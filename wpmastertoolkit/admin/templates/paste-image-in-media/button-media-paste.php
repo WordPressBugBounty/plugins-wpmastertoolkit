@@ -1,0 +1,1 @@
+<button type="button" role="tab" class="media-menu-item" id="menu-item-wpmastertoolkit-paste-image-in-media" aria-selected="false" tabindex="-1">{{button_text}}</button>

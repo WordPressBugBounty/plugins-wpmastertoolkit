@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",(()=>(()=>{const e=document.querySelector("select#role"),t=document.querySelector(".wpmastertoolkit-multiple-roles");if(e&&t){const o=e.closest("tr"),r=t.querySelector("tr");o&&r&&(o.innerHTML=r.innerHTML,r.remove())}})()));

@@ -1,0 +1,1 @@
+!function(){"use strict";document.addEventListener("DOMContentLoaded",(()=>{const t=document.querySelector("#wpmastertoolkit_adminer_form"),e=document.querySelector('#wpmastertoolkit_adminer_form button[type="submit"]');e&&e.addEventListener("click",(e=>{e.preventDefault(),t.submit(),window.location.href=wpmastertoolkit_adminer.page_url}))}))}();

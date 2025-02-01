@@ -1,0 +1,1 @@
+!function(){"use strict";document.addEventListener("DOMContentLoaded",(()=>{WPMastertoolkit_surecart_license.activated||document.querySelectorAll('a[href="admin.php?page=wpmastertoolkit-manage-license"]').forEach((e=>{e.textContent=WPMastertoolkit_surecart_license.i18n.upgrade,e.classList.add("wpmastertoolkit-surecart-upgrade")}))}))}();
