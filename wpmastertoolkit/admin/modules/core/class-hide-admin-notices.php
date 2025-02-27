@@ -23,9 +23,9 @@ class WPMastertoolkit_Hide_Admin_Notices {
      * Enqueue the necessary scripts and styles
      */
     public function enqueue_scripts() {
-        $assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/hide-admin-notices.asset.php' );
-        wp_enqueue_style( 'WPMastertoolkit_hide_admin_notices', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/hide-admin-notices.css', array(), $assets['version'], 'all' );
-        wp_enqueue_script( 'WPMastertoolkit_hide_admin_notices', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/hide-admin-notices.js', $assets['dependencies'], $assets['version'], true );
+        $assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/hide-admin-notices.asset.php' );
+        wp_enqueue_style( 'WPMastertoolkit_hide_admin_notices', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/hide-admin-notices.css', array(), $assets['version'], 'all' );
+        wp_enqueue_script( 'WPMastertoolkit_hide_admin_notices', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/hide-admin-notices.js', $assets['dependencies'], $assets['version'], true );
     }
     
     /**

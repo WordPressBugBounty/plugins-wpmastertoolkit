@@ -59,9 +59,9 @@ class WPMastertoolkit_Child_Theme_Generator {
             $themes_folders[] = $theme->get_stylesheet();
         }
 
-        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/child-theme-generator.asset.php' );
-        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/child-theme-generator.css', array(), $submenu_assets['version'], 'all' );
-        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/child-theme-generator.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
+        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/child-theme-generator.asset.php' );
+        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/child-theme-generator.css', array(), $submenu_assets['version'], 'all' );
+        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/child-theme-generator.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
         wp_localize_script( 'WPMastertoolkit_submenu', 'wpmastertoolkit_child_theme_generator', array(
             'themes_folders' => $themes_folders,
             'i18n' => array(
@@ -70,24 +70,29 @@ class WPMastertoolkit_Child_Theme_Generator {
             ),
         ) );
 
-        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/header.php';
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/header.php';
         $this->submenu_content();
-        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/footer.php';
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/footer.php';
     }
 
 	/**
      * Save the submenu option
      */
     public function save_submenu() {
-		$nonce = sanitize_text_field( $_POST['_wpnonce'] ?? '' );
+		$nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ?? '' ) );
 
 		if ( wp_verify_nonce( $nonce, $this->nonce_action ) && isset( $_POST[ $this->option_id ] ) ) {
 
-            $settings = array_map('sanitize_text_field', $_POST[ $this->option_id ]);
+            $settings = array_map('sanitize_text_field', wp_unslash( $_POST[ $this->option_id ] ) );
 
             if( !empty( $settings['action'] ) ){
-				wp_filesystem();
                 global $wp_filesystem;
+
+				if ( ! function_exists( 'WP_Filesystem' ) ) {
+					require_once ABSPATH . 'wp-admin/includes/file.php';
+				}
+
+				wp_filesystem();
 
 				$child_theme_folder_name = sanitize_file_name( trim( $settings['child_theme_folder_name'] ?? '' ) );
                 $child_theme_name        = trim( $settings['child_theme_name'] ?? '' );
@@ -124,6 +129,7 @@ class WPMastertoolkit_Child_Theme_Generator {
                         copy( $theme_image, $screenshot_path );
                     }
                 } else {
+					//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
                     $screenshot = $_FILES[ 'child_theme_screenshot' ];
 
 					if ( isset( $screenshot ) && $screenshot['error'] === UPLOAD_ERR_OK ) {
@@ -147,6 +153,7 @@ class WPMastertoolkit_Child_Theme_Generator {
 						$screenshot_path = $child_theme_folder . '/' . $screenshot_name;
 
 						// Move the uploaded file to the correct location
+						//phpcs:ignore Generic.PHP.ForbiddenFunctions.Found
 						if ( ! move_uploaded_file( $file_tmp_name, $screenshot_path ) ) {
 							exit();
 						}
@@ -244,11 +251,11 @@ class WPMastertoolkit_Child_Theme_Generator {
 
                     header( 'Content-Type: application/zip' );
                     header( 'Content-Disposition: attachment; filename="' . $child_theme_folder_name . '.zip"' );
-                    header( 'Content-Length: ' . filesize( $zip_file ) );
-                    readfile( $zip_file );
+                    header( 'Content-Length: ' . wp_filesize( $zip_file ) );
+                    $wp_filesystem->get_contents( $zip_file );
 
-                    unlink( $zip_file );
-                    @rmdir( $themes_dir );
+                    wp_delete_file( $zip_file );
+                    $wp_filesystem->delete( $themes_dir );
                     exit;
                 }
 
@@ -263,7 +270,7 @@ class WPMastertoolkit_Child_Theme_Generator {
                 }
             }
 
-            wp_safe_redirect( sanitize_url( $_SERVER['REQUEST_URI'] ?? '' ) );
+            wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
 			exit;
 		}
     }
@@ -283,7 +290,14 @@ class WPMastertoolkit_Child_Theme_Generator {
                 $parent_theme_name = $theme->parent()->get( 'Name' );
                 ?>
                 <div class="wp-mastertoolkit__section">
-                    <?php printf( esc_html__( 'The child theme "%s" is already exist for the parent theme "%s".', 'wpmastertoolkit' ), $child_theme_name, $parent_theme_name ); ?>
+                    <?php 
+                        echo esc_html( sprintf( 
+                            /* translators: %1$s: Child theme name, %2$s: Parent theme name */
+                            __( 'The child theme "%1$s" is already exist for the parent theme "%2$s".', 'wpmastertoolkit' ), 
+                            $child_theme_name, 
+                            $parent_theme_name 
+                        ) ); 
+                    ?>
                 </div>
                 <?php
                 return;
@@ -335,7 +349,15 @@ class WPMastertoolkit_Child_Theme_Generator {
                             <div class="wp-mastertoolkit__input-text">
 								<input type="text" name="<?php echo esc_attr( $this->option_id . '[child_theme_version]' ); ?>" value="<?php echo esc_attr( '1.0.0' ?? '' ); ?>" style="width: 400px;" required pattern="^\d+\.\d+\.\d+$" title="<?php esc_html_e( 'The version must be in the format of x.x.x.', 'wpmastertoolkit' ); ?>">
 							</div>
-                            <div class="description"><?php printf( esc_html__( 'The version of the parent theme is %s.', 'wpmastertoolkit' ), $theme_vers ); ?></div>
+                            <div class="description">
+                                <?php 
+                                echo esc_html( sprintf( 
+                                    /* translators: %s: Parent theme version */
+                                    __( 'The version of the parent theme is %s.', 'wpmastertoolkit' ), 
+                                    $theme_vers 
+                                )); 
+                                ?>
+                            </div>
 
                         </div>
                     </div>
@@ -428,6 +450,7 @@ class WPMastertoolkit_Child_Theme_Generator {
                         <div class="theme-about wp-clearfix">
                             <div class="theme-screenshots">
                                 <div class="screenshot">
+									<?php //phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
                                     <img id="child-theme-screenshot" src="" alt="" data-default-src="<?php echo esc_url( $theme_image ); ?>">
                                 </div>
                             </div>
@@ -445,7 +468,13 @@ class WPMastertoolkit_Child_Theme_Generator {
                                 </div>
                                 <p class="theme-description" id="child-theme-description"></p>
                                 <p class="parent-theme"> 
-                                    <?php printf( wp_kses_post( 'This theme is a child theme of <strong>%s</strong>.', 'wpmastertoolkit' ), $theme_name ); ?>
+                                    <?php 
+                                    echo wp_kses_post( sprintf( 
+                                        /* translators: %s: Parent theme name */
+                                        __('This theme is a child theme of <strong>%s</strong>.', 'wpmastertoolkit' ), 
+                                        $theme_name 
+                                    ) );
+                                    ?>
                                 </p>
                                 <p class="theme-tags">
                                     <span><?php esc_html_e('Tags:', 'wpmastertoolkit' ); ?></span> <span style="font-weight: normal;" id="child-theme-tags"></span>

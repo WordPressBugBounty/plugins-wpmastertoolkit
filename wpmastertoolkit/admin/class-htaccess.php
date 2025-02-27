@@ -74,65 +74,60 @@ class WPMastertoolkit_Htaccess {
      * Get the file contents
      */
     private static function get_file_contents() {
+		global $wp_filesystem;
 
-        $file_exists    = file_exists( self::FILE_PATH );
+		if ( ! function_exists( 'WP_Filesystem' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+		}
+		WP_Filesystem();
 
-        if ( !$file_exists ) {
-            
-            $dir_name = dirname( self::FILE_PATH );
+		$file_path = self::FILE_PATH;
+    	$dir_path  = dirname( $file_path );
 
-			if ( ! file_exists( $dir_name ) ){
+		if ( ! $wp_filesystem->is_dir( $dir_path ) ) {
+			$wp_filesystem->mkdir( $dir_path, FS_CHMOD_DIR );
+		}
 
-				mkdir( $dir_name, 0755, true );
-			}
+		if ( ! $wp_filesystem->exists( $file_path ) ) {
+			$wp_filesystem->put_contents( $file_path, '', FS_CHMOD_FILE );
+		}
 
-			touch( self::FILE_PATH );
-        }
-
-        $writable   = wp_is_writable( self::FILE_PATH );
-
-        if ( is_wp_error( $writable ) ) {
+		if ( ! $wp_filesystem->is_writable( $file_path ) ) {
 			return false;
 		}
 
-        $contents = @file_get_contents( self::FILE_PATH );
+		$contents = $wp_filesystem->get_contents( $file_path );
 
-        if ( false === $contents ) {
-            return false;
-        }
-        
-        return $contents;
+		return ( false !== $contents ) ? $contents : false;
     }
 
     /**
      * Write contents to the file.
      */
     private static function put_content( $contents ) {
+		global $wp_filesystem;
 
-        $fp = @fopen( self::FILE_PATH, 'wb' );
+		if ( ! function_exists( 'WP_Filesystem' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+		}
+		WP_Filesystem();
 
-		if ( ! $fp ) {
+		$file_path = self::FILE_PATH;
+    	$dir_path  = dirname( $file_path );
+
+		if ( ! $wp_filesystem->is_dir( $dir_path ) ) {
+			$wp_filesystem->mkdir( $dir_path, FS_CHMOD_DIR );
+		}
+
+		$success = $wp_filesystem->put_contents( $file_path, $contents, FS_CHMOD_FILE );
+
+		if ( ! $success ) {
 			return false;
 		}
 
-        mbstring_binary_safe_encoding();
+		$chmod_file = fileperms( ABSPATH . 'index.php' ) & 0777 | 0644;
+    	$wp_filesystem->chmod( $file_path, $chmod_file );
 
-        $data_length = strlen( $contents );
-
-		$bytes_written = fwrite( $fp, $contents );
-
-		reset_mbstring_encoding();
-
-        fclose( $fp );
-
-        if ( $data_length !== $bytes_written ) {
-			return false;
-		}
-
-        $chmod_file = fileperms( ABSPATH . 'index.php' ) & 0777 | 0644;
-        chmod( self::FILE_PATH, $chmod_file );
-
-        return true;
+		return true;
     }
-
 }

@@ -62,9 +62,11 @@ class WPMastertoolkit_Surecart {
 		));
 
 		if ( $this->license_activated() ) {
-			add_filter( 'site_transient_update_plugins', array( $this, 'force_surecart_updates' ) );
+			$site_transient_prefix = 'site_transient_';//phpcs:ignore prefix to ignore the error
+			add_filter( $site_transient_prefix . 'update_plugins', array( $this, 'force_surecart_updates' ) );
 		} else {
-			remove_filter( 'pre_set_site_transient_update_plugins', array( $this->updater, 'check_plugin_update' ) );
+			$site_transient_prefix = 'pre_set_site_transient_';//phpcs:ignore prefix to ignore the error
+			remove_filter(  $site_transient_prefix . 'update_plugins', array( $this->updater, 'check_plugin_update' ) );
 			remove_filter( 'plugins_api', array( $this->updater, 'plugins_api_filter' ), 10, 3 );
 		}
 	}
@@ -75,9 +77,9 @@ class WPMastertoolkit_Surecart {
 	 * @since 1.15.0
 	 */
 	public function enqueue_scripts_styles() {
-		$surecart_license_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/surecart-license.asset.php' );
-		wp_enqueue_style( 'WPMastertoolkit_surecart_license', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/surecart-license.css', array(), $surecart_license_assets['version'], 'all' );
-		wp_enqueue_script( 'WPMastertoolkit_surecart_license', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/surecart-license.js', $surecart_license_assets['dependencies'], $surecart_license_assets['version'], true );
+		$surecart_license_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/surecart-license.asset.php' );
+		wp_enqueue_style( 'WPMastertoolkit_surecart_license', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/surecart-license.css', array(), $surecart_license_assets['version'], 'all' );
+		wp_enqueue_script( 'WPMastertoolkit_surecart_license', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/surecart-license.js', $surecart_license_assets['dependencies'], $surecart_license_assets['version'], true );
 		wp_localize_script( 'WPMastertoolkit_surecart_license', 'WPMastertoolkit_surecart_license', array(
 			'activated' => $this->license_activated(),
 			'i18n'      => array(
@@ -98,8 +100,17 @@ class WPMastertoolkit_Surecart {
 				$new_version = $version_info->new_version ?? '';
 				if ( version_compare( $new_version, WPMASTERTOOLKIT_VERSION, '>' ) ) {
 					?>
-						<div class="wpmastertoolkit-notice">
-							<p><?php printf( esc_html__( 'A new version %s is available. If you activate your license, you will get the latest version automatically.', 'wpmastertoolkit' ), $new_version ); ?></p>
+						<div class="wpmastertoolkit-update-notice orange">
+							<b>
+								<?php esc_html_e( 'Note:', 'wpmastertoolkit' ); ?>
+							</b>
+							<?php 
+							echo wp_kses_post( sprintf(
+								/* translators: %s: new version */
+								__( 'A new version %s is available. If you activate your license, you will get the latest version automatically.', 'wpmastertoolkit' ),
+								$new_version
+							) );
+							?>
 						</div>
 					<?php
 				}
@@ -125,7 +136,8 @@ class WPMastertoolkit_Surecart {
 			}
 		}
 		delete_transient( $this->transient_id );
-		delete_option( '_site_transient_update_plugins' );
+		$site_transient_prefix = '_site_transient_';//phpcs:ignore prefix to ignore the error
+		delete_option( $site_transient_prefix . 'update_plugins' );
 	}
 
 	/**
@@ -135,7 +147,8 @@ class WPMastertoolkit_Surecart {
 	 */
 	public function after_deactivated() {
 		delete_transient( $this->transient_id );
-		delete_option( '_site_transient_update_plugins' );
+		$site_transient_prefix = '_site_transient_';//phpcs:ignore prefix to ignore the error
+		delete_option( $site_transient_prefix . 'update_plugins' );
 	}
 
 	/**

@@ -155,13 +155,13 @@ class WPMastertoolkit_Auto_Regenerate_Salt_Keys {
      */
     public function render_submenu() {
 
-        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/auto-regenerate-salt-keys.asset.php' );
-        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/auto-regenerate-salt-keys.css', array(), $submenu_assets['version'], 'all' );
-        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/auto-regenerate-salt-keys.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
+        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/auto-regenerate-salt-keys.asset.php' );
+        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/auto-regenerate-salt-keys.css', array(), $submenu_assets['version'], 'all' );
+        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/auto-regenerate-salt-keys.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
 
-        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/header.php';
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/header.php';
         $this->submenu_content();
-        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/footer.php';
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/footer.php';
     }
 
     /**
@@ -171,22 +171,23 @@ class WPMastertoolkit_Auto_Regenerate_Salt_Keys {
     public function save_submenu() {
 
         $submit        = isset( $_POST[$this->change_now_btn_name] ) ?? false;
-        $now_btn_nonce = sanitize_text_field( $_POST[$this->change_now_nonce_name] ?? '' );
-		$nonce         = sanitize_text_field( $_POST['_wpnonce'] ?? '' );
+        $now_btn_nonce = sanitize_text_field( wp_unslash( $_POST[$this->change_now_nonce_name] ?? '' ) );
+		$nonce         = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ?? '' ) );
 
 		if ( $submit && wp_verify_nonce( $now_btn_nonce, $this->change_now_nonce_action ) ) {
 
             $this->regenerate_salt_keys();
 
-            wp_safe_redirect( sanitize_url( $_SERVER['REQUEST_URI'] ?? '' ) );
+            wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
             exit;
 
         } elseif ( wp_verify_nonce( $nonce, $this->nonce_action ) ) {
 
+			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
             $new_settings = $this->sanitize_settings( $_POST[$this->option_id] ?? array() );
             $this->save_settings( $new_settings );
 
-            wp_safe_redirect( sanitize_url( $_SERVER['REQUEST_URI'] ?? '' ) );
+            wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
 			exit;
         }
     }

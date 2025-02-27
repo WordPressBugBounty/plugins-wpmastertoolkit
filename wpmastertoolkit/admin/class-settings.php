@@ -53,9 +53,9 @@ class WPMastertoolkit_Settings {
 
 		if ( $hook_suffix === 'toplevel_page_wp-mastertoolkit-settings' ) {
 
-			$settings_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/settings.asset.php' );
-			wp_enqueue_style( WPMASTERTOOLKIT_PLUGIN_SETTINGS, WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/settings.css', array(), $settings_assets['version'], 'all' );
-			wp_enqueue_script( WPMASTERTOOLKIT_PLUGIN_SETTINGS, WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/settings.js', $settings_assets['dependencies'], $settings_assets['version'], true );
+			$settings_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/settings.asset.php' );
+			wp_enqueue_style( WPMASTERTOOLKIT_PLUGIN_SETTINGS, WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/settings.css', array(), $settings_assets['version'], 'all' );
+			wp_enqueue_script( WPMASTERTOOLKIT_PLUGIN_SETTINGS, WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/settings.js', $settings_assets['dependencies'], $settings_assets['version'], true );
 		}
 	}
 		
@@ -87,7 +87,7 @@ class WPMastertoolkit_Settings {
 		$opt_in_status     = $opt_in_option['value'] ?? '1';
 		$show_opt_in_modal = $opt_in_option['already'] ?? '0';
 
-		require_once WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/page-settings.php';
+		require_once WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/page-settings.php';
 	}
 
 	/**
@@ -97,7 +97,7 @@ class WPMastertoolkit_Settings {
 	 */
 	public function settings_submit_button() {
 
-		$nonce = sanitize_text_field( $_POST['_wpnonce'] ?? '' );
+		$nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ?? '' ) );
 		
 		if ( ! wp_verify_nonce($nonce, WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_action') ) {
 			return;
@@ -110,7 +110,8 @@ class WPMastertoolkit_Settings {
 
 		if ( $settings_upload_json ) {
 
-			$upload_file = wpmastertoolkit_clean( wp_unslash( $_FILES['wpmastertoolkit_settings_tab_input'] ) );
+			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			$upload_file = wpmastertoolkit_clean( wp_unslash( $_FILES['wpmastertoolkit_settings_tab_input'] ?? '' ) );
 
 			if ( $upload_file ) {
 
@@ -162,7 +163,7 @@ class WPMastertoolkit_Settings {
 
 					$this->save_main_settings( $sanitized_main_data );
 
-					wp_safe_redirect( sanitize_url( $_SERVER['REQUEST_URI'] ?? '' ) );
+					wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
 					exit;
 				}
 			}
@@ -187,7 +188,7 @@ class WPMastertoolkit_Settings {
 				}
 			}
 
-			$upload_file_name		= 'wp-mastertoolkit-settings-' . date('Y-m-d') . '.json';
+			$upload_file_name		= 'wp-mastertoolkit-settings-' . wp_date('Y-m-d') . '.json';
 			$upload_file_content	= json_encode( $sanitized_data, JSON_PRETTY_PRINT );
 
 			header('Content-Type: application/json');
@@ -198,6 +199,7 @@ class WPMastertoolkit_Settings {
 
 		} else {
 
+			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			$new_settings = $this->sanitize_main_settings( $_POST[WPMASTERTOOLKIT_PLUGIN_SETTINGS] ?? array() );
 			$this->save_main_settings( $new_settings );
 			$this->save_opt_in();
@@ -205,7 +207,7 @@ class WPMastertoolkit_Settings {
 			$class_stats = new WPMastertoolkit_Stats();
 			$class_stats->send_stats();
 	
-			wp_safe_redirect( sanitize_url( $_SERVER['REQUEST_URI'] ?? '' ) );
+			wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
 			exit;
 		}
 		
@@ -246,7 +248,8 @@ class WPMastertoolkit_Settings {
 			'already' => '1',
 		);
 
-		$opt_in_option['value'] = sanitize_text_field( $_POST[WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_opt_in'] ?? '0' );
+		//phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$opt_in_option['value'] = sanitize_text_field( wp_unslash( $_POST[WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_opt_in'] ?? '0' ) );
 
 		update_option( WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_opt_in', $opt_in_option, false );
 	}

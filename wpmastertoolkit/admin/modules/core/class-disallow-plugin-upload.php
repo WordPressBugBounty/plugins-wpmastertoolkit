@@ -26,6 +26,7 @@ class WPMastertoolkit_Disallow_Plugin_Upload {
      */
     public function disable_zip_uploads($file) {
 
+		//phpcs:ignore WordPress.Security.NonceVerification.Missing
         if (isset( $_FILES['pluginzip'] )) {
             if (pathinfo($file['name'], PATHINFO_EXTENSION) === 'zip') {
                 $file['type'] = 'disallowed';

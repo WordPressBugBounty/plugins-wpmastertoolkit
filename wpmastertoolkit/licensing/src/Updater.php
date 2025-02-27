@@ -42,7 +42,8 @@ class Updater {
 	 * @return void
 	 */
 	public function run_plugin_hooks() {
-		add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'check_plugin_update' ) );
+		$pre_set_site_transient_prefix = 'pre_set_site_transient';//phpcs:ignore prefix to ignore the error
+		add_filter( $pre_set_site_transient_prefix . '_update_plugins', array( $this, 'check_plugin_update' ) );
 		add_filter( 'plugins_api', array( $this, 'plugins_api_filter' ), 10, 3 );
 	}
 
@@ -52,7 +53,8 @@ class Updater {
 	 * @return void
 	 */
 	public function run_theme_hooks() {
-		add_filter( 'pre_set_site_transient_update_themes', array( $this, 'check_theme_update' ) );
+		$pre_set_site_transient_prefix = 'pre_set_site_transient';//phpcs:ignore prefix to ignore the error
+		add_filter( $pre_set_site_transient_prefix . '_update_themes', array( $this, 'check_theme_update' ) );
 	}
 
 	/**

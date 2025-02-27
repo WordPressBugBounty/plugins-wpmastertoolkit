@@ -14,6 +14,7 @@ class WPMastertoolkit_Maintenance_Mode {
     private $nonce_action;
     private $settings;
     private $default_settings;
+    private $bypass_param;
 
     /**
      * Invoke the hooks
@@ -29,6 +30,15 @@ class WPMastertoolkit_Maintenance_Mode {
         add_action( 'template_include', array( $this, 'template_include' ), PHP_INT_MAX );
         add_action( 'admin_bar_menu', array( $this, 'render_toggle_button' ) );
         add_action( 'wp_ajax_wpmastertoolkit_maintenance_mode_adminbar_toggle', array( $this, 'change_maintenance_mode' ) );
+
+        /**
+         * Filter the disposable email domains.
+         *
+         * @since 2.3.0
+         *
+         * @param string   $bypass_param The bypass parameter.
+         */
+        $this->bypass_param = apply_filters( 'wpmastertoolkit/maintenance-mode/bypass-param', 'wpmtk-maintenance-bypass' );
     }
 
     /**
@@ -48,6 +58,38 @@ class WPMastertoolkit_Maintenance_Mode {
 		if ( '1' !== $enabled ) {
 			return $template;
 		}
+        
+        $cookie = sanitize_text_field( wp_unslash( $_COOKIE['wpmtk_maintenance_bypass'] ?? '' ) );
+        
+        if( $this->settings['bypass_link_status'] === '1' ){
+    
+            if( !empty($cookie) && $cookie === $this->settings['bypass_link_token'] ){
+                return $template;
+            }
+    
+			//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            if( isset($_GET[$this->bypass_param]) && $_GET[$this->bypass_param] === $this->settings['bypass_link_token'] ){
+                /**
+                 * Filter the bypass cookie validity.
+                 *
+                 * @since 2.3.0
+                 *
+                 * @param int   $cookie_validity The bypass cookie validity.
+                 */
+                $cookie_validity = apply_filters( 'wpmastertoolkit/maintenance-mode/bypass-cookie-validity', DAY_IN_SECONDS );
+                
+                setcookie( 
+                    'wpmtk_maintenance_bypass', 
+					//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                    sanitize_text_field( wp_unslash( $_GET[$this->bypass_param] ) ), 
+                    time() + $cookie_validity, 
+                    COOKIEPATH, 
+                    COOKIE_DOMAIN 
+                );
+                
+                return $template;
+            }
+        }
 
         if ( ! is_user_logged_in() && ! is_admin() ) {
 
@@ -61,8 +103,8 @@ class WPMastertoolkit_Maintenance_Mode {
                 }
             }
 
-            if ( file_exists( WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/maintenance-mode/index.php' ) ) {
-                $template =  WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/maintenance-mode/index.php';
+            if ( file_exists( WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/core/maintenance-mode/index.php' ) ) {
+                $template =  WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/core/maintenance-mode/index.php';
             }
         }
 
@@ -87,9 +129,9 @@ class WPMastertoolkit_Maintenance_Mode {
 			return;
 		}
 
-		$adminbar_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/maintenance-mode-adminbar.asset.php' );
-        wp_enqueue_style( 'WPMastertoolkit_maintenance_mode_adminbar', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/maintenance-mode-adminbar.css', array(), $adminbar_assets['version'], 'all' );
-        wp_enqueue_script( 'WPMastertoolkit_maintenance_mode_adminbar', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/maintenance-mode-adminbar.js', $adminbar_assets['dependencies'], $adminbar_assets['version'], true );
+		$adminbar_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/maintenance-mode-adminbar.asset.php' );
+        wp_enqueue_style( 'WPMastertoolkit_maintenance_mode_adminbar', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/maintenance-mode-adminbar.css', array(), $adminbar_assets['version'], 'all' );
+        wp_enqueue_script( 'WPMastertoolkit_maintenance_mode_adminbar', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/maintenance-mode-adminbar.js', $adminbar_assets['dependencies'], $adminbar_assets['version'], true );
 		wp_localize_script( 'WPMastertoolkit_maintenance_mode_adminbar', 'wpmastertoolkit_maintenance_mode_adminbar', array(
 			'ajaxurl' => admin_url( 'admin-ajax.php' ),
 			'nonce'   => wp_create_nonce( $this->nonce_action ),
@@ -118,12 +160,12 @@ class WPMastertoolkit_Maintenance_Mode {
 	 */
 	public function change_maintenance_mode() {
 
-		$nonce = sanitize_text_field( $_POST['nonce'] ?? '' );
+		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
 		if ( ! wp_verify_nonce( $nonce, $this->nonce_action ) ) {
 			wp_send_json_error( array( 'message' => __( 'Refresh the page and try again.', 'wpmastertoolkit' ) ) );
 		}
 
-		$status   = sanitize_text_field( $_POST['status'] ?? '0' );
+		$status   = sanitize_text_field( wp_unslash( $_POST['status'] ?? '0' ) );
 		$settings = $this->get_settings();
 		$settings['enabled'] = $status;
 		$this->save_settings( $settings );
@@ -210,13 +252,13 @@ class WPMastertoolkit_Maintenance_Mode {
         wp_enqueue_script('wp-color-picker');
         wp_enqueue_style('wp-color-picker');
         
-        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/maintenance-mode.asset.php' );
-        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/maintenance-mode.css', array(), $submenu_assets['version'], 'all' );
-        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/maintenance-mode.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
+        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/maintenance-mode.asset.php' );
+        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/maintenance-mode.css', array(), $submenu_assets['version'], 'all' );
+        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/maintenance-mode.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
 
-        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/header.php';
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/header.php';
         $this->submenu_content();
-        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/footer.php';
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/footer.php';
     }
 
     /**
@@ -224,14 +266,15 @@ class WPMastertoolkit_Maintenance_Mode {
      */
     public function save_submenu() {
 
-		$nonce = sanitize_text_field( $_POST['_wpnonce'] ?? '' );
+		$nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ?? '' ) );
 		
 		if ( wp_verify_nonce($nonce, $this->nonce_action) ) {
 
+			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
             $new_settings = $this->sanitize_settings( $_POST[$this->option_id] ?? array() );
             
             $this->save_settings( $new_settings );
-            wp_safe_redirect( sanitize_url( $_SERVER['REQUEST_URI'] ?? '' ) );
+            wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
 			exit;
 		}
     }
@@ -284,6 +327,14 @@ class WPMastertoolkit_Maintenance_Mode {
                     $timestamp   = $date->getTimestamp() ?? '';
                     $sanitized_settings[$settings_key] = $timestamp;
                 break;
+                case 'bypass_link_status':
+                    $is_pro = wpmastertoolkit_is_pro();
+                    $sanitized_settings[$settings_key] = $is_pro ? sanitize_text_field( $new_settings[$settings_key] ?? '0' ) : '0';
+                break;
+                case 'bypass_link_token':
+                    $is_pro = wpmastertoolkit_is_pro();
+                    $sanitized_settings[$settings_key] = $is_pro ? sanitize_text_field( $new_settings[$settings_key] ?? md5(time()) ) : md5(time());
+                break;                
             }
         }
 
@@ -311,7 +362,7 @@ class WPMastertoolkit_Maintenance_Mode {
             'title_text'                 => __( 'Site is undergoing maintenance', 'wpmastertoolkit' ),
             'headline_text'              => __( 'Maintenance Mode', 'wpmastertoolkit' ),
             'body_text'                  => __( 'Site will be available soon. Thank you for your patience!', 'wpmastertoolkit' ),
-            'footer_text'                => sprintf( '&copy; %s %s', get_bloginfo('name'), date('Y') ),
+            'footer_text'                => sprintf( '&copy; %s %s', get_bloginfo('name'), wp_date('Y') ),
             'background_color'           => '#000000',
             'text_color'                 => '#ffffff',
             'logo'                       => '',
@@ -322,6 +373,8 @@ class WPMastertoolkit_Maintenance_Mode {
             'countdown_end_date'         => strtotime( '+1 hour' ),
             'countdown_text_color'       => '#000000',
             'countdown_background_color' => '#ffffff',
+            'bypass_link_status'         => '0',
+            'bypass_link_token'          => md5(time()),
         );
     }
 
@@ -331,11 +384,12 @@ class WPMastertoolkit_Maintenance_Mode {
     private function submenu_content() {
         $this->settings         = $this->get_settings();
 		$this->default_settings = $this->get_default_settings();
-
+        
         $is_pro = wpmastertoolkit_is_pro();
-
+        
 		$show_in_adminbar_options = $this->default_settings['show_in_adminbar']['options'];
-
+        
+        $url                        = home_url() . '/?' . $this->bypass_param . '=';
         $image_placeholder          = WPMASTERTOOLKIT_PLUGIN_URL . 'admin/images/placeholder.svg';
         $enabled                    = $this->settings['enabled'] ?? $this->default_settings['enabled'];
 		$show_in_adminbar           = $this->settings['show_in_adminbar']['value'] ?? $this->default_settings['show_in_adminbar']['value'];
@@ -354,7 +408,8 @@ class WPMastertoolkit_Maintenance_Mode {
         $countdown_min_date         = wp_date( 'Y-m-d H:i', strtotime( '+1 minute' ) );
         $countdown_text_color       = $this->settings['countdown_text_color'] ?? '';
         $countdown_background_color = $this->settings['countdown_background_color'] ?? '';
-        
+        $bypass_link_status         = $is_pro ? $this->settings['bypass_link_status'] ?? '0' : '0';
+        $bypass_link_token          = $is_pro ? $this->settings['bypass_link_token'] ?? md5(time()) : '';
 
         ?>
             <div class="wp-mastertoolkit__section">
@@ -443,10 +498,11 @@ class WPMastertoolkit_Maintenance_Mode {
                         <div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e( 'Logo', 'wpmastertoolkit' ); ?></div>
                         <div class="wp-mastertoolkit__section__body__item__content">
                             <div class="wp-mastertoolkit__upload-image">
+								<?php //phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
                                 <img class="wp-mastertoolkit__upload-image__preview" src="<?php echo empty( $logo ) ? esc_url( $image_placeholder ) : esc_url( $logo ); ?>" data-default="<?php echo esc_attr( $image_placeholder ); ?>">
                                 <div class="wp-mastertoolkit__upload-image__actions">
-                                    <a class="wp-mastertoolkit__upload-image__upload" href="javascript:void(0);"><?php _e( "Upload", 'wc-etransactions' ); ?></a>
-                                    <a class="wp-mastertoolkit__upload-image__reset <?php echo empty( $logo ) ? '' : 'show'; ?>" href="javascript:void(0);">X</a>
+                                    <a class="wp-mastertoolkit__upload-image__upload" href="javascript:void(0);"><?php esc_html_e( "Upload", 'wpmastertoolkit' ); ?></a>
+                                    <a class="wp-mastertoolkit__upload-image__reset <?php echo esc_attr( empty( $logo ) ? '' : 'show' ); ?>" href="javascript:void(0);">X</a>
                                 </div>
                                 <input class="wp-mastertoolkit__upload-image__input" type="hidden" name="<?php echo esc_attr( $this->option_id . '[logo]' ); ?>" value="<?php echo esc_attr( $logo ); ?>">
                             </div>
@@ -457,9 +513,10 @@ class WPMastertoolkit_Maintenance_Mode {
                         <div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e( 'Background Image', 'wpmastertoolkit' ); ?></div>
                         <div class="wp-mastertoolkit__section__body__item__content">
                             <div class="wp-mastertoolkit__upload-image">
+								<?php //phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
                                 <img class="wp-mastertoolkit__upload-image__preview" src="<?php echo empty( $background_image ) ? esc_url( $image_placeholder ) : esc_url( $background_image ); ?>" data-default="<?php echo esc_attr( $image_placeholder ); ?>">
                                 <div class="wp-mastertoolkit__upload-image__actions">
-                                    <a class="wp-mastertoolkit__upload-image__upload" href="javascript:void(0);"><?php _e( "Upload", 'wc-etransactions' ); ?></a>
+                                    <a class="wp-mastertoolkit__upload-image__upload" href="javascript:void(0);"><?php esc_html_e( "Upload", 'wpmastertoolkit' ); ?></a>
                                     <a class="wp-mastertoolkit__upload-image__reset <?php echo empty( $background_image ) ? '' : 'show'; ?>" href="javascript:void(0);">X</a>
                                 </div>
                                 <input class="wp-mastertoolkit__upload-image__input" type="hidden" name="<?php echo esc_attr( $this->option_id . '[background_image]' ); ?>" value="<?php echo esc_attr( $background_image ); ?>">
@@ -503,7 +560,7 @@ class WPMastertoolkit_Maintenance_Mode {
                         <div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e("End date", 'wpmastertoolkit'); ?></div>
                         <div class="wp-mastertoolkit__section__body__item__content">
                             <div class="wp-mastertoolkit__input-text">
-                                <input type="datetime-local" name="<?php echo esc_attr( $this->option_id . '[countdown_end_date]' ); ?>" value="<?php echo esc_attr( $countdown_end_date ); ?>" min="<?php echo esc_attr( $countdown_min_date ); ?>">
+                                <input type="datetime-local" name="<?php echo esc_attr( $this->option_id . '[countdown_end_date]' ); ?>" value="<?php echo esc_attr( $countdown_end_date ); ?>" <?php echo esc_attr( $is_pro ? '' : 'disabled' ); ?>>
                             </div>
                         </div>
                     </div>
@@ -522,6 +579,47 @@ class WPMastertoolkit_Maintenance_Mode {
                         <div class="wp-mastertoolkit__section__body__item__content">
                             <div class="wp-mastertoolkit__input-text">
                                 <input type="text" name="<?php echo esc_attr( $this->option_id . '[countdown_background_color]' ); ?>" value="<?php echo esc_attr( $countdown_background_color ); ?>" class="wp-color-picker"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="wp-mastertoolkit__section pro-section <?php echo esc_attr( $is_pro ? 'is-pro' : 'is-not-pro' ); ?>">
+                <div class="wp-mastertoolkit__section__pro-only">
+                    <?php esc_html_e( 'This feature is only available in the Pro version.', 'wpmastertoolkit' ); ?>
+                </div>
+                <div class="wp-mastertoolkit__section__desc">
+                    <?php esc_html_e("The bypass link allows access to the website even if the site is in maintenance mode.", 'wpmastertoolkit'); ?>
+                </div>
+                <div class="wp-mastertoolkit__section__body">
+                    <div class="wp-mastertoolkit__section__body__item">
+                        <div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e("Bypass link status", 'wpmastertoolkit'); ?></div>
+						<div class="wp-mastertoolkit__section__body__item__content">
+							<label class="wp-mastertoolkit__toggle">
+								<input type="hidden" name="<?php echo esc_attr( $this->option_id . '[bypass_link_status]' ); ?>" value="0">
+								<input type="checkbox" name="<?php echo esc_attr( $this->option_id . '[bypass_link_status]' ); ?>" value="1" <?php checked( $bypass_link_status, '1' ); ?> <?php echo esc_attr( $is_pro ? '' : 'disabled' ); ?>>
+								<span class="wp-mastertoolkit__toggle__slider round"></span>
+							</label> 
+						</div>
+                    </div>
+                    
+                    <div class="wp-mastertoolkit__section__body__item">
+                        <div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e( 'Bypass link', 'wpmastertoolkit' ); ?></div>
+                        <div class="wp-mastertoolkit__section__body__item__content">
+                            <div class="wp-mastertoolkit__input-text slug-url">
+                                <div>
+									<code>
+                                    	<?php echo esc_url( $url ); ?>
+									</code>
+                                </div>
+                                <div>
+									<input type="hidden" class="home-url" value="<?php echo esc_url( $url ); ?>">
+                                    <input class="slug-input" type="text" name="<?php echo esc_attr( $this->option_id . '[bypass_link_token]' ); ?>" value="<?php echo esc_attr( $bypass_link_token ); ?>" <?php echo esc_attr( $is_pro ? '' : 'disabled' ); ?>>
+                                </div>
+                                <button class="copy-button">
+									<?php echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/copy.svg'), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
+                                </button>
                             </div>
                         </div>
                     </div>

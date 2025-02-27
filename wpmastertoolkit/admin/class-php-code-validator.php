@@ -285,7 +285,8 @@ class WPMastertoolkit_PHP_Code_Validator {
 
         ob_start();
         try {
-            $result = eval($code); // phpcs:ignore Squiz.PHP.Eval.Discouraged
+			//phpcs:ignore Generic.PHP.ForbiddenFunctions.Found, Squiz.PHP.Eval.Discouraged
+            $result = eval($code);
         } catch (\ParseError $parse_error) {
             $result = new \WP_Error('runtime_error', $parse_error->getMessage(), array(
                 'line' => $parse_error->getLine(),

@@ -4,7 +4,7 @@
  * Plugin Name:       WPMasterToolKit
  * Plugin URI:        https://wpmastertoolkit.com/
  * Description:       WPMasterToolKit enhances your WordPress administration experience by providing a powerful suite of features designed to optimize and streamline your website management. From media enhancements to user experience improvements and security fortifications, this toolkit is essential for any WordPress site owner looking to elevate their admin interface. With easy-to-use settings and impactful tweaks, you can tailor your site's backend to your specific needs.
- * Version:           2.2.0
+ * Version:           2.3.0
  * Author:            Webdeclic
  * Author URI:        https://webdeclic.com
  * License:           GPL-2.0+

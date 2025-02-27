@@ -33,8 +33,8 @@ class WPMastertoolkit_Disable_Cart_Fragments_Scripts {
 
         if ( 'woocommerce_page_wc-settings' === $hook_suffix ) {
 
-            $assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/wc-admin-add-to-cart-behaviour.asset.php' );
-            wp_enqueue_script( 'wpmastertoolkit-wc-admin-add-to-cart-behaviour', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/wc-admin-add-to-cart-behaviour.js', $assets['dependencies'], $assets['version'], true );   
+            $assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/wc-admin-add-to-cart-behaviour.asset.php' );
+            wp_enqueue_script( 'wpmastertoolkit-wc-admin-add-to-cart-behaviour', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/wc-admin-add-to-cart-behaviour.js', $assets['dependencies'], $assets['version'], true );   
         }
     }
 

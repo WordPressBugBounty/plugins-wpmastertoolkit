@@ -41,9 +41,11 @@ class WPMastertoolkit_Logs {
 		$this_class = new self();
 		add_filter( 'wpmastertoolkit/folders', array( $this_class, 'create_folders' ) );
 
-		$file_path = wpmastertoolkit_folders() . '/logs/wpmtk-' . date( 'Y-m-d' ) . '.log';
-		$message   = '[' . date( 'd-M-Y H:i:s' ) . '] ' . print_r( $message, true ) . "\n";
+		$file_path = wpmastertoolkit_folders() . '/logs/wpmtk-' . wp_date( 'Y-m-d' ) . '.log';
+		//phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r
+		$message   = '[' . wp_date( 'd-M-Y H:i:s' ) . '] ' . print_r( $message, true ) . "\n";
 
+		//phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
 		error_log( $message, 3, $file_path );
 	}
 

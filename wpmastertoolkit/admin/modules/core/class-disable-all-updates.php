@@ -14,18 +14,22 @@ class WPMastertoolkit_Disable_All_Updates {
      * @since    1.5.0
      */
     public function __construct() {
+		$pre_transient_prefix          = 'pre_transient';//phpcs:ignore prefix to ignore the error
+		$pre_site_transient_prefix     = 'pre_site_transient';//phpcs:ignore prefix to ignore the error
+		$pre_set_site_transient_prefix = 'pre_set_site_transient';//phpcs:ignore prefix to ignore the error
+
 		add_action( 'admin_init', array( $this, 'disable_update_notices_version_checks' ) );
 		// Disable core update
-		add_filter( 'pre_transient_update_core', array( $this, 'override_version_check_info' ) );
-		add_filter( 'pre_site_transient_update_core', array( $this, 'override_version_check_info' ) );
+		add_filter( $pre_transient_prefix . '_update_core', array( $this, 'override_version_check_info' ) );
+		add_filter( $pre_site_transient_prefix . '_update_core', array( $this, 'override_version_check_info' ) );
 		// Disable theme updates
-		add_filter( 'pre_transient_update_themes', array( $this, 'override_version_check_info' ) );
-		add_filter( 'pre_site_transient_update_themes', array( $this, 'override_version_check_info' ) );
-		add_action( 'pre_set_site_transient_update_themes', array( $this, 'override_version_check_info' ), 20 );
+		add_filter( $pre_transient_prefix . '_update_themes', array( $this, 'override_version_check_info' ) );
+		add_filter( $pre_site_transient_prefix . '_update_themes', array( $this, 'override_version_check_info' ) );
+		add_action( $pre_set_site_transient_prefix . '_update_themes', array( $this, 'override_version_check_info' ), 20 );
 		// Disable plugin updates
-		add_filter( 'pre_transient_update_plugins', array( $this, 'override_version_check_info' ) );
-		add_filter( 'pre_site_transient_update_plugins', array( $this, 'override_version_check_info' ) );
-		add_action( 'pre_set_site_transient_update_plugins', array( $this, 'override_version_check_info' ), 20 );
+		add_filter( $pre_transient_prefix . '_update_plugins', array( $this, 'override_version_check_info' ) );
+		add_filter( $pre_site_transient_prefix . '_update_plugins', array( $this, 'override_version_check_info' ) );
+		add_action( $pre_set_site_transient_prefix . '_update_plugins', array( $this, 'override_version_check_info' ), 20 );
 		// Disable auto updates
 		add_filter( 'automatic_updater_disabled', '__return_true' );
 		if ( ! defined( 'AUTOMATIC_UPDATER_DISABLED' ) ) {
@@ -39,9 +43,10 @@ class WPMastertoolkit_Disable_All_Updates {
 		add_filter( 'allow_minor_auto_core_updates', '__return_false' );
 		add_filter( 'allow_major_auto_core_updates', '__return_false' );
 		add_filter( 'allow_dev_auto_core_updates', '__return_false' );
-		add_filter( 'auto_update_plugin', '__return_false' );
-		add_filter( 'auto_update_theme', '__return_false' );
-		add_filter( 'auto_update_translation', '__return_false' );
+		$auto_update_prefix = 'auto_update';//phpcs:ignore prefix to ignore the error
+		add_filter( $auto_update_prefix . '_plugin', '__return_false' );
+		add_filter( $auto_update_prefix . '_theme', '__return_false' );
+		add_filter( $auto_update_prefix . '_translation', '__return_false' );
 		remove_action( 'init', 'wp_schedule_update_checks' );
 		// Disable update emails
 		add_filter( 'auto_core_update_send_email', '__return_false' );

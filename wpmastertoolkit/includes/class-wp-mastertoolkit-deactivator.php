@@ -44,6 +44,7 @@ class WPMastertoolkit_Deactivator {
 		global $wpdb;
 
 		$table_name = $wpdb->prefix . WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_limit_login_attempts';
-        $wpdb->query( "DROP TABLE IF EXISTS `". $table_name ."`" );
+		//phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange
+        $wpdb->query( $wpdb->prepare( "DROP TABLE IF EXISTS %i", $table_name ) );
 	}
 }

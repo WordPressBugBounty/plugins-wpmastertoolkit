@@ -52,8 +52,8 @@ class WPMasterToolKit_Prevent_User_Enumeration {
     public function block_author_page_front() {
         if ( ! current_user_can( 'list_users' ) && is_author() ) {
             wp_die( 
-                __( 'Access denied.', 'wpmastertoolkit' ), 
-                __( 'Forbidden', 'wpmastertoolkit' ), 
+                esc_html__( 'Access denied.', 'wpmastertoolkit' ), 
+                esc_html__( 'Forbidden', 'wpmastertoolkit' ), 
                 array( 'response' => 403 )
             );
         }

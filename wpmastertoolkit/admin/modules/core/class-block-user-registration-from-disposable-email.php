@@ -346,7 +346,7 @@ class WPMastertoolkit_Block_User_Registration_From_Disposable_Email {
         $email_domain              = substr(strrchr($user_email, "@"), 1);
 
         if ( in_array($email_domain, $disposable_emails_domains ) ) {
-            wp_die( __('Registration from disposable email addresses is not allowed.', 'wpmastertoolkit') );
+            wp_die( esc_html__('Registration from disposable email addresses is not allowed.', 'wpmastertoolkit') );
         }
 
         return $user_email;

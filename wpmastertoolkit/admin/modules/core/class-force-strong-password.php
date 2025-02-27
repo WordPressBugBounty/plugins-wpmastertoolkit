@@ -109,7 +109,8 @@ class WPMastertoolkit_Force_Strong_Password {
      * @return void
      */
     private function validate_complex_password( $errors ) {
-        $password = ( isset( $_POST[ 'pass1' ] ) && trim( $_POST[ 'pass1' ] ) ) ? sanitize_text_field( $_POST[ 'pass1' ] ) : null;
+		//phpcs:ignore WordPress.Security.NonceVerification.Missing
+        $password = isset( $_POST[ 'pass1' ] ) ? trim( sanitize_text_field( wp_unslash( $_POST[ 'pass1' ] ) ) ) : null;
 
         if ( empty( $password ) || $errors->get_error_data( 'pass' ) ) return $errors;
 

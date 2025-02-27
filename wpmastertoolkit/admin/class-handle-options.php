@@ -38,8 +38,14 @@ class WPMastertoolkit_Handle_options {
 
                 $option_data = $options_data[$option_key] ?? array();
                 $option_path = $option_data['path'] ?? '';
-                $option_path = WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/modules/' . $option_path;
-
+                
+                /**
+                 * Check if is relative path in plugin folder.
+                 */
+                if ( strpos( $option_path, 'pro/' ) === 0 || strpos( $option_path, 'core/' ) === 0 ) {
+                    $option_path = WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/modules/' . $option_path;
+                }
+                
                 if ( is_file( $option_path ) ) {
                     require_once $option_path;
 
@@ -90,7 +96,13 @@ class WPMastertoolkit_Handle_options {
         foreach ( $options_data as $option_key => $option_data ) {
             
             $option_path = $option_data['path'] ?? '';
-            $option_path = WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/modules/' . $option_path;
+            
+            /**
+             * Check if is relative path in plugin folder.
+             */
+            if ( strpos( $option_path, 'pro/' ) === 0 || strpos( $option_path, 'core/' ) === 0 ) {
+                $option_path = WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/modules/' . $option_path;
+            }
 
             if ( is_file( $option_path ) ) {
                 require_once $option_path;

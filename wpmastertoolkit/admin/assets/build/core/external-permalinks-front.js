@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",(()=>{document.querySelectorAll("a").forEach((e=>{const t=e.getAttribute("href");t&&t.indexOf("#wpmastertoolkit_new_tab")>=0&&(e.setAttribute("href",t.replace("#wpmastertoolkit_new_tab","")),e.setAttribute("target","_blank"),e.setAttribute("rel","noopener noreferrer nofollow"))}))}));

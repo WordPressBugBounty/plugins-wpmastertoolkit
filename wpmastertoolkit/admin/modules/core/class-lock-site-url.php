@@ -53,9 +53,9 @@ class WPMastertoolkit_Lock_Site_URL {
      * @return void
      */
     public function disable_users_can_register() {
-        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/wp-options-general.asset.php' );
-        wp_enqueue_style( 'WPMastertoolkit_wp-options-general', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/wp-options-general.css', array(), $submenu_assets['version'], 'all' );
-        wp_enqueue_script( 'WPMastertoolkit_wp-options-general', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/wp-options-general.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
+        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/wp-options-general.asset.php' );
+        wp_enqueue_style( 'WPMastertoolkit_wp-options-general', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/wp-options-general.css', array(), $submenu_assets['version'], 'all' );
+        wp_enqueue_script( 'WPMastertoolkit_wp-options-general', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/wp-options-general.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
 
         wp_localize_script( 'WPMastertoolkit_wp-options-general', 'wpmastertoolkit_lock_site_url', array(
             'i18n' => array(

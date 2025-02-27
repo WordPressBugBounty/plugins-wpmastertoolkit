@@ -112,12 +112,12 @@ class WPMastertoolkit_SMTP_Mailer {
 	 */
 	public function send_test_email() {
 
-		$nonce = sanitize_text_field( $_POST['nonce'] ?? '' );
+		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
 		if ( ! wp_verify_nonce( $nonce, $this->ajax_nonce ) ) {
             wp_send_json_error( array( 'message' => __( 'Refresh the page and try again.', 'wpmastertoolkit' ) ) );
 		}
 
-		$email = sanitize_email( $_POST['testEmail'] ?? '' );
+		$email = sanitize_email( wp_unslash( $_POST['testEmail'] ?? '' ) );
 		if ( empty( $email ) ) {
 			wp_send_json_error( array( 'message' => __( 'Please enter a valid email address.', 'wpmastertoolkit' ) ) );
 		}
@@ -159,18 +159,18 @@ class WPMastertoolkit_SMTP_Mailer {
      * @since   1.5.0
      */
     public function render_submenu() {
-        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/smtp-mailer.asset.php' );
-        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/smtp-mailer.css', array(), $submenu_assets['version'], 'all' );
-        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/smtp-mailer.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
+        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/smtp-mailer.asset.php' );
+        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/smtp-mailer.css', array(), $submenu_assets['version'], 'all' );
+        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/smtp-mailer.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
 		wp_localize_script( 'WPMastertoolkit_submenu', 'wpmastertoolkit_smtp_mailer', array(
             'ajaxUrl' => admin_url( 'admin-ajax.php' ),
             'action'  => $this->ajax_action,
 			'nonce'   => wp_create_nonce( $this->ajax_nonce ),
 		));
 
-        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/header.php';
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/header.php';
         $this->submenu_content();
-        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/footer.php';
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/footer.php';
     }
 
 	/**
@@ -179,12 +179,13 @@ class WPMastertoolkit_SMTP_Mailer {
      * @since   1.7.0
      */
     public function save_submenu() {
-		$nonce = sanitize_text_field( $_POST['_wpnonce'] ?? '' );
+		$nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ?? '' ) );
 
 		if ( wp_verify_nonce( $nonce, $this->nonce_action ) ) {
+			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
             $new_settings = $this->sanitize_settings( $_POST[ $this->option_id ] ?? array() );
             $this->save_settings( $new_settings );
-            wp_safe_redirect( sanitize_url( $_SERVER['REQUEST_URI'] ?? '' ) );
+            wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
 			exit;
 		}
     }
@@ -278,6 +279,8 @@ class WPMastertoolkit_SMTP_Mailer {
 
 		$encryption_options = $default_settings['encryption']['options'];
 		$encryption_value   = $this->settings['encryption']['value'] ?? $default_settings['encryption']['value'];
+
+		$current_user_email = wp_get_current_user()->user_email ?? '';
         ?>
             <div class="wp-mastertoolkit__section">
                 <div class="wp-mastertoolkit__section__desc">
@@ -370,7 +373,7 @@ class WPMastertoolkit_SMTP_Mailer {
 
 							<div class="wp-mastertoolkit__input-text flex">
                                 <div>
-                                    <input type="email" id="JS-test-input">
+                                    <input type="email" id="JS-test-input" value="<?php echo esc_attr( $current_user_email ); ?>">
                                 </div>
                                 <button class="copy-button" id="JS-test-btn">
 									<?php esc_html_e( 'Send Now', 'wpmastertoolkit' ); ?>

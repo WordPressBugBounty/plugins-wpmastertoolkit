@@ -49,24 +49,25 @@ class WPMastertoolkit_Content_Duplication {
     public function wpmastertoolkit_content_duplication() {
 
         if ( ! current_user_can( 'edit_posts' ) ) {
-            wp_die( __( 'You do not have permission to perform this action.', 'wpmastertoolkit' ) );
+            wp_die( esc_html__( 'You do not have permission to perform this action.', 'wpmastertoolkit' ) );
         }
 
         $nonce            = isset( $_GET['nonce'] ) ? sanitize_text_field( wp_unslash( $_GET['nonce'] ) ) : '';
-        $original_post_id = isset( $_GET['post'] ) ? intval( sanitize_text_field( $_GET['post'] ) ) : 0;
+		//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        $original_post_id = isset( $_GET['post'] ) ? intval( sanitize_text_field( wp_unslash( $_GET['post'] ) ) ) : 0;
 
         if ( ! wp_verify_nonce( $nonce, 'wpmastertoolkit_content_duplication_' . $original_post_id ) ) {
-            wp_die( __( 'Invalid nonce!', 'wpmastertoolkit' ) );
+            wp_die( esc_html__( 'Invalid nonce!', 'wpmastertoolkit' ) );
         }
 
         $original_post = get_post( $original_post_id );
 
         if ( ! $original_post ) {
-            wp_die( __( 'Invalid post ID.', 'wpmastertoolkit' ) );
+            wp_die( esc_html__( 'Invalid post ID.', 'wpmastertoolkit' ) );
         }
 
         if ( in_array( $original_post->post_type, $this->excluded_posts ) ) {
-            wp_die( __( 'You cannot duplicate this post type.', 'wpmastertoolkit' ) );
+            wp_die( esc_html__( 'You cannot duplicate this post type.', 'wpmastertoolkit' ) );
         }
 
         // Duplicate the post and insert it as a draft

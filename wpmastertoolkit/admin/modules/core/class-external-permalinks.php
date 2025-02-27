@@ -100,9 +100,11 @@ class WPMastertoolkit_External_Permalinks {
      */
     public function save_meta_boxes( $post_id ) {
 
+		//phpcs:ignore WordPress.Security.NonceVerification.Missing
         if ( isset( $_POST['wpmastertoolkit_external_permalink'] ) ) {
 
-            $external_permalink = esc_url_raw( trim( $_POST['wpmastertoolkit_external_permalink'] ) );
+			//phpcs:ignore WordPress.Security.NonceVerification.Missing
+            $external_permalink = trim( sanitize_url( wp_unslash( $_POST['wpmastertoolkit_external_permalink'] ) ) );
 
             if ( ! empty( $external_permalink ) ) {
                 update_post_meta( $post_id, 'wpmastertoolkit_external_permalink', $external_permalink );
@@ -193,8 +195,8 @@ class WPMastertoolkit_External_Permalinks {
      */
     public function enqueue_scripts() {
 
-        $external_permalink_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/external-permalinks-front.asset.php' );
-        wp_enqueue_script( 'WPMastertoolkit_external_permalink_front', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/external-permalinks-front.js', $external_permalink_assets['dependencies'], $external_permalink_assets['version'], true );
+        $external_permalink_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/external-permalinks-front.asset.php' );
+        wp_enqueue_script( 'WPMastertoolkit_external_permalink_front', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/external-permalinks-front.js', $external_permalink_assets['dependencies'], $external_permalink_assets['version'], true );
     }
 
     /**
@@ -220,13 +222,13 @@ class WPMastertoolkit_External_Permalinks {
      * @since   1.4.0
      */
     public function render_submenu() {
-        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/content-order.asset.php' );
-        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/content-order.css', array(), $submenu_assets['version'], 'all' );
-        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/content-order.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
+        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/content-order.asset.php' );
+        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/content-order.css', array(), $submenu_assets['version'], 'all' );
+        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/content-order.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
 
-        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/header.php';
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/header.php';
         $this->submenu_content();
-        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/footer.php';
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/footer.php';
     }
 
     /**
@@ -235,12 +237,13 @@ class WPMastertoolkit_External_Permalinks {
      * @since   1.4.0
      */
     public function save_submenu() {
-		$nonce = sanitize_text_field( $_POST['_wpnonce'] ?? '' );
+		$nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ?? '' ) );
 
 		if ( wp_verify_nonce( $nonce, $this->nonce_action ) ) {
+			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
             $new_settings = $this->sanitize_settings( $_POST[ $this->option_id ] ?? array() );
             $this->save_settings( $new_settings );
-            wp_safe_redirect( sanitize_url( $_SERVER['REQUEST_URI'] ?? '' ) );
+            wp_safe_redirect( sanitize_url( wp_unslash(  $_SERVER['REQUEST_URI'] ?? '' ) ) );
 			exit;
 		}
     }

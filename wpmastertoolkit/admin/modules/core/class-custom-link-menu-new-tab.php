@@ -50,7 +50,8 @@ class WPMastertoolkit_Custom_Link_Menu_New_Tab {
      */
     public function save_checkbox( $menu_id, $menu_item_db_id, $args ) {
 
-        $value = sanitize_text_field( $_POST['WPMastertoolkit_open_new_tab'][$menu_item_db_id] ?? false );
+		//phpcs:ignore WordPress.Security.NonceVerification.Missing
+        $value = sanitize_text_field( wp_unslash( $_POST['WPMastertoolkit_open_new_tab'][$menu_item_db_id] ?? false ) );
 
         if ( $value !== false ) {
             update_post_meta( $menu_item_db_id, 'WPMastertoolkit_open_new_tab', $value );

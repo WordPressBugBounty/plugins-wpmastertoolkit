@@ -4,7 +4,7 @@ Tags: all in one plugin, admin, security, disable features, easy to use
 Requires at least: 6.0.0
 Tested up to: 6.7.1
 Requires PHP: 7.4
-Stable tag: 2.2.0
+Stable tag: 2.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
 
@@ -13,8 +13,11 @@ Duplicate post, post order, email via SMTP, code snippets, disable gutenberg, ch
 == Description ==
 WP Master ToolKit is your all-in-one solution for optimizing WordPress. It streamlines your dashboard, enhances workflows, and simplifies content and settings management. Customize your WordPress installation effortlessly with all the tools you need at your fingertips.
 
-**Presentation of the extension by Alexis Fichou (WP-Origami) 🇫🇷:**
-[youtube https://www.youtube.com/watch?v=9ZFp_eyYop4]
+**Test by Alexis Fichou (WP-Origami) :**
+[youtube https://www.youtube.com/watch?v=Lw0EeaBy4W4]
+
+**Test by Enzo (Easy WordPress) :**
+[youtube https://www.youtube.com/watch?v=I1GdHeeJp6E&t]
 
 = 86 Free features =
 
@@ -41,7 +44,7 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 * Disable Feeds: Completely disable RSS, Atom, and RDF feeds for posts, categories, tags, comments, authors, and search. Removes all feed URL references from the `<head>` section.
 * Disable Gutenberg: Deactivate the Gutenberg block editor selectively, allowing you to control its usage for specific or all relevant post types.
 * Disable REST API: Disable REST API access for non-authenticated users and remove URL traces from &lt;head&gt;, HTTP headers and WP RSD endpoint.
-* Disable Really Simple Discovery (RSD) &lt;link&gt; tag: Disable Dashicons CSS and JS on the front-end for public visitors. Note: This may affect custom forms relying on Dashicons. Check custom login forms and layouts after disabling.
+* Disable Really Simple Discovery (RSD) &lt;link&gt; tag: Disable the Really Simple Discovery (RSD) <link> tag in <head>. The RSD tag is used by XML-RPC clients to discover the location of the XML-RPC endpoint on your site.
 * Disable WP Sitemap: Disable the default WordPress sitemap feature, which was introduced in WordPress 5.5.
 * Disable Windows Live Writer (WLW) manifest &lt;link&gt; tag: Disable the Windows Live Writer (WLW) manifest &lt;link&gt; tag in &lt;head&gt;. The WLW app was discontinued in 2017.
 * Disable WordPress shortlink &lt;link&gt; tag: Disable the WordPress shortlink `<link>` tag in `<head>`. Replace with a shortlink plugin for custom names and click tracking.
@@ -105,7 +108,7 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 * SVG Upload: Enhance media library functionality to support the seamless uploading of SVG files.
 * Wider Admin Menu: Give the admin menu more room to better accommodate wider items.
 
-= 18 Pro features =
+= 19 Pro features =
 * 410 Manager: Managing HTTP 410 statuses on your site. The 410 status indicates that the requested resource has been permanently deleted and that this deletion is intentional and final.
 * Add Essentials Shortcodes: Insert dynamic variables into your titles and content via shortcodes.
 * Auto clean actionscheduler_actions: Clean actionscheduler_actions database table from actions that have been completed | failed | cancelled.
@@ -124,13 +127,14 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 * Two Factor Authentication: Add an extra layer of security to your website by enabling two-factor authentication for all users.
 * Updates Logs: Track and record the most recent login activity of site users, then showcase the date and time in the users list table
 * User Switching: Instant switching between user accounts.
+* Vulnerabilities Scan: This module will scan your WordPress Core Version, Plugins and Themes for vulnerabilities.
 
 ⭐️ UPGRADE TO PRO VERSION: [WPMasterToolKit Pro](https://wpmastertoolkit.com) ⭐️
 
 == Other plugin by Webdeclic ==
 [Webdeclic](https://webdeclic.com) is a French web agency based in Paris. We are specialized in the creation of websites and e-commerce sites. We are also the creator of the following plugins:
-* [QuickWebP - Compress / Optimize Images & Convert WebP | SEO Friendly](https://wordpress.org/plugins/quickwebp/)
-* [Cookie Dough Compliance and Consent for GDPR](https://wordpress.org/plugins/cookie-dough-compliance-and-consent-for-gdpr/)
+* [QuickWebP](https://wordpress.org/plugins/quickwebp/)
+* [Cookie Dough](https://wordpress.org/plugins/cookie-dough-compliance-and-consent-for-gdpr/)
 * [Univeral Honey Pot](https://wordpress.org/plugins/universal-honey-pot/)
 * [Clean My WP](https://wordpress.org/plugins/clean-my-wp/)
 * [Mentions Legales Par Webdeclic](https://wordpress.org/plugins/mentions-legales-par-webdeclic/)
@@ -178,6 +182,22 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 4. Code snippets
 
 == Changelog ==
+
+= 2.3.0 =
+* Add Pro Modules informations
+* Better UX for Upgrade Pro page
+* Open Code for Addon Developers
+* Update Module: Disallow Access WP Sensible Files: Now unwanted files are deleted again after core update.
+* Update Module: Maintenance Mode: Add a Bypass link for the maintenance mode (PRO Only).
+* Update Module: SMTP mailer: Add current user email in test input value.
+* Light pot file (better exclusion)
+* Fix: Text Domain Mismatch
+* Fix: Missing Translators Comment
+* Fix: Non Singular String Literal Text
+* Fix: rand() function replaced by wp_rand()
+* Fix: date() function replaced by wp_date()
+* Complet review with Plugin Check
+* Better code organization
 
 = 2.2.0 =
 * Add Pro Modules informations

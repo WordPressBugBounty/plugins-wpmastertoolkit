@@ -222,10 +222,18 @@ function wpmastertoolkit_get_folder_url(){
  * @return void
  */
 function wpmastertoolkit_recursive_mkdir( $folders, $root_dir_path ){
+	global $wp_filesystem;
+
+	if ( ! function_exists( 'WP_Filesystem' ) ) {
+		require_once ABSPATH . 'wp-admin/includes/file.php';
+	}
+
+	WP_Filesystem();
+
     foreach ($folders as $folder_name => $sub_folders) {
         $folder_path = $root_dir_path . '/' . $folder_name;
         if( !is_dir( $folder_path ) ){
-            mkdir( $folder_path , 0705);
+            $wp_filesystem->mkdir( $folder_path , 0705 );
         }
 
         wpmastertoolkit_create_index_file($folder_path);

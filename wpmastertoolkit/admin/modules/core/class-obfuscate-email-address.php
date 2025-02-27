@@ -35,7 +35,7 @@ class WPMastertoolkit_Obfuscate_Email_Address {
         }
 
         // Reverse email address characters if not in Firefox, which has bug related to unicode-bidi CSS property
-        if ( false !== stripos( sanitize_text_field( $_SERVER['HTTP_USER_AGENT'] ), 'firefox' ) ) {
+        if ( false !== stripos( sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ?? '' ) ), 'firefox' ) ) {
             // Do nothing. Do not reverse characters.
             $email_reversed  = $atts['email'];
             $email_rev_parts = explode( '@', $email_reversed );

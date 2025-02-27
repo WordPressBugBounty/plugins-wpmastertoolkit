@@ -185,8 +185,8 @@ class WPMastertoolkit_Login_Logout_Menu {
 			'numberposts'  => -1,
 			'post_type'    => 'nav_menu_item',
 			'fields'       => 'ids',
-			'meta_key'     => '_menu_item_url',
-			'meta_value'   => 'wpmastertoolkit',
+			'meta_key'     => '_menu_item_url',//phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+			'meta_value'   => 'wpmastertoolkit',//phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
 			'meta_compare' => 'REGEXP',
 		);
 		$menu_items = get_posts( $post_args );

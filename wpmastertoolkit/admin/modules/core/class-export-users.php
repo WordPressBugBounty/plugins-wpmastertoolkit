@@ -80,13 +80,13 @@ class WPMastertoolkit_Export_Users {
      */
     public function download_user() {
 
-        $nonce = isset( $_GET[ 'nonce' ] ) ? sanitize_text_field( $_GET[ 'nonce' ] ) : '';
+        $nonce = isset( $_GET[ 'nonce' ] ) ? sanitize_text_field( wp_unslash( $_GET[ 'nonce' ] ) ) : '';
 
         if ( ! wp_verify_nonce( $nonce, self::NONCE ) ) {
             wp_die();
         }
 
-        $user_id = isset( $_GET[ 'user' ] ) ? sanitize_text_field( $_GET[ 'user' ] ) : '';
+        $user_id = isset( $_GET[ 'user' ] ) ? sanitize_text_field( wp_unslash( $_GET[ 'user' ] ) ) : '';
 
         if ( empty( $user_id ) ) {
             wp_die();
@@ -149,6 +149,7 @@ class WPMastertoolkit_Export_Users {
             fputcsv( $handle, $user, $delimiter, $enclosure );
         }
 
+		//phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
         fclose( $handle );
         exit;
     }

@@ -70,7 +70,8 @@ class WPMastertoolkit_Media_Cleaner {
 			return $metadata;
 		}
 
-		$original_name = isset( $_FILES['async-upload']['original_name'] ) ? sanitize_text_field( $_FILES['async-upload']['original_name'] ) : sanitize_text_field( $_FILES['async-upload']['name'] );
+		//phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$original_name = isset( $_FILES['async-upload']['original_name'] ) ? sanitize_text_field( $_FILES['async-upload']['original_name'] ) : sanitize_text_field( $_FILES['async-upload']['name'] ?? '' );
 		if ( ! empty( $original_name ) ) {
 			$original_name = pathinfo( $original_name, PATHINFO_FILENAME );
 			$post_arr      = array();
@@ -123,12 +124,13 @@ class WPMastertoolkit_Media_Cleaner {
      * @since   1.14.0
      */
     public function save_submenu() {
-		$nonce = sanitize_text_field( $_POST['_wpnonce'] ?? '' );
+		$nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ?? '' ) );
 
 		if ( wp_verify_nonce( $nonce, $this->nonce_action ) ) {
+			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
             $new_settings = $this->sanitize_settings( $_POST[ $this->option_id ] ?? array() );
             $this->save_settings( $new_settings );
-            wp_safe_redirect( sanitize_url( $_SERVER['REQUEST_URI'] ?? '' ) );
+            wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
 			exit;
 		}
     }
@@ -139,13 +141,13 @@ class WPMastertoolkit_Media_Cleaner {
      * @since   1.14.0
      */
     public function render_submenu() {
-        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/media-cleaner.asset.php' );
-        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/media-cleaner.css', array(), $submenu_assets['version'], 'all' );
-        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/media-cleaner.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
+        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/media-cleaner.asset.php' );
+        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/media-cleaner.css', array(), $submenu_assets['version'], 'all' );
+        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/media-cleaner.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
 
-        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/header.php';
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/header.php';
         $this->submenu_content();
-        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/footer.php';
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/footer.php';
     }
 
 	/**

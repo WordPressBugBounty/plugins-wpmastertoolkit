@@ -642,7 +642,22 @@ class WPMastertoolkit_Modules_Data {
 				'pro'           => true,
 				'path'          => 'pro/class-link-shortener.php',
 			),
+			'WPMastertoolkit_Vulnerabilities_Scan' => array(
+				'original_name' => "Vulnerabilities Scan",
+				'group'         => 'security',
+				'pro'           => true,
+				'path'          => 'pro/class-vulnerabilities-scan.php',
+			),
 		);
+		
+		/**
+         * Filter the modules data.
+         *
+         * @since 2.3.0
+         *
+         * @param array    $modules    The modules data.
+         */
+		$modules = apply_filters('wpmastertoolkit_modules_data', $modules);
 
 		return $modules;
 	}
@@ -811,7 +826,7 @@ class WPMastertoolkit_Modules_Data {
 			),
 			'WPMastertoolkit_Disable_Really_Simple_Discovery_Tag' => array(
 				'name' => esc_html_x( "Disable Really Simple Discovery (RSD) <link> tag", "Module name", 'wpmastertoolkit' ),
-				'desc' => esc_html_x( "Disable loading of Dashicons CSS and JS files on the front-end for public site visitors. This might break the layout or design of custom forms, including custom login forms, if they depend on Dashicons. Make sure to check those forms after disabling.", "Module description", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( "Disable the Really Simple Discovery (RSD) <link> tag in <head>. The RSD tag is used by XML-RPC clients to discover the location of the XML-RPC endpoint on your site. If you don't use XML-RPC, you can safely disable this tag.", "Module description", 'wpmastertoolkit' ),
 			),
 			'WPMastertoolkit_Disable_Windows_Live_Writer_Tag' => array(
 				'name' => esc_html_x( "Disable Windows Live Writer (WLW) manifest <link> tag", "Module name", 'wpmastertoolkit' ),
@@ -1069,8 +1084,21 @@ class WPMastertoolkit_Modules_Data {
 				'name' => esc_html_x( "Link Shortener", "Module name", 'wpmastertoolkit' ),
 				'desc' => esc_html_x( "Shorten your links with a custom prefix. You can also track the number of clicks on each link.", "Module description", 'wpmastertoolkit' ),
 			),
+			'WPMastertoolkit_Vulnerabilities_Scan' => array(
+				'name' => esc_html_x( "Vulnerabilities Scan", "Module name", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( "This module will scan your WordPress Core Version, Plugins and Themes for vulnerabilities.", "Module description", 'wpmastertoolkit' ),
+			),
 		);
 
+		/**
+         * Filter the modules labels.
+         *
+         * @since 2.3.0
+         *
+         * @param array    $modules    The modules labels.
+         */
+		$modules = apply_filters('wpmastertoolkit_modules_labels', $modules);
+		
 		return $modules;
 	}
 
@@ -1161,7 +1189,48 @@ class WPMastertoolkit_Modules_Data {
 				'exception' => true,
 			)
 		);
+
+		/**
+		 * Filter the modules groups.
+		 *
+		 * @since 2.3.0
+		 *
+		 * @param array    $groups    The modules groups.
+		 */
+		$groups = apply_filters('wpmastertoolkit_modules_groups', $groups);
 	
 		return $groups;
+	}
+	
+	/**
+	 * count_modules
+	 * 
+	 * @usage  WPMastertoolkit_Modules_Data::count_modules( 'all' );
+	 * @param  mixed $type
+	 */
+	public static function count_modules( $type = 'all' ) {
+		$modules = self::modules_normal_values();
+		$count = 0;
+		switch ( $type ) {
+			case 'free':
+				foreach ( $modules as $module ) {
+					if ( ! isset( $module['pro'] ) || ! $module['pro'] ) {
+						$count++;
+					}
+				}
+				return $count;
+				break;
+			case 'pro':
+				foreach ( $modules as $module ) {
+					if ( isset( $module['pro'] ) && $module['pro'] ) {
+						$count++;
+					}
+				}
+				return $count;
+				break;
+			default:
+			break;
+		}
+		return count( $modules );
 	}
 }

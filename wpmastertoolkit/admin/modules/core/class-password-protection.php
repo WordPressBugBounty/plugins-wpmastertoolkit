@@ -116,20 +116,21 @@ class WPMastertoolkit_Password_Protection {
             }
         }
 
-        $auth_cookie = ( isset( $_COOKIE[ self::COOKIE_ID ] ) ? $_COOKIE[ self::COOKIE_ID ] : '' );
+        $auth_cookie = ( isset( $_COOKIE[ self::COOKIE_ID ] ) ? sanitize_text_field( wp_unslash( $_COOKIE[ self::COOKIE_ID ] ) ) : '' );
 
         if ( wp_check_password( self::COOKIE_PASSWORD, $auth_cookie ) ) {
             return;
         }
 
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
         if ( isset( $_REQUEST['protected-page'] ) && 'view' == $_REQUEST['protected-page'] ) {
-            $password_protection_template = WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/password-protection.php';
+            $password_protection_template = WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/password-protection/password-protection.php';
             load_template( $password_protection_template );
             exit;
 
         } else {
 
-            $current_url = ( ( is_ssl() ? 'https://' : 'http://' ) ) . sanitize_text_field( $_SERVER['HTTP_HOST'] ) . sanitize_text_field( $_SERVER['REQUEST_URI'] );
+            $current_url = ( ( is_ssl() ? 'https://' : 'http://' ) ) . sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ?? '' ) ) . sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) );
             $args        = array(
                 'protected-page' => 'view',
                 'source'         => urlencode( $current_url ),
@@ -152,8 +153,10 @@ class WPMastertoolkit_Password_Protection {
         $settings        = $this->get_settings();
         $stored_password = $settings['password'] ?? '';
 
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
         if ( isset( $_REQUEST['protected_page_pwd'] ) ) {
-            $password_input = $_REQUEST['protected_page_pwd'];
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            $password_input = sanitize_text_field( wp_unslash( $_REQUEST['protected_page_pwd'] ) );
 
             if ( ! empty( $password_input ) ) {
 
@@ -164,7 +167,8 @@ class WPMastertoolkit_Password_Protection {
 
                     setcookie( self::COOKIE_ID, $hashed_cookie_value, $expiration, COOKIEPATH, COOKIE_DOMAIN, false, true );
 
-                    $redirect_to_url = ( isset( $_REQUEST['source'] ) ? $_REQUEST['source'] : '' );
+					// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+                    $redirect_to_url = ( isset( $_REQUEST['source'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['source'] ) ) : '' );
                     wp_safe_redirect( $redirect_to_url );
                     exit;
 
@@ -251,13 +255,13 @@ class WPMastertoolkit_Password_Protection {
      */
     public function render_submenu() {
 
-        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/password-protection.asset.php' );
-        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/password-protection.css', array(), $submenu_assets['version'], 'all' );
-        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/password-protection.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
+        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/password-protection.asset.php' );
+        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/password-protection.css', array(), $submenu_assets['version'], 'all' );
+        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/password-protection.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
 
-        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/header.php';
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/header.php';
         $this->submenu_content();
-        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/footer.php';
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/footer.php';
     }
 
     /**
@@ -266,14 +270,15 @@ class WPMastertoolkit_Password_Protection {
      */
     public function save_submenu() {
 
-		$nonce = sanitize_text_field( $_POST['_wpnonce'] ?? '' );
+		$nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ?? '' ) );
 		
 		if ( wp_verify_nonce($nonce, $this->nonce_action) ) {
 
+			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
             $new_settings = $this->sanitize_settings( $_POST[$this->option_id] ?? array() );
             
             $this->save_settings( $new_settings );
-            wp_safe_redirect( sanitize_url( $_SERVER['REQUEST_URI'] ?? '' ) );
+            wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
 			exit;
 		}
     }
@@ -330,8 +335,8 @@ class WPMastertoolkit_Password_Protection {
                         <div class="wp-mastertoolkit__section__body__item__content">
                             <div class="wp-mastertoolkit__input-password">
                                 <input type="password" name="<?php echo esc_attr( $this->option_id . '[password]' ); ?>" value="<?php echo esc_attr( $password ); ?>">
-                                <span class="eye-show"><?= file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/eye-show.svg' ); ?></span>
-                                <span class="eye-hide"><?= file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/eye-hide.svg' ); ?></span>
+                                <span class="eye-show"><?php echo file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/eye-show.svg' );// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+                                <span class="eye-hide"><?php echo file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/eye-hide.svg' );// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
                             </div>
                         </div>
                     </div>

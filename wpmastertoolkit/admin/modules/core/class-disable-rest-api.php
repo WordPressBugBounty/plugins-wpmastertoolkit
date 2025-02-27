@@ -44,7 +44,7 @@ class WPMastertoolkit_Disable_REST_API {
 		if ( ! is_user_logged_in() ) {
             return new WP_Error(
                 'rest_api_authentication_required',
-				__( 'The REST API has been restricted to authenticated users.', 'wp-mastertoolkit' ),
+				__( 'The REST API has been restricted to authenticated users.', 'wpmastertoolkit' ),
                 array(
                     'status' => rest_authorization_required_code()
                 )

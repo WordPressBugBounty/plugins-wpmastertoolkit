@@ -37,8 +37,8 @@ class WPMastertoolkit_Multiple_User_Roles {
 	public function enqueue_scripts_styles( $hook_suffix ) {
 		if ( 'user-edit.php' == $hook_suffix || 'user-new.php' == $hook_suffix ) {
             if ( current_user_can( 'promote_users', get_current_user_id() ) ) {
-				$user_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/multiple_user_roles_user.asset.php' );
-        		wp_enqueue_script( 'WPMastertoolkit_multiple_user_roles_user', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/multiple_user_roles_user.js', $user_assets['dependencies'], $user_assets['version'], true );
+				$user_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/multiple_user_roles_user.asset.php' );
+        		wp_enqueue_script( 'WPMastertoolkit_multiple_user_roles_user', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/multiple_user_roles_user.js', $user_assets['dependencies'], $user_assets['version'], true );
             }
         }
 	}
@@ -94,6 +94,7 @@ class WPMastertoolkit_Multiple_User_Roles {
 		$roles          = get_editable_roles();
         $user           = get_user_by( 'id', (int) $user_id );
         $user_roles     = array_intersect( array_values( $user->roles ), array_keys( $roles ) );
+		//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		$assigned_roles = wpmastertoolkit_clean( $_POST['wpmastertoolkit_assigned_roles'] ?? '' );
 
         if ( ! empty( $assigned_roles ) ) {

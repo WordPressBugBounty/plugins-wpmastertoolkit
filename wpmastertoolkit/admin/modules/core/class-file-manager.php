@@ -57,7 +57,8 @@ class WPMastertoolkit_File_Manager {
     public function class_init() {
 
 		$this->header_title = esc_html__( 'File Manager', 'wpmastertoolkit' );
-
+		
+		//phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		if ( ! isset( $_GET['page'] ) || $_GET['page'] != 'wp-mastertoolkit-settings-file-manager' ) {
 			return;
 		}
@@ -94,28 +95,27 @@ class WPMastertoolkit_File_Manager {
     public function render_submenu() {
 
 		$dependencies = array();
-		wp_enqueue_script( 'WPMastertoolkit_submenu_jquery', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/lib/jquery-3.6.1.min.js', array(), '3.6.1', true );
-		wp_enqueue_script( 'WPMastertoolkit_submenu_jquery_datatables', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/lib/jquery.dataTables.min.js', array(), '1.13.1', true );
-		$dependencies[] = 'WPMastertoolkit_submenu_jquery';
+		wp_enqueue_script( 'WPMastertoolkit_submenu_jquery_datatables', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/lib/core/jquery.dataTables.min.js', array('jquery'), '1.13.1', true );
 		$dependencies[] = 'WPMastertoolkit_submenu_jquery_datatables';
 
 		if ( 'upload' == $this->TEMPLATE ) {
-			wp_enqueue_style( 'WPMastertoolkit_submenu_dropzone', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/lib/dropzone-5.9.3.min.css', array(), '5.9.3', 'all' );
-			wp_enqueue_script( 'WPMastertoolkit_submenu_dropzone', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/lib/dropzone-5.9.3.min.js', array(), '5.9.3', true );
+			wp_enqueue_style( 'WPMastertoolkit_submenu_dropzone', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/lib/core/dropzone-5.9.3.min.css', array(), '5.9.3', 'all' );
+			wp_enqueue_script( 'WPMastertoolkit_submenu_dropzone', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/lib/core/dropzone-5.9.3.min.js', array(), '5.9.3', true );
 			$dependencies[] = 'WPMastertoolkit_submenu_dropzone';
 		}
 
 		if ( 'view' == $this->TEMPLATE ) {
-			wp_enqueue_style( 'WPMastertoolkit_submenu_highlight', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/lib/highlight-11.6.0.css', array(), '11.6.0', 'all' );
-			wp_enqueue_script( 'WPMastertoolkit_submenu_highlight', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/lib/highlight-11.6.0.js', array(), '11.6.0', true );
+			wp_enqueue_style( 'WPMastertoolkit_submenu_highlight', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/lib/core/highlight-11.6.0.css', array(), '11.6.0', 'all' );
+			wp_enqueue_script( 'WPMastertoolkit_submenu_highlight', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/lib/core/highlight-11.6.0.js', array(), '11.6.0', true );
 			$dependencies[] = 'WPMastertoolkit_submenu_highlight';
 		}
 
 		if ( 'edit' == $this->TEMPLATE ) {
-			wp_enqueue_script( 'WPMastertoolkit_submenu_ace', 'https://cdnjs.cloudflare.com/ajax/libs/ace/1.13.1/ace.js', array(), '1.13.1', true );
+			wp_enqueue_script( 'WPMastertoolkit_submenu_ace', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/lib/core/ace-1.13.1-min.js', array(), '1.13.1', true );
 			$dependencies[] = 'WPMastertoolkit_submenu_ace';
 
-			$ext = pathinfo( sanitize_text_field( $_GET["edit"] ?? '' ), PATHINFO_EXTENSION );
+			//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$ext = isset( $_GET['edit'] ) ? pathinfo( sanitize_text_field( wp_unslash( $_GET['edit'] ) ), PATHINFO_EXTENSION ) : '';
 			$ext =  $ext == "js" ? "javascript" :  $ext;
 			wp_localize_script( 'WPMastertoolkit_submenu_ace', 'WPMastertoolkit_submenu_ace', array(
 				'ext'  => $ext,
@@ -129,14 +129,14 @@ class WPMastertoolkit_File_Manager {
 			) );
 		}
 
-        wp_enqueue_style( 'WPMastertoolkit_submenu_fontawesome', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/lib/font-awesome.min.css', array(), '4.7.0', 'all' );
-        wp_enqueue_style( 'WPMastertoolkit_submenu_bootstrap', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/lib/bootstrap.min.css', array(), '5.3.0', 'all' );
-        wp_enqueue_script( 'WPMastertoolkit_submenu_bootstrap', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/lib/bootstrap.bundle.min.js', array(), '5.3.0', true );
+        wp_enqueue_style( 'WPMastertoolkit_submenu_fontawesome', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/lib/core/font-awesome.min.css', array(), '4.7.0', 'all' );
+        wp_enqueue_style( 'WPMastertoolkit_submenu_bootstrap', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/lib/core/bootstrap.min.css', array(), '5.3.0', 'all' );
+        wp_enqueue_script( 'WPMastertoolkit_submenu_bootstrap', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/lib/core/bootstrap.bundle.min.js', array(), '5.3.0', true );
 		$dependencies[] = 'WPMastertoolkit_submenu_bootstrap';
 
-        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/file-manager.asset.php' );
-        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/file-manager.css', array(), $submenu_assets['version'], 'all' );
-        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/file-manager.js', $submenu_assets['dependencies'] + $dependencies, $submenu_assets['version'], true );
+        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/file-manager.asset.php' );
+        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/file-manager.css', array(), $submenu_assets['version'], 'all' );
+        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/file-manager.js', $submenu_assets['dependencies'] + $dependencies, $submenu_assets['version'], true );
 		wp_localize_script( 'WPMastertoolkit_submenu', 'WPMastertoolkit_FileManager', array(
 			'nonce'         => wp_create_nonce( $this->user_nonce ),
 			'chunkSize'     => $this->UPLOAD_CHUNK_SIZE,
@@ -149,9 +149,9 @@ class WPMastertoolkit_File_Manager {
 			),
 		) );
 
-        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/header.php';
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/header.php';
         $this->submenu_content();
-        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/footer.php';
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/footer.php';
     }
 
 	/**
@@ -160,6 +160,7 @@ class WPMastertoolkit_File_Manager {
 	 * @since   1.9.0
 	 */
 	public function show_admin_notice() {
+		//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		$notice = wpmastertoolkit_clean( $_SESSION[$this->option_id]['notice'] ?? '' );
 
 		if ( empty( $notice ) ) {
@@ -181,22 +182,29 @@ class WPMastertoolkit_File_Manager {
 	 * @since   1.9.0
 	 */
 	private function handle_actions() {
+		global $wp_filesystem;
+
+		if ( ! function_exists( 'WP_Filesystem' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+		}
+
+		WP_Filesystem();
 
 		$this->set_global_variables();
 
 		switch (true) {
 			case isset( $_POST['ajax'], $_POST['token'] ) && isset( $_POST['type'] ):
 
-				$nonce = sanitize_text_field( $_POST['token'] ?? '' );
+				$nonce = sanitize_text_field( wp_unslash( $_POST['token'] ?? '' ) );
 				if ( ! wp_verify_nonce( $nonce, $this->user_nonce ) ) {
 					header( 'HTTP/1.0 401 Unauthorized' );
-                	die( __( 'Invalid token', 'wpmastertoolkit' ) );
+                	die( esc_html__( 'Invalid token', 'wpmastertoolkit' ) );
 				}
 
 				// Search
 				if ( $_POST['type'] == "search" ) {
-					$dir      = sanitize_text_field( $_POST['path'] ?? '' ) == "." ? '' : sanitize_text_field( $_POST['path'] ?? '' );
-					$response = $this->scan( $this->fm_clean_path( $dir ), sanitize_text_field( $_POST['content'] ?? '' ) );
+					$dir      = sanitize_text_field( wp_unslash( $_POST['path'] ?? '' ) ) == "." ? '' : sanitize_text_field( wp_unslash( $_POST['path'] ?? '' ) );
+					$response = $this->scan( $this->fm_clean_path( $dir ), sanitize_text_field( wp_unslash( $_POST['content'] ?? '' ) ) );
 					echo json_encode($response);
 					exit();
 				}
@@ -208,7 +216,7 @@ class WPMastertoolkit_File_Manager {
 						exit;
 					}
 	
-					$file = sanitize_text_field( $_GET['edit'] ?? '' );
+					$file = sanitize_text_field( wp_unslash( $_GET['edit'] ?? '' ) );
 					$file = $this->fm_clean_path( $file );
 					$file = str_replace( '/', '', $file );
 	
@@ -220,15 +228,13 @@ class WPMastertoolkit_File_Manager {
 	
 					header('X-XSS-Protection:0');
 
-					$file_path     = $this->PATH . '/' . $file;
-					$writedata     = wp_unslash( $_POST['content'] );
-					$fd            = fopen( $file_path, "w" );
-					$write_results = @fwrite( $fd, $writedata );
-					fclose( $fd );
-	
-					if ( $write_results === false ){
+					$file_path = $this->PATH . '/' . $file;
+					//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+					$writedata = wp_unslash( $_POST['content'] );
+
+					if ( ! $wp_filesystem->put_contents( $file_path, $writedata, FS_CHMOD_FILE ) ){
 						header("HTTP/1.1 500 Internal Server Error");
-						die( __( 'Could Not Write File! - Check Permissions / Ownership', 'wpmastertoolkit' ) );
+						die( esc_html__( 'Could Not Write File! - Check Permissions / Ownership', 'wpmastertoolkit' ) );
 					}
 	
 					die(true);
@@ -236,11 +242,11 @@ class WPMastertoolkit_File_Manager {
 
 				// Backup
 				if ( $_POST['type'] == "backup" && ! empty( $_POST['file'] ) ) {
-					$fileName = $this->fm_clean_path( $_POST['file'] );
+					$fileName = $this->fm_clean_path( sanitize_text_field( wp_unslash( $_POST['file'] ) ) );
 					$fullPath = $this->FM_ROOT_PATH . '/';
 	
 					if ( ! empty( $_POST['path'] ) ) {
-						$relativeDirPath = $this->fm_clean_path( $_POST['path'] );
+						$relativeDirPath = $this->fm_clean_path( sanitize_text_field( wp_unslash( $_POST['path'] ) ) );
 						$fullPath       .= "{$relativeDirPath}/";
 					}
 	
@@ -250,15 +256,27 @@ class WPMastertoolkit_File_Manager {
 	
 					try {
 						if ( ! file_exists( $fullyQualifiedFileName ) ) {
-							throw new Exception( sprintf( __( "File %s not found", 'wpmastertoolkit' ), $fileName ) );
+							throw new Exception( sprintf( 
+								/* translators: %s: file name */
+								__( "File %s not found", 'wpmastertoolkit' ), 
+								$fileName 
+							) );
 						}
 						if ( copy( $fullyQualifiedFileName, $fullPath . $newFileName ) ) {
-							printf( __( "Backup %s created", 'wpmastertoolkit' ), $newFileName );
+							echo esc_html( sprintf( 
+								/* translators: %s: file name */
+								__( "Backup %s created", 'wpmastertoolkit' ), 
+								$newFileName 
+							) );
 						} else {
-							throw new Exception( sprintf( __( "Could not copy file %s", 'wpmastertoolkit' ), $fileName ) );
+							throw new Exception( sprintf( 
+								/* translators: %s: file name */
+								__( "Could not copy file %s", 'wpmastertoolkit' ), 
+								$fileName 
+							) );
 						}
 					} catch (Exception $e) {
-						echo $e->getMessage();
+						echo wp_kses_post( $e->getMessage() ?? '' );
 					}
 				}
 
@@ -266,14 +284,14 @@ class WPMastertoolkit_File_Manager {
 			break;
 			case isset( $_GET['del'], $_POST['token'] ):
 
-				$nonce = sanitize_text_field( $_POST['token'] ?? '' );
+				$nonce = sanitize_text_field( wp_unslash( $_POST['token'] ?? '' ) );
 				if ( ! wp_verify_nonce( $nonce, $this->user_nonce ) ) {
 					$this->set_notice( __( 'Invalid token', 'wpmastertoolkit' ) );
 					wp_safe_redirect( $this->FM_SELF_URL . '?page=wp-mastertoolkit-settings-file-manager&p=' . urlencode( $this->FM_PATH ) );
 					exit;
 				}
 
-				$del = str_replace( '/', '', $this->fm_clean_path( sanitize_text_field( $_GET['del'] ) ) );
+				$del = str_replace( '/', '', $this->fm_clean_path( sanitize_text_field( wp_unslash( $_GET['del'] ) ) ) );
 
 				if ( $del == '' || $del == '..' || $del == '.' ) {
 					$this->set_notice( __( 'Invalid file or folder name', 'wpmastertoolkit' ) );
@@ -284,11 +302,17 @@ class WPMastertoolkit_File_Manager {
 				$is_dir = is_dir( $this->PATH . '/' . $del );
 
 				if ( $this->fm_rdelete( $this->PATH . '/' . $del ) ) {
-					$message = $is_dir ? __( "Folder <b>%s</b> Deleted", 'wpmastertoolkit' ) : __( "File <b>%s</b> Deleted", 'wpmastertoolkit' );
-					$this->set_notice( sprintf( $message, $this->fm_enc( $del ) ), 'success' );
+					$this->set_notice( sprintf(
+						/* translators: %s: file or folder name */
+						$is_dir ? __( "Folder <b>%s</b> Deleted", 'wpmastertoolkit' ) : __( "File <b>%s</b> Deleted", 'wpmastertoolkit' ), 
+						$this->fm_enc( $del ) 
+					), 'success' );
 				} else {
-					$message = $is_dir ? __( "Folder <b>%s</b> not deleted", 'wpmastertoolkit' ) : __( "File <b>%s</b> not deleted", 'wpmastertoolkit' );
-					$this->set_notice( sprintf( $message, $this->fm_enc( $del ) ) );
+					$this->set_notice( sprintf( 
+						/* translators: %s: file or folder name */
+						$is_dir ? __( "Folder <b>%s</b> not deleted", 'wpmastertoolkit' ) : __( "File <b>%s</b> not deleted", 'wpmastertoolkit' ), 
+						$this->fm_enc( $del ) 
+					) );
 				}
 				
 				wp_safe_redirect( $this->FM_SELF_URL . '?page=wp-mastertoolkit-settings-file-manager&p=' . urlencode( $this->FM_PATH ) );
@@ -296,15 +320,15 @@ class WPMastertoolkit_File_Manager {
 			break;
 			case isset( $_POST['newfilename'], $_POST['newfile'], $_POST['token'] ):
 
-				$nonce = sanitize_text_field( $_POST['token'] ?? '' );
+				$nonce = sanitize_text_field( wp_unslash( $_POST['token'] ?? '' ) );
 				if ( ! wp_verify_nonce( $nonce, $this->user_nonce ) ) {
 					$this->set_notice( __( 'Invalid token', 'wpmastertoolkit' ) );
 					wp_safe_redirect( $this->FM_SELF_URL . '?page=wp-mastertoolkit-settings-file-manager&p=' . urlencode( $this->FM_PATH ) );
 					exit;
 				}
 
-				$type = urldecode( sanitize_text_field( $_POST['newfile'] ?? 'file' ) );
-            	$new  = str_replace( '/', '', $this->fm_clean_path( strip_tags( sanitize_text_field( $_POST['newfilename'], '' ) ) ) );
+				$type = urldecode( sanitize_text_field( wp_unslash( $_POST['newfile'] ?? 'file' ) ) );
+            	$new  = str_replace( '/', '', $this->fm_clean_path( wp_strip_all_tags( sanitize_text_field( wp_unslash( $_POST['newfilename'], '' ) ) ) ) );
 
 				if ( ! $this->fm_isvalid_filename( $new ) || $new == '' || $new == '..' || $new == '.' ) {
 					$this->set_notice( __( 'Invalid characters in file or folder name', 'wpmastertoolkit' ) );
@@ -315,25 +339,50 @@ class WPMastertoolkit_File_Manager {
 				if ( $type == "file" ) {
 					if ( ! file_exists( $this->PATH . '/' . $new ) ) {
 						if ( $this->fm_is_valid_ext( $new ) ) {
+							//phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen
 							if ( ! @fopen( $this->PATH . '/' . $new, 'w' ) ) {
-								$this->set_notice( sprintf( __( 'Cannot open file: %s', 'wpmastertoolkit' ), $new ) );
+								$this->set_notice( sprintf(
+									/* translators: %s: file name */
+									__( 'Cannot open file: %s', 'wpmastertoolkit' ), 
+									$new 
+								) );
 								wp_safe_redirect( $this->FM_SELF_URL . '?page=wp-mastertoolkit-settings-file-manager&p=' . urlencode( $this->FM_PATH ) );
 								exit;
 							}
-							$this->set_notice( sprintf( __( 'File <b>%s</b> Created', 'wpmastertoolkit' ), $this->fm_enc( $new ) ), 'success' );
+							$this->set_notice( sprintf( 
+								/* translators: %s: file name */
+								__( 'File <b>%s</b> Created', 'wpmastertoolkit' ), 
+								$this->fm_enc( $new ) 
+							), 'success' );
 						} else {
 							$this->set_notice( __( 'File extension is not allowed', 'wpmastertoolkit' ) );
 						}
 					} else {
-						$this->set_notice( sprintf( __( 'File <b>%s</b> already exist', 'wpmastertoolkit' ), $this->fm_enc( $new ) ) );
+						$this->set_notice( sprintf( 
+							/* translators: %s: file name */	
+							__( 'File <b>%s</b> already exist', 'wpmastertoolkit' ), 
+							$this->fm_enc( $new ) 
+						) );
 					}
 				} else {
 					if ( $this->fm_mkdir( $this->PATH . '/' . $new, false ) === true ) {
-						$this->set_notice( sprintf( __( 'Folder <b>%s</b> Created', 'wpmastertoolkit' ), $new ), 'success' );
+						$this->set_notice( sprintf( 
+							/* translators: %s: folder name */
+							__( 'Folder <b>%s</b> Created', 'wpmastertoolkit' ), 
+							$new 
+						), 'success' );
 					} elseif ( $this->fm_mkdir( $this->PATH . '/' . $new, false ) === $this->PATH . '/' . $new ) {
-						$this->set_notice( sprintf( __( 'Folder <b>%s</b> already exist', 'wpmastertoolkit' ), $new ) );
+						$this->set_notice( sprintf( 
+							/* translators: %s: folder name */
+							__( 'Folder <b>%s</b> already exist', 'wpmastertoolkit' ), 
+							$new 
+						) );
 					} else {
-						$this->set_notice( sprintf( __( 'Folder <b>%s</b> not created', 'wpmastertoolkit' ), $new ) );
+						$this->set_notice( sprintf( 
+							/* translators: %s: folder name */
+							__( 'Folder <b>%s</b> not created', 'wpmastertoolkit' ), 
+							$new 
+						) );
 					}
 				}
 
@@ -341,7 +390,7 @@ class WPMastertoolkit_File_Manager {
 				exit;
 			break;
 			case isset( $_GET['copy'], $_GET['finish'] ):
-				$copy = urldecode( sanitize_text_field( $_GET['copy'] ) );
+				$copy = urldecode( sanitize_text_field( wp_unslash( $_GET['copy'] ) ) );
             	$copy = $this->fm_clean_path( $copy );
 
 				if ( $copy == '' ) {
@@ -357,7 +406,7 @@ class WPMastertoolkit_File_Manager {
 					$dest .= '/' . $this->FM_PATH;
 				}
 				$dest .= '/' . basename( $from );
-				$move = isset( $_GET['move'] ) ? sanitize_text_field( $_GET['move'] ) : '';
+				$move = isset( $_GET['move'] ) ? sanitize_text_field( wp_unslash( $_GET['move'] ) ) : '';
 				$move = $this->fm_clean_path( urldecode( $move ) );
 
 				if ( $from != $dest ) {
@@ -365,20 +414,42 @@ class WPMastertoolkit_File_Manager {
 					if ( $move ) {
 						$rename = $this->fm_rename( $from, $dest );
 						if ( $rename ) {
-							$message = sprintf( __( "Moved from <b>%s</b> to <b>%s</b>", 'wpmastertoolkit' ), $this->fm_enc( $copy ), $this->fm_enc( $msg_from ) );
+							$message = sprintf( 
+								/* translators: 1: source path, 2: destination path */
+								__( "Moved from <b>%$1s</b> to <b>%$2s</b>", 'wpmastertoolkit' ), 
+								$this->fm_enc( $copy ), 
+								$this->fm_enc( $msg_from ) 
+							);
 							$this->set_notice( $message, 'success' );
 						} elseif ( $rename === null ) {
-							$this->set_notice( __( "File or folder with this path already exists", 'wpmastertoolkit' ) );
+							$this->set_notice(
+								__( "File or folder with this path already exists", 'wpmastertoolkit' ) 
+							);
 						} else {
-							$message = sprintf( __( "Error while moving from <b>%s</b> to <b>%s</b>", 'wpmastertoolkit' ), $this->fm_enc( $copy ), $this->fm_enc( $msg_from ) );
+							$message = sprintf( 
+								/* translators: 1: source path, 2: destination path */
+								__( "Error while moving from <b>%$1s</b> to <b>%$2s</b>", 'wpmastertoolkit' ), 
+								$this->fm_enc( $copy ), 
+								$this->fm_enc( $msg_from ) 
+							);
 							$this->set_notice( $message, 'success' );
 						}
 					} else {
 						if ( $this->fm_rcopy( $from, $dest ) ) {
-							$message = sprintf( __( "Copied from <b>%s</b> to <b>%s</b>", 'wpmastertoolkit' ), $this->fm_enc( $copy ), $this->fm_enc( $msg_from ) );
+							$message = sprintf( 
+								/* translators: 1: source path, 2: destination path */
+								__( "Copied from <b>%$1s</b> to <b>%$2s</b>", 'wpmastertoolkit' ), 
+								$this->fm_enc( $copy ), 
+								$this->fm_enc( $msg_from ) 
+							);
 							$this->set_notice( $message, 'success' );
 						} else {
-							$message = sprintf( __( "Error while copying from <b>%s</b> to <b>%s</b>", 'wpmastertoolkit' ), $this->fm_enc( $copy ), $this->fm_enc( $msg_from ) );
+							$message = sprintf( 
+								/* translators: 1: source path, 2: destination path */
+								__( "Error while copying from <b>%$1s</b> to <b>%$2s</b>", 'wpmastertoolkit' ), 
+								$this->fm_enc( $copy ), 
+								$this->fm_enc( $msg_from ) 
+							);
 							$this->set_notice( $message );
 						}
 					}
@@ -393,7 +464,7 @@ class WPMastertoolkit_File_Manager {
 						}
 	
 						//Create new name for duplicate
-						$fn_duplicate = $fn_parts['dirname'] . '/' . $fn_parts['filename'] . '-' . date('YmdHis') . $extension_suffix;
+						$fn_duplicate = $fn_parts['dirname'] . '/' . $fn_parts['filename'] . '-' . gmdate('YmdHis') . $extension_suffix;
 						$loop_count   = 0;
 						$max_loop     = 1000;
 	
@@ -405,10 +476,20 @@ class WPMastertoolkit_File_Manager {
 						}
 	
 						if ( $this->fm_rcopy( $from, $fn_duplicate, False ) ) {
-							$message = sprintf( __( "Copied from <b>%s</b> to <b>%s</b>", 'wpmastertoolkit' ), $this->fm_enc( $copy ), $this->fm_enc( $fn_duplicate ) );
+							$message = sprintf( 
+								/* translators: 1: source path, 2: destination path */
+								__( "Copied from <b>%$1s</b> to <b>%$2s</b>", 'wpmastertoolkit' ), 
+								$this->fm_enc( $copy ), 
+								$this->fm_enc( $fn_duplicate ) 
+							);
 							$this->set_notice( $message, 'success' );
 						} else {
-							$message = sprintf( __( "Error while copying from <b>%s</b> to <b>%s</b>", 'wpmastertoolkit' ), $this->fm_enc( $copy ), $this->fm_enc( $fn_duplicate ) );
+							$message = sprintf( 
+								/* translators: 1: source path, 2: destination path */
+								__( "Error while copying from <b>%$1s</b> to <b>%$2s</b>", 'wpmastertoolkit' ), 
+								$this->fm_enc( $copy ), 
+								$this->fm_enc( $fn_duplicate ) 
+							);
 							$this->set_notice( $message );
 						}
 					} else {
@@ -421,7 +502,7 @@ class WPMastertoolkit_File_Manager {
 			break;
 			case isset( $_POST['file'], $_POST['copy_to'], $_POST['finish'], $_POST['token'] ):
 
-				$nonce = sanitize_text_field( $_POST['token'] ?? '' );
+				$nonce = sanitize_text_field( wp_unslash( $_POST['token'] ?? '' ) );
 				if ( ! wp_verify_nonce( $nonce, $this->user_nonce ) ) {
 					$this->set_notice( __( 'Invalid token', 'wpmastertoolkit' ) );
 					wp_safe_redirect( $this->FM_SELF_URL . '?page=wp-mastertoolkit-settings-file-manager&p=' . urlencode( $this->FM_PATH ) );
@@ -429,7 +510,7 @@ class WPMastertoolkit_File_Manager {
 				}
 
 				$copy_to_path = $this->FM_ROOT_PATH;
-				$copy_to      = $this->fm_clean_path( sanitize_text_field( $_POST['copy_to'] ?? '' ) );
+				$copy_to      = $this->fm_clean_path( sanitize_text_field( wp_unslash( $_POST['copy_to'] ?? '' ) ) );
 
 				if ( $copy_to != '' ) {
 					$copy_to_path .= '/' . $copy_to;
@@ -451,6 +532,7 @@ class WPMastertoolkit_File_Manager {
 
 				$move          = isset( $_POST['move'] );
 				$errors        = 0;
+				//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				$files_to_copy = wpmastertoolkit_clean( $_POST['file'] ?? array() );
 
 				if ( ! is_array( $files_to_copy ) || ! count( $files_to_copy ) ) {
@@ -491,18 +573,18 @@ class WPMastertoolkit_File_Manager {
 			break;
 			case isset( $_POST['rename_from'], $_POST['rename_to'], $_POST['token'] ):
 
-				$nonce = sanitize_text_field( $_POST['token'] ?? '' );
+				$nonce = sanitize_text_field( wp_unslash( $_POST['token'] ?? '' ) );
 				if ( ! wp_verify_nonce( $nonce, $this->user_nonce ) ) {
 					$this->set_notice( __( 'Invalid token', 'wpmastertoolkit' ) );
 					wp_safe_redirect( $this->FM_SELF_URL . '?page=wp-mastertoolkit-settings-file-manager&p=' . urlencode( $this->FM_PATH ) );
 					exit;
 				}
 
-				$old = urldecode( sanitize_text_field( $_POST['rename_from'] ) );
+				$old = urldecode( sanitize_text_field( wp_unslash( $_POST['rename_from'] ) ) );
 				$old = $this->fm_clean_path( $old );
 				$old = str_replace( '/', '', $old );
-				$new = urldecode( sanitize_text_field( $_POST['rename_to'] ) );
-				$new = $this->fm_clean_path( strip_tags( $new ) );
+				$new = urldecode( sanitize_text_field( wp_unslash( $_POST['rename_to'] ) ) );
+				$new = $this->fm_clean_path( wp_strip_all_tags( $new ) );
 				$new = str_replace( '/', '', $new );
 
 				if ( ! $this->fm_isvalid_filename( $new ) || $old == '' || $new == '' ) {
@@ -512,12 +594,22 @@ class WPMastertoolkit_File_Manager {
 				}
 
 				if ( $this->fm_rename( $this->PATH . '/' . $old, $this->PATH . '/' . $new ) ) {
-					$message = sprintf( __( "Renamed from <b>%s</b> to <b>%s</b>", 'wpmastertoolkit' ), $this->fm_enc( $old ), $this->fm_enc( $new ) );
+					$message = sprintf( 
+						/* translators: 1: old file name, 2: new file name */
+						__( "Renamed from <b>%$1s</b> to <b>%$2s</b>", 'wpmastertoolkit' ), 
+						$this->fm_enc( $old ), 
+						$this->fm_enc( $new ) 
+					);
 					$this->set_notice( $message, 'success' );
 					wp_safe_redirect( $this->FM_SELF_URL . '?page=wp-mastertoolkit-settings-file-manager&p=' . urlencode( $this->FM_PATH ) );
 					exit;
 				} else {
-					$message = sprintf( __( "Error while renaming from <b>%s</b> to <b>%s</b>", 'wpmastertoolkit' ), $this->fm_enc( $old ), $this->fm_enc( $new ) );
+					$message = sprintf( 
+						/* translators: 1: old file name, 2: new file name */
+						__( "Error while renaming from <b>%$1s</b> to <b>%$2s</b>", 'wpmastertoolkit' ), 
+						$this->fm_enc( $old ), 
+						$this->fm_enc( $new ) 
+					);
 					$this->set_notice( $message, 'success' );
 					wp_safe_redirect( $this->FM_SELF_URL . '?page=wp-mastertoolkit-settings-file-manager&p=' . urlencode( $this->FM_PATH ) );
 					exit;
@@ -525,14 +617,14 @@ class WPMastertoolkit_File_Manager {
 			break;
 			case isset( $_GET['dl'], $_POST['token'] ):
 
-				$nonce = sanitize_text_field( $_POST['token'] ?? '' );
+				$nonce = sanitize_text_field( wp_unslash( $_POST['token'] ?? '' ) );
 				if ( ! wp_verify_nonce( $nonce, $this->user_nonce ) ) {
 					$this->set_notice( __( 'Invalid token', 'wpmastertoolkit' ) );
 					wp_safe_redirect( $this->FM_SELF_URL . '?page=wp-mastertoolkit-settings-file-manager&p=' . urlencode( $this->FM_PATH ) );
 					exit;
 				}
 
-				$dl = urldecode( sanitize_text_field( $_GET['dl'] ) );
+				$dl = urldecode( sanitize_text_field( wp_unslash( $_GET['dl'] ) ) );
 				$dl = $this->fm_clean_path( $dl );
 				$dl = str_replace( '/', '', $dl );
 
@@ -555,14 +647,14 @@ class WPMastertoolkit_File_Manager {
 			break;
 			case ! empty( $_FILES ):
 
-				$nonce = sanitize_text_field( $_POST['token'] ?? '' );
+				$nonce = sanitize_text_field( wp_unslash( $_POST['token'] ?? '' ) );
 				if ( ! wp_verify_nonce( $nonce, $this->user_nonce ) ) {
 					wp_send_json( array( 'status' => 'error', 'info' => esc_html__( 'Invalid Token', 'wpmastertoolkit' ) ) );
 				}
 
-				$chunkIndex    = sanitize_text_field( $_POST['dzchunkindex'] ?? '' );
-            	$chunkTotal    = sanitize_text_field( $_POST['dztotalchunkcount'] ?? '' );
-				$fullPath      = sanitize_text_field( $_POST['fullpath'] ?? '' );
+				$chunkIndex    = sanitize_text_field( wp_unslash( $_POST['dzchunkindex'] ?? '' ) );
+            	$chunkTotal    = sanitize_text_field( wp_unslash( $_POST['dztotalchunkcount'] ?? '' ) );
+				$fullPath      = sanitize_text_field( wp_unslash( $_POST['fullpath'] ?? '' ) );
 				$fullPathInput = $this->fm_clean_path( $fullPath );
 				$f             = $_FILES;
 				$ds            = DIRECTORY_SEPARATOR;
@@ -582,7 +674,7 @@ class WPMastertoolkit_File_Manager {
 				}
 	
 				$targetPath = $this->PATH . $ds;
-				if ( ! is_writable( $targetPath ) ) {
+				if ( ! $wp_filesystem->is_writable( $targetPath ) ) {
 					wp_send_json( array( 'status' => 'error', 'info' => 'The specified folder for upload isn\'t writeable' ) );
 				}
 	
@@ -590,69 +682,57 @@ class WPMastertoolkit_File_Manager {
 				$folder        = substr( $fullPath, 0, strrpos( $fullPath, "/" ) );
 				$file_fullPath = $folder . '/' . $filename;
 	
-				if ( ! is_dir( $folder ) ) {
-					$old = umask(0);
-					mkdir($folder, 0777, true);
-					umask($old);
+				if ( ! $wp_filesystem->is_dir( $folder ) ) {
+					$wp_filesystem->mkdir( $folder, FS_CHMOD_DIR );
 				}
 	
 				if ( empty( $f['file']['error'] ) && ! empty( $tmp_name ) && $tmp_name != 'none' && $isFileAllowed ) {
 					if ( $chunkTotal ){
-                    	$out = @fopen("{$fullPath}.part", $chunkIndex == 0 ? "wb" : "ab");
-						if ( $out ) {
-							$in = @fopen($tmp_name, "rb");
-							if ( $in ) {
-								if ( PHP_VERSION_ID < 80009 ) {
-									// workaround https://bugs.php.net/bug.php?id=81145
-									do {
-										for (;;) {
-											$buff = fread($in, 4096);
-											if ($buff === false || $buff === '') {
-												break;
-											}
-											fwrite($out, $buff);
-										}
-									} while (!feof($in));
-								} else {
-									stream_copy_to_stream($in, $out);
-								}
-								$response = array (
+
+						$partFile = "{$fullPath}.part";
+        				$fileMode = ( $chunkIndex == 0 ) ? false : true; // false = overwrite, true = append
+
+						// Read chunk content
+						$chunkContent = $wp_filesystem->get_contents( $tmp_name );
+						if ( $chunkContent !== false ) {
+							// Append or overwrite based on chunk index
+							$success = ( $fileMode ) ? 
+								$wp_filesystem->put_contents( $partFile, $chunkContent, FS_CHMOD_FILE | FILE_APPEND ) : 
+								$wp_filesystem->put_contents( $partFile, $chunkContent, FS_CHMOD_FILE );
+
+							if ( $success ) {
+								$response = array(
 									'status' => 'success',
-									'info'   => __( 'file upload successful', 'wpmastertoolkit' ),
+									'info'   => __( 'File upload successful', 'wpmastertoolkit' ),
 								);
 							} else {
-								$response = array (
-									'status'       => 'error',
-									'info'         => __( 'failed to open output stream', 'wpmastertoolkit' ),
-									'errorDetails' => error_get_last(),
+								$response = array(
+									'status' => 'error',
+									'info'   => __( 'Failed to write file', 'wpmastertoolkit' ),
 								);
 							}
-							@fclose($in);
-							@fclose($out);
-							@unlink($tmp_name);
-
-							$response = array (
-								'status' => 'success',
-								'info'   => __( 'file upload successful', 'wpmastertoolkit' ),
-							);
 						} else {
-							$response = array (
-								'status' => 'error',
-								'info'   => __( 'failed to open output stream', 'wpmastertoolkit' ),
+							$response = array(
+								'status'       => 'error',
+								'info'         => __( 'Failed to read input file', 'wpmastertoolkit' ),
+								'errorDetails' => error_get_last(),
 							);
 						}
 
+						// Clean up temp file
+						$wp_filesystem->delete( $tmp_name );
+
 						if ( $chunkIndex == $chunkTotal - 1 ) {
-							if ( file_exists ( $fullPath ) ) {
+							if ( $wp_filesystem->exists( $fullPath )) {
 								$ext_1 = $ext ? '.'.$ext : '';
 								$fullPathTarget = $this->PATH . '/' . basename( $fullPathInput, $ext_1 ) .'_'. wp_date('ymdHis'). $ext_1;
 							} else {
 								$fullPathTarget = $fullPath;
 							}
-							rename("{$fullPath}.part", $fullPathTarget);
+							$wp_filesystem->move( $partFile, $fullPathTarget );
 						}
-                	} else if ( move_uploaded_file( $tmp_name, $file_fullPath ) ) {
-						if ( file_exists( $fullPath ) ) {
+                	} else if ( $wp_filesystem->move( $tmp_name, $file_fullPath ) ) {
+						if ( $wp_filesystem->exists( $file_fullPath ) ) {
 							$response = array (
 								'status' => 'success',
 								'info'   => __( 'file upload successfully', 'wpmastertoolkit' ),
@@ -675,7 +755,7 @@ class WPMastertoolkit_File_Manager {
 			break;
 			case isset( $_POST['group'], $_POST['delete'], $_POST['token'] ):
 
-				$nonce = sanitize_text_field( $_POST['token'] ?? '' );
+				$nonce = sanitize_text_field( wp_unslash( $_POST['token'] ?? '' ) );
 				if ( ! wp_verify_nonce( $nonce, $this->user_nonce ) ) {
 					$this->set_notice( __( 'Invalid token', 'wpmastertoolkit' ) );
 					wp_safe_redirect( $this->FM_SELF_URL . '?page=wp-mastertoolkit-settings-file-manager&p=' . urlencode( $this->FM_PATH ) );
@@ -683,6 +763,7 @@ class WPMastertoolkit_File_Manager {
 				}
 
 				$errors          = 0;
+				//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				$files_to_delete = wpmastertoolkit_clean( $_POST['file'] ?? array() );
 
 				if ( ! is_array( $files_to_delete ) || ! count( $files_to_delete ) ) {
@@ -712,7 +793,7 @@ class WPMastertoolkit_File_Manager {
 			break;
 			case isset( $_POST['group'], $_POST['token'] ) && ( isset( $_POST['zip'] ) || isset( $_POST['tar'] ) ):
 
-				$nonce = sanitize_text_field( $_POST['token'] ?? '' );
+				$nonce = sanitize_text_field( wp_unslash( $_POST['token'] ?? '' ) );
 				if ( ! wp_verify_nonce( $nonce, $this->user_nonce ) ) {
 					$this->set_notice( __( 'Invalid token', 'wpmastertoolkit' ) );
 					wp_safe_redirect( $this->FM_SELF_URL . '?page=wp-mastertoolkit-settings-file-manager&p=' . urlencode( $this->FM_PATH ) );
@@ -727,6 +808,7 @@ class WPMastertoolkit_File_Manager {
 					exit;
 				}
 
+				//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				$files_to_zip    = wpmastertoolkit_clean( $_POST['file'] ?? array() );
 				$sanitized_files = array();
 
@@ -753,17 +835,21 @@ class WPMastertoolkit_File_Manager {
 				}
 
 				if ( $ext == 'zip' ) {
-					include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/helpers/file-manager/class-fm-zipper.php';
+					include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/helpers/core/file-manager/class-fm-zipper.php';
 					$zipper = new FM_Zipper();
 					$res    = $zipper->create( $zipname, $files_to_zip );
 				} elseif ( $ext == 'tar' ) {
-					include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/helpers/file-manager/class-fm-zipper-tar.php';
+					include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/helpers/core/file-manager/class-fm-zipper-tar.php';
 					$tar = new FM_Zipper_Tar();
 					$res = $tar->create( $zipname, $files_to_zip );
 				}
 
 				if ( $res ) {
-					$message = sprintf( __( "Archive <b>%s</b> Created", 'wpmastertoolkit' ), $this->fm_enc( $zipname ) );
+					$message = sprintf( 
+						/* translators: %s: archive name */
+						__( "Archive <b>%s</b> Created", 'wpmastertoolkit' ), 
+						$this->fm_enc( $zipname ) 
+					);
 					$this->set_notice( $message, 'success' );
 					wp_safe_redirect( $this->FM_SELF_URL . '?page=wp-mastertoolkit-settings-file-manager&p=' . urlencode( $this->FM_PATH ) );
 					exit;
@@ -776,14 +862,14 @@ class WPMastertoolkit_File_Manager {
 			break;
 			case isset( $_POST['unzip'], $_POST['token'] ):
 
-				$nonce = sanitize_text_field( $_POST['token'] ?? '' );
+				$nonce = sanitize_text_field( wp_unslash( $_POST['token'] ?? '' ) );
 				if ( ! wp_verify_nonce( $nonce, $this->user_nonce ) ) {
 					$this->set_notice( __( 'Invalid token', 'wpmastertoolkit' ) );
 					wp_safe_redirect( $this->FM_SELF_URL . '?page=wp-mastertoolkit-settings-file-manager&p=' . urlencode( $this->FM_PATH ) );
 					exit;
 				}
 
-				$unzip = urldecode( sanitize_text_field( $_POST['unzip'] ?? '' ) );
+				$unzip = urldecode( sanitize_text_field( wp_unslash( $_POST['unzip'] ?? '' ) ) );
 				$unzip = $this->fm_clean_path( $unzip );
 				$unzip = str_replace( '/', '', $unzip );
 
@@ -813,7 +899,7 @@ class WPMastertoolkit_File_Manager {
 				}
 
 				if( $ext == "zip" ) {
-					include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/helpers/file-manager/class-fm-zipper.php';
+					include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/helpers/core/file-manager/class-fm-zipper.php';
 					$zipper = new FM_Zipper();
 					$res    = $zipper->unzip( $zip_path, $path );
 				} elseif ( $ext == "tar" ) {
@@ -840,7 +926,7 @@ class WPMastertoolkit_File_Manager {
 			break;
 			case isset( $_POST['chmod'], $_POST['token'] ) && ! $this->FM_IS_WIN:
 
-				$nonce = sanitize_text_field( $_POST['token'] ?? '' );
+				$nonce = sanitize_text_field( wp_unslash( $_POST['token'] ?? '' ) );
 				if ( ! wp_verify_nonce( $nonce, $this->user_nonce ) ) {
 					$this->set_notice( __( 'Invalid token', 'wpmastertoolkit' ) );
 					wp_safe_redirect( $this->FM_SELF_URL . '?page=wp-mastertoolkit-settings-file-manager&p=' . urlencode( $this->FM_PATH ) );
@@ -852,7 +938,7 @@ class WPMastertoolkit_File_Manager {
 					$path .= '/' . $this->FM_PATH;
 				}
 
-				$file = sanitize_text_field( $_POST['chmod'] ?? '' );
+				$file = sanitize_text_field( wp_unslash( $_POST['chmod'] ?? '' ) );
 				$file = $this->fm_clean_path( $file );
 				$file = str_replace( '/', '', $file );
 
@@ -891,7 +977,7 @@ class WPMastertoolkit_File_Manager {
 					$mode |= 0001;
 				}
 
-				if ( @chmod( $path . '/' . $file, $mode ) ) {
+				if ( $wp_filesystem->chmod( $path . '/' . $file, $mode ) ) {
 					$this->set_notice( __( 'Permissions changed', 'wpmastertoolkit' ), 'success' );
 				} else {
 					$this->set_notice( __( 'Permissions not changed', 'wpmastertoolkit' ) );
@@ -904,7 +990,7 @@ class WPMastertoolkit_File_Manager {
 				$this->TEMPLATE = 'upload';
 			break;
 			case isset( $_GET['copy'] ) && ! isset( $_GET['finish'] ):
-				$copy = sanitize_text_field( $_GET['copy'] ?? '' );
+				$copy = sanitize_text_field( wp_unslash( $_GET['copy'] ?? '' ) );
 				$copy = $this->fm_clean_path( $copy );
 				
 				if ( $copy == '' || ! file_exists( $this->FM_ROOT_PATH . '/' . $copy ) ) {
@@ -916,6 +1002,7 @@ class WPMastertoolkit_File_Manager {
 				$this->TEMPLATE = 'copyfinish';
 			break;
 			case isset( $_POST['copy'] ):
+				//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				$copy_files     = isset( $_POST['file'] ) ? wpmastertoolkit_clean( $_POST['file'] ) : null;
 				$this->TEMPLATE = 'copy';
 
@@ -926,7 +1013,7 @@ class WPMastertoolkit_File_Manager {
 				}
 			break;
 			case isset( $_GET['view'] ):
-				$file           = sanitize_text_field( $_GET['view'] ?? '' );
+				$file           = sanitize_text_field( wp_unslash( $_GET['view'] ?? '' ) );
 				$file           = $this->fm_clean_path( $file, false );
 				$file           = str_replace( '/', '', $file );
 				$this->TEMPLATE = 'view';
@@ -938,7 +1025,7 @@ class WPMastertoolkit_File_Manager {
 				}
 			break;
 			case isset( $_GET['edit'] ):
-				$file           = sanitize_text_field( $_GET['edit'] ?? '' );
+				$file           = sanitize_text_field( wp_unslash( $_GET['edit'] ?? '' ) );
 				$file           = $this->fm_clean_path( $file, false );
 				$file           = str_replace( '/', '', $file );
 				$this->TEMPLATE = 'edit';
@@ -962,7 +1049,7 @@ class WPMastertoolkit_File_Manager {
 				}
 			break;
 			case isset( $_GET['chmod'] ) && ! $this->FM_IS_WIN:
-				$file           = sanitize_text_field( $_GET['chmod'] ?? '' );
+				$file           = sanitize_text_field( wp_unslash( $_GET['chmod'] ?? '' ) );
 				$file           = $this->fm_clean_path( $file );
 				$file           = str_replace( '/', '', $file );
 				$this->TEMPLATE = 'chmod';
@@ -995,23 +1082,26 @@ class WPMastertoolkit_File_Manager {
 							switch ( $this->TEMPLATE ) {
 								case 'upload':
 									$this->filemanger_navbar();
-									include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/file-manager/views/upload.php';
+									include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/core/file-manager/views/upload.php';
 								break;
 								case 'copyfinish':
-									$copy           = sanitize_text_field( $_GET['copy'] ?? '' );
+									//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+									$copy           = sanitize_text_field( wp_unslash( $_GET['copy'] ?? '' ) );
 									$copy           = $this->fm_clean_path( $copy );
 									$files_folders  = $this->fm_get_files_folders( $this->PATH );
 									$files          = $files_folders['files'];
 									$folders        = $files_folders['folders'];
 									$this->filemanger_navbar();
-									include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/file-manager/views/copyfinish.php';
+									include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/core/file-manager/views/copyfinish.php';
 								break;
 								case 'copy':
+									//phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 									$copy_files = isset( $_POST['file'] ) ? wpmastertoolkit_clean( $_POST['file'] ) : null;
-									include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/file-manager/views/copy.php';
+									include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/core/file-manager/views/copy.php';
 								break;
 								case 'view':
-									$file            = sanitize_text_field( $_GET['view'] ?? '' );
+									//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+									$file            = sanitize_text_field( wp_unslash( $_GET['view'] ?? '' ) );
 									$file            = $this->fm_clean_path( $file, false );
 									$file            = str_replace( '/', '', $file );
 									$file_url        = $this->FM_ROOT_URL . $this->fm_convert_win( ( $this->FM_PATH != '' ? '/' . $this->FM_PATH : '') . '/' . $file );
@@ -1052,10 +1142,11 @@ class WPMastertoolkit_File_Manager {
 										$content = file_get_contents( $file_path );
 									}
 									$this->filemanger_navbar();
-									include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/file-manager/views/view.php';
+									include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/core/file-manager/views/view.php';
 								break;
 								case 'edit':
-									$file      = sanitize_text_field( $_GET['edit'] ?? '' );
+									//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+									$file      = sanitize_text_field( wp_unslash( $_GET['edit'] ?? '' ) );
 									$file      = $this->fm_clean_path( $file, false );
 									$file      = str_replace( '/', '', $file );
 									$file_url  = $this->FM_ROOT_URL . $this->fm_convert_win( ( $this->FM_PATH != '' ? '/' . $this->FM_PATH : '' ) . '/' . $file );
@@ -1071,10 +1162,11 @@ class WPMastertoolkit_File_Manager {
 									}
 
 									$this->filemanger_navbar();
-									include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/file-manager/views/edit.php';
+									include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/core/file-manager/views/edit.php';
 								break;
 								case 'chmod':
-									$file      = sanitize_text_field( $_GET['chmod'] ?? '' );
+									//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+									$file      = sanitize_text_field( wp_unslash( $_GET['chmod'] ?? '' ) );
 									$file      = $this->fm_clean_path( $file );
 									$file      = str_replace( '/', '', $file );
 									$file_url  = $this->FM_ROOT_URL . ( $this->FM_PATH != '' ? '/' . $this->FM_PATH : '') . '/' . $file;
@@ -1082,7 +1174,7 @@ class WPMastertoolkit_File_Manager {
 									$mode      = fileperms( $this->PATH . '/' . $file );
 
 									$this->filemanger_navbar();
-									include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/file-manager/views/chmod.php';
+									include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/core/file-manager/views/chmod.php';
 								break;
 								default:
 									$current_path   = array_slice( explode( "/", $this->PATH ), -1 )[0];
@@ -1093,17 +1185,17 @@ class WPMastertoolkit_File_Manager {
 									$num_files      = count( $files );
 									$num_folders    = count( $folders );
 									$this->filemanger_navbar();
-									include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/file-manager/views/default.php';
+									include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/core/file-manager/views/default.php';
 								break;
 							}
 						?>
 					</section>
 
 					<?php
-						include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/file-manager/modals/confirm.php';
-						include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/file-manager/modals/new-item.php';
-						include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/file-manager/modals/rename.php';
-						include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/file-manager/modals/search.php';
+						include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/core/file-manager/modals/confirm.php';
+						include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/core/file-manager/modals/new-item.php';
+						include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/core/file-manager/modals/rename.php';
+						include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/core/file-manager/modals/search.php';
 					?>
 
 					<div id="snackbar"></div>
@@ -1119,13 +1211,14 @@ class WPMastertoolkit_File_Manager {
 	 */
 	private function set_global_variables() {
 		$this->GLOBAL_IS_HTTPS     = isset( $_SERVER['HTTPS'] ) && ( $_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1 ) || isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https';
-    	$this->GLOBAL_SELF_URL     = ( $this->GLOBAL_IS_HTTPS ? 'https' : 'http' ) . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
-		$this->ROOT_PATH           = $_SERVER['DOCUMENT_ROOT'];
+    	$this->GLOBAL_SELF_URL     = ( $this->GLOBAL_IS_HTTPS ? 'https' : 'http' ) . '://' . sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ?? '' ) ) . sanitize_text_field( wp_unslash( $_SERVER['PHP_SELF'] ?? '' ) );
+		$this->ROOT_PATH           = sanitize_text_field( wp_unslash( $_SERVER['DOCUMENT_ROOT'] ?? '' ) );
 		$this->ROOT_PATH           = rtrim( $this->ROOT_PATH, '\\/' );
 		$this->ROOT_PATH           = str_replace( '\\', '/', $this->ROOT_PATH );
-		$this->HTTP_HOST           = $_SERVER['HTTP_HOST'];
+		$this->HTTP_HOST           = sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ?? '' ) );
 		$this->ROOT_URL            = $this->fm_clean_path( '' );
-		$this->P                   = isset( $_GET['p'] ) ? $_GET['p'] : ( isset( $_POST['p'] ) ? $_POST['p'] : '' );
+		//phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.NonceVerification.Missing
+		$this->P                   = isset( $_GET['p'] ) ? sanitize_text_field( wp_unslash( $_GET['p'] ) ) : ( isset( $_POST['p'] ) ? sanitize_text_field( wp_unslash( $_POST['p'] ) ) : '' );
 		$this->MAX_UPLOAD_SIZE     = 5000000000;
 		$this->UPLOAD_CHUNK_SIZE   = 2000000;
 		$this->FM_SESSION_ID       = 'filemanager';
@@ -1170,7 +1263,7 @@ class WPMastertoolkit_File_Manager {
             $root_url .= $sep . implode( $sep, $array );
         }
 
-		include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/file-manager/views/navbar.php';
+		include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/core/file-manager/views/navbar.php';
     }
 
 	/**
@@ -1564,7 +1657,11 @@ class WPMastertoolkit_File_Manager {
         $power = ( $size > 0 ) ? floor( log( $size, 1024 ) ) : 0;
         $power = ( $power > ( count( $units ) - 1 ) ) ? ( count( $units ) - 1 ) : $power;
 
-        return sprintf( '%s %s', round( $size / pow( 1024, $power ), 2 ), $units[$power] );
+        return sprintf( 
+			'%s %s', 
+			round( $size / pow( 1024, $power ), 2 ), 
+			$units[$power] 
+		);
     }
 
 	/**
@@ -1582,13 +1679,21 @@ class WPMastertoolkit_File_Manager {
 	 * @since   1.9.0
      */
     private function fm_rename( $old, $new ) {
+		global $wp_filesystem;
+
+		if ( ! function_exists( 'WP_Filesystem' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+		}
+
+		WP_Filesystem();
+
         $isFileAllowed = $this->fm_is_valid_ext( $new );
 
         if( ! is_dir( $old ) ) {
             if ( ! $isFileAllowed ) return false;
         }
 
-        return ( ! file_exists( $new ) && file_exists( $old ) ) ? rename( $old, $new ) : null;
+        return ( ! $wp_filesystem->exists( $new ) && $wp_filesystem->exists( $old ) ) ? $wp_filesystem->move( $old, $new ) : null;
     }
 
 	/**
@@ -1651,15 +1756,23 @@ class WPMastertoolkit_File_Manager {
 	 * @since   1.9.0
      */
     private function fm_mkdir( $dir, $force ) {
+		global $wp_filesystem;
+
+		if ( ! function_exists( 'WP_Filesystem' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+		}
+
+		WP_Filesystem();
+
         if ( file_exists( $dir ) ) {
             if ( is_dir( $dir ) ) {
                 return $dir;
             } elseif ( ! $force ) {
                 return false;
             }
-            unlink( $dir );
+            wp_delete_file( $dir );
         }
-        return mkdir( $dir, 0777, true );
+        return $wp_filesystem->mkdir( $dir, 0777, true );
     }
 
 	/**
@@ -1668,6 +1781,14 @@ class WPMastertoolkit_File_Manager {
 	 * @since   1.9.0
      */
     private function fm_copy( $f1, $f2, $upd ) {
+		global $wp_filesystem;
+
+		if ( ! function_exists( 'WP_Filesystem' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+		}
+
+		WP_Filesystem();
+
         $time1 = filemtime( $f1 );
         if ( file_exists( $f2 ) ) {
             $time2 = filemtime( $f2 );
@@ -1677,7 +1798,7 @@ class WPMastertoolkit_File_Manager {
         }
         $ok = copy( $f1, $f2 );
         if ( $ok ) {
-            touch( $f2, $time1 );
+            $wp_filesystem->touch( $f2, $time1 );
         }
         return $ok;
     }
@@ -1688,8 +1809,16 @@ class WPMastertoolkit_File_Manager {
 	 * @since   1.9.0
      */
     private function fm_rdelete( $path ) {
+		global $wp_filesystem;
+
+		if ( ! function_exists( 'WP_Filesystem' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+		}
+
+		WP_Filesystem();
+
         if ( is_link( $path ) ) {
-            return unlink( $path );
+            return wp_delete_file( $path );
         } elseif ( is_dir( $path ) ) {
             $objects = scandir( $path );
             $ok      = true;
@@ -1702,9 +1831,9 @@ class WPMastertoolkit_File_Manager {
                     }
                 }
             }
-            return ( $ok ) ? rmdir( $path ) : false;
+            return ( $ok ) ? $wp_filesystem->delete( $path ) : false;
         } elseif ( is_file( $path ) ) {
-            return unlink( $path );
+            return wp_delete_file( $path );
         }
         return false;
     }
@@ -1735,18 +1864,20 @@ class WPMastertoolkit_File_Manager {
         if ( $size == 0 ) {
             $result = array(
                 'status' => false,
-                'msg'    => __( 'Zero byte file! Aborting download', 'wp-mastertoolkit' ),
+                'msg'    => __( 'Zero byte file! Aborting download', 'wpmastertoolkit' ),
             );
             return $result;
         }
 
+		//phpcs:ignore Squiz.PHP.DiscouragedFunctions.Discouraged
         @ini_set( 'magic_quotes_runtime', 0 );
+		//phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen
         $fp = fopen( "$fileLocation", "rb" );
 
         if ( $fp === false ) {
             $result = array(
                 'status' => false,
-                'msg'    => __( 'Cannot open file! Aborting download', 'wp-mastertoolkit' ),
+                'msg'    => __( 'Cannot open file! Aborting download', 'wpmastertoolkit' ),
             );
             return $result;
         }
@@ -1761,7 +1892,7 @@ class WPMastertoolkit_File_Manager {
 
         $contentDisposition = 'attachment';
 
-        if ( strstr( $_SERVER['HTTP_USER_AGENT'], "MSIE" ) ) {
+        if ( strstr( sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ?? '' ) ), "MSIE" ) ) {
             $fileName = preg_replace( '/\./', '%2e', $fileName, substr_count($fileName, '.') - 1 );
             header("Content-Disposition: $contentDisposition;filename=\"$fileName\"");
         } else {
@@ -1772,7 +1903,7 @@ class WPMastertoolkit_File_Manager {
         $range = 0;
 
         if ( isset( $_SERVER['HTTP_RANGE'] ) ) {
-            list( $a, $range ) = explode( "=", $_SERVER['HTTP_RANGE'] );
+            list( $a, $range ) = explode( "=", sanitize_text_field( wp_unslash( $_SERVER['HTTP_RANGE'] ) ) );
             str_replace( $range, "-", $range );
             $size2 = $size - 1;
             $new_length = $size - $range;
@@ -1786,8 +1917,9 @@ class WPMastertoolkit_File_Manager {
         }
         $fileLocation = realpath( $fileLocation );
         while ( ob_get_level() ) ob_end_clean();
+		//phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_readfile
         readfile( $fileLocation );
-
+		//phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
         fclose( $fp );
 
         return ( ( connection_status() == 0 ) and ! connection_aborted() );

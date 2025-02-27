@@ -158,9 +158,10 @@ class WPMastertoolkit_Media_Encoder {
      * @since   1.13.0
      */
     public function save_submenu() {
-		$nonce = sanitize_text_field( $_POST['_wpnonce'] ?? '' );
+		$nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ?? '' ) );
 
 		if ( wp_verify_nonce( $nonce, $this->nonce_action ) ) {
+			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
             $new_settings = $this->sanitize_settings( $_POST[ $this->option_id ] ?? array() );
             $this->save_settings( $new_settings );
 
@@ -170,7 +171,7 @@ class WPMastertoolkit_Media_Encoder {
 				$this->remove_from_htaccess();
 			}
 
-            wp_safe_redirect( sanitize_url( $_SERVER['REQUEST_URI'] ?? '' ) );
+            wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
 			exit;
 		}
     }
@@ -261,7 +262,7 @@ class WPMastertoolkit_Media_Encoder {
 		$image   = $manager->make( $image_file['tmp_name'] );
 		$quality = $this->get_quality( $image_file['tmp_name'] );
 
-		$image->sharpen( $this->settings['sharpen'] );
+		// $image->sharpen( $this->settings['sharpen'] );
 		$image->save( $image_file['tmp_name'], $quality, 'webp' );
 
 		$size_after = $image->filesize();
@@ -428,7 +429,7 @@ class WPMastertoolkit_Media_Encoder {
 		}
 
 		if ( ! $this->valid_mimetype( $attachment_id ) ) {
-			echo __( 'Image type not supported', 'wpmastertoolkit' );
+			esc_html_e( 'Image type not supported', 'wpmastertoolkit' );
 			return;
 		}
 
@@ -436,13 +437,13 @@ class WPMastertoolkit_Media_Encoder {
 		$has_error = get_post_meta( $attachment_id, $this->meta_has_error, true );
 
 		if ( ! is_array( $data ) ) {
-			echo $this->optimize_btn( $attachment_id );
+			echo wp_kses_post( $this->optimize_btn( $attachment_id ) );
 
 			if ( ! empty( $has_error ) ) {
 				echo esc_html__( 'Error attempting to optimize this image', 'wpmastertoolkit' );
 			}
 		} else {
-			echo $this->attachment_data( $data, $attachment_id );
+			echo wp_kses_post( $this->attachment_data( $data, $attachment_id ) );
 		}
 	}
 
@@ -467,7 +468,7 @@ class WPMastertoolkit_Media_Encoder {
 
 		if ( ! is_array( $data ) ) {
 			echo '<table><tr><td><div><strong>WPMasterToolkit</strong></div>';
-			echo $this->optimize_btn( $post->ID );
+			echo wp_kses_post( $this->optimize_btn( $post->ID ) );
 
 			if ( ! empty( $has_error ) ) {
 				echo esc_html__( 'Error attempting to optimize this image', 'wpmastertoolkit' );
@@ -475,7 +476,7 @@ class WPMastertoolkit_Media_Encoder {
 
 			echo '</td></tr></table>';
 		} else {
-			echo '<table><tr><td><div><strong>WPMasterToolkit</strong></div>' . $this->attachment_data( $data, $post->ID ) . '</td></tr></table>';
+			echo '<table><tr><td><div><strong>WPMasterToolkit</strong></div>' . wp_kses_post( $this->attachment_data( $data, $post->ID ) ) . '</td></tr></table>';
 		}
 	}
 
@@ -488,9 +489,9 @@ class WPMastertoolkit_Media_Encoder {
 		global $post_type;
 
 		if ( 'upload.php' == $suffix || ( 'post.php' == $suffix && 'attachment' == $post_type ) ) {
-			$submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/media-encoder-wpmedia.asset.php' );
-			wp_enqueue_style( 'WPMastertoolkit_wpmedia', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/media-encoder-wpmedia.css', array(), $submenu_assets['version'], 'all' );
-			wp_enqueue_script( 'WPMastertoolkit_wpmedia', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/media-encoder-wpmedia.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
+			$submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/media-encoder-wpmedia.asset.php' );
+			wp_enqueue_style( 'WPMastertoolkit_wpmedia', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/media-encoder-wpmedia.css', array(), $submenu_assets['version'], 'all' );
+			wp_enqueue_script( 'WPMastertoolkit_wpmedia', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/media-encoder-wpmedia.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
 			wp_localize_script( 'WPMastertoolkit_wpmedia', 'WPMastertoolkit_media_encoder_wpmedia', array(
 				'ajaxUrl' => admin_url( 'admin-ajax.php' ),
 				'nonce'   => wp_create_nonce( $this->nonce_action ),
@@ -609,7 +610,7 @@ class WPMastertoolkit_Media_Encoder {
 	 * @since   1.13.0
 	 */
 	public function preview_mode_cb() {
-		$nonce = sanitize_text_field( $_POST['nonce'] ?? '' );
+		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
 		if ( ! wp_verify_nonce( $nonce, $this->nonce_action ) ) {
 			wp_send_json_error( __( 'Refresh the page and try again.', 'wpmastertoolkit' ) );
 		}
@@ -660,7 +661,7 @@ class WPMastertoolkit_Media_Encoder {
 	 * @since   1.13.0
 	 */
 	public function start_bulk_cb() {
-		$nonce = sanitize_text_field( $_POST['nonce'] ?? '' );
+		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
 		if ( ! wp_verify_nonce( $nonce, $this->nonce_action ) ) {
 			wp_send_json_error( __( 'Refresh the page and try again.', 'wpmastertoolkit' ) );
 		}
@@ -701,7 +702,7 @@ class WPMastertoolkit_Media_Encoder {
 	 * @since   1.13.0
 	 */
 	public function stop_bulk_cb() {
-		$nonce = sanitize_text_field( $_POST['nonce'] ?? '' );
+		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
 		if ( ! wp_verify_nonce( $nonce, $this->nonce_action ) ) {
 			wp_send_json_error( __( 'Refresh the page and try again.', 'wpmastertoolkit' ) );
 		}
@@ -719,7 +720,7 @@ class WPMastertoolkit_Media_Encoder {
 	 * @since   1.13.0
 	 */
 	public function progress_bulk_cb() {
-		$nonce = sanitize_text_field( $_POST['nonce'] ?? '' );
+		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
 		if ( ! wp_verify_nonce( $nonce, $this->nonce_action ) ) {
 			wp_send_json_error( __( 'Refresh the page and try again.', 'wpmastertoolkit' ) );
 		}
@@ -743,7 +744,7 @@ class WPMastertoolkit_Media_Encoder {
 	 * @since   1.13.0
 	 */
 	public function progress_bulk_migration_cb() {
-		$nonce = sanitize_text_field( $_POST['nonce'] ?? '' );
+		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
 		if ( ! wp_verify_nonce( $nonce, $this->nonce_action ) ) {
 			wp_send_json_error( __( 'Refresh the page and try again.', 'wpmastertoolkit' ) );
 		}
@@ -767,12 +768,12 @@ class WPMastertoolkit_Media_Encoder {
 	 * @since   1.13.0
 	 */
 	public function start_single_cb() {
-		$nonce = sanitize_text_field( $_POST['nonce'] ?? '' );
+		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
 		if ( ! wp_verify_nonce( $nonce, $this->nonce_action ) ) {
 			wp_send_json_error( __( 'Refresh the page and try again.', 'wpmastertoolkit' ) );
 		}
 
-		$attachment_id = isset( $_POST['attachment_id'] ) ? sanitize_text_field( $_POST['attachment_id'] ) : false;
+		$attachment_id = isset( $_POST['attachment_id'] ) ? sanitize_text_field( wp_unslash( $_POST['attachment_id'] ) ) : false;
 		if ( ! $attachment_id ) {
 			wp_send_json_error( __( 'No attachment id.', 'wpmastertoolkit' ) );
 		}
@@ -820,12 +821,12 @@ class WPMastertoolkit_Media_Encoder {
 	 * @since   1.13.0
 	 */
 	public function undo_single_cb() {
-		$nonce = sanitize_text_field( $_POST['nonce'] ?? '' );
+		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
 		if ( ! wp_verify_nonce( $nonce, $this->nonce_action ) ) {
 			wp_send_json_error( __( 'Refresh the page and try again.', 'wpmastertoolkit' ) );
 		}
 
-		$attachment_id	= isset( $_POST['attachment_id'] ) ? sanitize_text_field( $_POST['attachment_id'] ) : false;
+		$attachment_id	= isset( $_POST['attachment_id'] ) ? sanitize_text_field( wp_unslash( $_POST['attachment_id'] ) ) : false;
 		if ( ! $attachment_id ) {
 			wp_send_json_error( __( 'No attachment id.', 'wpmastertoolkit' ) );
 		}
@@ -849,12 +850,12 @@ class WPMastertoolkit_Media_Encoder {
 	 * @since   1.13.0
 	 */
 	public function start_single_migration_cb() {
-		$nonce = sanitize_text_field( $_POST['nonce'] ?? '' );
+		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
 		if ( ! wp_verify_nonce( $nonce, $this->nonce_action ) ) {
 			wp_send_json_error( __( 'Refresh the page and try again.', 'wpmastertoolkit' ) );
 		}
 
-		$attachment_id = isset( $_POST['attachment_id'] ) ? sanitize_text_field( $_POST['attachment_id'] ) : false;
+		$attachment_id = isset( $_POST['attachment_id'] ) ? sanitize_text_field( wp_unslash( $_POST['attachment_id'] ) ) : false;
 		if ( ! $attachment_id ) {
 			wp_send_json_error( __( 'No attachment id.', 'wpmastertoolkit' ) );
 		}
@@ -880,7 +881,7 @@ class WPMastertoolkit_Media_Encoder {
 	 * @since   1.13.0
 	 */
 	public function start_bulk_migration_cb() {
-		$nonce = sanitize_text_field( $_POST['nonce'] ?? '' );
+		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
 		if ( ! wp_verify_nonce( $nonce, $this->nonce_action ) ) {
 			wp_send_json_error( __( 'Refresh the page and try again.', 'wpmastertoolkit' ) );
 		}
@@ -921,7 +922,7 @@ class WPMastertoolkit_Media_Encoder {
 	 * @since   1.13.0
 	 */
 	public function stop_bulk_migration_cb() {
-		$nonce = sanitize_text_field( $_POST['nonce'] ?? '' );
+		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
 		if ( ! wp_verify_nonce( $nonce, $this->nonce_action ) ) {
 			wp_send_json_error( __( 'Refresh the page and try again.', 'wpmastertoolkit' ) );
 		}
@@ -958,17 +959,17 @@ class WPMastertoolkit_Media_Encoder {
      * @since   1.13.0
      */
     public function render_submenu() {
-        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/media-encoder.asset.php' );
-        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/media-encoder.css', array(), $submenu_assets['version'], 'all' );
-        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/media-encoder.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
+        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/media-encoder.asset.php' );
+        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/media-encoder.css', array(), $submenu_assets['version'], 'all' );
+        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/media-encoder.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
 		wp_localize_script( 'WPMastertoolkit_submenu', 'WPMastertoolkit_media_encoder', array(
 			'ajaxUrl' => admin_url( 'admin-ajax.php' ),
             'nonce'   => wp_create_nonce( $this->nonce_action ),
 		));
 
-        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/header.php';
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/header.php';
         $this->submenu_content();
-        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/footer.php';
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/footer.php';
     }
 
 	/**
@@ -1317,10 +1318,11 @@ class WPMastertoolkit_Media_Encoder {
 
             } else {
 
-                $document_root     = realpath( wp_unslash( $_SERVER['DOCUMENT_ROOT'] ) );
+				$document_root     = sanitize_text_field( wp_unslash( $_SERVER['DOCUMENT_ROOT'] ?? '' ) );
+                $document_root     = realpath( $document_root );
                 $document_root     = trailingslashit( str_replace( '\\', '/', $document_root ) );
                 $path_current_site = trim( str_replace( '\\', '/', PATH_CURRENT_SITE ), '/' );
-                $root_dir         = trailingslashit( wp_normalize_path( $document_root . $path_current_site ) );
+                $root_dir          = trailingslashit( wp_normalize_path( $document_root . $path_current_site ) );
             }
 
             $domain_url  = wp_parse_url( $root_url );
@@ -1569,20 +1571,20 @@ class WPMastertoolkit_Media_Encoder {
 			ob_start();
 				?>
 					<div>
-						<strong><?php _e( 'Original Image: ', 'wpmastertoolkit' ); ?></strong>
-						<span><?php echo round( $full_image_data['original_size'] / 1024, 2 ) . 'KB'; ?></span>
+						<strong><?php esc_html_e( 'Original Image: ', 'wpmastertoolkit' ); ?></strong>
+						<span><?php echo esc_html( round( $full_image_data['original_size'] / 1024, 2 ) . 'KB' ); ?></span>
 					</div>
 					<div>
-						<strong><?php _e( 'Webp: ', 'wpmastertoolkit' ); ?></strong>
-						<span><?php echo round( $full_image_data['optimized_size'] / 1024, 2 ) . 'KB'; ?></span>
+						<strong><?php esc_html_e( 'Webp: ', 'wpmastertoolkit' ); ?></strong>
+						<span><?php echo esc_html( round( $full_image_data['optimized_size'] / 1024, 2 ) . 'KB' ); ?></span>
 					</div>
 					<div>
-						<strong><?php _e( 'Save: ', 'wpmastertoolkit' ); ?></strong>
-						<span><?php echo $full_image_data['percent'] . '%'; ?></span>
+						<strong><?php esc_html_e( 'Save: ', 'wpmastertoolkit' ); ?></strong>
+						<span><?php echo esc_html( $full_image_data['percent'] . '%' ); ?></span>
 					</div>
 					<div>
 						<button type="button" class="button button-sacondary wpmastertoolkit-undo-single-optimization-btn" data-attachment-id="<?php echo esc_attr( $attachment_id ); ?>">
-							<?php _e( 'Undo optimization', 'wpmastertoolkit' ); ?>
+							<?php esc_html_e( 'Undo optimization', 'wpmastertoolkit' ); ?>
 							<div class="spinner"></div>
 						</button>
 						<div class="wpmastertoolkit-undo-single-optimization-msg"></div>
@@ -1670,6 +1672,7 @@ class WPMastertoolkit_Media_Encoder {
 			'post_status'    => array_keys( $statuses ),
 			'posts_per_page' => -1,
 			'fields'         => 'ids',
+			//phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 			'meta_query'     => array(
 				'relation' => 'AND',
 				array(
@@ -1720,6 +1723,7 @@ class WPMastertoolkit_Media_Encoder {
 			'post_status'    => array_keys( $statuses ),
 			'posts_per_page' => -1,
 			'fields'         => 'ids',
+			//phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
 			'meta_query'     => array(
 				'relation' => 'AND',
 				array(
@@ -1976,6 +1980,7 @@ class WPMastertoolkit_Media_Encoder {
 	private function get_ajax_settings() {
 		$this->settings = $this->get_settings();
 
+		//phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
 		$settings = isset( $_POST['settings'] ) ? sanitize_text_field( $_POST['settings'] ) : array();
 		$settings = json_decode( stripslashes( $settings ), true );
 
@@ -2087,7 +2092,15 @@ class WPMastertoolkit_Media_Encoder {
 			?>
 				<div class="wp-mastertoolkit__section">
 					<div class="wp-mastertoolkit__section__notice show">
-						<p class="wp-mastertoolkit__section__notice__message"><?php echo wp_kses_post( sprintf( __( "Please deactivate %s plugin.", 'wpmastertoolkit' ), '<strong>QuickWebP - Compress / Optimize Images & Convert WebP | SEO Friendly</strong>' ) ); ?></p>
+						<p class="wp-mastertoolkit__section__notice__message">
+							<?php 
+							echo wp_kses_post( sprintf( 
+								/* translators: %s: plugin name */
+								__( "Please deactivate %s plugin.", 'wpmastertoolkit' ), 
+								'<strong>QuickWebP - Compress / Optimize Images & Convert WebP | SEO Friendly</strong>' 
+							) ); 
+							?>
+						</p>
 					</div>
 				</div>
 			<?php
@@ -2328,8 +2341,8 @@ class WPMastertoolkit_Media_Encoder {
 				<div class="wp-mastertoolkit__section__preview">
 					<div class="wp-mastertoolkit__section__preview__file show">
 						<div class="wp-mastertoolkit__section__preview__file__btn">
-							<?php echo file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/add-img.svg' ); ?>
-							<span><?php _e( 'Add image', 'wpmastertoolkit' ); ?></span>
+							<?php echo file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/add-img.svg' );//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							<span><?php esc_html_e( 'Add image', 'wpmastertoolkit' ); ?></span>
 						</div>
 						<input type="file" class="wp-mastertoolkit__section__preview__file__input" accept='image/*'>
 					</div>
@@ -2346,14 +2359,14 @@ class WPMastertoolkit_Media_Encoder {
 
 						<div class="wp-mastertoolkit__section__preview__compare__handle">
 							<div class="wp-mastertoolkit__section__preview__compare__handle__svg">
-								<?php echo file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/resize.svg' ); ?>
+								<?php echo file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/resize.svg' );//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 							</div>
 						</div>
 
 						<div class="wp-mastertoolkit__section__preview__compare__data">
 
 							<div class="wp-mastertoolkit__section__preview__compare__data__original">
-								<div class="wp-mastertoolkit__section__preview__compare__data__original__type"><?php _e( 'Original Image', 'wpmastertoolkit' ); ?></div>
+								<div class="wp-mastertoolkit__section__preview__compare__data__original__type"><?php esc_html_e( 'Original Image', 'wpmastertoolkit' ); ?></div>
 								<div class="wp-mastertoolkit__section__preview__compare__data__original__size"></div>
 							</div>
 
@@ -2371,7 +2384,7 @@ class WPMastertoolkit_Media_Encoder {
 					</div>
 
 					<div class="wp-mastertoolkit__section__preview__close">
-            			<button type="button" class="wp-mastertoolkit__section__preview__close__btn"><?php echo file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/times.svg' ); ?></button>
+            			<button type="button" class="wp-mastertoolkit__section__preview__close__btn"><?php echo file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/times.svg' );//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></button>
         			</div>
 				</div>
             </div>

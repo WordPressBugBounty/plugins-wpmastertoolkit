@@ -116,9 +116,9 @@ class WPMastertoolkit_Meta_Debugger {
      */
     public function render_meta_debugger( $id, $type ) {
 
-        $meta_debugger_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/meta-debugger.asset.php' );
-        wp_enqueue_style( 'WPMastertoolkit_meta_debugger', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/meta-debugger.css', array(), $meta_debugger_assets['version'], 'all' );
-        wp_enqueue_script( 'WPMastertoolkit_meta_debugger', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/meta-debugger.js', $meta_debugger_assets['dependencies'], $meta_debugger_assets['version'], true );
+        $meta_debugger_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/meta-debugger.asset.php' );
+        wp_enqueue_style( 'WPMastertoolkit_meta_debugger', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/meta-debugger.css', array(), $meta_debugger_assets['version'], 'all' );
+        wp_enqueue_script( 'WPMastertoolkit_meta_debugger', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/meta-debugger.js', $meta_debugger_assets['dependencies'], $meta_debugger_assets['version'], true );
         wp_localize_script( 'WPMastertoolkit_meta_debugger', 'wpmastertoolkit_meta_debugger', array(
             'ajaxurl' => admin_url( 'admin-ajax.php' ),
             'nonce'   => wp_create_nonce( $this->nonce ),
@@ -143,7 +143,7 @@ class WPMastertoolkit_Meta_Debugger {
      */
     public function get_meta_data() {
 
-        $nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( $_POST['nonce'] ) : '';
+        $nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
         if ( ! wp_verify_nonce( $nonce, $this->nonce ) ) {
             wp_send_json_error( '<div><p>' . esc_html__( 'Refresh the page and try again.', 'wpmastertoolkit' ) . '</p></div>' );
         }
@@ -152,8 +152,8 @@ class WPMastertoolkit_Meta_Debugger {
             wp_send_json_error( '<div><p>' . esc_html__( 'You are not allowed to perform this action', 'wpmastertoolkit' ) . '</p></div>' );
         }
 
-        $id   = isset( $_POST['id'] ) ? sanitize_text_field( $_POST['id'] ) : '';
-        $type = isset( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : '';
+        $id   = isset( $_POST['id'] ) ? sanitize_text_field( wp_unslash( $_POST['id'] ) ) : '';
+        $type = isset( $_POST['type'] ) ? sanitize_text_field( wp_unslash( $_POST['type'] ) ) : '';
 
         switch ( $type ) {
             case 'post':

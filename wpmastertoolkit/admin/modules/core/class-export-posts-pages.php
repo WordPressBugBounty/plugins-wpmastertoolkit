@@ -51,14 +51,14 @@ class WPMastertoolkit_Export_Posts_Pages {
      */
     public function download_post() {
 
-        $nonce = isset( $_GET[ 'nonce' ] ) ? sanitize_text_field( $_GET[ 'nonce' ] ) : '';
+        $nonce = isset( $_GET[ 'nonce' ] ) ? sanitize_text_field( wp_unslash( $_GET[ 'nonce' ] ) ) : '';
 
         if ( ! wp_verify_nonce( $nonce, self::NONCE ) ) {
             wp_die();
         }
 
-        $post_id   = isset( $_GET[ 'post' ] ) ? sanitize_text_field( $_GET[ 'post' ] ) : '';
-        $post_type = isset( $_GET[ 'post_type' ] ) ? sanitize_text_field( $_GET[ 'post_type' ] ) : '';
+        $post_id   = isset( $_GET[ 'post' ] ) ? sanitize_text_field( wp_unslash( $_GET[ 'post' ] ) ) : '';
+        $post_type = isset( $_GET[ 'post_type' ] ) ? sanitize_text_field( wp_unslash( $_GET[ 'post_type' ] ) ) : '';
 
         if ( empty( $post_id ) || empty( $post_type ) ) {
             wp_die();
@@ -186,6 +186,7 @@ class WPMastertoolkit_Export_Posts_Pages {
             fputcsv( $handle, $post, $delimiter, $enclosure );
         }
 
+		//phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
         fclose( $handle );
         exit;
     }

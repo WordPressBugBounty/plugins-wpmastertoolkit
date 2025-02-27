@@ -64,9 +64,9 @@ class WPMastertoolkit_Limit_Login_Attempts {
 		$default_settings = $this->get_default_settings();
 		$fails_allowed    = $settings['fails_allowed'] ?? $default_settings['fails_allowed'];
 		$lockout_maxcount = $settings['lockout_maxcount'] ?? $default_settings['lockout_maxcount'];
-		$request_uri      = sanitize_text_field( $_SERVER['REQUEST_URI'] ?? '' );
-		$sql              = $wpdb->prepare( "SELECT * FROM %i Where %i = %s", $table_name, 'ip_address', $ip_address );
-        $result           = $wpdb->get_results( $sql, ARRAY_A );
+		$request_uri      = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) );
+		//phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+        $result           = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM %i Where %i = %s", $table_name, 'ip_address', $ip_address ), ARRAY_A );
 		$result_count     = count( $result );
 
 		if ( $result_count > 0 ) {
@@ -116,7 +116,14 @@ class WPMastertoolkit_Limit_Login_Attempts {
                     $wpmastertoolkit_limit_login['lockout_period_remaining'] = $lockout_period_remaining;
 					$lockout_period_remaining_to_render                      = $this->formate_seconds_to_period( $lockout_period_remaining );
 
-					$error = new WP_Error( 'ip_address_blocked', '<b>' . __( 'WARNING', 'wpmastertoolkit' ) . ':</b> ' . sprintf( __( 'You\'ve been locked out. You can login again in %s.', 'wpmastertoolkit' ), $lockout_period_remaining_to_render ) );
+					$error = new WP_Error( 
+						'ip_address_blocked',
+						sprintf( 
+							/* translators: %s: Lockout period remaining */
+							__( '<b>WARNING:</b> You\'ve been locked out. You can login again in %s.', 'wpmastertoolkit' ), 
+							$lockout_period_remaining_to_render 
+						) 
+					);
 					return $error;
 				} else {
 					$wpmastertoolkit_limit_login['within_lockout_period'] = false;
@@ -126,7 +133,7 @@ class WPMastertoolkit_Limit_Login_Attempts {
 						$where        = array( 'ip_address' => $ip_address );
 						$where_format = array( '%s' );
 
-						// Delete existing data in the database
+						//phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 						$wpdb->delete(
 							$table_name,
 							$where,
@@ -197,7 +204,8 @@ class WPMastertoolkit_Limit_Login_Attempts {
 				</style>
 			<?php
 		} else {
-            $page_was_reloaded = 1 == sanitize_text_field( $_GET['rl'] ?? '' ) ? true : false;
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            $page_was_reloaded = 1 == sanitize_text_field( wp_unslash( $_GET['rl'] ?? '' ) ) ? true : false;
 			$fail_count        = $wpmastertoolkit_limit_login['fail_count'] ?? false;
 			$fails_allowed     = $wpmastertoolkit_limit_login['login_fails_allowed'] ?? '3';
 
@@ -275,6 +283,7 @@ class WPMastertoolkit_Limit_Login_Attempts {
         );
 
 		if ( 0 == $result_count ) {
+			//phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
             $wpdb->insert(
                 $table_name,
                 $data,
@@ -297,6 +306,7 @@ class WPMastertoolkit_Limit_Login_Attempts {
 
 				if ( ( time() - $last_fail_on ) > $lockout_period ) {
                     if ( $lockout_count < $lockout_maxcount ) {
+						//phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 						$wpdb->update(
                             $table_name,
                             $data,
@@ -307,6 +317,7 @@ class WPMastertoolkit_Limit_Login_Attempts {
 					}
 				}
 			} else {
+				//phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 				$wpdb->update(
                     $table_name,
                     $data,
@@ -331,6 +342,7 @@ class WPMastertoolkit_Limit_Login_Attempts {
 		$where        = array( 'ip_address' => $ip_address );
         $where_format = array( '%s' );
 
+		//phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$wpdb->delete(
             $table_name,
             $where,
@@ -371,13 +383,13 @@ class WPMastertoolkit_Limit_Login_Attempts {
      * @since   1.5.0
      */
     public function render_submenu() {
-        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/limit-login-attempts.asset.php' );
-        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/limit-login-attempts.css', array(), $submenu_assets['version'], 'all' );
-        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/limit-login-attempts.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
+        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/limit-login-attempts.asset.php' );
+        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/limit-login-attempts.css', array(), $submenu_assets['version'], 'all' );
+        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/limit-login-attempts.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
 
-        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/header.php';
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/header.php';
         $this->submenu_content();
-        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/footer.php';
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/footer.php';
     }
 
 	/**
@@ -386,18 +398,19 @@ class WPMastertoolkit_Limit_Login_Attempts {
      * @since   1.4.0
      */
     public function save_submenu() {
-		$nonce = sanitize_text_field( $_POST['_wpnonce'] ?? '' );
+		$nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ?? '' ) );
 
 		if ( wp_verify_nonce( $nonce, $this->nonce_action ) ) {
 
 			if ( isset( $_POST['delete'] ) ) {
 				$this->delete_attempt( $_POST );
 			} else {
+				// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				$new_settings = $this->sanitize_settings( $_POST[ $this->option_id ] ?? array() );
 				$this->save_settings( $new_settings );
 			}
 
-            wp_safe_redirect( sanitize_url( $_SERVER['REQUEST_URI'] ?? '' ) );
+            wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
 			exit;
 		}
     }
@@ -471,8 +484,8 @@ class WPMastertoolkit_Limit_Login_Attempts {
 
 		if ( $this->is_table_exist() ) {
 			$limit   = 10;
-			$sql     = $wpdb->prepare( "SELECT * FROM %i ORDER BY unixtime DESC LIMIT %d", $this->get_table_name(), $limit );
-			$entries = $wpdb->get_results( $sql, ARRAY_A );
+			//phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			$entries = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM %i ORDER BY unixtime DESC LIMIT %d", $this->get_table_name(), $limit ), ARRAY_A );
 		} else {
 			$entries = array();
 		}
@@ -554,6 +567,7 @@ class WPMastertoolkit_Limit_Login_Attempts {
 		$where        = array( 'ip_address' => $ip_address );
         $where_format = array( '%s' );
 
+		//phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$wpdb->delete(
             $table_name,
             $where,
@@ -568,8 +582,8 @@ class WPMastertoolkit_Limit_Login_Attempts {
 	 */
 	private function is_table_exist() {
 		global $wpdb;
-		$query = $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $this->get_table_name() ) );
-		return $wpdb->get_var( $query ) === $this->get_table_name();
+		//phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		return $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $this->get_table_name() ) ) ) === $this->get_table_name();
 	}
 
 	/**
@@ -601,8 +615,8 @@ class WPMastertoolkit_Limit_Login_Attempts {
 		$table_name = $this->get_table_name();
 
 		// Drop table if already exists
-		$sql = $wpdb->prepare( "DROP TABLE IF EXISTS %i", $table_name );
-		$wpdb->query( $sql );
+		//phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange
+		$wpdb->query( $wpdb->prepare( "DROP TABLE IF EXISTS %i", $table_name ) );
 
 		// Create database table.
 		$sql = 
@@ -629,17 +643,17 @@ class WPMastertoolkit_Limit_Login_Attempts {
 	 */
 	private function get_current_ip() {
         if ( isset( $_SERVER['HTTP_CLIENT_IP'] ) ) {
-            return sanitize_text_field( $_SERVER['HTTP_CLIENT_IP'] );
+            return sanitize_text_field( wp_unslash( $_SERVER['HTTP_CLIENT_IP'] ) );
         } elseif ( isset( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
-            return sanitize_text_field( $_SERVER['HTTP_X_FORWARDED_FOR'] );
+            return sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_FORWARDED_FOR'] ) );
         } elseif ( isset( $_SERVER['HTTP_X_FORWARDED'] ) ) {
-            return sanitize_text_field( $_SERVER['HTTP_X_FORWARDED'] );
+            return sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_FORWARDED'] ) );
         } elseif ( isset( $_SERVER['HTTP_FORWARDED_FOR'] ) ) {
-            return sanitize_text_field( $_SERVER['HTTP_FORWARDED_FOR'] );
+            return sanitize_text_field( wp_unslash( $_SERVER['HTTP_FORWARDED_FOR'] ) );
         } elseif ( isset( $_SERVER['HTTP_FORWARDED'] ) ) {
-            return sanitize_text_field( $_SERVER['HTTP_FORWARDED'] );
+            return sanitize_text_field( wp_unslash( $_SERVER['HTTP_FORWARDED'] ) );
         } elseif ( isset( $_SERVER['REMOTE_ADDR'] ) ) {
-            return sanitize_text_field( $_SERVER['REMOTE_ADDR'] );
+            return sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) );
         } else {
             return '';
         }
@@ -656,13 +670,26 @@ class WPMastertoolkit_Limit_Login_Attempts {
         $period_end   = new DateTime("@{$seconds}");
 
 		if ( $seconds < 60 ) {
-			$result = sprintf( esc_html__( '%s seconds', 'wpmastertoolkit' ), $seconds );
+			$result = esc_html( sprintf(
+				/* translators: %s: Seconds */
+				__( '%s seconds', 'wpmastertoolkit' ), 
+				$seconds 
+			) );
 		} elseif ( $seconds < 3600 ) {
-            $result = $period_start->diff( $period_end )->format( esc_html__( '%i minutes and %s seconds', 'wpmastertoolkit' ) );
+            $result = $period_start->diff( $period_end )->format( 
+				/* translators: %i: Minutes, %s: Seconds */
+				esc_html__( '%i minutes and %s seconds', 'wpmastertoolkit' ) 
+			);
 		} elseif ( $seconds < 86400 ) {
-            $result = $period_start->diff( $period_end )->format( esc_html__( '%h hours, %i minutes and %s seconds', 'wpmastertoolkit' ) );
+            $result = $period_start->diff( $period_end )->format( 
+				/* translators: %1$h: Hours, %2$i: Minutes, %3$s: Seconds */
+				esc_html__( '%1$h hours, %2$i minutes and %3$s seconds', 'wpmastertoolkit' ) 
+			);
 		} else {
-			$result = $period_start->diff( $period_end )->format( esc_html__( '%a days, %h hours, %i minutes and %s seconds', 'wpmastertoolkit' ) );
+			$result = $period_start->diff( $period_end )->format( 
+				/* translators: %1$a: Days, %2$h: Hours, %3$i: Minutes, %4$s: Seconds */
+				esc_html__( '%1$a days, %2$h hours, %3$i minutes and %4$s seconds', 'wpmastertoolkit' ) 
+			);
 		}
 		
 		return $result;

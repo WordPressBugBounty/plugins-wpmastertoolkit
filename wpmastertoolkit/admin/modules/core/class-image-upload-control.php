@@ -156,7 +156,7 @@ class WPMastertoolkit_Image_Upload_Control {
             $new_filename = wp_unique_filename( dirname( $upload['file'] ), $new_filename );
             if ( imagejpeg( $image_object, $wp_uploads['path'] . '/' . $new_filename, 90 ) ) {
                 // delete original BMP/PNG
-                unlink( $upload['file'] );
+                wp_delete_file( $upload['file'] );
                 // Add converted JPG info into $upload
                 $upload['file'] = $wp_uploads['path'] . '/' . $new_filename;
                 $upload['url']  = $wp_uploads['url'] . '/' . $new_filename;
@@ -194,9 +194,9 @@ class WPMastertoolkit_Image_Upload_Control {
         wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/insert-head-body-footer-code.css', array(), $submenu_assets['version'], 'all' );
         wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/insert-head-body-footer-code.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
 
-        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/header.php';
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/header.php';
         $this->submenu_content();
-        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/footer.php';
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/footer.php';
     }
 
 	/**
@@ -205,12 +205,13 @@ class WPMastertoolkit_Image_Upload_Control {
      * @since   1.4.0
      */
     public function save_submenu() {
-		$nonce = sanitize_text_field( $_POST['_wpnonce'] ?? '' );
+		$nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ?? '' ) );
 
 		if ( wp_verify_nonce( $nonce, $this->nonce_action ) ) {
+			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
             $new_settings = $this->sanitize_settings( $_POST[ $this->option_id ] ?? array() );
             $this->save_settings( $new_settings );
-            wp_safe_redirect( sanitize_url( $_SERVER['REQUEST_URI'] ?? '' ) );
+            wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
 			exit;
 		}
     }
@@ -288,7 +289,13 @@ class WPMastertoolkit_Image_Upload_Control {
                 <div class="wp-mastertoolkit__section__desc">
 					<?php esc_html_e( "Resize newly uploaded, large images to a smaller dimension and delete originally uploaded files. BMPs and non-transparent PNGs will be converted to JPGs and resized.", 'wpmastertoolkit'); ?>
 					</br>
-					<?php printf( esc_html__( 'To exclude an image from conversion and resizing, append \'%1$s\' suffix to the file name, e.g. my-image%1$s.jpg', 'wpmastertoolkit' ), $this->prefix_to_ignore ); ?>
+					<?php 
+                    echo esc_html( sprintf(
+                        /* translators: %1$s: prefix_to_ignore */
+                        __( 'To exclude an image from conversion and resizing, append \'%1$s\' suffix to the file name, e.g. my-image%1$s.jpg', 'wpmastertoolkit' ), 
+                        $this->prefix_to_ignore 
+                    )); 
+                    ?>
 				</div>
                 <div class="wp-mastertoolkit__section__body">
 					<div class="wp-mastertoolkit__section__body__item">

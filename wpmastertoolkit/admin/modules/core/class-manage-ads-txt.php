@@ -117,16 +117,16 @@ class WPMastertoolkit_Manage_Ads_Txt {
             ),
         ) );
 
-        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/manage-ads-txt.asset.php' );
-        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/manage-ads-txt.css', array(), $submenu_assets['version'], 'all' );
-        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/manage-ads-txt.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
+        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/manage-ads-txt.asset.php' );
+        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/manage-ads-txt.css', array(), $submenu_assets['version'], 'all' );
+        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/manage-ads-txt.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
         wp_localize_script( 'WPMastertoolkit_submenu', 'wpmastertoolkit_code_snippets', array(
             'code_editor' => $code_editor,
         ) );
 
-        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/header.php';
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/header.php';
         $this->submenu_content();
-        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/footer.php';
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/footer.php';
     }
 
 	/**
@@ -135,12 +135,13 @@ class WPMastertoolkit_Manage_Ads_Txt {
      * @since   1.4.0
      */
     public function save_submenu() {
-		$nonce = sanitize_text_field( $_POST['_wpnonce'] ?? '' );
+		$nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ?? '' ) );
 
 		if ( wp_verify_nonce( $nonce, $this->nonce_action ) ) {
+			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
             $new_settings = $this->sanitize_settings( $_POST[ $this->option_id ] ?? array() );
             $this->save_settings( $new_settings );
-            wp_safe_redirect( sanitize_url( $_SERVER['REQUEST_URI'] ?? '' ) );
+            wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
 			exit;
 		}
     }
@@ -219,7 +220,16 @@ class WPMastertoolkit_Manage_Ads_Txt {
 		$app_ads = $this->settings['app_ads'] ?? array();
         ?>
             <div class="wp-mastertoolkit__section">
-                <div class="wp-mastertoolkit__section__desc"><?php printf( __( "Easily edit and validate your %s and %s content.", 'wpmastertoolkit' ), '<a target="_blank" href="' . site_url( 'ads.txt' ). '">ads.txt</a>', '<a target="_blank" href="' . site_url( 'app-ads.txt' ). '">app-ads.txt</a>' ); ?></div>
+                <div class="wp-mastertoolkit__section__desc">
+                    <?php 
+                    echo wp_kses_post( sprintf(
+                        /* translators: %1$s: ads.txt, %2$s: app-ads.txt */
+                        __( 'Easily edit and validate your %1$s and %2$s content.', 'wpmastertoolkit' ), 
+                        '<a target="_blank" href="' . site_url( 'ads.txt' ). '">ads.txt</a>', 
+                        '<a target="_blank" href="' . site_url( 'app-ads.txt' ). '">app-ads.txt</a>' 
+                    ) ); 
+                    ?>
+                </div>
                 <div class="wp-mastertoolkit__section__body">
 					<div class="wp-mastertoolkit__section__body__item">
                         <div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e('ads.txt', 'wpmastertoolkit'); ?></div>

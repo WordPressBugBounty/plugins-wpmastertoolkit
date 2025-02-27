@@ -34,6 +34,8 @@ class Settings {
 	 */
 	private $menu_args;
 
+	private $notices;
+
 	/**
 	 * Create the pages.
 	 *
@@ -43,6 +45,7 @@ class Settings {
 		$this->client     = $client;
 		$this->name       = strtolower( preg_replace( '/\s+/', '', $this->client->name ) );
 		$this->option_key = $this->name . '_license_options';
+		$this->notices    = array();
 	}
 
 	/**
@@ -208,38 +211,67 @@ class Settings {
 	public function settings_output() {
 		$this->license_form_submit();
 
-		$this->print_css();
+		$assets = include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/licensing.asset.php';
+		// wp_enqueue_script( 'wpmastertoolkit-licensing', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/licensing.js', $assets['dependencies'], $assets['version'], true );
+		wp_enqueue_style( 'wpmastertoolkit-licensing', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/licensing.css', array(), $assets['version'] );
 
-		$activation = $this->get_activation();
-		$action     = ! empty( $activation->id ) ? 'deactivate' : 'activate'
+		$activation 	= $this->get_activation();
+		$action     	= ! empty( $activation->id ) ? 'deactivate' : 'activate';
 		?>
 
-		<div class="wrap">
-			<h1></h1>
-			<?php settings_errors(); ?>
+		<div class="wrap wpmastertoolkit-license-wrap">
+			<div class="wpmastertoolkit-header-section">
+				<h1><?php echo esc_html( $this->menu_args['page_title'] ); ?></h1>
+				<a class="wpmastertoolkit-header-section__help" target="_blank" href="<?php echo esc_url( __( 'https://wpmastertoolkit.com/en/how-to-upgrade-to-wpmastertoolkit-pro-complete-guide/', 'wpmastertoolkit' ) ); ?>">
+					<?php //phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
+					<img src="<?php echo esc_url(WPMASTERTOOLKIT_PLUGIN_URL . 'admin/svg/interrogation.svg'); ?>" alt="">
+					<span>
+						<?php esc_html_e( 'Help', 'wpmastertoolkit' ); ?>
+					</span>
+				</a>
+			</div>
 
-			<div class="<?php echo esc_attr( $this->name ) . '-form-container'; ?>">
-				<form method="post" action="<?php echo esc_attr( $this->form_action_url() ); ?>">
+			<?php $this->render_notices(); ?>
+
+			<section class="wpmastertoolkit-license-main-section" style="<?php echo esc_attr( 'background-image: url(' . WPMASTERTOOLKIT_PLUGIN_URL . 'admin/svg/grey-logo-background.svg);' ); ?>">
+				<?php // LEFT ?>
+				<form method="post" action="<?php echo esc_attr( $this->form_action_url() ); ?>" class="wpmastertoolkit-license-main-section__left">
 					<input type="hidden" name="_action" value="<?php echo esc_attr( $action ); ?>">
 					<input type="hidden" name="_nonce" value="<?php echo esc_attr( wp_create_nonce( $this->client->name ) ); ?>">
 					<input type="hidden" name="activation_id" value="<?php echo esc_attr( $this->activation_id ); ?>">
 
-					<h2><?php echo esc_html( $this->menu_args['page_title'] ); ?></h2>
-					<label for="license_key">
-						<?php if ( 'activate' === $action ) : ?> 
-							<?php echo esc_html( sprintf( __( 'Enter your license key to activate %s.', 'wpmastertoolkit' ), $this->client->name ) ); ?>
-						<?php else : ?>
-							<?php echo esc_html( sprintf( __( 'Your license is succesfully activated for this site.', 'wpmastertoolkit' ), $this->client->name ) ); ?>
-						<?php endif; ?>
-					</label>
-
-					<?php do_action( 'wpmastertoolkit_surecart_before_license_key', $action ); ?>
+					<div class="wpmastertoolkit-license-main-section__left__header">
+						<div>
+							<?php
+							if ( 'activate' === $action ) {
+								echo esc_html( sprintf(
+									/* translators: %s: client name */
+									__( 'Enter your license key to activate %s.', 'wpmastertoolkit' ), $this->client->name )
+								);
+							} else {
+								echo esc_html( sprintf(
+									/* translators: %s: client name */
+									__( 'Your license is succesfully activated for this site.', 'wpmastertoolkit' ), $this->client->name )
+								);
+							}
+							?>
+						</div>
+						<div class="wpmastertoolkit-license-main-section__left__header__state">
+							<div><?php echo wp_kses_post( __( 'State:', 'wpmastertoolkit' ) ); ?></div>
+							<div class="wpmastertoolkit-license-main-section__left__header__state__icon <?php echo esc_attr( $action ); ?>">●</div>
+						</div>
+					</div>
 
 					<?php if ( 'activate' === $action ) : ?> 
-						<input class="widefat" type="password" autocomplete="off" name="license_key" id="license_key" value="<?php echo esc_attr( $this->license_key ); ?>" autofocus>
+						<input class="widefat" type="password" autocomplete="off" name="license_key" id="license_key" value="<?php echo esc_attr( $this->license_key ); ?>" autofocus placeholder="<?php esc_attr_e('Enter the license...', 'wpmastertoolkit'); ?>">
+					<?php else : ?>
+						<div class="wpmastertoolkit-license-main-section__left__header__license">
+							<?php 
+							$obfuscated_license = substr( $this->license_key, 0, 8 ) . str_repeat( '*', strlen( $this->license_key ) - 8 );
+							echo esc_html( $obfuscated_license ); 
+							?>
+						</div>
 					<?php endif; ?>
-
-					<?php do_action( 'wpmastertoolkit_surecart_after_license_key', $action ); ?>
 
 					<?php if ( isset( $_GET['debug'] ) ) : // phpcs:ignore  ?>
 						<label for="license_id"><?php echo esc_html( sprintf( __( 'License ID', 'wpmastertoolkit' ), $this->client->name ) ); ?></label>
@@ -249,48 +281,132 @@ class Settings {
 						<input class="widefat" type="text" autocomplete="off" name="activation_id" id="activation_id" value="<?php echo esc_attr( $this->activation_id ); ?>" autofocus>
 					<?php endif; ?>
 
-					<?php submit_button( 'activate' === $action ? __( 'Activate License', 'wpmastertoolkit' ) : __( 'Deactivate License', 'wpmastertoolkit' ) ); ?>
-				</form>
-			</div>
-		</div>
-		<?php
-	}
+					<div class="wpmastertoolkit-license-main-section__left__actions">
+						<?php if ( 'activate' === $action ) : ?>
+							<button name="submit" type="submit" class="wpmastertoolkit-submit-license-form-button activate">
+								<?php echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/white-key.svg'), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
+								<?php esc_html_e( 'Activate License', 'wpmastertoolkit' ); ?>
+							</button>
+						<?php else : ?>
+							<button name="submit" type="submit" class="wpmastertoolkit-submit-license-form-button deactivate">
+								<?php echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/red-key.svg'), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
+								<?php esc_html_e( 'Deactivate License', 'wpmastertoolkit' ); ?>
+							</button>
+						<?php endif; ?>
+						
+						<a href="<?php echo esc_url( __( 'https://wpmastertoolkit.com/en/customer-dashboard/', 'wpmastertoolkit') ); ?>" target="_blank" class="wpmastertoolkit-my-account-button">
+							<?php echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/grey-my-account.svg'), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
+							<?php esc_html_e( 'My account', 'wpmastertoolkit' ); ?>
+						</a>
+					</div>
 
-		/**
-		 * Print the css for the form.
-		 *
-		 * @return void
-		 */
-	public function print_css() {
-		?>
-		<style>
-			.spinner {
-				float: none;
-			}
-			<?php echo '.' . esc_attr( $this->name ) . '-form-container'; ?> form {
-				padding:30px;
-				background: #fff;
-				display: grid;
-				gap: 1em;
-				max-width: 600px;
-			}
-			h2 {
-				padding: 0;
-				margin: 0;
-			}
-			label {
-				display: block;
-				font-size: 1.1em;
-				margin-bottom: 5px;
-			}
-			label[hidden] {
-				display: none;
-			}
-			p.submit {
-				margin: 0;
-				padding: 0;
-			}
-		</style>
+					<?php 
+					/**
+					 * Fires after the submit section.
+					 *
+					 * @param string $action The action.
+					 */
+					do_action( 'wpmastertoolkit_licensing/after_submit_section', $action ); 
+					?>
+
+				</form>
+
+				<?php // RIGHT ?>
+				<div class="wpmastertoolkit-license-main-section__right">
+					<div class="wpmastertoolkit-license-main-section__right__title">
+						<?php esc_html_e( 'With the PRO version you unlock:', 'wpmastertoolkit' ); ?>
+					</div>
+
+					<div class="wpmastertoolkit-license-main-section__right__what-you-unlock">
+						<div class="wpmastertoolkit-license-main-section__right__what-you-unlock__item">
+							<div class="wpmastertoolkit-license-main-section__right__what-you-unlock__item__title">
+								<?php echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/unlock-pro-features.svg'), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
+								<div>
+									<?php esc_html_e( 'Pro features', 'wpmastertoolkit' ); ?>
+								</div>
+							</div>
+							<div class="wpmastertoolkit-license-main-section__right__what-you-unlock__item__description">
+								<?php esc_html_e( 'Unlock Pro features on free modules. These features will save you even more time without overloading your site. ✨', 'wpmastertoolkit' ); ?>
+							</div>
+						</div>
+						
+						<div class="wpmastertoolkit-license-main-section__right__what-you-unlock__item">
+							<div class="wpmastertoolkit-license-main-section__right__what-you-unlock__item__title">
+								<?php echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/modules.svg'), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
+								<div>
+									<?php
+										echo esc_html( sprintf( 
+											/* translators: %s: Number of vulnerabilities */
+											__( '+ %s Pro modules', 'wpmastertoolkit' ), 
+											\WPMastertoolkit_Modules_Data::count_modules( 'pro' ),
+										) );
+									?>
+								</div>
+							</div>
+							<div class="wpmastertoolkit-license-main-section__right__what-you-unlock__item__description">
+								<?php esc_html_e( 'Take advantage of all the pro modules. These modules were created mainly to facilitate web professionals and will save you a lot of time. ✨', 'wpmastertoolkit' ); ?>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</section>
+
+			<section class="wpmastertoolkit-marketing-section">
+				<div class="wpmastertoolkit-marketing-section__left">
+					<div class="wpmastertoolkit-marketing-section__left__block" style="<?php echo esc_attr( 'background-image: url(' . WPMASTERTOOLKIT_PLUGIN_URL . 'admin/images/licensing-offers.png' ); ?>">
+						<div class="wpmastertoolkit-marketing-section__left__block__content">
+							 <div class="wpmastertoolkit-marketing-section__left__block__content__title-top">
+								 💼 <?php esc_html_e( 'Our offers', 'wpmastertoolkit' ); ?>
+							 </div>
+							 <div class="wpmastertoolkit-marketing-section__left__block__content__title">
+								 <?php esc_html_e( 'WPMasterToolKit', 'wpmastertoolkit' ); ?>
+							 </div>
+							 <div class="wpmastertoolkit-marketing-section__left__block__content__description">
+								 <?php esc_html_e( 'Choose from our 4 plans, the plan that best suits your needs and enjoy advanced features to optimize your WordPress site. ✨', 'wpmastertoolkit' ); ?>
+							 </div>
+							 <a href="<?php echo esc_url( __( 'https://wpmastertoolkit.com/en/products-2/wpmastertoolkit-pro/', 'wpmastertoolkit' ) ); ?>" target="_blank" class="wpmastertoolkit-marketing-section__left__block__content__button">
+								 <?php echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/white-add-to-cart.svg'), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
+								 <?php esc_html_e( 'Buy', 'wpmastertoolkit' ); ?>
+							 </a>
+						 </div>
+					</div>
+
+					<div class="wpmastertoolkit-marketing-section__left__block" style="<?php echo esc_attr( 'background-image: url(' . WPMASTERTOOLKIT_PLUGIN_URL . 'admin/images/licensing-documentation.png' ); ?>">
+						<div class="wpmastertoolkit-marketing-section__left__block__content">
+							 <div class="wpmastertoolkit-marketing-section__left__block__content__title">
+							 	📖 <?php esc_html_e( 'Modules documentation', 'wpmastertoolkit' ); ?>
+							 </div>
+							 <div class="wpmastertoolkit-marketing-section__left__block__content__description">
+								 <?php esc_html_e( 'Find all the essential information to configure and use WPMasterToolKit modules effectively. 🎓', 'wpmastertoolkit' ); ?>
+							 </div>
+							 <a href="<?php echo esc_url( __( 'https://wpmastertoolkit.com/en/modules/', 'wpmastertoolkit' ) ); ?>" target="_blank" class="wpmastertoolkit-marketing-section__left__block__content__button">
+								 <?php echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/white-documentation.svg'), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
+								 <?php esc_html_e( 'Discover WPMTK', 'wpmastertoolkit' ); ?>
+							 </a>
+						 </div>
+					</div>
+				</div>
+				
+				<!-- RIGHT -->
+				<div class="wpmastertoolkit-marketing-section__right">
+					<div class="wpmastertoolkit-marketing-section__right__video">
+						<!-- <video src="#" autoplay loop muted controls></video> -->
+						<?php //phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
+						<img class="wpmastertoolkit-marketing-section__right__video__no-video-placeholder" src="<?php echo esc_url( WPMASTERTOOLKIT_PLUGIN_URL . 'admin/images/licensing-video-placeholder.png' ); ?>" alt="">
+					</div>
+					<div class="wpmastertoolkit-marketing-section__right__content">
+						<div class="wpmastertoolkit-marketing-section__right__content__title">
+							🔓 <?php esc_html_e( 'Unlock the full potential of WPMTK', 'wpmastertoolkit' ); ?>
+						</div>
+						<div class="wpmastertoolkit-marketing-section__right__content__description">
+							<?php esc_html_e( 'Discover the power of WPMasterToolKit and unlock the full potential of your WordPress site. 🔥', 'wpmastertoolkit' ); ?>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+
 		<?php
 	}
 
@@ -327,20 +443,20 @@ class Settings {
 		}
 
 		// Cerify nonce.
-		if ( ! wp_verify_nonce( $_POST['_nonce'], $this->client->name ) ) {
+		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_nonce'] ) ), $this->client->name ) ) {
 			$this->add_error( 'unauthorized', __( "You don't have permission to manage licenses.", 'wpmastertoolkit' ) );
 			return;
 		}
 
 		// handle activation.
-		if ( 'activate' === $_POST['_action'] ) {
-			$activated = $this->client->license()->activate( sanitize_text_field( $_POST['license_key'] ) );
+		if ( 'activate' === sanitize_text_field( wp_unslash( $_POST['_action'] ) ) ) {
+			$activated = $this->client->license()->activate( sanitize_text_field( wp_unslash( $_POST['license_key'] ?? '' ) ) );
 			if ( is_wp_error( $activated ) ) {
 				$this->add_error( $activated->get_error_code(), $activated->get_error_message() );
 				return;
 			}
 
-			do_action( 'wpmastertoolkit_surecart_license_activated' );
+			do_action( 'wpmastertoolkit_licensing/license_activated' );
 
 			if ( ! empty( $this->menu_args['activated_redirect'] ) ) {
 				$this->redirect( $this->menu_args['activated_redirect'] );
@@ -351,13 +467,13 @@ class Settings {
 		}
 
 		// handle deactivation.
-		if ( 'deactivate' === $_POST['_action'] ) {
-			$deactivated = $this->client->license()->deactivate( sanitize_text_field( $_POST['activation_id'] ) );
+		if ( 'deactivate' === sanitize_text_field( wp_unslash( $_POST['_action'] ) ) ) {
+			$deactivated = $this->client->license()->deactivate( sanitize_text_field( wp_unslash( $_POST['activation_id'] ?? '' ) ) );
 			if ( is_wp_error( $deactivated ) ) {
 				$this->add_error( $deactivated->get_error_code(), $deactivated->get_error_message() );
 			}
 
-			do_action( 'wpmastertoolkit_surecart_license_deactivated' );
+			do_action( 'wpmastertoolkit_licensing/license_deactivated' );
 
 			if ( ! empty( $this->menu_args['deactivated_redirect'] ) ) {
 				$this->redirect( $this->menu_args['deactivated_redirect'] );
@@ -395,11 +511,10 @@ class Settings {
 	 * @return void
 	 */
 	public function add_notice( $code, $message, $type = 'info' ) {
-		add_settings_error(
-			$this->name . '_license_options', // matches what we registered in `register_setting.
-			$code, // the error code.
-			$message,
-			$type
+		$this->notices[] = array(
+			'code'    => $code,
+			'message' => $message,
+			'type'    => $type,
 		);
 	}
 
@@ -413,6 +528,28 @@ class Settings {
 	 */
 	public function add_error( $code, $message ) {
 		$this->add_notice( $code, $message, 'error' );
+	}
+	
+	/**
+	 * render_notices
+	 *
+	 * @return void
+	 */
+	public function render_notices(){
+		if( empty( $this->notices ) )return;
+		?>
+		<section class="wpmastertoolkit-notices-section">
+			<?php
+			foreach ( $this->notices as $notice ) {
+				?>
+				<div class="wpmastertoolkit-notice wpmastertoolkit-notice--<?php echo esc_attr( $notice['type'] ); ?>">
+					<?php echo esc_html( $notice['message'] ); ?>
+				</div>
+				<?php
+			}
+			?>
+		</section>
+		<?php
 	}
 
 	/**

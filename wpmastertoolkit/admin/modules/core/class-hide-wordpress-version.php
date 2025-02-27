@@ -75,6 +75,10 @@ class WPMastertoolkit_Hide_WordPress_Version {
     public function remove_wordpress_version_in_footer( $footer ) {
         $version = $this->get_wordpress_version();
 
-        return str_replace( sprintf( __( 'Version %s' ), $version ), '', $footer );
+        return str_replace( sprintf( 
+            /* translators: %s: WordPress version */
+            __( 'Version %s' ),// phpcs:ignore WordPress.WP.I18n.MissingArgDomain
+            $version 
+        ), '', $footer );
     }
 }

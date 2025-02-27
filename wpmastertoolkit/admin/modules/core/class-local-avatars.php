@@ -38,9 +38,9 @@ class WPMastertoolkit_Local_Avatars {
 	function enqueue_scripts_styles( $hook_suffix ) {
 		if ( 'profile.php' == $hook_suffix || 'user-edit.php' == $hook_suffix ) {
 			wp_enqueue_media();
-			$metabox_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/local-avatars-metabox.asset.php' );
-			wp_enqueue_style( 'WPMastertoolkit_local_avatars_metabox', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/local-avatars-metabox.css', array(), $metabox_assets['version'], 'all' );
-			wp_enqueue_script( 'WPMastertoolkit_local_avatars_metabox', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/local-avatars-metabox.js', $metabox_assets['dependencies'], $metabox_assets['version'], true );
+			$metabox_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/local-avatars-metabox.asset.php' );
+			wp_enqueue_style( 'WPMastertoolkit_local_avatars_metabox', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/local-avatars-metabox.css', array(), $metabox_assets['version'], 'all' );
+			wp_enqueue_script( 'WPMastertoolkit_local_avatars_metabox', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/local-avatars-metabox.js', $metabox_assets['dependencies'], $metabox_assets['version'], true );
 		}
 	}
 
@@ -74,7 +74,8 @@ class WPMastertoolkit_Local_Avatars {
 					<th><label><?php esc_html_e( 'Profile Picture', 'wpmastertoolkit' ); ?></label></th>
 					<td>
 						<div class="site-icon-section">
-							<div id="wpmastertoolkit-local-avatar-icon-preview-container" >
+							<div id="wpmastertoolkit-local-avatar-icon-preview-container">
+								<?php //phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 								<img id="wpmastertoolkit-local-avatar-icon-preview" class="app-icon-preview" src="<?php echo esc_url( $avatar_url ); ?>">
 							</div>
 							<input type="hidden" name="wpmastertoolkit_local_avatar_icon" id="wpmastertoolkit_local_avatar_icon_hidden_field" value="<?php esc_attr( $avatar_id ); ?>" />
@@ -91,9 +92,9 @@ class WPMastertoolkit_Local_Avatars {
 									data-state="<?php echo esc_attr( $has_avatar ); ?>"
 								>
 									<?php if ( $has_avatar ) : ?>
-										<?php _e( 'Change Image', 'wpmastertoolkit' ); ?>
+										<?php esc_html_e( 'Change Image', 'wpmastertoolkit' ); ?>
 									<?php else : ?>
-										<?php _e( 'Choose an Image', 'wpmastertoolkit' ); ?>
+										<?php esc_html_e( 'Choose an Image', 'wpmastertoolkit' ); ?>
 									<?php endif; ?>
 								</button>
 								<button
@@ -101,7 +102,7 @@ class WPMastertoolkit_Local_Avatars {
 									type="button"
 									<?php echo $has_avatar ? 'class="button button-secondary reset"' : 'class="button button-secondary reset hidden"'; ?>
 								>
-									<?php _e( 'Remove Image', 'wpmastertoolkit' ); ?>
+									<?php esc_html_e( 'Remove Image', 'wpmastertoolkit' ); ?>
 								</button>
 							</div>
 						</div>
@@ -123,7 +124,7 @@ class WPMastertoolkit_Local_Avatars {
 			return;
 		}
 
-		$avatar_id = sanitize_text_field( $_POST['wpmastertoolkit_local_avatar_icon'] ?? '' );
+		$avatar_id = sanitize_text_field( wp_unslash( $_POST['wpmastertoolkit_local_avatar_icon'] ?? '' ) );
 		if ( $avatar_id ) {
 			update_user_meta( $user_id, $this->user_avatar_meta_key, $avatar_id );
 		}

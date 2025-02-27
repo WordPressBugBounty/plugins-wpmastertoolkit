@@ -25,7 +25,7 @@ class WPMastertoolkit_Disable_Dashicons_CSS_JS_files {
 
         if ( ! is_user_logged_in() ) {
 
-            $current_request_uri = sanitize_text_field( $_SERVER['REQUEST_URI'] ?? '' );
+            $current_request_uri = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) );
             $is_login_page       = false !== strpos( $current_request_uri, 'wp-login.php' ) || 'wp-login.php' === $pagenow;
             $is_protected_page   = false !== strpos( $current_request_uri, 'protected-page=view' );
 

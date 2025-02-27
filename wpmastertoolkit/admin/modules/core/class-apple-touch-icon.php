@@ -33,7 +33,7 @@ class WPMastertoolkit_Apple_Touch_Icon {
 				'general',
 			);
 		
-			register_setting( 'general', 'wpmastertoolkit_apple_touch_icon' );
+			register_setting( 'general', 'wpmastertoolkit_apple_touch_icon', 'intval' );
 		}
 	}
 
@@ -66,14 +66,14 @@ class WPMastertoolkit_Apple_Touch_Icon {
 			$filename           = wp_basename( $icon_url );
 			$app_icon_alt_value = sprintf(
 				/* translators: %s: The selected image filename. */
-				__( 'App icon preview: The current image has no alternative text. The file name is: %s' ),
+				__( 'App icon preview: The current image has no alternative text. The file name is: %s' ),// phpcs:ignore WordPress.WP.I18n.MissingArgDomain
 				$filename
 			);
 
 			if ( $img_alt ) {
 				$app_icon_alt_value = sprintf(
 					/* translators: %s: The selected image alt text. */
-					__( 'App icon preview: Current image: %s' ),
+					__( 'App icon preview: Current image: %s' ),// phpcs:ignore WordPress.WP.I18n.MissingArgDomain
 					$img_alt
 				);
 			}
@@ -82,6 +82,7 @@ class WPMastertoolkit_Apple_Touch_Icon {
 		?>
 			<div class="site-icon-section">
 				<div id="wpmastertoolkit-apple-touch-icon-preview" class="site-icon-preview wp-clearfix settings-page-preview <?php echo esc_attr( $classes_for_wrapper ); ?>">
+					<?php //phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 					<img id="wpmastertoolkit-app-icon-preview" class="app-icon-preview" src="<?php echo esc_url( $icon_url ); ?>" alt="<?php echo esc_attr( $app_icon_alt_value ); ?>" style="display: none;">
 				</div>
 				<input type="hidden" name="wpmastertoolkit_apple_touch_icon" id="wpmastertoolkit_apple_touch_icon_hidden_field" value="<?php form_option( 'wpmastertoolkit_apple_touch_icon' ); ?>" />
@@ -98,9 +99,9 @@ class WPMastertoolkit_Apple_Touch_Icon {
 						data-state="<?php echo esc_attr( $has_icon ); ?>"
 					>
 						<?php if ( $has_icon ) : ?>
-							<?php _e( 'Change Icon', 'wpmastertoolkit' ); ?>
+							<?php esc_html_e( 'Change Icon', 'wpmastertoolkit' ); ?>
 						<?php else : ?>
-							<?php _e( 'Choose an Icon', 'wpmastertoolkit' ); ?>
+							<?php esc_html_e( 'Choose an Icon', 'wpmastertoolkit' ); ?>
 						<?php endif; ?>
 					</button>
 					<button
@@ -109,7 +110,7 @@ class WPMastertoolkit_Apple_Touch_Icon {
 						type="button"
 						<?php echo $has_icon ? 'class="button button-secondary reset"' : 'class="button button-secondary reset hidden"'; ?>
 					>
-						<?php _e( 'Remove Icon', 'wpmastertoolkit' ); ?>
+						<?php esc_html_e( 'Remove Icon', 'wpmastertoolkit' ); ?>
 					</button>
 				</div>
 			</div>
@@ -123,9 +124,9 @@ class WPMastertoolkit_Apple_Touch_Icon {
 	 */
 	function enqueue_scripts_styles( $hook_suffix ) {
 		if ( 'options-general.php' == $hook_suffix ) {
-			$options_general_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/apple-touch-icon-options-general.asset.php' );
-			wp_enqueue_style( 'wpmastertoolkit-apple-touch-icon', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/apple-touch-icon-options-general.css', array(), $options_general_assets['version'], 'all' );
-			wp_enqueue_script( 'wpmastertoolkit-apple-touch-icon', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/apple-touch-icon-options-general.js', $options_general_assets['dependencies'], $options_general_assets['version'], true );
+			$options_general_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/apple-touch-icon-options-general.asset.php' );
+			wp_enqueue_style( 'wpmastertoolkit-apple-touch-icon', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/apple-touch-icon-options-general.css', array(), $options_general_assets['version'], 'all' );
+			wp_enqueue_script( 'wpmastertoolkit-apple-touch-icon', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/apple-touch-icon-options-general.js', $options_general_assets['dependencies'], $options_general_assets['version'], true );
 			
 			wp_localize_script( 'wpmastertoolkit-apple-touch-icon', 'wpmastertoolkit_apple_touch_icon', array(
 				'default_icon' => includes_url('images/w-logo-blue.png'),

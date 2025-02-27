@@ -221,7 +221,7 @@ class WPMastertoolkit_Code_Snippets {
      * @return void
      */
     public function post_submit_meta_box( $post ){
-        $publish_label = 'publish' === $post->post_status ? esc_html__( 'Update' ) : esc_html__( 'Publish' );
+        $publish_label = 'publish' === $post->post_status ? __( 'Update' ) : __( 'Publish' );// phpcs:ignore WordPress.WP.I18n.MissingArgDomain
         $snippet_type = get_post_meta( $post->ID, 'snippet_type', true );
         ?>
         <div class="wp-mastertoolkit-code-snippets__settings">
@@ -248,12 +248,14 @@ class WPMastertoolkit_Code_Snippets {
         <div class="submitbox" id="submitpost">
             <div id="major-publishing-actions">
                     <div id="delete-action">
-                        <a class="submitdelete deletion" href="<?php echo get_delete_post_link( $post->ID, '', true ); ?>"><?php esc_html_e( 'Delete' ); ?></a>
+                        <a class="submitdelete deletion" href="<?php echo esc_attr( get_delete_post_link( $post->ID, '', true ) ); ?>">
+							<?php esc_html_e( 'Delete' );// phpcs:ignore WordPress.WP.I18n.MissingArgDomain ?>
+						</a>
                     </div>
 
                 <div id="publishing-action">
                     <span class="spinner"></span>
-                    <input name="original_publish" type="hidden" id="original_publish" value="<?php esc_attr_e( 'Publish' ); ?>">
+                    <input name="original_publish" type="hidden" id="original_publish" value="<?php esc_attr_e( 'Publish' );// phpcs:ignore WordPress.WP.I18n.MissingArgDomain ?>">
                     <input type="submit" name="publish" id="publish" class="button button-primary button-large" value="<?php echo esc_attr( $publish_label ); ?>">
                 </div>
                 <div class="clear"></div>
@@ -320,9 +322,9 @@ class WPMastertoolkit_Code_Snippets {
                 ),
             ) );
 
-            $assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/code-snippets.asset.php' );
-            wp_enqueue_script( 'wpmastertoolkit-code-snippets', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/code-snippets.js', $assets['dependencies'], $assets['version'], true );
-            wp_enqueue_style( 'wpmastertoolkit-code-snippets', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/code-snippets.css', array(), $assets['version'], 'all' );
+            $assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/code-snippets.asset.php' );
+            wp_enqueue_script( 'wpmastertoolkit-code-snippets', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/code-snippets.js', $assets['dependencies'], $assets['version'], true );
+            wp_enqueue_style( 'wpmastertoolkit-code-snippets', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/code-snippets.css', array(), $assets['version'], 'all' );
             wp_localize_script( 'wpmastertoolkit-code-snippets', 'wpmastertoolkit_code_snippets', array(
                 'code_editor' => $code_editor,
             ) );
@@ -337,15 +339,19 @@ class WPMastertoolkit_Code_Snippets {
      */
     public function save_code_snippet( $post_id ){
 
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing
         if ( ! isset( $_POST['code_snippet'], $_POST['snippet_status'], $_POST['snippet_type'] ) ) {
             return;
         }
-        $status = sanitize_text_field( $_POST['snippet_status'] );
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing
+        $status = sanitize_text_field( wp_unslash( $_POST['snippet_status'] ) );
         
-        update_post_meta( $post_id, 'snippet_type', sanitize_text_field( $_POST['snippet_type'] ) );
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing
+        update_post_meta( $post_id, 'snippet_type', sanitize_text_field( wp_unslash( $_POST['snippet_type'] ) ) );
 
         require_once WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/class-php-code-validator.php';
 
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.NonceVerification.Missing
         $code_snippet = wp_unslash( $_POST['code_snippet'] );
         $code_snippet = preg_replace('/^<\?php/', '', $code_snippet);
 
@@ -495,7 +501,7 @@ class WPMastertoolkit_Code_Snippets {
     public function delete_snippet_file( $post_id ){
         $file_path = $this->get_snippet_file_path( $post_id );
         if( file_exists($file_path) ){
-            return unlink( $file_path );
+            return wp_delete_file( $file_path );
         }
     }
     
@@ -509,6 +515,7 @@ class WPMastertoolkit_Code_Snippets {
             'post_type' => 'wpmtk_code_snippets',
             'post_status' => 'publish',
             'posts_per_page' => -1,
+			//phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
             'meta_query' => array(
                 array(
                     'key' => 'snippet_status',
@@ -536,6 +543,7 @@ class WPMastertoolkit_Code_Snippets {
             'post_type' => 'wpmtk_code_snippets',
             'post_status' => 'publish',
             'posts_per_page' => -1,
+			//phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
             'meta_query' => array(
                 array(
                     'key' => 'snippet_status',
@@ -552,7 +560,7 @@ class WPMastertoolkit_Code_Snippets {
         }
         foreach( $files as $file ){
             if( !in_array($file, $active_snippet_files) && strpos($file, 'index.php') === false ){
-                unlink( $file );
+                wp_delete_file( $file );
             }
         }
     }
@@ -567,9 +575,8 @@ class WPMastertoolkit_Code_Snippets {
          * Prevent load on post edit action to avoid already defined function error
          */
         if( 
-            isset( $_POST['post_type'], $_POST['action'] ) && 
-            $_POST['post_type'] === 'wpmtk_code_snippets' &&
-            $_POST['action'] === 'editpost'
+			// phpcs:ignore WordPress.Security.NonceVerification.Missing
+            sanitize_text_field( wp_unslash( $_POST['post_type'] ?? '' ) )  === 'wpmtk_code_snippets' && sanitize_text_field( wp_unslash( $_POST['action'] ?? '' ) ) === 'editpost'
         ) return;
 
         if( defined('WPMASTERTOOLKIT_SNIPPETS_SAFE_MODE') && WPMASTERTOOLKIT_SNIPPETS_SAFE_MODE === true ) return;
@@ -703,7 +710,7 @@ class WPMastertoolkit_Code_Snippets {
         if( !isset($_GET['post_type']) || $_GET['post_type'] !== 'wpmtk_code_snippets' ) return;
 
         if( isset($_GET['regenerate_snippet_file']) && $_GET['regenerate_snippet_file'] === 'true' ){
-            if( !isset($_GET['_wpnonce']) || !wp_verify_nonce( $_GET['_wpnonce'], 'regenerate_snippet_file' ) ) return;
+            if( !isset($_GET['_wpnonce']) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'], 'regenerate_snippet_file' ) ) ) ) return;
 
             $this->delete_all_non_active_snippet_file();
             $this->generate_all_active_snippets();

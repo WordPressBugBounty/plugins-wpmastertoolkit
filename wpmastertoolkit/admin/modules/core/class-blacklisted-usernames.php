@@ -99,9 +99,9 @@ class WPMastertoolkit_Blacklisted_Usernames {
      */
     public function show_notice_to_change_username() {
 
-        $assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/blacklisted-usernames.asset.php' );
-        wp_enqueue_style( 'wpmastertoolkit-blacklisted-usernames-admin', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/blacklisted-usernames.css', array(), $assets['version'], 'all' );
-        wp_enqueue_script( 'wpmastertoolkit-blacklisted-usernames-admin', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/blacklisted-usernames.js', $assets['dependencies'], $assets['version'], true );
+        $assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/blacklisted-usernames.asset.php' );
+        wp_enqueue_style( 'wpmastertoolkit-blacklisted-usernames-admin', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/blacklisted-usernames.css', array(), $assets['version'], 'all' );
+        wp_enqueue_script( 'wpmastertoolkit-blacklisted-usernames-admin', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/blacklisted-usernames.js', $assets['dependencies'], $assets['version'], true );
         wp_localize_script( 'wpmastertoolkit-blacklisted-usernames-admin', 'wpmastertoolkitBlacklistedUsernames', array(
             'ajaxUrl'  => admin_url( 'admin-ajax.php' ),
             'action'   => self::ACTION,
@@ -114,7 +114,13 @@ class WPMastertoolkit_Blacklisted_Usernames {
                 <div id="wpmastertoolkit-blacklisted-usernames-text">
                     <p>
                         <strong>WPMastertoolkit: </strong>
-                        <?php echo sprintf( esc_html__( 'You can\'t use "%s" as your username. It\'s not safe. Please pick another username for better security.', 'wpmastertoolkit' ), $this->last_username ); ?>
+                        <?php 
+                        echo esc_html( sprintf(
+                            /* translators: %s: username */
+                            __( 'You can\'t use "%s" as your username. It\'s not safe. Please pick another username for better security.', 'wpmastertoolkit' ), 
+                            $this->last_username 
+                        ) ); 
+                        ?>
                     </p>
                     <p><?php esc_html_e( 'After changing the username you\'ll need to login again.', 'wpmastertoolkit' ) ?></p>
                 </div>
@@ -130,13 +136,13 @@ class WPMastertoolkit_Blacklisted_Usernames {
      */
     public function change_admin_name() {
 
-        $nonce    = sanitize_text_field( $_POST['nonce'] ?? '' );
-        $username = sanitize_text_field( $_POST['username'] ?? '' );
+        $nonce    = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
+        $username = sanitize_text_field( wp_unslash( $_POST['username'] ?? '' ) );
         if ( ! wp_verify_nonce( $nonce, self::NONCE ) || empty( $username ) ) {
             wp_send_json_error( array( 'message' => __( 'Refresh the page and try again.', 'wpmastertoolkit' ) ) );
         }
 
-        $newusername = sanitize_text_field( $_POST['newusername'] ?? '' );
+        $newusername = sanitize_text_field( wp_unslash( $_POST['newusername'] ?? '' ) );
         $newusername = sanitize_title( trim( $newusername ) );
         if ( empty( $newusername ) ) {
             wp_send_json_error( array( 'message' => __( 'Username can\'t be empty.', 'wpmastertoolkit' ) ) );
@@ -147,15 +153,31 @@ class WPMastertoolkit_Blacklisted_Usernames {
         }
 
         if ( username_exists( $newusername ) ) {
-            wp_send_json_error( array( 'message' => sprintf( __( 'The username "%s" already exists. Please choose a different one.', 'wpmastertoolkit' ), $newusername ) ) );
+            wp_send_json_error( 
+                array(
+                 'message' => sprintf(
+                        /* translators: %s: username */
+                        __( 'The username "%s" already exists. Please choose a different one.', 'wpmastertoolkit' ), 
+                        $newusername 
+                    ) 
+                ) 
+            );
         }
 
         $admin_user = get_user_by( 'login', $username );
         if ( ! $admin_user ) {
-            wp_send_json_error( array( 'message' => sprintf( __( 'No user has the username "%s". Nothing to update.', 'wpmastertoolkit' ), $username ) ) );
+            wp_send_json_error( 
+                array( 'message' => sprintf( 
+                        /* translators: %s: username */
+                        __( 'No user has the username "%s". Nothing to update.', 'wpmastertoolkit' ), 
+                        $username
+                    ) 
+                ) 
+            );
         }
 
         global $wpdb;
+		//phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         $wpdb->update( $wpdb->users, array( 'user_login' => $newusername ), array( 'ID' => $admin_user->ID ) );
 
         if ( get_user_by( 'login', $newusername ) ) {

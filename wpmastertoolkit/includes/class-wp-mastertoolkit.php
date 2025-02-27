@@ -187,9 +187,9 @@ class WPMastertoolkit {
 		$wpmastertoolkit_surecart = new WPMastertoolkit_Surecart();
 		$this->loader->add_action( 'init', $wpmastertoolkit_surecart, 'init_surecart' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $wpmastertoolkit_surecart, 'enqueue_scripts_styles' );
-		$this->loader->add_action( 'wpmastertoolkit_surecart_before_license_key', $wpmastertoolkit_surecart, 'show_warning_if_new_version' );
-		$this->loader->add_action( 'wpmastertoolkit_surecart_license_activated', $wpmastertoolkit_surecart, 'after_activated' );
-		$this->loader->add_action( 'wpmastertoolkit_surecart_license_deactivated', $wpmastertoolkit_surecart, 'after_deactivated' );
+		$this->loader->add_action( 'wpmastertoolkit_licensing/after_submit_section', $wpmastertoolkit_surecart, 'show_warning_if_new_version' );
+		$this->loader->add_action( 'wpmastertoolkit_licensing/license_activated', $wpmastertoolkit_surecart, 'after_activated' );
+		$this->loader->add_action( 'wpmastertoolkit_licensing/license_deactivated', $wpmastertoolkit_surecart, 'after_deactivated' );
 	}
 
 	/**

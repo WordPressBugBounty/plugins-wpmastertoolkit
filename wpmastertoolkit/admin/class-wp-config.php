@@ -102,6 +102,7 @@ class WPMastertoolkit_WP_Config {
         $wp_config_path    = self::get_wp_config_path();
         $wp_config_content = self::get_wp_config_content();
         
+		//phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_export
         $wp_config_content = preg_replace( '/<\?php/', "<?php\ndefine( '" . $constant_name . "', " . var_export($constant_value, true) . " );", $wp_config_content, 1 );
         return file_put_contents( $wp_config_path, $wp_config_content );
     }
@@ -128,6 +129,7 @@ class WPMastertoolkit_WP_Config {
             $pattern = '/define\s*\(\s*[\'"]' . preg_quote( $constant_name, '/' ) . '[\'"]\s*,\s*[\s\S]*?\);/';
         }
 
+		//phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_export
         $replacement = "define( '" . $constant_name . "', " . var_export($constant_value, true) . " );";
 
         $wp_config_content = preg_replace( $pattern, $replacement, $wp_config_content );
@@ -162,6 +164,7 @@ class WPMastertoolkit_WP_Config {
 		$wp_config_content = self::get_wp_config_content();
 
 		$pattern           = '/\$' . $variable_name . '\s=(.*)\;/';
+		//phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_export
 		$new_variable      = "\n\$" . $variable_name . " = " . var_export( $new_value, true ) . ";\n";
         $wp_config_content = preg_replace( $pattern, $new_variable, $wp_config_content );
 		

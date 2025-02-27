@@ -27,8 +27,8 @@ class WPMastertoolkit_Quick_Add_Post {
 
         if ( $screen->base == 'post' && in_array( $screen->id, array('post', 'page') ) ) {
 
-            $assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/quick-add-post.asset.php' );
-            wp_enqueue_script( 'wpmastertoolkit-quick-add-post', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/quick-add-post.js', $assets['dependencies'], $assets['version'], true );
+            $assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/quick-add-post.asset.php' );
+            wp_enqueue_script( 'wpmastertoolkit-quick-add-post', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/quick-add-post.js', $assets['dependencies'], $assets['version'], true );
             wp_localize_script( 'wpmastertoolkit-quick-add-post', 'WPMastertoolkitQuickAddPost', array(
                 'post_type' => $post ? $post->post_type : null,
             ));

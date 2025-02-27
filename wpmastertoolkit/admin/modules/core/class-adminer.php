@@ -87,8 +87,10 @@ class WPMastertoolkit_Adminer {
      */
     public function render_submenu() {
 
-		$status           = sanitize_text_field( $_GET['wpmastertoolkit_status'] ?? '' );
-		$adminer_url      = sanitize_url( $_GET['wpmastertoolkit_url'] ?? '' );
+		//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$status           = sanitize_text_field( wp_unslash( $_GET['wpmastertoolkit_status'] ?? '' ) );
+		//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$adminer_url      = sanitize_url( wp_unslash( $_GET['wpmastertoolkit_url'] ?? '' ) );
 		$redirection_form = false;
 
 		if ( 'adminer' == $status && ! empty( $adminer_url ) ) {
@@ -96,20 +98,20 @@ class WPMastertoolkit_Adminer {
 			$redirection_form   = true;
 		}
 
-		$submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/adminer.asset.php' );
-		wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/adminer.css', array(), $submenu_assets['version'], 'all' );
-		wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/adminer.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );		
+		$submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/adminer.asset.php' );
+		wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/adminer.css', array(), $submenu_assets['version'], 'all' );
+		wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/adminer.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );		
 		wp_localize_script( 'WPMastertoolkit_submenu', 'wpmastertoolkit_adminer', array(
 			'page_url' => get_admin_url( null, 'admin.php?page=wp-mastertoolkit-settings-adminer' ),
 		) );
 
-		include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/header.php';
+		include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/header.php';
 		if ( $redirection_form ) {
 			$this->redirection_form();
 		} else {
 			$this->submenu_content();
 		}
-		include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/footer.php';
+		include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/footer.php';
     }
 
 	/**
@@ -157,26 +159,27 @@ class WPMastertoolkit_Adminer {
 						'wpmastertoolkit_status' => 'adminer',
 						'wpmastertoolkit_url'    => $file_url,
 					),
-					sanitize_url( $_SERVER['REQUEST_URI'] ?? '' ),
+					sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ),
 				);
 
 				wp_safe_redirect( $new_url );
 				exit;
 			}
 
-			wp_safe_redirect( sanitize_url( $_SERVER['REQUEST_URI'] ?? '' ) );
+			wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
 			exit;
 
 		} elseif ( 'delete' == $submit ) {
 			$this->delete_old_files();
 
-			wp_safe_redirect( sanitize_url( $_SERVER['REQUEST_URI'] ?? '' ) );
+			wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
 			exit;
 		} else {
+			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			$new_settings = $this->sanitize_settings( $_POST[$this->option_id] ?? array() );
             
             $this->save_settings( $new_settings );
-            wp_safe_redirect( sanitize_url( $_SERVER['REQUEST_URI'] ?? '' ) );
+            wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
 			exit;
 		}
 	}
@@ -244,7 +247,7 @@ class WPMastertoolkit_Adminer {
 			}
 
 			if ( is_file( $file ) ) {
-				unlink( $file );
+				wp_delete_file( $file );
 			}
 		}
 
@@ -354,7 +357,8 @@ class WPMastertoolkit_Adminer {
 	 * @since 1.11.0
 	 */
 	private function redirection_form() {
-		$adminer_url    = sanitize_url( $_GET['wpmastertoolkit_url'] ?? '' );
+		//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$adminer_url    = sanitize_url( wp_unslash( $_GET['wpmastertoolkit_url'] ?? '' ) );
 		$token          = md5( time() );
 		$db_host        = DB_HOST;
 		$db_user        = DB_USER;
@@ -423,7 +427,7 @@ class WPMastertoolkit_Adminer {
 					<div class="wp-mastertoolkit__section__body__item">
                         <div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e( 'File Creation', 'wpmastertoolkit' ); ?></div>
                         <div class="wp-mastertoolkit__section__body__item__content">
-                            <p><?php echo wp_date( $time_formate, $creationtime ); ?></p>
+                            <p><?php echo esc_html( wp_date( $time_formate, $creationtime ) ); ?></p>
                         </div>
 						<input type="hidden" name="<?php echo esc_attr( $this->option_id . '[creationtime]' ); ?>" value="<?php echo esc_attr( $creationtime ); ?>">
                     </div>
@@ -431,7 +435,7 @@ class WPMastertoolkit_Adminer {
 					<div class="wp-mastertoolkit__section__body__item">
                         <div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e( 'File Deletion', 'wpmastertoolkit' ); ?></div>
                         <div class="wp-mastertoolkit__section__body__item__content">
-                            <p><?php echo wp_date( $time_formate, $deletiontime ); ?></p>
+                            <p><?php echo esc_html( wp_date( $time_formate, $deletiontime ) ); ?></p>
 							<div class="wp-mastertoolkit__button">
 								<button class="secondary" type="submit" name="submit" value="delete"><?php esc_html_e( 'Delete Now', 'wpmastertoolkit' ); ?></button>
 							</div>

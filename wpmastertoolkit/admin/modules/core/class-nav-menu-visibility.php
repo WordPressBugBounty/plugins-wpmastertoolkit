@@ -33,15 +33,15 @@ class WPMastertoolkit_Nav_Menu_Visibility {
                 <strong>WPMasterToolkit: </strong><?php esc_html_e( 'Show this menu item for:', 'wpmastertoolkit' ); ?>
                 <br>
                 <label>
-                    <input type="radio" name="<?php echo sprintf( '%s[%s]', self::META_KEY, esc_attr( $item_id ) ); ?>" value="loggedin" <?php checked( 'loggedin', $visibility ); ?> >
+                    <input type="radio" name="<?php echo esc_attr( sprintf( '%s[%s]', self::META_KEY, $item_id ) ); ?>" value="loggedin" <?php checked( 'loggedin', $visibility ); ?> >
                     <?php esc_html_e( 'Logged In', 'wpmastertoolkit' ); ?>
                 </label>
                 <label>
-                    <input type="radio" name="<?php echo sprintf( '%s[%s]', self::META_KEY, esc_attr( $item_id ) ); ?>" value="loggedout" <?php checked( 'loggedout', $visibility ); ?>>
+                    <input type="radio" name="<?php echo esc_attr( sprintf( '%s[%s]', self::META_KEY, $item_id ) ); ?>" value="loggedout" <?php checked( 'loggedout', $visibility ); ?>>
                     <?php esc_html_e( 'Logged Out', 'wpmastertoolkit' ); ?>
                 </label>
                 <label>
-                    <input type="radio" name="<?php echo sprintf( '%s[%s]', self::META_KEY, esc_attr( $item_id ) ); ?>" value="" <?php checked( '', $visibility ); ?> >
+                    <input type="radio" name="<?php echo esc_attr( sprintf( '%s[%s]', self::META_KEY, $item_id ) ); ?>" value="" <?php checked( '', $visibility ); ?> >
                     <?php esc_html_e( 'Everyone', 'wpmastertoolkit' ); ?>
                 </label>
             </p>
@@ -53,7 +53,8 @@ class WPMastertoolkit_Nav_Menu_Visibility {
      */
     public function save_radio_buttons( $menu_id, $menu_item_db_id, $args ) {
 
-        $value = sanitize_text_field( $_POST[ self::META_KEY ][ $menu_item_db_id ] ?? false );
+		//phpcs:ignore WordPress.Security.NonceVerification.Missing
+        $value = sanitize_text_field( wp_unslash( $_POST[ self::META_KEY ][ $menu_item_db_id ] ?? false ) );
 
         if ( $value !== false ) {
             update_post_meta( $menu_item_db_id, self::META_KEY, $value );

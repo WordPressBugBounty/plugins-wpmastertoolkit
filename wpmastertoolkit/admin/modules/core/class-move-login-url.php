@@ -283,7 +283,7 @@ class WPMastertoolkit_Move_Login_URL {
 	 */
 	public function prevent_trp_subdirectory_on_custom_login_url( $settings ) {
 		// check if the current URL is the custom login URL
-		if ( $this->is_custom_login_uri( $_SERVER['REQUEST_URI'] ) ) {
+		if ( $this->is_custom_login_uri( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) ) ) {
 			// set the option to 'no' to prevent TRP from adding the subdirectory
 			$settings['add-subdirectory-to-default-language'] = 'no';
 		}
@@ -315,16 +315,17 @@ class WPMastertoolkit_Move_Login_URL {
 	 */
 	public function save_submenu() {
         
-		$nonce = sanitize_text_field( $_POST['_wpnonce'] ?? '' );
+		$nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ?? '' ) );
         
 		if ( wp_verify_nonce($nonce, $this->nonce_action) ) {
 
 			$this->default_settings = $this->get_default_settings();
 
+			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			$new_settings       = $this->sanitize_settings( $_POST[$this->option_id] ?? array() );
 			
 			$this->save_settings( $new_settings );
-            wp_safe_redirect( sanitize_url( $_SERVER['REQUEST_URI'] ?? '' ) );
+            wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
 			exit;
 		}
     }
@@ -335,9 +336,12 @@ class WPMastertoolkit_Move_Login_URL {
 	 * @return void
 	 */
 	public function redirect_export_data() {
-		if ( ! empty( $_GET ) && isset( $_GET['action'] ) && 'confirmaction' === sanitize_text_field($_GET['action']) && isset( $_GET['request_id'] ) && isset( $_GET['confirm_key'] ) ) {
-			$request_id = (int) sanitize_text_field($_GET['request_id']);
-			$key        = wp_unslash( sanitize_text_field( $_GET['confirm_key'] ) );
+		//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( ! empty( $_GET ) && isset( $_GET['action'] ) && 'confirmaction' === sanitize_text_field( wp_unslash( $_GET['action'] )) && isset( $_GET['request_id'] ) && isset( $_GET['confirm_key'] ) ) {
+			//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$request_id = (int) sanitize_text_field( wp_unslash( $_GET['request_id'] ) );
+			//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$key        = sanitize_text_field( wp_unslash( $_GET['confirm_key'] ) );
 			$result     = wp_validate_user_request_key( $request_id, $key );
 			if ( ! is_wp_error( $result ) ) {
 				wp_redirect( add_query_arg( array(
@@ -367,22 +371,25 @@ class WPMastertoolkit_Move_Login_URL {
 		 *
 		 * @param bool $enable_signup Enable or disable the signup feature.
 		 */
+
+		//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$request_uri = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) );
+
 		if ( ! is_multisite()
-		     && ( strpos( rawurldecode( $_SERVER['REQUEST_URI'] ), 'wp-signup' ) !== false
-		          || strpos( rawurldecode( $_SERVER['REQUEST_URI'] ), 'wp-activate' ) !== false ) && apply_filters( 'wpmastertoolkit/move_login_url/signup_enable', false ) === false ) {
+		    && ( strpos( rawurldecode( $request_uri ), 'wp-signup' ) !== false
+		    || strpos( rawurldecode( $request_uri ), 'wp-activate' ) !== false ) && apply_filters( 'wpmastertoolkit/move_login_url/signup_enable', false ) === false ) {
 
 			wp_die( esc_html__( 'This feature is not enabled.', 'wpmastertoolkit' ), 403 );
 
 		}
 
-		$request = parse_url( rawurldecode( $_SERVER['REQUEST_URI'] ) );
+		$request = wp_parse_url( rawurldecode( $request_uri ) );
 
 		$settings	= $this->get_settings();
 		$login_slug	= $settings['login_slug'] ?? null;
 
-		if ( ( strpos( rawurldecode( $_SERVER['REQUEST_URI'] ), 'wp-login.php' ) !== false
-		       || ( isset( $request['path'] ) && untrailingslashit( $request['path'] ) === site_url( 'wp-login', 'relative' ) ) )
-		     && ! is_admin() ) {
+		if ( ( strpos( rawurldecode( $request_uri ), 'wp-login.php' ) !== false
+		       || ( isset( $request['path'] ) && untrailingslashit( $request['path'] ) === site_url( 'wp-login', 'relative' ) ) ) && ! is_admin() ) {
 
 			$this->wp_custom_login_php = true;
 
@@ -391,17 +398,16 @@ class WPMastertoolkit_Move_Login_URL {
 			$pagenow = 'index.php';
 
 		} elseif ( ( isset( $request['path'] ) && untrailingslashit( $request['path'] ) === home_url( $login_slug, 'relative' ) )
-		           || ( ! get_option( 'permalink_structure' )
-		                && isset( $_GET[ $login_slug ] )
-		                && empty( $_GET[ $login_slug ] ) ) ) {
+			//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		    || ( ! get_option( 'permalink_structure' ) && isset( $_GET[ $login_slug ] ) && empty( $_GET[ $login_slug ] ) ) ) {
 
 			$_SERVER['SCRIPT_NAME'] = $login_slug;
 
 			$pagenow = 'wp-login.php';
 
-		} elseif ( ( strpos( rawurldecode( $_SERVER['REQUEST_URI'] ), 'wp-register.php' ) !== false
-		             || ( isset( $request['path'] ) && untrailingslashit( $request['path'] ) === site_url( 'wp-register', 'relative' ) ) )
-		           && ! is_admin() ) {
+		} elseif ( ( strpos( rawurldecode( $request_uri ), 'wp-register.php' ) !== false
+		    || ( isset( $request['path'] ) && untrailingslashit( $request['path'] ) === site_url( 'wp-register', 'relative' ) ) )
+		    && ! is_admin() ) {
 
 			$this->wp_custom_login_php = true;
 
@@ -434,7 +440,7 @@ class WPMastertoolkit_Move_Login_URL {
 
 		global $pagenow;
 
-		$request = parse_url( rawurldecode( $_SERVER['REQUEST_URI'] ) );
+		$request = wp_parse_url( rawurldecode( sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) ) );
 
 		/**
 		 * Fires before redirecting the user to the new login URL.
@@ -445,6 +451,7 @@ class WPMastertoolkit_Move_Login_URL {
 		 */
 		do_action( 'wpmastertoolkit/move_login_url/before_redirect', $request );
 
+		//phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.NonceVerification.Missing
 		if ( ! ( isset( $_GET['action'] ) && $_GET['action'] === 'postpass' && isset( $_POST['post_password'] ) ) ) {
 
 			if ( is_admin() && ! is_user_logged_in() && ! defined( 'WP_CLI' ) && ! defined( 'DOING_AJAX' ) && ! defined( 'DOING_CRON' ) && $pagenow !== 'admin-post.php' && $request['path'] !== '/wp-admin/options.php' ) {
@@ -452,6 +459,7 @@ class WPMastertoolkit_Move_Login_URL {
 				die();
 			}
 
+			//phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			if ( ! is_user_logged_in() && isset( $_GET['wc-ajax'] ) && $pagenow === 'profile.php' ) {
 				wp_safe_redirect( $this->new_redirect_url() );
 				die();
@@ -463,8 +471,7 @@ class WPMastertoolkit_Move_Login_URL {
 			}
 
 			if ( $pagenow === 'wp-login.php' && isset( $request['path'] ) && $request['path'] !== $this->user_trailingslashit( $request['path'] ) && get_option( 'permalink_structure' ) ) {
-				wp_safe_redirect( $this->user_trailingslashit( $this->new_login_url() )
-				                  . ( ! empty( $_SERVER['QUERY_STRING'] ) ? '?' . $_SERVER['QUERY_STRING'] : '' ) );
+				wp_safe_redirect( $this->user_trailingslashit( $this->new_login_url() ) . ( ! empty( $_SERVER['QUERY_STRING'] ) ? '?' . wp_unslash( $_SERVER['QUERY_STRING'] ) : '' ) );
 
 				die;
 
@@ -472,7 +479,7 @@ class WPMastertoolkit_Move_Login_URL {
 
 				if ( ( $referer = wp_get_referer() )
 				     && strpos( $referer, 'wp-activate.php' ) !== false
-				     && ( $referer = parse_url( $referer ) )
+				     && ( $referer = wp_parse_url( $referer ) )
 				     && ! empty( $referer['query'] ) ) {
 
 					parse_str( $referer['query'], $referer );
@@ -485,8 +492,7 @@ class WPMastertoolkit_Move_Login_URL {
 					     && ( $result->get_error_code() === 'already_active'
 					          || $result->get_error_code() === 'blog_taken' ) ) {
 
-						wp_safe_redirect( $this->new_login_url()
-						                  . ( ! empty( $_SERVER['QUERY_STRING'] ) ? '?' . $_SERVER['QUERY_STRING'] : '' ) );
+						wp_safe_redirect( $this->new_login_url() . ( ! empty( $_SERVER['QUERY_STRING'] ) ? '?' . wp_unslash( $_SERVER['QUERY_STRING'] ) : '' ) );
 
 						die;
 
@@ -502,12 +508,15 @@ class WPMastertoolkit_Move_Login_URL {
 				$redirect_to = admin_url();
 
 				$requested_redirect_to = '';
+				//phpcs:ignore WordPress.Security.NonceVerification.Recommended
 				if ( isset( $_REQUEST['redirect_to'] ) ) {
-					$requested_redirect_to = sanitize_url( $_REQUEST['redirect_to'] );
+					//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+					$requested_redirect_to = sanitize_url( wp_unslash( $_REQUEST['redirect_to'] ) );
 				}
 
 				if ( is_user_logged_in() ) {
 					$user = wp_get_current_user();
+					//phpcs:ignore WordPress.Security.NonceVerification.Recommended
 					if ( ! isset( $_REQUEST['action'] ) ) {
 						/**
 						 * Fires after a user has successfully logged in.
@@ -687,16 +696,16 @@ class WPMastertoolkit_Move_Login_URL {
      */
     public function render_submenu() {
 
-        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/move-login-url.asset.php' );
-        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/move-login-url.css', array(), $submenu_assets['version'], 'all' );
-        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/move-login-url.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
+        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/move-login-url.asset.php' );
+        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/move-login-url.css', array(), $submenu_assets['version'], 'all' );
+        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/move-login-url.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
         wp_localize_script( 'WPMastertoolkit_submenu', 'wpmastertoolkit', array(
             'home_url' => esc_url( home_url() . "/" ),
         ) );
 
-        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/header.php';
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/header.php';
         $this->submenu_content();
-        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/footer.php';
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/footer.php';
     }
     
     /**

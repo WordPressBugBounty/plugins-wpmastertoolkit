@@ -59,6 +59,7 @@ class WPMastertoolkit_Publish_Missed_Schedule_Posts {
                 $post_types = apply_filters( 'wpmastertoolkit/publish_missed_schedule_posts/post_types', $post_types );
 
                 $sql = "SELECT ID FROM {$wpdb->posts} WHERE post_type IN ({$post_types}) AND post_status='future' AND post_date_gmt<'{$current_gmt_datetime}'";
+				//phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
                 $missed_schedule_posts = $wpdb->get_results( $sql, ARRAY_A );
                 
                 /**

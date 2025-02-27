@@ -35,13 +35,13 @@ class WPMastertoolkit_Duplicate_Menu {
      */
     public function duplicate_menu() {
 
-        $nonce  = sanitize_text_field( $_POST['nonce'] ?? '' );
+        $nonce  = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
         if ( ! wp_verify_nonce( $nonce, self::NONCE ) ) {
             wp_send_json_error( array( 'message' => __( 'Refresh the page and try again.', 'wpmastertoolkit' ) ) );
         }
 
-        $source      = intval( sanitize_text_field( $_POST['source'] ?? '' ) );
-        $destination = sanitize_text_field( $_POST['destination'] ?? '' );
+        $source      = intval( sanitize_text_field( wp_unslash( $_POST['source'] ?? '' ) ) );
+        $destination = sanitize_text_field( wp_unslash( $_POST['destination'] ?? '' ) );
         if ( empty( $source ) || empty( $destination ) ) {
             wp_send_json_error( array( 'message' => __( 'Please select a menu and enter a name for the new menu.', 'wpmastertoolkit' ) ) );
         }
@@ -113,18 +113,18 @@ class WPMastertoolkit_Duplicate_Menu {
      */
     public function render_submenu() {
 
-        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/duplicate-menu.asset.php' );
-        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/duplicate-menu.css', array(), $submenu_assets['version'], 'all' );
-        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/duplicate-menu.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
+        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/duplicate-menu.asset.php' );
+        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/duplicate-menu.css', array(), $submenu_assets['version'], 'all' );
+        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/duplicate-menu.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
         wp_localize_script( 'WPMastertoolkit_submenu', 'wpmastertoolkitDuplicateMenu', array(
             'ajaxUrl' => admin_url( 'admin-ajax.php' ),
             'action'  => self::ACTION,
             'nonce'   => wp_create_nonce( self::NONCE ),
         ));
 
-        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/header.php';
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/header.php';
         $this->submenu_content();
-        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/footer.php';
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/footer.php';
     }
 
     /**

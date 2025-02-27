@@ -46,9 +46,9 @@ class WPMastertoolkit_Lock_Admin_Email {
      * @return void
      */
     public function lock_admin_email() {
-        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/wp-options-general.asset.php' );
-        wp_enqueue_style( 'WPMastertoolkit_wp-options-general', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/wp-options-general.css', array(), $submenu_assets['version'], 'all' );
-        wp_enqueue_script( 'WPMastertoolkit_wp-options-general', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/wp-options-general.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
+        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/wp-options-general.asset.php' );
+        wp_enqueue_style( 'WPMastertoolkit_wp-options-general', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/wp-options-general.css', array(), $submenu_assets['version'], 'all' );
+        wp_enqueue_script( 'WPMastertoolkit_wp-options-general', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/wp-options-general.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
 
         wp_localize_script( 'WPMastertoolkit_wp-options-general', 'wpmastertoolkit_lock_admin_email', array(
             'i18n' => array(
@@ -92,7 +92,7 @@ class WPMastertoolkit_Lock_Admin_Email {
         if(defined( 'WPMASTERTOOLKIT_ADMIN_EMAIL' )){
             return WPMASTERTOOLKIT_ADMIN_EMAIL;
         }
+		//phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         return $wpdb->get_var( "SELECT option_value FROM $wpdb->options WHERE option_name = 'admin_email'" );
     }
-
 }

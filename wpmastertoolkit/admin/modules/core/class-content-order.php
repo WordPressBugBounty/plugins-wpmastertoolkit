@@ -118,17 +118,15 @@ class WPMastertoolkit_Content_Order {
 
         $posts = get_posts( $args );
 
-        
-        $page_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/content-order-page.asset.php' );
-        $dependencies = array_merge( $page_assets['dependencies'], array( 'WPMastertoolkit_nested_sortable' ) );
-        wp_enqueue_style( 'WPMastertoolkit_content_order_page', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/content-order-page.css', array(), $page_assets['version'], 'all' );
-        wp_enqueue_script( 'WPMastertoolkit_jquery_ui_touch_punch', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/lib/jquery.ui.touch-punch.min.js', array('jquery-ui-sortable'), '0.2.3', true );
-        wp_enqueue_script( 'WPMastertoolkit_nested_sortable', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/lib/jquery.mjs.nestedSortable.js', array('WPMastertoolkit_jquery_ui_touch_punch'), '2.0.0', true );
-        wp_enqueue_script( 'WPMastertoolkit_content_order_page', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/content-order-page.js', $dependencies, $page_assets['version'], true );
+        $page_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/content-order-page.asset.php' );
+		wp_enqueue_style( 'WPMastertoolkit_content_order_page', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/content-order-page.css', array(), $page_assets['version'], 'all' );
+		wp_enqueue_script( 'WPMastertoolkit_nested_sortable', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/lib/core/jquery.mjs.nestedSortable.js', array( 'jquery-ui-sortable' ), '2.0.0', true );
+		$dependencies = array_merge( $page_assets['dependencies'], array( 'WPMastertoolkit_nested_sortable' ) );
+		wp_enqueue_script( 'WPMastertoolkit_content_order_page', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/content-order-page.js', $dependencies, $page_assets['version'], true );
 
-        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/header.php';
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/header.php';
         $this->render_order_page( $posts, $post_type_slug );
-        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/footer.php';
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/footer.php';
     }
 
     /**
@@ -176,7 +174,12 @@ class WPMastertoolkit_Content_Order {
         ?>
             <li class="wp-mastertoolkit__sortable__item">
                 <div class="wp-mastertoolkit__sortable__item__container">
-                    <div class="wp-mastertoolkit__sortable__item__handle"><?php echo file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/drag.svg' ); ?></div>
+                    <div class="wp-mastertoolkit__sortable__item__handle">
+						<?php
+							//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+							echo file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/drag.svg' );
+						?>
+					</div>
                     <a class="wp-mastertoolkit__sortable__item__title" href="<?php echo esc_attr( get_edit_post_link( $post->ID ) ); ?>"><?php echo esc_html( $post->post_title ); ?></a>
                     <?php if ( $post->post_status != 'publish' && 'attachment' != $post->post_type ):
                         $post_status_object = get_post_status_object( $post->post_status );
@@ -186,7 +189,13 @@ class WPMastertoolkit_Content_Order {
                     <?php endif; ?>
                     <?php if ( $has_child == 'true' ) : ?>
                         <div class="wp-mastertoolkit__sortable__item__haschild">
-                            <?php printf( esc_html__( 'Has child %s', 'wpmastertoolkit' ), strtolower( $post_type_object->label ) ); ?>
+                            <?php 
+                            echo esc_html( sprintf( 
+                                /* translators: %s: post type label */
+                                __( 'Has child %s', 'wpmastertoolkit' ), 
+                                strtolower( $post_type_object->label ) 
+                            ) ); 
+                            ?>
                         </div>
                     <?php endif; ?>
                     <a class="wp-mastertoolkit__sortable__item__view" href="<?php echo esc_attr( get_the_permalink( $post->ID ) ); ?>" target="_blank"><?php echo esc_html__( 'View', 'wpmastertoolkit' ); ?></a>
@@ -203,6 +212,7 @@ class WPMastertoolkit_Content_Order {
      */
     private function save_sortable_page() {
 
+		//phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
         $items = $_POST['WPMastertoolkit_sortable'] ?? array();
 
         if ( empty( $items ) ) {
@@ -240,13 +250,13 @@ class WPMastertoolkit_Content_Order {
      * @since   1.4.0
      */
     public function render_submenu() {
-        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/content-order.asset.php' );
-        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/content-order.css', array(), $submenu_assets['version'], 'all' );
-        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/content-order.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
+        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/content-order.asset.php' );
+        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/content-order.css', array(), $submenu_assets['version'], 'all' );
+        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/content-order.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
 
-        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/header.php';
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/header.php';
         $this->submenu_content();
-        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/submenu/footer.php';
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/footer.php';
     }
 
     /**
@@ -255,7 +265,7 @@ class WPMastertoolkit_Content_Order {
      * @since   1.4.0
      */
     public function save_submenu() {
-		$nonce = sanitize_text_field( $_POST['_wpnonce'] ?? '' );
+		$nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ?? '' ) );
 
 		if ( wp_verify_nonce( $nonce, $this->nonce_action ) ) {
             
@@ -264,9 +274,10 @@ class WPMastertoolkit_Content_Order {
                 return;
             }
 
+			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
             $new_settings = $this->sanitize_settings( $_POST[ $this->option_id ] ?? array() );
             $this->save_settings( $new_settings );
-            wp_safe_redirect( sanitize_url( $_SERVER['REQUEST_URI'] ?? '' ) );
+            wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
 			exit;
 		}
     }
