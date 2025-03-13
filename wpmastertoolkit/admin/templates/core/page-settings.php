@@ -117,6 +117,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
                 <?php foreach ( wpmastertoolkit_options() as $option_key => $option_data ) :
                         $option_path     = $option_data['path'] ?? '';
+                        $coming_soon     = $option_data['coming_soon'] ?? false;
                         $is_addon_module = false;
 
                         /**
@@ -141,7 +142,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
                                     <?php if($option_data['pro'] ?? false): ?>
                                         <span class="pro"><?php esc_html_e('PRO', 'wpmastertoolkit'); ?></span>
                                     <?php endif; ?>
-                                    <?php if ( $disabled ): ?>
+                                    <?php if ( $coming_soon ): ?>
                                         <span class="comming-soon"><?php esc_html_e('coming soon', 'wpmastertoolkit'); ?></span>
                                     <?php endif; ?>
                                 </span>

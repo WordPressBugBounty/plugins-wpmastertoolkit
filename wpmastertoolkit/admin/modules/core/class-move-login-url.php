@@ -13,6 +13,8 @@ class WPMastertoolkit_Move_Login_URL {
     private $nonce_action;
 	private $default_settings;
     private $wp_custom_login_php;
+	
+	const MODULE_ID = 'Move Login URL';
 
 	/**
      * Invoke the hooks.
@@ -53,6 +55,8 @@ class WPMastertoolkit_Move_Login_URL {
         
 		add_action( 'admin_menu', array( $this, 'add_submenu' ), 999 );
         add_action( 'admin_init', array( $this, 'save_submenu' ) );
+
+		add_filter( 'wpmastertoolkit_nginx_code_snippets', array( $this, 'nginx_code_snippets' ) );
 		
     }
 		
@@ -61,6 +65,87 @@ class WPMastertoolkit_Move_Login_URL {
      */
     public function class_init() {
 		$this->header_title	= esc_html__( 'Move login URL', 'wpmastertoolkit' );
+    }
+
+	/**
+     * activate
+     *
+     * @return void
+     */
+    public static function activate() {
+        global $is_apache, $is_nginx;
+
+		$is_pro   = wpmastertoolkit_is_pro();
+		$settings = get_option( WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_move_login_url', array() );
+
+        if ( $is_apache && $is_pro && !empty( $settings['wp_admin_403'] ) ) {
+            require_once WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/class-htaccess.php';
+            WPMastertoolkit_Htaccess::add( self::get_raw_content_htaccess(), self::MODULE_ID );
+        }
+    }
+
+	/**
+	 * deactivate
+	 *
+	 * @return void
+	 */
+	public static function deactivate() {
+		global $is_apache;
+
+		if ( $is_apache ) {
+			require_once WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/class-htaccess.php';
+			WPMastertoolkit_Htaccess::remove( self::MODULE_ID );
+		}
+	}
+	
+	/**
+	 * get_raw_content_htaccess
+	 *
+	 * @return void
+	 */
+	public static function get_raw_content_htaccess() {
+		return trim("
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteCond %{REQUEST_URI} ^/wp-admin [NC]
+	RewriteCond %{HTTP_COOKIE} !^.*wordpress_logged_in_.*$ [NC]
+	RewriteRule ^(.*)$ - [R=403,L]
+</IfModule>
+		");
+	}
+	
+	/**
+	 * get_raw_content_nginx
+	 *
+	 * @return void
+	 */
+	public static function get_raw_content_nginx() {
+		return trim('
+location ~* /wp-admin {
+	if ($http_cookie !~* \"wordpress_logged_in_\") {
+		return 403;
+	}
+}
+		');
+	}
+
+	/**
+     * nginx_code_snippets
+     *
+     * @param  mixed $code_snippets
+     * @return array
+     */
+    public function nginx_code_snippets( $code_snippets ) {
+        global $is_nginx;
+
+		$is_pro   = wpmastertoolkit_is_pro();
+		$settings = self::get_settings();
+
+        if ( $is_nginx && $is_pro && !empty( $settings['wp_admin_403'] ) ) {
+            $code_snippets[self::MODULE_ID] = self::get_raw_content_nginx();
+        }
+
+        return $code_snippets;
     }
 
 	/**
@@ -84,7 +169,8 @@ class WPMastertoolkit_Move_Login_URL {
 
         return array(
             'login_slug'   	=> 'login',
-            'redirect_slug'	=> '404'
+            'redirect_slug'	=> '404',
+			'wp_admin_403'	=> 0,
         );
     }
 
@@ -103,9 +189,11 @@ class WPMastertoolkit_Move_Login_URL {
      * @return array
      */
     public function sanitize_settings($new_settings){
-
+		global $is_apache;
+		
+		$is_pro 				= wpmastertoolkit_is_pro();
 		$this->default_settings = $this->get_default_settings();
-		$sanitized_settings = array();
+		$sanitized_settings 	= array();
 
 		foreach ( $this->default_settings as $settings_key => $settings_value ) {
 			
@@ -123,6 +211,23 @@ class WPMastertoolkit_Move_Login_URL {
 				case 'redirect_slug':
 					$redirect_slug = sanitize_title_with_dashes( $new_settings[$settings_key] );
 					$sanitized_settings[$settings_key] = $redirect_slug;
+				break;
+				case 'wp_admin_403':
+					if ( $is_pro ) {
+						$sanitized_settings[$settings_key] = (int) sanitize_text_field( $new_settings[$settings_key] );
+					} else {
+						$sanitized_settings[$settings_key] = $settings_value;
+					}
+
+					if ( $is_apache ) {
+						if ( $sanitized_settings[$settings_key] ) {
+							require_once WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/class-htaccess.php';
+							WPMastertoolkit_Htaccess::add( self::get_raw_content_htaccess(), self::MODULE_ID );
+						} else {
+							require_once WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/class-htaccess.php';
+							WPMastertoolkit_Htaccess::remove( self::MODULE_ID );
+						}
+					}
 				break;
 			}
 		}
@@ -715,9 +820,11 @@ class WPMastertoolkit_Move_Login_URL {
      */
     private function submenu_content() {
 
+		$is_pro 		= wpmastertoolkit_is_pro();
 		$settings		= $this->get_settings();
 		$login_slug		= $settings['login_slug'] ?? null;
 		$redirect_slug	= $settings['redirect_slug'] ?? null;
+		$wp_admin_403	= $settings['wp_admin_403'] ?? 0;
 
         ?>
             <div class="wp-mastertoolkit__section">
@@ -759,6 +866,27 @@ class WPMastertoolkit_Move_Login_URL {
                     </div>
                 </div>
             </div>
+
+			<div class="wp-mastertoolkit__section pro-section <?php echo esc_attr( $is_pro ? 'is-pro' : 'is-not-pro' ); ?>">
+				<div class="wp-mastertoolkit__section__pro-only">
+                    <?php esc_html_e( 'This feature is only available in the Pro version.', 'wpmastertoolkit' ); ?>
+                </div>
+                <div class="wp-mastertoolkit__section__body">
+                    <div class="wp-mastertoolkit__section__body__item">
+                        <div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e("403 for not logged in on /wp-admin", 'wpmastertoolkit'); ?></div>
+						<div class="wp-mastertoolkit__section__body__item__content">
+							<label class="wp-mastertoolkit__toggle">
+								<input type="hidden" name="<?php echo esc_attr( $this->option_id . '[wp_admin_403]' ); ?>" value="0">
+								<input type="checkbox" name="<?php echo esc_attr( $this->option_id . '[wp_admin_403]' ); ?>" value="1" <?php checked( $wp_admin_403, '1' ); ?> <?php echo esc_attr( $is_pro ? '' : 'disabled' ); ?>>
+								<span class="wp-mastertoolkit__toggle__slider round"></span>
+							</label> 
+						</div>
+						<div class="wp-mastertoolkit__section__body__item__desc">
+							<?php esc_html_e("Prevent access to ^/wp-admin for not logged in users with a 403 error. This feature allows you to block the request directly via Apache or Nginx, which saves your server resources. If this feature is enabled the redirection URL will be ignored.", 'wpmastertoolkit'); ?>
+						</div>
+                    </div>
+				</div>
+			</div>
         <?php
     }
 }

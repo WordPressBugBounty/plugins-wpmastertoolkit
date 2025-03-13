@@ -648,6 +648,12 @@ class WPMastertoolkit_Modules_Data {
 				'pro'           => true,
 				'path'          => 'pro/class-vulnerabilities-scan.php',
 			),
+			'WPMastertoolkit_Force_SSL' => array(
+				'original_name' => "Force SSL",
+				'group'         => 'security',
+				'pro'           => false,
+				'path'          => 'core/class-force-ssl.php',
+			),
 		);
 		
 		/**
@@ -1087,6 +1093,10 @@ class WPMastertoolkit_Modules_Data {
 			'WPMastertoolkit_Vulnerabilities_Scan' => array(
 				'name' => esc_html_x( "Vulnerabilities Scan", "Module name", 'wpmastertoolkit' ),
 				'desc' => esc_html_x( "This module will scan your WordPress Core Version, Plugins and Themes for vulnerabilities.", "Module description", 'wpmastertoolkit' ),
+			),
+			'WPMastertoolkit_Force_SSL' => array(
+				'name' => esc_html_x( "Force SSL", "Module name", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( "Force HTTPS on your site to ensure all traffic is encrypted and secure.", "Module description", 'wpmastertoolkit' ),
 			),
 		);
 

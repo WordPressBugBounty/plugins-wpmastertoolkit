@@ -4,7 +4,7 @@ Tags: all in one plugin, admin, security, disable features, easy to use
 Requires at least: 6.0.0
 Tested up to: 6.7.1
 Requires PHP: 7.4
-Stable tag: 2.3.0
+Stable tag: 2.4.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
 
@@ -19,7 +19,7 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 **Test by Enzo (Easy WordPress) :**
 [youtube https://www.youtube.com/watch?v=I1GdHeeJp6E&t]
 
-= 86 Free features =
+= 87 Free features =
 
 * Adminer: A full-featured database management tool.
 * Allow Menu Custom Links to Open in New Tab: Enable custom menu links to open in a new tab with a checkbox. For security and SEO, links include the `rel="noopener noreferrer nofollow"` attribute.
@@ -67,6 +67,7 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 * Export Users: Download your user data to a .csv format.
 * External Permalinks: Enable pages, posts and/or custom post types to have permalinks that point to external URLs. The rel=&quot;noopener noreferrer nofollow&quot; attribute will also be added for enhanced security and SEO benefits.
 * File Manager: Browser and manage your files efficiently and easily.
+* Force SSL: Force HTTPS on your site to ensure all traffic is encrypted and secure.
 * Force Strong Password: Enforce the use of strong passwords for all users on your website. This feature is especially useful for websites with multiple users, as it ensures that all users have a strong password that is difficult to guess or crack.
 * Heartbeat Control: Modify the interval of the WordPress heartbeat API or disable it on admin pages, post creation/edit screens and/or the frontend. This will help reduce CPU load on the server.
 * Hide Admin Bar: Hide the admin bar on the front end of your website for either specific user roles or all users.
@@ -182,6 +183,11 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 4. Code snippets
 
 == Changelog ==
+
+= 2.4.0 =
+* Add Module: Force SSL
+* Fix: Enhance List Tables : The CSS was not loading after changing the folder of the CSS file. The path had not been updated.
+* Fix: All PRO modules were still written "coming soon" even those available in the PRO version.
 
 = 2.3.0 =
 * Add Pro Modules informations

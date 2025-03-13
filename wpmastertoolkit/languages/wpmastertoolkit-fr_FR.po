@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WPMasterToolKit\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-31 17:04+0100\n"
-"PO-Revision-Date: 2025-02-27 12:17+0000\n"
+"PO-Revision-Date: 2025-03-12 16:15+0000\n"
 "Last-Translator: \n"
 "Language-Team: Français\n"
 "Language: fr_FR\n"
@@ -202,6 +202,11 @@ msgstr "30 secondes"
 msgid "4 Hours"
 msgstr "4 Heures"
 
+#: admin/modules/core/class-move-login-url.php:876
+#, fuzzy
+msgid "403 for not logged in on /wp-admin"
+msgstr "403 pour non connecté sur /wp-admin"
+
 #: admin/modules/pro/class-410-manager.php:50
 msgid "410 Manager"
 msgstr "Gestionnaire 410"
@@ -230,18 +235,6 @@ msgstr ""
 "<b>ATTENTION :</b> votre compte a été bloqué. Vous pourrez vous reconnecter "
 "dans %s."
 
-#: includes/build/vendor/humbug/php-scoper/fixtures/set027-laravel/public/js/app.js:1
-#: includes/vendor/humbug/php-scoper/fixtures/set027-laravel/public/js/app.js:1
-#, fuzzy
-msgid "<div>"
-msgstr "<div>"
-
-#: includes/build/vendor/humbug/php-scoper/fixtures/set027-laravel/public/js/app.js:1
-#: includes/vendor/humbug/php-scoper/fixtures/set027-laravel/public/js/app.js:1
-#, fuzzy
-msgid "<script>"
-msgstr "<script>"
-
 #: admin/modules/core/class-force-strong-password.php:120
 msgid ""
 "<strong>ERROR</strong>: Your password is not strong enough. Please use a "
@@ -249,12 +242,6 @@ msgid ""
 msgstr ""
 "<strong>ERREUR</strong> : Votre mot de passe n'est pas assez fort. Veuillez "
 "utiliser un mot de passe plus fort."
-
-#: includes/build/vendor/humbug/php-scoper/fixtures/set027-laravel/public/js/app.js:1
-#: includes/vendor/humbug/php-scoper/fixtures/set027-laravel/public/js/app.js:1
-#, fuzzy
-msgid ">tbody"
-msgstr ">tcorps"
 
 #: admin/modules/core/class-adminer.php:409
 msgid "A full-featured database management tool."
@@ -295,7 +282,7 @@ msgstr "Actes"
 msgid "Activate License"
 msgstr "Activer la licence"
 
-#: admin/class-modules-data.php:1137
+#: admin/class-modules-data.php:1147
 msgid "Activated modules"
 msgstr "Modules activés"
 
@@ -420,7 +407,7 @@ msgstr "Notices d'administration"
 msgid "Adminer"
 msgstr "Adminer"
 
-#: admin/class-modules-data.php:1142
+#: admin/class-modules-data.php:1152
 msgid "Administration"
 msgstr "Administration"
 
@@ -453,7 +440,7 @@ msgstr "Tous les snippets actifs ont été régénérés."
 msgid "All events"
 msgstr "Tous les événements"
 
-#: admin/class-modules-data.php:1132
+#: admin/class-modules-data.php:1142
 msgid "All modules"
 msgstr "Tous les modules"
 
@@ -819,7 +806,7 @@ msgstr "Changer maintenant"
 msgid "Change Permissions"
 msgstr "Modifier les autorisations"
 
-#: admin/modules/core/class-move-login-url.php:724
+#: admin/modules/core/class-move-login-url.php:831
 msgid ""
 "Change the login URL and prevent access to the wp-login.php page and the wp-"
 "admin directory to non-connected people."
@@ -980,7 +967,7 @@ msgstr "Code à insérer avant </body>"
 msgid "Code to insert before </head>"
 msgstr "Code à insérer avant </head>"
 
-#: admin/templates/core/page-settings.php:145
+#: admin/templates/core/page-settings.php:146
 msgid "coming soon"
 msgstr "à venir"
 
@@ -1009,7 +996,7 @@ msgstr "contenu"
 msgid "Content Order"
 msgstr "Ordre du contenu"
 
-#: admin/class-modules-data.php:1147
+#: admin/class-modules-data.php:1157
 msgid "Contents & Media"
 msgstr "Contenus et médias"
 
@@ -1106,7 +1093,7 @@ msgstr "Créer un nouveau lien court"
 msgid "CreateNow"
 msgstr "Créer maintenant"
 
-#: admin/class-modules-data.php:1187
+#: admin/class-modules-data.php:1197
 #: admin/templates/core/page-settings-tabs/credits.php:13
 msgid "Credits"
 msgstr "Crédits"
@@ -1148,7 +1135,7 @@ msgstr "CSS d'administration personnalisé"
 msgid "Custom Body Class"
 msgstr "Classe du body personnalisée"
 
-#: admin/class-modules-data.php:1152
+#: admin/class-modules-data.php:1162
 msgid "Custom Code"
 msgstr "Code personnalisé"
 
@@ -1168,7 +1155,7 @@ msgstr "Tous les jours"
 msgid "Dark"
 msgstr "Sombre"
 
-#: admin/templates/core/page-settings.php:198
+#: admin/templates/core/page-settings.php:199
 msgid "Data anonymization"
 msgstr "Anonymisation des données"
 
@@ -1324,7 +1311,7 @@ msgstr "Désactiver les commentaires via XML-RPC"
 msgid "Disable Dashboard Widgets"
 msgstr "Désactiver les widgets du tableau de bord"
 
-#: admin/class-modules-data.php:1157
+#: admin/class-modules-data.php:1167
 msgid "Disable Features"
 msgstr "Désactiver les fonctionnalités"
 
@@ -2147,7 +2134,7 @@ msgstr "https://wpmastertoolkit.com/fr/modules/"
 msgid "https://wpmastertoolkit.com/en/products-2/wpmastertoolkit-pro/"
 msgstr "https://wpmastertoolkit.com/fr/produits/wpmastertoolkit-pro/"
 
-#: admin/templates/core/page-settings.php:237
+#: admin/templates/core/page-settings.php:238
 msgid "I agree to share my configuration with wpmastertoolkit.com."
 msgstr "J'accepte de partager ma configuration avec wpmastertoolkit.com."
 
@@ -2246,7 +2233,7 @@ msgstr ""
 "taxonomies, médias, commentaires et utilisateurs en ajoutant/supprimant des "
 "colonnes et des éléments."
 
-#: admin/templates/core/page-settings.php:186
+#: admin/templates/core/page-settings.php:187
 msgid ""
 "In order to improve our modules, we would like to know which modules are "
 "most used, with the aim of improving the most used modules as a priority. "
@@ -2433,7 +2420,7 @@ msgstr "Dernière connexion"
 msgid "Last Username"
 msgstr "Dernier nom d'utilisateur"
 
-#: admin/templates/core/page-settings.php:160
+#: admin/templates/core/page-settings.php:161
 msgid "Learn more"
 msgstr "En savoir +"
 
@@ -2506,7 +2493,7 @@ msgstr "Déconnecté"
 msgid "Login attempts"
 msgstr "Tentatives de connexion"
 
-#: admin/modules/core/class-move-login-url.php:727
+#: admin/modules/core/class-move-login-url.php:834
 msgid "Login URL"
 msgstr "URL de connexion"
 
@@ -2654,19 +2641,19 @@ msgstr ""
 "publication et/ou le frontend. Cela contribuera à réduire la charge CPU sur "
 "le serveur."
 
-#: admin/class-modules-data.php:1029
+#: admin/class-modules-data.php:1035
 msgctxt "Module description"
 msgid "A full-featured database management tool."
 msgstr "Un outil de gestion de base de données complet."
 
-#: admin/class-modules-data.php:885
+#: admin/class-modules-data.php:891
 msgctxt "Module description"
 msgid "A new button to quickly add new posts to speed up your workflow."
 msgstr ""
 "Un nouveau bouton pour ajouter rapidement de nouvelles publications afin "
 "d'accélérer votre flux de travail."
 
-#: admin/class-modules-data.php:897
+#: admin/class-modules-data.php:903
 msgctxt "Module description"
 msgid ""
 "A simple tool to generate a child theme on your WordPress. You can disable "
@@ -2675,7 +2662,7 @@ msgstr ""
 "Un outil simple pour générer un thème enfant sur votre WordPress. Vous "
 "pouvez le désactiver après la génération."
 
-#: admin/class-modules-data.php:761
+#: admin/class-modules-data.php:767
 msgctxt "Module description"
 msgid ""
 "Add an extra layer of security to your website by enabling two-factor "
@@ -2684,7 +2671,7 @@ msgstr ""
 "Ajoutez une couche de sécurité supplémentaire à votre site Web en activant "
 "l'authentification à deux facteurs pour tous les utilisateurs."
 
-#: admin/class-modules-data.php:841
+#: admin/class-modules-data.php:847
 msgctxt "Module description"
 msgid ""
 "Add custom <body> class(es) on the singular view of some or all public post "
@@ -2693,7 +2680,7 @@ msgstr ""
 "Ajoutez des classes <body> personnalisées sur la vue unique de certains ou "
 "de tous les types de publications publiques."
 
-#: admin/class-modules-data.php:705
+#: admin/class-modules-data.php:711
 msgctxt "Module description"
 msgid ""
 "Add custom code snippets to your website without the need to edit the "
@@ -2709,21 +2696,21 @@ msgstr ""
 "ajoutez cette ligne à votre wp-config.php : "
 "définir('WPMASTERTOOLKIT_SNIPPETS_SAFE_MODE', true);"
 
-#: admin/class-modules-data.php:945
+#: admin/class-modules-data.php:951
 msgctxt "Module description"
 msgid "Add custom CSS on all admin pages for all user roles."
 msgstr ""
 "Ajoute du CSS personnalisé sur toutes les pages d'administration pour tous "
 "les rôles d'utilisateur."
 
-#: admin/class-modules-data.php:949
+#: admin/class-modules-data.php:955
 msgctxt "Module description"
 msgid "Add custom CSS on all frontend pages for all user roles."
 msgstr ""
 "Ajoutez du CSS personnalisé sur toutes les pages frontales pour tous les "
 "rôles d'utilisateur."
 
-#: admin/class-modules-data.php:1005
+#: admin/class-modules-data.php:1011
 msgctxt "Module description"
 msgid ""
 "Add security headers quickly to your site to protect it from threats such as "
@@ -2732,7 +2719,7 @@ msgstr ""
 "Ajoutez rapidement des en-têtes de sécurité à votre site pour le protéger "
 "des menaces telles que les attaques de phishing, le vol de données, etc."
 
-#: admin/class-modules-data.php:1061
+#: admin/class-modules-data.php:1067
 msgctxt "Module description"
 msgid ""
 "Automatically converts images to WebP when they are uploaded to the media "
@@ -2741,7 +2728,7 @@ msgstr ""
 "Convertit automatiquement les images en WebP lorsqu'elles sont téléchargées "
 "dans la bibliothèque multimédia."
 
-#: admin/class-modules-data.php:701
+#: admin/class-modules-data.php:707
 msgctxt "Module description"
 msgid ""
 "Automatically initiate the publication of scheduled posts marked with "
@@ -2751,7 +2738,7 @@ msgstr ""
 "« horaire manqué » à chaque visite sur le site Web, pour tous les types de "
 "publications."
 
-#: admin/class-modules-data.php:1065
+#: admin/class-modules-data.php:1071
 msgctxt "Module description"
 msgid ""
 "Automatically sanitize uploaded file names by removing special characters, "
@@ -2764,7 +2751,7 @@ msgstr ""
 "automatiquement les champs de métadonnées clés (titre, légende, texte "
 "alternatif et description) directement à partir du nom de fichier nettoyé."
 
-#: admin/class-modules-data.php:813
+#: admin/class-modules-data.php:819
 msgctxt "Module description"
 msgid ""
 "Avoid overloading the database by setting a cap on the number of revisions "
@@ -2774,12 +2761,12 @@ msgstr ""
 "de révisions à enregistrer pour certains ou tous les types de publications "
 "prenant en charge les révisions."
 
-#: admin/class-modules-data.php:997
+#: admin/class-modules-data.php:1003
 msgctxt "Module description"
 msgid "Ban the chosen emails."
 msgstr "Interdire les emails choisis."
 
-#: admin/class-modules-data.php:993
+#: admin/class-modules-data.php:999
 msgctxt "Module description"
 msgid ""
 "Block user registration from disposable email addresses. Disposable email "
@@ -2791,19 +2778,19 @@ msgstr ""
 "pour s'inscrire sur des sites Web qui nécessitent une vérification par e-"
 "mail."
 
-#: admin/class-modules-data.php:1013
+#: admin/class-modules-data.php:1019
 msgctxt "Module description"
 msgid "Browser and manage your files efficiently and easily."
 msgstr "Naviguez et gérez vos fichiers efficacement et facilement."
 
-#: admin/class-modules-data.php:757
+#: admin/class-modules-data.php:763
 msgctxt "Module description"
 msgid "Change the default login URL to a custom URL of your choice."
 msgstr ""
 "Remplacez l'URL de connexion par défaut par une URL personnalisée de votre "
 "choix."
 
-#: admin/class-modules-data.php:1041
+#: admin/class-modules-data.php:1047
 msgctxt "Module description"
 msgid ""
 "Clean actionscheduler_actions database table from actions that have been "
@@ -2812,7 +2799,7 @@ msgstr ""
 "Nettoyer la table de base de données actionscheduler_actions des actions qui "
 "ont été terminées | échouées | annulées."
 
-#: admin/class-modules-data.php:857
+#: admin/class-modules-data.php:863
 msgctxt "Module description"
 msgid ""
 "Clean up and speed up the dashboard by completely disabling some or all "
@@ -2823,7 +2810,7 @@ msgstr ""
 "partie des widgets. Les widgets désactivés ne chargeront aucun actif et "
 "n'apparaîtront pas sous Options d'écran."
 
-#: admin/class-modules-data.php:713
+#: admin/class-modules-data.php:719
 msgctxt "Module description"
 msgid ""
 "Completely deactivate RSS, Atom, and RDF feeds across your website. This "
@@ -2837,7 +2824,7 @@ msgstr ""
 "et la recherche. De plus, il efface toutes les références restantes aux URL "
 "de flux de la section <head> de vos pages Web."
 
-#: admin/class-modules-data.php:969
+#: admin/class-modules-data.php:975
 msgctxt "Module description"
 msgid ""
 "Completely disable core, theme and plugin updates and auto-updates. Will "
@@ -2847,7 +2834,7 @@ msgstr ""
 "noyau, des thèmes et des plugins. Désactivez également les vérifications de "
 "mise à jour, les notifications et les e-mails."
 
-#: admin/class-modules-data.php:873
+#: admin/class-modules-data.php:879
 msgctxt "Module description"
 msgid ""
 "Control your nav menu by allowing you to apply visibility controls to menu."
@@ -2855,7 +2842,7 @@ msgstr ""
 "Contrôlez votre menu de navigation en vous permettant d'appliquer des "
 "contrôles de visibilité au menu."
 
-#: admin/class-modules-data.php:717
+#: admin/class-modules-data.php:723
 msgctxt "Module description"
 msgid ""
 "Deactivate the Gutenberg block editor selectively, allowing you to control "
@@ -2865,19 +2852,19 @@ msgstr ""
 "permet de contrôler son utilisation pour des types de publication "
 "spécifiques ou tous les types pertinents."
 
-#: admin/class-modules-data.php:777
+#: admin/class-modules-data.php:783
 msgctxt "Module description"
 msgid ""
 "Delete the wp-config-sample.php, block access to readme.html, license.txt"
 msgstr ""
 "Supprimez le wp-config-sample.php, bloquez l'accès à readme.html, licence.txt"
 
-#: admin/class-modules-data.php:789
+#: admin/class-modules-data.php:795
 msgctxt "Module description"
 msgid "Disable admin emails notifications."
 msgstr "Désactivez les notifications par e-mail de l'administrateur."
 
-#: admin/class-modules-data.php:837
+#: admin/class-modules-data.php:843
 msgctxt "Module description"
 msgid ""
 "Disable block-based widgets settings screen. Restores the classic widgets "
@@ -2888,7 +2875,7 @@ msgstr ""
 "l'écran des paramètres des widgets classiques lors de l'utilisation d'un "
 "thème classique (non bloquant). Cela n'a aucun effet sur les thèmes de bloc."
 
-#: admin/class-modules-data.php:809
+#: admin/class-modules-data.php:815
 msgctxt "Module description"
 msgid ""
 "Disable cart fragments scripts on the front-end for public site visitors. "
@@ -2899,7 +2886,7 @@ msgstr ""
 "visiteurs du site public. Cela pourrait interrompre la fonctionnalité des "
 "pages de panier et de paiement si elles dépendent de fragments de panier."
 
-#: admin/class-modules-data.php:817
+#: admin/class-modules-data.php:823
 msgctxt "Module description"
 msgid ""
 "Disable emoji support for pages, posts and custom post types on the admin "
@@ -2914,7 +2901,7 @@ msgstr ""
 "navigateurs modernes sur différents systèmes d'exploitation et appareils "
 "disposent désormais d'une prise en charge native."
 
-#: admin/class-modules-data.php:821
+#: admin/class-modules-data.php:827
 msgctxt "Module description"
 msgid ""
 "Disable loading of Dashicons CSS and JS files on the front-end for public "
@@ -2928,7 +2915,7 @@ msgstr ""
 "connexion personnalisés, s'ils dépendent de Dashicons. Assurez-vous de "
 "vérifier ces formulaires après la désactivation."
 
-#: admin/class-modules-data.php:965
+#: admin/class-modules-data.php:971
 msgctxt "Module description"
 msgid ""
 "Disable REST API access for non-authenticated users and remove URL traces "
@@ -2938,7 +2925,7 @@ msgstr ""
 "supprimez les traces d'URL de <head>, des en-têtes HTTP et du point de "
 "terminaison WP RSD."
 
-#: admin/class-modules-data.php:825
+#: admin/class-modules-data.php:831
 msgctxt "Module description"
 msgid ""
 "Disable the default WordPress shortlink <link> tag in <head>. Ignored by "
@@ -2952,7 +2939,7 @@ msgstr ""
 "préféré, ce qui permet d'afficher de jolis noms dans les liens courts et de "
 "suivre les clics lors du partage du lien sur les réseaux sociaux."
 
-#: admin/class-modules-data.php:793
+#: admin/class-modules-data.php:799
 msgctxt "Module description"
 msgid ""
 "Disable the default WordPress sitemap feature, which was introduced in "
@@ -2961,12 +2948,12 @@ msgstr ""
 "Désactivez la fonctionnalité de plan de site WordPress par défaut, "
 "introduite dans WordPress 5.5."
 
-#: admin/class-modules-data.php:785
+#: admin/class-modules-data.php:791
 msgctxt "Module description"
 msgid "Disable the listing of the directories."
 msgstr "Désactivez le listing des répertoires."
 
-#: admin/class-modules-data.php:829
+#: admin/class-modules-data.php:835
 #, fuzzy
 msgctxt "Module description"
 msgid ""
@@ -2979,7 +2966,7 @@ msgstr ""
 "du point de terminaison XML-RPC sur votre site. Si vous n'utilisez pas XML-"
 "RPC, vous pouvez désactiver cette balise en toute sécurité."
 
-#: admin/class-modules-data.php:833
+#: admin/class-modules-data.php:839
 msgctxt "Module description"
 msgid ""
 "Disable the Windows Live Writer (WLW) manifest <link> tag in <head>. The WLW "
@@ -2988,7 +2975,7 @@ msgstr ""
 "Désactivez la balise <link> du manifeste Windows Live Writer (WLW) dans "
 "<head>. L'application WLW a été abandonnée en 2017."
 
-#: admin/class-modules-data.php:721
+#: admin/class-modules-data.php:727
 msgctxt "Module description"
 msgid ""
 "Disable the wp_mail function, which is used by WordPress to send emails. "
@@ -3000,7 +2987,7 @@ msgstr ""
 "d'e-mails, car elle empêche la fonction wp_mail de charger et de consommer "
 "des ressources."
 
-#: admin/class-modules-data.php:773
+#: admin/class-modules-data.php:779
 msgctxt "Module description"
 msgid ""
 "Disable zip file uploads for plugins, which are used to install plugins on "
@@ -3009,7 +2996,7 @@ msgstr ""
 "Désactivez les téléchargements de fichiers zip pour les plugins, qui sont "
 "utilisés pour installer des plugins sur votre site Web."
 
-#: admin/class-modules-data.php:769
+#: admin/class-modules-data.php:775
 msgctxt "Module description"
 msgid ""
 "Disable zip file uploads for themes, which are used to install themes on "
@@ -3018,14 +3005,14 @@ msgstr ""
 "Désactivez les téléchargements de fichiers zip pour les thèmes, qui sont "
 "utilisés pour installer des thèmes sur votre site Web."
 
-#: admin/class-modules-data.php:929
+#: admin/class-modules-data.php:935
 msgctxt "Module description"
 msgid "Display all metadata for a post, user, term, or comment."
 msgstr ""
 "Affiche toutes les métadonnées d'une publication, d'un utilisateur, d'un "
 "terme ou d'un commentaire."
 
-#: admin/class-modules-data.php:1049
+#: admin/class-modules-data.php:1055
 msgctxt "Module description"
 msgid ""
 "Displaying the sequence of action and filter hooks by their origin on a "
@@ -3034,41 +3021,41 @@ msgstr ""
 "Affichage de la séquence d'actions et des filtres de hooks par leur origine "
 "sur une seule page."
 
-#: admin/class-modules-data.php:801
+#: admin/class-modules-data.php:807
 msgctxt "Module description"
 msgid "Download plugins from the plugins page in the WordPress admin panel."
 msgstr ""
 "Téléchargez les plugins depuis la page des plugins dans le panneau "
 "d'administration WordPress."
 
-#: admin/class-modules-data.php:889
+#: admin/class-modules-data.php:895
 msgctxt "Module description"
 msgid "Download your posts and pages to a .csv format."
 msgstr "Téléchargez vos articles et pages au format .csv."
 
-#: admin/class-modules-data.php:877
+#: admin/class-modules-data.php:883
 msgctxt "Module description"
 msgid "Download your user data to a .csv format."
 msgstr "Téléchargez vos données utilisateur au format .csv."
 
-#: admin/class-modules-data.php:893
+#: admin/class-modules-data.php:899
 msgctxt "Module description"
 msgid "Easily duplicate your WordPress Menus"
 msgstr "Dupliquez facilement vos menus WordPress"
 
-#: admin/class-modules-data.php:957
+#: admin/class-modules-data.php:963
 msgctxt "Module description"
 msgid "Easily edit and validate your ads.txt and app-ads.txt content."
 msgstr ""
 "Modifiez et validez facilement le contenu de vos fichiers ads.txt et app-ads."
 "txt."
 
-#: admin/class-modules-data.php:961
+#: admin/class-modules-data.php:967
 msgctxt "Module description"
 msgid "Easily edit and validate your robots.txt content."
 msgstr "Modifiez et validez facilement le contenu de votre fichier robots.txt."
 
-#: admin/class-modules-data.php:953
+#: admin/class-modules-data.php:959
 msgctxt "Module description"
 msgid ""
 "Easily insert <meta>, <link>, <script> and <style> tags, Google Analytics, "
@@ -3079,7 +3066,7 @@ msgstr ""
 "Analytics, Tag Manager, AdSense, le code Ads Conversion et Optimize, les "
 "pixels Facebook, TikTok et Twitter, etc."
 
-#: admin/class-modules-data.php:1025
+#: admin/class-modules-data.php:1031
 msgctxt "Module description"
 msgid ""
 "Enable assignment of multiple roles during user account creation and editing."
@@ -3091,7 +3078,7 @@ msgstr ""
 "avec des rôles non définis dans le noyau WordPress, par exemple à partir de "
 "plugins de commerce électronique ou de LMS."
 
-#: admin/class-modules-data.php:921
+#: admin/class-modules-data.php:927
 msgctxt "Module description"
 msgid ""
 "Enable custom ordering of various \"hierarchical\" content types or those "
@@ -3102,7 +3089,7 @@ msgstr ""
 "ceux prenant en charge les « attributs de page ». Un nouveau sous-menu "
 "« Commander » apparaîtra pour le(s) type(s) de contenu activé(s)."
 
-#: admin/class-modules-data.php:941
+#: admin/class-modules-data.php:947
 msgctxt "Module description"
 msgid ""
 "Enable log in, log out and dynamic log in/out menu item for addition to any "
@@ -3111,7 +3098,7 @@ msgstr ""
 "Active l'élément de menu de connexion, de déconnexion et de "
 "connexion/déconnexion dynamique pour l'ajouter à n'importe quel menu."
 
-#: admin/class-modules-data.php:913
+#: admin/class-modules-data.php:919
 msgctxt "Module description"
 msgid ""
 "Enable one-click duplication of pages, posts and custom posts. The "
@@ -3121,7 +3108,7 @@ msgstr ""
 "publications personnalisées. Les termes de taxonomie correspondants et la "
 "méta-post seront également dupliqués."
 
-#: admin/class-modules-data.php:925
+#: admin/class-modules-data.php:931
 msgctxt "Module description"
 msgid ""
 "Enable pages, posts and/or custom post types to have permalinks that point "
@@ -3133,7 +3120,7 @@ msgstr ""
 "L'attribut rel=\"noopener noreferrer nofollow\" sera également ajouté pour "
 "une sécurité améliorée et des avantages en matière de référencement."
 
-#: admin/class-modules-data.php:753
+#: admin/class-modules-data.php:759
 msgctxt "Module description"
 msgid ""
 "Enforce the use of strong passwords for all users on your website. This "
@@ -3146,7 +3133,7 @@ msgstr ""
 "utilisateurs disposent d'un mot de passe fort, difficile à deviner ou à "
 "déchiffrer."
 
-#: admin/class-modules-data.php:689
+#: admin/class-modules-data.php:695
 msgctxt "Module description"
 msgid ""
 "Enhance media library functionality to support the seamless uploading of SVG "
@@ -3155,7 +3142,7 @@ msgstr ""
 "Améliorez la fonctionnalité de la bibliothèque multimédia pour prendre en "
 "charge le téléchargement transparent de fichiers SVG."
 
-#: admin/class-modules-data.php:733
+#: admin/class-modules-data.php:739
 msgctxt "Module description"
 msgid ""
 "Enhance your website's security by fortifying it against brute force, (DoS) "
@@ -3168,7 +3155,7 @@ msgstr ""
 "plus, notre solution désactive de manière proactive les rétroliens et les "
 "pingbacks, renforçant ainsi les mécanismes de défense de votre site."
 
-#: admin/class-modules-data.php:693
+#: admin/class-modules-data.php:699
 msgctxt "Module description"
 msgid ""
 "Ensure that all external links within post content open in a new browser tab "
@@ -3182,7 +3169,7 @@ msgstr ""
 "référencement en incluant l'attribut \"rel=\"noopener noreferrer "
 "nofollow\"\"."
 
-#: admin/class-modules-data.php:797
+#: admin/class-modules-data.php:803
 msgctxt "Module description"
 msgid ""
 "Force all emails sent from your website to be sent to a specific email "
@@ -3194,14 +3181,22 @@ msgstr ""
 "fonctionnalité de messagerie sur votre site Web, car elle garantit que tous "
 "les e-mails sont envoyés à une seule adresse e-mail."
 
-#: admin/class-modules-data.php:853
+#: admin/class-modules-data.php:1099
+#, fuzzy
+msgctxt "Module description"
+msgid "Force HTTPS on your site to ensure all traffic is encrypted and secure."
+msgstr ""
+"Forcez HTTPS sur votre site pour garantir que tout le trafic est crypté et "
+"sécurisé."
+
+#: admin/class-modules-data.php:859
 msgctxt "Module description"
 msgid "Give the admin menu more room to better accommodate wider items."
 msgstr ""
 "Donnez plus d'espace au menu d'administration pour mieux accueillir des "
 "éléments plus larges."
 
-#: admin/class-modules-data.php:681
+#: admin/class-modules-data.php:687
 msgctxt "Module description"
 msgid ""
 "Hide the admin bar on the front end of your website for either specific user "
@@ -3210,7 +3205,7 @@ msgstr ""
 "Masquez la barre d'administration sur le front-end de votre site Web pour "
 "des rôles d'utilisateur spécifiques ou pour tous les utilisateurs."
 
-#: admin/class-modules-data.php:765
+#: admin/class-modules-data.php:771
 msgctxt "Module description"
 msgid ""
 "Hide the default WordPress login errors that appear when an incorrect "
@@ -3219,12 +3214,12 @@ msgstr ""
 "Masquez les erreurs de connexion WordPress par défaut qui apparaissent "
 "lorsqu'un nom d'utilisateur ou un mot de passe incorrect est saisi."
 
-#: admin/class-modules-data.php:725
+#: admin/class-modules-data.php:731
 msgctxt "Module description"
 msgid "Hide the WordPress version from the source code."
 msgstr "Masquez la version WordPress du code source."
 
-#: admin/class-modules-data.php:937
+#: admin/class-modules-data.php:943
 msgctxt "Module description"
 msgid ""
 "Improve the usefulness of listing pages for various post types and "
@@ -3235,7 +3230,7 @@ msgstr ""
 "taxonomies, médias, commentaires et utilisateurs en ajoutant/supprimant des "
 "colonnes et des éléments."
 
-#: admin/class-modules-data.php:673
+#: admin/class-modules-data.php:679
 #, fuzzy
 msgctxt "Module description"
 msgid ""
@@ -3246,24 +3241,24 @@ msgstr ""
 "rassemblant toutes les notifications dans une fenêtre contextuelle (ouverte "
 "en cliquant sur la cloche en haut à droite)."
 
-#: admin/class-modules-data.php:781
+#: admin/class-modules-data.php:787
 msgctxt "Module description"
 msgid "Include/Exclude countries IP"
 msgstr "Inclure/exclure l'adresse IP des pays"
 
-#: admin/class-modules-data.php:1073
+#: admin/class-modules-data.php:1079
 msgctxt "Module description"
 msgid "Insert dynamic variables into your titles and content via shortcodes."
 msgstr ""
 "Insérez des variables dynamiques dans vos titres et contenus via des codes "
 "courts."
 
-#: admin/class-modules-data.php:1057
+#: admin/class-modules-data.php:1063
 msgctxt "Module description"
 msgid "Instant switching between user accounts."
 msgstr "Commutation instantanée entre les comptes utilisateurs."
 
-#: admin/class-modules-data.php:1033
+#: admin/class-modules-data.php:1039
 msgctxt "Module description"
 msgid ""
 "Manage app icon (Apple Touch Icon) individually. Once activated, go to "
@@ -3274,12 +3269,12 @@ msgstr ""
 "activée, accédez à Paramètres / Général pour modifier votre icône Apple "
 "Touch sans impacter votre favicon."
 
-#: admin/class-modules-data.php:1045
+#: admin/class-modules-data.php:1051
 msgctxt "Module description"
 msgid "Manage cron events on your website."
 msgstr "Gérez les événements cron sur votre site Web."
 
-#: admin/class-modules-data.php:709
+#: admin/class-modules-data.php:715
 msgctxt "Module description"
 msgid ""
 "Manage the visibility of comments on your public posts by selectively "
@@ -3293,7 +3288,7 @@ msgstr ""
 "les commentaires existants disparaîtront de manière transparente du front-"
 "end."
 
-#: admin/class-modules-data.php:1077
+#: admin/class-modules-data.php:1083
 msgctxt "Module description"
 msgid ""
 "Managing HTTP 410 statuses on your site. The 410 status indicates that the "
@@ -3304,7 +3299,7 @@ msgstr ""
 "ressource demandée a été supprimée définitivement et que cette suppression "
 "est intentionnelle et définitive."
 
-#: admin/class-modules-data.php:985
+#: admin/class-modules-data.php:991
 msgctxt "Module description"
 msgid ""
 "Modify the interval of the WordPress heartbeat API or disable it on admin "
@@ -3316,7 +3311,7 @@ msgstr ""
 "publication et/ou le frontend. Cela contribuera à réduire la charge CPU sur "
 "le serveur."
 
-#: admin/class-modules-data.php:977
+#: admin/class-modules-data.php:983
 msgctxt "Module description"
 msgid ""
 "Obfuscate email address to prevent spam bots from harvesting them, but make "
@@ -3328,7 +3323,7 @@ msgstr ""
 "humains, en utilisant le shortcode [wpm_obfuscate email=\"example@email."
 "com\" display=\"newline\"]"
 
-#: admin/class-modules-data.php:973
+#: admin/class-modules-data.php:979
 msgctxt "Module description"
 msgid ""
 "Obfuscate publicly exposed author page URLs that shows the user slugs / "
@@ -3342,7 +3337,7 @@ msgstr ""
 "des erreurs 404 pour les URL d'origine. Masquez également le point de "
 "terminaison de l'API REST /wp-json/wp/v2/users/."
 
-#: admin/class-modules-data.php:909
+#: admin/class-modules-data.php:915
 msgctxt "Module description"
 msgid ""
 "Password-protect the entire site to hide the content from public view and "
@@ -3353,7 +3348,7 @@ msgstr ""
 "vue du public et des robots/robots des moteurs de recherche. Les "
 "administrateurs connectés peuvent toujours accéder au site comme d'habitude."
 
-#: admin/class-modules-data.php:989
+#: admin/class-modules-data.php:995
 msgctxt "Module description"
 msgid ""
 "Prevent brute force attacks by limiting the number of failed login attempts "
@@ -3362,7 +3357,7 @@ msgstr ""
 "Empêchez les attaques par force brute en limitant le nombre de tentatives de "
 "connexion infructueuses autorisées par adresse IP."
 
-#: admin/class-modules-data.php:737
+#: admin/class-modules-data.php:743
 msgctxt "Module description"
 msgid ""
 "Prevent the creation of new user accounts on your website with the native "
@@ -3371,7 +3366,7 @@ msgstr ""
 "Empêchez la création de nouveaux comptes d'utilisateurs sur votre site Web "
 "avec le formulaire d'inscription natif WordPress."
 
-#: admin/class-modules-data.php:749
+#: admin/class-modules-data.php:755
 msgctxt "Module description"
 msgid ""
 "Prevent the creation of new user accounts with predifined blacklisted "
@@ -3381,19 +3376,19 @@ msgstr ""
 "d'utilisateur prédéfinis sur liste noire. Liste noire des noms d'utilisateur "
 "trop courants."
 
-#: admin/class-modules-data.php:745
+#: admin/class-modules-data.php:751
 msgctxt "Module description"
 msgid "Prevent the modification of the admin email address on your website."
 msgstr ""
 "Empêchez la modification de l’adresse e-mail de l’administrateur sur votre "
 "site Web."
 
-#: admin/class-modules-data.php:741
+#: admin/class-modules-data.php:747
 msgctxt "Module description"
 msgid "Prevent the modification of the site URL on your website."
 msgstr "Empêchez la modification de l'URL du site sur votre site Web."
 
-#: admin/class-modules-data.php:729
+#: admin/class-modules-data.php:735
 msgctxt "Module description"
 msgid ""
 "Prevent the modification of your website's core files through the WordPress "
@@ -3402,14 +3397,14 @@ msgstr ""
 "Empêchez la modification des fichiers principaux de votre site Web via le "
 "panneau d'administration WordPress."
 
-#: admin/class-modules-data.php:1009
+#: admin/class-modules-data.php:1015
 msgctxt "Module description"
 msgid "Prevent user enumeration via ?author=X and REST API /users/ endpoints."
 msgstr ""
 "Empêcher l'énumération des utilisateurs via ?author=X et les points de "
 "terminaison REST API /users/."
 
-#: admin/class-modules-data.php:1081
+#: admin/class-modules-data.php:1087
 msgctxt "Module description"
 msgid ""
 "Prevents plugin activation, deactivation, and deletion for enhanced security."
@@ -3417,7 +3412,7 @@ msgstr ""
 "Empêche l'activation, la désactivation et la suppression des plugins pour "
 "une sécurité renforcée."
 
-#: admin/class-modules-data.php:861
+#: admin/class-modules-data.php:867
 msgctxt "Module description"
 msgid ""
 "Protect your site against a wide range of threats. check all incoming "
@@ -3429,7 +3424,7 @@ msgstr ""
 "des éléments désagréables comme eval(, base64_ et des chaînes de requêtes "
 "excessivement longues."
 
-#: admin/class-modules-data.php:805
+#: admin/class-modules-data.php:811
 msgctxt "Module description"
 msgid ""
 "Protect your website from malicious file access in the upload directory."
@@ -3437,7 +3432,7 @@ msgstr ""
 "Protégez votre site Web contre l'accès malveillant aux fichiers dans le "
 "répertoire de téléchargement."
 
-#: admin/class-modules-data.php:1053
+#: admin/class-modules-data.php:1059
 msgctxt "Module description"
 msgid ""
 "Quickly change your WordPress database prefix to save time and enhance "
@@ -3446,22 +3441,22 @@ msgstr ""
 "Modifiez rapidement le préfixe de votre base de données WordPress pour "
 "gagner du temps et améliorer la sécurité."
 
-#: admin/class-modules-data.php:933
+#: admin/class-modules-data.php:939
 msgctxt "Module description"
 msgid "Remove various elements from the admin bar."
 msgstr "Supprimez divers éléments de la barre d'administration."
 
-#: admin/class-modules-data.php:1017
+#: admin/class-modules-data.php:1023
 msgctxt "Module description"
 msgid "Removes the jQuery Migrate script from the frontend of your site."
 msgstr "Supprime le script jQuery Migrate du frontend de votre site."
 
-#: admin/class-modules-data.php:1037
+#: admin/class-modules-data.php:1043
 msgctxt "Module description"
 msgid "Replaces GRAVATAR management with media management."
 msgstr "Remplace la gestion GRAVATAR par la gestion des médias."
 
-#: admin/class-modules-data.php:981
+#: admin/class-modules-data.php:987
 msgctxt "Module description"
 msgid ""
 "Resize newly uploaded, large images to a smaller dimension and delete "
@@ -3473,14 +3468,14 @@ msgstr ""
 "fichiers BMP et PNG non transparents seront convertis en fichiers JPG et "
 "redimensionnés."
 
-#: admin/class-modules-data.php:1021
+#: admin/class-modules-data.php:1027
 msgctxt "Module description"
 msgid "Revert to previous versions of any theme or plugin from WordPress.org."
 msgstr ""
 "Revenir aux versions précédentes de n’importe quel thème ou plugin de "
 "WordPress.org."
 
-#: admin/class-modules-data.php:901
+#: admin/class-modules-data.php:907
 msgctxt "Module description"
 msgid ""
 "Sends visitors to your homepage if they try to access a page that doesn't "
@@ -3489,21 +3484,21 @@ msgstr ""
 "Envoie les visiteurs vers votre page d'accueil s'ils tentent d'accéder à une "
 "page qui n'existe pas, garantissant ainsi qu'ils restent sur votre site."
 
-#: admin/class-modules-data.php:849
+#: admin/class-modules-data.php:855
 msgctxt "Module description"
 msgid "Set custom redirect URL for all or some user roles after login."
 msgstr ""
 "Définissez une URL de redirection personnalisée pour tout ou partie des "
 "rôles d'utilisateur après la connexion."
 
-#: admin/class-modules-data.php:845
+#: admin/class-modules-data.php:851
 msgctxt "Module description"
 msgid "Set custom redirect URL for all or some user roles after logout."
 msgstr ""
 "Définissez une URL de redirection personnalisée pour tout ou partie des "
 "rôles d'utilisateur après la déconnexion."
 
-#: admin/class-modules-data.php:1001
+#: admin/class-modules-data.php:1007
 msgctxt "Module description"
 msgid ""
 "Set custom sender name and email. Optionally use external SMTP service to "
@@ -3515,7 +3510,7 @@ msgstr ""
 "mails de notification et de transaction de votre site sont envoyés dans les "
 "boîtes de réception."
 
-#: admin/class-modules-data.php:1085
+#: admin/class-modules-data.php:1091
 #, fuzzy
 msgctxt "Module description"
 msgid ""
@@ -3525,7 +3520,7 @@ msgstr ""
 "Raccourcissez vos liens avec un préfixe personnalisé. Vous pouvez également "
 "suivre le nombre de clics sur chaque lien."
 
-#: admin/class-modules-data.php:905
+#: admin/class-modules-data.php:911
 msgctxt "Module description"
 msgid ""
 "Show a customizable maintenance page on the frontend while performing a "
@@ -3536,7 +3531,7 @@ msgstr ""
 "effectuant une brève maintenance de votre site. Les administrateurs "
 "connectés peuvent toujours consulter le site comme d'habitude."
 
-#: admin/class-modules-data.php:869
+#: admin/class-modules-data.php:875
 msgctxt "Module description"
 msgid ""
 "Some servers send a header called X-Powered-By that contains the PHP version "
@@ -3547,14 +3542,14 @@ msgstr ""
 "version PHP utilisée sur votre site. Cela peut constituer une information "
 "utile pour les attaquants et doit être supprimé."
 
-#: admin/class-modules-data.php:917
+#: admin/class-modules-data.php:923
 msgctxt "Module description"
 msgid "Specifying the number of posts to display per page, for each post type."
 msgstr ""
 "Spécifier le nombre de publications à afficher par page, pour chaque type de "
 "publication."
 
-#: admin/class-modules-data.php:1089
+#: admin/class-modules-data.php:1095
 #, fuzzy
 msgctxt "Module description"
 msgid ""
@@ -3564,14 +3559,14 @@ msgstr ""
 "Ce module analysera votre version principale de WordPress, vos plugins et "
 "vos thèmes à la recherche de vulnérabilités."
 
-#: admin/class-modules-data.php:881
+#: admin/class-modules-data.php:887
 msgctxt "Module description"
 msgid "Tidy up user profiles by removing sections you do not utilise."
 msgstr ""
 "Rangez les profils d'utilisateurs en supprimant les sections que vous "
 "n'utilisez pas."
 
-#: admin/class-modules-data.php:677 admin/class-modules-data.php:685
+#: admin/class-modules-data.php:683 admin/class-modules-data.php:691
 msgctxt "Module description"
 msgid ""
 "Track and record the most recent login activity of site users, then showcase "
@@ -3581,7 +3576,7 @@ msgstr ""
 "utilisateurs du site, puis affichez la date et l'heure dans le tableau de la "
 "liste des utilisateurs"
 
-#: admin/class-modules-data.php:1069
+#: admin/class-modules-data.php:1075
 msgctxt "Module description"
 msgid ""
 "With this feature you can paste directly your picture in WordPress media."
@@ -3589,7 +3584,7 @@ msgstr ""
 "Avec cette fonctionnalité, vous pouvez coller directement votre image dans "
 "le média WordPress."
 
-#: admin/class-modules-data.php:865
+#: admin/class-modules-data.php:871
 msgctxt "Module description"
 msgid ""
 "WordPress salt keys or security keys are codes that help protect important "
@@ -3598,7 +3593,7 @@ msgstr ""
 "Les clés de sel WordPress ou clés de sécurité sont des codes qui aident à "
 "protéger les informations importantes sur votre site Web."
 
-#: admin/class-modules-data.php:697
+#: admin/class-modules-data.php:703
 msgctxt "Module description"
 msgid ""
 "You can enable custom link menu items to open in a separate browser tab with "
@@ -3612,533 +3607,539 @@ msgstr ""
 "avons implémenté l'attribut \"rel=\"noopener noreferrer nofollow\"\" pour "
 "ces liens."
 
-#: admin/class-modules-data.php:1076
+#: admin/class-modules-data.php:1082
 msgctxt "Module name"
 msgid "410 Manager"
 msgstr "Gestionnaire 410"
 
-#: admin/class-modules-data.php:1072
+#: admin/class-modules-data.php:1078
 msgctxt "Module name"
 msgid "Add Essentials Shortcodes"
 msgstr "Ajouter des codes courts essentiels"
 
-#: admin/class-modules-data.php:1028
+#: admin/class-modules-data.php:1034
 msgctxt "Module name"
 msgid "Adminer"
 msgstr "Adminer"
 
-#: admin/class-modules-data.php:696
+#: admin/class-modules-data.php:702
 msgctxt "Module name"
 msgid "Allow Menu Custom Links to Open in New Tab"
 msgstr ""
 "Autoriser l'ouverture des liens personnalisés du menu dans un nouvel onglet"
 
-#: admin/class-modules-data.php:1032
+#: admin/class-modules-data.php:1038
 msgctxt "Module name"
 msgid "Apple Touch Icon"
 msgstr "Icône Apple Touch"
 
-#: admin/class-modules-data.php:1040
+#: admin/class-modules-data.php:1046
 msgctxt "Module name"
 msgid "Auto clean actionscheduler_actions"
 msgstr "Nettoyage automatique de actionscheduler_actions"
 
-#: admin/class-modules-data.php:864
+#: admin/class-modules-data.php:870
 msgctxt "Module name"
 msgid "Auto Regenerate Salt Keys"
 msgstr "Régénération automatique des clés de salage"
 
-#: admin/class-modules-data.php:700
+#: admin/class-modules-data.php:706
 msgctxt "Module name"
 msgid "Auto-Publish Posts with Missed Schedule"
 msgstr "Publication automatique des publications programmées « manquées »"
 
-#: admin/class-modules-data.php:996
+#: admin/class-modules-data.php:1002
 #| msgid "Ban emails"
 msgctxt "Module name"
 msgid "Ban Emails"
 msgstr "Interdire les e-mails"
 
-#: admin/class-modules-data.php:748
+#: admin/class-modules-data.php:754
 msgctxt "Module name"
 msgid "Blacklisted Usernames"
 msgstr "Noms d'utilisateur sur liste noire"
 
-#: admin/class-modules-data.php:992
+#: admin/class-modules-data.php:998
 msgctxt "Module name"
 msgid "Block User Registration from Disposable Email"
 msgstr "Bloquer l'enregistrement des utilisateurs à partir d'un e-mail jetable"
 
-#: admin/class-modules-data.php:1052
+#: admin/class-modules-data.php:1058
 msgctxt "Module name"
 msgid "Change Database Prefix"
 msgstr "Modifier le préfixe de la base de données"
 
-#: admin/class-modules-data.php:896
+#: admin/class-modules-data.php:902
 msgctxt "Module name"
 msgid "Child theme generator"
 msgstr "Générateur de thèmes enfants"
 
-#: admin/class-modules-data.php:880
+#: admin/class-modules-data.php:886
 msgctxt "Module name"
 msgid "Clean Profiles"
 msgstr "Nettoyer les profils"
 
-#: admin/class-modules-data.php:932
+#: admin/class-modules-data.php:938
 msgctxt "Module name"
 msgid "Clean Up Admin Bar"
 msgstr "Nettoyer la barre d'administration"
 
-#: admin/class-modules-data.php:704
+#: admin/class-modules-data.php:710
 msgctxt "Module name"
 msgid "Code Snippets"
 msgstr "Code Snippets"
 
-#: admin/class-modules-data.php:912
+#: admin/class-modules-data.php:918
 msgctxt "Module name"
 msgid "Content Duplication"
 msgstr "Duplication de contenu"
 
-#: admin/class-modules-data.php:920
+#: admin/class-modules-data.php:926
 msgctxt "Module name"
 msgid "Content Order"
 msgstr "Ordre du contenu"
 
-#: admin/class-modules-data.php:1044
+#: admin/class-modules-data.php:1050
 msgctxt "Module name"
 msgid "CRON Manager"
 msgstr "Gestionnaire CRON"
 
-#: admin/class-modules-data.php:944
+#: admin/class-modules-data.php:950
 msgctxt "Module name"
 msgid "Custom Admin CSS"
 msgstr "CSS d'administration personnalisé"
 
-#: admin/class-modules-data.php:840
+#: admin/class-modules-data.php:846
 msgctxt "Module name"
 msgid "Custom Body Class"
 msgstr "Classe de Body personnalisée"
 
-#: admin/class-modules-data.php:948
+#: admin/class-modules-data.php:954
 msgctxt "Module name"
 msgid "Custom Frontend CSS"
 msgstr "CSS personnalisé pour le frontend"
 
-#: admin/class-modules-data.php:968
+#: admin/class-modules-data.php:974
 msgctxt "Module name"
 msgid "Disable All Updates"
 msgstr "Désactiver toutes les mises à jour"
 
-#: admin/class-modules-data.php:836
+#: admin/class-modules-data.php:842
 msgctxt "Module name"
 msgid "Disable Block-Based Widgets Settings Screen"
 msgstr "Désactiver l'écran des paramètres des widgets basés sur des blocs"
 
-#: admin/class-modules-data.php:808
+#: admin/class-modules-data.php:814
 msgctxt "Module name"
 msgid "Disable cart fragments scripts"
 msgstr "Désactiver les scripts de « cart fragments »"
 
-#: admin/class-modules-data.php:708
+#: admin/class-modules-data.php:714
 msgctxt "Module name"
 msgid "Disable Comments"
 msgstr "Désactiver les commentaires"
 
-#: admin/class-modules-data.php:856
+#: admin/class-modules-data.php:862
 msgctxt "Module name"
 msgid "Disable Dashboard Widgets"
 msgstr "Désactiver les widgets du tableau de bord"
 
-#: admin/class-modules-data.php:820
+#: admin/class-modules-data.php:826
 msgctxt "Module name"
 msgid "Disable dashicons CSS and JS files"
 msgstr "Désactiver les fichiers CSS et JS dashicons"
 
-#: admin/class-modules-data.php:816
+#: admin/class-modules-data.php:822
 msgctxt "Module name"
 msgid "Disable emoji support"
 msgstr "Désactiver la prise en charge des emoji"
 
-#: admin/class-modules-data.php:712
+#: admin/class-modules-data.php:718
 msgctxt "Module name"
 msgid "Disable Feeds"
 msgstr "Désactiver les flux"
 
-#: admin/class-modules-data.php:716
+#: admin/class-modules-data.php:722
 msgctxt "Module name"
 msgid "Disable Gutenberg"
 msgstr "Désactiver Gutenberg"
 
-#: admin/class-modules-data.php:1016
+#: admin/class-modules-data.php:1022
 msgctxt "Module name"
 msgid "Disable jQuery Migrate"
 msgstr "Désactiver jQuery Migrate"
 
-#: admin/class-modules-data.php:828
+#: admin/class-modules-data.php:834
 msgctxt "Module name"
 msgid "Disable Really Simple Discovery (RSD) <link> tag"
 msgstr "Désactiver la balise <link> Really Simple Discovery (RSD)"
 
-#: admin/class-modules-data.php:964
+#: admin/class-modules-data.php:970
 msgctxt "Module name"
 msgid "Disable REST API"
 msgstr "Désactiver l'API REST"
 
-#: admin/class-modules-data.php:832
+#: admin/class-modules-data.php:838
 msgctxt "Module name"
 msgid "Disable Windows Live Writer (WLW) manifest <link> tag"
 msgstr "Désactiver la balise <link> du manifeste Windows Live Writer (WLW)"
 
-#: admin/class-modules-data.php:824
+#: admin/class-modules-data.php:830
 msgctxt "Module name"
 msgid "Disable WordPress shortlink <link> tag"
 msgstr "Désactiver la balise WordPress shortlink <link>"
 
-#: admin/class-modules-data.php:792
+#: admin/class-modules-data.php:798
 msgctxt "Module name"
 msgid "Disable WP Sitemap"
 msgstr "Désactiver le plan du site WP"
 
-#: admin/class-modules-data.php:720
+#: admin/class-modules-data.php:726
 msgctxt "Module name"
 msgid "Disable wp_mail"
 msgstr "Désactiver wp_mail"
 
-#: admin/class-modules-data.php:732
+#: admin/class-modules-data.php:738
 msgctxt "Module name"
 msgid "Disable XML-RPC"
 msgstr "Désactiver XML-RPC"
 
-#: admin/class-modules-data.php:776
+#: admin/class-modules-data.php:782
 msgctxt "Module name"
 msgid "Disallow Access WP Sensible Files"
 msgstr "Interdire l'accès aux fichiers sensibles WP"
 
-#: admin/class-modules-data.php:860
+#: admin/class-modules-data.php:866
 msgctxt "Module name"
 msgid "Disallow Bad Requests"
 msgstr "Interdire les mauvaises requêtes"
 
-#: admin/class-modules-data.php:780
+#: admin/class-modules-data.php:786
 msgctxt "Module name"
 msgid "Disallow Countries IP"
 msgstr "Interdire les IPs par pays"
 
-#: admin/class-modules-data.php:784
+#: admin/class-modules-data.php:790
 msgctxt "Module name"
 msgid "Disallow Dir Listing"
 msgstr "Interdire la liste des répertoires"
 
-#: admin/class-modules-data.php:804
+#: admin/class-modules-data.php:810
 msgctxt "Module name"
 msgid "Disallow Malicious File Access in upload"
 msgstr "Interdire l'accès aux fichiers malveillants dans le dossier upload"
 
-#: admin/class-modules-data.php:772
+#: admin/class-modules-data.php:778
 msgctxt "Module name"
 msgid "Disallow Plugin Upload"
 msgstr "Interdire le téléversement de plugins"
 
-#: admin/class-modules-data.php:736
+#: admin/class-modules-data.php:742
 msgctxt "Module name"
 msgid "Disallow register user"
 msgstr "Désactiver l’option « Tout le monde peut s’inscrire »"
 
-#: admin/class-modules-data.php:768
+#: admin/class-modules-data.php:774
 msgctxt "Module name"
 msgid "Disallow Theme Upload"
 msgstr "Interdire le téléversement de thème"
 
-#: admin/class-modules-data.php:728
+#: admin/class-modules-data.php:734
 msgctxt "Module name"
 msgid "Disallow WP File Edit"
 msgstr "Interdire l’utilisation de WP File Edit"
 
-#: admin/class-modules-data.php:892
+#: admin/class-modules-data.php:898
 msgctxt "Module name"
 msgid "Duplicate Menu"
 msgstr "Duplication de menu"
 
-#: admin/class-modules-data.php:936
+#: admin/class-modules-data.php:942
 msgctxt "Module name"
 msgid "Enhance List Tables"
 msgstr "Améliorer les tableaux de liste"
 
-#: admin/class-modules-data.php:888
+#: admin/class-modules-data.php:894
 msgctxt "Module name"
 msgid "Export Posts & Pages"
 msgstr "Exporter les articles et les pages"
 
-#: admin/class-modules-data.php:876
+#: admin/class-modules-data.php:882
 msgctxt "Module name"
 msgid "Export Users"
 msgstr "Exporter les utilisateurs"
 
-#: admin/class-modules-data.php:924
+#: admin/class-modules-data.php:930
 msgctxt "Module name"
 msgid "External Permalinks"
 msgstr "Permaliens externes"
 
-#: admin/class-modules-data.php:1012
+#: admin/class-modules-data.php:1018
 msgctxt "Module name"
 msgid "File Manager"
 msgstr "Gestionnaire de fichiers"
 
-#: admin/class-modules-data.php:796
+#: admin/class-modules-data.php:802
 msgctxt "Module name"
 msgid "Force Send All Email To"
 msgstr "Forcer l'envoi de tous les e-mails à"
 
-#: admin/class-modules-data.php:752
+#: admin/class-modules-data.php:1098
+#, fuzzy
+msgctxt "Module name"
+msgid "Force SSL"
+msgstr "Forcer SSL"
+
+#: admin/class-modules-data.php:758
 msgctxt "Module name"
 msgid "Force Strong Password"
 msgstr "Forcer un mot de passe fort"
 
-#: admin/class-modules-data.php:984
+#: admin/class-modules-data.php:990
 msgctxt "Module name"
 msgid "Heartbeat Control"
 msgstr "Contrôle du rythme cardiaque"
 
-#: admin/class-modules-data.php:680
+#: admin/class-modules-data.php:686
 msgctxt "Module name"
 msgid "Hide Admin Bar"
 msgstr "Masquer la barre d'administration"
 
-#: admin/class-modules-data.php:672
+#: admin/class-modules-data.php:678
 msgctxt "Module name"
 msgid "Hide Admin Notices"
 msgstr "Masquer les notifications d'administration"
 
-#: admin/class-modules-data.php:764
+#: admin/class-modules-data.php:770
 msgctxt "Module name"
 msgid "Hide Login Errors"
 msgstr "Masquer les erreurs de connexion"
 
-#: admin/class-modules-data.php:868
+#: admin/class-modules-data.php:874
 msgctxt "Module name"
 msgid "Hide PHP Versions"
 msgstr "Masquer les versions PHP"
 
-#: admin/class-modules-data.php:724
+#: admin/class-modules-data.php:730
 msgctxt "Module name"
 msgid "Hide WordPress Version"
 msgstr "Masquer la version WordPress"
 
-#: admin/class-modules-data.php:1048
+#: admin/class-modules-data.php:1054
 #| msgid "Hook and filter debugger"
 msgctxt "Module name"
 msgid "Hook And Filter Debugger"
 msgstr "Débogueur de hook et de filtre"
 
-#: admin/class-modules-data.php:980
+#: admin/class-modules-data.php:986
 msgctxt "Module name"
 msgid "Image Upload Control"
 msgstr "Contrôle de téléchargement d'images"
 
-#: admin/class-modules-data.php:952
+#: admin/class-modules-data.php:958
 msgctxt "Module name"
 msgid "Insert <head>, <body> and <footer> Code"
 msgstr "Insérer le code <head>, <body> et <footer>"
 
-#: admin/class-modules-data.php:684
+#: admin/class-modules-data.php:690
 msgctxt "Module name"
 msgid "Last Login Column"
 msgstr "Colonne Dernière connexion"
 
-#: admin/class-modules-data.php:988
+#: admin/class-modules-data.php:994
 msgctxt "Module name"
 msgid "Limit Login Attempts"
 msgstr "Limiter les tentatives de connexion"
 
-#: admin/class-modules-data.php:1084
+#: admin/class-modules-data.php:1090
 #, fuzzy
 msgctxt "Module name"
 msgid "Link Shortener"
 msgstr "Raccourcisseur de liens"
 
-#: admin/class-modules-data.php:1036
+#: admin/class-modules-data.php:1042
 msgctxt "Module name"
 msgid "Local avatars"
 msgstr "Local avatars"
 
-#: admin/class-modules-data.php:744
+#: admin/class-modules-data.php:750
 msgctxt "Module name"
 msgid "Lock Admin Email"
 msgstr "Verrouiller l'e-mail de l'administrateur"
 
-#: admin/class-modules-data.php:740
+#: admin/class-modules-data.php:746
 msgctxt "Module name"
 msgid "Lock Site URL"
 msgstr "Verrouiller l'URL du site"
 
-#: admin/class-modules-data.php:940
+#: admin/class-modules-data.php:946
 msgctxt "Module name"
 msgid "Log In/Out Menu"
 msgstr "Menu Connexion/Déconnexion"
 
-#: admin/class-modules-data.php:904
+#: admin/class-modules-data.php:910
 msgctxt "Module name"
 msgid "Maintenance Mode"
 msgstr "Maintenance en cours"
 
-#: admin/class-modules-data.php:788
+#: admin/class-modules-data.php:794
 msgctxt "Module name"
 msgid "Manage Admin Emails Notifications"
 msgstr "Gérer les notifications par e-mail de l'administrateur"
 
-#: admin/class-modules-data.php:956
+#: admin/class-modules-data.php:962
 msgctxt "Module name"
 msgid "Manage ads.txt and app-ads.txt"
 msgstr "Gérer les fichiers ads.txt et app-ads.txt"
 
-#: admin/class-modules-data.php:960
+#: admin/class-modules-data.php:966
 msgctxt "Module name"
 msgid "Manage robots.txt"
 msgstr "Gérer le fichier robots.txt"
 
-#: admin/class-modules-data.php:1064
+#: admin/class-modules-data.php:1070
 msgctxt "Module name"
 msgid "Media Cleaner"
 msgstr "Nettoyeur de médias"
 
-#: admin/class-modules-data.php:1060
+#: admin/class-modules-data.php:1066
 msgctxt "Module name"
 msgid "Media Encoder"
 msgstr "Encodeur multimédia"
 
-#: admin/class-modules-data.php:928
+#: admin/class-modules-data.php:934
 msgctxt "Module name"
 msgid "Meta Debugger"
 msgstr "Méta-débogueur"
 
-#: admin/class-modules-data.php:756
+#: admin/class-modules-data.php:762
 msgctxt "Module name"
 msgid "Move Login URL"
 msgstr "Déplacer l'URL de connexion"
 
-#: admin/class-modules-data.php:1024
+#: admin/class-modules-data.php:1030
 msgctxt "Module name"
 msgid "Multiple User Roles"
 msgstr "Rôles d'utilisateurs multiples"
 
-#: admin/class-modules-data.php:872
+#: admin/class-modules-data.php:878
 msgctxt "Module name"
 msgid "Nav Menu Visibility"
 msgstr "Visibilité du menu de navigation"
 
-#: admin/class-modules-data.php:1080
+#: admin/class-modules-data.php:1086
 msgctxt "Module name"
 msgid "No Plugin Activation / Deactivation / Deletion"
 msgstr "Aucune activation / désactivation / suppression de plugin"
 
-#: admin/class-modules-data.php:972
+#: admin/class-modules-data.php:978
 msgctxt "Module name"
 msgid "Obfuscate Author Slugs"
 msgstr "Masquer les slugs des auteurs"
 
-#: admin/class-modules-data.php:976
+#: admin/class-modules-data.php:982
 msgctxt "Module name"
 msgid "Obfuscate Email Addresses"
 msgstr "Masquer les adresses e-mail"
 
-#: admin/class-modules-data.php:692
+#: admin/class-modules-data.php:698
 msgctxt "Module name"
 msgid "Open All External Links in New Tab"
 msgstr "Ouvrir tous les liens externes dans un nouvel onglet"
 
-#: admin/class-modules-data.php:908
+#: admin/class-modules-data.php:914
 msgctxt "Module name"
 msgid "Password Protection"
 msgstr "Mot de passe de protection"
 
-#: admin/class-modules-data.php:1068
+#: admin/class-modules-data.php:1074
 msgctxt "Module name"
 msgid "Paste Image In Media"
 msgstr "Coller l'image dans le média"
 
-#: admin/class-modules-data.php:1020
+#: admin/class-modules-data.php:1026
 msgctxt "Module name"
 msgid "Plugin & Theme Rollback"
 msgstr "Restauration des plugins et des thèmes"
 
-#: admin/class-modules-data.php:800
+#: admin/class-modules-data.php:806
 msgctxt "Module name"
 msgid "Plugin Download"
 msgstr "Téléchargement du plugin"
 
-#: admin/class-modules-data.php:916
+#: admin/class-modules-data.php:922
 msgctxt "Module name"
 msgid "Post Per Page"
 msgstr "Publication par page"
 
-#: admin/class-modules-data.php:1008
+#: admin/class-modules-data.php:1014
 msgctxt "Module name"
 msgid "Prevent User Enumeration"
 msgstr "Empêcher l'énumération des utilisateurs"
 
-#: admin/class-modules-data.php:1004
+#: admin/class-modules-data.php:1010
 msgctxt "Module name"
 msgid "Protect Website Headers"
 msgstr "Protéger les en-têtes du site Web"
 
-#: admin/class-modules-data.php:884
+#: admin/class-modules-data.php:890
 msgctxt "Module name"
 msgid "Quick Add Post"
 msgstr "Ajout rapide d'un article"
 
-#: admin/class-modules-data.php:900
+#: admin/class-modules-data.php:906
 msgctxt "Module name"
 msgid "Redirect 404 to Homepage"
 msgstr "Rediriger 404 vers la page d'accueil"
 
-#: admin/class-modules-data.php:848
+#: admin/class-modules-data.php:854
 msgctxt "Module name"
 msgid "Redirect After Login"
 msgstr "Redirection après la connexion"
 
-#: admin/class-modules-data.php:844
+#: admin/class-modules-data.php:850
 msgctxt "Module name"
 msgid "Redirect After Logout"
 msgstr "Redirection après la déconnexion"
 
-#: admin/class-modules-data.php:812
+#: admin/class-modules-data.php:818
 msgctxt "Module name"
 msgid "Revisions Control"
 msgstr "Contrôle des révisions"
 
-#: admin/class-modules-data.php:1000
+#: admin/class-modules-data.php:1006
 #| msgid "SMTP mailer"
 msgctxt "Module name"
 msgid "SMTP Mailer"
 msgstr "Courrier SMTP"
 
-#: admin/class-modules-data.php:688
+#: admin/class-modules-data.php:694
 msgctxt "Module name"
 msgid "SVG Upload"
 msgstr "Téléchargement SVG"
 
-#: admin/class-modules-data.php:760
+#: admin/class-modules-data.php:766
 msgctxt "Module name"
 msgid "Two Factor Authentication"
 msgstr "Authentification à deux facteurs"
 
-#: admin/class-modules-data.php:676
+#: admin/class-modules-data.php:682
 msgctxt "Module name"
 msgid "Updates Logs"
 msgstr "Journaux de mises à jour"
 
-#: admin/class-modules-data.php:1056
+#: admin/class-modules-data.php:1062
 msgctxt "Module name"
 msgid "User Switching"
 msgstr "Changement d'utilisateur"
 
-#: admin/class-modules-data.php:1088
+#: admin/class-modules-data.php:1094
 #, fuzzy
 msgctxt "Module name"
 msgid "Vulnerabilities Scan"
 msgstr "Analyse des vulnérabilités"
 
-#: admin/class-modules-data.php:852
+#: admin/class-modules-data.php:858
 msgctxt "Module name"
 msgid "Wider Admin Menu"
 msgstr "Menu d’administration plus large"
@@ -4161,7 +4162,7 @@ msgstr "Mensuel"
 msgid "Move"
 msgstr "Se déplacer"
 
-#: admin/modules/core/class-move-login-url.php:63
+#: admin/modules/core/class-move-login-url.php:67
 msgid "Move login URL"
 msgstr "Déplacer l'URL de connexion"
 
@@ -4454,7 +4455,7 @@ msgstr "Image originale :"
 msgid "Other"
 msgstr "Autre"
 
-#: admin/class-modules-data.php:1177
+#: admin/class-modules-data.php:1187
 msgid "Other Features"
 msgstr "Autres caractéristiques"
 
@@ -4593,7 +4594,7 @@ msgstr "Contenu de la politique d'autorisation"
 msgid "Perms"
 msgstr "Autorisations"
 
-#: admin/templates/core/page-settings.php:209
+#: admin/templates/core/page-settings.php:210
 msgid "Personal Data"
 msgstr "Données personnelles"
 
@@ -4665,7 +4666,7 @@ msgstr ""
 msgid "Plugin & Theme Rollback"
 msgstr "Restauration des plugins et des thèmes"
 
-#: admin/templates/core/page-settings.php:220
+#: admin/templates/core/page-settings.php:221
 msgid "Plugin improvement"
 msgstr "Amélioration des plugins"
 
@@ -4716,6 +4717,20 @@ msgstr "Types de messages"
 msgid "Preload"
 msgstr "Préchargement"
 
+#: admin/modules/core/class-move-login-url.php:885
+#, fuzzy
+msgid ""
+"Prevent access to ^/wp-admin for not logged in users with a 403 error. This "
+"feature allows you to block the request directly via Apache or Nginx, which "
+"saves your server resources. If this feature is enabled the redirection URL "
+"will be ignored."
+msgstr ""
+"Empêchez l'accès à ^/wp-admin aux utilisateurs non connectés présentant une "
+"erreur 403. Cette fonctionnalité vous permet de bloquer la requête "
+"directement via Apache ou Nginx, ce qui économise les ressources de votre "
+"serveur. Si cette fonctionnalité est activée, l'URL de redirection sera "
+"ignorée."
+
 #: admin/modules/core/class-limit-login-attempts.php:496
 msgid ""
 "Prevent brute force attacks by limiting the number of failed login attempts "
@@ -4743,7 +4758,7 @@ msgstr "Priorité"
 msgid "Priority:"
 msgstr "Priorité:"
 
-#: admin/templates/core/page-settings.php:142
+#: admin/templates/core/page-settings.php:143
 msgid "PRO"
 msgstr "PRO"
 
@@ -4832,7 +4847,7 @@ msgstr "URL de redirection"
 msgid "Redirected roles"
 msgstr "Rôles redirigés"
 
-#: admin/modules/core/class-move-login-url.php:746
+#: admin/modules/core/class-move-login-url.php:853
 msgid "Redirection URL"
 msgstr "URL de redirection"
 
@@ -5086,7 +5101,7 @@ msgstr "SAMEORIGIN"
 msgid "Save"
 msgstr "Sauvegarder"
 
-#: admin/templates/core/page-settings.php:242
+#: admin/templates/core/page-settings.php:243
 msgid "Save & continue"
 msgstr "Enregistrer et continuer"
 
@@ -5159,7 +5174,7 @@ msgstr "Secondes"
 msgid "Sections to hide"
 msgstr "Sections à masquer"
 
-#: admin/class-modules-data.php:1162
+#: admin/class-modules-data.php:1172
 msgid "Security"
 msgstr "Sécurité"
 
@@ -5312,12 +5327,12 @@ msgstr "Définir le mot de passe"
 msgid "Set width to"
 msgstr "Définir la largeur sur"
 
-#: admin/class-modules-data.php:1182
+#: admin/class-modules-data.php:1192
 #: admin/modules/core/class-code-snippets.php:166
 msgid "Settings"
 msgstr "Paramètres"
 
-#: admin/templates/core/page-settings.php:185
+#: admin/templates/core/page-settings.php:186
 msgid "Share my configuration"
 msgstr "Partager ma configuration"
 
@@ -5488,7 +5503,7 @@ msgstr ""
 "Spécifier le nombre de publications à afficher par page, pour chaque type de "
 "publication."
 
-#: admin/class-modules-data.php:1167
+#: admin/class-modules-data.php:1177
 msgid "Speed Optimizations"
 msgstr "Optimisations de vitesse"
 
@@ -5762,12 +5777,13 @@ msgstr "Il n'y a actuellement aucun événement cron programmé."
 msgid "There are no %s cron events to delete."
 msgstr "Il n'y a aucun événement cron %s à supprimer."
 
-#: admin/modules/core/class-move-login-url.php:382
+#: admin/modules/core/class-move-login-url.php:487
 msgid "This feature is not enabled."
 msgstr "Cette fonctionnalité n'est pas activée."
 
 #: admin/modules/core/class-maintenance-mode.php:542
 #: admin/modules/core/class-maintenance-mode.php:590
+#: admin/modules/core/class-move-login-url.php:872
 #, fuzzy
 msgid "This feature is only available in the Pro version."
 msgstr "Cette fonctionnalité n'est disponible que dans la version Pro."
@@ -5776,7 +5792,7 @@ msgstr "Cette fonctionnalité n'est disponible que dans la version Pro."
 msgid "This folder name already exists"
 msgstr "Ce nom de dossier existe déjà"
 
-#: admin/modules/core/class-move-login-url.php:430
+#: admin/modules/core/class-move-login-url.php:535
 msgid "This has been disabled"
 msgstr "Ceci a été désactivé"
 
@@ -5864,7 +5880,7 @@ msgstr ""
 "Cette analyse est effectuée régulièrement en arrière-plan et à chaque fois "
 "qu'un plugin ou un thème est installé sur votre site."
 
-#: admin/templates/core/page-settings.php:221
+#: admin/templates/core/page-settings.php:222
 msgid ""
 "This sharing allows us to make the most relevant improvements to the plugin."
 msgstr ""
@@ -6172,11 +6188,11 @@ msgstr ""
 "développez les capacités de votre site Web avec des outils fiables et "
 "faciles à utiliser."
 
-#: admin/templates/core/page-settings.php:210
+#: admin/templates/core/page-settings.php:211
 msgid "We never share or get your personal information."
 msgstr "Nous ne partageons ni n'obtenons jamais vos informations personnelles."
 
-#: admin/templates/core/page-settings.php:199
+#: admin/templates/core/page-settings.php:200
 msgid "We only send your WPMasterToolKit configuration."
 msgstr "Nous envoyons uniquement votre configuration WPMasterToolKit."
 
@@ -6230,7 +6246,7 @@ msgstr "Semaine"
 msgid "Weekly"
 msgstr "Hebdomadaire"
 
-#: admin/templates/core/page-settings.php:262
+#: admin/templates/core/page-settings.php:263
 #, php-format
 msgid "What's new in v%s"
 msgstr "Quoi de neuf dans v%s"
@@ -6283,7 +6299,7 @@ msgstr "Widget (sans nom)"
 msgid "With the PRO version you unlock:"
 msgstr "Avec la version PRO vous débloquez :"
 
-#: admin/class-modules-data.php:1172
+#: admin/class-modules-data.php:1182
 msgid "Woocommerce"
 msgstr "Woocommerce"
 
