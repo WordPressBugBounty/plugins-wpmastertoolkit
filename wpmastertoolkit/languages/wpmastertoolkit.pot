@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: WPMasterToolKit\n"
 "Report-Msgid-Bugs-To: Webdeclic "
 "<contact@webdeclic.com>\n"
-"POT-Creation-Date: 2025-03-12 16:14+0200\n"
+"POT-Creation-Date: 2025-03-25 13:29+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Webdeclic "
 "<contact@webdeclic.com>\n"
@@ -1699,65 +1699,65 @@ msgstr ""
 msgid "Adminer"
 msgstr ""
 
-#: admin/modules/core/class-adminer.php:343
+#: admin/modules/core/class-adminer.php:344
 msgid "30 Min"
 msgstr ""
 
-#: admin/modules/core/class-adminer.php:344
+#: admin/modules/core/class-adminer.php:345
 msgid "1 Hour"
 msgstr ""
 
-#: admin/modules/core/class-adminer.php:345
+#: admin/modules/core/class-adminer.php:346
 msgid "2 Hours"
 msgstr ""
 
-#: admin/modules/core/class-adminer.php:346
+#: admin/modules/core/class-adminer.php:347
 msgid "3 Hours"
 msgstr ""
 
-#: admin/modules/core/class-adminer.php:347
+#: admin/modules/core/class-adminer.php:348
 msgid "4 Hours"
 msgstr ""
 
-#: admin/modules/core/class-adminer.php:382
+#: admin/modules/core/class-adminer.php:383
 msgid "Connect"
 msgstr ""
 
-#: admin/modules/core/class-adminer.php:384
+#: admin/modules/core/class-adminer.php:385
 msgid "Connect to your database"
 msgstr ""
 
-#: admin/modules/core/class-adminer.php:409
+#: admin/modules/core/class-adminer.php:410
 msgid ""
 "A full-featured database management tool."
 msgstr ""
 
-#: admin/modules/core/class-adminer.php:413
+#: admin/modules/core/class-adminer.php:414
 msgid "File lifetime"
 msgstr ""
 
-#: admin/modules/core/class-adminer.php:421
+#: admin/modules/core/class-adminer.php:422
 msgid ""
 "Choose the lifetime of the database file"
 msgstr ""
 
-#: admin/modules/core/class-adminer.php:428
+#: admin/modules/core/class-adminer.php:429
 msgid "File Creation"
 msgstr ""
 
-#: admin/modules/core/class-adminer.php:436
+#: admin/modules/core/class-adminer.php:437
 msgid "File Deletion"
 msgstr ""
 
-#: admin/modules/core/class-adminer.php:440
+#: admin/modules/core/class-adminer.php:441
 msgid "Delete Now"
 msgstr ""
 
-#: admin/modules/core/class-adminer.php:447
+#: admin/modules/core/class-adminer.php:448
 msgid "Download adminer"
 msgstr ""
 
-#: admin/modules/core/class-adminer.php:450
+#: admin/modules/core/class-adminer.php:451
 #: admin/templates/core/file-manager/views/default.php:178
 #: admin/templates/core/file-manager/views/view.php:77
 #: admin/templates/core/page-settings-tabs/settings.php:37
@@ -4063,8 +4063,12 @@ msgid ""
 "redirection URL will be ignored."
 msgstr ""
 
-#: admin/modules/core/class-multiple-user-roles.php:63
+#: admin/modules/core/class-multiple-user-roles.php:65
 msgid "Roles"
+msgstr ""
+
+#: admin/modules/core/class-multiple-user-roles.php:76
+msgid "(You cannot remove this role)"
 msgstr ""
 
 #: admin/modules/core/class-nav-menu-visibility.php:33
@@ -4660,7 +4664,7 @@ msgstr ""
 msgid "410 Manager"
 msgstr ""
 
-#: admin/modules/pro/class-410-manager.php:481
+#: admin/modules/pro/class-410-manager.php:487
 msgid ""
 "Managing HTTP 410 statuses on your site. The "
 "410 status indicates that the requested "
@@ -4668,21 +4672,21 @@ msgid ""
 "that this deletion is intentional and final."
 msgstr ""
 
-#: admin/modules/pro/class-410-manager.php:485
+#: admin/modules/pro/class-410-manager.php:491
 msgid "Add URLs"
 msgstr ""
 
-#: admin/modules/pro/class-410-manager.php:490
+#: admin/modules/pro/class-410-manager.php:496
 msgid ""
 "Enter the URLs you want to mark as 410 in "
 "the textarea, one URL per line."
 msgstr ""
 
-#: admin/modules/pro/class-410-manager.php:495
+#: admin/modules/pro/class-410-manager.php:501
 msgid "Exclude URLs from XML Sitemap"
 msgstr ""
 
-#: admin/modules/pro/class-410-manager.php:506
+#: admin/modules/pro/class-410-manager.php:512
 msgid "Exclude URLs from RSS feed"
 msgstr ""
 

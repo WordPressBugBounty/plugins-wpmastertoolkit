@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WPMasterToolKit\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-31 17:04+0100\n"
-"PO-Revision-Date: 2025-03-12 16:15+0000\n"
+"PO-Revision-Date: 2025-03-25 13:30+0000\n"
 "Last-Translator: \n"
 "Language-Team: Français\n"
 "Language: fr_FR\n"
@@ -140,13 +140,17 @@ msgstr ""
 "(WordPress n'a pas pu établir de connexion sécurisée avec WordPress.org. "
 "Veuillez contacter l'administrateur de votre serveur.)"
 
+#: admin/modules/core/class-multiple-user-roles.php:76
+msgid "(You cannot remove this role)"
+msgstr "(Vous ne pouvez pas supprimer ce rôle)"
+
 #: licensing/src/Settings.php:340
 #, fuzzy, php-format
 #| msgid "+%s Pro modules"
 msgid "+ %s Pro modules"
 msgstr "+%s Modules Pro"
 
-#: admin/modules/core/class-adminer.php:344
+#: admin/modules/core/class-adminer.php:345
 msgid "1 Hour"
 msgstr "1 Heure"
 
@@ -170,7 +174,7 @@ msgstr "120 secondes"
 msgid "15 seconds"
 msgstr "15 secondes"
 
-#: admin/modules/core/class-adminer.php:345
+#: admin/modules/core/class-adminer.php:346
 msgid "2 Hours"
 msgstr "2 Heures"
 
@@ -179,7 +183,7 @@ msgstr "2 Heures"
 msgid "2 minutes"
 msgstr "2 minutes"
 
-#: admin/modules/core/class-adminer.php:346
+#: admin/modules/core/class-adminer.php:347
 msgid "3 Hours"
 msgstr "3 Heures"
 
@@ -188,7 +192,7 @@ msgstr "3 Heures"
 msgid "3 minutes"
 msgstr "3 minutes"
 
-#: admin/modules/core/class-adminer.php:343
+#: admin/modules/core/class-adminer.php:344
 msgid "30 Min"
 msgstr "30 Min"
 
@@ -198,7 +202,7 @@ msgstr "30 Min"
 msgid "30 seconds"
 msgstr "30 secondes"
 
-#: admin/modules/core/class-adminer.php:347
+#: admin/modules/core/class-adminer.php:348
 msgid "4 Hours"
 msgstr "4 Heures"
 
@@ -243,7 +247,7 @@ msgstr ""
 "<strong>ERREUR</strong> : Votre mot de passe n'est pas assez fort. Veuillez "
 "utiliser un mot de passe plus fort."
 
-#: admin/modules/core/class-adminer.php:409
+#: admin/modules/core/class-adminer.php:410
 msgid "A full-featured database management tool."
 msgstr "Un outil de gestion de base de données complet."
 
@@ -391,7 +395,7 @@ msgstr ""
 msgid "Add to Menu"
 msgstr "Ajouter au menu"
 
-#: admin/modules/pro/class-410-manager.php:485
+#: admin/modules/pro/class-410-manager.php:491
 msgid "Add URLs"
 msgstr "Ajouter des URL"
 
@@ -869,7 +873,7 @@ msgstr "Choisir une image"
 msgid "Choose the frequency to clean for the above period."
 msgstr "Choisissez la fréquence de nettoyage pour la période ci-dessus."
 
-#: admin/modules/core/class-adminer.php:421
+#: admin/modules/core/class-adminer.php:422
 msgid "Choose the lifetime of the database file"
 msgstr "Choisissez la durée de vie du fichier de base de données"
 
@@ -980,11 +984,11 @@ msgstr "Commentaires"
 msgid "Compression: %s%%"
 msgstr "Compression : %s%%"
 
-#: admin/modules/core/class-adminer.php:382
+#: admin/modules/core/class-adminer.php:383
 msgid "Connect"
 msgstr "Connecter"
 
-#: admin/modules/core/class-adminer.php:384
+#: admin/modules/core/class-adminer.php:385
 msgid "Connect to your database"
 msgstr "Connectez-vous à votre base de données"
 
@@ -1212,7 +1216,7 @@ msgstr "Supprimer le fichier"
 msgid "Delete Folder"
 msgstr "Supprimer le dossier"
 
-#: admin/modules/core/class-adminer.php:440
+#: admin/modules/core/class-adminer.php:441
 msgid "Delete Now"
 msgstr "Supprimer maintenant"
 
@@ -1367,14 +1371,14 @@ msgstr "Ne compressez pas les images déjà présentes dans WebP"
 msgid "Don't see in admin bar"
 msgstr "Ne pas voir dans la barre d'administration"
 
-#: admin/modules/core/class-adminer.php:450
+#: admin/modules/core/class-adminer.php:451
 #: admin/templates/core/file-manager/views/default.php:178
 #: admin/templates/core/file-manager/views/view.php:77
 #: admin/templates/core/page-settings-tabs/settings.php:37
 msgid "Download"
 msgstr "Télécharger"
 
-#: admin/modules/core/class-adminer.php:447
+#: admin/modules/core/class-adminer.php:448
 msgid "Download adminer"
 msgstr "Télécharger Adminer"
 
@@ -1583,7 +1587,7 @@ msgstr "Entrer le code"
 msgid "Enter the license..."
 msgstr "Entrez la licence..."
 
-#: admin/modules/pro/class-410-manager.php:490
+#: admin/modules/pro/class-410-manager.php:496
 msgid ""
 "Enter the URLs you want to mark as 410 in the textarea, one URL per line."
 msgstr ""
@@ -1686,11 +1690,11 @@ msgstr "Tout le monde"
 msgid "Excerpt"
 msgstr "Extrait"
 
-#: admin/modules/pro/class-410-manager.php:506
+#: admin/modules/pro/class-410-manager.php:512
 msgid "Exclude URLs from RSS feed"
 msgstr "Exclure les URL du flux RSS"
 
-#: admin/modules/pro/class-410-manager.php:495
+#: admin/modules/pro/class-410-manager.php:501
 msgid "Exclude URLs from XML Sitemap"
 msgstr "Exclure les URL du plan de site XML"
 
@@ -1824,11 +1828,11 @@ msgstr "Fichier <b>%s</b> supprimé"
 msgid "File <b>%s</b> not deleted"
 msgstr "Le fichier <b>%s</b> n'a pas été supprimé"
 
-#: admin/modules/core/class-adminer.php:428
+#: admin/modules/core/class-adminer.php:429
 msgid "File Creation"
 msgstr "Création de fichier"
 
-#: admin/modules/core/class-adminer.php:436
+#: admin/modules/core/class-adminer.php:437
 msgid "File Deletion"
 msgstr "Suppression de fichiers"
 
@@ -1840,7 +1844,7 @@ msgstr "L'extension de fichier n'est pas autorisée"
 msgid "File extension not supported for editing"
 msgstr "L'extension de fichier n'est pas prise en charge pour l'édition"
 
-#: admin/modules/core/class-adminer.php:413
+#: admin/modules/core/class-adminer.php:414
 msgid "File lifetime"
 msgstr "Durée de vie du fichier"
 
@@ -2556,7 +2560,7 @@ msgstr ""
 "les commentaires existants disparaîtront de manière transparente du front-"
 "end."
 
-#: admin/modules/pro/class-410-manager.php:481
+#: admin/modules/pro/class-410-manager.php:487
 msgid ""
 "Managing HTTP 410 statuses on your site. The 410 status indicates that the "
 "requested resource has been permanently deleted and that this deletion is "
@@ -5075,7 +5079,7 @@ msgstr "fichier robots.txt"
 msgid "Role"
 msgstr "Rôle"
 
-#: admin/modules/core/class-multiple-user-roles.php:63
+#: admin/modules/core/class-multiple-user-roles.php:65
 msgid "Roles"
 msgstr "Rôles"
 

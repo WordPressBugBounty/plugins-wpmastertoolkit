@@ -57,7 +57,8 @@ class WPMastertoolkit_Adminer {
     public function class_init() {
         $this->header_title = esc_html__( 'Adminer', 'wpmastertoolkit' );
 
-		if ( ! headers_sent() && ! session_id() ) {
+		$is_adminer_file_request = preg_match( '/wpmastertoolkit-adminer-.*\.php/', sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
+		if ( $is_adminer_file_request && ! headers_sent() && ! session_id() ) {
 			session_start();
 		}
     }

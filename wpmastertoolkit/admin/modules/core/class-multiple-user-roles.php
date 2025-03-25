@@ -49,12 +49,14 @@ class WPMastertoolkit_Multiple_User_Roles {
 	 * @since   1.10.0
 	 */
 	public function render_user_meta_box( $user ) {
-		$roles      = get_editable_roles();
-		$user_roles = array();
+		$roles      	 	   = get_editable_roles();
+		$user_roles 	 	   = array();
 
 		if ( ! empty( $user->roles ) ) {
         	$user_roles = array_intersect( array_values( $user->roles ), array_keys( $roles ) );
         }
+
+		$is_current_user_admin = get_current_user_id() == $user->ID && in_array( 'administrator', $user->roles );
 
 		if ( current_user_can( 'promote_users', get_current_user_id() ) ) : ?>
 			<div class="wpmastertoolkit-multiple-roles">
@@ -64,8 +66,21 @@ class WPMastertoolkit_Multiple_User_Roles {
 						<td>
 							<?php foreach ( $roles as $role_slug => $role_info ) : ?>
 								<label>
-									<input type="checkbox" name="wpmastertoolkit_assigned_roles[]" value="<?php echo esc_attr( $role_slug ); ?>" <?php checked( in_array( $role_slug, $user_roles ) ); ?> style="width: 1rem;"/>
-									<?php echo esc_html( translate_user_role( $role_info['name'] ) ); ?>
+								<?php
+									$after_role_text = '';
+									if ( $is_current_user_admin && 'administrator' == $role_slug ) {
+										?>
+										<input type="hidden" name="wpmastertoolkit_assigned_roles[]" value="<?php echo esc_attr( $role_slug ); ?>"/>
+										<input type="checkbox" name="wpmastertoolkit_assigned_roles[]" value="<?php echo esc_attr( $role_slug ); ?>" <?php checked( in_array( $role_slug, $user_roles ) ); ?> style="width: 1rem;" disabled/>
+										<?php
+										$after_role_text = ' <small><em>' . esc_html__( '(You cannot remove this role)', 'wpmastertoolkit' ) . '</em></small>';
+									} else {
+										?>
+										<input type="checkbox" name="wpmastertoolkit_assigned_roles[]" value="<?php echo esc_attr( $role_slug ); ?>" <?php checked( in_array( $role_slug, $user_roles ) ); ?> style="width: 1rem;"/>
+										<?php
+									}
+									?>
+									<?php echo wp_kses_post( translate_user_role( $role_info['name'] ) . $after_role_text ); ?>
 								</label>
 								<br/>
 							<?php endforeach; ?>
@@ -96,11 +111,16 @@ class WPMastertoolkit_Multiple_User_Roles {
         $user_roles     = array_intersect( array_values( $user->roles ), array_keys( $roles ) );
 		//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		$assigned_roles = wpmastertoolkit_clean( $_POST['wpmastertoolkit_assigned_roles'] ?? '' );
+		$is_current_user_admin = get_current_user_id() == $user_id && in_array( 'administrator', $user_roles );
 
         if ( ! empty( $assigned_roles ) ) {
 			$roles_to_remove = array();
             $roles_to_add    = array();
             $assigned_roles  = array_intersect( $assigned_roles, array_keys( $roles ) );
+
+			if( $is_current_user_admin ) {
+				$assigned_roles[] = 'administrator';
+			}
 
 			if ( empty( $assigned_roles ) ) {
                 $roles_to_remove = $user_roles;

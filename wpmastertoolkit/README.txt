@@ -4,7 +4,7 @@ Tags: all in one plugin, admin, security, disable features, easy to use
 Requires at least: 6.0.0
 Tested up to: 6.7.1
 Requires PHP: 7.4
-Stable tag: 2.4.0
+Stable tag: 2.4.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
 
@@ -183,6 +183,10 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 4. Code snippets
 
 == Changelog ==
+
+= 2.4.1 =
+* Fix: Adminer: Problem with session_start() on REST-API. Related support ticket: https://wordpress.org/support/topic/problemes-critiques/#post-18381082
+* Fix: Multiple User Roles: Prevents the administrator from removing his own administrator role. Related support ticket: https://wordpress.org/support/topic/multiple-user-roles-generates-a-403-forbidden-error-2/#post-18381136
 
 = 2.4.0 =
 * Add Module: Force SSL
