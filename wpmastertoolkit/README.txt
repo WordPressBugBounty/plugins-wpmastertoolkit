@@ -4,7 +4,7 @@ Tags: all in one plugin, admin, security, disable features, easy to use
 Requires at least: 6.0.0
 Tested up to: 6.7.1
 Requires PHP: 7.4
-Stable tag: 2.4.1
+Stable tag: 2.5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
 
@@ -19,7 +19,7 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 **Test by Enzo (Easy WordPress) :**
 [youtube https://www.youtube.com/watch?v=I1GdHeeJp6E&t]
 
-= 87 Free features =
+= 88 Free features =
 
 * Adminer: A full-featured database management tool.
 * Allow Menu Custom Links to Open in New Tab: Enable custom menu links to open in a new tab with a checkbox. For security and SEO, links include the `rel="noopener noreferrer nofollow"` attribute.
@@ -29,6 +29,7 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 * Ban Emails: Ban the chosen emails.
 * Blacklisted Usernames: Prevent the creation of new user accounts with predifined blacklisted usernames. Blacklist usernames that are too common.
 * Block User Registration from Disposable Email: Block user registration from disposable email addresses. Disposable email addresses are temporary email addresses that are used to register on websites that require email verification.
+* Browser Theme Color: Select a tag color to allow seamless theme customization in all major browsers.
 * Child theme generator: A simple tool to generate a child theme on your WordPress. You can disable it after generation.
 * Clean Profiles: Tidy up user profiles by removing sections you do not utilise.
 * Clean Up Admin Bar: Remove various elements from the admin bar.
@@ -109,7 +110,7 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 * SVG Upload: Enhance media library functionality to support the seamless uploading of SVG files.
 * Wider Admin Menu: Give the admin menu more room to better accommodate wider items.
 
-= 19 Pro features =
+= 20 Pro features =
 * 410 Manager: Managing HTTP 410 statuses on your site. The 410 status indicates that the requested resource has been permanently deleted and that this deletion is intentional and final.
 * Add Essentials Shortcodes: Insert dynamic variables into your titles and content via shortcodes.
 * Auto clean actionscheduler_actions: Clean actionscheduler_actions database table from actions that have been completed | failed | cancelled.
@@ -125,6 +126,7 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 * No Plugin Activation / Deactivation / Deletion: Prevents plugin activation, deactivation, and deletion for enhanced security.
 * Paste Image In Media: With this feature you can paste directly your picture in WordPress media.
 * Plugin Download: Download plugins from the plugins page in the WordPress admin panel.
+* Post Type Switcher: A simple way to change the type of a post.
 * Two Factor Authentication: Add an extra layer of security to your website by enabling two-factor authentication for all users.
 * Updates Logs: Track and record the most recent login activity of site users, then showcase the date and time in the users list table
 * User Switching: Instant switching between user accounts.
@@ -183,6 +185,11 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 4. Code snippets
 
 == Changelog ==
+
+= 2.5.0 =
+* Add Module: Browser Theme Color
+* Add Pro Module: Post Type Switcher
+* Fix: quick add post module on fullscreen mode
 
 = 2.4.1 =
 * Fix: Adminer: Problem with session_start() on REST-API. Related support ticket: https://wordpress.org/support/topic/problemes-critiques/#post-18381082

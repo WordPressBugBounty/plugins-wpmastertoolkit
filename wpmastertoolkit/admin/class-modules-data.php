@@ -654,6 +654,18 @@ class WPMastertoolkit_Modules_Data {
 				'pro'           => false,
 				'path'          => 'core/class-force-ssl.php',
 			),
+			'WPMastertoolkit_Post_Type_Switcher' => array(
+				'original_name' => "Post Type Switcher",
+				'group'         => 'content-media',
+				'pro'           => true,
+				'path'          => 'pro/class-post-type-switcher.php',
+			),
+			'WPMastertoolkit_Browser_Theme_Color' => array(
+				'original_name' => "Browser Theme Color",
+				'group'         => 'content-media',
+				'pro'           => false,
+				'path'          => 'core/class-browser-theme-color.php',
+			),
 		);
 		
 		/**
@@ -1097,6 +1109,14 @@ class WPMastertoolkit_Modules_Data {
 			'WPMastertoolkit_Force_SSL' => array(
 				'name' => esc_html_x( "Force SSL", "Module name", 'wpmastertoolkit' ),
 				'desc' => esc_html_x( "Force HTTPS on your site to ensure all traffic is encrypted and secure.", "Module description", 'wpmastertoolkit' ),
+			),
+			'WPMastertoolkit_Post_Type_Switcher' => array(
+				'name' => esc_html_x( "Post Type Switcher", "Module name", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( "A simple way to change the type of a post.", "Module description", 'wpmastertoolkit' ),
+			),
+			'WPMastertoolkit_Browser_Theme_Color' => array(
+				'name' => esc_html_x( "Browser Theme Color", "Module name", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( "Select a tag color to allow seamless theme customization in all major browsers.", "Module description", 'wpmastertoolkit' ),
 			),
 		);
 

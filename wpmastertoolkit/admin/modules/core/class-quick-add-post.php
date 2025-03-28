@@ -31,6 +31,9 @@ class WPMastertoolkit_Quick_Add_Post {
             wp_enqueue_script( 'wpmastertoolkit-quick-add-post', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/quick-add-post.js', $assets['dependencies'], $assets['version'], true );
             wp_localize_script( 'wpmastertoolkit-quick-add-post', 'WPMastertoolkitQuickAddPost', array(
                 'post_type' => $post ? $post->post_type : null,
+				'i18n'      => array(
+					'quick_add_button_text' => __( 'New', 'wpmastertoolkit' ),
+				),
             ));
         }
     }

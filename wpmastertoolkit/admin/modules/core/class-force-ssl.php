@@ -28,8 +28,12 @@ class WPMastertoolkit_Force_SSL {
      * @return void
      */
     public function redirect_to_ssl() {
+
+		$host = sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ?? '' ) );
+		$uri  = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) );
+
         if ( ! is_ssl() ) {
-            wp_redirect( 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], 301 );
+            wp_redirect( 'https://' . $host . $uri, 301 );
             exit;
         }
     }
@@ -123,7 +127,7 @@ class WPMastertoolkit_Force_SSL {
      * @return string
      */
     private static function get_raw_content_nginx() {
-        $domain = parse_url( get_home_url(), PHP_URL_HOST );
+        $domain = wp_parse_url( get_home_url(), PHP_URL_HOST );
 
         return trim("
 server {
