@@ -99,9 +99,9 @@ class WPMastertoolkit_Disable_Dashboard_Widgets {
      */
     public function render_submenu() {
 
-        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/disable-comments.asset.php' );
-        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/disable-comments.css', array(), $submenu_assets['version'], 'all' );
-        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/disable-comments.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
+        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/disable-dashboard-widgets.asset.php' );
+        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/disable-dashboard-widgets.css', array(), $submenu_assets['version'], 'all' );
+        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/disable-dashboard-widgets.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
 
         include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/header.php';
         $this->submenu_content();

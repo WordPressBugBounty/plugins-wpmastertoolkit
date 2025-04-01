@@ -132,9 +132,9 @@ class WPMastertoolkit_Clean_Up_Admin_Bar {
      * @since   1.4.0
      */
     public function render_submenu() {
-        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/content-order.asset.php' );
-        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/content-order.css', array(), $submenu_assets['version'], 'all' );
-        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/content-order.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
+        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/clean-up-admin-bar.asset.php' );
+        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/clean-up-admin-bar.css', array(), $submenu_assets['version'], 'all' );
+        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/clean-up-admin-bar.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
 
         include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/header.php';
         $this->submenu_content();

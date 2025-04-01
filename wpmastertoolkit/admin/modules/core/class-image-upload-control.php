@@ -190,9 +190,9 @@ class WPMastertoolkit_Image_Upload_Control {
      * @since   1.5.0
      */
     public function render_submenu() {
-        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/insert-head-body-footer-code.asset.php' );
-        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/insert-head-body-footer-code.css', array(), $submenu_assets['version'], 'all' );
-        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/insert-head-body-footer-code.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
+        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/image-upload-control.asset.php' );
+        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/image-upload-control.css', array(), $submenu_assets['version'], 'all' );
+        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/image-upload-control.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
 
         include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/header.php';
         $this->submenu_content();
