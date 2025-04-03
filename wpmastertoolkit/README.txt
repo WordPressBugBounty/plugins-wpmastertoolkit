@@ -4,7 +4,7 @@ Tags: all in one plugin, admin, security, disable features, easy to use
 Requires at least: 6.0.0
 Tested up to: 6.7.1
 Requires PHP: 7.4
-Stable tag: 2.5.1
+Stable tag: 2.5.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
 
@@ -185,6 +185,11 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 4. Code snippets
 
 == Changelog ==
+
+= 2.5.2 =
+* Fix: Media Encoder: Problem with exif rotation when uploading images.
+* Fix: Image Upload Control: add compression on WebP resize to prevent a problem or the images becoming heavier.
+* Update: Image Upload Control: 'big_image_size_threshold' turned off, to prevent conflict with the 'Image Upload Control' module.
 
 = 2.5.1 =
 * Fix: include assets on multiple modules, forgotten following major code refactoring.

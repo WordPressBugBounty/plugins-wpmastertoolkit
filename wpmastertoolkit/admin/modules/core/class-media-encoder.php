@@ -258,6 +258,19 @@ class WPMastertoolkit_Media_Encoder {
 			return $image_file;
 		}
 
+		$exif_meta = wp_read_image_metadata( $image_file['tmp_name'] );
+		
+		if ( ! empty( $exif_meta['orientation'] ) ) {
+			$orientation = $exif_meta['orientation'];
+			if ( $orientation > 1 ) {
+				$manager = new ImageManager( array( 'driver' => $extension_to_use ) );
+				$image   = $manager->make( $image_file['tmp_name'] );
+				$image->orientate();
+				$image->save( $image_file['tmp_name'], 100, $image_file['type'] );
+				$image_file['tmp_name'] = $image->basePath();
+			}
+		}
+
 		$manager = new ImageManager( array( 'driver' => $extension_to_use ) );
 		$image   = $manager->make( $image_file['tmp_name'] );
 		$quality = $this->get_quality( $image_file['tmp_name'] );
@@ -265,11 +278,8 @@ class WPMastertoolkit_Media_Encoder {
 		// $image->sharpen( $this->settings['sharpen'] );
 		$image->save( $image_file['tmp_name'], $quality, 'webp' );
 
-		$size_after = $image->filesize();
-		$mime       = $image->mime();
-
-		$image_file['size'] = $size_after;
-		$image_file['type'] = $mime;
+		$image_file['size'] = $image->filesize();
+		$image_file['type'] = $image->mime();
 
 		return $image_file;
 	}

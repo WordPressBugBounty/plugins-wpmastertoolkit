@@ -42,6 +42,7 @@ class WPMastertoolkit_Image_Upload_Control {
         add_action( 'admin_menu', array( $this, 'add_submenu' ), 999 );
         add_action( 'admin_init', array( $this, 'save_submenu' ) );
 		add_filter( 'wp_handle_upload', array( $this, 'image_upload_handler' ) );
+        add_filter( 'big_image_size_threshold', '__return_false' );
     }
 
 	/**
@@ -86,7 +87,8 @@ class WPMastertoolkit_Image_Upload_Control {
 
 					if ( isset( $image_size['width'] ) && $image_size['width'] > $max_width || isset( $image_size['height'] ) && $image_size['height'] > $max_height ) {
                         $wp_image_editor->resize( $max_width, $max_height, false );
-                        if ( 'image/jpg' === $upload['type'] || 'image/jpeg' === $upload['type'] ) {
+                        $compatible_mime_types = array( 'image/jpeg', 'image/jpg', 'image/webp', 'image/png' );
+                        if ( in_array( $upload['type'], $compatible_mime_types ) ) {
                             $wp_image_editor->set_quality( 90 );
                         }
                         $wp_image_editor->save( $upload['file'] );
@@ -94,7 +96,6 @@ class WPMastertoolkit_Image_Upload_Control {
 				}
 			}
 		}
-
 		return $upload;
 	}
 
