@@ -2,7 +2,7 @@
 Contributors: ludwigyou
 Tags: all in one plugin, admin, security, disable features, easy to use
 Requires at least: 6.0.0
-Tested up to: 6.7.1
+Tested up to: 6.8.0
 Requires PHP: 7.4
 Stable tag: 2.5.2
 License: GPLv2 or later
