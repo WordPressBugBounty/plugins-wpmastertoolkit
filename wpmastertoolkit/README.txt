@@ -4,7 +4,7 @@ Tags: all in one plugin, admin, security, disable features, easy to use
 Requires at least: 6.0.0
 Tested up to: 6.8.0
 Requires PHP: 7.4
-Stable tag: 2.5.2
+Stable tag: 2.6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
 
@@ -19,7 +19,7 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 **Test by Enzo (Easy WordPress) :**
 [youtube https://www.youtube.com/watch?v=I1GdHeeJp6E&t]
 
-= 88 Free features =
+= 89 Free features =
 
 * Adminer: A full-featured database management tool.
 * Allow Menu Custom Links to Open in New Tab: Enable custom menu links to open in a new tab with a checkbox. For security and SEO, links include the `rel="noopener noreferrer nofollow"` attribute.
@@ -106,6 +106,7 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 * Redirect After Login: Set custom redirect URL for all or some user roles after login.
 * Redirect After Logout: Set custom redirect URL for all or some user roles after logout.
 * Revisions Control: Avoid overloading the database by setting a cap on the number of revisions to save for certain or all types of posts that support revisions.
+* Register Custom Content Types: Register custom content types for custom post types.
 * SMTP Mailer: Set custom sender name and email. Optionally use external SMTP service to ensure notification and transactional emails from your site are being delivered to inboxes.
 * SVG Upload: Enhance media library functionality to support the seamless uploading of SVG files.
 * Wider Admin Menu: Give the admin menu more room to better accommodate wider items.
@@ -116,6 +117,7 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 * Auto clean actionscheduler_actions: Clean actionscheduler_actions database table from actions that have been completed | failed | cancelled.
 * CRON Manager: Manage cron events on your website.
 * Change Database Prefix: Quickly change your WordPress database prefix to save time and enhance security.
+* Custom Login Design: Personalize your login page to match your brand.
 * Disable Comments: Manage the visibility of comments on your public posts by selectively disabling them for specific post types or across all posts. Once comments are disabled, any existing comments will seamlessly disappear from the front-end.
 * Disallow Access WP Sensible Files: Delete the wp-config-sample.php, block access to readme.html, license.txt
 * Disallow Countries IP: Include/Exclude countries IP
@@ -185,6 +187,14 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 4. Code snippets
 
 == Changelog ==
+
+= 2.6.0 =
+* Fix: Move Login URL: Problem on front with ajax if you activate 403 on /wp-admin.
+* Add Module: Register Custom Content Types
+* Fix Reported Vulnerability: CVE-2025-3300: '≤ 2.5.2 - Authenticated (Administrator+) to Arbitrary File Read and Write' on File Manager module.
+* Better CSS on administration pages.
+* Update Module: Media encoder: Add AVIF support (PRO ONLY) (php ≥ 8.1).
+* Update Module: Media encoder: Better interface and change library for image conversion.
 
 = 2.5.2 =
 * Fix: Media Encoder: Problem with exif rotation when uploading images.

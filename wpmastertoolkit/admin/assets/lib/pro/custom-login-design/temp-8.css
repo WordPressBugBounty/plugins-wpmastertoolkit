@@ -1,0 +1,68 @@
+.wpmtk-cld__form__inner__logo {
+	background: linear-gradient(90deg, rgb(249, 111, 31) 0%, rgb(145, 80, 167) 100%);
+}  
+#login form p.submit input {
+	background: linear-gradient(90deg, rgb(249, 111, 31) 0%, rgb(145, 80, 167) 100%);
+}
+.wpmtk-cld__form__after-form {
+	align-self: center;
+	max-width: 506px;
+}
+.wpmtk-reviews {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 69px;
+	margin-top: 20px;
+}
+.wpmtk-reviews img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+.wpmtk-reviews__left {
+	margin-right: 16px;
+}
+.wpmtk-reviews__right__top {
+	width: 94px;
+}
+.wpmtk-reviews__right__bottom {
+	font-size: 11px;
+    color: #fff;
+    font-weight: 400;
+    white-space: nowrap;
+}
+@media (max-width: 1024px) {
+	.wpmtk-cld__aside {
+	  	width: 30% !important;
+	}
+	.wpmtk-cld__form {
+		width: 70% !important;
+	}
+}
+@media (max-width: 767px) {
+	.wpmtk-cld__aside {
+		display: none !important;
+	}
+	.wpmtk-cld__form {
+		width: 100% !important;
+	}
+	.wpmtk-cld__form__inner {
+		padding: 20px !important;
+	}
+	.wpmtk-cld__form__after-form {
+		align-self: center !important;
+	}
+	.wpmtk-reviews {
+		flex-direction: column !important;
+		padding: 10px 50px !important;
+	}
+	.wpmtk-reviews__left {
+		max-width: 150px !important;
+		margin: 0 !important;
+		margin-bottom: 10px !important;
+	}
+	.wpmtk-reviews__right__top {
+		margin: auto !important;
+	}
+}

@@ -432,7 +432,7 @@ class WPMastertoolkit_Code_Snippets {
      *
      * @return void
      */
-    function get_code_snippets_folder_path(){
+    public function get_code_snippets_folder_path(){
         if( !empty($this->code_snippets_folder_path) ){
             return $this->code_snippets_folder_path;
         }
@@ -445,7 +445,7 @@ class WPMastertoolkit_Code_Snippets {
      * @param  mixed $post_id
      * @return void
      */
-    function get_snippet_file_path( $post_id, $type = null ) {
+    public function get_snippet_file_path( $post_id, $type = null ) {
         $code_snippets_folder_path = $this->get_code_snippets_folder_path();
         $type                      = !empty($type) ? $type : get_post_meta( $post_id, 'snippet_type', true );
         return $code_snippets_folder_path . '/' . esc_attr( $type ) . '-' . $post_id . '.php';

@@ -212,8 +212,8 @@ class WPMastertoolkit_Content_Order {
      */
     private function save_sortable_page() {
 
-		//phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-        $items = $_POST['WPMastertoolkit_sortable'] ?? array();
+		//phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+        $items = wpmastertoolkit_clean( wp_unslash( $_POST['WPMastertoolkit_sortable'] ?? array() ) );
 
         if ( empty( $items ) ) {
             return;
@@ -274,8 +274,8 @@ class WPMastertoolkit_Content_Order {
                 return;
             }
 
-			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-            $new_settings = $this->sanitize_settings( $_POST[ $this->option_id ] ?? array() );
+			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+            $new_settings = $this->sanitize_settings( wp_unslash( $_POST[ $this->option_id ] ?? array() ) );
             $this->save_settings( $new_settings );
             wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
 			exit;

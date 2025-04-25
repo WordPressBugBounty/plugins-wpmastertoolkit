@@ -5,6 +5,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * The admin settings of the plugin.
  * @since      1.0.0
  */
+
+$pro_modules_count = 0;
 ?>
 
 <div class="wrap wp-mastertoolkit">
@@ -57,11 +59,12 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
                     <?php
 
-                        $has_items         = false;
-                        $is_exception      = $group_data['exception'] ?? false;
-						$show_counter      = ! $is_exception;
-						$counter           = 0;
-						$counter_activated = 0;
+                        $has_items           = false;
+                        $is_exception        = $group_data['exception'] ?? false;
+						$show_counter        = ! $is_exception;
+						$counter             = 0;
+						$counter_activated   = 0;
+						$counter_pro_modules = 0;
 
                         if ( $is_exception ) {
                             $has_items = true;
@@ -82,11 +85,20 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 								if ( $checked ) {
 									$counter_activated++;
 								}
+
+								if ( $option_data['pro'] ) {
+									$counter_pro_modules++;
+								}
                             }
 
 							if ( $group_key === 'activated' && $counter_activated > 0 ) {
 								$has_items = true;
 								$counter   = $counter_activated;
+							}
+
+							if ( $group_key === 'pro-modules' && $counter_pro_modules > 0 ) {
+								$has_items = true;
+								$counter   = $counter_pro_modules;
 							}
                         }
 
@@ -120,6 +132,10 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
                         $coming_soon     = $option_data['coming_soon'] ?? false;
                         $is_addon_module = false;
 
+						if ( $option_data['pro'] ) {
+							$pro_modules_count++;
+						}
+
                         /**
                          * Check if is relative path in plugin folder.
                          */
@@ -132,7 +148,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
                         $disabled   = $file_exist ? false : true;
                         $checked    = isset($db_options[$option_key]) && $db_options[$option_key] === '1' && !$disabled;
                 ?>
-                    <div class="wp-mastertoolkit__body__sections__item <?php echo esc_attr( $disabled ? 'disabled' : '' ); ?>" data-key="<?php echo esc_attr($option_data['group'] ?? ''); ?><?php echo $checked ? ' activated' : ''; ?>" data-title="<?php echo esc_attr($option_data['name'] ?? ''); ?>" data-originaltitle="<?php echo esc_attr($option_data['original_name'] ?? ''); ?>">
+                    <div class="wp-mastertoolkit__body__sections__item <?php echo esc_attr( $disabled ? 'disabled' : '' ); ?>" data-key="<?php echo esc_attr($option_data['group'] ?? ''); ?><?php echo $checked ? ' activated' : ''; ?><?php echo $option_data['pro'] ? ' pro-modules' : ''; ?>" data-title="<?php echo esc_attr($option_data['name'] ?? ''); ?>" data-originaltitle="<?php echo esc_attr($option_data['original_name'] ?? ''); ?>">
                         <div class="wp-mastertoolkit__body__sections__item__top">
                             <div class="wp-mastertoolkit__body__sections__item__title">
                                 <span class="wp-mastertoolkit__body__sections__item__title__text">
@@ -141,6 +157,13 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
                                 <span class="wp-mastertoolkit__body__sections__item__title__tags">
                                     <?php if($option_data['pro'] ?? false): ?>
                                         <span class="pro"><?php esc_html_e('PRO', 'wpmastertoolkit'); ?></span>
+
+										<?php if( ! wpmastertoolkit_is_pro() ): ?>
+                                        <span class="try">
+											<a href="<?php echo esc_url( $try_url ); ?>" target="_blank"><?php esc_html_e('Try 15 days for free', 'wpmastertoolkit'); ?></a>
+										</span>
+										<?php endif; ?>
+
                                     <?php endif; ?>
                                     <?php if ( $coming_soon ): ?>
                                         <span class="comming-soon"><?php esc_html_e('coming soon', 'wpmastertoolkit'); ?></span>
@@ -245,6 +268,87 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 					</div>
 				</div>
 			</div>
+		<?php elseif( $show_promot_modal ): ?>
+			<div id="JS-wpmastertoolkit_modal_promot" class="wp-mastertoolkit__promot-modal">
+				<div class="wp-mastertoolkit__promot-modal__content">
+					<div class="wp-mastertoolkit__promot-modal__content__header">
+						<div class="wp-mastertoolkit__promot-modal__content__header__title"><?php esc_html_e( 'Unlock the full potential of WPMasterToolKit', 'wpmastertoolkit' ); ?></div>
+						<div class="wp-mastertoolkit__promot-modal__content__header__subtitle">
+							<?php
+								echo esc_html(
+									sprintf(
+										/* translators: %s: pro modules count */
+										__( 'Like the free version of WPMasterToolKit? The PRO version lets you go further with %s additional modules and additional features in the free modules.', 'wpmastertoolkit' ),
+										$pro_modules_count,
+									)
+								);
+							?>
+						</div>
+					</div>
+
+					<div class="wp-mastertoolkit__promot-modal__content__body">
+						<div class="wp-mastertoolkit__promot-modal__content__body__left">
+							<div class="wp-mastertoolkit__promot-modal__content__body__left__item">
+								<div class="wp-mastertoolkit__promot-modal__content__body__left__item__img">
+									<?php //phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
+									<img src="<?php echo esc_url( WPMASTERTOOLKIT_PLUGIN_URL . 'admin/images/promot-1.svg' ); ?>"/>
+								</div>
+								<div class="wp-mastertoolkit__promot-modal__content__body__left__item__txt">
+									<div class="wp-mastertoolkit__promot-modal__content__body__left__item__txt__title">
+										<?php
+											echo esc_html(
+												sprintf(
+													/* translators: %s: pro modules count */
+													__( '+%s modules', 'wpmastertoolkit' ),
+													$pro_modules_count,
+												)
+											);
+										?>
+									</div>
+									<div class="wp-mastertoolkit__promot-modal__content__body__left__item__txt__desc"><?php esc_html_e( 'Benefit from modules designed 100% for professionals.', 'wpmastertoolkit' ); ?></div>
+								</div>
+							</div>
+							<div class="wp-mastertoolkit__promot-modal__content__body__left__item">
+								<div class="wp-mastertoolkit__promot-modal__content__body__left__item__img">
+									<?php //phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
+									<img src="<?php echo esc_url( WPMASTERTOOLKIT_PLUGIN_URL . 'admin/images/promot-2.svg' ); ?>"/>
+								</div>
+								<div class="wp-mastertoolkit__promot-modal__content__body__left__item__txt">
+									<div class="wp-mastertoolkit__promot-modal__content__body__left__item__txt__title"><?php esc_html_e( 'Additional Features', 'wpmastertoolkit' ); ?></div>
+									<div class="wp-mastertoolkit__promot-modal__content__body__left__item__txt__desc"><?php esc_html_e( 'Take advantage of PRO features within the free modules, to go further.', 'wpmastertoolkit' ); ?></div>
+								</div>
+							</div>
+							<div class="wp-mastertoolkit__promot-modal__content__body__left__item">
+								<div class="wp-mastertoolkit__promot-modal__content__body__left__item__img">
+									<?php //phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
+									<img src="<?php echo esc_url( WPMASTERTOOLKIT_PLUGIN_URL . 'admin/images/promot-3.svg' ); ?>"/>
+								</div>
+								<div class="wp-mastertoolkit__promot-modal__content__body__left__item__txt">
+									<div class="wp-mastertoolkit__promot-modal__content__body__left__item__txt__title"><?php esc_html_e( 'Improve your performance', 'wpmastertoolkit' ); ?></div>
+									<div class="wp-mastertoolkit__promot-modal__content__body__left__item__txt__desc"><?php esc_html_e( 'Further reduce the number of active plugins and benefit from our resource-conscious approach.', 'wpmastertoolkit' ); ?></div>
+								</div>
+							</div>
+						</div>
+						<div class="wp-mastertoolkit__promot-modal__content__body__right">
+							<?php //phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
+							<img src="<?php echo esc_url( WPMASTERTOOLKIT_PLUGIN_URL . 'admin/images/promot-image.png' ); ?>"/>
+						</div>
+					</div>
+
+					<div class="wp-mastertoolkit__promot-modal__content__footer">
+						<div class="wp-mastertoolkit__promot-modal__content__footer__no-longer">
+							<button type="submit" name="wpmastertoolkit_promot_modal" value="no-longer"><?php esc_html_e( 'I no longer wish to see this message', 'wpmastertoolkit' ); ?></button>
+						</div>
+						<div class="wp-mastertoolkit__promot-modal__content__footer__have-license">
+							<button type="submit" name="wpmastertoolkit_promot_modal" value="have-license"><?php esc_html_e( 'I already have a license', 'wpmastertoolkit' ); ?></button>
+						</div>
+						<div class="wp-mastertoolkit__promot-modal__content__footer__try-now">
+							<button id="JS-wpmastertoolkit_modal_promot_try_now_hidden" type="submit" name="wpmastertoolkit_promot_modal" value="try-now"><?php esc_html_e( 'Start 15 free trial', 'wpmastertoolkit' ); ?></button>
+							<a id="JS-wpmastertoolkit_modal_promot_try_now" href="<?php echo esc_url( $try_url ); ?>" target="_blank"><?php esc_html_e( 'Start 15 free trial', 'wpmastertoolkit' ); ?></a>
+						</div>
+					</div>
+				</div>
+			</div>
 		<?php endif; ?>
 
     </form>
@@ -265,7 +369,9 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 				)); ?>
 			</h2>
             <hr>
-            <?php echo wp_kses_post( WPMastertoolkit_Settings::get_changelog() ); ?>
+			<div class="wp-mastertoolkit__changelog-modal__content__body">
+				<?php echo wp_kses_post( WPMastertoolkit_Settings::get_changelog() ); ?>
+			</div>
         </div>
     </div>
 </div>

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: WPMasterToolKit\n"
 "Report-Msgid-Bugs-To: Webdeclic "
 "<contact@webdeclic.com>\n"
-"POT-Creation-Date: 2025-03-28 15:23+0200\n"
+"POT-Creation-Date: 2025-04-24 16:11+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Webdeclic "
 "<contact@webdeclic.com>\n"
@@ -33,12 +33,12 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: admin/assets\n"
 "X-Poedit-SearchPathExcluded-1: svn\n"
 
-#: admin/class-modules-data.php:690
+#: admin/class-modules-data.php:702
 msgctxt "Module name"
 msgid "Hide Admin Notices"
 msgstr ""
 
-#: admin/class-modules-data.php:691
+#: admin/class-modules-data.php:703
 msgctxt "Module description"
 msgid ""
 "Improve user experience on admin pages by "
@@ -47,13 +47,13 @@ msgid ""
 "right)."
 msgstr ""
 
-#: admin/class-modules-data.php:694
+#: admin/class-modules-data.php:706
 msgctxt "Module name"
 msgid "Updates Logs"
 msgstr ""
 
-#: admin/class-modules-data.php:695
-#: admin/class-modules-data.php:703
+#: admin/class-modules-data.php:707
+#: admin/class-modules-data.php:715
 msgctxt "Module description"
 msgid ""
 "Track and record the most recent login "
@@ -61,12 +61,12 @@ msgid ""
 "date and time in the users list table"
 msgstr ""
 
-#: admin/class-modules-data.php:698
+#: admin/class-modules-data.php:710
 msgctxt "Module name"
 msgid "Hide Admin Bar"
 msgstr ""
 
-#: admin/class-modules-data.php:699
+#: admin/class-modules-data.php:711
 msgctxt "Module description"
 msgid ""
 "Hide the admin bar on the front end of your "
@@ -74,29 +74,29 @@ msgid ""
 "all users."
 msgstr ""
 
-#: admin/class-modules-data.php:702
+#: admin/class-modules-data.php:714
 msgctxt "Module name"
 msgid "Last Login Column"
 msgstr ""
 
-#: admin/class-modules-data.php:706
+#: admin/class-modules-data.php:718
 msgctxt "Module name"
 msgid "SVG Upload"
 msgstr ""
 
-#: admin/class-modules-data.php:707
+#: admin/class-modules-data.php:719
 msgctxt "Module description"
 msgid ""
 "Enhance media library functionality to "
 "support the seamless uploading of SVG files."
 msgstr ""
 
-#: admin/class-modules-data.php:710
+#: admin/class-modules-data.php:722
 msgctxt "Module name"
 msgid "Open All External Links in New Tab"
 msgstr ""
 
-#: admin/class-modules-data.php:711
+#: admin/class-modules-data.php:723
 msgctxt "Module description"
 msgid ""
 "Ensure that all external links within post "
@@ -108,13 +108,13 @@ msgid ""
 "attribute."
 msgstr ""
 
-#: admin/class-modules-data.php:714
+#: admin/class-modules-data.php:726
 msgctxt "Module name"
 msgid ""
 "Allow Menu Custom Links to Open in New Tab"
 msgstr ""
 
-#: admin/class-modules-data.php:715
+#: admin/class-modules-data.php:727
 msgctxt "Module description"
 msgid ""
 "You can enable custom link menu items to "
@@ -125,12 +125,12 @@ msgid ""
 "nofollow\"\" attribute for these links."
 msgstr ""
 
-#: admin/class-modules-data.php:718
+#: admin/class-modules-data.php:730
 msgctxt "Module name"
 msgid "Auto-Publish Posts with Missed Schedule"
 msgstr ""
 
-#: admin/class-modules-data.php:719
+#: admin/class-modules-data.php:731
 msgctxt "Module description"
 msgid ""
 "Automatically initiate the publication of "
@@ -139,12 +139,12 @@ msgid ""
 "across all post types."
 msgstr ""
 
-#: admin/class-modules-data.php:722
+#: admin/class-modules-data.php:734
 msgctxt "Module name"
 msgid "Code Snippets"
 msgstr ""
 
-#: admin/class-modules-data.php:723
+#: admin/class-modules-data.php:735
 msgctxt "Module description"
 msgid ""
 "Add custom code snippets to your website "
@@ -158,12 +158,12 @@ msgid ""
 "true);"
 msgstr ""
 
-#: admin/class-modules-data.php:726
+#: admin/class-modules-data.php:738
 msgctxt "Module name"
 msgid "Disable Comments"
 msgstr ""
 
-#: admin/class-modules-data.php:727
+#: admin/class-modules-data.php:739
 msgctxt "Module description"
 msgid ""
 "Manage the visibility of comments on your "
@@ -174,12 +174,12 @@ msgid ""
 "front-end."
 msgstr ""
 
-#: admin/class-modules-data.php:730
+#: admin/class-modules-data.php:742
 msgctxt "Module name"
 msgid "Disable Feeds"
 msgstr ""
 
-#: admin/class-modules-data.php:731
+#: admin/class-modules-data.php:743
 msgctxt "Module description"
 msgid ""
 "Completely deactivate RSS, Atom, and RDF "
@@ -192,12 +192,12 @@ msgid ""
 "pages."
 msgstr ""
 
-#: admin/class-modules-data.php:734
+#: admin/class-modules-data.php:746
 msgctxt "Module name"
 msgid "Disable Gutenberg"
 msgstr ""
 
-#: admin/class-modules-data.php:735
+#: admin/class-modules-data.php:747
 msgctxt "Module description"
 msgid ""
 "Deactivate the Gutenberg block editor "
@@ -206,12 +206,12 @@ msgid ""
 "types."
 msgstr ""
 
-#: admin/class-modules-data.php:738
+#: admin/class-modules-data.php:750
 msgctxt "Module name"
 msgid "Disable wp_mail"
 msgstr ""
 
-#: admin/class-modules-data.php:739
+#: admin/class-modules-data.php:751
 msgctxt "Module description"
 msgid ""
 "Disable the wp_mail function, which is used "
@@ -221,36 +221,36 @@ msgid ""
 "loading and consuming resources."
 msgstr ""
 
-#: admin/class-modules-data.php:742
+#: admin/class-modules-data.php:754
 msgctxt "Module name"
 msgid "Hide WordPress Version"
 msgstr ""
 
-#: admin/class-modules-data.php:743
+#: admin/class-modules-data.php:755
 msgctxt "Module description"
 msgid ""
 "Hide the WordPress version from the source "
 "code."
 msgstr ""
 
-#: admin/class-modules-data.php:746
+#: admin/class-modules-data.php:758
 msgctxt "Module name"
 msgid "Disallow WP File Edit"
 msgstr ""
 
-#: admin/class-modules-data.php:747
+#: admin/class-modules-data.php:759
 msgctxt "Module description"
 msgid ""
 "Prevent the modification of your website's "
 "core files through the WordPress admin panel."
 msgstr ""
 
-#: admin/class-modules-data.php:750
+#: admin/class-modules-data.php:762
 msgctxt "Module name"
 msgid "Disable XML-RPC"
 msgstr ""
 
-#: admin/class-modules-data.php:751
+#: admin/class-modules-data.php:763
 msgctxt "Module description"
 msgid ""
 "Enhance your website's security by "
@@ -262,12 +262,12 @@ msgid ""
 "mechanisms."
 msgstr ""
 
-#: admin/class-modules-data.php:754
+#: admin/class-modules-data.php:766
 msgctxt "Module name"
 msgid "Disallow register user"
 msgstr ""
 
-#: admin/class-modules-data.php:755
+#: admin/class-modules-data.php:767
 msgctxt "Module description"
 msgid ""
 "Prevent the creation of new user accounts on "
@@ -275,36 +275,36 @@ msgid ""
 "registration form."
 msgstr ""
 
-#: admin/class-modules-data.php:758
+#: admin/class-modules-data.php:770
 msgctxt "Module name"
 msgid "Lock Site URL"
 msgstr ""
 
-#: admin/class-modules-data.php:759
+#: admin/class-modules-data.php:771
 msgctxt "Module description"
 msgid ""
 "Prevent the modification of the site URL on "
 "your website."
 msgstr ""
 
-#: admin/class-modules-data.php:762
+#: admin/class-modules-data.php:774
 msgctxt "Module name"
 msgid "Lock Admin Email"
 msgstr ""
 
-#: admin/class-modules-data.php:763
+#: admin/class-modules-data.php:775
 msgctxt "Module description"
 msgid ""
 "Prevent the modification of the admin email "
 "address on your website."
 msgstr ""
 
-#: admin/class-modules-data.php:766
+#: admin/class-modules-data.php:778
 msgctxt "Module name"
 msgid "Blacklisted Usernames"
 msgstr ""
 
-#: admin/class-modules-data.php:767
+#: admin/class-modules-data.php:779
 msgctxt "Module description"
 msgid ""
 "Prevent the creation of new user accounts "
@@ -312,12 +312,12 @@ msgid ""
 "Blacklist usernames that are too common."
 msgstr ""
 
-#: admin/class-modules-data.php:770
+#: admin/class-modules-data.php:782
 msgctxt "Module name"
 msgid "Force Strong Password"
 msgstr ""
 
-#: admin/class-modules-data.php:771
+#: admin/class-modules-data.php:783
 msgctxt "Module description"
 msgid ""
 "Enforce the use of strong passwords for all "
@@ -328,24 +328,24 @@ msgid ""
 "or crack."
 msgstr ""
 
-#: admin/class-modules-data.php:774
+#: admin/class-modules-data.php:786
 msgctxt "Module name"
 msgid "Move Login URL"
 msgstr ""
 
-#: admin/class-modules-data.php:775
+#: admin/class-modules-data.php:787
 msgctxt "Module description"
 msgid ""
 "Change the default login URL to a custom URL "
 "of your choice."
 msgstr ""
 
-#: admin/class-modules-data.php:778
+#: admin/class-modules-data.php:790
 msgctxt "Module name"
 msgid "Two Factor Authentication"
 msgstr ""
 
-#: admin/class-modules-data.php:779
+#: admin/class-modules-data.php:791
 msgctxt "Module description"
 msgid ""
 "Add an extra layer of security to your "
@@ -353,12 +353,12 @@ msgid ""
 "authentication for all users."
 msgstr ""
 
-#: admin/class-modules-data.php:782
+#: admin/class-modules-data.php:794
 msgctxt "Module name"
 msgid "Hide Login Errors"
 msgstr ""
 
-#: admin/class-modules-data.php:783
+#: admin/class-modules-data.php:795
 msgctxt "Module description"
 msgid ""
 "Hide the default WordPress login errors that "
@@ -366,78 +366,78 @@ msgid ""
 "password is entered."
 msgstr ""
 
-#: admin/class-modules-data.php:786
+#: admin/class-modules-data.php:798
 msgctxt "Module name"
 msgid "Disallow Theme Upload"
 msgstr ""
 
-#: admin/class-modules-data.php:787
+#: admin/class-modules-data.php:799
 msgctxt "Module description"
 msgid ""
 "Disable zip file uploads for themes, which "
 "are used to install themes on your website."
 msgstr ""
 
-#: admin/class-modules-data.php:790
+#: admin/class-modules-data.php:802
 msgctxt "Module name"
 msgid "Disallow Plugin Upload"
 msgstr ""
 
-#: admin/class-modules-data.php:791
+#: admin/class-modules-data.php:803
 msgctxt "Module description"
 msgid ""
 "Disable zip file uploads for plugins, which "
 "are used to install plugins on your website."
 msgstr ""
 
-#: admin/class-modules-data.php:794
+#: admin/class-modules-data.php:806
 msgctxt "Module name"
 msgid "Disallow Access WP Sensible Files"
 msgstr ""
 
-#: admin/class-modules-data.php:795
+#: admin/class-modules-data.php:807
 msgctxt "Module description"
 msgid ""
 "Delete the wp-config-sample.php, block "
 "access to readme.html, license.txt"
 msgstr ""
 
-#: admin/class-modules-data.php:798
+#: admin/class-modules-data.php:810
 msgctxt "Module name"
 msgid "Disallow Countries IP"
 msgstr ""
 
-#: admin/class-modules-data.php:799
+#: admin/class-modules-data.php:811
 msgctxt "Module description"
 msgid "Include/Exclude countries IP"
 msgstr ""
 
-#: admin/class-modules-data.php:802
+#: admin/class-modules-data.php:814
 msgctxt "Module name"
 msgid "Disallow Dir Listing"
 msgstr ""
 
-#: admin/class-modules-data.php:803
+#: admin/class-modules-data.php:815
 msgctxt "Module description"
 msgid "Disable the listing of the directories."
 msgstr ""
 
-#: admin/class-modules-data.php:806
+#: admin/class-modules-data.php:818
 msgctxt "Module name"
 msgid "Manage Admin Emails Notifications"
 msgstr ""
 
-#: admin/class-modules-data.php:807
+#: admin/class-modules-data.php:819
 msgctxt "Module description"
 msgid "Disable admin emails notifications."
 msgstr ""
 
-#: admin/class-modules-data.php:810
+#: admin/class-modules-data.php:822
 msgctxt "Module name"
 msgid "Disable WP Sitemap"
 msgstr ""
 
-#: admin/class-modules-data.php:811
+#: admin/class-modules-data.php:823
 msgctxt "Module description"
 msgid ""
 "Disable the default WordPress sitemap "
@@ -445,12 +445,12 @@ msgid ""
 "5.5."
 msgstr ""
 
-#: admin/class-modules-data.php:814
+#: admin/class-modules-data.php:826
 msgctxt "Module name"
 msgid "Force Send All Email To"
 msgstr ""
 
-#: admin/class-modules-data.php:815
+#: admin/class-modules-data.php:827
 msgctxt "Module description"
 msgid ""
 "Force all emails sent from your website to "
@@ -461,37 +461,37 @@ msgid ""
 "address."
 msgstr ""
 
-#: admin/class-modules-data.php:818
+#: admin/class-modules-data.php:830
 msgctxt "Module name"
 msgid "Plugin Download"
 msgstr ""
 
-#: admin/class-modules-data.php:819
+#: admin/class-modules-data.php:831
 msgctxt "Module description"
 msgid ""
 "Download plugins from the plugins page in "
 "the WordPress admin panel."
 msgstr ""
 
-#: admin/class-modules-data.php:822
+#: admin/class-modules-data.php:834
 msgctxt "Module name"
 msgid ""
 "Disallow Malicious File Access in upload"
 msgstr ""
 
-#: admin/class-modules-data.php:823
+#: admin/class-modules-data.php:835
 msgctxt "Module description"
 msgid ""
 "Protect your website from malicious file "
 "access in the upload directory."
 msgstr ""
 
-#: admin/class-modules-data.php:826
+#: admin/class-modules-data.php:838
 msgctxt "Module name"
 msgid "Disable cart fragments scripts"
 msgstr ""
 
-#: admin/class-modules-data.php:827
+#: admin/class-modules-data.php:839
 msgctxt "Module description"
 msgid ""
 "Disable cart fragments scripts on the front-"
@@ -501,12 +501,12 @@ msgid ""
 "fragments."
 msgstr ""
 
-#: admin/class-modules-data.php:830
+#: admin/class-modules-data.php:842
 msgctxt "Module name"
 msgid "Revisions Control"
 msgstr ""
 
-#: admin/class-modules-data.php:831
+#: admin/class-modules-data.php:843
 msgctxt "Module description"
 msgid ""
 "Avoid overloading the database by setting a "
@@ -515,12 +515,12 @@ msgid ""
 "revisions."
 msgstr ""
 
-#: admin/class-modules-data.php:834
+#: admin/class-modules-data.php:846
 msgctxt "Module name"
 msgid "Disable emoji support"
 msgstr ""
 
-#: admin/class-modules-data.php:835
+#: admin/class-modules-data.php:847
 msgctxt "Module description"
 msgid ""
 "Disable emoji support for pages, posts and "
@@ -532,12 +532,12 @@ msgid ""
 "it."
 msgstr ""
 
-#: admin/class-modules-data.php:838
+#: admin/class-modules-data.php:850
 msgctxt "Module name"
 msgid "Disable dashicons CSS and JS files"
 msgstr ""
 
-#: admin/class-modules-data.php:839
+#: admin/class-modules-data.php:851
 msgctxt "Module description"
 msgid ""
 "Disable loading of Dashicons CSS and JS "
@@ -549,12 +549,12 @@ msgid ""
 "disabling."
 msgstr ""
 
-#: admin/class-modules-data.php:842
+#: admin/class-modules-data.php:854
 msgctxt "Module name"
 msgid "Disable WordPress shortlink <link> tag"
 msgstr ""
 
-#: admin/class-modules-data.php:843
+#: admin/class-modules-data.php:855
 msgctxt "Module description"
 msgid ""
 "Disable the default WordPress shortlink "
@@ -566,14 +566,14 @@ msgid ""
 "clicks when sharing the link on social media."
 msgstr ""
 
-#: admin/class-modules-data.php:846
+#: admin/class-modules-data.php:858
 msgctxt "Module name"
 msgid ""
 "Disable Really Simple Discovery (RSD) <link> "
 "tag"
 msgstr ""
 
-#: admin/class-modules-data.php:847
+#: admin/class-modules-data.php:859
 msgctxt "Module description"
 msgid ""
 "Disable the Really Simple Discovery (RSD) "
@@ -584,14 +584,14 @@ msgid ""
 "this tag."
 msgstr ""
 
-#: admin/class-modules-data.php:850
+#: admin/class-modules-data.php:862
 msgctxt "Module name"
 msgid ""
 "Disable Windows Live Writer (WLW) manifest "
 "<link> tag"
 msgstr ""
 
-#: admin/class-modules-data.php:851
+#: admin/class-modules-data.php:863
 msgctxt "Module description"
 msgid ""
 "Disable the Windows Live Writer (WLW) "
@@ -599,13 +599,13 @@ msgid ""
 "was discontinued in 2017."
 msgstr ""
 
-#: admin/class-modules-data.php:854
+#: admin/class-modules-data.php:866
 msgctxt "Module name"
 msgid ""
 "Disable Block-Based Widgets Settings Screen"
 msgstr ""
 
-#: admin/class-modules-data.php:855
+#: admin/class-modules-data.php:867
 msgctxt "Module description"
 msgid ""
 "Disable block-based widgets settings screen. "
@@ -614,60 +614,60 @@ msgid ""
 "has no effect on block themes."
 msgstr ""
 
-#: admin/class-modules-data.php:858
+#: admin/class-modules-data.php:870
 msgctxt "Module name"
 msgid "Custom Body Class"
 msgstr ""
 
-#: admin/class-modules-data.php:859
+#: admin/class-modules-data.php:871
 msgctxt "Module description"
 msgid ""
 "Add custom <body> class(es) on the singular "
 "view of some or all public post types."
 msgstr ""
 
-#: admin/class-modules-data.php:862
+#: admin/class-modules-data.php:874
 msgctxt "Module name"
 msgid "Redirect After Logout"
 msgstr ""
 
-#: admin/class-modules-data.php:863
+#: admin/class-modules-data.php:875
 msgctxt "Module description"
 msgid ""
 "Set custom redirect URL for all or some user "
 "roles after logout."
 msgstr ""
 
-#: admin/class-modules-data.php:866
+#: admin/class-modules-data.php:878
 msgctxt "Module name"
 msgid "Redirect After Login"
 msgstr ""
 
-#: admin/class-modules-data.php:867
+#: admin/class-modules-data.php:879
 msgctxt "Module description"
 msgid ""
 "Set custom redirect URL for all or some user "
 "roles after login."
 msgstr ""
 
-#: admin/class-modules-data.php:870
+#: admin/class-modules-data.php:882
 msgctxt "Module name"
 msgid "Wider Admin Menu"
 msgstr ""
 
-#: admin/class-modules-data.php:871
+#: admin/class-modules-data.php:883
 msgctxt "Module description"
 msgid ""
 "Give the admin menu more room to better "
 "accommodate wider items."
 msgstr ""
 
-#: admin/class-modules-data.php:874
+#: admin/class-modules-data.php:886
 msgctxt "Module name"
 msgid "Disable Dashboard Widgets"
 msgstr ""
 
-#: admin/class-modules-data.php:875
+#: admin/class-modules-data.php:887
 msgctxt "Module description"
 msgid ""
 "Clean up and speed up the dashboard by "
@@ -676,12 +676,12 @@ msgid ""
 "show up under Screen Options."
 msgstr ""
 
-#: admin/class-modules-data.php:878
+#: admin/class-modules-data.php:890
 msgctxt "Module name"
 msgid "Disallow Bad Requests"
 msgstr ""
 
-#: admin/class-modules-data.php:879
+#: admin/class-modules-data.php:891
 msgctxt "Module description"
 msgid ""
 "Protect your site against a wide range of "
@@ -691,12 +691,12 @@ msgid ""
 "long request-strings."
 msgstr ""
 
-#: admin/class-modules-data.php:882
+#: admin/class-modules-data.php:894
 msgctxt "Module name"
 msgid "Auto Regenerate Salt Keys"
 msgstr ""
 
-#: admin/class-modules-data.php:883
+#: admin/class-modules-data.php:895
 msgctxt "Module description"
 msgid ""
 "WordPress salt keys or security keys are "
@@ -704,12 +704,12 @@ msgid ""
 "information on your website."
 msgstr ""
 
-#: admin/class-modules-data.php:886
+#: admin/class-modules-data.php:898
 msgctxt "Module name"
 msgid "Hide PHP Versions"
 msgstr ""
 
-#: admin/class-modules-data.php:887
+#: admin/class-modules-data.php:899
 msgctxt "Module description"
 msgid ""
 "Some servers send a header called X-Powered-"
@@ -718,81 +718,81 @@ msgid ""
 "for attackers, and should be removed."
 msgstr ""
 
-#: admin/class-modules-data.php:890
+#: admin/class-modules-data.php:902
 msgctxt "Module name"
 msgid "Nav Menu Visibility"
 msgstr ""
 
-#: admin/class-modules-data.php:891
+#: admin/class-modules-data.php:903
 msgctxt "Module description"
 msgid ""
 "Control your nav menu by allowing you to "
 "apply visibility controls to menu."
 msgstr ""
 
-#: admin/class-modules-data.php:894
+#: admin/class-modules-data.php:906
 msgctxt "Module name"
 msgid "Export Users"
 msgstr ""
 
-#: admin/class-modules-data.php:895
+#: admin/class-modules-data.php:907
 msgctxt "Module description"
 msgid ""
 "Download your user data to a .csv format."
 msgstr ""
 
-#: admin/class-modules-data.php:898
+#: admin/class-modules-data.php:910
 msgctxt "Module name"
 msgid "Clean Profiles"
 msgstr ""
 
-#: admin/class-modules-data.php:899
+#: admin/class-modules-data.php:911
 msgctxt "Module description"
 msgid ""
 "Tidy up user profiles by removing sections "
 "you do not utilise."
 msgstr ""
 
-#: admin/class-modules-data.php:902
+#: admin/class-modules-data.php:914
 msgctxt "Module name"
 msgid "Quick Add Post"
 msgstr ""
 
-#: admin/class-modules-data.php:903
+#: admin/class-modules-data.php:915
 msgctxt "Module description"
 msgid ""
 "A new button to quickly add new posts to "
 "speed up your workflow."
 msgstr ""
 
-#: admin/class-modules-data.php:906
+#: admin/class-modules-data.php:918
 msgctxt "Module name"
 msgid "Export Posts & Pages"
 msgstr ""
 
-#: admin/class-modules-data.php:907
+#: admin/class-modules-data.php:919
 msgctxt "Module description"
 msgid ""
 "Download your posts and pages to a .csv "
 "format."
 msgstr ""
 
-#: admin/class-modules-data.php:910
+#: admin/class-modules-data.php:922
 msgctxt "Module name"
 msgid "Duplicate Menu"
 msgstr ""
 
-#: admin/class-modules-data.php:911
+#: admin/class-modules-data.php:923
 msgctxt "Module description"
 msgid "Easily duplicate your WordPress Menus"
 msgstr ""
 
-#: admin/class-modules-data.php:914
+#: admin/class-modules-data.php:926
 msgctxt "Module name"
 msgid "Child theme generator"
 msgstr ""
 
-#: admin/class-modules-data.php:915
+#: admin/class-modules-data.php:927
 msgctxt "Module description"
 msgid ""
 "A simple tool to generate a child theme on "
@@ -800,12 +800,12 @@ msgid ""
 "generation."
 msgstr ""
 
-#: admin/class-modules-data.php:918
+#: admin/class-modules-data.php:930
 msgctxt "Module name"
 msgid "Redirect 404 to Homepage"
 msgstr ""
 
-#: admin/class-modules-data.php:919
+#: admin/class-modules-data.php:931
 msgctxt "Module description"
 msgid ""
 "Sends visitors to your homepage if they try "
@@ -813,12 +813,12 @@ msgid ""
 "ensuring they stay on your site."
 msgstr ""
 
-#: admin/class-modules-data.php:922
+#: admin/class-modules-data.php:934
 msgctxt "Module name"
 msgid "Maintenance Mode"
 msgstr ""
 
-#: admin/class-modules-data.php:923
+#: admin/class-modules-data.php:935
 msgctxt "Module description"
 msgid ""
 "Show a customizable maintenance page on the "
@@ -828,12 +828,12 @@ msgid ""
 "usual."
 msgstr ""
 
-#: admin/class-modules-data.php:926
+#: admin/class-modules-data.php:938
 msgctxt "Module name"
 msgid "Password Protection"
 msgstr ""
 
-#: admin/class-modules-data.php:927
+#: admin/class-modules-data.php:939
 msgctxt "Module description"
 msgid ""
 "Password-protect the entire site to hide the "
@@ -842,12 +842,12 @@ msgid ""
 "can still access the site as usual."
 msgstr ""
 
-#: admin/class-modules-data.php:930
+#: admin/class-modules-data.php:942
 msgctxt "Module name"
 msgid "Content Duplication"
 msgstr ""
 
-#: admin/class-modules-data.php:931
+#: admin/class-modules-data.php:943
 msgctxt "Module description"
 msgid ""
 "Enable one-click duplication of pages, posts "
@@ -855,24 +855,24 @@ msgid ""
 "terms and post meta will also be duplicated."
 msgstr ""
 
-#: admin/class-modules-data.php:934
+#: admin/class-modules-data.php:946
 msgctxt "Module name"
 msgid "Post Per Page"
 msgstr ""
 
-#: admin/class-modules-data.php:935
+#: admin/class-modules-data.php:947
 msgctxt "Module description"
 msgid ""
 "Specifying the number of posts to display "
 "per page, for each post type."
 msgstr ""
 
-#: admin/class-modules-data.php:938
+#: admin/class-modules-data.php:950
 msgctxt "Module name"
 msgid "Content Order"
 msgstr ""
 
-#: admin/class-modules-data.php:939
+#: admin/class-modules-data.php:951
 msgctxt "Module description"
 msgid ""
 "Enable custom ordering of various "
@@ -882,12 +882,12 @@ msgid ""
 "content type(s)."
 msgstr ""
 
-#: admin/class-modules-data.php:942
+#: admin/class-modules-data.php:954
 msgctxt "Module name"
 msgid "External Permalinks"
 msgstr ""
 
-#: admin/class-modules-data.php:943
+#: admin/class-modules-data.php:955
 msgctxt "Module description"
 msgid ""
 "Enable pages, posts and/or custom post types "
@@ -897,35 +897,35 @@ msgid ""
 "enhanced security and SEO benefits."
 msgstr ""
 
-#: admin/class-modules-data.php:946
+#: admin/class-modules-data.php:958
 msgctxt "Module name"
 msgid "Meta Debugger"
 msgstr ""
 
-#: admin/class-modules-data.php:947
+#: admin/class-modules-data.php:959
 msgctxt "Module description"
 msgid ""
 "Display all metadata for a post, user, term, "
 "or comment."
 msgstr ""
 
-#: admin/class-modules-data.php:950
+#: admin/class-modules-data.php:962
 msgctxt "Module name"
 msgid "Clean Up Admin Bar"
 msgstr ""
 
-#: admin/class-modules-data.php:951
+#: admin/class-modules-data.php:963
 msgctxt "Module description"
 msgid ""
 "Remove various elements from the admin bar."
 msgstr ""
 
-#: admin/class-modules-data.php:954
+#: admin/class-modules-data.php:966
 msgctxt "Module name"
 msgid "Enhance List Tables"
 msgstr ""
 
-#: admin/class-modules-data.php:955
+#: admin/class-modules-data.php:967
 msgctxt "Module description"
 msgid ""
 "Improve the usefulness of listing pages for "
@@ -934,48 +934,48 @@ msgid ""
 "columns and elements."
 msgstr ""
 
-#: admin/class-modules-data.php:958
+#: admin/class-modules-data.php:970
 msgctxt "Module name"
 msgid "Log In/Out Menu"
 msgstr ""
 
-#: admin/class-modules-data.php:959
+#: admin/class-modules-data.php:971
 msgctxt "Module description"
 msgid ""
 "Enable log in, log out and dynamic log in/"
 "out menu item for addition to any menu."
 msgstr ""
 
-#: admin/class-modules-data.php:962
+#: admin/class-modules-data.php:974
 msgctxt "Module name"
 msgid "Custom Admin CSS"
 msgstr ""
 
-#: admin/class-modules-data.php:963
+#: admin/class-modules-data.php:975
 msgctxt "Module description"
 msgid ""
 "Add custom CSS on all admin pages for all "
 "user roles."
 msgstr ""
 
-#: admin/class-modules-data.php:966
+#: admin/class-modules-data.php:978
 msgctxt "Module name"
 msgid "Custom Frontend CSS"
 msgstr ""
 
-#: admin/class-modules-data.php:967
+#: admin/class-modules-data.php:979
 msgctxt "Module description"
 msgid ""
 "Add custom CSS on all frontend pages for all "
 "user roles."
 msgstr ""
 
-#: admin/class-modules-data.php:970
+#: admin/class-modules-data.php:982
 msgctxt "Module name"
 msgid "Insert <head>, <body> and <footer> Code"
 msgstr ""
 
-#: admin/class-modules-data.php:971
+#: admin/class-modules-data.php:983
 msgctxt "Module description"
 msgid ""
 "Easily insert <meta>, <link>, <script> and "
@@ -984,36 +984,36 @@ msgid ""
 "Facebook, TikTok and Twitter pixels, etc."
 msgstr ""
 
-#: admin/class-modules-data.php:974
+#: admin/class-modules-data.php:986
 msgctxt "Module name"
 msgid "Manage ads.txt and app-ads.txt"
 msgstr ""
 
-#: admin/class-modules-data.php:975
+#: admin/class-modules-data.php:987
 msgctxt "Module description"
 msgid ""
 "Easily edit and validate your ads.txt and "
 "app-ads.txt content."
 msgstr ""
 
-#: admin/class-modules-data.php:978
+#: admin/class-modules-data.php:990
 msgctxt "Module name"
 msgid "Manage robots.txt"
 msgstr ""
 
-#: admin/class-modules-data.php:979
+#: admin/class-modules-data.php:991
 msgctxt "Module description"
 msgid ""
 "Easily edit and validate your robots.txt "
 "content."
 msgstr ""
 
-#: admin/class-modules-data.php:982
+#: admin/class-modules-data.php:994
 msgctxt "Module name"
 msgid "Disable REST API"
 msgstr ""
 
-#: admin/class-modules-data.php:983
+#: admin/class-modules-data.php:995
 msgctxt "Module description"
 msgid ""
 "Disable REST API access for non-"
@@ -1022,12 +1022,12 @@ msgid ""
 "endpoint."
 msgstr ""
 
-#: admin/class-modules-data.php:986
+#: admin/class-modules-data.php:998
 msgctxt "Module name"
 msgid "Disable All Updates"
 msgstr ""
 
-#: admin/class-modules-data.php:987
+#: admin/class-modules-data.php:999
 msgctxt "Module description"
 msgid ""
 "Completely disable core, theme and plugin "
@@ -1035,12 +1035,12 @@ msgid ""
 "update checks, notices and emails."
 msgstr ""
 
-#: admin/class-modules-data.php:990
+#: admin/class-modules-data.php:1002
 msgctxt "Module name"
 msgid "Obfuscate Author Slugs"
 msgstr ""
 
-#: admin/class-modules-data.php:991
+#: admin/class-modules-data.php:1003
 msgctxt "Module description"
 msgid ""
 "Obfuscate publicly exposed author page URLs "
@@ -1052,12 +1052,12 @@ msgid ""
 "endpoint."
 msgstr ""
 
-#: admin/class-modules-data.php:994
+#: admin/class-modules-data.php:1006
 msgctxt "Module name"
 msgid "Obfuscate Email Addresses"
 msgstr ""
 
-#: admin/class-modules-data.php:995
+#: admin/class-modules-data.php:1007
 msgctxt "Module description"
 msgid ""
 "Obfuscate email address to prevent spam bots "
@@ -1068,12 +1068,12 @@ msgid ""
 "display=\"newline\"]"
 msgstr ""
 
-#: admin/class-modules-data.php:998
+#: admin/class-modules-data.php:1010
 msgctxt "Module name"
 msgid "Image Upload Control"
 msgstr ""
 
-#: admin/class-modules-data.php:999
+#: admin/class-modules-data.php:1011
 msgctxt "Module description"
 msgid ""
 "Resize newly uploaded, large images to a "
@@ -1082,12 +1082,24 @@ msgid ""
 "PNGs will be converted to JPGs and resized."
 msgstr ""
 
-#: admin/class-modules-data.php:1002
+#: admin/class-modules-data.php:1014
+msgctxt "Module name"
+msgid "Register Custom Content Types"
+msgstr ""
+
+#: admin/class-modules-data.php:1015
+msgctxt "Module description"
+msgid ""
+"Register custom content types for custom "
+"post types."
+msgstr ""
+
+#: admin/class-modules-data.php:1018
 msgctxt "Module name"
 msgid "Heartbeat Control"
 msgstr ""
 
-#: admin/class-modules-data.php:1003
+#: admin/class-modules-data.php:1019
 msgctxt "Module description"
 msgid ""
 "Modify the interval of the WordPress "
@@ -1097,12 +1109,12 @@ msgid ""
 "the server."
 msgstr ""
 
-#: admin/class-modules-data.php:1006
+#: admin/class-modules-data.php:1022
 msgctxt "Module name"
 msgid "Limit Login Attempts"
 msgstr ""
 
-#: admin/class-modules-data.php:1007
+#: admin/class-modules-data.php:1023
 msgctxt "Module description"
 msgid ""
 "Prevent brute force attacks by limiting the "
@@ -1110,13 +1122,13 @@ msgid ""
 "IP address."
 msgstr ""
 
-#: admin/class-modules-data.php:1010
+#: admin/class-modules-data.php:1026
 msgctxt "Module name"
 msgid ""
 "Block User Registration from Disposable Email"
 msgstr ""
 
-#: admin/class-modules-data.php:1011
+#: admin/class-modules-data.php:1027
 msgctxt "Module description"
 msgid ""
 "Block user registration from disposable "
@@ -1126,22 +1138,22 @@ msgid ""
 "verification."
 msgstr ""
 
-#: admin/class-modules-data.php:1014
+#: admin/class-modules-data.php:1030
 msgctxt "Module name"
 msgid "Ban Emails"
 msgstr ""
 
-#: admin/class-modules-data.php:1015
+#: admin/class-modules-data.php:1031
 msgctxt "Module description"
 msgid "Ban the chosen emails."
 msgstr ""
 
-#: admin/class-modules-data.php:1018
+#: admin/class-modules-data.php:1034
 msgctxt "Module name"
 msgid "SMTP Mailer"
 msgstr ""
 
-#: admin/class-modules-data.php:1019
+#: admin/class-modules-data.php:1035
 msgctxt "Module description"
 msgid ""
 "Set custom sender name and email. Optionally "
@@ -1150,12 +1162,12 @@ msgid ""
 "your site are being delivered to inboxes."
 msgstr ""
 
-#: admin/class-modules-data.php:1022
+#: admin/class-modules-data.php:1038
 msgctxt "Module name"
 msgid "Protect Website Headers"
 msgstr ""
 
-#: admin/class-modules-data.php:1023
+#: admin/class-modules-data.php:1039
 msgctxt "Module description"
 msgid ""
 "Add security headers quickly to your site to "
@@ -1163,60 +1175,60 @@ msgid ""
 "attacks, data theft and more."
 msgstr ""
 
-#: admin/class-modules-data.php:1026
+#: admin/class-modules-data.php:1042
 msgctxt "Module name"
 msgid "Prevent User Enumeration"
 msgstr ""
 
-#: admin/class-modules-data.php:1027
+#: admin/class-modules-data.php:1043
 msgctxt "Module description"
 msgid ""
 "Prevent user enumeration via ?author=X and "
 "REST API /users/ endpoints."
 msgstr ""
 
-#: admin/class-modules-data.php:1030
+#: admin/class-modules-data.php:1046
 msgctxt "Module name"
 msgid "File Manager"
 msgstr ""
 
-#: admin/class-modules-data.php:1031
+#: admin/class-modules-data.php:1047
 msgctxt "Module description"
 msgid ""
 "Browser and manage your files efficiently "
 "and easily."
 msgstr ""
 
-#: admin/class-modules-data.php:1034
+#: admin/class-modules-data.php:1050
 msgctxt "Module name"
 msgid "Disable jQuery Migrate"
 msgstr ""
 
-#: admin/class-modules-data.php:1035
+#: admin/class-modules-data.php:1051
 msgctxt "Module description"
 msgid ""
 "Removes the jQuery Migrate script from the "
 "frontend of your site."
 msgstr ""
 
-#: admin/class-modules-data.php:1038
+#: admin/class-modules-data.php:1054
 msgctxt "Module name"
 msgid "Plugin & Theme Rollback"
 msgstr ""
 
-#: admin/class-modules-data.php:1039
+#: admin/class-modules-data.php:1055
 msgctxt "Module description"
 msgid ""
 "Revert to previous versions of any theme or "
 "plugin from WordPress.org."
 msgstr ""
 
-#: admin/class-modules-data.php:1042
+#: admin/class-modules-data.php:1058
 msgctxt "Module name"
 msgid "Multiple User Roles"
 msgstr ""
 
-#: admin/class-modules-data.php:1043
+#: admin/class-modules-data.php:1059
 msgctxt "Module description"
 msgid ""
 "Enable assignment of multiple roles during "
@@ -1226,23 +1238,23 @@ msgid ""
 "commerce or LMS plugins."
 msgstr ""
 
-#: admin/class-modules-data.php:1046
+#: admin/class-modules-data.php:1062
 msgctxt "Module name"
 msgid "Adminer"
 msgstr ""
 
-#: admin/class-modules-data.php:1047
+#: admin/class-modules-data.php:1063
 msgctxt "Module description"
 msgid ""
 "A full-featured database management tool."
 msgstr ""
 
-#: admin/class-modules-data.php:1050
+#: admin/class-modules-data.php:1066
 msgctxt "Module name"
 msgid "Apple Touch Icon"
 msgstr ""
 
-#: admin/class-modules-data.php:1051
+#: admin/class-modules-data.php:1067
 msgctxt "Module description"
 msgid ""
 "Manage app icon (Apple Touch Icon) "
@@ -1251,24 +1263,24 @@ msgid ""
 "Touch icon without impact your favicon."
 msgstr ""
 
-#: admin/class-modules-data.php:1054
+#: admin/class-modules-data.php:1070
 msgctxt "Module name"
 msgid "Local avatars"
 msgstr ""
 
-#: admin/class-modules-data.php:1055
+#: admin/class-modules-data.php:1071
 msgctxt "Module description"
 msgid ""
 "Replaces GRAVATAR management with media "
 "management."
 msgstr ""
 
-#: admin/class-modules-data.php:1058
+#: admin/class-modules-data.php:1074
 msgctxt "Module name"
 msgid "Auto clean actionscheduler_actions"
 msgstr ""
 
-#: admin/class-modules-data.php:1059
+#: admin/class-modules-data.php:1075
 msgctxt "Module description"
 msgid ""
 "Clean actionscheduler_actions database table "
@@ -1276,69 +1288,70 @@ msgid ""
 "failed | cancelled."
 msgstr ""
 
-#: admin/class-modules-data.php:1062
+#: admin/class-modules-data.php:1078
 msgctxt "Module name"
 msgid "CRON Manager"
 msgstr ""
 
-#: admin/class-modules-data.php:1063
+#: admin/class-modules-data.php:1079
 msgctxt "Module description"
 msgid "Manage cron events on your website."
 msgstr ""
 
-#: admin/class-modules-data.php:1066
+#: admin/class-modules-data.php:1082
 msgctxt "Module name"
 msgid "Hook And Filter Debugger"
 msgstr ""
 
-#: admin/class-modules-data.php:1067
+#: admin/class-modules-data.php:1083
 msgctxt "Module description"
 msgid ""
 "Displaying the sequence of action and filter "
 "hooks by their origin on a single page."
 msgstr ""
 
-#: admin/class-modules-data.php:1070
+#: admin/class-modules-data.php:1086
 msgctxt "Module name"
 msgid "Change Database Prefix"
 msgstr ""
 
-#: admin/class-modules-data.php:1071
+#: admin/class-modules-data.php:1087
 msgctxt "Module description"
 msgid ""
 "Quickly change your WordPress database "
 "prefix to save time and enhance security."
 msgstr ""
 
-#: admin/class-modules-data.php:1074
+#: admin/class-modules-data.php:1090
 msgctxt "Module name"
 msgid "User Switching"
 msgstr ""
 
-#: admin/class-modules-data.php:1075
+#: admin/class-modules-data.php:1091
 msgctxt "Module description"
 msgid ""
 "Instant switching between user accounts."
 msgstr ""
 
-#: admin/class-modules-data.php:1078
+#: admin/class-modules-data.php:1094
 msgctxt "Module name"
 msgid "Media Encoder"
 msgstr ""
 
-#: admin/class-modules-data.php:1079
+#: admin/class-modules-data.php:1095
 msgctxt "Module description"
 msgid ""
-"Automatically converts images to WebP when "
-"they are uploaded to the media library."
+"Automatically converts uploaded images to "
+"your selected format (WebP or AVIF) for "
+"better performance and reduced file size."
 msgstr ""
 
-#: admin/class-modules-data.php:1082
+#: admin/class-modules-data.php:1098
 msgctxt "Module name"
 msgid "Media Cleaner"
 msgstr ""
 
-#: admin/class-modules-data.php:1083
+#: admin/class-modules-data.php:1099
 msgctxt "Module description"
 msgid ""
 "Automatically sanitize uploaded file names "
@@ -1349,36 +1362,36 @@ msgid ""
 "from the cleaned file name."
 msgstr ""
 
-#: admin/class-modules-data.php:1086
+#: admin/class-modules-data.php:1102
 msgctxt "Module name"
 msgid "Paste Image In Media"
 msgstr ""
 
-#: admin/class-modules-data.php:1087
+#: admin/class-modules-data.php:1103
 msgctxt "Module description"
 msgid ""
 "With this feature you can paste directly "
 "your picture in WordPress media."
 msgstr ""
 
-#: admin/class-modules-data.php:1090
+#: admin/class-modules-data.php:1106
 msgctxt "Module name"
 msgid "Add Essentials Shortcodes"
 msgstr ""
 
-#: admin/class-modules-data.php:1091
+#: admin/class-modules-data.php:1107
 msgctxt "Module description"
 msgid ""
 "Insert dynamic variables into your titles "
 "and content via shortcodes."
 msgstr ""
 
-#: admin/class-modules-data.php:1094
+#: admin/class-modules-data.php:1110
 msgctxt "Module name"
 msgid "410 Manager"
 msgstr ""
 
-#: admin/class-modules-data.php:1095
+#: admin/class-modules-data.php:1111
 msgctxt "Module description"
 msgid ""
 "Managing HTTP 410 statuses on your site. The "
@@ -1387,26 +1400,26 @@ msgid ""
 "that this deletion is intentional and final."
 msgstr ""
 
-#: admin/class-modules-data.php:1098
+#: admin/class-modules-data.php:1114
 msgctxt "Module name"
 msgid ""
 "No Plugin Activation / Deactivation / "
 "Deletion"
 msgstr ""
 
-#: admin/class-modules-data.php:1099
+#: admin/class-modules-data.php:1115
 msgctxt "Module description"
 msgid ""
 "Prevents plugin activation, deactivation, "
 "and deletion for enhanced security."
 msgstr ""
 
-#: admin/class-modules-data.php:1102
+#: admin/class-modules-data.php:1118
 msgctxt "Module name"
 msgid "Link Shortener"
 msgstr ""
 
-#: admin/class-modules-data.php:1103
+#: admin/class-modules-data.php:1119
 msgctxt "Module description"
 msgid ""
 "Shorten your links with a custom prefix. You "
@@ -1414,12 +1427,12 @@ msgid ""
 "link."
 msgstr ""
 
-#: admin/class-modules-data.php:1106
+#: admin/class-modules-data.php:1122
 msgctxt "Module name"
 msgid "Vulnerabilities Scan"
 msgstr ""
 
-#: admin/class-modules-data.php:1107
+#: admin/class-modules-data.php:1123
 msgctxt "Module description"
 msgid ""
 "This module will scan your WordPress Core "
@@ -1427,87 +1440,103 @@ msgid ""
 "vulnerabilities."
 msgstr ""
 
-#: admin/class-modules-data.php:1110
+#: admin/class-modules-data.php:1126
 msgctxt "Module name"
 msgid "Force SSL"
 msgstr ""
 
-#: admin/class-modules-data.php:1111
+#: admin/class-modules-data.php:1127
 msgctxt "Module description"
 msgid ""
 "Force HTTPS on your site to ensure all "
 "traffic is encrypted and secure."
 msgstr ""
 
-#: admin/class-modules-data.php:1114
+#: admin/class-modules-data.php:1130
 msgctxt "Module name"
 msgid "Post Type Switcher"
 msgstr ""
 
-#: admin/class-modules-data.php:1115
+#: admin/class-modules-data.php:1131
 msgctxt "Module description"
 msgid ""
 "A simple way to change the type of a post."
 msgstr ""
 
-#: admin/class-modules-data.php:1118
+#: admin/class-modules-data.php:1134
 msgctxt "Module name"
 msgid "Browser Theme Color"
 msgstr ""
 
-#: admin/class-modules-data.php:1119
+#: admin/class-modules-data.php:1135
 msgctxt "Module description"
 msgid ""
 "Select a tag color to allow seamless theme "
 "customization in all major browsers."
 msgstr ""
 
-#: admin/class-modules-data.php:1162
-msgid "All modules"
+#: admin/class-modules-data.php:1138
+msgctxt "Module name"
+msgid "Custom Login Design"
 msgstr ""
 
-#: admin/class-modules-data.php:1167
-msgid "Activated modules"
-msgstr ""
-
-#: admin/class-modules-data.php:1172
-msgid "Administration"
-msgstr ""
-
-#: admin/class-modules-data.php:1177
-msgid "Contents & Media"
+#: admin/class-modules-data.php:1139
+msgctxt "Module description"
+msgid ""
+"Personalize your login page to match your "
+"brand."
 msgstr ""
 
 #: admin/class-modules-data.php:1182
-msgid "Custom Code"
+msgid "All modules"
 msgstr ""
 
 #: admin/class-modules-data.php:1187
-msgid "Disable Features"
+msgid "Activated modules"
 msgstr ""
 
 #: admin/class-modules-data.php:1192
-msgid "Security"
+msgid "PRO modules"
 msgstr ""
 
 #: admin/class-modules-data.php:1197
-msgid "Speed Optimizations"
+msgid "Administration"
 msgstr ""
 
 #: admin/class-modules-data.php:1202
-msgid "Woocommerce"
+msgid "Contents & Media"
 msgstr ""
 
 #: admin/class-modules-data.php:1207
-msgid "Other Features"
+msgid "Custom Code"
 msgstr ""
 
 #: admin/class-modules-data.php:1212
+msgid "Disable Features"
+msgstr ""
+
+#: admin/class-modules-data.php:1217
+msgid "Security"
+msgstr ""
+
+#: admin/class-modules-data.php:1222
+msgid "Speed Optimizations"
+msgstr ""
+
+#: admin/class-modules-data.php:1227
+msgid "Woocommerce"
+msgstr ""
+
+#: admin/class-modules-data.php:1232
+msgid "Other Features"
+msgstr ""
+
+#: admin/class-modules-data.php:1237
 #: admin/modules/core/class-code-snippets.php:166
 msgid "Settings"
 msgstr ""
 
-#: admin/class-modules-data.php:1217
+#: admin/class-modules-data.php:1242
 #: admin/templates/core/page-settings-tabs/credits.php:13
 msgid "Credits"
 msgstr ""
@@ -1549,8 +1578,8 @@ msgid "WPMasterToolkit Settings"
 msgstr ""
 
 #: admin/class-settings.php:70
-#: admin/modules/core/class-media-encoder.php:411
-#: admin/templates/core/page-settings.php:20
+#: admin/modules/core/class-media-encoder.php:447
+#: admin/templates/core/page-settings.php:22
 #: admin/templates/core/submenu/header.php:22
 msgid "WPMasterToolkit"
 msgstr ""
@@ -1574,6 +1603,1321 @@ msgid ""
 "A new version %s is available. If you "
 "activate your license, you will get the "
 "latest version automatically."
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:21
+msgid "Appearance Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:22
+msgid "Collapse Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:23
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:347
+msgid "Comments Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:24
+msgid "Customizer Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:25
+msgid "Generic Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:26
+msgid "Home Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:27
+msgid "Links Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:28
+msgid "Media Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:29
+msgid "Multisite Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:30
+msgid "Network Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:31
+msgid "Page Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:32
+msgid "Plugins Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:33
+msgid "Post Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:34
+msgid "Settings Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:35
+msgid "Site Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:36
+msgid "Site (alt) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:37
+msgid "Site (alt2) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:38
+msgid "Site (alt3) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:39
+msgid "Tools Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:40
+msgid "Users Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:41
+msgid "Airplane Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:42
+msgid "Album Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:43
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:137
+msgid "Align Center Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:44
+msgid "Align Full Width Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:45
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:138
+msgid "Align Left Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:46
+msgid "Align None Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:47
+msgid "Align Pull Left Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:48
+msgid "Align Pull Right Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:49
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:139
+msgid "Align Right Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:50
+msgid "Align Wide Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:51
+msgid "Amazon Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:52
+msgid "Analytics Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:53
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:237
+msgid "Archive Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:54
+msgid "Arrow Down Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:55
+msgid "Arrow Down (alt) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:56
+msgid "Arrow Down (alt2) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:57
+msgid "Arrow Left Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:58
+msgid "Arrow Left (alt) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:59
+msgid "Arrow Left (alt2) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:60
+msgid "Arrow Right Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:61
+msgid "Arrow Right (alt) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:62
+msgid "Arrow Right (alt2) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:63
+msgid "Arrow Up Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:64
+msgid "Arrow Up (alt) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:65
+msgid "Arrow Up (alt2) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:66
+msgid "Art Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:67
+msgid "Awards Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:68
+msgid "Backup Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:69
+msgid "Bank Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:70
+msgid "Beer Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:71
+msgid "Bell Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:72
+msgid "Block Default Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:73
+msgid "Book Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:74
+msgid "Book (alt) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:75
+msgid "Activity Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:76
+msgid "bbPress Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:77
+msgid "BuddyPress Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:78
+msgid "Community Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:79
+msgid "Forums Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:80
+msgid "Friends Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:81
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:202
+msgid "Groups Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:82
+msgid "PM Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:83
+msgid "Replies Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:84
+msgid "Topics Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:85
+msgid "Tracking Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:86
+msgid "Building Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:87
+msgid "Businessman Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:88
+msgid "Businessperson Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:89
+msgid "Businesswoman Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:90
+msgid "Button Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:91
+msgid "Calculator Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:92
+msgid "Calendar Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:93
+msgid "Calendar (alt) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:94
+msgid "Camera Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:95
+msgid "Camera (alt) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:96
+msgid "Car Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:97
+msgid "Carrot Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:98
+msgid "Cart Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:99
+msgid "Category Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:100
+msgid "Chart Area Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:101
+msgid "Chart Bar Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:102
+msgid "Chart Line Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:103
+msgid "Chart Pie Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:104
+msgid "Clipboard Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:105
+msgid "Clock Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:106
+msgid "Cloud Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:107
+msgid "Cloud Saved Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:108
+msgid "Cloud Upload Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:109
+msgid "Code Standards Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:110
+msgid "Coffee Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:111
+msgid "Color Picker Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:112
+msgid "Columns Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:113
+msgid "Back Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:114
+msgid "Forward Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:115
+msgid "Pause Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:116
+msgid "Play Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:117
+msgid "Repeat Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:118
+msgid "Skip Back Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:119
+msgid "Skip Forward Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:120
+msgid "Volume Off Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:121
+msgid "Volume On Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:122
+msgid "Cover Image Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:123
+msgid "Dashboard Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:124
+msgid "Database Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:125
+msgid "Database Add Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:126
+msgid "Database Export Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:127
+msgid "Database Import Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:128
+msgid "Database Remove Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:129
+msgid "Database View Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:130
+msgid "Desktop Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:131
+msgid "Dismiss Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:132
+msgid "Download Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:133
+msgid "Drumstick Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:134
+msgid "Edit Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:135
+msgid "Edit Large Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:136
+msgid "Edit Page Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:140
+msgid "Bold Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:141
+msgid "Break Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:142
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:239
+msgid "Code Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:143
+msgid "Contract Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:144
+msgid "Custom Character Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:145
+msgid "Expand Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:146
+msgid "Help Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:147
+msgid "Indent Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:148
+msgid "Insert More Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:149
+msgid "Italic Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:150
+msgid "Justify Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:151
+msgid "Kitchen Sink Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:152
+msgid "LTR Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:153
+msgid "Ordered List Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:154
+msgid "Ordered List RTL Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:155
+msgid "Outdent Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:156
+msgid "Paragraph Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:157
+msgid "Paste Text Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:158
+msgid "Paste Word Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:159
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:193
+msgid "Quote Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:160
+msgid "Remove Formatting Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:161
+msgid "RTL Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:162
+msgid "Spellcheck Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:163
+msgid "Strikethrough Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:164
+msgid "Table Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:165
+msgid "Text Color Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:166
+msgid "Unordered List Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:167
+msgid "Underline Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:168
+msgid "Unlink Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:169
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:195
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:245
+msgid "Video Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:170
+msgid "Ellipsis Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:171
+msgid "Email Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:172
+msgid "Email (alt) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:173
+msgid "Email (alt2) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:174
+msgid "Embed Audio Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:175
+msgid "Embed Generic Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:176
+msgid "Embed Photo Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:177
+msgid "Embed Post Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:178
+msgid "Embed Video Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:179
+msgid "Excerpt View Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:180
+msgid "Exit Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:181
+msgid "External Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:182
+msgid "Facebook Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:183
+msgid "Facebook (alt) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:184
+msgid "Feedback Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:185
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:212
+msgid "Filter Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:186
+msgid "Flag Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:187
+msgid "Food Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:188
+msgid "Aside Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:189
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:238
+msgid "Audio Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:190
+msgid "Chat Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:191
+msgid "Gallery Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:192
+msgid "Image Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:194
+msgid "Status Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:196
+msgid "Forms Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:197
+msgid "Fullscreen (alt) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:198
+msgid "Fullscreen Exit (alt) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:199
+msgid "Games Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:200
+msgid "Google Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:201
+msgid "Grid View Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:203
+msgid "Hammer Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:204
+msgid "Heading Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:205
+msgid "Heart Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:206
+msgid "Hidden Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:207
+msgid "Hourglass Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:208
+msgid "HTML Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:209
+msgid "ID Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:210
+msgid "ID (alt) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:211
+msgid "Crop Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:213
+msgid "Flip Horizontal Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:214
+msgid "Flip Vertical Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:215
+msgid "Rotate Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:216
+msgid "Rotate Left Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:217
+msgid "Rotate Right Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:218
+msgid "Images (alt) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:219
+msgid "Images (alt2) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:220
+msgid "Index Card Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:221
+msgid "Info Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:222
+msgid "Info Outline Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:223
+msgid "Insert Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:224
+msgid "Insert After Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:225
+msgid "Insert Before Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:226
+msgid "Instagram Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:227
+msgid "Laptop Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:228
+msgid "Layout Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:229
+msgid "Left Right Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:230
+msgid "Lightbulb Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:231
+msgid "LinkedIn Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:232
+msgid "List View Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:233
+msgid "Location Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:234
+msgid "Location (alt) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:235
+msgid "Lock Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:236
+msgid "Marker Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:240
+msgid "Default Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:241
+msgid "Document Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:242
+msgid "Interactive Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:243
+msgid "Spreadsheet Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:244
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:321
+msgid "Text Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:246
+msgid "Megaphone Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:247
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:309
+msgid "Menu Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:248
+msgid "Menu (alt) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:249
+msgid "Menu (alt2) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:250
+msgid "Menu (alt3) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:251
+msgid "Microphone Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:252
+msgid "Migrate Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:253
+msgid "Minus Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:254
+msgid "Money Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:255
+msgid "Money (alt) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:256
+msgid "Move Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:257
+msgid "Nametag Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:258
+msgid "Networking Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:259
+msgid "No Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:260
+msgid "No (alt) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:261
+msgid "Open Folder Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:262
+msgid "Palm Tree Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:263
+msgid "Paperclip Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:264
+msgid "PDF Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:265
+msgid "Performance Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:266
+msgid "Pets Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:267
+msgid "Phone Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:268
+msgid "Pinterest Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:269
+msgid "Playlist Audio Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:270
+msgid "Playlist Video Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:271
+msgid "Plugins Checked Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:272
+msgid "Plus Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:273
+msgid "Plus (alt) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:274
+msgid "Plus (alt2) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:275
+msgid "Podio Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:276
+msgid "Portfolio Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:277
+msgid "Post Status Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:278
+msgid "Pressthis Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:279
+msgid "Printer Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:280
+msgid "Privacy Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:281
+msgid "Products Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:282
+msgid "Randomize Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:283
+msgid "Reddit Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:284
+msgid "Redo Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:285
+#: admin/modules/core/class-apple-touch-icon.php:113
+msgid "Remove Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:286
+msgid "REST API Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:287
+msgid "RSS Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:288
+msgid "Saved Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:289
+msgid "Schedule Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:290
+msgid "Screen Options Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:291
+msgid "Search Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:292
+msgid "Share Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:293
+msgid "Share (alt) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:294
+msgid "Share (alt2) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:295
+msgid "Shield Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:296
+msgid "Shield (alt) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:297
+msgid "Shortcode Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:298
+msgid "Slides Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:299
+msgid "Smartphone Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:300
+msgid "Smiley Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:301
+msgid "Sort Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:302
+msgid "Sos Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:303
+msgid "Spotify Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:304
+msgid "Star Empty Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:305
+msgid "Star Filled Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:306
+msgid "Star Half Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:307
+msgid "Sticky Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:308
+msgid "Store Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:309
+msgid "Superhero Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:310
+msgid "Superhero (alt) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:311
+msgid "Table Col After Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:312
+msgid "Table Col Before Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:313
+msgid "Table Col Delete Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:314
+msgid "Table Row After Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:315
+msgid "Table Row Before Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:316
+msgid "Table Row Delete Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:317
+msgid "Tablet Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:318
+msgid "Tag Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:319
+msgid "Tagcloud Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:320
+msgid "Testimonial Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:322
+msgid "Text Page Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:323
+msgid "Thumbs Down Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:324
+msgid "Thumbs Up Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:325
+msgid "Tickets Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:326
+msgid "Tickets (alt) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:327
+msgid "Tide Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:328
+msgid "Translation Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:329
+msgid "Trash Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:330
+msgid "Twitch Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:331
+msgid "Twitter Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:332
+msgid "Twitter (alt) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:333
+msgid "Undo Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:334
+msgid "Universal Access Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:335
+msgid "Universal Access (alt) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:336
+msgid "Unlock Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:337
+msgid "Update Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:338
+msgid "Update (alt) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:339
+msgid "Upload Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:340
+msgid "Vault Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:341
+msgid "Video (alt) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:342
+msgid "Video (alt2) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:343
+msgid "Video (alt3) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:344
+msgid "Visibility Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:345
+msgid "Warning Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:346
+msgid "Add Page Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:348
+msgid "Learn More Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:349
+msgid "View Site Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:350
+msgid "Widgets Menus Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:351
+msgid "Write Blog Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:352
+msgid "WhatsApp Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:353
+msgid "WordPress Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:354
+msgid "WordPress (alt) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:355
+msgid "Xing Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:356
+msgid "Yes Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:357
+msgid "Yes (alt) Icon"
+msgstr ""
+
+#: admin/helpers/core/select-dashicon/class-select-dashicon.php:358
+msgid "YouTube Icon"
 msgstr ""
 
 #: admin/helpers/pro/cron-manager/class-event-list-table.php:160
@@ -1820,10 +3164,6 @@ msgstr ""
 msgid "Choose an Icon"
 msgstr ""
 
-#: admin/modules/core/class-apple-touch-icon.php:113
-msgid "Remove Icon"
-msgstr ""
-
 #: admin/modules/core/class-auto-regenerate-salt-keys.php:48
 msgid "Auto Regenerate Salt Keys"
 msgstr ""
@@ -1946,26 +3286,27 @@ msgstr ""
 
 #: admin/modules/core/class-blacklisted-usernames.php:128
 #: admin/templates/core/file-manager/views/chmod.php:46
+#: admin/templates/pro/custom-login-design/login-page-template.php:148
 msgid "Change"
 msgstr ""
 
 #: admin/modules/core/class-blacklisted-usernames.php:142
 #: admin/modules/core/class-duplicate-menu.php:40
 #: admin/modules/core/class-maintenance-mode.php:165
-#: admin/modules/core/class-media-encoder.php:615
-#: admin/modules/core/class-media-encoder.php:666
-#: admin/modules/core/class-media-encoder.php:696
-#: admin/modules/core/class-media-encoder.php:707
-#: admin/modules/core/class-media-encoder.php:714
-#: admin/modules/core/class-media-encoder.php:725
-#: admin/modules/core/class-media-encoder.php:749
-#: admin/modules/core/class-media-encoder.php:773
-#: admin/modules/core/class-media-encoder.php:826
-#: admin/modules/core/class-media-encoder.php:855
-#: admin/modules/core/class-media-encoder.php:886
-#: admin/modules/core/class-media-encoder.php:916
-#: admin/modules/core/class-media-encoder.php:927
-#: admin/modules/core/class-media-encoder.php:934
+#: admin/modules/core/class-media-encoder.php:724
+#: admin/modules/core/class-media-encoder.php:780
+#: admin/modules/core/class-media-encoder.php:818
+#: admin/modules/core/class-media-encoder.php:829
+#: admin/modules/core/class-media-encoder.php:836
+#: admin/modules/core/class-media-encoder.php:847
+#: admin/modules/core/class-media-encoder.php:871
+#: admin/modules/core/class-media-encoder.php:945
+#: admin/modules/core/class-media-encoder.php:974
+#: admin/modules/core/class-media-encoder.php:1008
+#: admin/modules/core/class-media-encoder.php:1038
+#: admin/modules/core/class-media-encoder.php:1049
+#: admin/modules/core/class-media-encoder.php:1056
+#: admin/modules/core/class-media-encoder.php:1067
 #: admin/modules/core/class-meta-debugger.php:148
 #: admin/modules/core/class-smtp-mailer.php:117
 msgid "Refresh the page and try again."
@@ -2013,18 +3354,18 @@ msgstr ""
 msgid "Browser Theme Color"
 msgstr ""
 
-#: admin/modules/core/class-browser-theme-color.php:153
+#: admin/modules/core/class-browser-theme-color.php:154
 msgid ""
 "Select a tag color to allow seamless theme "
 "customization in all major browsers."
 msgstr ""
 
-#: admin/modules/core/class-browser-theme-color.php:158
+#: admin/modules/core/class-browser-theme-color.php:159
 msgid "Theme Color"
 msgstr ""
 
-#: admin/modules/core/class-browser-theme-color.php:163
-#: admin/modules/core/class-browser-theme-color.php:164
+#: admin/modules/core/class-browser-theme-color.php:165
+#: admin/modules/core/class-browser-theme-color.php:167
 msgid "Browser Theme Color Preview"
 msgstr ""
 
@@ -2082,6 +3423,7 @@ msgid "The version of the parent theme is %s."
 msgstr ""
 
 #: admin/modules/core/class-child-theme-generator.php:366
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:112
 msgid "Author"
 msgstr ""
 
@@ -2109,7 +3451,9 @@ msgstr ""
 
 #: admin/modules/core/class-child-theme-generator.php:411
 #: admin/modules/core/class-code-snippets.php:635
-#: admin/templates/pro/link-shortener/edit-post.php:87
+#: admin/modules/core/class-register-custom-content-types.php:241
+#: admin/modules/pro/class-custom-login-design.php:4302
+#: admin/templates/pro/link-shortener/edit-post.php:89
 msgid "Description"
 msgstr ""
 
@@ -2128,7 +3472,7 @@ msgid "Preview & generation"
 msgstr ""
 
 #: admin/modules/core/class-child-theme-generator.php:430
-#: admin/modules/core/class-media-encoder.php:2266
+#: admin/modules/core/class-media-encoder.php:2586
 msgid "Preview"
 msgstr ""
 
@@ -2202,10 +3546,28 @@ msgid "Role"
 msgstr ""
 
 #: admin/modules/core/class-clean-profiles.php:220
+#: admin/modules/pro/class-custom-login-design.php:152
+#: admin/modules/pro/class-custom-login-design.php:281
+#: admin/modules/pro/class-custom-login-design.php:410
+#: admin/modules/pro/class-custom-login-design.php:539
+#: admin/modules/pro/class-custom-login-design.php:668
+#: admin/modules/pro/class-custom-login-design.php:797
+#: admin/modules/pro/class-custom-login-design.php:926
+#: admin/modules/pro/class-custom-login-design.php:1055
+#: admin/modules/pro/class-custom-login-design.php:1184
+#: admin/modules/pro/class-custom-login-design.php:1313
+#: admin/modules/pro/class-custom-login-design.php:1442
+#: admin/modules/pro/class-custom-login-design.php:1571
+#: admin/modules/pro/class-custom-login-design.php:1700
+#: admin/modules/pro/class-custom-login-design.php:1829
+#: admin/modules/pro/class-custom-login-design.php:1958
+#: admin/modules/pro/class-custom-login-design.php:2087
+#: admin/templates/pro/custom-login-design/login-page-template.php:81
 msgid "Email"
 msgstr ""
 
 #: admin/modules/core/class-clean-profiles.php:224
+#: admin/modules/pro/class-custom-login-design.php:4767
 msgid "New Password"
 msgstr ""
 
@@ -2309,6 +3671,7 @@ msgid "Add New Snippet"
 msgstr ""
 
 #: admin/modules/core/class-code-snippets.php:91
+#: admin/modules/core/class-register-custom-content-types.php:271
 msgid "Add New"
 msgstr ""
 
@@ -2346,6 +3709,7 @@ msgid "Not found in Trash"
 msgstr ""
 
 #: admin/modules/core/class-code-snippets.php:100
+#: admin/modules/core/class-register-custom-content-types.php:311
 msgid "Featured Image"
 msgstr ""
 
@@ -2429,8 +3793,10 @@ msgstr ""
 
 #: admin/modules/core/class-code-snippets.php:229
 #: admin/modules/core/class-code-snippets.php:637
+#: admin/modules/core/class-register-custom-content-types.php:103
 #: admin/modules/pro/class-link-shortener.php:121
-#: admin/templates/pro/link-shortener/edit-post.php:41
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:47
+#: admin/templates/pro/link-shortener/edit-post.php:43
 msgid "Status"
 msgstr ""
 
@@ -2690,6 +4056,7 @@ msgid "Featured image"
 msgstr ""
 
 #: admin/modules/core/class-enhance-list-tables.php:95
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:114
 msgid "Excerpt"
 msgstr ""
 
@@ -2710,6 +4077,7 @@ msgid "Post types"
 msgstr ""
 
 #: admin/modules/core/class-enhance-list-tables.php:499
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:85
 msgid "Taxonomies"
 msgstr ""
 
@@ -2718,6 +4086,7 @@ msgid "Media"
 msgstr ""
 
 #: admin/modules/core/class-enhance-list-tables.php:531
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:115
 msgid "Comments"
 msgstr ""
 
@@ -2863,83 +4232,83 @@ msgid ""
 "enhanced security and SEO benefits."
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:59
+#: admin/modules/core/class-file-manager.php:57
 msgid "File Manager"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:123
+#: admin/modules/core/class-file-manager.php:121
 msgid "Bright"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:124
+#: admin/modules/core/class-file-manager.php:122
 msgid "Dark"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:125
+#: admin/modules/core/class-file-manager.php:123
 msgid "Error: Server Timeout"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:126
+#: admin/modules/core/class-file-manager.php:124
 msgid "Error: try again"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:127
+#: admin/modules/core/class-file-manager.php:125
 msgid "Saved Successfully"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:146
+#: admin/modules/core/class-file-manager.php:144
 msgid "OOPS: minimum 3 characters required!"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:147
+#: admin/modules/core/class-file-manager.php:145
 msgid "No result found!"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:148
+#: admin/modules/core/class-file-manager.php:146
 msgid "ERROR: Try again later!"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:201
-#: admin/modules/core/class-file-manager.php:289
+#: admin/modules/core/class-file-manager.php:199
+#: admin/modules/core/class-file-manager.php:288
 #: admin/modules/core/class-file-manager.php:325
 #: admin/modules/core/class-file-manager.php:507
 #: admin/modules/core/class-file-manager.php:578
-#: admin/modules/core/class-file-manager.php:622
-#: admin/modules/core/class-file-manager.php:760
-#: admin/modules/core/class-file-manager.php:798
-#: admin/modules/core/class-file-manager.php:867
-#: admin/modules/core/class-file-manager.php:931
+#: admin/modules/core/class-file-manager.php:624
+#: admin/modules/core/class-file-manager.php:763
+#: admin/modules/core/class-file-manager.php:801
+#: admin/modules/core/class-file-manager.php:870
+#: admin/modules/core/class-file-manager.php:935
 msgid "Invalid token"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:224
-#: admin/modules/core/class-file-manager.php:643
-#: admin/modules/core/class-file-manager.php:881
-#: admin/modules/core/class-file-manager.php:946
-#: admin/modules/core/class-file-manager.php:997
-#: admin/modules/core/class-file-manager.php:1022
-#: admin/modules/core/class-file-manager.php:1034
-#: admin/modules/core/class-file-manager.php:1058
+#: admin/modules/core/class-file-manager.php:223
+#: admin/modules/core/class-file-manager.php:646
+#: admin/modules/core/class-file-manager.php:885
+#: admin/modules/core/class-file-manager.php:951
+#: admin/modules/core/class-file-manager.php:1002
+#: admin/modules/core/class-file-manager.php:1028
+#: admin/modules/core/class-file-manager.php:1041
+#: admin/modules/core/class-file-manager.php:1066
 msgid "File not found"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:237
+#: admin/modules/core/class-file-manager.php:236
 msgid ""
 "Could Not Write File! - Check Permissions / "
 "Ownership"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:261
+#: admin/modules/core/class-file-manager.php:260
 #, php-format
 msgid "File %s not found"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:268
+#: admin/modules/core/class-file-manager.php:267
 #, php-format
 msgid "Backup %s created"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:274
+#: admin/modules/core/class-file-manager.php:273
 #, php-format
 msgid "Could not copy file %s"
 msgstr ""
@@ -3053,7 +4422,7 @@ msgid "Unable to create destination folder"
 msgstr ""
 
 #: admin/modules/core/class-file-manager.php:539
-#: admin/modules/core/class-file-manager.php:1010
+#: admin/modules/core/class-file-manager.php:1015
 msgid "Nothing selected"
 msgstr ""
 
@@ -3073,132 +4442,139 @@ msgstr ""
 msgid "Selected files and folders copied"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:591
+#: admin/modules/core/class-file-manager.php:593
 msgid "Invalid characters in file name"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:599
+#: admin/modules/core/class-file-manager.php:601
 msgid "Renamed from <b>%$1s</b> to <b>%$2s</b>"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:609
+#: admin/modules/core/class-file-manager.php:611
 msgid ""
 "Error while renaming from <b>%$1s</b> to <b>%"
 "$2s</b>"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:652
+#: admin/modules/core/class-file-manager.php:655
 msgid "Invalid Token"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:664
+#: admin/modules/core/class-file-manager.php:667
 msgid "Oops! Try again"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:673
+#: admin/modules/core/class-file-manager.php:676
 msgid "Invalid File name!"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:706
+#: admin/modules/core/class-file-manager.php:709
 msgid "File upload successful"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:711
+#: admin/modules/core/class-file-manager.php:714
 msgid "Failed to write file"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:717
+#: admin/modules/core/class-file-manager.php:720
 msgid "Failed to read input file"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:738
+#: admin/modules/core/class-file-manager.php:741
 msgid "file upload successfully"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:743
+#: admin/modules/core/class-file-manager.php:746
 msgid "Couldn't upload the requested file."
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:749
+#: admin/modules/core/class-file-manager.php:752
 msgid "Error while uploading files."
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:770
-#: admin/modules/core/class-file-manager.php:822
+#: admin/modules/core/class-file-manager.php:773
+#: admin/modules/core/class-file-manager.php:825
 msgid "No files selected"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:785
+#: admin/modules/core/class-file-manager.php:788
 msgid "Selected files and folders deleted"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:789
+#: admin/modules/core/class-file-manager.php:792
 msgid "Error while deleting items"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:806
-#: admin/modules/core/class-file-manager.php:887
+#: admin/modules/core/class-file-manager.php:809
+#: admin/modules/core/class-file-manager.php:891
 msgid ""
 "Operations with archives are not available"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:850
+#: admin/modules/core/class-file-manager.php:853
 #, php-format
 msgid "Archive <b>%s</b> Created"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:857
+#: admin/modules/core/class-file-manager.php:860
 msgid "Archive not created"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:919
+#: admin/modules/core/class-file-manager.php:923
 msgid "Unzip successful"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:921
+#: admin/modules/core/class-file-manager.php:925
 msgid "Unzip failed"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:981
+#: admin/modules/core/class-file-manager.php:986
 msgid "Permissions changed"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:983
+#: admin/modules/core/class-file-manager.php:988
 msgid "Permissions not changed"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:1046
+#: admin/modules/core/class-file-manager.php:1053
 msgid ""
 "File extension not supported for editing"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:1120
+#: admin/modules/core/class-file-manager.php:1129
 #: admin/templates/core/file-manager/modals/new-item.php:16
 #: admin/templates/core/file-manager/views/default.php:201
 msgid "File"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:1129
+#: admin/modules/core/class-file-manager.php:1138
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:503
 msgid "Archive"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:1133
+#: admin/modules/core/class-file-manager.php:1142
 msgid "Image"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:1136
+#: admin/modules/core/class-file-manager.php:1145
 msgid "Audio"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:1139
+#: admin/modules/core/class-file-manager.php:1148
 msgid "Video"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:1867
+#: admin/modules/core/class-file-manager.php:1251
+msgid ""
+"Sorry, you are not allowed to access this "
+"page."
+msgstr ""
+
+#: admin/modules/core/class-file-manager.php:1686
 msgid "Zero byte file! Aborting download"
 msgstr ""
 
-#: admin/modules/core/class-file-manager.php:1880
+#: admin/modules/core/class-file-manager.php:1699
 msgid "Cannot open file! Aborting download"
 msgstr ""
 
@@ -3361,11 +4737,11 @@ msgstr ""
 msgid "Version %s"
 msgstr ""
 
-#: admin/modules/core/class-image-upload-control.php:54
+#: admin/modules/core/class-image-upload-control.php:55
 msgid "Image Upload Control"
 msgstr ""
 
-#: admin/modules/core/class-image-upload-control.php:290
+#: admin/modules/core/class-image-upload-control.php:291
 msgid ""
 "Resize newly uploaded, large images to a "
 "smaller dimension and delete originally "
@@ -3373,7 +4749,7 @@ msgid ""
 "PNGs will be converted to JPGs and resized."
 msgstr ""
 
-#: admin/modules/core/class-image-upload-control.php:295
+#: admin/modules/core/class-image-upload-control.php:296
 #, php-format
 msgid ""
 "To exclude an image from conversion and "
@@ -3381,21 +4757,22 @@ msgid ""
 "name, e.g. my-image%1$s.jpg"
 msgstr ""
 
-#: admin/modules/core/class-image-upload-control.php:302
+#: admin/modules/core/class-image-upload-control.php:303
+#: admin/modules/pro/class-custom-login-design.php:3880
 msgid "Max Width"
 msgstr ""
 
-#: admin/modules/core/class-image-upload-control.php:306
-#: admin/modules/core/class-image-upload-control.php:316
+#: admin/modules/core/class-image-upload-control.php:307
+#: admin/modules/core/class-image-upload-control.php:317
 msgid "pixels"
 msgstr ""
 
-#: admin/modules/core/class-image-upload-control.php:308
-#: admin/modules/core/class-image-upload-control.php:318
+#: admin/modules/core/class-image-upload-control.php:309
+#: admin/modules/core/class-image-upload-control.php:319
 msgid "(Default is 1920 pixels)"
 msgstr ""
 
-#: admin/modules/core/class-image-upload-control.php:312
+#: admin/modules/core/class-image-upload-control.php:313
 msgid "Max Height"
 msgstr ""
 
@@ -3584,6 +4961,39 @@ msgstr ""
 
 #: admin/modules/core/class-login-logout-menu.php:48
 #: admin/modules/core/class-login-logout-menu.php:146
+#: admin/modules/pro/class-custom-login-design.php:177
+#: admin/modules/pro/class-custom-login-design.php:192
+#: admin/modules/pro/class-custom-login-design.php:306
+#: admin/modules/pro/class-custom-login-design.php:321
+#: admin/modules/pro/class-custom-login-design.php:435
+#: admin/modules/pro/class-custom-login-design.php:450
+#: admin/modules/pro/class-custom-login-design.php:564
+#: admin/modules/pro/class-custom-login-design.php:579
+#: admin/modules/pro/class-custom-login-design.php:693
+#: admin/modules/pro/class-custom-login-design.php:708
+#: admin/modules/pro/class-custom-login-design.php:822
+#: admin/modules/pro/class-custom-login-design.php:837
+#: admin/modules/pro/class-custom-login-design.php:951
+#: admin/modules/pro/class-custom-login-design.php:966
+#: admin/modules/pro/class-custom-login-design.php:1080
+#: admin/modules/pro/class-custom-login-design.php:1095
+#: admin/modules/pro/class-custom-login-design.php:1209
+#: admin/modules/pro/class-custom-login-design.php:1224
+#: admin/modules/pro/class-custom-login-design.php:1338
+#: admin/modules/pro/class-custom-login-design.php:1353
+#: admin/modules/pro/class-custom-login-design.php:1467
+#: admin/modules/pro/class-custom-login-design.php:1482
+#: admin/modules/pro/class-custom-login-design.php:1596
+#: admin/modules/pro/class-custom-login-design.php:1611
+#: admin/modules/pro/class-custom-login-design.php:1725
+#: admin/modules/pro/class-custom-login-design.php:1740
+#: admin/modules/pro/class-custom-login-design.php:1854
+#: admin/modules/pro/class-custom-login-design.php:1869
+#: admin/modules/pro/class-custom-login-design.php:1983
+#: admin/modules/pro/class-custom-login-design.php:1998
+#: admin/modules/pro/class-custom-login-design.php:2112
+#: admin/modules/pro/class-custom-login-design.php:2127
+#: admin/modules/pro/class-custom-login-design.php:4743
 msgid "Log In"
 msgstr ""
 
@@ -3699,6 +5109,13 @@ msgid "Footer Text"
 msgstr ""
 
 #: admin/modules/core/class-maintenance-mode.php:480
+#: admin/modules/pro/class-custom-login-design.php:3649
+#: admin/modules/pro/class-custom-login-design.php:3718
+#: admin/modules/pro/class-custom-login-design.php:3791
+#: admin/modules/pro/class-custom-login-design.php:3907
+#: admin/modules/pro/class-custom-login-design.php:4118
+#: admin/modules/pro/class-custom-login-design.php:4485
+#: admin/modules/pro/class-custom-login-design.php:4821
 msgid "Background Color"
 msgstr ""
 
@@ -3707,6 +5124,7 @@ msgid "Text Color"
 msgstr ""
 
 #: admin/modules/core/class-maintenance-mode.php:498
+#: admin/modules/pro/class-custom-login-design.php:2491
 msgid "Logo"
 msgstr ""
 
@@ -3718,6 +5136,10 @@ msgid "Upload"
 msgstr ""
 
 #: admin/modules/core/class-maintenance-mode.php:513
+#: admin/modules/pro/class-custom-login-design.php:3639
+#: admin/modules/pro/class-custom-login-design.php:3708
+#: admin/modules/pro/class-custom-login-design.php:3781
+#: admin/modules/pro/class-custom-login-design.php:3897
 msgid "Background Image"
 msgstr ""
 
@@ -3727,7 +5149,7 @@ msgstr ""
 
 #: admin/modules/core/class-maintenance-mode.php:542
 #: admin/modules/core/class-maintenance-mode.php:590
-#: admin/modules/core/class-move-login-url.php:872
+#: admin/modules/core/class-move-login-url.php:882
 msgid ""
 "This feature is only available in the Pro "
 "version."
@@ -3844,205 +5266,231 @@ msgstr ""
 msgid "Description completion from file name."
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:110
+#: admin/modules/core/class-media-encoder.php:112
 msgid "Media Encoder"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:383
-#: admin/modules/core/class-media-encoder.php:443
-#: admin/modules/core/class-media-encoder.php:474
-msgid "Error attempting to optimize this image"
+#: admin/modules/core/class-media-encoder.php:421
+#: admin/modules/core/class-media-encoder.php:505
+#: admin/modules/core/class-media-encoder.php:560
+msgid "Image already optimized."
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:432
+#: admin/modules/core/class-media-encoder.php:468
 msgid "Image type not supported"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:510
-#: admin/modules/core/class-media-encoder.php:515
+#: admin/modules/core/class-media-encoder.php:593
+#: admin/modules/core/class-media-encoder.php:598
 msgid "Every minute"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:620
-#: admin/modules/core/class-media-encoder.php:627
+#: admin/modules/core/class-media-encoder.php:729
+#: admin/modules/core/class-media-encoder.php:736
 msgid "No image uploaded, try again."
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:632
-msgid "This library does not exist."
+#: admin/modules/core/class-media-encoder.php:788
+#: admin/modules/core/class-media-encoder.php:879
+msgid ""
+"Choose an image format and save the settings."
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:671
+#: admin/modules/core/class-media-encoder.php:793
 msgid "No images to optimize."
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:676
+#: admin/modules/core/class-media-encoder.php:798
 msgid "Bulk optimization is already running."
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:711
+#: admin/modules/core/class-media-encoder.php:833
 msgid "Bulk optimization stopped."
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:778
-#: admin/modules/core/class-media-encoder.php:831
-#: admin/modules/core/class-media-encoder.php:860
+#: admin/modules/core/class-media-encoder.php:884
+#: admin/modules/core/class-media-encoder.php:950
+#: admin/modules/core/class-media-encoder.php:979
 msgid "No attachment id."
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:783
+#: admin/modules/core/class-media-encoder.php:890
+#: admin/modules/core/class-media-encoder.php:894
 msgid "Already optimized."
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:792
+#: admin/modules/core/class-media-encoder.php:899
 msgid "Not a valid image."
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:843
+#: admin/modules/core/class-media-encoder.php:962
 msgid "Not optimized."
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:891
+#: admin/modules/core/class-media-encoder.php:1013
 msgid "No images to migrate."
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:896
+#: admin/modules/core/class-media-encoder.php:1018
 msgid "Bulk migration is already running."
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:931
+#: admin/modules/core/class-media-encoder.php:1053
 msgid "Bulk migration stopped."
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:1544
+#: admin/modules/core/class-media-encoder.php:1763
 msgid "Optimize"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:1548
+#: admin/modules/core/class-media-encoder.php:1767
 msgid "Migrate from quickWebP"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:1574
+#: admin/modules/core/class-media-encoder.php:1796
 msgid "Original Image: "
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:1578
-msgid "Webp: "
-msgstr ""
-
-#: admin/modules/core/class-media-encoder.php:1582
+#: admin/modules/core/class-media-encoder.php:1804
 msgid "Save: "
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:1587
+#: admin/modules/core/class-media-encoder.php:1809
 msgid "Undo optimization"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2068
-msgid "GD"
+#: admin/modules/core/class-media-encoder.php:2380
+msgid "Off"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2069
-msgid "Imagick"
+#: admin/modules/core/class-media-encoder.php:2381
+msgid "WebP"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2075
+#: admin/modules/core/class-media-encoder.php:2382
+msgid "AVIF"
+msgstr ""
+
+#: admin/modules/core/class-media-encoder.php:2388
+msgid "Low"
+msgstr ""
+
+#: admin/modules/core/class-media-encoder.php:2389
+msgid "Medium"
+msgstr ""
+
+#: admin/modules/core/class-media-encoder.php:2390
+msgid "High"
+msgstr ""
+
+#: admin/modules/core/class-media-encoder.php:2398
 msgid "Deactivate"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2076
+#: admin/modules/core/class-media-encoder.php:2399
 msgid "Use <picture> tags"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2077
+#: admin/modules/core/class-media-encoder.php:2400
 msgid "Use rewrite rules"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2099
+#: admin/modules/core/class-media-encoder.php:2422
 #, php-format
 msgid "Please deactivate %s plugin."
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2145
+#: admin/modules/core/class-media-encoder.php:2468
 msgid ""
-"Automatically converts images to WebP when "
-"they are uploaded to the media library."
+"Automatically converts uploaded images to "
+"your selected format (WebP or AVIF) for "
+"better performance and reduced file size."
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2150
-msgid ""
-"Enable/disable image conversion to WEBP "
-"format"
+#: admin/modules/core/class-media-encoder.php:2474
+msgid "Image Format Optimization"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2161
+#: admin/modules/core/class-media-encoder.php:2480
+msgid ""
+"Select “Off” to disable image optimization, "
+"“WebP” for wide browser support, or “AVIF” "
+"for best compression and smaller file sizes."
+msgstr ""
+
+#: admin/modules/core/class-media-encoder.php:2493
+#: admin/templates/core/page-settings.php:159
+msgid "PRO"
+msgstr ""
+
+#: admin/modules/core/class-media-encoder.php:2495
+msgid "(PHP 8.1 or higher)"
+msgstr ""
+
+#: admin/modules/core/class-media-encoder.php:2510
 msgid "Quality"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2175
-msgid "Sharpen"
+#: admin/modules/core/class-media-encoder.php:2516
+msgid ""
+"Choose the image quality level. Lower "
+"quality results in smaller file sizes, while "
+"higher quality provides better visuals but "
+"larger files."
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2189
-msgid "Do not compress images already in WebP"
+#: admin/modules/core/class-media-encoder.php:2532
+msgid ""
+"Do not compress images already in same format"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2202
+#: admin/modules/core/class-media-encoder.php:2545
 msgid "Save original images"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2216
-msgid "Library to use"
-msgstr ""
-
-#: admin/modules/core/class-media-encoder.php:2222
+#: admin/modules/core/class-media-encoder.php:2559
 msgid ""
-"We use the GD library as the default option. "
-"However, if the GD library is not available, "
-"we will use Imagick instead."
+"Display images with new format on the site"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2239
-msgid ""
-"Display images in WebP format on the site"
-msgstr ""
-
-#: admin/modules/core/class-media-encoder.php:2245
+#: admin/modules/core/class-media-encoder.php:2565
 msgid ""
 "This option allows to override the original "
-"images by the webp version (useless for "
+"images by the new version (useless for "
 "images converted in import)"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2263
+#: admin/modules/core/class-media-encoder.php:2583
 msgid ""
 "Before saving, test your configuration with "
 "preview mode"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2272
+#: admin/modules/core/class-media-encoder.php:2592
 msgid "Bulk optimization"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2279
-#: admin/modules/core/class-media-encoder.php:2314
+#: admin/modules/core/class-media-encoder.php:2599
+#: admin/modules/core/class-media-encoder.php:2634
+#: admin/modules/pro/class-custom-login-design.php:3857
+#: admin/modules/pro/class-custom-login-design.php:4001
 msgid "Start"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2286
-#: admin/modules/core/class-media-encoder.php:2320
+#: admin/modules/core/class-media-encoder.php:2606
+#: admin/modules/core/class-media-encoder.php:2640
 msgid "Stop"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2306
+#: admin/modules/core/class-media-encoder.php:2626
 msgid "Bulk migration from QuickWebP"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2345
+#: admin/modules/core/class-media-encoder.php:2665
 msgid "Add image"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2369
+#: admin/modules/core/class-media-encoder.php:2689
 msgid "Original Image"
 msgstr ""
 
@@ -4069,34 +5517,34 @@ msgstr ""
 msgid "Move login URL"
 msgstr ""
 
-#: admin/modules/core/class-move-login-url.php:487
+#: admin/modules/core/class-move-login-url.php:497
 msgid "This feature is not enabled."
 msgstr ""
 
-#: admin/modules/core/class-move-login-url.php:535
+#: admin/modules/core/class-move-login-url.php:545
 msgid "This has been disabled"
 msgstr ""
 
-#: admin/modules/core/class-move-login-url.php:831
+#: admin/modules/core/class-move-login-url.php:841
 msgid ""
 "Change the login URL and prevent access to "
 "the wp-login.php page and the wp-admin "
 "directory to non-connected people."
 msgstr ""
 
-#: admin/modules/core/class-move-login-url.php:834
+#: admin/modules/core/class-move-login-url.php:844
 msgid "Login URL"
 msgstr ""
 
-#: admin/modules/core/class-move-login-url.php:853
+#: admin/modules/core/class-move-login-url.php:863
 msgid "Redirection URL"
 msgstr ""
 
-#: admin/modules/core/class-move-login-url.php:876
+#: admin/modules/core/class-move-login-url.php:886
 msgid "403 for not logged in on /wp-admin"
 msgstr ""
 
-#: admin/modules/core/class-move-login-url.php:885
+#: admin/modules/core/class-move-login-url.php:895
 msgid ""
 "Prevent access to ^/wp-admin for not logged "
 "in users with a 403 error. This feature "
@@ -4549,6 +5997,545 @@ msgid ""
 "roles after logout."
 msgstr ""
 
+#: admin/modules/core/class-register-custom-content-types.php:67
+msgid "Content Types"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:68
+#: admin/modules/core/class-register-custom-content-types.php:102
+msgid "Content Type"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:69
+msgid "Add New Content Type"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:70
+msgid "Create New Content Type"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:71
+msgid "Edit Content Type"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:72
+msgid "New Content Type"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:73
+msgid "All Content Types"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:74
+msgid "View Content Type"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:75
+msgid "Search Content Types"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:76
+msgid "No Content Types Found"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:77
+msgid "No Content Types Found in Trash"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:115
+#: admin/templates/core/register-custom-content-types/edit-post-select-type.php:26
+msgid "Custom Post Type"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:118
+#: admin/templates/core/register-custom-content-types/edit-post-select-type.php:37
+msgid "Custom Taxonomy"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:121
+#: admin/templates/core/register-custom-content-types/edit-post-select-type.php:48
+msgid "Option Page"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:124
+#: admin/modules/core/class-register-custom-content-types.php:142
+msgid "Unknown"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:133
+msgid "Published"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:136
+msgid "Draft"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:139
+msgid "Trashed"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:223
+msgid "Plural Label"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:225
+msgid "Movies"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:226
+msgid ""
+"The plural label for the custom post type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:229
+msgid "Singular Label"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:231
+msgid "Movie"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:232
+msgid ""
+"The singular label for the custom post type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:235
+msgid "Post Type Key"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:237
+msgid "movie"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:238
+msgid ""
+"The post type key for the custom post type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:242
+msgid "This content type is used to..."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:243
+msgid ""
+"A short description of the custom post type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:246
+msgid "Menu Name"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:247
+msgid "Posts"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:248
+msgid "The menu name for the custom post type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:251
+msgid "All Items"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:252
+msgid "All Posts"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:253
+msgid ""
+"The all items label for the custom post type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:256
+msgid "Edit Item"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:257
+msgid "Edit Post"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:258
+msgid ""
+"The edit item label for the custom post type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:261
+msgid "View Item"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:262
+msgid "View Post"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:263
+msgid ""
+"The view item label for the custom post type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:266
+msgid "Add New Item"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:267
+#: admin/modules/core/class-register-custom-content-types.php:272
+msgid "Add New Post"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:268
+msgid ""
+"The add new item label for the custom post "
+"type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:273
+msgid ""
+"The add new label for the custom post type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:276
+#: admin/templates/core/file-manager/views/navbar.php:28
+msgid "New Item"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:277
+msgid "New Post"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:278
+msgid ""
+"The new item label for the custom post type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:281
+msgid "Parent Item"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:282
+msgid "Parent Post"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:283
+msgid ""
+"The parent item label for the custom post "
+"type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:286
+msgid "Search Items"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:287
+msgid "Search Posts"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:288
+msgid ""
+"The search items label for the custom post "
+"type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:291
+msgid "Not Found"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:292
+msgid "No Posts Found"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:293
+msgid ""
+"The not found label for the custom post type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:296
+msgid "Not Found in Trash"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:297
+msgid "No Posts Found in Trash"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:298
+msgid ""
+"The not found in trash label for the custom "
+"post type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:301
+msgid "Archives"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:302
+msgid "Post Archives"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:303
+msgid ""
+"The archives label for the custom post type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:306
+msgid "Attributes"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:307
+msgid "Post Attributes"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:308
+msgid ""
+"The attributes label for the custom post "
+"type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:312
+msgid "Post Featured Image"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:313
+msgid ""
+"The featured image label for the custom post "
+"type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:316
+msgid "Set Featured Image"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:317
+msgid "Set Post Featured Image"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:318
+msgid ""
+"The set featured image label for the custom "
+"post type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:321
+msgid "Remove Featured Image"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:322
+msgid "Remove Post Featured Image"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:323
+msgid ""
+"The remove featured image label for the "
+"custom post type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:326
+msgid "Use Featured Image"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:327
+msgid "Use Post Featured Image"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:328
+msgid ""
+"The use featured image label for the custom "
+"post type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:331
+msgid "Insert into Item"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:332
+msgid "Insert into Post"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:333
+msgid ""
+"The insert into item label for the custom "
+"post type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:336
+msgid "Uploaded to this Item"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:337
+msgid "Uploaded to this Post"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:338
+msgid ""
+"The uploaded to this item label for the "
+"custom post type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:341
+msgid "Filter Items List"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:342
+msgid "Filter Posts List"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:343
+msgid ""
+"The filter items list label for the custom "
+"post type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:346
+msgid "Filter by Date"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:347
+msgid "Filter Posts by Date"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:348
+msgid ""
+"The filter by date label for the custom post "
+"type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:351
+msgid "Items List Navigation"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:352
+msgid "Posts List Navigation"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:353
+msgid ""
+"The items list navigation label for the "
+"custom post type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:356
+msgid "Items List"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:357
+msgid "Posts List"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:358
+msgid ""
+"The items list label for the custom post "
+"type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:361
+msgid "Item Published"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:362
+msgid "Post Published"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:363
+msgid ""
+"The item published label for the custom post "
+"type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:366
+msgid "Item Published Privately"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:367
+msgid "Post Published Privately"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:368
+msgid ""
+"The item published privately label for the "
+"custom post type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:371
+msgid "Item Reverted to Draft"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:372
+msgid "Post Reverted to Draft"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:373
+msgid ""
+"The item reverted to draft label for the "
+"custom post type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:376
+msgid "Item Scheduled"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:377
+msgid "Post Scheduled"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:378
+msgid ""
+"The item scheduled label for the custom post "
+"type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:381
+msgid "Item Updated"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:382
+msgid "Post Updated"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:383
+msgid ""
+"The item updated label for the custom post "
+"type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:386
+msgid "Item Link"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:387
+msgid "Post Link"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:388
+msgid ""
+"The item link label for the custom post type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:391
+msgid "Item Link Description"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:392
+msgid "Post Link Description"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:393
+msgid ""
+"The item link description label for the "
+"custom post type."
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:396
+msgid "Enter Title Here"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:397
+msgid "Enter Post Title Here"
+msgstr ""
+
+#: admin/modules/core/class-register-custom-content-types.php:398
+msgid ""
+"The enter title here label for the custom "
+"post type."
+msgstr ""
+
 #: admin/modules/core/class-revisions-control.php:35
 msgid "Revisions Control"
 msgstr ""
@@ -4648,11 +6635,61 @@ msgid "Port"
 msgstr ""
 
 #: admin/modules/core/class-smtp-mailer.php:332
+#: admin/modules/pro/class-custom-login-design.php:149
+#: admin/modules/pro/class-custom-login-design.php:151
+#: admin/modules/pro/class-custom-login-design.php:278
+#: admin/modules/pro/class-custom-login-design.php:280
+#: admin/modules/pro/class-custom-login-design.php:407
+#: admin/modules/pro/class-custom-login-design.php:409
+#: admin/modules/pro/class-custom-login-design.php:536
+#: admin/modules/pro/class-custom-login-design.php:538
+#: admin/modules/pro/class-custom-login-design.php:665
+#: admin/modules/pro/class-custom-login-design.php:667
+#: admin/modules/pro/class-custom-login-design.php:794
+#: admin/modules/pro/class-custom-login-design.php:796
+#: admin/modules/pro/class-custom-login-design.php:923
+#: admin/modules/pro/class-custom-login-design.php:925
+#: admin/modules/pro/class-custom-login-design.php:1052
+#: admin/modules/pro/class-custom-login-design.php:1054
+#: admin/modules/pro/class-custom-login-design.php:1181
+#: admin/modules/pro/class-custom-login-design.php:1183
+#: admin/modules/pro/class-custom-login-design.php:1310
+#: admin/modules/pro/class-custom-login-design.php:1312
+#: admin/modules/pro/class-custom-login-design.php:1439
+#: admin/modules/pro/class-custom-login-design.php:1441
+#: admin/modules/pro/class-custom-login-design.php:1568
+#: admin/modules/pro/class-custom-login-design.php:1570
+#: admin/modules/pro/class-custom-login-design.php:1697
+#: admin/modules/pro/class-custom-login-design.php:1699
+#: admin/modules/pro/class-custom-login-design.php:1826
+#: admin/modules/pro/class-custom-login-design.php:1828
+#: admin/modules/pro/class-custom-login-design.php:1955
+#: admin/modules/pro/class-custom-login-design.php:1957
+#: admin/modules/pro/class-custom-login-design.php:2084
+#: admin/modules/pro/class-custom-login-design.php:2086
+#: admin/templates/pro/custom-login-design/login-page-template.php:77
 msgid "Username"
 msgstr ""
 
 #: admin/modules/core/class-smtp-mailer.php:336
+#: admin/modules/pro/class-custom-login-design.php:150
+#: admin/modules/pro/class-custom-login-design.php:279
+#: admin/modules/pro/class-custom-login-design.php:408
+#: admin/modules/pro/class-custom-login-design.php:537
+#: admin/modules/pro/class-custom-login-design.php:666
+#: admin/modules/pro/class-custom-login-design.php:795
+#: admin/modules/pro/class-custom-login-design.php:924
+#: admin/modules/pro/class-custom-login-design.php:1053
+#: admin/modules/pro/class-custom-login-design.php:1182
+#: admin/modules/pro/class-custom-login-design.php:1311
+#: admin/modules/pro/class-custom-login-design.php:1440
+#: admin/modules/pro/class-custom-login-design.php:1569
+#: admin/modules/pro/class-custom-login-design.php:1698
+#: admin/modules/pro/class-custom-login-design.php:1827
+#: admin/modules/pro/class-custom-login-design.php:1956
+#: admin/modules/pro/class-custom-login-design.php:2085
 #: admin/templates/core/password-protection/password-protection.php:52
+#: admin/templates/pro/custom-login-design/login-page-template.php:54
 msgid "Password"
 msgstr ""
 
@@ -4697,13 +6734,13 @@ msgstr ""
 msgid "Wider Admin Menu"
 msgstr ""
 
-#: admin/modules/core/class-wider-admin-menu.php:212
+#: admin/modules/core/class-wider-admin-menu.php:225
 msgid ""
 "Give the admin menu more room to better "
 "accommodate wider items."
 msgstr ""
 
-#: admin/modules/core/class-wider-admin-menu.php:215
+#: admin/modules/core/class-wider-admin-menu.php:228
 msgid "Set width to"
 msgstr ""
 
@@ -5085,6 +7122,640 @@ msgstr ""
 msgid "An unknown error occurred."
 msgstr ""
 
+#: admin/modules/pro/class-custom-login-design.php:69
+msgid "Custom Login Design"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:85
+msgid "Temp 1"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:134
+#: admin/modules/pro/class-custom-login-design.php:263
+#: admin/modules/pro/class-custom-login-design.php:392
+#: admin/modules/pro/class-custom-login-design.php:521
+#: admin/modules/pro/class-custom-login-design.php:650
+#: admin/modules/pro/class-custom-login-design.php:779
+#: admin/modules/pro/class-custom-login-design.php:908
+#: admin/modules/pro/class-custom-login-design.php:1037
+#: admin/modules/pro/class-custom-login-design.php:1166
+#: admin/modules/pro/class-custom-login-design.php:1295
+#: admin/modules/pro/class-custom-login-design.php:1424
+#: admin/modules/pro/class-custom-login-design.php:1553
+#: admin/modules/pro/class-custom-login-design.php:1682
+#: admin/modules/pro/class-custom-login-design.php:1811
+#: admin/modules/pro/class-custom-login-design.php:1940
+msgid "Sign in with email"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:141
+#: admin/modules/pro/class-custom-login-design.php:270
+#: admin/modules/pro/class-custom-login-design.php:399
+#: admin/modules/pro/class-custom-login-design.php:528
+#: admin/modules/pro/class-custom-login-design.php:657
+#: admin/modules/pro/class-custom-login-design.php:786
+#: admin/modules/pro/class-custom-login-design.php:915
+#: admin/modules/pro/class-custom-login-design.php:1044
+#: admin/modules/pro/class-custom-login-design.php:1173
+#: admin/modules/pro/class-custom-login-design.php:1302
+#: admin/modules/pro/class-custom-login-design.php:1431
+#: admin/modules/pro/class-custom-login-design.php:1560
+#: admin/modules/pro/class-custom-login-design.php:1689
+#: admin/modules/pro/class-custom-login-design.php:1818
+#: admin/modules/pro/class-custom-login-design.php:1947
+#: admin/modules/pro/class-custom-login-design.php:2076
+msgid ""
+"Please log in to access your account and "
+"continue where you left off."
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:153
+#: admin/modules/pro/class-custom-login-design.php:282
+#: admin/modules/pro/class-custom-login-design.php:411
+#: admin/modules/pro/class-custom-login-design.php:540
+#: admin/modules/pro/class-custom-login-design.php:669
+#: admin/modules/pro/class-custom-login-design.php:798
+#: admin/modules/pro/class-custom-login-design.php:927
+#: admin/modules/pro/class-custom-login-design.php:1056
+#: admin/modules/pro/class-custom-login-design.php:1185
+#: admin/modules/pro/class-custom-login-design.php:1314
+#: admin/modules/pro/class-custom-login-design.php:1443
+#: admin/modules/pro/class-custom-login-design.php:1572
+#: admin/modules/pro/class-custom-login-design.php:1701
+#: admin/modules/pro/class-custom-login-design.php:1830
+#: admin/modules/pro/class-custom-login-design.php:1959
+#: admin/modules/pro/class-custom-login-design.php:2088
+#: admin/templates/pro/custom-login-design/login-page-template.php:50
+#: admin/templates/pro/custom-login-design/login-page-template.php:96
+msgid "Username or Email Address"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:165
+#: admin/modules/pro/class-custom-login-design.php:294
+#: admin/modules/pro/class-custom-login-design.php:423
+#: admin/modules/pro/class-custom-login-design.php:552
+#: admin/modules/pro/class-custom-login-design.php:681
+#: admin/modules/pro/class-custom-login-design.php:810
+#: admin/modules/pro/class-custom-login-design.php:939
+#: admin/modules/pro/class-custom-login-design.php:1068
+#: admin/modules/pro/class-custom-login-design.php:1197
+#: admin/modules/pro/class-custom-login-design.php:1326
+#: admin/modules/pro/class-custom-login-design.php:1455
+#: admin/modules/pro/class-custom-login-design.php:1584
+#: admin/modules/pro/class-custom-login-design.php:1713
+#: admin/modules/pro/class-custom-login-design.php:1842
+#: admin/modules/pro/class-custom-login-design.php:1971
+#: admin/modules/pro/class-custom-login-design.php:2100
+#: admin/modules/pro/class-custom-login-design.php:2518
+msgid "Remember Me"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:178
+#: admin/modules/pro/class-custom-login-design.php:193
+#: admin/modules/pro/class-custom-login-design.php:307
+#: admin/modules/pro/class-custom-login-design.php:322
+#: admin/modules/pro/class-custom-login-design.php:436
+#: admin/modules/pro/class-custom-login-design.php:451
+#: admin/modules/pro/class-custom-login-design.php:565
+#: admin/modules/pro/class-custom-login-design.php:580
+#: admin/modules/pro/class-custom-login-design.php:694
+#: admin/modules/pro/class-custom-login-design.php:709
+#: admin/modules/pro/class-custom-login-design.php:823
+#: admin/modules/pro/class-custom-login-design.php:838
+#: admin/modules/pro/class-custom-login-design.php:952
+#: admin/modules/pro/class-custom-login-design.php:967
+#: admin/modules/pro/class-custom-login-design.php:1081
+#: admin/modules/pro/class-custom-login-design.php:1096
+#: admin/modules/pro/class-custom-login-design.php:1210
+#: admin/modules/pro/class-custom-login-design.php:1225
+#: admin/modules/pro/class-custom-login-design.php:1339
+#: admin/modules/pro/class-custom-login-design.php:1354
+#: admin/modules/pro/class-custom-login-design.php:1468
+#: admin/modules/pro/class-custom-login-design.php:1483
+#: admin/modules/pro/class-custom-login-design.php:1597
+#: admin/modules/pro/class-custom-login-design.php:1612
+#: admin/modules/pro/class-custom-login-design.php:1726
+#: admin/modules/pro/class-custom-login-design.php:1741
+#: admin/modules/pro/class-custom-login-design.php:1855
+#: admin/modules/pro/class-custom-login-design.php:1870
+#: admin/modules/pro/class-custom-login-design.php:1984
+#: admin/modules/pro/class-custom-login-design.php:1999
+#: admin/modules/pro/class-custom-login-design.php:2113
+#: admin/modules/pro/class-custom-login-design.php:2128
+#: admin/modules/pro/class-custom-login-design.php:4751
+#: admin/modules/pro/class-custom-login-design.php:4928
+msgid "Register"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:179
+#: admin/modules/pro/class-custom-login-design.php:308
+#: admin/modules/pro/class-custom-login-design.php:437
+#: admin/modules/pro/class-custom-login-design.php:566
+#: admin/modules/pro/class-custom-login-design.php:695
+#: admin/modules/pro/class-custom-login-design.php:824
+#: admin/modules/pro/class-custom-login-design.php:953
+#: admin/modules/pro/class-custom-login-design.php:1082
+#: admin/modules/pro/class-custom-login-design.php:1211
+#: admin/modules/pro/class-custom-login-design.php:1340
+#: admin/modules/pro/class-custom-login-design.php:1469
+#: admin/modules/pro/class-custom-login-design.php:1598
+#: admin/modules/pro/class-custom-login-design.php:1727
+#: admin/modules/pro/class-custom-login-design.php:1856
+#: admin/modules/pro/class-custom-login-design.php:1985
+#: admin/modules/pro/class-custom-login-design.php:2114
+msgid ""
+"Registration confirmation will be emailed to "
+"you"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:180
+#: admin/modules/pro/class-custom-login-design.php:309
+#: admin/modules/pro/class-custom-login-design.php:438
+#: admin/modules/pro/class-custom-login-design.php:567
+#: admin/modules/pro/class-custom-login-design.php:696
+#: admin/modules/pro/class-custom-login-design.php:825
+#: admin/modules/pro/class-custom-login-design.php:954
+#: admin/modules/pro/class-custom-login-design.php:1083
+#: admin/modules/pro/class-custom-login-design.php:1212
+#: admin/modules/pro/class-custom-login-design.php:1341
+#: admin/modules/pro/class-custom-login-design.php:1470
+#: admin/modules/pro/class-custom-login-design.php:1599
+#: admin/modules/pro/class-custom-login-design.php:1728
+#: admin/modules/pro/class-custom-login-design.php:1857
+#: admin/modules/pro/class-custom-login-design.php:1986
+#: admin/modules/pro/class-custom-login-design.php:2115
+msgid "Get New Password"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:194
+#: admin/modules/pro/class-custom-login-design.php:323
+#: admin/modules/pro/class-custom-login-design.php:452
+#: admin/modules/pro/class-custom-login-design.php:581
+#: admin/modules/pro/class-custom-login-design.php:710
+#: admin/modules/pro/class-custom-login-design.php:839
+#: admin/modules/pro/class-custom-login-design.php:968
+#: admin/modules/pro/class-custom-login-design.php:1097
+#: admin/modules/pro/class-custom-login-design.php:1226
+#: admin/modules/pro/class-custom-login-design.php:1355
+#: admin/modules/pro/class-custom-login-design.php:1484
+#: admin/modules/pro/class-custom-login-design.php:1613
+#: admin/modules/pro/class-custom-login-design.php:1742
+#: admin/modules/pro/class-custom-login-design.php:1871
+#: admin/modules/pro/class-custom-login-design.php:2000
+#: admin/modules/pro/class-custom-login-design.php:2129
+msgid "Lost your password?"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:195
+#: admin/modules/pro/class-custom-login-design.php:324
+#: admin/modules/pro/class-custom-login-design.php:453
+#: admin/modules/pro/class-custom-login-design.php:582
+#: admin/modules/pro/class-custom-login-design.php:711
+#: admin/modules/pro/class-custom-login-design.php:840
+#: admin/modules/pro/class-custom-login-design.php:969
+#: admin/modules/pro/class-custom-login-design.php:1098
+#: admin/modules/pro/class-custom-login-design.php:1227
+#: admin/modules/pro/class-custom-login-design.php:1356
+#: admin/modules/pro/class-custom-login-design.php:1485
+#: admin/modules/pro/class-custom-login-design.php:1614
+#: admin/modules/pro/class-custom-login-design.php:1743
+#: admin/modules/pro/class-custom-login-design.php:1872
+#: admin/modules/pro/class-custom-login-design.php:2001
+#: admin/modules/pro/class-custom-login-design.php:2130
+msgid "&larr; Back to Website"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:214
+msgid "Temp 2"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:343
+msgid "Temp 3"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:472
+msgid "Temp 4"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:601
+msgid "Temp 5"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:730
+msgid "Temp 6"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:859
+msgid "Temp 7"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:988
+msgid "Temp 8"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:1117
+msgid "Temp 9"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:1246
+msgid "Temp 10"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:1375
+msgid "Temp 11"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:1504
+msgid "Temp 12"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:1633
+msgid "Temp 13"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:1762
+msgid "Temp 14"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:1891
+msgid "Temp 15"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:2020
+msgid "Temp 16"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:2069
+msgid "Sign in"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:2437
+msgid "Templates"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:2446
+msgid "Background"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:2455
+#: admin/modules/pro/class-custom-login-design.php:5061
+msgid "Aside"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:2464
+#: admin/modules/pro/class-custom-login-design.php:3871
+msgid "Content"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:2473
+msgid "Form"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:2482
+#: admin/modules/pro/class-custom-login-design.php:5073
+msgid "Form Top"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:2500
+#: admin/modules/pro/class-custom-login-design.php:4206
+#: admin/modules/pro/class-custom-login-design.php:4310
+#: admin/modules/pro/class-custom-login-design.php:4584
+msgid "Text"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:2509
+msgid "Field"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:2527
+msgid "Submit Button"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:2536
+msgid "Links"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:2545
+msgid "Language Switcher"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:2554
+msgid "HTML Content"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:2563
+msgid "Custom CSS"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:3625
+msgid "Select Template"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:3659
+#: admin/modules/pro/class-custom-login-design.php:3728
+#: admin/modules/pro/class-custom-login-design.php:3801
+#: admin/modules/pro/class-custom-login-design.php:3917
+#: admin/modules/pro/class-custom-login-design.php:4128
+#: admin/modules/pro/class-custom-login-design.php:4495
+#: admin/modules/pro/class-custom-login-design.php:4665
+msgid "Background Opacity"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:3676
+#: admin/modules/pro/class-custom-login-design.php:4046
+#: admin/modules/pro/class-custom-login-design.php:4908
+msgid "Position"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:3680
+#: admin/modules/pro/class-custom-login-design.php:4050
+#: admin/modules/pro/class-custom-login-design.php:4219
+#: admin/modules/pro/class-custom-login-design.php:4323
+#: admin/modules/pro/class-custom-login-design.php:4515
+#: admin/modules/pro/class-custom-login-design.php:4901
+#: admin/modules/pro/class-custom-login-design.php:5020
+msgid "Hide"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:3681
+#: admin/modules/pro/class-custom-login-design.php:4063
+#: admin/modules/pro/class-custom-login-design.php:4274
+#: admin/modules/pro/class-custom-login-design.php:4378
+#: admin/modules/pro/class-custom-login-design.php:4834
+#: admin/modules/pro/class-custom-login-design.php:5031
+msgid "Left"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:3682
+#: admin/modules/pro/class-custom-login-design.php:4065
+#: admin/modules/pro/class-custom-login-design.php:4276
+#: admin/modules/pro/class-custom-login-design.php:4380
+#: admin/modules/pro/class-custom-login-design.php:4836
+#: admin/modules/pro/class-custom-login-design.php:5033
+msgid "Right"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:3691
+#: admin/modules/pro/class-custom-login-design.php:4074
+msgid "Width"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:3745
+#: admin/modules/pro/class-custom-login-design.php:3818
+msgid "Margin"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:3762
+#: admin/modules/pro/class-custom-login-design.php:3968
+#: admin/modules/pro/class-custom-login-design.php:4179
+msgid "Border Raduis"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:3835
+#: admin/modules/pro/class-custom-login-design.php:3951
+#: admin/modules/pro/class-custom-login-design.php:4029
+#: admin/modules/pro/class-custom-login-design.php:4145
+#: admin/modules/pro/class-custom-login-design.php:4524
+#: admin/modules/pro/class-custom-login-design.php:4862
+msgid "Padding"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:3852
+#: admin/modules/pro/class-custom-login-design.php:4059
+#: admin/modules/pro/class-custom-login-design.php:4270
+#: admin/modules/pro/class-custom-login-design.php:4374
+#: admin/modules/pro/class-custom-login-design.php:4829
+#: admin/modules/pro/class-custom-login-design.php:5027
+msgid "Align"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:3856
+#: admin/modules/pro/class-custom-login-design.php:4833
+msgid "Full Width"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:3858
+#: admin/modules/pro/class-custom-login-design.php:4002
+#: admin/modules/pro/class-custom-login-design.php:4064
+#: admin/modules/pro/class-custom-login-design.php:4275
+#: admin/modules/pro/class-custom-login-design.php:4379
+#: admin/modules/pro/class-custom-login-design.php:4835
+#: admin/modules/pro/class-custom-login-design.php:5032
+msgid "Center"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:3859
+#: admin/modules/pro/class-custom-login-design.php:4003
+msgid "End"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:3866
+#: admin/modules/pro/class-custom-login-design.php:4091
+msgid "Height"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:3870
+msgid "Full Height"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:3934
+msgid "Background Blur"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:3985
+msgid "Direction"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:3989
+msgid "Row"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:3990
+msgid "Column"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:3997
+msgid "Align Items"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:4012
+#: admin/modules/pro/class-custom-login-design.php:4568
+#: admin/modules/pro/class-custom-login-design.php:4726
+msgid "Gap"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:4051
+msgid "Inside"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:4052
+msgid "Outside"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:4108
+msgid "Logo Image"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:4162
+#: admin/modules/pro/class-custom-login-design.php:4285
+#: admin/modules/pro/class-custom-login-design.php:4389
+msgid "Margin Bottom"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:4198
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:110
+msgid "Title"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:4214
+#: admin/modules/pro/class-custom-login-design.php:4318
+msgid "Show/Hide"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:4218
+#: admin/modules/pro/class-custom-login-design.php:4322
+#: admin/modules/pro/class-custom-login-design.php:4514
+#: admin/modules/pro/class-custom-login-design.php:4900
+#: admin/modules/pro/class-custom-login-design.php:5019
+msgid "Show"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:4228
+#: admin/modules/pro/class-custom-login-design.php:4332
+#: admin/modules/pro/class-custom-login-design.php:4465
+#: admin/modules/pro/class-custom-login-design.php:4628
+#: admin/modules/pro/class-custom-login-design.php:4811
+#: admin/modules/pro/class-custom-login-design.php:4988
+msgid "Color"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:4238
+#: admin/modules/pro/class-custom-login-design.php:4342
+#: admin/modules/pro/class-custom-login-design.php:4448
+#: admin/modules/pro/class-custom-login-design.php:4594
+#: admin/modules/pro/class-custom-login-design.php:4777
+#: admin/modules/pro/class-custom-login-design.php:4954
+msgid "Font Size"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:4255
+#: admin/modules/pro/class-custom-login-design.php:4359
+#: admin/modules/pro/class-custom-login-design.php:4611
+#: admin/modules/pro/class-custom-login-design.php:4794
+#: admin/modules/pro/class-custom-login-design.php:4971
+msgid "Font Weight"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:4406
+msgid "Login Placeholder"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:4414
+msgid "Password Placeholder"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:4422
+msgid "Register Login Placeholder"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:4430
+msgid "Register Email Placeholder"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:4438
+msgid "Lost password Login Placeholder"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:4475
+msgid "Placeholde Color"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:4510
+msgid "Icons"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:4541
+msgid "Border Color"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:4551
+#: admin/modules/pro/class-custom-login-design.php:4845
+msgid "Border Radius"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:4638
+msgid "Checkbox Size"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:4655
+msgid "Checkbox Background Color"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:4682
+msgid "Checkbox Border Color"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:4692
+msgid "Checkbox Border Radius"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:4709
+#: admin/modules/pro/class-custom-login-design.php:4879
+#: admin/modules/pro/class-custom-login-design.php:4998
+#: admin/modules/pro/class-custom-login-design.php:5042
+msgid "Margin Top"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:4759
+msgid "Register confirmation"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:4896
+#: admin/modules/pro/class-custom-login-design.php:5015
+msgid "Display"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:4912
+msgid "Top"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:4913
+msgid "Bottom"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:4920
+msgid "Login"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:4936
+msgid "Lost Password"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:4944
+msgid "Go To"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:5062
+#: admin/modules/pro/class-custom-login-design.php:5074
+#: admin/modules/pro/class-custom-login-design.php:5086
+#: admin/modules/pro/class-custom-login-design.php:5098
+msgid ""
+"You can enter raw HTML or use shortcodes in "
+"this field."
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:5085
+msgid "Form Middle"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:5097
+msgid "Footer"
+msgstr ""
+
+#: admin/modules/pro/class-custom-login-design.php:5111
+msgid "Custom css"
+msgstr ""
+
 #: admin/modules/pro/class-disable-comments.php:40
 msgid "Disable Comments"
 msgstr ""
@@ -5247,7 +7918,7 @@ msgid "No Short Links Found in Trash"
 msgstr ""
 
 #: admin/modules/pro/class-link-shortener.php:119
-#: admin/templates/pro/link-shortener/edit-post.php:73
+#: admin/templates/pro/link-shortener/edit-post.php:75
 msgid "Redirect URL"
 msgstr ""
 
@@ -5757,7 +8428,7 @@ msgid "Fullscreen"
 msgstr ""
 
 #: admin/templates/core/file-manager/views/edit.php:11
-#: admin/templates/core/page-settings.php:35
+#: admin/templates/core/page-settings.php:37
 msgid "Search"
 msgstr ""
 
@@ -5800,9 +8471,10 @@ msgid "BackUp"
 msgstr ""
 
 #: admin/templates/core/file-manager/views/edit.php:25
-#: admin/templates/core/page-settings.php:44
+#: admin/templates/core/page-settings.php:46
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:22
 #: admin/templates/core/submenu/header.php:36
-#: admin/templates/pro/link-shortener/edit-post.php:30
+#: admin/templates/pro/link-shortener/edit-post.php:32
 msgid "Save"
 msgstr ""
 
@@ -5816,10 +8488,6 @@ msgstr ""
 
 #: admin/templates/core/file-manager/views/navbar.php:28
 msgid "NewItem"
-msgstr ""
-
-#: admin/templates/core/file-manager/views/navbar.php:28
-msgid "New Item"
 msgstr ""
 
 #: admin/templates/core/file-manager/views/upload.php:9
@@ -6005,36 +8673,36 @@ msgid ""
 "if an improvement makes sense."
 msgstr ""
 
-#: admin/templates/core/page-settings.php:24
+#: admin/templates/core/page-settings.php:26
 #: licensing/src/Settings.php:363
 msgid "WPMasterToolKit"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:26
+#: admin/templates/core/page-settings.php:28
 msgid "Version"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:26
+#: admin/templates/core/page-settings.php:28
 msgid "What's new?"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:143
-msgid "PRO"
+#: admin/templates/core/page-settings.php:163
+msgid "Try 15 days for free"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:146
+#: admin/templates/core/page-settings.php:169
 msgid "coming soon"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:161
+#: admin/templates/core/page-settings.php:184
 msgid "Learn more"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:186
+#: admin/templates/core/page-settings.php:209
 msgid "Share my configuration"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:187
+#: admin/templates/core/page-settings.php:210
 msgid ""
 "In order to improve our modules, we would "
 "like to know which modules are most used, "
@@ -6043,47 +8711,107 @@ msgid ""
 "anonymously."
 msgstr ""
 
-#: admin/templates/core/page-settings.php:199
+#: admin/templates/core/page-settings.php:222
 msgid "Data anonymization"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:200
+#: admin/templates/core/page-settings.php:223
 msgid ""
 "We only send your WPMasterToolKit "
 "configuration."
 msgstr ""
 
-#: admin/templates/core/page-settings.php:210
+#: admin/templates/core/page-settings.php:233
 msgid "Personal Data"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:211
+#: admin/templates/core/page-settings.php:234
 msgid ""
 "We never share or get your personal "
 "information."
 msgstr ""
 
-#: admin/templates/core/page-settings.php:221
+#: admin/templates/core/page-settings.php:244
 msgid "Plugin improvement"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:222
+#: admin/templates/core/page-settings.php:245
 msgid ""
 "This sharing allows us to make the most "
 "relevant improvements to the plugin."
 msgstr ""
 
-#: admin/templates/core/page-settings.php:238
+#: admin/templates/core/page-settings.php:261
 msgid ""
 "I agree to share my configuration with "
 "wpmastertoolkit.com."
 msgstr ""
 
-#: admin/templates/core/page-settings.php:243
+#: admin/templates/core/page-settings.php:266
 msgid "Save & continue"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:263
+#: admin/templates/core/page-settings.php:275
+msgid ""
+"Unlock the full potential of WPMasterToolKit"
+msgstr ""
+
+#: admin/templates/core/page-settings.php:281
+#, php-format
+msgid ""
+"Like the free version of WPMasterToolKit? "
+"The PRO version lets you go further with %s "
+"additional modules and additional features "
+"in the free modules."
+msgstr ""
+
+#: admin/templates/core/page-settings.php:302
+#, php-format
+msgid "+%s modules"
+msgstr ""
+
+#: admin/templates/core/page-settings.php:308
+#, no-php-format
+msgid ""
+"Benefit from modules designed 100% for "
+"professionals."
+msgstr ""
+
+#: admin/templates/core/page-settings.php:317
+msgid "Additional Features"
+msgstr ""
+
+#: admin/templates/core/page-settings.php:318
+msgid ""
+"Take advantage of PRO features within the "
+"free modules, to go further."
+msgstr ""
+
+#: admin/templates/core/page-settings.php:327
+msgid "Improve your performance"
+msgstr ""
+
+#: admin/templates/core/page-settings.php:328
+msgid ""
+"Further reduce the number of active plugins "
+"and benefit from our resource-conscious "
+"approach."
+msgstr ""
+
+#: admin/templates/core/page-settings.php:340
+msgid "I no longer wish to see this message"
+msgstr ""
+
+#: admin/templates/core/page-settings.php:343
+msgid "I already have a license"
+msgstr ""
+
+#: admin/templates/core/page-settings.php:346
+#: admin/templates/core/page-settings.php:347
+msgid "Start 15 free trial"
+msgstr ""
+
+#: admin/templates/core/page-settings.php:367
 #, php-format
 msgid "What's new in v%s"
 msgstr ""
@@ -6092,37 +8820,508 @@ msgstr ""
 msgid "View Content"
 msgstr ""
 
-#: admin/templates/pro/link-shortener/edit-post.php:24
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:17
+#: admin/templates/pro/link-shortener/edit-post.php:26
 msgid "Enter a title"
 msgstr ""
 
-#: admin/templates/pro/link-shortener/edit-post.php:53
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:31
+msgid "General"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:51
+msgid ""
+"If you want to activate the content type, "
+"you need to check the status."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:62
+msgid "Public"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:65
+msgid ""
+"Visible to the public in the admin menu and "
+"on the front end."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:76
+msgid "Hierarchical"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:79
+msgid ""
+"If checked, the content type will be "
+"hierarchical like pages. If unchecked, it "
+"will be flat like posts."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:100
+msgid ""
+"Select existing taxonomies to associate with "
+"this content type."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:106
+msgid "Supports"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:111
+msgid "Editor"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:113
+msgid "Thumbnail"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:116
+msgid "Revisions"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:117
+msgid "Page Attributes"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:118
+msgid "Custom Fields"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:139
+msgid ""
+"Select the features you want to enable for "
+"this content type. You can also create new "
+"features."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:149
+msgid "Labels"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:173
+msgid "Text Domain"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:175
+msgid "your-text-domain"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:178
+msgid ""
+"Enter the text domain for translation. "
+"Example: 'your-text-domain'."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:189
+msgid "Manage Optional Labels"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:192
+msgid ""
+"If checked, you can manage the optional "
+"labels."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:220
+msgid "Admin Menu"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:236
+msgid "Show In UI"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:240
+msgid ""
+"Items can be edited and managed in the admin "
+"dashboard."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:255
+msgid "Show In Menu"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:259
+msgid ""
+"If checked, the content type will be visible "
+"in the admin menu."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:266
+msgid "Admin Menu Parent"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:268
+msgid "edit.php?post_type={parent_page}"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:271
+msgid ""
+"Enter the menu parent slug. Example: \"edit."
+"php?post_type=page\"."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:278
+msgid "Admin Menu Position"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:280
+msgid "5"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:283
+msgid ""
+"Enter the menu position. Example: \"5\"."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:298
+msgid "Use Dashicon"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:302
+msgid ""
+"Check this if you want to use a dashicon for "
+"the menu item. If unchecked, the menu item "
+"will use custom icon URL."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:320
+msgid "The icon for the menu item."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:327
+msgid "Custom Icon URL"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:329
+msgid "Enter a URL"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:332
+msgid ""
+"Enter the URL of the custom icon. Example: "
+"\"https://example.com/icon.png\". Ideally, "
+"the icon should be 20x20 pixels."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:347
+msgid "Show In Admin Bar"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:351
+msgid ""
+"If checked, the content type will be visible "
+"in the admin bar."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:366
+msgid "Appearance Menus Support"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:370
+msgid ""
+"Allow items to be added to menus in the "
+"'Appearance' > 'Menus' screen. Must be "
+"turned on in 'Screen options'."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:385
+msgid "Exclude From Search"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:389
+msgid ""
+"If checked, the content type will be "
+"excluded from search results."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:401
+msgid "Front end"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:409
+msgid "Permalink Rewrite"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:412
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:549
+msgid "Post Type Key (default)"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:413
+msgid "Custom Permalink"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:414
+msgid "No permalink (Prevent URL rewriting)"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:418
+msgid "Select the permalink rewrite option."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:425
+msgid "URL Slug"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:427
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:516
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:561
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:605
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:618
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:727
+msgid "Enter a slug"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:430
+msgid ""
+"Enter the URL slug. Example: \"portfolio\"."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:446
+msgid "Front URL Prefix"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:450
+msgid ""
+"Alters the permalink structure to add the "
+"`WP_Rewrite::$front` prefix to URLs."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:465
+msgid "Feed URL"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:469
+msgid "RSS feed URL for the post type items."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:484
+msgid "Pagination"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:488
+msgid ""
+"Pagination support for the items URLs such "
+"as the archives."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:507
+msgid ""
+"If checked, the content type will have an "
+"archive page."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:514
+msgid "Archive Slug"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:519
+msgid ""
+"Enter the archive slug. Example: "
+"\"portfolio\"."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:535
+msgid "Publicly Queryable"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:539
+msgid ""
+"URLs for an item and items can be accessed "
+"with a query string."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:546
+msgid "Query Variable Support"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:550
+msgid "Custom Query Variable"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:551
+msgid "No Query Variable"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:559
+msgid "Query Variable Name"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:564
+msgid ""
+"Enter the query variable name. Example: "
+"\"portfolio\"."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:576
+msgid "Permissions"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:592
+msgid "Rename Capabilities"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:596
+msgid ""
+"By default the capabilities of the post type "
+"will inherit the 'Post' capability names, "
+"eg. edit_post, delete_posts. Enable to use "
+"post type specific capabilities, eg. "
+"edit_{singular}, delete_{plural}."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:603
+msgid "Singular Capability Name"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:608
+msgid ""
+"Enter the singular capability name. Example: "
+"\"portfolio\"."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:616
+msgid "Plural Capability Name"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:621
+msgid ""
+"Enter the plural capability name. Example: "
+"\"portfolios\"."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:637
+msgid "Can Export"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:641
+msgid ""
+"Allow the post type to be exported from "
+"'Tools' > 'Export'."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:656
+msgid "Delete with User"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:660
+msgid ""
+"If checked, items of this content type will "
+"be deleted when the user is deleted."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:672
+msgid "REST API"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:688
+msgid "Show In REST API"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:692
+msgid ""
+"If checked, the content type will be "
+"available in the REST API. Note if you want "
+"use Gutenberg editor, you need to enable "
+"this option."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:699
+msgid "Base URL"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:701
+msgid "post"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:704
+msgid ""
+"The base URL for the post type REST API URLs."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:712
+msgid "REST API Namespace"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:714
+msgid "wp/v2"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:717
+msgid ""
+"The namespace for the post type REST API "
+"URLs."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:725
+msgid "REST API Controller Class"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:730
+msgid ""
+"Optional custom controller to use instead of "
+"`WP_REST_Posts_Controller`."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-select-type.php:10
+msgid "Choice the content type to create"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-select-type.php:16
+msgid "Continue"
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-select-type.php:29
+msgid ""
+"Create a custom post type based on the "
+"WordPress post type. Example: Portfolio, "
+"Testimonials, etc."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-select-type.php:40
+msgid ""
+"Create a custom taxonomy based on the "
+"WordPress taxonomy. Example: Category, Tags, "
+"etc."
+msgstr ""
+
+#: admin/templates/core/register-custom-content-types/edit-post-select-type.php:51
+msgid ""
+"Create a custom option page based on the "
+"WordPress option page. Example: Settings, "
+"etc."
+msgstr ""
+
+#: admin/templates/pro/custom-login-design/login-page-template.php:132
+msgid "Language"
+msgstr ""
+
+#: admin/templates/pro/link-shortener/edit-post.php:55
 msgid "Shortened URL"
 msgstr ""
 
-#: admin/templates/pro/link-shortener/edit-post.php:63
+#: admin/templates/pro/link-shortener/edit-post.php:65
 msgid "Enter a custom slug"
 msgstr ""
 
-#: admin/templates/pro/link-shortener/edit-post.php:76
+#: admin/templates/pro/link-shortener/edit-post.php:78
 msgid "Enter URL"
 msgstr ""
 
-#: admin/templates/pro/link-shortener/edit-post.php:90
+#: admin/templates/pro/link-shortener/edit-post.php:92
 msgid "Enter a description"
 msgstr ""
 
-#: admin/templates/pro/link-shortener/edit-post.php:102
+#: admin/templates/pro/link-shortener/edit-post.php:104
 msgid "Click"
 msgid_plural "Clicks"
 msgstr[0] ""
 msgstr[1] ""
 
-#: admin/templates/pro/link-shortener/edit-post.php:109
+#: admin/templates/pro/link-shortener/edit-post.php:111
 msgid "QR code"
 msgstr ""
 
-#: admin/templates/pro/link-shortener/edit-post.php:113
+#: admin/templates/pro/link-shortener/edit-post.php:115
 msgid "QR Code"
 msgstr ""
 

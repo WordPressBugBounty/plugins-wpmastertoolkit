@@ -1,0 +1,14 @@
+.wpmtk-cld__form__inner {
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.08);
+}
+.wpmtk-cld__form__logo {
+	box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.08);
+}
+#login form p.submit input {
+	background: linear-gradient(230deg, rgb(0, 111, 255) 0%, rgb(0, 31, 192) 100%);
+}
+@media (max-width: 767px) {
+	.wpmtk-cld__form__inner {
+		padding: 20px !important;
+	}
+}

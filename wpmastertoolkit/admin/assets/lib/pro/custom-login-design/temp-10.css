@@ -1,0 +1,40 @@
+.wpmtk-cld {
+	padding: 20px;
+}
+.wpmtk-cld__wrapper {
+	height: auto;
+	min-height: auto;
+	width: 100%;
+	max-width: 1000px;
+	background: #FFFFFF;
+	border-radius: 30px;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.8);
+	margin: auto;
+}
+.wpmtk-cld__aside {
+	flex: 1;
+	margin: 74px 30px 74px 30px;
+}
+.wpmtk-cld__form__inner__logo {
+	flex: 1 0 auto;
+}
+@media (max-width: 1024px) {
+	.wpmtk-cld__aside {
+		width: 30% !important;
+	}
+	.wpmtk-cld__form {
+		width: 70% !important;
+	}
+}
+@media (max-width: 767px) {
+	.wpmtk-cld__aside {
+		display: none !important;
+	}
+	.wpmtk-cld__form {
+		width: 100% !important;
+	}
+	.wpmtk-cld__form__inner {
+		align-self: center !important;
+		padding: 20px !important;
+	}
+}

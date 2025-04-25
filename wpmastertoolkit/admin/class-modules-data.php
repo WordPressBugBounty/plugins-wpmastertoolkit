@@ -486,6 +486,12 @@ class WPMastertoolkit_Modules_Data {
 				'pro'           => false,
 				'path'          => 'core/class-image-upload-control.php',
 			),
+			'WPMastertoolkit_Register_Custom_Content_Types' => array(
+				'original_name' => "Register Custom Content Types",
+				'group'         => 'content-media',
+				'pro'           => false,
+				'path'          => 'core/class-register-custom-content-types.php',
+			),
 			'WPMastertoolkit_Heartbeat_Control' => array(
 				'original_name' => "Heartbeat Control",
 				'group'         => 'content-media',
@@ -665,6 +671,12 @@ class WPMastertoolkit_Modules_Data {
 				'group'         => 'content-media',
 				'pro'           => false,
 				'path'          => 'core/class-browser-theme-color.php',
+			),
+			'WPMastertoolkit_Custom_Login_Design' => array(
+				'original_name' => "Custom Login Design",
+				'group'         => 'administration',
+				'pro'           => true,
+				'path'          => 'pro/class-custom-login-design.php',
 			),
 		);
 		
@@ -998,6 +1010,10 @@ class WPMastertoolkit_Modules_Data {
 				'name' => esc_html_x( "Image Upload Control", "Module name", 'wpmastertoolkit' ),
 				'desc' => esc_html_x( "Resize newly uploaded, large images to a smaller dimension and delete originally uploaded files. BMPs and non-transparent PNGs will be converted to JPGs and resized.", "Module description", 'wpmastertoolkit' ),
 			),
+			'WPMastertoolkit_Register_Custom_Content_Types' => array(
+				'name' => esc_html_x( "Register Custom Content Types", "Module name", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( "Register custom content types for custom post types.", "Module description", 'wpmastertoolkit' ),
+			),
 			'WPMastertoolkit_Heartbeat_Control' => array(
 				'name' => esc_html_x( "Heartbeat Control", "Module name", 'wpmastertoolkit' ),
 				'desc' => esc_html_x( "Modify the interval of the WordPress heartbeat API or disable it on admin pages, post creation/edit screens and/or the frontend. This will help reduce CPU load on the server.", "Module description", 'wpmastertoolkit' ),
@@ -1076,7 +1092,7 @@ class WPMastertoolkit_Modules_Data {
 			),
 			'WPMastertoolkit_Media_Encoder' => array(
 				'name' => esc_html_x( "Media Encoder", "Module name", 'wpmastertoolkit' ),
-				'desc' => esc_html_x( "Automatically converts images to WebP when they are uploaded to the media library.", "Module description", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( "Automatically converts uploaded images to your selected format (WebP or AVIF) for better performance and reduced file size.", "Module description", 'wpmastertoolkit' ),
 			),
 			'WPMastertoolkit_Media_Cleaner' => array(
 				'name' => esc_html_x( "Media Cleaner", "Module name", 'wpmastertoolkit' ),
@@ -1117,6 +1133,10 @@ class WPMastertoolkit_Modules_Data {
 			'WPMastertoolkit_Browser_Theme_Color' => array(
 				'name' => esc_html_x( "Browser Theme Color", "Module name", 'wpmastertoolkit' ),
 				'desc' => esc_html_x( "Select a tag color to allow seamless theme customization in all major browsers.", "Module description", 'wpmastertoolkit' ),
+			),
+			'WPMastertoolkit_Custom_Login_Design' => array(
+				'name' => esc_html_x( "Custom Login Design", "Module name", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( "Personalize your login page to match your brand.", "Module description", 'wpmastertoolkit' ),
 			),
 		);
 
@@ -1166,6 +1186,11 @@ class WPMastertoolkit_Modules_Data {
 			'activated' => array(
 				'name'      => esc_html__( 'Activated modules', 'wpmastertoolkit' ),
 				'logo'      => 'checked.svg',
+				'exception' => false,
+			),
+			'pro-modules' => array(
+				'name'      => esc_html__( 'PRO modules', 'wpmastertoolkit' ),
+				'logo'      => 'star.svg',
 				'exception' => false,
 			),
 			'administration' => array(

@@ -1,0 +1,11 @@
+.wpmtk-cld__form__inner {
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.8);
+}
+.wpmtk-cld__form__inner__logo {
+	flex: 1 0 auto;
+}
+@media (max-width: 767px) {
+	.wpmtk-cld__form__inner {
+		padding: 20px !important;
+	}
+}

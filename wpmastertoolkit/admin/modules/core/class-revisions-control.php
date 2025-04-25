@@ -97,8 +97,8 @@ class WPMastertoolkit_Revisions_Control {
 		
 		if ( wp_verify_nonce($nonce, $this->nonce_action) ) {
 
-			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-            $new_settings = $this->sanitize_settings( $_POST[$this->option_id] ?? array() );
+			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+            $new_settings = $this->sanitize_settings( wp_unslash( $_POST[$this->option_id] ?? array() ) );
             
             $this->save_settings( $new_settings );
             wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );

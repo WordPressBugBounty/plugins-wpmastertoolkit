@@ -12,10 +12,8 @@ class WPMastertoolkit_File_Manager {
     private $header_title;
     private $user_nonce;
 	private $disable_form;
-	private $GLOBAL_IS_HTTPS;
 	private $GLOBAL_SELF_URL;
 	private $ROOT_PATH;
-	private $HTTP_HOST;
 	private $ROOT_URL;
 	private $P;
 	private $MAX_UPLOAD_SIZE;
@@ -218,6 +216,7 @@ class WPMastertoolkit_File_Manager {
 	
 					$file = sanitize_text_field( wp_unslash( $_GET['edit'] ?? '' ) );
 					$file = $this->fm_clean_path( $file );
+					$file = str_replace( '../', '', $file );
 					$file = str_replace( '/', '', $file );
 	
 					if ( $file == '' || ! is_file( $this->PATH . '/' . $file ) ) {
@@ -292,6 +291,7 @@ class WPMastertoolkit_File_Manager {
 				}
 
 				$del = str_replace( '/', '', $this->fm_clean_path( sanitize_text_field( wp_unslash( $_GET['del'] ) ) ) );
+				$del = str_replace( '../', '', $del );
 
 				if ( $del == '' || $del == '..' || $del == '.' ) {
 					$this->set_notice( __( 'Invalid file or folder name', 'wpmastertoolkit' ) );
@@ -532,8 +532,8 @@ class WPMastertoolkit_File_Manager {
 
 				$move          = isset( $_POST['move'] );
 				$errors        = 0;
-				//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-				$files_to_copy = wpmastertoolkit_clean( $_POST['file'] ?? array() );
+				//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+				$files_to_copy = wpmastertoolkit_clean( wp_unslash( $_POST['file'] ?? array() ) );
 
 				if ( ! is_array( $files_to_copy ) || ! count( $files_to_copy ) ) {
 					$this->set_notice( __( 'Nothing selected', 'wpmastertoolkit' ) );
@@ -582,9 +582,11 @@ class WPMastertoolkit_File_Manager {
 
 				$old = urldecode( sanitize_text_field( wp_unslash( $_POST['rename_from'] ) ) );
 				$old = $this->fm_clean_path( $old );
+				$old = str_replace( '../', '', $old );
 				$old = str_replace( '/', '', $old );
 				$new = urldecode( sanitize_text_field( wp_unslash( $_POST['rename_to'] ) ) );
 				$new = $this->fm_clean_path( wp_strip_all_tags( $new ) );
+				$new = str_replace( '../', '', $new );
 				$new = str_replace( '/', '', $new );
 
 				if ( ! $this->fm_isvalid_filename( $new ) || $old == '' || $new == '' ) {
@@ -626,6 +628,7 @@ class WPMastertoolkit_File_Manager {
 
 				$dl = urldecode( sanitize_text_field( wp_unslash( $_GET['dl'] ) ) );
 				$dl = $this->fm_clean_path( $dl );
+				$dl = str_replace( '../', '', $dl );
 				$dl = str_replace( '/', '', $dl );
 
 				if ( $dl != '' && is_file($this->PATH . '/' . $dl ) ) {
@@ -763,8 +766,8 @@ class WPMastertoolkit_File_Manager {
 				}
 
 				$errors          = 0;
-				//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-				$files_to_delete = wpmastertoolkit_clean( $_POST['file'] ?? array() );
+				//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+				$files_to_delete = wpmastertoolkit_clean( wp_unslash( $_POST['file'] ?? array() ) );
 
 				if ( ! is_array( $files_to_delete ) || ! count( $files_to_delete ) ) {
 					$this->set_notice( __( 'No files selected', 'wpmastertoolkit' ) );
@@ -808,8 +811,8 @@ class WPMastertoolkit_File_Manager {
 					exit;
 				}
 
-				//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-				$files_to_zip    = wpmastertoolkit_clean( $_POST['file'] ?? array() );
+				//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+				$files_to_zip    = wpmastertoolkit_clean( wp_unslash( $_POST['file'] ?? array() ) );
 				$sanitized_files = array();
 
 				foreach( $files_to_zip as $file ){
@@ -871,6 +874,7 @@ class WPMastertoolkit_File_Manager {
 
 				$unzip = urldecode( sanitize_text_field( wp_unslash( $_POST['unzip'] ?? '' ) ) );
 				$unzip = $this->fm_clean_path( $unzip );
+				$unzip = str_replace( '../', '', $unzip );
 				$unzip = str_replace( '/', '', $unzip );
 
 
@@ -940,6 +944,7 @@ class WPMastertoolkit_File_Manager {
 
 				$file = sanitize_text_field( wp_unslash( $_POST['chmod'] ?? '' ) );
 				$file = $this->fm_clean_path( $file );
+				$file = str_replace( '../', '', $file );
 				$file = str_replace( '/', '', $file );
 
 				if ( $file == '' || ( ! is_file( $path . '/' . $file ) && ! is_dir( $path . '/' . $file ) ) ) {
@@ -1002,8 +1007,8 @@ class WPMastertoolkit_File_Manager {
 				$this->TEMPLATE = 'copyfinish';
 			break;
 			case isset( $_POST['copy'] ):
-				//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-				$copy_files     = isset( $_POST['file'] ) ? wpmastertoolkit_clean( $_POST['file'] ) : null;
+				//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+				$copy_files     = isset( $_POST['file'] ) ? wpmastertoolkit_clean( wp_unslash( $_POST['file'] ) ) : null;
 				$this->TEMPLATE = 'copy';
 
 				if ( ! is_array( $copy_files ) || empty( $copy_files ) ) {
@@ -1015,6 +1020,7 @@ class WPMastertoolkit_File_Manager {
 			case isset( $_GET['view'] ):
 				$file           = sanitize_text_field( wp_unslash( $_GET['view'] ?? '' ) );
 				$file           = $this->fm_clean_path( $file, false );
+				$file           = str_replace( '../', '', $file );
 				$file           = str_replace( '/', '', $file );
 				$this->TEMPLATE = 'view';
 
@@ -1027,6 +1033,7 @@ class WPMastertoolkit_File_Manager {
 			case isset( $_GET['edit'] ):
 				$file           = sanitize_text_field( wp_unslash( $_GET['edit'] ?? '' ) );
 				$file           = $this->fm_clean_path( $file, false );
+				$file           = str_replace( '../', '', $file );
 				$file           = str_replace( '/', '', $file );
 				$this->TEMPLATE = 'edit';
 
@@ -1051,6 +1058,7 @@ class WPMastertoolkit_File_Manager {
 			case isset( $_GET['chmod'] ) && ! $this->FM_IS_WIN:
 				$file           = sanitize_text_field( wp_unslash( $_GET['chmod'] ?? '' ) );
 				$file           = $this->fm_clean_path( $file );
+				$file           = str_replace( '../', '', $file );
 				$file           = str_replace( '/', '', $file );
 				$this->TEMPLATE = 'chmod';
 
@@ -1095,14 +1103,15 @@ class WPMastertoolkit_File_Manager {
 									include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/core/file-manager/views/copyfinish.php';
 								break;
 								case 'copy':
-									//phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-									$copy_files = isset( $_POST['file'] ) ? wpmastertoolkit_clean( $_POST['file'] ) : null;
+									//phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+									$copy_files = isset( $_POST['file'] ) ? wpmastertoolkit_clean( wp_unslash( $_POST['file'] ) ) : null;
 									include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/core/file-manager/views/copy.php';
 								break;
 								case 'view':
 									//phpcs:ignore WordPress.Security.NonceVerification.Recommended
 									$file            = sanitize_text_field( wp_unslash( $_GET['view'] ?? '' ) );
 									$file            = $this->fm_clean_path( $file, false );
+									$file            = str_replace( '../', '', $file );
 									$file            = str_replace( '/', '', $file );
 									$file_url        = $this->FM_ROOT_URL . $this->fm_convert_win( ( $this->FM_PATH != '' ? '/' . $this->FM_PATH : '') . '/' . $file );
 									$file_path       = $this->PATH . '/' . $file;
@@ -1148,6 +1157,7 @@ class WPMastertoolkit_File_Manager {
 									//phpcs:ignore WordPress.Security.NonceVerification.Recommended
 									$file      = sanitize_text_field( wp_unslash( $_GET['edit'] ?? '' ) );
 									$file      = $this->fm_clean_path( $file, false );
+									$file      = str_replace( '../', '', $file );
 									$file      = str_replace( '/', '', $file );
 									$file_url  = $this->FM_ROOT_URL . $this->fm_convert_win( ( $this->FM_PATH != '' ? '/' . $this->FM_PATH : '' ) . '/' . $file );
 									$file_path = $this->PATH . '/' . $file;
@@ -1168,6 +1178,7 @@ class WPMastertoolkit_File_Manager {
 									//phpcs:ignore WordPress.Security.NonceVerification.Recommended
 									$file      = sanitize_text_field( wp_unslash( $_GET['chmod'] ?? '' ) );
 									$file      = $this->fm_clean_path( $file );
+									$file      = str_replace( '../', '', $file );
 									$file      = str_replace( '/', '', $file );
 									$file_url  = $this->FM_ROOT_URL . ( $this->FM_PATH != '' ? '/' . $this->FM_PATH : '') . '/' . $file;
 									$file_path = $this->PATH . '/' . $file;
@@ -1210,12 +1221,10 @@ class WPMastertoolkit_File_Manager {
 	 * @since   1.9.0
 	 */
 	private function set_global_variables() {
-		$this->GLOBAL_IS_HTTPS     = isset( $_SERVER['HTTPS'] ) && ( $_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1 ) || isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https';
-    	$this->GLOBAL_SELF_URL     = ( $this->GLOBAL_IS_HTTPS ? 'https' : 'http' ) . '://' . sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ?? '' ) ) . sanitize_text_field( wp_unslash( $_SERVER['PHP_SELF'] ?? '' ) );
-		$this->ROOT_PATH           = sanitize_text_field( wp_unslash( $_SERVER['DOCUMENT_ROOT'] ?? '' ) );
+		$this->GLOBAL_SELF_URL     = get_site_url( null, 'wp-admin/admin.php' );
+		$this->ROOT_PATH           = ABSPATH;
 		$this->ROOT_PATH           = rtrim( $this->ROOT_PATH, '\\/' );
 		$this->ROOT_PATH           = str_replace( '\\', '/', $this->ROOT_PATH );
-		$this->HTTP_HOST           = sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ?? '' ) );
 		$this->ROOT_URL            = $this->fm_clean_path( '' );
 		//phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.NonceVerification.Missing
 		$this->P                   = isset( $_GET['p'] ) ? sanitize_text_field( wp_unslash( $_GET['p'] ) ) : ( isset( $_POST['p'] ) ? sanitize_text_field( wp_unslash( $_POST['p'] ) ) : '' );
@@ -1228,7 +1237,7 @@ class WPMastertoolkit_File_Manager {
 		$this->FM_SELF_URL         = $this->GLOBAL_SELF_URL;
 		$this->FM_UPLOAD_EXTENSION = '';
 		$this->FM_FILE_EXTENSION   = '';
-		$this->FM_ROOT_URL         = ( $this->GLOBAL_IS_HTTPS ? 'https' : 'http' ) . '://' . $this->HTTP_HOST . ( ! empty( $this->ROOT_URL ) ? '/' . $this->ROOT_URL : '' );
+		$this->FM_ROOT_URL         = get_site_url();
 		$this->PARENT_PATH         = $this->fm_get_parent_path( $this->FM_PATH );
     	$this->PATH                = $this->FM_ROOT_PATH;
 		$this->TEMPLATE            = '';
@@ -1237,6 +1246,29 @@ class WPMastertoolkit_File_Manager {
     	if ( $this->FM_PATH != '' ) {
         	$this->PATH .= '/' . $this->FM_PATH;
     	}
+
+		if ( ! $this->is_child_path( $this->PATH, ABSPATH ) ) {
+			wp_die( esc_html__( 'Sorry, you are not allowed to access this page.', 'wpmastertoolkit' ) );
+		}
+	}
+
+	/**
+	 * Check if a path is a child of another path
+	 * 
+	 * @since   2.5.0
+	 */
+	private function is_child_path( $childPath, $parentPath ) {
+		$realChild  = realpath( $childPath );
+		$realParent = realpath( $parentPath );
+	
+		if ( $realChild === false || $realParent === false ) {
+			return false;
+		}
+	
+		$realChild  = rtrim( str_replace( '\\', '/', $realChild ), '/' ) . '/';
+		$realParent = rtrim( str_replace( '\\', '/', $realParent ), '/' ) . '/';
+	
+		return strpos( $realChild, $realParent ) === 0;
 	}
 
 	/**
@@ -1399,14 +1431,13 @@ class WPMastertoolkit_File_Manager {
         );
 	}
 
-	/**
+		/**
      * Get CSS classname for file
 	 * 
 	 * @since   1.9.0
      */
     private function fm_get_file_icon_class( $path ) {
         $ext = strtolower( pathinfo( $path, PATHINFO_EXTENSION ) );
-
         switch ( $ext ) {
             case 'ico':
             case 'gif':
@@ -1592,7 +1623,6 @@ class WPMastertoolkit_File_Manager {
             default:
                 $img = 'fa fa-info-circle';
         }
-
         return $img;
     }
 
@@ -2113,7 +2143,7 @@ class WPMastertoolkit_File_Manager {
         );
     }
 
-	/**
+		/**
      * Check if string is in UTF-8
 	 * 
 	 * @since   1.9.0
@@ -2121,7 +2151,6 @@ class WPMastertoolkit_File_Manager {
     private function fm_is_utf8( $string ) {
         return preg_match( '//u', $string );
     }
-
 	/**
      * Get file names of text files w/o extensions
 	 * 

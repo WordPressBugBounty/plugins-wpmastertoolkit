@@ -53,26 +53,39 @@ class WPMastertoolkit_Wider_Admin_Menu {
             $position = 'right';
         }
 
-        $styles = "
-            #wpcontent, #wpfooter {
+		$styles = "
+            #wpcontent,
+			#wpfooter {
                 {$margin}: {$width}px;
             }
-            #adminmenuback, #adminmenuwrap, #adminmenu, #adminmenu .wp-submenu {
+			#adminmenu,
+			#adminmenu .wp-submenu,
+            #adminmenuback,
+			#adminmenuwrap {
                 width: {$width}px;
             }
             #adminmenu .wp-submenu {
                 {$position}: {$width}px;
             }
-            #adminmenu .wp-not-current-submenu .wp-submenu, .folded #adminmenu .wp-has-current-submenu .wp-submenu {
+            #adminmenu .wp-not-current-submenu .wp-submenu,
+			.folded #adminmenu .wp-has-current-submenu .wp-submenu {
                 min-width: {$width}px;
             }
-            @media (min-width: 960px) {
-	            .woocommerce-layout__header {
-                    width: calc(100% - {$width}px);
-                }
+			@media (min-width: 783px) {
+				.interface-interface-skeleton {
+					{$position}: {$width}px;
+				}
             }
-            .interface-interface-skeleton {
-                {$position}: {$width}px;
+			@media (min-width: 961px) {
+				.interface-interface-skeleton {
+					{$position}: {$width}px;
+				}
+				.auto-fold:not(.folded) .interface-interface-skeleton {
+					{$position}: {$width}px;
+				}
+				.woocommerce-layout__header {
+                	width: calc(100% - {$width}px);
+                }
             }
         ";
 
@@ -142,8 +155,8 @@ class WPMastertoolkit_Wider_Admin_Menu {
 		$nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ?? '' ) );
 		
 		if ( wp_verify_nonce($nonce, $this->nonce_action) ) {
-			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-            $new_settings = $this->sanitize_settings( $_POST[$this->option_id] ?? array() );
+			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+            $new_settings = $this->sanitize_settings( wp_unslash( $_POST[$this->option_id] ?? array() ) );
             
             $this->save_settings( $new_settings );
             wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );

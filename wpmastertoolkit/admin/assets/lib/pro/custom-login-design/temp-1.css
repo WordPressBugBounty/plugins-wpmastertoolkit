@@ -1,0 +1,8 @@
+.wpmtk-cld__form__inner__overlay {
+	background: linear-gradient(180deg, rgb(222, 245, 255) 0%, rgb(255, 255, 255) 36%);
+}
+@media (max-width: 767px) {
+	.wpmtk-cld__form__inner {
+		padding: 20px !important;
+	}
+}

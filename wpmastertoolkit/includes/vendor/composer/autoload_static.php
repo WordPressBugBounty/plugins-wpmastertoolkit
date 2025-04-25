@@ -7,7 +7,6 @@ namespace Composer\Autoload;
 class ComposerStaticInit1f9018969054e9985ca64f5fce393461
 {
     public static $files = array (
-        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
     );
 
@@ -24,10 +23,6 @@ class ComposerStaticInit1f9018969054e9985ca64f5fce393461
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
         ),
-        'P' => 
-        array (
-            'Psr\\Http\\Message\\' => 17,
-        ),
         'M' => 
         array (
             'MaxMind\\WebService\\' => 19,
@@ -38,13 +33,8 @@ class ComposerStaticInit1f9018969054e9985ca64f5fce393461
         array (
             'League\\ISO3166\\' => 15,
         ),
-        'I' => 
-        array (
-            'Intervention\\Image\\' => 19,
-        ),
         'G' => 
         array (
-            'GuzzleHttp\\Psr7\\' => 16,
             'GeoIp2\\' => 7,
         ),
         'C' => 
@@ -66,11 +56,6 @@ class ComposerStaticInit1f9018969054e9985ca64f5fce393461
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
         ),
-        'Psr\\Http\\Message\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
-        ),
         'MaxMind\\WebService\\' => 
         array (
             0 => __DIR__ . '/..' . '/maxmind/web-service-common/src/WebService',
@@ -86,14 +71,6 @@ class ComposerStaticInit1f9018969054e9985ca64f5fce393461
         'League\\ISO3166\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/iso3166/src',
-        ),
-        'Intervention\\Image\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image',
-        ),
-        'GuzzleHttp\\Psr7\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
         ),
         'GeoIp2\\' => 
         array (

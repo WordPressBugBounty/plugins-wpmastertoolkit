@@ -109,8 +109,8 @@ class WPMastertoolkit_Multiple_User_Roles {
 		$roles          = get_editable_roles();
         $user           = get_user_by( 'id', (int) $user_id );
         $user_roles     = array_intersect( array_values( $user->roles ), array_keys( $roles ) );
-		//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-		$assigned_roles = wpmastertoolkit_clean( $_POST['wpmastertoolkit_assigned_roles'] ?? '' );
+		//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$assigned_roles = wpmastertoolkit_clean( wp_unslash( $_POST['wpmastertoolkit_assigned_roles'] ?? '' ) );
 		$is_current_user_admin = get_current_user_id() == $user_id && in_array( 'administrator', $user_roles );
 
         if ( ! empty( $assigned_roles ) ) {

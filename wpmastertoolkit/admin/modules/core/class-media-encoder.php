@@ -1,11 +1,12 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-use Intervention\Image\ImageManager;
+use function Sodium\compare;
+
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
  * Module Name: Media Encoder
- * Description: Automatically converts images to WebP when they are uploaded to the media library.
+ * Description: Automatically converts uploaded images to your selected format (WebP or AVIF) for better performance and reduced file size.
  * @since 1.13.0
  */
 class WPMastertoolkit_Media_Encoder {
@@ -64,7 +65,7 @@ class WPMastertoolkit_Media_Encoder {
 		$this->cron_recurrence_migrate          = $this->option_id . '_migrate_optimization';
 		$this->cron_hook_migrate                = $this->option_id . '_migrate_optimization_hook';
 
-		$this->allowed_mime_types               = array( 'image/jpeg', 'image/png', 'image/webp' );
+		$this->allowed_mime_types               = array( 'image/jpeg', 'image/png', 'image/webp', 'image/avif' );
 		$this->quickwebp_plugin_activated       = false;
 
         add_action( 'init', array( $this, 'class_init' ) );
@@ -73,20 +74,21 @@ class WPMastertoolkit_Media_Encoder {
 		add_filter( 'wpmastertoolkit_nginx_code_snippets', array( $this, 'nginx_code_snippets' ) );
 
 		add_filter( 'wp_handle_upload_prefilter', array( $this, 'image_optimization' ) );
+		add_filter( 'wp_generate_attachment_metadata', array( $this, 'add_already_optimized_meta' ), 10, 3 );
 		add_filter( 'wp_generate_attachment_metadata', array( $this, 'image_optimization_saving_original' ), 10, 3 );
 		add_filter( 'wp_editor_set_quality', array( $this, 'change_image_compression_quality' ), PHP_INT_MAX );
 		add_action( 'delete_attachment', array( $this, 'before_delete_attachment' ) );
-
+		
 		add_filter( 'attachment_fields_to_edit', array( $this, 'add_attachment_fields_to_edit' ), PHP_INT_MAX, 2 );
 		add_filter( 'manage_media_columns', array( $this, 'add_media_columns' ) );
 		add_action( 'manage_media_custom_column', array( $this, 'add_media_custom_column' ), 10, 2 );
 		add_action( 'attachment_submitbox_misc_actions', array( $this, 'add_attachment_submitbox_misc_actions' ), PHP_INT_MAX );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts_styles' ) );
-
+		
 		add_filter( 'cron_schedules', array( $this, 'crons_registrations' ) );
 		add_action( $this->cron_hook_bulk, array( $this, 'excute_bulk_cron' ) );
 		add_action( $this->cron_hook_migrate, array( $this, 'excute_migrate_cron' ) );
-
+		
 		add_action( 'wp_ajax_wpmtk_media_encoder_preview_mode', array( $this, 'preview_mode_cb' ) );
 		add_action( 'wp_ajax_wpmtk_media_encoder_start_bulk', array( $this, 'start_bulk_cb' ) );
 		add_action( 'wp_ajax_wpmtk_media_encoder_stop_bulk', array( $this, 'stop_bulk_cb' ) );
@@ -116,26 +118,6 @@ class WPMastertoolkit_Media_Encoder {
     }
 
 	/**
-     * activate
-     *
-     * @since   1.13.0
-     */
-    public static function activate(){
-		$this_class = new self();
-		$this_class->add_to_htaccess();
-    }
-
-	/**
-     * deactivate
-     *
-     * @since   1.13.0
-     */
-    public static function deactivate(){
-		$this_class = new self();
-		$this_class->remove_from_htaccess();
-    }
-
-	/**
      * Add a submenu
      * 
      * @since   1.13.0
@@ -161,11 +143,11 @@ class WPMastertoolkit_Media_Encoder {
 		$nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ?? '' ) );
 
 		if ( wp_verify_nonce( $nonce, $this->nonce_action ) ) {
-			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-            $new_settings = $this->sanitize_settings( $_POST[ $this->option_id ] ?? array() );
+			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+            $new_settings = $this->sanitize_settings( wp_unslash( $_POST[ $this->option_id ] ?? array() ) );
             $this->save_settings( $new_settings );
 
-			if ( 'rewrite' == $new_settings['display_webp_mode']['value'] ) {
+			if ( 'rewrite' == $new_settings['display_mode']['value'] ) {
 				$this->add_to_htaccess();
 			} else {
 				$this->remove_from_htaccess();
@@ -177,38 +159,6 @@ class WPMastertoolkit_Media_Encoder {
     }
 
 	/**
-	 * Add the module to htaccess file
-	 * 
-	 * @since   1.13.0
-	 */
-	private function add_to_htaccess() {
-		global $is_apache;
-
-        if ( $is_apache ) {
-			$this->settings = $this->get_settings();
-
-			if ( 'rewrite' == $this->settings['display_webp_mode']['value'] ) {
-				require_once WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/class-htaccess.php';
-				WPMastertoolkit_Htaccess::add( $this->get_raw_content_htaccess(), self::MODULE_ID );
-			}
-        }
-	}
-
-	/**
-	 * Remove the module from htaccess file
-	 * 
-	 * @since   1.13.0
-	 */
-	private function remove_from_htaccess() {
-		global $is_apache;
-
-        if ( $is_apache ) {
-            require_once WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/class-htaccess.php';
-            WPMastertoolkit_Htaccess::remove( self::MODULE_ID );
-        }
-	}
-
-	/**
 	 * Add the nginx code snippets
 	 *
 	 * @since   1.13.0
@@ -217,9 +167,11 @@ class WPMastertoolkit_Media_Encoder {
 		global $is_nginx;
 
 		if ( $is_nginx ) {
-			$this->settings = $this->get_settings();
+			$this->settings         = $this->get_settings();
+			$this->default_settings = $this->get_default_settings();
+			$display_mode           = $this->settings['display_mode']['value'] ?? $this->default_settings['display_mode']['value'];
 
-			if ( 'rewrite' == $this->settings['display_webp_mode']['value'] ) {
+			if ( $display_mode == 'rewrite' ) {
 				$code_snippets[self::MODULE_ID] = self::get_raw_content_nginx();
 			}
 		}
@@ -238,9 +190,16 @@ class WPMastertoolkit_Media_Encoder {
 			return $file;
 		}
 
-		$this->settings = $this->get_settings();
+		$this->settings         = $this->get_settings();
+		$this->default_settings = $this->get_default_settings();
 
-		if ( $this->settings['enabled'] != '1' ) {
+		$save_original = $this->settings['save_original'] ?? $this->default_settings['save_original'];
+		if ( '1' === $save_original ) {
+			return $file;
+		}
+
+		$mode_enabled = $this->settings['mode_enabled']['value'] ?? $this->default_settings['mode_enabled']['value'];
+		if ( 'off' === $mode_enabled ) {
 			return $file;
 		}
 
@@ -248,40 +207,62 @@ class WPMastertoolkit_Media_Encoder {
 		if ( ! $image_file ) {
 			return $file;
 		}
-
-		if ( $this->settings['save_original'] == '1' ) {
-			return $image_file;
-		}
-
-		$extension_to_use = $this->image_extension_loaded();
-		if ( ! $extension_to_use ) {
-			return $image_file;
-		}
-
-		$exif_meta = wp_read_image_metadata( $image_file['tmp_name'] );
 		
-		if ( ! empty( $exif_meta['orientation'] ) ) {
-			$orientation = $exif_meta['orientation'];
-			if ( $orientation > 1 ) {
-				$manager = new ImageManager( array( 'driver' => $extension_to_use ) );
-				$image   = $manager->make( $image_file['tmp_name'] );
-				$image->orientate();
-				$image->save( $image_file['tmp_name'], 100, $image_file['type'] );
-				$image_file['tmp_name'] = $image->basePath();
+		$ignore_same_format = $this->settings['ignore_same_format'] ?? $this->default_settings['ignore_same_format'];
+		$mime_type          = wp_get_image_mime( $file['tmp_name'] );
+		if ( '1' === $ignore_same_format ) {
+			if ( 'webp' == $mode_enabled && 'image/webp' == $mime_type ) {
+				return $file;
+			} elseif( 'avif' == $mode_enabled && 'image/avif' == $mime_type ) {
+				return $file;
 			}
 		}
 
-		$manager = new ImageManager( array( 'driver' => $extension_to_use ) );
-		$image   = $manager->make( $image_file['tmp_name'] );
-		$quality = $this->get_quality( $image_file['tmp_name'] );
+		$is_pro  = wpmastertoolkit_is_pro();
+		$quality = $this->get_the_quality();
 
-		// $image->sharpen( $this->settings['sharpen'] );
-		$image->save( $image_file['tmp_name'], $quality, 'webp' );
+		if ( 'avif' === $mode_enabled && $is_pro ) {
+			$avif_image = $this->create_avif_image( $file['tmp_name'], $file['tmp_name'], $quality );
+			if ( $avif_image ) {
+				$file['size']  = filesize( $file['tmp_name'] );
+				$file['type']  = 'image/avif';
+				$file['wpmtk'] = 'optimized';
+			}
+		}
 
-		$image_file['size'] = $image->filesize();
-		$image_file['type'] = $image->mime();
+		if ( 'webp' === $mode_enabled ) {
+			$webp_image = $this->create_webp_image( $file['tmp_name'], $file['tmp_name'], $quality );
+			if ( $webp_image ) {
+				$file['size']  = filesize( $file['tmp_name'] );
+				$file['type']  = 'image/webp';
+				$file['wpmtk'] = 'optimized';
+			}
+		}
 
-		return $image_file;
+		return $file;
+	}
+
+	/**
+	 * Add post meta to the attachment that already optimized
+	 * 
+	 * @since   2.5.0
+	 */
+	public function add_already_optimized_meta( $metadata, $attachment_id, $context ) {
+		//phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$wpmtk = sanitize_text_field( wp_unslash( $_FILES['async-upload']['wpmtk'] ?? '' ) );
+		
+		if ( 'optimized' == $wpmtk ) {
+			//phpcs:ignore WordPress.Security.NonceVerification.Missing
+			$type = sanitize_text_field( wp_unslash( $_FILES['async-upload']['type'] ?? '' ) );
+
+			if ( 'image/webp' == $type ) {
+				update_post_meta( $attachment_id, $this->meta_already_optimized, '1' );
+			} elseif ( 'image/avif' == $type ) {
+				update_post_meta( $attachment_id, $this->meta_already_optimized, '2' );
+			}
+		}
+
+		return $metadata;
 	}
 
 	/**
@@ -299,14 +280,28 @@ class WPMastertoolkit_Media_Encoder {
 			return $metadata;
 		}
 
-		$this->settings = $this->get_settings();
+		$this->settings         = $this->get_settings();
+		$this->default_settings = $this->get_default_settings();
 
-		if ( $this->settings['enabled'] != '1' ) {
+		$mode_enabled = $this->settings['mode_enabled']['value'] ?? $this->default_settings['mode_enabled']['value'];
+		if ( 'off' === $mode_enabled ) {
 			return $metadata;
 		}
 
-		if ( $this->settings['save_original'] != '1' ) {
+		$save_original = $this->settings['save_original'] ?? $this->default_settings['save_original'];
+		if ( '1' !== $save_original ) {
 			return $metadata;
+		}
+
+		$ignore_same_format = $this->settings['ignore_same_format'] ?? $this->default_settings['ignore_same_format'];
+		//phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$mime_type          = sanitize_text_field( wp_unslash( $_FILES['async-upload']['type'] ?? '' ) );
+		if ( '1' === $ignore_same_format ) {
+			if ( 'webp' == $mode_enabled && 'image/webp' == $mime_type ) {
+				return $metadata;
+			} elseif( 'avif' == $mode_enabled && 'image/avif' == $mime_type ) {
+				return $metadata;
+			}
 		}
 
 		$sizes     = $this->get_media_files( $attachment_id );
@@ -321,7 +316,11 @@ class WPMastertoolkit_Media_Encoder {
 		}
 
 		if ( ! empty( $new_sizes ) ) {
-			update_post_meta( $attachment_id, $this->meta_already_optimized, '1' );
+			if ( 'webp' == $mode_enabled ) {
+				update_post_meta( $attachment_id, $this->meta_already_optimized, '1' );
+			} elseif ( 'avif' == $mode_enabled ) {
+				update_post_meta( $attachment_id, $this->meta_already_optimized, '2' );
+			}
 			update_post_meta( $attachment_id, $this->meta_data, $new_sizes );
 			delete_post_meta( $attachment_id, $this->meta_has_error );
 		} else {
@@ -337,13 +336,15 @@ class WPMastertoolkit_Media_Encoder {
 	 * @since   1.13.0
 	 */
 	public function change_image_compression_quality( $quality ) {
-		$this->settings = $this->get_settings();
+		$this->settings         = $this->get_settings();
+		$this->default_settings = $this->get_default_settings();
 
 		if ( $this->quickwebp_plugin_activated ) {
 			return $quality;
 		}
 
-		if ( $this->settings['enabled'] != '1' ) {
+		$mode_enabled = $this->settings['mode_enabled']['value'] ?? $this->default_settings['mode_enabled']['value'];
+		if ( 'off' == $mode_enabled ) {
 			return $quality;
 		}
 
@@ -356,10 +357,10 @@ class WPMastertoolkit_Media_Encoder {
 	 * @since   1.13.0
 	 */
 	public function before_delete_attachment( $post_id ) {
-		$already_optimized = get_post_meta( $post_id, $this->meta_already_optimized, true );
+		$data = get_post_meta( $post_id, $this->meta_data, true );
 
-		if ( '1' == $already_optimized ) {
-			$this->remove_related_files( $post_id );
+		if ( ! empty( $data ) ) {
+			$this->remove_related_files( $data );
 		}
 	}
 
@@ -383,17 +384,42 @@ class WPMastertoolkit_Media_Encoder {
 			return $form_fields;
 		}
 
-		$data      = get_post_meta( $post->ID, $this->meta_data, true );
-		$has_error = get_post_meta( $post->ID, $this->meta_has_error, true );
+		$this->settings         = $this->get_settings();
+		$this->default_settings = $this->get_default_settings();
 
-		if ( ! is_array( $data ) ) {
-			$html = $this->optimize_btn( $post->ID );
+		$html              = '';
+		$status            = '0';
+		$already_optimized = get_post_meta( $post->ID, $this->meta_already_optimized, true );
+		$data              = get_post_meta( $post->ID, $this->meta_data, true );
 
-			if ( ! empty( $has_error ) ) {
-				$html .= '<br>' . esc_html__( 'Error attempting to optimize this image', 'wpmastertoolkit' );
+		$mode_enabled = $this->settings['mode_enabled']['value'] ?? $this->default_settings['mode_enabled']['value'];
+
+		if ( '1' == $already_optimized && ( 'webp' == $mode_enabled || 'off' == $mode_enabled ) ) {
+			if ( is_array( $data ) ) {
+				$status = '1';
+			} else {
+				$status = '2';
 			}
-		} else {
-			$html = $this->attachment_data( $data, $post->ID );
+		}
+
+		if ( '2' == $already_optimized && ( 'avif' == $mode_enabled || 'off' == $mode_enabled ) ) {
+			if ( is_array( $data ) ) {
+				$status = '1';
+			} else {
+				$status = '2';
+			}
+		}
+
+		switch ( $status ) {
+			case '0':
+				$html = $this->optimize_btn( $post->ID );
+			break;
+			case '1':
+				$html = $this->attachment_data( $data, $post->ID );
+			break;
+			case '2':
+				$html = '<br>' . esc_html__( 'Image already optimized.', 'wpmastertoolkit' );
+			break;
 		}
 		
 		$form_fields['wpmtk_media_encoder'] = array(
@@ -443,17 +469,41 @@ class WPMastertoolkit_Media_Encoder {
 			return;
 		}
 
-		$data      = get_post_meta( $attachment_id, $this->meta_data, true );
-		$has_error = get_post_meta( $attachment_id, $this->meta_has_error, true );
+		$this->settings         = $this->get_settings();
+		$this->default_settings = $this->get_default_settings();
 
-		if ( ! is_array( $data ) ) {
-			echo wp_kses_post( $this->optimize_btn( $attachment_id ) );
+		$status            = '0';
+		$already_optimized = get_post_meta( $attachment_id, $this->meta_already_optimized, true );
+		$data              = get_post_meta( $attachment_id, $this->meta_data, true );
 
-			if ( ! empty( $has_error ) ) {
-				echo esc_html__( 'Error attempting to optimize this image', 'wpmastertoolkit' );
+		$mode_enabled = $this->settings['mode_enabled']['value'] ?? $this->default_settings['mode_enabled']['value'];
+
+		if ( '1' == $already_optimized && ( 'webp' == $mode_enabled || 'off' == $mode_enabled ) ) {
+			if ( is_array( $data ) ) {
+				$status = '1';
+			} else {
+				$status = '2';
 			}
-		} else {
-			echo wp_kses_post( $this->attachment_data( $data, $attachment_id ) );
+		}
+
+		if ( '2' == $already_optimized && ( 'avif' == $mode_enabled || 'off' == $mode_enabled ) ) {
+			if ( is_array( $data ) ) {
+				$status = '1';
+			} else {
+				$status = '2';
+			}
+		}
+
+		switch ( $status ) {
+			case '0':
+				echo wp_kses_post( $this->optimize_btn( $attachment_id ) );
+			break;
+			case '1':
+				echo wp_kses_post( $this->attachment_data( $data, $attachment_id ) );
+			break;
+			case '2':
+				echo wp_kses_post( '<br>' . esc_html__( 'Image already optimized.', 'wpmastertoolkit' ) );
+			break;
 		}
 	}
 
@@ -473,21 +523,44 @@ class WPMastertoolkit_Media_Encoder {
 			return;
 		}
 
-		$data      = get_post_meta( $post->ID, $this->meta_data, true );
-		$has_error = get_post_meta( $post->ID, $this->meta_has_error, true );
+		$this->settings         = $this->get_settings();
+		$this->default_settings = $this->get_default_settings();
 
-		if ( ! is_array( $data ) ) {
-			echo '<table><tr><td><div><strong>WPMasterToolkit</strong></div>';
-			echo wp_kses_post( $this->optimize_btn( $post->ID ) );
+		$status            = '0';
+		$already_optimized = get_post_meta( $post->ID, $this->meta_already_optimized, true );
+		$data              = get_post_meta( $post->ID, $this->meta_data, true );
 
-			if ( ! empty( $has_error ) ) {
-				echo esc_html__( 'Error attempting to optimize this image', 'wpmastertoolkit' );
+		$mode_enabled = $this->settings['mode_enabled']['value'] ?? $this->default_settings['mode_enabled']['value'];
+
+		if ( '1' == $already_optimized && ( 'webp' == $mode_enabled || 'off' == $mode_enabled ) ) {
+			if ( is_array( $data ) ) {
+				$status = '1';
+			} else {
+				$status = '2';
 			}
-
-			echo '</td></tr></table>';
-		} else {
-			echo '<table><tr><td><div><strong>WPMasterToolkit</strong></div>' . wp_kses_post( $this->attachment_data( $data, $post->ID ) ) . '</td></tr></table>';
 		}
+
+		if ( '2' == $already_optimized && ( 'avif' == $mode_enabled || 'off' == $mode_enabled ) ) {
+			if ( is_array( $data ) ) {
+				$status = '1';
+			} else {
+				$status = '2';
+			}
+		}
+
+		echo '<table><tr><td><div><strong>WPMasterToolkit</strong></div>';
+		switch ( $status ) {
+			case '0':
+				echo wp_kses_post( $this->optimize_btn( $post->ID ) );
+			break;
+			case '1':
+				echo wp_kses_post( $this->attachment_data( $data, $post->ID ) );
+			break;
+			case '2':
+				echo esc_html__( 'Image already optimized.', 'wpmastertoolkit' );
+			break;
+		}
+		echo '</td></tr></table>';
 	}
 
 	/**
@@ -534,6 +607,14 @@ class WPMastertoolkit_Media_Encoder {
 	 * @since   1.13.0
 	 */
 	public function excute_bulk_cron() {
+		$this->settings         = $this->get_settings();
+		$this->default_settings = $this->get_default_settings();
+		
+		$mode_enabled = $this->settings['mode_enabled']['value'] ?? $this->default_settings['mode_enabled']['value'];
+		if ( 'off' === $mode_enabled ) {
+			$this->end_cron_job();
+		}
+
 		$time_start = microtime(true);
 		$media_ids  = $this->get_unoptimized_media_ids();
 
@@ -565,8 +646,23 @@ class WPMastertoolkit_Media_Encoder {
 			}
 
 			if ( ! empty( $new_sizes ) ) {
-				update_post_meta( $id, $this->meta_already_optimized, '1' );
+
+				$data = get_post_meta( $id, $this->meta_data, true );
+				if ( ! empty( $data ) ) {
+					$this->remove_related_files( $data );
+				}
+
+				if ( 'webp' == $mode_enabled ) {
+					update_post_meta( $id, $this->meta_already_optimized, '1' );
+				} elseif ( 'avif' == $mode_enabled ) {
+					update_post_meta( $id, $this->meta_already_optimized, '2' );
+				}
 				update_post_meta( $id, $this->meta_data, $new_sizes );
+				delete_post_meta( $id, $this->meta_has_error );
+			} else {
+				update_post_meta( $id, $this->meta_has_error, '1' );
+				delete_post_meta( $id, $this->meta_already_optimized );
+				delete_post_meta( $id, $this->meta_data );
 			}
 
 			$current++;
@@ -605,6 +701,9 @@ class WPMastertoolkit_Media_Encoder {
 			if ( $already_optimized_quickwebp === '1' && ! empty( $data_quickweb ) ) {
 				update_post_meta( $id, $this->meta_already_optimized, '1' );
 				update_post_meta( $id, $this->meta_data, $data_quickweb );
+
+				delete_post_meta( $id, $this->meta_already_optimized_quickwebp );
+				delete_post_meta( $id, $this->meta_data_quickwebp );
 			}
 
 			$current++;
@@ -637,20 +736,25 @@ class WPMastertoolkit_Media_Encoder {
 			wp_send_json_error( __( 'No image uploaded, try again.', 'wpmastertoolkit' ) );
 		}
 
-		$extension_to_use = $this->image_extension_loaded();
-		if ( ! $image_file ) {
-			wp_send_json_error( __( 'This library does not exist.', 'wpmastertoolkit' ) );
+		$is_pro       = wpmastertoolkit_is_pro();
+		$quality      = $this->get_the_quality();
+		$mode_enabled = $this->settings['mode_enabled']['value'] ?? $this->default_settings['mode_enabled']['value'];
+
+		if ( 'avif' === $mode_enabled && $is_pro ) {
+			$avif_image = $this->create_avif_image( $image_file['tmp_name'], $image_file['tmp_name'], $quality );
+			if ( $avif_image ) {
+				$image_file['new_size'] = filesize( $image_file['tmp_name'] );
+				$image_file['new_type'] = 'image/avif';
+			}
 		}
 
-		$manager = new ImageManager( array( 'driver' => $extension_to_use ) );
-		$image   = $manager->make( $image_file['tmp_name'] );
-		$quality = $this->get_quality( $image_file['tmp_name'] );
-
-		$image->sharpen( $this->settings['sharpen'] );
-		$image->save( $image_file['tmp_name'], $quality, 'webp' );
-
-		$image_file['new_size'] = $image->filesize();
-		$image_file['new_type'] = $image->mime();
+		if ( 'webp' === $mode_enabled ) {
+			$webp_image = $this->create_webp_image( $image_file['tmp_name'], $image_file['tmp_name'], $quality );
+			if ( $webp_image ) {
+				$image_file['new_size'] = filesize( $image_file['tmp_name'] );
+				$image_file['new_type'] = 'image/webp';
+			}
+		}
 
 		$return = array(
 			'size'          => $image_file['size'],
@@ -676,6 +780,14 @@ class WPMastertoolkit_Media_Encoder {
 			wp_send_json_error( __( 'Refresh the page and try again.', 'wpmastertoolkit' ) );
 		}
 
+		$this->settings         = $this->get_settings();
+		$this->default_settings = $this->get_default_settings();
+
+		$mode_enabled = $this->settings['mode_enabled']['value'] ?? $this->default_settings['mode_enabled']['value'];
+		if ( 'off' === $mode_enabled ) {
+			wp_send_json_error( __( 'Choose an image format and save the settings.', 'wpmastertoolkit' ) );
+		}
+
 		$media_ids = $this->get_unoptimized_media_ids();
 		if ( empty( $media_ids ) ) {
 			wp_send_json_error( __( 'No images to optimize.', 'wpmastertoolkit' ) );
@@ -697,8 +809,8 @@ class WPMastertoolkit_Media_Encoder {
 			update_option( $this->option_bulk_status, 'running' );
 
 			$data = array(
-				'progress'	=> $current . '/' . $total,
-				'percent'	=> $total ? round( abs( ( $current / $total ) ) * 100 ) . '%' : '0%'
+				'progress' => $current . '/' . $total,
+				'percent'  => $total ? round( abs( ( $current / $total ) ) * 100 ) . '%' : '0%'
 			);
 			wp_send_json_success( $data );
 		}
@@ -749,30 +861,6 @@ class WPMastertoolkit_Media_Encoder {
 	}
 
 	/**
-	 * Check the progress of bulk migration
-	 * 
-	 * @since   1.13.0
-	 */
-	public function progress_bulk_migration_cb() {
-		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
-		if ( ! wp_verify_nonce( $nonce, $this->nonce_action ) ) {
-			wp_send_json_error( __( 'Refresh the page and try again.', 'wpmastertoolkit' ) );
-		}
-
-		$status     = get_option( $this->option_migrate_status, '' );
-		$total      = (int)get_option( $this->option_migrate_total, 0 );
-		$current    = (int)get_option( $this->option_migrate_current, 0 );
-		$is_running = $status == 'running' ? true : false;
-
-		$data = array(
-			'running'  => $is_running,
-			'progress' => $current . '/' . $total,
-			'percent'  => $total ? round( abs( ( $current / $total ) ) * 100 ) . '%' : '0%'
-		);
-		wp_send_json_success( $data );
-	}
-
-	/**
 	 * Start single optimization callback
 	 * 
 	 * @since   1.13.0
@@ -783,22 +871,31 @@ class WPMastertoolkit_Media_Encoder {
 			wp_send_json_error( __( 'Refresh the page and try again.', 'wpmastertoolkit' ) );
 		}
 
+		$this->settings         = $this->get_settings();
+		$this->default_settings = $this->get_default_settings();
+
+		$mode_enabled = $this->settings['mode_enabled']['value'] ?? $this->default_settings['mode_enabled']['value'];
+		if ( 'off' === $mode_enabled ) {
+			wp_send_json_error( __( 'Choose an image format and save the settings.', 'wpmastertoolkit' ) );
+		}
+
 		$attachment_id = isset( $_POST['attachment_id'] ) ? sanitize_text_field( wp_unslash( $_POST['attachment_id'] ) ) : false;
 		if ( ! $attachment_id ) {
 			wp_send_json_error( __( 'No attachment id.', 'wpmastertoolkit' ) );
 		}
 
 		$already_optimized = get_post_meta( $attachment_id, $this->meta_already_optimized, true );
-		if ( $already_optimized === '1' ) {
+
+		if ( '1' == $already_optimized && 'webp' == $mode_enabled ) {
 			wp_send_json_error( __( 'Already optimized.', 'wpmastertoolkit' ) );
 		}
 
-		$mime_types	= $this->allowed_mime_types;
-		$index 		= array_search( 'image/webp', $mime_types );
-		unset( $mime_types[$index] );
-		$mime_type 	= get_post_mime_type( $attachment_id );
+		if ( '2' == $already_optimized && 'avif' == $mode_enabled ) {
+			wp_send_json_error( __( 'Already optimized.', 'wpmastertoolkit' ) );
+		}
 
-		if ( ! in_array( $mime_type, $mime_types ) ) {
+		$post_mime_type = get_post_mime_type( $attachment_id );
+		if ( ! in_array( $post_mime_type, $this->allowed_mime_types ) ) {
 			wp_send_json_error( __( 'Not a valid image.', 'wpmastertoolkit' ) );
 		}
 
@@ -814,11 +911,23 @@ class WPMastertoolkit_Media_Encoder {
 		}
 
 		if ( ! empty( $new_sizes ) ) {
-			update_post_meta( $attachment_id, $this->meta_already_optimized, '1' );
+
+			$data = get_post_meta( $attachment_id, $this->meta_data, true );
+			if ( ! empty( $data ) ) {
+				$this->remove_related_files( $data );
+			}
+
+			if ( 'webp' == $mode_enabled ) {
+				update_post_meta( $attachment_id, $this->meta_already_optimized, '1' );
+			} elseif ( 'avif' == $mode_enabled ) {
+				update_post_meta( $attachment_id, $this->meta_already_optimized, '2' );
+			}
 			update_post_meta( $attachment_id, $this->meta_data, $new_sizes );
 			delete_post_meta( $attachment_id, $this->meta_has_error );
 		} else {
 			update_post_meta( $attachment_id, $this->meta_has_error, '1' );
+			delete_post_meta( $attachment_id, $this->meta_already_optimized );
+			delete_post_meta( $attachment_id, $this->meta_data );
 		}
 
 		$html = $this->attachment_data( $new_sizes, $attachment_id );
@@ -836,14 +945,14 @@ class WPMastertoolkit_Media_Encoder {
 			wp_send_json_error( __( 'Refresh the page and try again.', 'wpmastertoolkit' ) );
 		}
 
-		$attachment_id	= isset( $_POST['attachment_id'] ) ? sanitize_text_field( wp_unslash( $_POST['attachment_id'] ) ) : false;
+		$attachment_id = isset( $_POST['attachment_id'] ) ? sanitize_text_field( wp_unslash( $_POST['attachment_id'] ) ) : false;
 		if ( ! $attachment_id ) {
 			wp_send_json_error( __( 'No attachment id.', 'wpmastertoolkit' ) );
 		}
 
-		$already_optimized = get_post_meta( $attachment_id, $this->meta_already_optimized, true );
-		if ( $already_optimized === '1' ) {
-			$this->remove_related_files( $attachment_id );
+		$data = get_post_meta( $attachment_id, $this->meta_data, true );
+		if ( ! empty( $data ) ) {
+			$this->remove_related_files( $data );
 			delete_post_meta( $attachment_id, $this->meta_already_optimized );
 			delete_post_meta( $attachment_id, $this->meta_data );
 
@@ -876,6 +985,9 @@ class WPMastertoolkit_Media_Encoder {
 		if ( $already_optimized_quickwebp === '1' && ! empty( $data_quickweb ) ) {
 			update_post_meta( $attachment_id, $this->meta_already_optimized, '1' );
 			update_post_meta( $attachment_id, $this->meta_data, $data_quickweb );
+
+			delete_post_meta( $attachment_id, $this->meta_already_optimized_quickwebp );
+			delete_post_meta( $attachment_id, $this->meta_data_quickwebp );
 
 			$html = $this->attachment_data( $data_quickweb, $attachment_id );
 		} else {
@@ -945,18 +1057,44 @@ class WPMastertoolkit_Media_Encoder {
 	}
 
 	/**
+	 * Check the progress of bulk migration
+	 * 
+	 * @since   1.13.0
+	 */
+	public function progress_bulk_migration_cb() {
+		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
+		if ( ! wp_verify_nonce( $nonce, $this->nonce_action ) ) {
+			wp_send_json_error( __( 'Refresh the page and try again.', 'wpmastertoolkit' ) );
+		}
+
+		$status     = get_option( $this->option_migrate_status, '' );
+		$total      = (int)get_option( $this->option_migrate_total, 0 );
+		$current    = (int)get_option( $this->option_migrate_current, 0 );
+		$is_running = $status == 'running' ? true : false;
+
+		$data = array(
+			'running'  => $is_running,
+			'progress' => $current . '/' . $total,
+			'percent'  => $total ? round( abs( ( $current / $total ) ) * 100 ) . '%' : '0%'
+		);
+		wp_send_json_success( $data );
+	}
+
+	/**
 	 * Start buffering the page content
 	 * 
 	 * @since   1.13.0
 	 */
 	public function start_content_process() {
-		$this->settings = $this->get_settings();
+		$this->settings         = $this->get_settings();
+		$this->default_settings = $this->get_default_settings();
 
 		if ( $this->quickwebp_plugin_activated ) {
 			return;
 		}
 
-		if ( 'picture' != $this->settings['display_webp_mode']['value'] ) {
+		$display_mode = $this->settings['display_mode']['value'] ?? $this->default_settings['display_mode']['value'];
+		if ( 'picture' != $display_mode ) {
 			return;
 		}
 
@@ -983,6 +1121,60 @@ class WPMastertoolkit_Media_Encoder {
     }
 
 	/**
+     * activate
+     *
+     * @since   1.13.0
+     */
+    public static function activate(){
+		$this_class = new self();
+		$this_class->add_to_htaccess();
+    }
+
+	/**
+     * deactivate
+     *
+     * @since   1.13.0
+     */
+    public static function deactivate(){
+		$this_class = new self();
+		$this_class->remove_from_htaccess();
+    }
+
+	/**
+	 * Add the module to htaccess file
+	 * 
+	 * @since   1.13.0
+	 */
+	private function add_to_htaccess() {
+		global $is_apache;
+
+        if ( $is_apache ) {
+			$this->settings         = $this->get_settings();
+			$this->default_settings = $this->get_default_settings();
+			$display_mode           = $this->settings['display_mode']['value'] ?? $this->default_settings['display_mode']['value'];
+
+			if ( $display_mode == 'rewrite' ) {
+				require_once WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/class-htaccess.php';
+				WPMastertoolkit_Htaccess::add( $this->get_raw_content_htaccess(), self::MODULE_ID );
+			}
+        }
+	}
+
+	/**
+	 * Remove the module from htaccess file
+	 * 
+	 * @since   1.13.0
+	 */
+	private function remove_from_htaccess() {
+		global $is_apache;
+
+        if ( $is_apache ) {
+            require_once WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/class-htaccess.php';
+            WPMastertoolkit_Htaccess::remove( self::MODULE_ID );
+        }
+	}
+
+	/**
 	 * Content of the .htaccess file
 	 * 
 	 * @since   1.13.0
@@ -992,20 +1184,32 @@ class WPMastertoolkit_Media_Encoder {
 		$home_root = $home_root['path'];
 
 		$content  = "<IfModule mod_setenvif.c>";
-		$content .= "\n\tSetEnvIf Request_URI \"\.(jpg|jpeg|jpe|png)$\" REQUEST_image";
+		$content .= "\n\tSetEnvIf Request_URI \"\\.(jpg|jpeg|jpe|png)$\" REQUEST_image";
 		$content .= "\n</IfModule>";
+
 		$content .= "\n<IfModule mod_rewrite.c>";
 		$content .= "\n\tRewriteEngine On";
 		$content .= "\n\tRewriteBase $home_root";
+
+		// Serve AVIF if browser supports it and file exists
+		$content .= "\n\tRewriteCond %{HTTP_ACCEPT} image/avif";
+		$content .= "\n\tRewriteCond %{REQUEST_FILENAME}.avif -f";
+		$content .= "\n\tRewriteRule (.+)\\.(jpg|jpeg|jpe|png)$ $1.$2.avif [T=image/avif,NC,E=REQUEST_image:avif,L]";
+	
+		// Otherwise, serve WebP if browser supports it and file exists
 		$content .= "\n\tRewriteCond %{HTTP_ACCEPT} image/webp";
 		$content .= "\n\tRewriteCond %{REQUEST_FILENAME}.webp -f";
-		$content .= "\n\tRewriteRule (.+)\.(jpg|jpeg|jpe|png)$ $1.$2.webp [T=image/webp,NC]";
+		$content .= "\n\tRewriteRule (.+)\\.(jpg|jpeg|jpe|png)$ $1.$2.webp [T=image/webp,NC,E=REQUEST_image:webp,L]";
+
 		$content .= "\n</IfModule>";
+
 		$content .= "\n<IfModule mod_headers.c>";
 		$content .= "\n\tHeader append Vary Accept env=REQUEST_image";
 		$content .= "\n</IfModule>";
+
 		$content .= "\n<IfModule mod_mime.c>";
 		$content .= "\n\tAddType image/webp .webp";
+		$content .= "\n\tAddType image/avif .avif";
 		$content .= "\n</IfModule>";
 
         return trim( $content );
@@ -1020,17 +1224,31 @@ class WPMastertoolkit_Media_Encoder {
 		$home_root = wp_parse_url( home_url( '/' ) );
 		$home_root = $home_root['path'];
 
-        $content  = "location ~* ^($home_root.+)\\\.(jpg|jpeg|jpe|png)$ {";
+		$content  = "location ~* ^($home_root.+)\\.(jpg|jpeg|jpe|png)$ {";
 		$content .= "\n\tadd_header Vary Accept;";
-		$content .= "\n\n\tif (\$http_accept ~* \"webp\"){";
+	
+		// Check for AVIF support and file existence
+		$content .= "\n\n\tif (\$http_accept ~* \"avif\") {";
+		$content .= "\n\t\tset \$imavif A;";
+		$content .= "\n\t}";
+		$content .= "\n\tif (-f \$request_filename.avif) {";
+		$content .= "\n\t\tset \$imavif \"\${imavif}B\";";
+		$content .= "\n\t}";
+		$content .= "\n\tif (\$imavif = AB) {";
+		$content .= "\n\t\trewrite ^(.*) \$1.avif break;";
+		$content .= "\n\t}";
+	
+		// Check for WebP support and file existence
+		$content .= "\n\n\tif (\$http_accept ~* \"webp\") {";
 		$content .= "\n\t\tset \$imwebp A;";
 		$content .= "\n\t}";
 		$content .= "\n\tif (-f \$request_filename.webp) {";
-		$content .= "\n\t\tset \$imwebp  \"\${imwebp}B\";";
+		$content .= "\n\t\tset \$imwebp \"\${imwebp}B\";";
 		$content .= "\n\t}";
 		$content .= "\n\tif (\$imwebp = AB) {";
-		$content .= "\n\t\trewrite ^(.*) $1.webp;";
+		$content .= "\n\t\trewrite ^(.*) \$1.webp break;";
 		$content .= "\n\t}";
+	
 		$content .= "\n}";
 
         return trim( $content );
@@ -1119,29 +1337,15 @@ class WPMastertoolkit_Media_Encoder {
 		}
 
 		foreach ( $images as $i => $image ) {
-            if ( empty( $image['src']['webp_exists'] ) || empty( $image['src']['webp_url'] ) ) {
+
+            if ( empty( $image['src'] ) ) {
 				unset( $images[ $i ] );
 				continue;
 			}
 
-			unset( $images[ $i ]['src']['webp_path'], $images[ $i ]['src']['webp_exists'] );
-
             if ( empty( $image['srcset'] ) || ! is_array( $image['srcset'] ) ) {
 				unset( $images[ $i ]['srcset'] );
 				continue;
-			}
-
-            foreach ( $image['srcset'] as $j => $srcset ) {
-
-				if ( ! is_array( $srcset ) ) {
-					continue;
-				}
-
-				if ( empty( $srcset['webp_exists'] ) || empty( $srcset['webp_url'] ) ) {
-					unset( $images[ $i ]['srcset'][ $j ]['webp_url'] );
-				}
-
-				unset( $images[ $i ]['srcset'][ $j ]['webp_path'], $images[ $i ]['srcset'][ $j ]['webp_exists'] );
 			}
         }
 
@@ -1194,9 +1398,16 @@ class WPMastertoolkit_Media_Encoder {
 			return false;
 		}
 
-		$webp_url  = $src['src'] . '.webp';
-		$webp_path = $this->url_to_path( $webp_url );
-        $webp_url .= ! empty( $src['query'] ) ? $src['query'] : '';
+		$avif_url   = $src['src'] . '.avif';
+		$webp_url   = $src['src'] . '.webp';
+		$avif_path  = $this->url_to_path( $avif_url );
+		$webp_path  = $this->url_to_path( $webp_url );
+        $avif_url  .= ! empty( $src['query'] ) ? $src['query'] : '';
+        $webp_url  .= ! empty( $src['query'] ) ? $src['query'] : '';
+		$avif_exist = $avif_path && @file_exists( $avif_path );
+		$webp_exist = $webp_path && @file_exists( $webp_path );
+		$type       = $avif_exist ? 'image/avif' : ( $webp_exist ? 'image/webp' : '' );
+		$new_url    = $avif_exist ? $avif_url : ( $webp_exist ? $webp_url : '' );
 
         $data = [
 			'tag'              => $image,
@@ -1204,12 +1415,11 @@ class WPMastertoolkit_Media_Encoder {
 			'src_attribute'    => $src_source,
 			'src'              => [
 				'url'         => $attributes[ $src_source ],
-				'webp_url'    => $webp_url,
-				'webp_path'   => $webp_path,
-				'webp_exists' => $webp_path && @file_exists( $webp_path )
+				'new_url'     => $new_url,
 			],
 			'srcset_attribute' => false,
-			'srcset'           => []
+			'srcset'           => [],
+			'type'             => $type,
 		];
 
         // Deal with the srcset attribute.
@@ -1249,16 +1459,21 @@ class WPMastertoolkit_Media_Encoder {
 					continue;
 				}
 
-                $webp_url  = $src['src'] . '.webp';
-				$webp_path = $this->url_to_path( $webp_url );
-				$webp_url .= ! empty( $src['query'] ) ? $src['query'] : '';
+                $avif_url   = $src['src'] . '.avif';
+                $webp_url   = $src['src'] . '.webp';
+				$avif_path  = $this->url_to_path( $avif_url );
+				$webp_path  = $this->url_to_path( $webp_url );
+				$avif_url  .= ! empty( $src['query'] ) ? $src['query'] : '';
+				$webp_url  .= ! empty( $src['query'] ) ? $src['query'] : '';
+				$avif_exist = $avif_path && @file_exists( $avif_path );
+				$webp_exist = $webp_path && @file_exists( $webp_path );
+				$type       = $avif_exist ? 'image/avif' : ( $webp_exist ? 'image/webp' : '' );
+				$new_url    = $avif_exist ? $avif_url : ( $webp_exist ? $webp_url : '' );
 
                 $data['srcset'][] = [
-					'url'         => $srcs[0],
-					'descriptor'  => $srcs[1],
-					'webp_url'    => $webp_url,
-					'webp_path'   => $webp_path,
-					'webp_exists' => $webp_path && @file_exists( $webp_path )
+					'url'        => $srcs[0],
+					'descriptor' => $srcs[1],
+					'new_url'    => $new_url,
 				];
             }
         }
@@ -1390,7 +1605,6 @@ class WPMastertoolkit_Media_Encoder {
 
         /**
 		 * Remove Gutenberg specific attributes from picture tag, leave them on img tag.
-		 * Optional: $attributes['class'] = 'imagify-webp-cover-wrapper'; for website admin styling ease.
 		 */
 		if ( ! empty( $image['attributes']['class'] ) && strpos( $image['attributes']['class'], 'wp-block-cover__image-background' ) !== false ) {
 			unset( $attributes['style'] );
@@ -1434,22 +1648,22 @@ class WPMastertoolkit_Media_Encoder {
     private function build_source_tag( $image ) {
 		$srcset_source = ! empty( $image['srcset_attribute'] ) ? $image['srcset_attribute'] : $image['src_attribute'] . 'set';
 		$attributes    = [
-			'type'         => 'image/webp',
+			'type'         => $image['type'],
 			$srcset_source => [],
 		];
         
 		if ( ! empty( $image['srcset'] ) ) {
             foreach ( $image['srcset'] as $srcset ) {
-                if ( empty( $srcset['webp_url'] ) ) {
+                if ( empty( $srcset['new_url'] ) ) {
                     continue;
 				}
                 
-				$attributes[ $srcset_source ][] = $srcset['webp_url'] . ' ' . $srcset['descriptor'];
+				$attributes[ $srcset_source ][] = $srcset['new_url'] . ' ' . $srcset['descriptor'];
 			}
 		}
 
 		if ( empty( $attributes[ $srcset_source ] ) ) {
-			$attributes[ $srcset_source ][] = $image['src']['webp_url'];
+			$attributes[ $srcset_source ][] = $image['src']['new_url'];
 		}
 
 		$attributes[ $srcset_source ] = implode( ', ', $attributes[ $srcset_source ] );
@@ -1506,17 +1720,13 @@ class WPMastertoolkit_Media_Encoder {
 	}
 
 	/**
-	 * Check the mimetype of the file
+	 * Check the mimetype of the post
 	 * 
 	 * @since   1.13.0
 	 */
 	private function valid_mimetype( $post_id ) {
-		$mime_types = $this->allowed_mime_types;
-		$index      = array_search( 'image/webp', $mime_types );
-		unset( $mime_types[$index] );
-		$mime_type  = get_post_mime_type( $post_id );
-
-		return in_array( $mime_type, $mime_types );
+		$post_mime_type = get_post_mime_type( $post_id );
+		return in_array( $post_mime_type, $this->allowed_mime_types );
 	}
 
 	/**
@@ -1525,7 +1735,6 @@ class WPMastertoolkit_Media_Encoder {
 	 * @since   1.13.0
 	 */
 	private function optimize_btn( $attachment_id ) {
-
 		$quickweb_data            = get_post_meta( $attachment_id, $this->meta_data_quickwebp, true );
 		$optimized_with_quickwebp = false;
 
@@ -1575,7 +1784,10 @@ class WPMastertoolkit_Media_Encoder {
 	 * @since   1.13.0
 	 */
 	private function attachment_data( $data, $attachment_id ) {
+		$this->default_settings = $this->get_default_settings();
+		
 		$full_image_data = $data['full'] ?? array();
+		$format          = $this->default_settings['mode_enabled']['options'][ $full_image_data['format'] ] ?? '';
 
 		if ( ! empty( $full_image_data ) ) {
 			ob_start();
@@ -1585,7 +1797,7 @@ class WPMastertoolkit_Media_Encoder {
 						<span><?php echo esc_html( round( $full_image_data['original_size'] / 1024, 2 ) . 'KB' ); ?></span>
 					</div>
 					<div>
-						<strong><?php esc_html_e( 'Webp: ', 'wpmastertoolkit' ); ?></strong>
+						<strong><?php echo esc_html( $format ); ?>: </strong>
 						<span><?php echo esc_html( round( $full_image_data['optimized_size'] / 1024, 2 ) . 'KB' ); ?></span>
 					</div>
 					<div>
@@ -1662,6 +1874,12 @@ class WPMastertoolkit_Media_Encoder {
 	 * @since   1.13.0
 	 */
 	private function get_unoptimized_media_ids() {
+		$this->settings         = $this->get_settings();
+		$this->default_settings = $this->get_default_settings();
+
+		$mode_enabled       = $this->settings['mode_enabled']['value'] ?? $this->default_settings['mode_enabled']['value'];
+		$ignore_same_format = $this->settings['ignore_same_format'] ?? $this->default_settings['ignore_same_format'];
+
 		$statuses = array(
 			'inherit' => 'inherit',
 			'private' => 'private',
@@ -1672,13 +1890,42 @@ class WPMastertoolkit_Media_Encoder {
 			$statuses = array_merge( $statuses, $custom_statuses );
 		}
 
-		$mime_types	= $this->allowed_mime_types;
-		$index 		= array_search( 'image/webp', $mime_types );
-		unset( $mime_types[$index] );
+		$allowed_mime_types = $this->allowed_mime_types;
+		if ( '1' == $ignore_same_format ) {
+			if ( 'webp' == $mode_enabled ) {
+				$webp_index = array_search( 'image/webp', $allowed_mime_types );
+				unset( $allowed_mime_types[$webp_index] );
+			} elseif ( 'avif' == $mode_enabled ) {
+				$avif_index = array_search( 'image/avif', $allowed_mime_types );
+				unset( $allowed_mime_types[$avif_index] );
+			}
+		}
+
+		$meta_query_already_optimized = array(
+			'relation' => 'OR',
+			array(
+				'key'     => $this->meta_already_optimized,
+				'compare' => 'NOT EXISTS'
+			),
+		);
+
+		if ( 'webp' == $mode_enabled ) {
+			$meta_query_already_optimized[] = array(
+				'key'     => $this->meta_already_optimized,
+				'compare' => '!=',
+				'value'   => '1',
+			);
+		} elseif ( 'avif' == $mode_enabled ) {
+			$meta_query_already_optimized[] = array(
+				'key'     => $this->meta_already_optimized,
+				'compare' => '!=',
+				'value'   => '2',
+			);
+		}
 
 		$media_ids = get_posts( array(
 			'post_type'      => 'attachment',
-			'post_mime_type' => $mime_types,
+			'post_mime_type' => $allowed_mime_types,
 			'post_status'    => array_keys( $statuses ),
 			'posts_per_page' => -1,
 			'fields'         => 'ids',
@@ -1689,20 +1936,9 @@ class WPMastertoolkit_Media_Encoder {
 					'key'     => $this->meta_has_error,
 					'compare' => 'NOT EXISTS'
 				),
-				array(
-					'relation' => 'OR',
-					array(
-						'key'     => $this->meta_already_optimized,
-						'compare' => 'NOT EXISTS'
-					),
-					array(
-						'key'     => $this->meta_already_optimized,
-						'compare' => '=',
-						'value'   => '0'
-					)
-				),
+				$meta_query_already_optimized,
 			),
-		) );
+		));
 
 		return $media_ids;
 	}
@@ -1723,13 +1959,9 @@ class WPMastertoolkit_Media_Encoder {
 			$statuses = array_merge( $statuses, $custom_statuses );
 		}
 
-		$mime_types	= $this->allowed_mime_types;
-		$index 		= array_search( 'image/webp', $mime_types );
-		unset( $mime_types[$index] );
-
 		$media_ids = get_posts( array(
 			'post_type'      => 'attachment',
-			'post_mime_type' => $mime_types,
+			'post_mime_type' => $this->allowed_mime_types,
 			'post_status'    => array_keys( $statuses ),
 			'posts_per_page' => -1,
 			'fields'         => 'ids',
@@ -1786,7 +2018,8 @@ class WPMastertoolkit_Media_Encoder {
 		$array = array(
 			'image/jpeg' => 'JPEG',
 			'image/png'  => 'PNG',
-			'image/webp' => 'WebP'
+			'image/webp' => 'WebP',
+			'image/avif' => 'AVIF',
 		);
 
 		return $array[$mime_type] ?? '';
@@ -1797,16 +2030,12 @@ class WPMastertoolkit_Media_Encoder {
 	 * 
 	 * @since   1.13.0
 	 */
-	private function remove_related_files( $id ) {
-		$data = get_post_meta( $id, $this->meta_data, true );
-			
-		if ( ! empty( $data ) ) {
-			foreach ( $data as $value ) {
-				$path = $value['path'] ?? '';
+	private function remove_related_files( $data ) {
+		foreach ( $data as $value ) {
+			$path = $value['path'] ?? '';
 
-				if ( ! empty( $path ) && file_exists( $path ) ) {
-					wp_delete_file( $path );
-				}
+			if ( ! empty( $path ) && file_exists( $path ) ) {
+				wp_delete_file( $path );
 			}
 		}
 	}
@@ -1831,60 +2060,6 @@ class WPMastertoolkit_Media_Encoder {
 		}
 
 		return $file;
-	}
-
-	/**
-	 * Get the package used by the server
-	 * 
-	 * @since   1.13.0
-	 */
-	private function image_extension_loaded() {
-		$this->settings = $this->get_settings();
-		$library_to_use = $this->settings['library']['value'];
-
-		if ( $library_to_use == 'gd' ) {
-			if ( extension_loaded( 'gd' ) ) {
-				$library_to_use = 'gd';
-			} elseif ( extension_loaded( 'imagick' ) ) {
-				$library_to_use = 'imagick';
-			} else {
-				$library_to_use = false;
-			}
-		}
-
-		if ( $library_to_use == 'imagick' ) {
-			if ( extension_loaded( 'imagick' ) ) {
-				$library_to_use = 'imagick';
-			} elseif ( extension_loaded( 'gd' ) ) {
-				$library_to_use = 'gd';
-			} else {
-				$library_to_use = false;
-			}
-		}
-		
-		return $library_to_use;
-	}
-
-	/**
-	 * Get the quality
-	 * 
-	 * @since   1.13.0
-	 */
-	private function get_quality( $file ) {
-		$this->settings = $this->get_settings();
-		$ignore_webp    = $this->settings['ignore_webp'];
-		$quality        = $this->settings['quality'];
-		$mime_type      = wp_get_image_mime( $file );
-
-		switch ( $mime_type ) {
-			case 'image/webp':
-				if ( $ignore_webp == '1' ) {
-					$quality = 100;
-				}
-			break;
-		}
-
-		return $quality;
 	}
 
 	/**
@@ -1938,12 +2113,8 @@ class WPMastertoolkit_Media_Encoder {
 	 * @since   1.13.0
 	 */
 	private function optimize_local_file( $size ) {
-		$this->settings = $this->get_settings();
-
-		$extension_to_use = $this->image_extension_loaded();
-		if ( ! $extension_to_use ) {
-			return false;
-		}
+		$this->settings         = $this->get_settings();
+		$this->default_settings = $this->get_default_settings();
 
 		if ( ! is_file( $size['path'] ) ) {
 			return false;
@@ -1954,32 +2125,148 @@ class WPMastertoolkit_Media_Encoder {
 			return false;
 		}
 
-		try {
-			$size_before = filesize( $size['path'] );
-			$manager     = new ImageManager( array( 'driver' => $extension_to_use ) );
-			$image       = $manager->make( $size['path'] );
-			$quality     = $this->get_quality( $size['path'] );
-			$webp_path   = $size['path'] . '.webp';
-	
-			$image->sharpen( $this->settings['sharpen'] );
-			$image->save( $webp_path, $quality, 'webp' );
+		$is_pro       = wpmastertoolkit_is_pro();
+		$quality      = $this->get_the_quality();
+		$mode_enabled = $this->settings['mode_enabled']['value'] ?? $this->default_settings['mode_enabled']['value'];
+		$size_before  = filesize( $size['path'] );
+		$new_path     = $size['path'] . '.' . $mode_enabled;
 
-			$size_after = $image->filesize();
-			$image->destroy();
-	
-			$deference = $size_before - $size_after;
-			$percent   = $deference / $size_before * 100;
-	
-			return array(
-				'success'        => 1,
-				'original_size'  => $size_before,
-				'optimized_size' => $size_after,
-				'percent'        => round( $percent, 2 ),
-				'path'           => $webp_path
-			);
-		} catch ( \Throwable $th ) {
+		if ( 'avif' === $mode_enabled && $is_pro ) {
+			$avif_image = $this->create_avif_image( $size['path'], $new_path, $quality );
+			if ( $avif_image ) {
+				$size_after = filesize( $new_path );
+			}
+		} elseif ( 'webp' === $mode_enabled ) {
+			$webp_image = $this->create_webp_image( $size['path'], $new_path, $quality );
+			if ( $webp_image ) {
+				$size_after = filesize( $new_path );
+			}
+		}
+
+		$deference = $size_before - $size_after;
+		$percent   = $deference / $size_before * 100;
+
+		return array(
+			'success'        => 1,
+			'original_size'  => $size_before,
+			'optimized_size' => $size_after,
+			'percent'        => round( $percent, 2 ),
+			'path'           => $new_path,
+			'format'         => $mode_enabled
+		);
+	}
+
+	/**
+	 * Get the quality
+	 * 
+	 * @since   2.5.0
+	 */
+	private function get_the_quality() {
+		$this->settings         = $this->get_settings();
+		$this->default_settings = $this->get_default_settings();
+
+		$result       = 50;
+		$mode_enabled = $this->settings['mode_enabled']['value'] ?? $this->default_settings['mode_enabled']['value'];
+		$quality      = $this->settings['quality']['value'] ?? $this->default_settings['quality']['value'];
+
+		switch ($quality) {
+			case 'low':
+				$result = 50;
+				if ( 'avif' === $mode_enabled ) {
+					$result = 30;
+				}
+			break;
+			case 'medium':
+				$result = 75;
+				if ( 'avif' === $mode_enabled ) {
+					$result = 50;
+				}
+			break;
+			case 'high':
+				$result = 90;
+				if ( 'avif' === $mode_enabled ) {
+					$result = 70;
+				}
+			break;
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Create the avif image
+	 * 
+	 * @since   2.5.0
+	 */
+	private function create_avif_image( $file_path, $output_path, $quality ) {
+		$image     = false;
+		$mime_type = wp_get_image_mime( $file_path );
+
+		if ( 'image/avif' == $mime_type ) {
+			$image = imagecreatefromavif( $file_path );
+		} elseif ( 'image/webp' == $mime_type ) {
+			$image = imagecreatefromwebp( $file_path );
+		} elseif ( 'image/jpeg' == $mime_type ) {
+			$image = imagecreatefromjpeg( $file_path );
+		} elseif ( 'image/png' == $mime_type ) {
+			$image = imagecreatefrompng( $file_path );
+		}
+
+		if ( ! $image ) {
 			return false;
 		}
+		
+		if (!imageistruecolor($image)) {
+            $truecolor = imagecreatetruecolor(imagesx($image), imagesy($image));
+            imagecopy($truecolor, $image, 0, 0, 0, 0, imagesx($image), imagesy($image));
+            $image = $truecolor;
+        }
+
+		$avif_image = imageavif( $image, $output_path, $quality );
+		imagedestroy( $image );
+		if ( ! $avif_image ) {
+			return false;
+		}
+
+		return $avif_image;
+	}
+	
+	/**
+	 * Create the webp image
+	 * 
+	 * @since   2.5.0
+	 */
+	private function create_webp_image( $file_path, $output_path, $quality ) {
+		$image     = false;
+		$mime_type = wp_get_image_mime( $file_path );
+
+		if ( 'image/avif' == $mime_type ) {
+			$image = imagecreatefromavif( $file_path );
+		} elseif ( 'image/webp' == $mime_type ) {
+			$image = imagecreatefromwebp( $file_path );
+		} elseif ( 'image/jpeg' == $mime_type ) {
+			$image = imagecreatefromjpeg( $file_path );
+		} elseif ( 'image/png' == $mime_type ) {
+			$image = imagecreatefrompng( $file_path );
+		}
+
+		if ( ! $image ) {
+			return false;
+		}
+		
+		if (!imageistruecolor($image)) {
+            $truecolor = imagecreatetruecolor(imagesx($image), imagesy($image));
+            imagecopy($truecolor, $image, 0, 0, 0, 0, imagesx($image), imagesy($image));
+            $image = $truecolor;
+        }
+
+		$webp_image = imagewebp( $image, $output_path, $quality );
+		imagedestroy( $image );
+		if ( ! $webp_image ) {
+			return false;
+		}
+
+		return $webp_image;
 	}
 
 	/**
@@ -1990,24 +2277,25 @@ class WPMastertoolkit_Media_Encoder {
 	private function get_ajax_settings() {
 		$this->settings = $this->get_settings();
 
-		//phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-		$settings = isset( $_POST['settings'] ) ? sanitize_text_field( $_POST['settings'] ) : array();
+		//phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$settings = isset( $_POST['settings'] ) ? sanitize_text_field( wp_unslash( $_POST['settings'] ) ) : array();
 		$settings = json_decode( stripslashes( $settings ), true );
 
 		foreach ( $settings as $settings_key => $settings_value ) {
 			switch ( $settings_key ) {
-				case 'library':
-					$this->settings[$settings_key]['value'] = $settings_value['value'];
+				case 'mode_enabled':
+					$settings_value = $settings_value == 'off' ? 'webp' : $settings_value;
+					$this->settings[$settings_key]['value'] = $settings_value;
 				break;
-				default:
-					$this->settings[ $settings_key ] = $settings_value;
+				case 'quality':
+					$this->settings[$settings_key]['value'] = $settings_value;
 				break;
 			}
         }
 	}
 
 	/**
-     * sanitize_settings
+     * Sanitize settings
      * 
      * @since   1.13.0
      * @return array
@@ -2018,8 +2306,9 @@ class WPMastertoolkit_Media_Encoder {
 
         foreach ( $this->default_settings as $settings_key => $settings_value ) {
 			switch ( $settings_key ) {
-				case 'library':
-				case 'display_webp_mode':
+				case 'mode_enabled':
+				case 'quality':
+				case 'display_mode':
 					$sanitized_settings[$settings_key]['value'] = sanitize_text_field( $new_settings[$settings_key]['value'] ?? $this->default_settings[$settings_key]['value'] );
 				break;
 				default:
@@ -2042,7 +2331,37 @@ class WPMastertoolkit_Media_Encoder {
 		}
 
         $this->default_settings = $this->get_default_settings();
-        return get_option( $this->option_id, $this->default_settings );
+		$settings = get_option( $this->option_id, $this->default_settings );
+
+		if ( ! isset( $settings['mode_enabled'] ) ) {
+			$old_enabled = $settings['enabled'];
+			$mode_enabled = 'webp';
+			if ( '0' == $old_enabled ) {
+				$mode_enabled = 'off';
+			}
+			$settings['mode_enabled'] = array();
+			$settings['mode_enabled'] = array( 'value' => $mode_enabled );
+		}
+		if ( ! isset( $settings['quality']['value'] ) ) {
+			$old_quality = $settings['quality'];
+			$quality     = 'medium';
+			if ( $old_quality < 50 ) {
+				$quality = 'low';
+			} elseif ( $old_quality > 80 ) {
+				$quality = 'high';
+			}
+			$settings['quality'] = array(
+				'value' => $quality,
+			);
+		}
+		if ( ! isset( $settings['ignore_same_format'] ) ) {
+			$settings['ignore_same_format'] = $settings['ignore_webp'];
+		}
+		if ( ! isset( $settings['display_mode'] ) ) {
+			$settings['display_mode'] = $settings['display_webp_mode'];
+		}
+
+        return $settings;
     }
 
 	/**
@@ -2067,19 +2386,25 @@ class WPMastertoolkit_Media_Encoder {
 		}
 
         return array(
-			'enabled'           => '1',
-			'quality'           => '75',
-			'sharpen'           => '0',
-			'ignore_webp'       => '1',
-			'save_original'     => '0',
-			'library'           => array(
-				'value'   => 'gd',
+			'mode_enabled'       => array(
+				'value'   => 'webp',
 				'options' => array(
-					'gd'      => __( 'GD', 'wpmastertoolkit' ),
-					'imagick' => __( 'Imagick', 'wpmastertoolkit' ),
-				),
+					'off'  => __( 'Off', 'wpmastertoolkit' ),
+					'webp' => __( 'WebP', 'wpmastertoolkit' ),
+					'avif' => __( 'AVIF', 'wpmastertoolkit' ),
+				)
 			),
-			'display_webp_mode' => array(
+			'quality'            => array(
+				'value'   => 'medium',
+				'options' => array(
+					'low'    => __( 'Low', 'wpmastertoolkit' ),
+					'medium' => __( 'Medium', 'wpmastertoolkit' ),
+					'high'   => __( 'High', 'wpmastertoolkit' ),
+				)
+			),
+			'ignore_same_format' => '1',
+			'save_original'      => '0',
+			'display_mode'       => array(
 				'value'   => 'disabled',
 				'options' => array(
 					'disabled' => __( 'Deactivate', 'wpmastertoolkit' ),
@@ -2119,17 +2444,18 @@ class WPMastertoolkit_Media_Encoder {
 
         $this->settings         = $this->get_settings();
 		$this->default_settings = $this->get_default_settings();
+		$is_pro                 = wpmastertoolkit_is_pro();
+		$php_compatible         = is_php_version_compatible( '8.1.0' );
 
-		$library_options           = $this->default_settings['library']['options'];
-		$display_webp_mode_options = $this->default_settings['display_webp_mode']['options'];
+		$mode_enabled_options = $this->default_settings['mode_enabled']['options'];
+		$quality_options      = $this->default_settings['quality']['options'];
+		$display_mode_options = $this->default_settings['display_mode']['options'];
 
-        $enabled           = $this->settings['enabled'] ?? $this->default_settings['enabled'];
-		$quality           = $this->settings['quality'] ?? $this->default_settings['quality'];
-		$sharpen           = $this->settings['sharpen'] ?? $this->default_settings['sharpen'];
-		$ignore_webp       = $this->settings['ignore_webp'] ?? $this->default_settings['ignore_webp'];
-		$save_original     = $this->settings['save_original'] ?? $this->default_settings['save_original'];
-		$library           = $this->settings['library']['value'] ?? $this->default_settings['library']['value'];
-		$display_webp_mode = $this->settings['display_webp_mode']['value'] ?? $this->default_settings['display_webp_mode']['value'];
+        $mode_enabled       = $this->settings['mode_enabled']['value'] ?? $this->default_settings['mode_enabled']['value'];
+		$quality            = $this->settings['quality']['value'] ?? $this->default_settings['quality']['value'];
+		$ignore_same_format = $this->settings['ignore_same_format'] ?? $this->default_settings['ignore_same_format'];
+		$save_original      = $this->settings['save_original'] ?? $this->default_settings['save_original'];
+		$display_mode       = $this->settings['display_mode']['value'] ?? $this->default_settings['display_mode']['value'];
 
 		$status     = get_option( $this->option_bulk_status, '' );
 		$is_running = $status == 'running' ? true : false;
@@ -2148,60 +2474,79 @@ class WPMastertoolkit_Media_Encoder {
 		$percent_migration    = $total_migration ? round( abs( ( $current_migration / $total_migration ) ) * 100 ) . '%' : '0%';
 		$progress_migration   = $current_migration . '/' . $total_migration;
 
-
         ?>
             <div class="wp-mastertoolkit__section">
                 <div class="wp-mastertoolkit__section__desc">
-					<?php esc_html_e( "Automatically converts images to WebP when they are uploaded to the media library.", 'wpmastertoolkit'); ?>
+					<?php esc_html_e( "Automatically converts uploaded images to your selected format (WebP or AVIF) for better performance and reduced file size.", 'wpmastertoolkit'); ?>
 				</div>
                 <div class="wp-mastertoolkit__section__body">
 
 					<div class="wp-mastertoolkit__section__body__item">
-                        <div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e( 'Enable/disable image conversion to WEBP format', 'wpmastertoolkit' ); ?></div>
-                        <div class="wp-mastertoolkit__section__body__item__content">
-							<label class="wp-mastertoolkit__toggle">
-								<input type="hidden" name="<?php echo esc_attr( $this->option_id . '[enabled]' ); ?>" value="0">
-								<input type="checkbox" name="<?php echo esc_attr( $this->option_id . '[enabled]' ); ?>" value="1" <?php checked( $enabled, '1' ); ?>>
-								<span class="wp-mastertoolkit__toggle__slider round"></span>
-							</label>
-                        </div>
-                    </div>
-
-					<div class="wp-mastertoolkit__section__body__item">
-                        <div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e( 'Quality', 'wpmastertoolkit' ); ?></div>
-                        <div class="wp-mastertoolkit__section__body__item__content">
-							<div class="wp-mastertoolkit__rang-slider" style="width:300px;">
-								<input type="range" name="<?php echo esc_attr( $this->option_id . '[quality]' ); ?>" value="<?php echo esc_attr( $quality ); ?>" min="0" max="100" step="1">
-								<span class="value">
-									<span class="value-num"><?php echo esc_html( $quality ); ?></span>
-									<span class="value-unit">%</span>
-								</span>
-								<span class="progress"></span>
+                        <div class="wp-mastertoolkit__section__body__item__title">
+							<?php esc_html_e( 'Image Format Optimization', 'wpmastertoolkit' ); ?>
+							<div class="wp-mastertoolkit__section__body__item__title__info">
+								<div class="wp-mastertoolkit__section__body__item__title__info__icon">
+									<?php echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/info.svg'), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
+								</div>
+								<div class="wp-mastertoolkit__section__body__item__title__info__popup">
+									<p><?php esc_html_e( 'Select “Off” to disable image optimization, “WebP” for wide browser support, or “AVIF” for best compression and smaller file sizes.', 'wpmastertoolkit' ); ?></p>
+								</div>
 							</div>
-                        </div>
-                    </div>
-
-					<div class="wp-mastertoolkit__section__body__item">
-                        <div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e( 'Sharpen', 'wpmastertoolkit' ); ?></div>
+						</div>
                         <div class="wp-mastertoolkit__section__body__item__content">
-							<div class="wp-mastertoolkit__rang-slider" style="width:300px;">
-								<input type="range" name="<?php echo esc_attr( $this->option_id . '[sharpen]' ); ?>" value="<?php echo esc_attr( $sharpen ); ?>" min="0" max="100" step="1">
-								<span class="value">
-									<span class="value-num"><?php echo esc_html( $sharpen ); ?></span>
-									<span class="value-unit">%</span>
-								</span>
-								<span class="progress"></span>
-							</div>
+							<div class="wp-mastertoolkit__select">
+                                <select name="<?php echo esc_attr( $this->option_id . '[mode_enabled][value]' ); ?>">
+                                    <?php
+										foreach ( $mode_enabled_options as $key => $name ) {
+											$option_disabled = false;
+											$disable_message = '';
+											if ( $key == 'avif' && ( ! $is_pro || ! $php_compatible ) ) {
+												$option_disabled = true;
+												$disable_message = __( 'PRO', 'wpmastertoolkit' );
+												if ( ! $php_compatible ) {
+													$disable_message = __( '(PHP 8.1 or higher)', 'wpmastertoolkit' );
+												}
+											}
+											?>
+												<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $mode_enabled, $key ); ?> <?php disabled( $option_disabled, true ); ?>><?php echo esc_html( $name ); ?> <?php echo esc_html( $disable_message ); ?></option>
+											<?php
+										}
+									?>
+                                </select>
+                            </div>
                         </div>
                     </div>
 
 					<div class="wp-mastertoolkit__section__body__item">
-                        <div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e( 'Do not compress images already in WebP', 'wpmastertoolkit' ); ?></div>
+						<div class="wp-mastertoolkit__section__body__item__title">
+							<?php esc_html_e( 'Quality', 'wpmastertoolkit' ); ?>
+							<div class="wp-mastertoolkit__section__body__item__title__info">
+								<div class="wp-mastertoolkit__section__body__item__title__info__icon">
+									<?php echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/info.svg'), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
+								</div>
+								<div class="wp-mastertoolkit__section__body__item__title__info__popup">
+									<p><?php esc_html_e( 'Choose the image quality level. Lower quality results in smaller file sizes, while higher quality provides better visuals but larger files.', 'wpmastertoolkit' ); ?></p>
+								</div>
+							</div>
+						</div>
+                        <div class="wp-mastertoolkit__section__body__item__content">
+							<div class="wp-mastertoolkit__select">
+                                <select name="<?php echo esc_attr( $this->option_id . '[quality][value]' ); ?>">
+                                    <?php foreach ( $quality_options as $key => $name ) : ?>
+										<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $quality, $key ); ?>><?php echo esc_html( $name ); ?></option>
+									<?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+					<div class="wp-mastertoolkit__section__body__item">
+                        <div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e( 'Do not compress images already in same format', 'wpmastertoolkit' ); ?></div>
                         <div class="wp-mastertoolkit__section__body__item__content">
 							<div class="wp-mastertoolkit__checkbox">
 								<label class="wp-mastertoolkit__checkbox__label">
-									<input type="hidden" name="<?php echo esc_attr( $this->option_id . '[ignore_webp]' ); ?>" value="0">
-									<input type="checkbox" name="<?php echo esc_attr( $this->option_id . '[ignore_webp]' ); ?>" value="1" <?php checked( $ignore_webp, '1' ); ?>>
+									<input type="hidden" name="<?php echo esc_attr( $this->option_id . '[ignore_same_format]' ); ?>" value="0">
+									<input type="checkbox" name="<?php echo esc_attr( $this->option_id . '[ignore_same_format]' ); ?>" value="1" <?php checked( $ignore_same_format, '1' ); ?>>
 									<span class="mark"></span>
 								</label>
 							</div>
@@ -2223,44 +2568,21 @@ class WPMastertoolkit_Media_Encoder {
 
 					<div class="wp-mastertoolkit__section__body__item">
                         <div class="wp-mastertoolkit__section__body__item__title">
-							<?php esc_html_e( 'Library to use', 'wpmastertoolkit' ); ?>
+							<?php esc_html_e( 'Display images with new format on the site', 'wpmastertoolkit' ); ?>
 							<div class="wp-mastertoolkit__section__body__item__title__info">
 								<div class="wp-mastertoolkit__section__body__item__title__info__icon">
 									<?php echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/info.svg'), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
 								</div>
 								<div class="wp-mastertoolkit__section__body__item__title__info__popup">
-									<p><?php esc_html_e( 'We use the GD library as the default option. However, if the GD library is not available, we will use Imagick instead.', 'wpmastertoolkit' ); ?></p>
-								</div>
-							</div>
-						</div>
-                        <div class="wp-mastertoolkit__section__body__item__content">
-							<div class="wp-mastertoolkit__select">
-                                <select name="<?php echo esc_attr( $this->option_id . '[library][value]' ); ?>">
-                                    <?php foreach ( $library_options as $key => $name ) : ?>
-                                        <option value="<?php echo esc_attr( $key ); ?>" <?php selected( $library, $key ); ?>><?php echo esc_html( $name ); ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-					<div class="wp-mastertoolkit__section__body__item">
-                        <div class="wp-mastertoolkit__section__body__item__title">
-							<?php esc_html_e( 'Display images in WebP format on the site', 'wpmastertoolkit' ); ?>
-							<div class="wp-mastertoolkit__section__body__item__title__info">
-								<div class="wp-mastertoolkit__section__body__item__title__info__icon">
-									<?php echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/info.svg'), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
-								</div>
-								<div class="wp-mastertoolkit__section__body__item__title__info__popup">
-									<p><?php esc_html_e( 'This option allows to override the original images by the webp version (useless for images converted in import)', 'wpmastertoolkit' ); ?></p>
+									<p><?php esc_html_e( 'This option allows to override the original images by the new version (useless for images converted in import)', 'wpmastertoolkit' ); ?></p>
 								</div>
 							</div>
 						</div>
                         <div class="wp-mastertoolkit__section__body__item__content">
 							<div class="wp-mastertoolkit__radio">
-								<?php foreach ( $display_webp_mode_options as $key => $name ) : ?>
+								<?php foreach ( $display_mode_options as $key => $name ) : ?>
 									<label class="wp-mastertoolkit__radio__label">
-										<input type="radio" name="<?php echo esc_attr( $this->option_id . '[display_webp_mode][value]' ); ?>" value="<?php echo esc_attr( $key ); ?>" <?php checked( $display_webp_mode, $key ); ?>>
+										<input type="radio" name="<?php echo esc_attr( $this->option_id . '[display_mode][value]' ); ?>" value="<?php echo esc_attr( $key ); ?>" <?php checked( $display_mode, $key ); ?>>
 										<span class="mark"></span>
 										<span class="wp-mastertoolkit__checkbox__label__text"><?php echo esc_html( $name ); ?></span>
 									</label>

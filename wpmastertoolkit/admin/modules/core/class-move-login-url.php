@@ -108,6 +108,8 @@ class WPMastertoolkit_Move_Login_URL {
 <IfModule mod_rewrite.c>
 	RewriteEngine On
 	RewriteCond %{REQUEST_URI} ^/wp-admin [NC]
+	RewriteCond %{REQUEST_URI} !^/wp-admin/admin-ajax\.php$ [NC]
+	RewriteCond %{REQUEST_URI} !^/wp-admin/load-(styles|scripts)\.php$ [NC]
 	RewriteCond %{HTTP_COOKIE} !^.*wordpress_logged_in_.*$ [NC]
 	RewriteRule ^(.*)$ - [R=403,L]
 </IfModule>
@@ -121,10 +123,18 @@ class WPMastertoolkit_Move_Login_URL {
 	 */
 	public static function get_raw_content_nginx() {
 		return trim('
-location ~* /wp-admin {
-	if ($http_cookie !~* \"wordpress_logged_in_\") {
-		return 403;
-	}
+location ^~ /wp-admin {
+    location = /wp-admin/admin-ajax.php {
+        allow all;
+    }
+
+    location ~* ^/wp-admin/load-(styles|scripts)\.php$ {
+        allow all;
+    }
+
+    if ($http_cookie !~* "wordpress_logged_in_") {
+        return 403;
+    }
 }
 		');
 	}
@@ -426,8 +436,8 @@ location ~* /wp-admin {
 
 			$this->default_settings = $this->get_default_settings();
 
-			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-			$new_settings       = $this->sanitize_settings( $_POST[$this->option_id] ?? array() );
+			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			$new_settings       = $this->sanitize_settings( wp_unslash( $_POST[$this->option_id] ?? array() ) );
 			
 			$this->save_settings( $new_settings );
             wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );

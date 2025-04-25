@@ -405,8 +405,8 @@ class WPMastertoolkit_Limit_Login_Attempts {
 			if ( isset( $_POST['delete'] ) ) {
 				$this->delete_attempt( $_POST );
 			} else {
-				// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-				$new_settings = $this->sanitize_settings( $_POST[ $this->option_id ] ?? array() );
+				// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+				$new_settings = $this->sanitize_settings( wp_unslash( $_POST[ $this->option_id ] ?? array() ) );
 				$this->save_settings( $new_settings );
 			}
 

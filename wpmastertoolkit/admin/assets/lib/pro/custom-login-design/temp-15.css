@@ -1,0 +1,16 @@
+@media (max-width: 1024px) {
+	.wpmtk-cld__aside {
+		width: 30% !important;
+	}
+	.wpmtk-cld__form {
+		width: 70% !important;
+	}
+}
+@media (max-width: 767px) {
+	.wpmtk-cld__aside {
+		display: none !important;
+	}
+	.wpmtk-cld__form {
+		width: 100% !important;
+	}
+}

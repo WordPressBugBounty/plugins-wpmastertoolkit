@@ -101,6 +101,7 @@ class WPMastertoolkit_Browser_Theme_Color {
 		$nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ?? '' ) );
 		if ( wp_verify_nonce( $nonce, $this->nonce_action ) ) {
 
+			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
             $new_settings = $this->sanitize_settings( wp_unslash( $_POST[$this->option_id] ?? array() ) );
             
             $this->save_settings( $new_settings );
@@ -160,7 +161,9 @@ class WPMastertoolkit_Browser_Theme_Color {
                             <div class="wp-mastertoolkit__input-text">
                                 <input id="wpmastertoolkit-browser-theme-color" type="text" name="<?php echo esc_attr( $this->option_id . '[theme_color]' ); ?>" value="<?php echo esc_attr( $theme_color ); ?>" class="wp-color-picker"/>
                             </div>
+							<?php //phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
                             <img class="wp-mastertoolkit__preview-browser-theme-color black" src="<?php echo esc_url( WPMASTERTOOLKIT_PLUGIN_URL . 'admin/images/browser-theme-color-black.webp' ); ?>" alt="<?php esc_attr_e( 'Browser Theme Color Preview', 'wpmastertoolkit' ); ?>" class="wp-mastertoolkit__section__body__preview" />
+							<?php //phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
                             <img class="wp-mastertoolkit__preview-browser-theme-color white" src="<?php echo esc_url( WPMASTERTOOLKIT_PLUGIN_URL . 'admin/images/browser-theme-color-white.webp' ); ?>" alt="<?php esc_attr_e( 'Browser Theme Color Preview', 'wpmastertoolkit' ); ?>" class="wp-mastertoolkit__section__body__preview" />
                         </div>
                     </div>

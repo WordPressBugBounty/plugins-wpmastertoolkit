@@ -82,10 +82,20 @@ class WPMastertoolkit_Settings {
 	 * @since	1.0.0
 	 */
 	public function render_settings_page() {
-		$db_options        = get_option( WPMASTERTOOLKIT_PLUGIN_SETTINGS, array() );
-		$opt_in_option     = get_option( WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_opt_in', array() );
-		$opt_in_status     = $opt_in_option['value'] ?? '1';
-		$show_opt_in_modal = $opt_in_option['already'] ?? '0';
+		$db_options              = get_option( WPMASTERTOOLKIT_PLUGIN_SETTINGS, array() );
+		$opt_in_option           = get_option( WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_opt_in', array() );
+		$promot_option           = get_option( WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_promot', array() );
+		$opt_in_status           = $opt_in_option['value'] ?? '1';
+		$show_opt_in_modal       = $opt_in_option['already'] ?? '0';
+		$promot_option_status    = $promot_option['status'] ?? '';
+		$promot_option_last_show = $promot_option['last_show'] ?? '0';
+		$promot_delay_to_show    = DAY_IN_SECONDS * 45;
+		$promot_show_now         = ( time() - $promot_delay_to_show ) > $promot_option_last_show;
+		$show_promot_modal       = !wpmastertoolkit_is_pro() && $show_opt_in_modal === '1' && $promot_option_status !== 'no-longer' && $promot_show_now;
+		$try_url                 = 'https://wpmastertoolkit.com/en/wpmtk-products/wpmastertoolkit-pro/';
+		if ( get_locale() === 'fr_FR' ) {
+			$try_url = 'https://wpmastertoolkit.com/fr/produits/wpmastertoolkit-pro/';
+		}
 
 		require_once WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/page-settings.php';
 	}
@@ -103,12 +113,43 @@ class WPMastertoolkit_Settings {
 			return;
 		}
 
+		$promot_modal_clicked   = isset($_POST['wpmastertoolkit_promot_modal']);
 		$settings_upload_json 	= isset($_POST['wpmastertoolkit_settings_tab_upload_json_submit']);
 		$settings_download_json	= isset($_POST['wpmastertoolkit_settings_tab_download_json_submit']);
 
 		WPMastertoolkit_Handle_options::require_once_all_options();
 
-		if ( $settings_upload_json ) {
+		if ( $promot_modal_clicked ) {
+
+			$promot_modal       = sanitize_text_field( wp_unslash( $_POST['wpmastertoolkit_promot_modal'] ) );
+			$promot_option      = array();
+			$manage_license_url = false;
+
+			if ( 'no-longer' == $promot_modal ){
+				$promot_option = array(
+					'status' => 'no-longer'
+				);
+			} else if ( 'have-license' == $promot_modal ) {
+				$promot_option = array(
+					'status'    => '',
+					'last_show' => time(),
+				);
+				$manage_license_url = admin_url( 'admin.php?page=wpmastertoolkit-manage-license' );
+			} else if ( 'try-now' == $promot_modal ) {
+				$promot_option = array(
+					'status'    => '',
+					'last_show' => time(),
+				);
+				$manage_license_url = admin_url( 'admin.php?page=wpmastertoolkit-manage-license' );
+			}
+			
+			update_option( WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_promot', $promot_option, false );
+			if ( $manage_license_url ) {
+				wp_safe_redirect( $manage_license_url );
+				exit;
+			}
+
+		} else if ( $settings_upload_json ) {
 
 			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			$upload_file = wpmastertoolkit_clean( wp_unslash( $_FILES['wpmastertoolkit_settings_tab_input'] ?? '' ) );
@@ -199,8 +240,8 @@ class WPMastertoolkit_Settings {
 
 		} else {
 
-			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-			$new_settings = $this->sanitize_main_settings( $_POST[WPMASTERTOOLKIT_PLUGIN_SETTINGS] ?? array() );
+			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			$new_settings = $this->sanitize_main_settings( wp_unslash( $_POST[WPMASTERTOOLKIT_PLUGIN_SETTINGS] ?? array() ) );
 			$this->save_main_settings( $new_settings );
 			$this->save_opt_in();
 
@@ -210,7 +251,6 @@ class WPMastertoolkit_Settings {
 			wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
 			exit;
 		}
-		
 	}
 
 	/**
@@ -276,23 +316,34 @@ class WPMastertoolkit_Settings {
 	 * @return void
 	 */
 	public static function get_changelog() {
-		$readme_file = WPMASTERTOOLKIT_PLUGIN_PATH . 'README.txt';
-		$readme_content = file_get_contents( $readme_file );
-		
-		if ( ! $readme_content ) return;
-
-		$changelog = explode( '= ' . WPMASTERTOOLKIT_VERSION . ' =', $readme_content );
-		$changelog = explode( '= ', $changelog[1] ?? '' );
-		$changelog = $changelog[0] ?? '';
-
-		if ( class_exists( 'Parsedown' ) ) {
-			$Parsedown = new Parsedown();
-			$changelog = $Parsedown->text( $changelog );
-		} else {
-			$changelog = nl2br( $changelog );
+		if( file_exists( WPMASTERTOOLKIT_PLUGIN_PATH . 'release.json' ) ) {
+			$release_json = json_decode( file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'release.json' ), true );
+			if ( !empty( $release_json['sections']['changelog'] ) ) {
+				return $release_json['sections']['changelog'];
+			}
 		}
 
-		return $changelog;
+		if( file_exists( WPMASTERTOOLKIT_PLUGIN_PATH . 'README.txt' ) ) {
+			$readme_file = WPMASTERTOOLKIT_PLUGIN_PATH . 'README.txt';
+			$readme_content = file_get_contents( $readme_file );
+			
+			if ( ! $readme_content ) return;
+	
+			$changelog = explode( '= ' . WPMASTERTOOLKIT_VERSION . ' =', $readme_content );
+			$changelog = explode( '= ', $changelog[1] ?? '' );
+			$changelog = $changelog[0] ?? '';
+	
+			if ( class_exists( 'Parsedown' ) ) {
+				$Parsedown = new Parsedown();
+				$changelog = $Parsedown->text( esc_html( $changelog ) );
+			} else {
+				$changelog = nl2br( esc_html( $changelog ) );
+			}
+	
+			return $changelog;
+		}
+
+		return '';
 	}
 
 }
