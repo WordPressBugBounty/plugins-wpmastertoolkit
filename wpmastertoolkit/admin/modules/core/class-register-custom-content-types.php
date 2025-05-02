@@ -13,6 +13,7 @@ class WPMastertoolkit_Register_Custom_Content_Types {
     protected $content_type_settings = 'content_type_settings';
     
     private $code_folder_path;
+    private $all_wp_capabilities;
 
     /**
      * Constructor.
@@ -26,6 +27,7 @@ class WPMastertoolkit_Register_Custom_Content_Types {
         add_action( 'manage_' . $this->post_type . '_posts_custom_column', array( $this, 'custom_column_content' ), 10, 2 );
         add_action( 'add_meta_boxes', array( $this, 'meta_boxes' ) );
         add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_assets' ) );
+        add_filter( 'admin_body_class', array( $this, 'admin_body_class' ) );
         add_filter( 'wp_sitemaps_post_types', array( $this, 'remove_from_sitemap' ), 10, 2 );
         add_action( 'edit_form_top', array( $this, 'render_edit_post_html' ) );
         add_action( 'save_post_' . $this->post_type, array( $this, 'save_post' ) );
@@ -34,6 +36,7 @@ class WPMastertoolkit_Register_Custom_Content_Types {
         add_action( 'wp_trash_post', array( $this, 'delete_file_on_delete_post' ) );
 
         add_filter( 'wpmastertoolkit/folders', array( $this, 'create_folders' ) );
+
 
         $this->custom_content_types_loader();
 
@@ -66,13 +69,13 @@ class WPMastertoolkit_Register_Custom_Content_Types {
         $labels = array(
             'name'               => __( 'Content Types', 'wpmastertoolkit' ),
             'singular_name'      => __( 'Content Type', 'wpmastertoolkit' ),
-            'add_new'            => __( 'Add New Content Type', 'wpmastertoolkit' ),
-            'add_new_item'       => __( 'Create New Content Type', 'wpmastertoolkit' ),
-            'edit_item'          => __( 'Edit Content Type', 'wpmastertoolkit' ),
-            'new_item'           => __( 'New Content Type', 'wpmastertoolkit' ),
-            'all_items'          => __( 'All Content Types', 'wpmastertoolkit' ),
-            'view_item'          => __( 'View Content Type', 'wpmastertoolkit' ),
-            'search_items'       => __( 'Search Content Types', 'wpmastertoolkit' ),
+            'add_new'            => __( 'Add New', 'wpmastertoolkit' ),
+            'add_new_item'       => __( 'Create New', 'wpmastertoolkit' ),
+            'edit_item'          => __( 'Edit', 'wpmastertoolkit' ),
+            'new_item'           => __( 'New', 'wpmastertoolkit' ),
+            'all_items'          => __( 'All', 'wpmastertoolkit' ),
+            'view_item'          => __( 'View', 'wpmastertoolkit' ),
+            'search_items'       => __( 'Search', 'wpmastertoolkit' ),
             'not_found'          => __( 'No Content Types Found', 'wpmastertoolkit' ),
             'not_found_in_trash' => __( 'No Content Types Found in Trash', 'wpmastertoolkit' ),
         );
@@ -156,9 +159,29 @@ class WPMastertoolkit_Register_Custom_Content_Types {
     }
 
     /**
+     * admin_body_class
+     *
+     * @param  mixed $classes
+     * @return void
+     */
+    public function admin_body_class( $classes ) {
+        global $pagenow;
+        if ( $pagenow === 'edit.php' && isset( $_GET['post_type'] ) && $_GET['post_type'] === $this->post_type ) {
+            $classes .= ' wpmtk-modern-post-list';
+        }
+        return $classes;
+    }
+
+    /**
      * Enqueue Admin Assets
      */
     public function enqueue_admin_assets( $hook ) {
+        if ( $hook === 'edit.php' ) {
+            if ( get_post_type() !== $this->post_type ) return;
+
+            $assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/modern-post-list.asset.php' );
+            wp_enqueue_style( 'WPMastertoolkit_modern_post_list', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/modern-post-list.css', array(), $assets['version'], 'all' );
+        }
         if ( $hook === 'post.php' || $hook === 'post-new.php' ) {
             if ( get_post_type() !== $this->post_type ) return;
 
@@ -201,6 +224,7 @@ class WPMastertoolkit_Register_Custom_Content_Types {
                 include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/register-custom-content-types/edit-post-cpt.php' );
                 break;
             case 'taxonomy':
+                include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/register-custom-content-types/edit-taxonomy.php' );
                 break;
             case 'option_page':
                 break;
@@ -413,6 +437,186 @@ class WPMastertoolkit_Register_Custom_Content_Types {
     }
     
     /**
+     * get_taxonomy_labels
+     *
+     * @param  mixed $filter
+     * @return void
+     */
+    public function get_taxonomy_labels( $filter = false ) {
+        $labels = array(
+            'name' => array(
+                "label"       => __( 'Plural Label', 'wpmastertoolkit' ),
+                "required"    => true,
+                "placeholder" => __( 'Genres', 'wpmastertoolkit' ),
+                "description" => __( 'The plural label for the taxonomy.', 'wpmastertoolkit' ),
+            ),
+            'singular_name' => array(
+                "label"       => __( 'Singular Label', 'wpmastertoolkit' ),
+                "required"    => true,
+                "placeholder" => __( 'Genre', 'wpmastertoolkit' ),
+                "description" => __( 'The singular label for the taxonomy.', 'wpmastertoolkit' ),
+            ),
+            'taxonomy' => array(
+                "label"       => __( 'Taxonomy Key', 'wpmastertoolkit' ),
+                "required"    => true,
+                "placeholder" => __( 'genre', 'wpmastertoolkit' ),
+                "description" => __( 'The post type key for the taxonomy.', 'wpmastertoolkit' ),
+            ),
+            'description' => array(
+                "label"       => __( 'Description', 'wpmastertoolkit' ),
+                "placeholder" => __( 'This content type is used to...', 'wpmastertoolkit' ),
+                "description" => __( 'A short description of the taxonomy.', 'wpmastertoolkit' ),
+            ),
+            'menu_name' => array(
+                "label"       => __( 'Menu Label', 'wpmastertoolkit' ),
+                "placeholder" => __( 'Tags', 'wpmastertoolkit' ),
+                "description" => __( 'Assigns the menu name text.', 'wpmastertoolkit' ),
+            ),
+            'all_items' => array(
+                "label"       => __( 'All Items', 'wpmastertoolkit' ),
+                "placeholder" => __( 'All Tags', 'wpmastertoolkit' ),
+                "description" => __( 'Assigns the all items text.', 'wpmastertoolkit' ),
+            ),
+            'edit_item' => array(
+                "label"       => __( 'Edit Item', 'wpmastertoolkit' ),
+                "placeholder" => __( 'Edit Tag', 'wpmastertoolkit' ),
+                "description" => __( 'At the top of the editor screen when editing a term.', 'wpmastertoolkit' ),
+            ),
+            'view_item' => array(
+                "label"       => __( 'View Item', 'wpmastertoolkit' ),
+                "placeholder" => __( 'View Tag', 'wpmastertoolkit' ),
+                "description" => __( 'In the admin bar to view term during editing.', 'wpmastertoolkit' ),
+            ),
+            'update_item' => array(
+                "label"       => __( 'Update Item', 'wpmastertoolkit' ),
+                "placeholder" => __( 'Update Tag', 'wpmastertoolkit' ),
+                "description" => __( 'Assigns the update item text.', 'wpmastertoolkit' ),
+            ),
+            'add_new_item' => array(
+                "label"       => __( 'Add New Item', 'wpmastertoolkit' ),
+                "placeholder" => __( 'Add New Tag', 'wpmastertoolkit' ),
+                "description" => __( 'Assigns the add new item text.', 'wpmastertoolkit' ),
+            ),
+            'new_item_name' => array(
+                "label"       => __( 'New Item Name', 'wpmastertoolkit' ),
+                "placeholder" => __( 'New Tag Name', 'wpmastertoolkit' ),
+                "description" => __( 'Assigns the new item name text.', 'wpmastertoolkit' ),
+            ),
+            'parent_item' => array(
+                "label"       => __( 'Parent Item', 'wpmastertoolkit' ),
+                "placeholder" => __( 'Parent Category', 'wpmastertoolkit' ),
+                "description" => __( 'Assigns the parent item text.', 'wpmastertoolkit' ),
+            ),
+            'parent_item_colon' => array(
+                "label"       => __( 'Parent Item With Colon', 'wpmastertoolkit' ),
+                "placeholder" => __( 'Parent Category:', 'wpmastertoolkit' ),
+                "description" => __( 'Assigns the parent item with colon text.', 'wpmastertoolkit' ),
+            ),
+            'search_items' => array(
+                "label"       => __( 'Search Items', 'wpmastertoolkit' ),
+                "placeholder" => __( 'Search Tags', 'wpmastertoolkit' ),
+                "description" => __( 'Assigns the search items text.', 'wpmastertoolkit' ),
+            ),
+            'popular_items' => array(
+                "label"       => __( 'Popular Items', 'wpmastertoolkit' ),
+                "placeholder" => __( 'Popular Tags', 'wpmastertoolkit' ),
+                "description" => __( 'Assigns the popular items text.', 'wpmastertoolkit' ),
+            ),
+            'separate_items_with_commas' => array(
+                "label"       => __( 'Separate Items With Commas', 'wpmastertoolkit' ),
+                "placeholder" => __( 'Separate tags with commas', 'wpmastertoolkit' ),
+                "description" => __( 'Assigns the separate items with commas text.', 'wpmastertoolkit' ),
+            ),
+            'add_or_remove_items' => array(
+                "label"       => __( 'Add Or Remove Items', 'wpmastertoolkit' ),
+                "placeholder" => __( 'Add or remove tags', 'wpmastertoolkit' ),
+                "description" => __( 'Assigns the add or remove items text.', 'wpmastertoolkit' ),
+            ),
+            'choose_from_most_used' => array(
+                "label"       => __( 'Choose From Most Used', 'wpmastertoolkit' ),
+                "placeholder" => __( 'Choose from the most used tags', 'wpmastertoolkit' ),
+                "description" => __( 'Assigns the choose from most used text.', 'wpmastertoolkit' ),
+            ),
+            'most_used' => array(
+                "label"       => __( 'Most Used', 'wpmastertoolkit' ),
+                "placeholder" => __( 'Most Used', 'wpmastertoolkit' ),
+                "description" => __( 'Assigns the most used text.', 'wpmastertoolkit' ),
+            ),
+            'not_found' => array(
+                "label"       => __( 'Not Found', 'wpmastertoolkit' ),
+                "placeholder" => __( 'No tags found', 'wpmastertoolkit' ),
+                "description" => __( 'Assigns the not found text.', 'wpmastertoolkit' ),
+            ),
+            'no_terms' => array(
+                "label"       => __( 'No Terms', 'wpmastertoolkit' ),
+                "placeholder" => __( 'No tags', 'wpmastertoolkit' ),
+                "description" => __( 'Assigns the no terms text.', 'wpmastertoolkit' ),
+            ),
+            'name_field_description' => array(
+                "label"       => __( 'Name Field Description', 'wpmastertoolkit' ),
+                "placeholder" => __( 'The name is how it appears on your site', 'wpmastertoolkit' ),
+                "description" => __( 'The name is how it appears on your site', 'wpmastertoolkit' ),
+            ),
+            'slug_field_description' => array(
+                "label"       => __( 'Slug Field Description', 'wpmastertoolkit' ),
+                "placeholder" => __( 'The &quot;slug&quot; is the URL-friendly version of the name. It is usually all lower case and contains only letters, numbers, and hyphens.', 'wpmastertoolkit' ),
+                "description" => __( 'Describes the Slug field on the Edit Tags screen.', 'wpmastertoolkit' ),
+            ),
+            'parent_field_description' => array(
+                "label"       => __( 'Parent Field Description', 'wpmastertoolkit' ),
+                "placeholder" => __( 'Assign a parent term to create a hierarchy. The term Jazz, for example, would be the parent of Bebop and Big Band', 'wpmastertoolkit' ),
+                "description" => __( 'Describes the Parent field on the Edit Tags screen.', 'wpmastertoolkit' ),
+            ),
+            'desc_field_description' => array(
+                "label"       => __( 'Description Field Description', 'wpmastertoolkit' ),
+                "placeholder" => __( 'The description is not prominent by default; however, some themes may show it.', 'wpmastertoolkit' ),
+                "description" => __( 'Describes the Description field on the Edit Tags screen.', 'wpmastertoolkit' ),
+            ),
+            'filter_by_item' => array(
+                "label"       => __( 'Filter By Item', 'wpmastertoolkit' ),
+                "placeholder" => __( 'Filter by category', 'wpmastertoolkit' ),
+                "description" => __( 'Assigns the filter by item text.', 'wpmastertoolkit' ),
+            ),
+            'items_list_navigation' => array(
+                "label"       => __( 'Items List Navigation', 'wpmastertoolkit' ),
+                "placeholder" => __( 'Tags list navigation', 'wpmastertoolkit' ),
+                "description" => __( 'Assigns the items list navigation text.', 'wpmastertoolkit' ),
+            ),
+            'items_list' => array(
+                "label"       => __( 'Items List', 'wpmastertoolkit' ),
+                "placeholder" => __( 'Tags list', 'wpmastertoolkit' ),
+                "description" => __( 'Assigns the items list text.', 'wpmastertoolkit' ),
+            ),
+            'back_to_items' => array(
+                "label"       => __( 'Back To Items', 'wpmastertoolkit' ),
+                "placeholder" => __( '← Go to tags', 'wpmastertoolkit' ),
+                "description" => __( 'Assigns the back to items text.', 'wpmastertoolkit' ),
+            ),
+            'item_link' => array(
+                "label"       => __( 'Item Link', 'wpmastertoolkit' ),
+                "placeholder" => __( 'Tag Link', 'wpmastertoolkit' ),
+                "description" => __( 'Assigns a title for navigation link block variation used in the block editor.', 'wpmastertoolkit' ),
+            ),
+            'item_link_description' => array(
+                "label"       => __( 'Item Link Description', 'wpmastertoolkit' ),
+                "placeholder" => __( 'Describes a navigation link block variation used in the block editor.', 'wpmastertoolkit' ),
+            ),
+        );
+        switch( $filter ) {
+            case 'required':
+                return array_filter( $labels, function( $label ) {
+                    return $label['required'] ?? false;
+                });
+            case 'optional':
+                return array_filter( $labels, function( $label ) {
+                    return ! ( $label['required'] ?? false );
+                });
+            default:
+                return $labels;
+        }
+    }
+    
+    /**
      * save_post
      *
      * @param  mixed $post_id
@@ -433,8 +637,23 @@ class WPMastertoolkit_Register_Custom_Content_Types {
         }
         //phpcs:ignore WordPress.Security.NonceVerification.Missing
         if ( isset( $_POST[ $this->content_type_settings ] ) && is_array( $_POST[ $this->content_type_settings ] ) ) {
-            //phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-            $settings = $this->clean_settings_cpt( wp_unslash( $_POST[ $this->content_type_settings ] ) );
+            $content_type = get_post_meta( $post_id, 'content_type', true );
+            switch( $content_type ) {
+                case 'cpt':
+                    //phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+                    $settings = $this->clean_settings_cpt( wp_unslash( $_POST[ $this->content_type_settings ] ) );
+                    break;
+                    case 'taxonomy':
+                    //phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+                    $settings = $this->clean_settings_taxonomy( wp_unslash( $_POST[ $this->content_type_settings ] ) );
+                    break;
+                case 'option_page':
+                    // TODO: Add option page settings
+                    break;
+                default:
+                    return false;
+                    break;
+            }
             update_post_meta( $post_id, $this->content_type_settings, $settings );
 
 			//phpcs:ignore WordPress.Security.NonceVerification.Missing
@@ -478,6 +697,24 @@ class WPMastertoolkit_Register_Custom_Content_Types {
         include ( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/register-custom-content-types/cpt-code-template.php' );
         return ob_get_clean();
     }
+
+    /**
+     * generate_taxonomy_registration_code
+     *
+     * @param  mixed $post_id
+     * @return void
+     */
+    public function generate_taxonomy_registration_code( $post_id ) {
+        $content_type = get_post_meta( $post_id, 'content_type', true );
+
+        if( $content_type !== 'taxonomy' ) return;
+
+        $settings = $this->get_settings_taxonomy( $post_id );
+
+        ob_start();
+        include ( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/register-custom-content-types/taxonomy-code-template.php' );
+        return ob_get_clean();
+    }
     
     /**
      * generate_registration_file
@@ -507,6 +744,7 @@ class WPMastertoolkit_Register_Custom_Content_Types {
                 $content .= $this->generate_cpt_registration_code( $post_id );
                 break;
             case 'taxonomy':
+                $content .= $this->generate_taxonomy_registration_code( $post_id );
                 break;
             case 'option_page':
                 break;
@@ -561,6 +799,29 @@ class WPMastertoolkit_Register_Custom_Content_Types {
         $settings['post_type'] = sanitize_title( $settings['post_type'] );
 
         return $settings;
+    }
+    
+    /**
+     * get_all_wp_capabilities
+     *
+     * @return void
+     */
+    public function get_all_wp_capabilities() {
+        if( $this->all_wp_capabilities ) {
+            return $this->all_wp_capabilities;
+        }
+        $all_capabilities = array();
+    
+        foreach ( wp_roles()->roles as $role ) {
+            if ( isset( $role['capabilities'] ) && is_array( $role['capabilities'] ) ) {
+                $all_capabilities += $role['capabilities'];
+            }
+        }
+    
+        $unique_caps = array_keys( array_filter( $all_capabilities ) );
+        $this->all_wp_capabilities = array_combine( $unique_caps, $unique_caps );
+        
+        return $this->all_wp_capabilities;
     }
     
     /**
@@ -643,6 +904,116 @@ class WPMastertoolkit_Register_Custom_Content_Types {
         );
     }
     
+    /**
+     * get_settings_taxonomy
+     *
+     * @param  mixed $post_id
+     * @return void
+     */
+    public function get_settings_taxonomy( $post_id ) {
+        $settings = get_post_meta( $post_id, $this->content_type_settings, true );
+
+        if( empty( $settings ) || !is_array( $settings ) ) {
+            $settings = $this->default_settings_taxonomy();
+        } else {
+            $settings = $this->clean_settings_taxonomy( $settings );
+        }
+
+        return $settings;
+    }
+
+    /**
+     * clean_settings_taxonomy
+     *
+     * @param  mixed $settings
+     * @return void
+     */
+    public function clean_settings_taxonomy( $settings ){
+        $settings         = !empty( $settings ) && is_array( $settings ) ? $settings : array();
+        $default_settings = $this->default_settings_taxonomy();
+        $settings         = array_merge( $default_settings, $settings );
+        $settings         = array_map( function( $item ) {
+            return is_array( $item ) ? array_map( 'sanitize_text_field', $item ) : sanitize_text_field( $item );
+        }, $settings );
+
+        $settings['taxonomy'] = sanitize_title( $settings['taxonomy'] );
+
+        return $settings;
+    }
+
+    /**
+     * default_settings_taxonomy
+     *
+     * @return void
+     */
+    public function default_settings_taxonomy(){
+        return array(
+            'public' => '1',
+            'hierarchical' => '0',
+            'object_type' => array(),
+            'sort' => '0',
+            'name' => '',
+            'singular_name' => '',
+            'taxonomy' => '',
+            'text_domain' => '',
+            'manage_optional_labels' => '0',
+            'description' => '',
+            'menu_name' => '',
+            'all_items' => '',
+            'edit_item' => '',
+            'view_item' => '',
+            'update_item' => '',
+            'add_new_item' => '',
+            'new_item_name' => '',
+            'parent_item' => '',
+            'parent_item_colon' => '',
+            'search_items' => '',
+            'popular_items' => '',
+            'separate_items_with_commas' => '',
+            'add_or_remove_items' => '',
+            'choose_from_most_used' => '',
+            'most_used' => '',
+            'not_found' => '',
+            'no_terms' => '',
+            'name_field_description' => '',
+            'slug_field_description' => '',
+            'parent_field_description' => '',
+            'desc_field_description' => '',
+            'filter_by_item' => '',
+            'items_list_navigation' => '',
+            'items_list' => '',
+            'back_to_items' => '',
+            'item_link' => '',
+            'item_link_description' => '',
+            'show_ui' => '1',
+            'show_in_menu' => '1',
+            'show_in_nav_menus' => '1',
+            'show_tagcloud' => '1',
+            'show_in_quick_edit' => '1',
+            'show_admin_column' => '0',
+            'default_term_enabled' => '0',
+            'default_term_name' => '',
+            'default_term_slug' => '',
+            'default_term_description' => '',
+            'permalink_rewrite' => 'taxonomy_key',
+            'slug' => '',
+            'with_front' => '1',
+            'rewrite_hierarchical' => '0',
+            'pages' => '1',
+            'publicly_queryable' => '1',
+            'query_var' => 'taxonomy_key',
+            'query_var_name' => '',
+            'manage_terms' => 'manage_categories',
+            'edit_terms' => 'manage_categories',
+            'delete_terms' => 'manage_categories',
+            'assign_terms' => 'edit_posts',
+            'show_in_rest' => '0',
+            'rest_base' => '',
+            'rest_namespace' => 'wp/v2',
+            'rest_controller_class' => 'WP_REST_Terms_Controller',
+          );
+    }
+
     /**
      * get_code_folder_path
      *

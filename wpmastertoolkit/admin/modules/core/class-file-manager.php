@@ -57,7 +57,7 @@ class WPMastertoolkit_File_Manager {
 		$this->header_title = esc_html__( 'File Manager', 'wpmastertoolkit' );
 		
 		//phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		if ( ! isset( $_GET['page'] ) || $_GET['page'] != 'wp-mastertoolkit-settings-file-manager' ) {
+		if ( ! is_admin() || ! isset( $_GET['page'] ) || $_GET['page'] != 'wp-mastertoolkit-settings-file-manager' ) {
 			return;
 		}
 
@@ -181,6 +181,11 @@ class WPMastertoolkit_File_Manager {
 	 */
 	private function handle_actions() {
 		global $wp_filesystem;
+		
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_safe_redirect( admin_url() );
+			exit;
+		}
 
 		if ( ! function_exists( 'WP_Filesystem' ) ) {
 			require_once ABSPATH . 'wp-admin/includes/file.php';
@@ -390,6 +395,13 @@ class WPMastertoolkit_File_Manager {
 				exit;
 			break;
 			case isset( $_GET['copy'], $_GET['finish'] ):
+				$nonce = sanitize_text_field( wp_unslash( $_GET['token'] ?? '' ) );
+				if ( ! wp_verify_nonce( $nonce, $this->user_nonce ) ) {
+					$this->set_notice( __( 'Invalid token', 'wpmastertoolkit' ) );
+					wp_safe_redirect( $this->FM_SELF_URL . '?page=wp-mastertoolkit-settings-file-manager&p=' . urlencode( $this->FM_PATH ) );
+					exit;
+				}
+				
 				$copy = urldecode( sanitize_text_field( wp_unslash( $_GET['copy'] ) ) );
             	$copy = $this->fm_clean_path( $copy );
 
@@ -408,7 +420,7 @@ class WPMastertoolkit_File_Manager {
 				$dest .= '/' . basename( $from );
 				$move = isset( $_GET['move'] ) ? sanitize_text_field( wp_unslash( $_GET['move'] ) ) : '';
 				$move = $this->fm_clean_path( urldecode( $move ) );
-
+				
 				if ( $from != $dest ) {
 					$msg_from = trim( $this->FM_PATH . '/' . basename( $from ), '/' );
 					if ( $move ) {
@@ -416,7 +428,7 @@ class WPMastertoolkit_File_Manager {
 						if ( $rename ) {
 							$message = sprintf( 
 								/* translators: 1: source path, 2: destination path */
-								__( "Moved from <b>%$1s</b> to <b>%$2s</b>", 'wpmastertoolkit' ), 
+								__( "Moved from <b>%1\$s</b> to <b>%2\$s</b>", 'wpmastertoolkit' ), 
 								$this->fm_enc( $copy ), 
 								$this->fm_enc( $msg_from ) 
 							);
@@ -428,7 +440,7 @@ class WPMastertoolkit_File_Manager {
 						} else {
 							$message = sprintf( 
 								/* translators: 1: source path, 2: destination path */
-								__( "Error while moving from <b>%$1s</b> to <b>%$2s</b>", 'wpmastertoolkit' ), 
+								__( "Error while moving from <b>%1\$s</b> to <b>%2\$s</b>", 'wpmastertoolkit' ), 
 								$this->fm_enc( $copy ), 
 								$this->fm_enc( $msg_from ) 
 							);
@@ -438,7 +450,7 @@ class WPMastertoolkit_File_Manager {
 						if ( $this->fm_rcopy( $from, $dest ) ) {
 							$message = sprintf( 
 								/* translators: 1: source path, 2: destination path */
-								__( "Copied from <b>%$1s</b> to <b>%$2s</b>", 'wpmastertoolkit' ), 
+								__( "Copied from <b>%1\$s</b> to <b>%2\$s</b>", 'wpmastertoolkit' ), 
 								$this->fm_enc( $copy ), 
 								$this->fm_enc( $msg_from ) 
 							);
@@ -446,7 +458,7 @@ class WPMastertoolkit_File_Manager {
 						} else {
 							$message = sprintf( 
 								/* translators: 1: source path, 2: destination path */
-								__( "Error while copying from <b>%$1s</b> to <b>%$2s</b>", 'wpmastertoolkit' ), 
+								__( "Error while copying from <b>%1\$s</b> to <b>%2\$s</b>", 'wpmastertoolkit' ), 
 								$this->fm_enc( $copy ), 
 								$this->fm_enc( $msg_from ) 
 							);
@@ -478,7 +490,7 @@ class WPMastertoolkit_File_Manager {
 						if ( $this->fm_rcopy( $from, $fn_duplicate, False ) ) {
 							$message = sprintf( 
 								/* translators: 1: source path, 2: destination path */
-								__( "Copied from <b>%$1s</b> to <b>%$2s</b>", 'wpmastertoolkit' ), 
+								__( "Copied from <b>%1\$s</b> to <b>%2\$s</b>", 'wpmastertoolkit' ), 
 								$this->fm_enc( $copy ), 
 								$this->fm_enc( $fn_duplicate ) 
 							);
@@ -486,7 +498,7 @@ class WPMastertoolkit_File_Manager {
 						} else {
 							$message = sprintf( 
 								/* translators: 1: source path, 2: destination path */
-								__( "Error while copying from <b>%$1s</b> to <b>%$2s</b>", 'wpmastertoolkit' ), 
+								__( "Error while copying from <b>%1\$s</b> to <b>%2\$s</b>", 'wpmastertoolkit' ), 
 								$this->fm_enc( $copy ), 
 								$this->fm_enc( $fn_duplicate ) 
 							);
@@ -598,7 +610,7 @@ class WPMastertoolkit_File_Manager {
 				if ( $this->fm_rename( $this->PATH . '/' . $old, $this->PATH . '/' . $new ) ) {
 					$message = sprintf( 
 						/* translators: 1: old file name, 2: new file name */
-						__( "Renamed from <b>%$1s</b> to <b>%$2s</b>", 'wpmastertoolkit' ), 
+						__( "Renamed from <b>%1\$s</b> to <b>%2\$s</b>", 'wpmastertoolkit' ), 
 						$this->fm_enc( $old ), 
 						$this->fm_enc( $new ) 
 					);
@@ -608,7 +620,7 @@ class WPMastertoolkit_File_Manager {
 				} else {
 					$message = sprintf( 
 						/* translators: 1: old file name, 2: new file name */
-						__( "Error while renaming from <b>%$1s</b> to <b>%$2s</b>", 'wpmastertoolkit' ), 
+						__( "Error while renaming from <b>%1\$s</b> to <b>%2\$s</b>", 'wpmastertoolkit' ), 
 						$this->fm_enc( $old ), 
 						$this->fm_enc( $new ) 
 					);
@@ -992,9 +1004,22 @@ class WPMastertoolkit_File_Manager {
 				exit;
 			break;
 			case isset( $_GET['upload'] ):
+				$nonce = sanitize_text_field( wp_unslash( $_GET['token'] ?? '' ) );
+				if ( ! wp_verify_nonce( $nonce, $this->user_nonce ) ) {
+					$this->set_notice( __( 'Invalid token', 'wpmastertoolkit' ) );
+					wp_safe_redirect( $this->FM_SELF_URL . '?page=wp-mastertoolkit-settings-file-manager&p=' . urlencode( $this->FM_PATH ) );
+					exit;
+				}
 				$this->TEMPLATE = 'upload';
 			break;
 			case isset( $_GET['copy'] ) && ! isset( $_GET['finish'] ):
+				$nonce = sanitize_text_field( wp_unslash( $_GET['token'] ?? '' ) );
+				if ( ! wp_verify_nonce( $nonce, $this->user_nonce ) ) {
+					$this->set_notice( __( 'Invalid token', 'wpmastertoolkit' ) );
+					wp_safe_redirect( $this->FM_SELF_URL . '?page=wp-mastertoolkit-settings-file-manager&p=' . urlencode( $this->FM_PATH ) );
+					exit;
+				}
+				
 				$copy = sanitize_text_field( wp_unslash( $_GET['copy'] ?? '' ) );
 				$copy = $this->fm_clean_path( $copy );
 				
@@ -1007,6 +1032,13 @@ class WPMastertoolkit_File_Manager {
 				$this->TEMPLATE = 'copyfinish';
 			break;
 			case isset( $_POST['copy'] ):
+				$nonce = sanitize_text_field( wp_unslash( $_POST['token'] ?? '' ) );
+				if ( ! wp_verify_nonce( $nonce, $this->user_nonce ) ) {
+					$this->set_notice( __( 'Invalid token', 'wpmastertoolkit' ) );
+					wp_safe_redirect( $this->FM_SELF_URL . '?page=wp-mastertoolkit-settings-file-manager&p=' . urlencode( $this->FM_PATH ) );
+					exit;
+				}
+
 				//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				$copy_files     = isset( $_POST['file'] ) ? wpmastertoolkit_clean( wp_unslash( $_POST['file'] ) ) : null;
 				$this->TEMPLATE = 'copy';
@@ -1018,6 +1050,12 @@ class WPMastertoolkit_File_Manager {
 				}
 			break;
 			case isset( $_GET['view'] ):
+				$nonce = sanitize_text_field( wp_unslash( $_GET['token'] ?? '' ) );
+				if ( ! wp_verify_nonce( $nonce, $this->user_nonce ) ) {
+					$this->set_notice( __( 'Invalid token', 'wpmastertoolkit' ) );
+					wp_safe_redirect( $this->FM_SELF_URL . '?page=wp-mastertoolkit-settings-file-manager&p=' . urlencode( $this->FM_PATH ) );
+					exit;
+				}
 				$file           = sanitize_text_field( wp_unslash( $_GET['view'] ?? '' ) );
 				$file           = $this->fm_clean_path( $file, false );
 				$file           = str_replace( '../', '', $file );
@@ -1031,6 +1069,13 @@ class WPMastertoolkit_File_Manager {
 				}
 			break;
 			case isset( $_GET['edit'] ):
+				$nonce = sanitize_text_field( wp_unslash( $_GET['token'] ?? '' ) );
+				if ( ! wp_verify_nonce( $nonce, $this->user_nonce ) ) {
+					$this->set_notice( __( 'Invalid token', 'wpmastertoolkit' ) );
+					wp_safe_redirect( $this->FM_SELF_URL . '?page=wp-mastertoolkit-settings-file-manager&p=' . urlencode( $this->FM_PATH ) );
+					exit;
+				}
+
 				$file           = sanitize_text_field( wp_unslash( $_GET['edit'] ?? '' ) );
 				$file           = $this->fm_clean_path( $file, false );
 				$file           = str_replace( '../', '', $file );
@@ -1056,6 +1101,12 @@ class WPMastertoolkit_File_Manager {
 				}
 			break;
 			case isset( $_GET['chmod'] ) && ! $this->FM_IS_WIN:
+				$nonce = sanitize_text_field( wp_unslash( $_GET['token'] ?? '' ) );
+				if ( ! wp_verify_nonce( $nonce, $this->user_nonce ) ) {
+					$this->set_notice( __( 'Invalid token', 'wpmastertoolkit' ) );
+					wp_safe_redirect( $this->FM_SELF_URL . '?page=wp-mastertoolkit-settings-file-manager&p=' . urlencode( $this->FM_PATH ) );
+					exit;
+				}
 				$file           = sanitize_text_field( wp_unslash( $_GET['chmod'] ?? '' ) );
 				$file           = $this->fm_clean_path( $file );
 				$file           = str_replace( '../', '', $file );
@@ -1290,7 +1341,7 @@ class WPMastertoolkit_File_Manager {
             for ( $i = 0; $i < $count; $i++ ) {
                 $parent     = trim( $parent . '/' . $exploded[$i], '/' );
                 $parent_enc = urlencode( $parent );
-                $array[]    = "<a href='?page=wp-mastertoolkit-settings-file-manager&p={$parent_enc}'>" . $this->fm_enc( $this->fm_convert_win( $exploded[$i] ) ) . "</a>";
+                $array[]    = "<a href='?page=wp-mastertoolkit-settings-file-manager&token=". $this->TOKEN ."&p={$parent_enc}'>" . $this->fm_enc( $this->fm_convert_win( $exploded[$i] ) ) . "</a>";
             }
             $root_url .= $sep . implode( $sep, $array );
         }

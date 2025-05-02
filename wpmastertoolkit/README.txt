@@ -4,7 +4,7 @@ Tags: all in one plugin, admin, security, disable features, easy to use
 Requires at least: 6.0.0
 Tested up to: 6.8.0
 Requires PHP: 7.4
-Stable tag: 2.6.0
+Stable tag: 2.7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
 
@@ -19,7 +19,7 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 **Test by Enzo (Easy WordPress) :**
 [youtube https://www.youtube.com/watch?v=I1GdHeeJp6E&t]
 
-= 89 Free features =
+= 89 FREE modules =
 
 * Adminer: A full-featured database management tool.
 * Allow Menu Custom Links to Open in New Tab: Enable custom menu links to open in a new tab with a checkbox. For security and SEO, links include the `rel="noopener noreferrer nofollow"` attribute.
@@ -46,7 +46,7 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 * Disable Gutenberg: Deactivate the Gutenberg block editor selectively, allowing you to control its usage for specific or all relevant post types.
 * Disable REST API: Disable REST API access for non-authenticated users and remove URL traces from &lt;head&gt;, HTTP headers and WP RSD endpoint.
 * Disable Really Simple Discovery (RSD) &lt;link&gt; tag: Disable the Really Simple Discovery (RSD) <link> tag in <head>. The RSD tag is used by XML-RPC clients to discover the location of the XML-RPC endpoint on your site.
-* Disable WP Sitemap: Disable the default WordPress sitemap feature, which was introduced in WordPress 5.5.
+* Disable WP Sitemap: Disable the default WordPress sitemap.
 * Disable Windows Live Writer (WLW) manifest &lt;link&gt; tag: Disable the Windows Live Writer (WLW) manifest &lt;link&gt; tag in &lt;head&gt;. The WLW app was discontinued in 2017.
 * Disable WordPress shortlink &lt;link&gt; tag: Disable the WordPress shortlink `<link>` tag in `<head>`. Replace with a shortlink plugin for custom names and click tracking.
 * Disable XML-RPC: Enhance security with advanced XML-RPC protection against brute force, DoS, and DDoS attacks. Trackbacks and pingbacks are also disabled to strengthen defenses.
@@ -75,7 +75,7 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 * Hide Admin Notices: Improve user experience on admin pages by gathering all notifications in a popup (opened by clicking on the bell at the top right).
 * Hide Login Errors: Hide the default WordPress login errors that appear when an incorrect username or password is entered.
 * Hide PHP Versions: Some servers send a header called X-Powered-By that contains the PHP version used on your site. It may be a useful information for attackers, and should be removed.
-* Hide WordPress Version: Hide the WordPress version from the source code.
+* Hide WordPress Version
 * Image Upload Control: Resize newly uploaded, large images to a smaller dimension and delete originally uploaded files. BMPs and non-transparent PNGs will be converted to JPGs and resized.
 * Insert &lt;head&gt;, &lt;body&gt; and &lt;footer&gt; Code: Easily insert &lt;meta&gt;, &lt;link&gt;, &lt;script&gt; and &lt;style&gt; tags, Google Analytics, Tag Manager, AdSense, Ads Conversion and Optimize code, Facebook, TikTok and Twitter pixels, etc.
 * Last Login Column: Track and record the most recent login activity of site users, then showcase the date and time in the users list table
@@ -88,7 +88,7 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 * Manage ads.txt and app-ads.txt: Easily edit and validate your ads.txt and app-ads.txt content.
 * Manage robots.txt: Easily edit and validate your robots.txt content.
 * Media Cleaner: Automatically sanitize uploaded file names by removing special characters, and streamline media management by auto-generating key metadata fields (title, caption, alt text, and description) directly from the cleaned file name.
-* Media Encoder: Automatically converts images to WebP when they are uploaded to the media library.
+* Media Encoder: Automatically converts images to WebP (or AVIF in PRO) when they are uploaded to the media library.
 * Meta Debugger: Display all metadata for a post, user, term, or comment.
 * Move Login URL: Change the default login URL to a custom URL of your choice.
 * Multiple User Roles: Enable assignment of multiple roles during user account creation and editing. This maybe useful for working with roles not defined in WordPress core, e.g. from e-commerce or LMS plugins.
@@ -103,15 +103,15 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 * Protect Website Headers: Add security headers quickly to your site to protect it from threats such as phishing attacks, data theft and more.
 * Quick Add Post: A new button to quickly add new posts to speed up your workflow.
 * Redirect 404 to Homepage: Sends visitors to your homepage if they try to access a page that doesn&#039;t exist, ensuring they stay on your site.
-* Redirect After Login: Set custom redirect URL for all or some user roles after login.
-* Redirect After Logout: Set custom redirect URL for all or some user roles after logout.
-* Revisions Control: Avoid overloading the database by setting a cap on the number of revisions to save for certain or all types of posts that support revisions.
-* Register Custom Content Types: Register custom content types for custom post types.
+* Redirect After Login
+* Redirect After Logout
+* Revisions Control: cap the number of revisions to save for certain or all types of posts that support revisions.
+* Register Custom Content Types: Register CPTs & Taxnomies.
 * SMTP Mailer: Set custom sender name and email. Optionally use external SMTP service to ensure notification and transactional emails from your site are being delivered to inboxes.
-* SVG Upload: Enhance media library functionality to support the seamless uploading of SVG files.
-* Wider Admin Menu: Give the admin menu more room to better accommodate wider items.
+* SVG Upload: Enable SVG upload support in the media library.
+* Wider Admin Menu
 
-= 20 Pro features =
+= 20 PRO modules =
 * 410 Manager: Managing HTTP 410 statuses on your site. The 410 status indicates that the requested resource has been permanently deleted and that this deletion is intentional and final.
 * Add Essentials Shortcodes: Insert dynamic variables into your titles and content via shortcodes.
 * Auto clean actionscheduler_actions: Clean actionscheduler_actions database table from actions that have been completed | failed | cancelled.
@@ -134,6 +134,11 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 * User Switching: Instant switching between user accounts.
 * Vulnerabilities Scan: This module will scan your WordPress Core Version, Plugins and Themes for vulnerabilities.
 
+= PRO Additionnals Features =
+* Move Login URL: Stop access to /wp-admin with server side 403 error. To prevent ressource loading.
+* Maintenance Mode: A real countdown that puts your site live once finished. Also, a bypass link for the maintenance mode.
+* Media Encoder: Convert images to AVIF (php ≥ 8.1).
+
 ⭐️ UPGRADE TO PRO VERSION: [WPMasterToolKit Pro](https://wpmastertoolkit.com) ⭐️
 
 == Other plugin by Webdeclic ==
@@ -145,11 +150,6 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 * [Mentions Legales Par Webdeclic](https://wordpress.org/plugins/mentions-legales-par-webdeclic/)
 * [Lexilink](https://wordpress.org/plugins/lexilink/)
 * [Show all plugins on WordPress.org](https://wordpress.org/plugins/search/webdeclic/)
-
-== Support us ==
-⭐️ If you like this plugin, please give us a 5 star rating on WordPress.org. This will motivate us to develop new features and write other plugins. ⭐️
-
-☕️ If you want buy me a coffee, you can do it here : [Buy me a coffee](https://bmc.link/ludwig) ☕️
 
 == Installation ==
 
@@ -177,6 +177,12 @@ Contributions are welcome! You can contribute by reporting bugs, suggesting feat
 = Is WPMasterToolKit similar to ASE ? =
 Yes, WPMasterToolKit is similar to Admin and Site Enhancements (ASE), WP Extended and other all in one plugin.
 
+= Can I replace my security plugin with WPMTK? =
+Yes, WPMTK includes many security features that can replace your existing security plugin. WPMTK includes up to 90% of the features known from security plugins like Wordfence, Sucuri, iThemes Security, SecuPress, etc.
+
+= Can I replace plugins like Imagify or ShortPixel? =
+Yes, WPMTK includes a media encoder that can convert images to WebP and AVIF if you have the PRO version. This very similar to the features of Imagify and ShortPixel, the big difference is that WPMTK convert your images locally and not on the cloud. So you don't need to worry about your images being uploaded to a third party server.
+
 = How can I report security bugs? =
 You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/wordpress/plugin/wpmastertoolkit/vdp)
 
@@ -187,6 +193,12 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 4. Code snippets
 
 == Changelog ==
+
+= 2.7.0 =
+* Modern Post List on Code Snippets, Link Shortener and Register Custom Content Types modules.
+* Fix: File Manager: Problem with sprintf syntax.
+* Fix: File Manager: Security improvement on all actions in handle_actions() function.
+* Update: Register Custom Content Types: Add taxonomy creation support.
 
 = 2.6.0 =
 * Fix: Move Login URL: Problem on front with ajax if you activate 403 on /wp-admin.

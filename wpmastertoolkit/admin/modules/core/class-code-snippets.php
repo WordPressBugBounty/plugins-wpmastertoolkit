@@ -11,6 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  */
 class WPMastertoolkit_Code_Snippets {
 
+    protected $post_type = 'wpmtk_code_snippets';
     private $code_snippets_folder_path;
 
     /**
@@ -22,6 +23,7 @@ class WPMastertoolkit_Code_Snippets {
         add_action( 'init', array( $this, 'register_cpt_wpmastertoolkit_code_snippets' ) );
         add_action( 'add_meta_boxes', array( $this, 'add_metaboxes' ) );
         add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+        add_filter( 'admin_body_class', array( $this, 'admin_body_class' ) );
         add_action( 'save_post_wpmtk_code_snippets', array( $this, 'save_code_snippet' ) );
         add_shortcode( 'wpmtk_code_snippets', array( $this, 'shortcode_wpmtk_code_snippets' ) );
 
@@ -287,13 +289,33 @@ class WPMastertoolkit_Code_Snippets {
     }
 
     /**
+     * admin_body_class
+     *
+     * @param  mixed $classes
+     * @return void
+     */
+    public function admin_body_class( $classes ) {
+        global $pagenow;
+        if ( $pagenow === 'edit.php' && isset( $_GET['post_type'] ) && $_GET['post_type'] === $this->post_type ) {
+            $classes .= ' wpmtk-modern-post-list';
+        }
+        return $classes;
+    }
+
+    /**
      * enqueue_scripts
      *
      * @param  mixed $hook_suffix
      * @return void
      */
     public function enqueue_scripts( $hook_suffix ){
-        if ( ($hook_suffix === 'post-new.php' || $hook_suffix === 'post.php') && get_post_type() === 'wpmtk_code_snippets' ){
+        if ( $hook_suffix === 'edit.php' ) {
+            if ( get_post_type() !== $this->post_type ) return;
+
+            $assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/modern-post-list.asset.php' );
+            wp_enqueue_style( 'WPMastertoolkit_modern_post_list', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/modern-post-list.css', array(), $assets['version'], 'all' );
+        }
+        if ( ($hook_suffix === 'post-new.php' || $hook_suffix === 'post.php') && get_post_type() === $this->post_type ){
             
             $code_editor = wp_enqueue_code_editor( array( 
                 'type' => 'php',

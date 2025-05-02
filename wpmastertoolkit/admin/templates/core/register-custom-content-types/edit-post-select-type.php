@@ -30,10 +30,10 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
             </p>
         </div>
     </label>
-    <label class="wp-mastertoolkit__section select-content-type" style="background-color: #f5f5f5; color: #999;">
-        <input type="radio" name="content_type" id="" value="taxonomy" disabled>
+    <label class="wp-mastertoolkit__section select-content-type">
+        <input type="radio" name="content_type" id="" value="taxonomy">
         <div>
-            <h2 style="color: #999;">
+            <h2>
                 <?php esc_html_e( 'Custom Taxonomy', 'wpmastertoolkit' ); ?> (<?php esc_html_e( 'Coming soon', 'wpmastertoolkit' ); ?>)
             </h2>
             <p>

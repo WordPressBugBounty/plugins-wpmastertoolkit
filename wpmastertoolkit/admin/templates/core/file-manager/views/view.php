@@ -72,7 +72,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 			?>
 		</p>
 		<div class="d-flex align-items-center mb-3">
-			<form method="post" class="d-inline ms-2" action="?page=wp-mastertoolkit-settings-file-manager&p=<?php echo esc_attr( urlencode( $this->FM_PATH ) ); ?>&amp;dl=<?php echo esc_attr( urlencode( $file ) ); ?>">
+			<form method="post" class="d-inline ms-2" action="?page=wp-mastertoolkit-settings-file-manager&token=<?php echo esc_attr( $this->TOKEN ); ?>&p=<?php echo esc_attr( urlencode( $this->FM_PATH ) ); ?>&amp;dl=<?php echo esc_attr( urlencode( $file ) ); ?>">
 				<input type="hidden" name="token" value="<?php echo esc_attr( $this->TOKEN ); ?>">
 				<button type="submit" class="btn btn-link text-decoration-none fw-bold p-0"><i class="fa fa-cloud-download"></i> <?php esc_html_e( 'Download', 'wpmastertoolkit' ); ?></button> &nbsp;
 			</form>
@@ -97,11 +97,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 			}
 			if ( $is_text ) {
 				?>
-				<b class="ms-2"><a href="?page=wp-mastertoolkit-settings-file-manager&p=<?php echo esc_attr( urlencode( trim( $this->FM_PATH ) ) ); ?>&amp;edit=<?php echo esc_attr( urlencode( $file ) ); ?>" class="edit-file"><i class="fa fa-pencil-square"></i> <?php esc_html_e( 'Edit', 'wpmastertoolkit' ); ?></a></b> &nbsp;
+				<b class="ms-2"><a href="?page=wp-mastertoolkit-settings-file-manager&token=<?php echo esc_attr( $this->TOKEN ); ?>&p=<?php echo esc_attr( urlencode( trim( $this->FM_PATH ) ) ); ?>&amp;edit=<?php echo esc_attr( urlencode( $file ) ); ?>" class="edit-file"><i class="fa fa-pencil-square"></i> <?php esc_html_e( 'Edit', 'wpmastertoolkit' ); ?></a></b> &nbsp;
 				<?php
 			}
 			?>
-			<b class="ms-2"><a href="?page=wp-mastertoolkit-settings-file-manager&p=<?php echo esc_attr( urlencode( $this->FM_PATH ) ); ?>"><i class="fa fa-chevron-circle-left go-back"></i> <?php esc_html_e( 'Back', 'wpmastertoolkit' ); ?></a></b>
+			<b class="ms-2"><a href="?page=wp-mastertoolkit-settings-file-manager&token=<?php echo esc_attr( $this->TOKEN ); ?>&p=<?php echo esc_attr( urlencode( $this->FM_PATH ) ); ?>"><i class="fa fa-chevron-circle-left go-back"></i> <?php esc_html_e( 'Back', 'wpmastertoolkit' ); ?></a></b>
 		</div>
 		<?php
 		if ( $is_onlineViewer ) {

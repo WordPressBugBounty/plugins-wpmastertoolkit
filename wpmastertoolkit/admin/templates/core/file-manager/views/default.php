@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 				?>
 				<tr>
 					<td class="nosort"></td>
-					<td class="border-0" data-sort><a href="?page=wp-mastertoolkit-settings-file-manager&p=<?php echo esc_attr( urlencode( $this->PARENT_PATH ) ); ?>"><i class="fa fa-chevron-circle-left go-back"></i> ..</a></td>
+					<td class="border-0" data-sort><a href="?page=wp-mastertoolkit-settings-file-manager&token=<?php echo esc_attr( $this->TOKEN ); ?>&p=<?php echo esc_attr( urlencode( $this->PARENT_PATH ) ); ?>"><i class="fa fa-chevron-circle-left go-back"></i> ..</a></td>
 					<td class="border-0" data-order></td>
 					<td class="border-0" data-order></td>
 					<td class="border-0"></td>
@@ -79,7 +79,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 					</td>
 					<td data-sort=<?php echo esc_attr( $this->fm_convert_win( $this->fm_enc( $f ) ) ); ?>>
 						<div class="filename">
-							<a href="?page=wp-mastertoolkit-settings-file-manager&p=<?php echo esc_attr( urlencode( trim( $this->FM_PATH . '/' . $f, '/' ) ) ); ?>">
+							<a href="?page=wp-mastertoolkit-settings-file-manager&token=<?php echo esc_attr( $this->TOKEN ); ?>&p=<?php echo esc_attr( urlencode( trim( $this->FM_PATH . '/' . $f, '/' ) ) ); ?>">
 								<i class="<?php echo esc_attr( $img ); ?>"></i>
 								<?php echo esc_attr( $this->fm_convert_win( $this->fm_enc( $f ) ) ); ?>
 							</a>
@@ -91,13 +91,13 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 					</td>
 					<td data-order="a-<?php echo esc_attr( $date_sorting );?>"><?php echo esc_html( $modif ); ?></td>
 					<?php if ( ! $this->FM_IS_WIN ) : ?>
-						<td><a title="<?php esc_attr_e( 'Change Permissions', 'wpmastertoolkit' ); ?>" href="?page=wp-mastertoolkit-settings-file-manager&p=<?php echo esc_attr( urlencode( $this->FM_PATH ) ); ?>&amp;chmod=<?php echo urlencode($f) ?>"><?php echo esc_html( $perms ); ?></a></td>
+						<td><a title="<?php esc_attr_e( 'Change Permissions', 'wpmastertoolkit' ); ?>" href="?page=wp-mastertoolkit-settings-file-manager&token=<?php echo esc_attr( $this->TOKEN ); ?>&p=<?php echo esc_attr( urlencode( $this->FM_PATH ) ); ?>&amp;chmod=<?php echo urlencode($f) ?>"><?php echo esc_html( $perms ); ?></a></td>
 						<td><?php echo esc_html( $owner['name'] . ':' . $group['name'] ); ?></td>
 					<?php endif; ?>
 					<td class="inline-actions">
-						<a title="<?php esc_attr_e( 'Delete', 'wpmastertoolkit' ); ?>" href="?page=wp-mastertoolkit-settings-file-manager&p=<?php echo esc_attr( urlencode( $this->FM_PATH ) ); ?>&amp;del=<?php echo esc_attr( urlencode( $f ) ); ?>" onclick="confirmDailog(event, '1028', '<?php esc_attr_e( 'Delete Folder', 'wpmastertoolkit' ); ?>','<?php echo esc_attr( urlencode( $f ) ); ?>', this.href);"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+						<a title="<?php esc_attr_e( 'Delete', 'wpmastertoolkit' ); ?>" href="?page=wp-mastertoolkit-settings-file-manager&token=<?php echo esc_attr( $this->TOKEN ); ?>&p=<?php echo esc_attr( urlencode( $this->FM_PATH ) ); ?>&amp;del=<?php echo esc_attr( urlencode( $f ) ); ?>" onclick="confirmDailog(event, '1028', '<?php esc_attr_e( 'Delete Folder', 'wpmastertoolkit' ); ?>','<?php echo esc_attr( urlencode( $f ) ); ?>', this.href);"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
 						<a title="<?php esc_attr_e( 'Rename', 'wpmastertoolkit' ); ?>" href="#" onclick="rename('<?php echo esc_attr( $this->fm_enc( addslashes( $this->FM_PATH ) ) ); ?>', '<?php echo esc_attr( $this->fm_enc( addslashes( $f ) ) ); ?>');return false;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-						<a title="<?php esc_attr_e( 'CopyTo', 'wpmastertoolkit' ); ?>" href="?page=wp-mastertoolkit-settings-file-manager&p=&amp;copy=<?php echo esc_attr( urlencode( trim( $this->FM_PATH . '/' . $f, '/' ) ) ); ?>"><i class="fa fa-files-o" aria-hidden="true"></i></a>
+						<a title="<?php esc_attr_e( 'CopyTo', 'wpmastertoolkit' ); ?>" href="?page=wp-mastertoolkit-settings-file-manager&token=<?php echo esc_attr( $this->TOKEN ); ?>&p=&amp;copy=<?php echo esc_attr( urlencode( trim( $this->FM_PATH . '/' . $f, '/' ) ) ); ?>"><i class="fa fa-files-o" aria-hidden="true"></i></a>
 						<a title="<?php esc_attr_e( 'DirectLink', 'wpmastertoolkit' ); ?>" href="<?php echo esc_attr( $this->fm_enc( $this->FM_ROOT_URL . ( $this->FM_PATH != '' ? '/' . $this->FM_PATH : '') . '/' . $f . '/') ); ?>" target="_blank"><i class="fa fa-link" aria-hidden="true"></i></a>
 					</td>
 				</tr>
@@ -115,7 +115,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 				$date_sorting   = strtotime( wp_date( "F d Y H:i:s.", $modif_raw ) );
 				$filesize_raw   = $this->fm_get_size( $file_path );
 				$filesize       = $this->fm_get_filesize( $filesize_raw );
-				$filelink       = '?page=wp-mastertoolkit-settings-file-manager&p=' . urlencode( $this->FM_PATH ) . '&amp;view=' . urlencode( $f );
+				$filelink       = '?page=wp-mastertoolkit-settings-file-manager&token='. $this->TOKEN .'&p=' . urlencode( $this->FM_PATH ) . '&amp;view=' . urlencode( $f );
 				$all_files_size += $filesize_raw;
 				$perms          = substr( decoct( fileperms( $file_path )), -4 );
 				$ext            = strtolower( pathinfo( $file_path, PATHINFO_EXTENSION ) );
@@ -164,18 +164,18 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 					</td>
 					<td data-order="b-<?php echo esc_attr( $date_sorting );?>"><?php echo esc_html( $modif ); ?></td>
 					<?php if ( ! $this->FM_IS_WIN ): ?>
-						<td><a title="<?php esc_html_e( 'Change Permissions', 'wpmastertoolkit' ); ?>" href="?page=wp-mastertoolkit-settings-file-manager&p=<?php echo esc_attr( urlencode( $this->FM_PATH ) ); ?>&amp;chmod=<?php echo esc_attr( urlencode( $f ) ); ?>"><?php echo esc_html( $perms ); ?></a></td>
+						<td><a title="<?php esc_html_e( 'Change Permissions', 'wpmastertoolkit' ); ?>" href="?page=wp-mastertoolkit-settings-file-manager&token=<?php echo esc_attr( $this->TOKEN ); ?>&p=<?php echo esc_attr( urlencode( $this->FM_PATH ) ); ?>&amp;chmod=<?php echo esc_attr( urlencode( $f ) ); ?>"><?php echo esc_html( $perms ); ?></a></td>
 						<td><?php echo esc_html( $this->fm_enc( $owner['name'] . ':' . $group['name'] ) ); ?></td>
 					<?php endif; ?>
 					<td class="inline-actions">
-						<a title="<?php esc_html_e( 'Delete', 'wpmastertoolkit' ); ?>" href="?page=wp-mastertoolkit-settings-file-manager&p=<?php echo esc_attr( urlencode( $this->FM_PATH ) ); ?>&amp;del=<?php echo esc_attr( urlencode( $f ) ); ?>" onclick="confirmDailog(event, 1209, '<?php esc_html_e( 'Delete File', 'wpmastertoolkit' ); ?>','<?php echo esc_attr( urlencode( $f ) ); ?>', this.href);"> <i class="fa fa-trash-o"></i></a>
+						<a title="<?php esc_html_e( 'Delete', 'wpmastertoolkit' ); ?>" href="?page=wp-mastertoolkit-settings-file-manager&token=<?php echo esc_attr( $this->TOKEN ); ?>&p=<?php echo esc_attr( urlencode( $this->FM_PATH ) ); ?>&amp;del=<?php echo esc_attr( urlencode( $f ) ); ?>" onclick="confirmDailog(event, 1209, '<?php esc_html_e( 'Delete File', 'wpmastertoolkit' ); ?>','<?php echo esc_attr( urlencode( $f ) ); ?>', this.href);"> <i class="fa fa-trash-o"></i></a>
 						<?php if ( $is_text ): ?>
-						<a title="<?php esc_html_e( 'Edit', 'wpmastertoolkit' ); ?>" href="?page=wp-mastertoolkit-settings-file-manager&p=<?php echo esc_attr( urlencode( trim( $this->FM_PATH ) ) ); ?>&amp;edit=<?php echo esc_attr( urlencode( $f ) ); ?>"><i class="fa fa-pencil-square-o"></i></a>
+						<a title="<?php esc_html_e( 'Edit', 'wpmastertoolkit' ); ?>" href="?page=wp-mastertoolkit-settings-file-manager&token=<?php echo esc_attr( $this->TOKEN ); ?>&p=<?php echo esc_attr( urlencode( trim( $this->FM_PATH ) ) ); ?>&amp;edit=<?php echo esc_attr( urlencode( $f ) ); ?>"><i class="fa fa-pencil-square-o"></i></a>
 						<?php endif; ?>
 						<a title="<?php esc_html_e( 'Rename', 'wpmastertoolkit' ); ?>" href="#" onclick="rename('<?php echo esc_attr( $this->fm_enc( addslashes( $this->FM_PATH ) ) ); ?>', '<?php echo esc_attr( $this->fm_enc( addslashes( $f ) ) ); ?>');return false;"><i class="fa fa-text-width"></i></a>
-						<a title="<?php esc_html_e( 'CopyTo', 'wpmastertoolkit' ); ?>" href="?page=wp-mastertoolkit-settings-file-manager&p=<?php echo esc_attr( urlencode( $this->FM_PATH ) ); ?>&amp;copy=<?php echo esc_attr( urlencode( trim( $this->FM_PATH . '/' . $f, '/') ) ); ?>"><i class="fa fa-files-o"></i></a>
+						<a title="<?php esc_html_e( 'CopyTo', 'wpmastertoolkit' ); ?>" href="?page=wp-mastertoolkit-settings-file-manager&token=<?php echo esc_attr( $this->TOKEN ); ?>&p=<?php echo esc_attr( urlencode( $this->FM_PATH ) ); ?>&amp;copy=<?php echo esc_attr( urlencode( trim( $this->FM_PATH . '/' . $f, '/') ) ); ?>"><i class="fa fa-files-o"></i></a>
 						<a title="<?php esc_html_e( 'DirectLink', 'wpmastertoolkit' ); ?>" href="<?php echo esc_attr( $this->fm_enc( $this->FM_ROOT_URL . ( $this->FM_PATH != '' ? '/' . $this->FM_PATH : '' ) . '/' . $f ) ); ?>" target="_blank"><i class="fa fa-link"></i></a>
-						<a title="<?php esc_html_e( 'Download', 'wpmastertoolkit' ); ?>" href="?page=wp-mastertoolkit-settings-file-manager&p=<?php echo esc_attr( urlencode( $this->FM_PATH ) ); ?>&amp;dl=<?php echo esc_attr( urlencode( $f ) ); ?>" onclick="confirmDailog(event, 1211, '<?php esc_html_e( 'Download', 'wpmastertoolkit' ); ?>','<?php echo esc_attr( urlencode( $f ) ); ?>', this.href);"><i class="fa fa-download"></i></a>
+						<a title="<?php esc_html_e( 'Download', 'wpmastertoolkit' ); ?>" href="?page=wp-mastertoolkit-settings-file-manager&token=<?php echo esc_attr( $this->TOKEN ); ?>&p=<?php echo esc_attr( urlencode( $this->FM_PATH ) ); ?>&amp;dl=<?php echo esc_attr( urlencode( $f ) ); ?>" onclick="confirmDailog(event, 1211, '<?php esc_html_e( 'Download', 'wpmastertoolkit' ); ?>','<?php echo esc_attr( urlencode( $f ) ); ?>', this.href);"><i class="fa fa-download"></i></a>
 					</td>
 				</tr>
 				<?php

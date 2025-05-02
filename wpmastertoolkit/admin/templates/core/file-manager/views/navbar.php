@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 					</div>
 				</li>
 				<li class="nav-item">
-					<a title="<?php esc_attr_e( 'Upload', 'wpmastertoolkit' ); ?>" class="nav-link" href="?page=wp-mastertoolkit-settings-file-manager&p=<?php echo esc_attr( urlencode( $path ) ) ?>&amp;upload"><i class="fa fa-cloud-upload" aria-hidden="true"></i> <?php esc_html_e( 'Upload', 'wpmastertoolkit' ); ?></a>
+					<a title="<?php esc_attr_e( 'Upload', 'wpmastertoolkit' ); ?>" class="nav-link" href="?page=wp-mastertoolkit-settings-file-manager&token=<?php echo esc_attr( $this->TOKEN ); ?>&p=<?php echo esc_attr( urlencode( $path ) ) ?>&amp;upload"><i class="fa fa-cloud-upload" aria-hidden="true"></i> <?php esc_html_e( 'Upload', 'wpmastertoolkit' ); ?></a>
 				</li>
 				<li class="nav-item">
 					<a title="<?php esc_attr_e( 'NewItem', 'wpmastertoolkit' ); ?>" class="nav-link" href="#createNewItem" data-bs-toggle="modal" data-bs-target="#createNewItem"><i class="fa fa-plus-square"></i> <?php esc_html_e( 'New Item', 'wpmastertoolkit' ); ?></a>

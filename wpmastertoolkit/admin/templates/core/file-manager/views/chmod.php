@@ -42,7 +42,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 				</table>
 				<p>
 					<input type="hidden" name="token" value="<?php echo esc_attr( $this->TOKEN ); ?>">
-					<b><a href="?page=wp-mastertoolkit-settings-file-manager&p=<?php echo esc_attr( urlencode( $this->FM_PATH ) ); ?>" class="btn btn-outline-primary"><i class="fa fa-times-circle"></i> <?php esc_html_e( 'Cancel', 'wpmastertoolkit' ); ?></a></b>&nbsp;
+					<b><a href="?page=wp-mastertoolkit-settings-file-manager&token=<?php echo esc_attr( $this->TOKEN ); ?>&p=<?php echo esc_attr( urlencode( $this->FM_PATH ) ); ?>" class="btn btn-outline-primary"><i class="fa fa-times-circle"></i> <?php esc_html_e( 'Cancel', 'wpmastertoolkit' ); ?></a></b>&nbsp;
 					<button type="submit" class="btn btn-success"><i class="fa fa-check-circle"></i> <?php esc_html_e( 'Change', 'wpmastertoolkit' ); ?></button>
 				</p>
 			</form>

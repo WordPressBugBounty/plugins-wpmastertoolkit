@@ -816,7 +816,7 @@ class WPMastertoolkit_Modules_Data {
 			),
 			'WPMastertoolkit_Manage_Admin_Emails_Notifications' => array(
 				'name' => esc_html_x('Manage Admin Emails Notifications', "Module name", 'wpmastertoolkit'),
-				'desc' => esc_html_x("Disable admin emails notifications.", "Module description", 'wpmastertoolkit'),
+				'desc' => esc_html_x("Check the types of emails you no longer want to receive as an administrator.", "Module description", 'wpmastertoolkit'),
 			),
 			'WPMastertoolkit_Disable_WP_Sitemap' => array(
 				'name' => esc_html_x('Disable WP Sitemap', "Module name", 'wpmastertoolkit'),

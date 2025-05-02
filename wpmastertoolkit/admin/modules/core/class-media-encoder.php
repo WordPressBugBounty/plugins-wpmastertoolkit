@@ -2446,6 +2446,7 @@ class WPMastertoolkit_Media_Encoder {
 		$this->default_settings = $this->get_default_settings();
 		$is_pro                 = wpmastertoolkit_is_pro();
 		$php_compatible         = is_php_version_compatible( '8.1.0' );
+		$imageavif_supported 	= function_exists('imageavif');
 
 		$mode_enabled_options = $this->default_settings['mode_enabled']['options'];
 		$quality_options      = $this->default_settings['quality']['options'];
@@ -2500,9 +2501,12 @@ class WPMastertoolkit_Media_Encoder {
 										foreach ( $mode_enabled_options as $key => $name ) {
 											$option_disabled = false;
 											$disable_message = '';
-											if ( $key == 'avif' && ( ! $is_pro || ! $php_compatible ) ) {
+											if ( $key == 'avif' && ( ! $is_pro || ! $php_compatible || ! $imageavif_supported ) ) {
 												$option_disabled = true;
-												$disable_message = __( 'PRO', 'wpmastertoolkit' );
+												$disable_message = __( '(PRO Only)', 'wpmastertoolkit' );
+												if( ! $imageavif_supported ) {
+													$disable_message = __( '(imageavif() not supported)', 'wpmastertoolkit' );
+												}
 												if ( ! $php_compatible ) {
 													$disable_message = __( '(PHP 8.1 or higher)', 'wpmastertoolkit' );
 												}

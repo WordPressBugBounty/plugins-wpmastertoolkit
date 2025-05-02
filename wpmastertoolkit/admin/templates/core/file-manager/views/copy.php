@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 					<input type="checkbox" name="move" value="1" id="js-move-files" class="custom-control-input"><label for="js-move-files" class="custom-control-label ms-2"> <?php esc_html_e( 'Move', 'wpmastertoolkit' ); ?></label>
 				</p>
 				<p>
-					<b><a href="?page=wp-mastertoolkit-settings-file-manager&p=<?php echo esc_attr( urlencode( $this->FM_PATH ) ); ?>" class="btn btn-outline-danger"><i class="fa fa-times-circle"></i> <?php esc_html_e( 'Cancel', 'wpmastertoolkit' ); ?></a></b>&nbsp;
+					<b><a href="?page=wp-mastertoolkit-settings-file-manager&token=<?php echo esc_attr( $this->TOKEN ); ?>&p=<?php echo esc_attr( urlencode( $this->FM_PATH ) ); ?>" class="btn btn-outline-danger"><i class="fa fa-times-circle"></i> <?php esc_html_e( 'Cancel', 'wpmastertoolkit' ); ?></a></b>&nbsp;
 					<input type="hidden" name="token" value="<?php echo esc_attr( $this->TOKEN ); ?>">
 					<button type="submit" class="btn btn-success"><i class="fa fa-check-circle"></i> <?php esc_html_e( 'Copy', 'wpmastertoolkit' ); ?></button>
 				</p>

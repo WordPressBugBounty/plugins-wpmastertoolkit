@@ -110,7 +110,6 @@ add_action( 'init', function(){
 <?php if( !empty( $settings['show_in_rest'] ) && !empty( $settings['rest_controller_class'] ) && $settings['rest_controller_class'] !== 'WP_REST_Posts_Controller' ) : ?>
         'rest_controller_class' => "<?php echo esc_html( $settings['rest_controller_class'] ); ?>",
 <?php endif; ?>
-        'query_var'             => <?php echo esc_html( $this->text_to_boolean( $settings['query_var'] ) ); ?>,
         'rewrite'               => <?php echo $rewrite; ?>,
 <?php if( $settings['query_var'] !== 'post_type_key' && !empty( $settings['publicly_queryable'] ) ) : ?>
         'query_var'             => <?php echo $query_var; ?>,
@@ -120,5 +119,13 @@ add_action( 'init', function(){
 <?php endif; ?>
         'delete_with_user'      => <?php echo esc_html( $this->text_to_boolean( $settings['delete_with_user'] ) ); ?>,
     );
+    
+    /**
+    * Filter the arguments for the custom post type.
+    *
+    * @param array    $args The arguments for the custom post type.
+    */
+    $args = apply_filters( 'wpmastertoolkit/register_custom_content_types/cpt/<?php echo esc_html( $settings['post_type'] ); ?>', $args );
+
     register_post_type( '<?php echo esc_html( $settings['post_type'] ); ?>', $args );
 });

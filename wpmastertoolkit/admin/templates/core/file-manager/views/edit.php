@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 			</div>
 		</div>
 		<div class="edit-file-actions col-xs-12 col-sm-7 col-lg-6 text-end pt-1">
-			<a title="<?php esc_attr_e( 'Back', 'wpmastertoolkit' ); ?>" class="btn btn-sm btn-outline-primary" href="?page=wp-mastertoolkit-settings-file-manager&p=<?php echo esc_attr( urlencode( trim( $this->FM_PATH ) ) ); ?>&amp;view=<?php echo esc_attr( urlencode( $file ) ); ?>"><i class="fa fa-reply-all"></i> <?php esc_html_e( 'Back', 'wpmastertoolkit' ); ?></a>
+			<a title="<?php esc_attr_e( 'Back', 'wpmastertoolkit' ); ?>" class="btn btn-sm btn-outline-primary" href="?page=wp-mastertoolkit-settings-file-manager&token=<?php echo esc_attr( $this->TOKEN ); ?>&p=<?php echo esc_attr( urlencode( trim( $this->FM_PATH ) ) ); ?>&amp;view=<?php echo esc_attr( urlencode( $file ) ); ?>"><i class="fa fa-reply-all"></i> <?php esc_html_e( 'Back', 'wpmastertoolkit' ); ?></a>
 			<a title="<?php esc_attr_e( 'BackUp', 'wpmastertoolkit' ); ?>" class="btn btn-sm btn-outline-primary" href="javascript:void(0);" onclick="backup('<?php echo esc_attr( urlencode( trim( $this->FM_PATH ) ) ); ?>','<?php echo esc_attr( urlencode( $file ) ); ?>')"><i class="fa fa-database"></i> <?php esc_html_e( 'BackUp', 'wpmastertoolkit' ); ?></a>
 			<?php if ( $is_text ): ?>
 				<button type="button" class="btn btn-sm btn-success" id="js-ace-save" name="<?php esc_attr_e( 'Save', 'wpmastertoolkit' ); ?>" data-url="<?php echo esc_attr( $this->fm_enc( $file_url ) ); ?>"><i class="fa fa-floppy-o"></i> <?php esc_html_e( 'Save', 'wpmastertoolkit' ); ?></button>
