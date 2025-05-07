@@ -678,6 +678,18 @@ class WPMastertoolkit_Modules_Data {
 				'pro'           => true,
 				'path'          => 'pro/class-custom-login-design.php',
 			),
+			'WPMastertoolkit_Generate_Alt_Text_With_AI' => array(
+				'original_name' => "Generate Alt Text With AI",
+				'group'         => 'content-media',
+				'pro'           => true,
+				'path'          => 'pro/class-generate-alt-text-with-ai.php',
+			),
+			'WPMastertoolkit_Better_Password_Hash' => array(
+				'original_name' => "Better Password Hash",
+				'group'         => 'security',
+				'pro'           => true,
+				'path'          => 'pro/class-better-password-hash.php',
+			),
 		);
 		
 		/**
@@ -1138,6 +1150,14 @@ class WPMastertoolkit_Modules_Data {
 				'name' => esc_html_x( "Custom Login Design", "Module name", 'wpmastertoolkit' ),
 				'desc' => esc_html_x( "Personalize your login page to match your brand.", "Module description", 'wpmastertoolkit' ),
 			),
+			'WPMastertoolkit_Generate_Alt_Text_With_AI' => array(
+				'name' => esc_html_x( "Generate Alt Text With AI", "Module name", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( "Automatically generate alternative text using AI.", "Module description", 'wpmastertoolkit' ),
+			),
+			'WPMastertoolkit_Better_Password_Hash' => array(
+				'name' => esc_html_x( "Better Password Hash", "Module name", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( "Improve the default WordPress password hashing algorithm using Argon2. If Argon2 is not available, it will fallback to the default bcrypt algorithm.", "Module description", 'wpmastertoolkit' ),
+			),
 		);
 
 		/**
@@ -1236,6 +1256,11 @@ class WPMastertoolkit_Modules_Data {
 			'settings' => array(
 				'name'      => esc_html__( 'Settings', 'wpmastertoolkit' ),
 				'logo'      => 'gear.svg',
+				'exception' => true,
+			),
+			'credentials' => array(
+				'name'      => esc_html__( 'Credentials', 'wpmastertoolkit' ),
+				'logo'      => 'key.svg',
 				'exception' => true,
 			),
 			'credits' => array(

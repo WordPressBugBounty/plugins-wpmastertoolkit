@@ -422,7 +422,13 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
                 <?php esc_html_e( 'Rewrite the URL using the post type key as the slug. Your permalink structure will be {slug}.', 'wpmastertoolkit' ); ?>
             </div>
             <div class="description" data-show-if="<?php echo esc_attr( $this->content_type_settings . '[permalink_rewrite]' ); ?>=custom_permalink">
-                <?php echo esc_html( sprintf( __( 'Rewrite the URL using a custom slug defined in the input below. Your permalink structure will be %s/{slug}.', 'wpmastertoolkit' ), home_url() ) ); ?>
+                <?php
+					echo esc_html( sprintf(
+						/* translators: %s: Home URL */
+						__( 'Rewrite the URL using a custom slug defined in the input below. Your permalink structure will be %s/{slug}.', 'wpmastertoolkit' ),
+						home_url()
+					) );
+				?>
             </div>
             <div class="description" data-show-if="<?php echo esc_attr( $this->content_type_settings . '[permalink_rewrite]' ); ?>=no_permalink">
                 <?php esc_html_e( 'Permalinks for this taxonomy are disabled.', 'wpmastertoolkit' ); ?>

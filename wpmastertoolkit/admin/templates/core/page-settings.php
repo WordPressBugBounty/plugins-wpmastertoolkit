@@ -192,6 +192,8 @@ $pro_modules_count = 0;
 
                 <?php include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/page-settings-tabs/credits.php'; ?>
 
+                <?php include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/page-settings-tabs/credentials.php'; ?>
+
             </div>
 
         </div>

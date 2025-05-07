@@ -244,6 +244,7 @@ class WPMastertoolkit_Settings {
 			$new_settings = $this->sanitize_main_settings( wp_unslash( $_POST[WPMASTERTOOLKIT_PLUGIN_SETTINGS] ?? array() ) );
 			$this->save_main_settings( $new_settings );
 			$this->save_opt_in();
+			$this->save_credentials();
 
 			$class_stats = new WPMastertoolkit_Stats();
 			$class_stats->send_stats();
@@ -292,6 +293,19 @@ class WPMastertoolkit_Settings {
 		$opt_in_option['value'] = sanitize_text_field( wp_unslash( $_POST[WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_opt_in'] ?? '0' ) );
 
 		update_option( WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_opt_in', $opt_in_option, false );
+	}
+
+	/**
+	 * Save the credentials
+	 */
+	private function save_credentials() {
+		$new_settings = array();
+		foreach ( wpmastertoolkit_ai_modules() as $ai_module_key => $ai_module ) {
+			//phpcs:ignore WordPress.Security.NonceVerification.Missing
+			$new_settings[$ai_module_key] = sanitize_text_field( wp_unslash( $_POST['wpmastertoolkit_credentials_tab'][$ai_module_key] ?? '' ) );
+		}
+
+		update_option( 'wpmastertoolkit_credentials_tab', $new_settings );
 	}
 
 	/**

@@ -3,9 +3,9 @@ msgstr ""
 "Project-Id-Version: WPMasterToolKit\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-31 17:04+0100\n"
-"PO-Revision-Date: 2025-05-02 17:29+0000\n"
+"PO-Revision-Date: 2025-05-07 17:15+0000\n"
 "Last-Translator: \n"
-"Language-Team: French (France)\n"
+"Language-Team: Français\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -156,16 +156,16 @@ msgstr "— Aucun changement —"
 msgid "(Default is 1920 pixels)"
 msgstr "(La valeur par défaut est 1920 pixels)"
 
-#: admin/modules/core/class-media-encoder.php:2508
+#: admin/modules/core/class-media-encoder.php:2524
 #, fuzzy
 msgid "(imageavif() not supported)"
 msgstr "(imageavif() non pris en charge)"
 
-#: admin/modules/core/class-media-encoder.php:2511
+#: admin/modules/core/class-media-encoder.php:2527
 msgid "(PHP 8.1 or higher)"
 msgstr "(PHP 8.1 ou supérieur)"
 
-#: admin/modules/core/class-media-encoder.php:2506
+#: admin/modules/core/class-media-encoder.php:2522
 #, fuzzy
 msgid "(PRO Only)"
 msgstr "(PRO uniquement)"
@@ -188,7 +188,7 @@ msgstr "(Vous ne pouvez pas supprimer ce rôle)"
 msgid "+ %s Pro modules"
 msgstr "+%s Modules Pro"
 
-#: admin/templates/core/page-settings.php:302
+#: admin/templates/core/page-settings.php:304
 #, php-format
 msgid "+%s modules"
 msgstr "+%s modules"
@@ -286,14 +286,6 @@ msgstr ""
 "<b>ATTENTION :</b> votre compte a été bloqué. Vous pourrez vous reconnecter "
 "dans %s."
 
-#: admin/modules/core/class-force-strong-password.php:120
-msgid ""
-"<strong>ERROR</strong>: Your password is not strong enough. Please use a "
-"stronger password."
-msgstr ""
-"<strong>ERREUR</strong> : Votre mot de passe n'est pas assez fort. Veuillez "
-"utiliser un mot de passe plus fort."
-
 #: admin/modules/core/class-adminer.php:410
 msgid "A full-featured database management tool."
 msgstr "Un outil de gestion de base de données complet."
@@ -307,11 +299,11 @@ msgstr ""
 "Une nouvelle version %s est disponible. Si vous activez votre licence, vous "
 "obtiendrez automatiquement la dernière version."
 
-#: admin/modules/core/class-register-custom-content-types.php:267
+#: admin/modules/core/class-register-custom-content-types.php:268
 msgid "A short description of the custom post type."
 msgstr "Une brève description du type de publication personnalisée."
 
-#: admin/modules/core/class-register-custom-content-types.php:468
+#: admin/modules/core/class-register-custom-content-types.php:469
 #, fuzzy
 msgid "A short description of the taxonomy."
 msgstr "Une brève description de la taxonomie."
@@ -342,7 +334,7 @@ msgstr "Actes"
 msgid "Activate License"
 msgstr "Activer la licence"
 
-#: admin/class-modules-data.php:1187
+#: admin/class-modules-data.php:1207
 msgid "Activated modules"
 msgstr "Modules activés"
 
@@ -361,6 +353,30 @@ msgstr "Icône d'activité"
 #: admin/modules/pro/class-activity-log.php:37
 msgid "Activity Log"
 msgstr "Journal d'activité"
+
+#: admin/modules/core/class-custom-link-menu-new-tab.php:77
+#: admin/modules/core/class-external-links-new-tab.php:268
+#, fuzzy
+msgid "Add \"rel=nofollow\""
+msgstr "Ajouter « rel=nofollow »"
+
+#: admin/modules/core/class-custom-link-menu-new-tab.php:63
+#: admin/modules/core/class-external-links-new-tab.php:246
+#, fuzzy
+msgid "Add \"rel=noopener\""
+msgstr "Ajouter « rel=noopener »"
+
+#: admin/modules/core/class-custom-link-menu-new-tab.php:70
+#: admin/modules/core/class-external-links-new-tab.php:257
+#, fuzzy
+msgid "Add \"rel=noreferrer\""
+msgstr "Ajouter « rel=noreferrer »"
+
+#: admin/modules/core/class-custom-link-menu-new-tab.php:56
+#: admin/modules/core/class-external-links-new-tab.php:235
+#, fuzzy
+msgid "Add \"target=_blank\""
+msgstr "Ajouter « target=_blank »"
 
 #: admin/modules/core/class-custom-body-class.php:244
 msgid ""
@@ -422,7 +438,7 @@ msgstr "Ajouter une colonne d'ID"
 msgid "Add ID in actions."
 msgstr "Ajouter l'ID dans les actions."
 
-#: admin/modules/core/class-media-encoder.php:2681
+#: admin/modules/core/class-media-encoder.php:2697
 msgid "Add image"
 msgstr "Ajouter une image"
 
@@ -432,17 +448,17 @@ msgstr "Ajouter une métabox dans"
 
 #: admin/modules/core/class-code-snippets.php:93
 #: admin/modules/core/class-register-custom-content-types.php:72
-#: admin/modules/core/class-register-custom-content-types.php:295
+#: admin/modules/core/class-register-custom-content-types.php:296
 msgid "Add New"
 msgstr "Ajouter un nouveau"
 
-#: admin/modules/core/class-register-custom-content-types.php:290
-#: admin/modules/core/class-register-custom-content-types.php:496
+#: admin/modules/core/class-register-custom-content-types.php:291
+#: admin/modules/core/class-register-custom-content-types.php:497
 msgid "Add New Item"
 msgstr "Ajouter un nouvel élément"
 
-#: admin/modules/core/class-register-custom-content-types.php:291
-#: admin/modules/core/class-register-custom-content-types.php:296
+#: admin/modules/core/class-register-custom-content-types.php:292
+#: admin/modules/core/class-register-custom-content-types.php:297
 msgid "Add New Post"
 msgstr "Ajouter un nouveau article"
 
@@ -455,17 +471,17 @@ msgstr "Ajouter un nouveau lien court"
 msgid "Add New Snippet"
 msgstr "Ajouter un nouveau Snippet"
 
-#: admin/modules/core/class-register-custom-content-types.php:497
+#: admin/modules/core/class-register-custom-content-types.php:498
 #, fuzzy
 msgid "Add New Tag"
 msgstr "Ajouter une nouvelle balise"
 
-#: admin/modules/core/class-register-custom-content-types.php:531
+#: admin/modules/core/class-register-custom-content-types.php:532
 #, fuzzy
 msgid "Add Or Remove Items"
 msgstr "Ajouter ou supprimer des éléments"
 
-#: admin/modules/core/class-register-custom-content-types.php:532
+#: admin/modules/core/class-register-custom-content-types.php:533
 #, fuzzy
 msgid "Add or remove tags"
 msgstr "Ajouter ou supprimer des balises"
@@ -490,7 +506,7 @@ msgstr "Ajouter au menu"
 msgid "Add URLs"
 msgstr "Ajouter des URL"
 
-#: admin/templates/core/page-settings.php:317
+#: admin/templates/core/page-settings.php:319
 msgid "Additional Features"
 msgstr "Fonctionnalités supplémentaires"
 
@@ -519,7 +535,7 @@ msgstr "Notices d'administration"
 msgid "Adminer"
 msgstr "Adminer"
 
-#: admin/class-modules-data.php:1197
+#: admin/class-modules-data.php:1217
 msgid "Administration"
 msgstr "Administration"
 
@@ -543,6 +559,11 @@ msgid ""
 msgstr ""
 "Après avoir enregistré les paramètres ci-dessus, vérifiez si tout est "
 "correctement configuré ci-dessous."
+
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:662
+#, fuzzy
+msgid "AI Module"
+msgstr "Module d'IA"
 
 #: admin/helpers/core/select-dashicon/class-select-dashicon.php:41
 msgid "Airplane Icon"
@@ -605,7 +626,7 @@ msgstr "Icône d'alignement large"
 msgid "All"
 msgstr "Tous"
 
-#: admin/modules/core/class-code-snippets.php:748
+#: admin/modules/core/class-code-snippets.php:749
 msgid "All active snippets have been regenerated."
 msgstr "Tous les snippets actifs ont été régénérés."
 
@@ -613,12 +634,17 @@ msgstr "Tous les snippets actifs ont été régénérés."
 msgid "All events"
 msgstr "Tous les événements"
 
-#: admin/modules/core/class-register-custom-content-types.php:275
-#: admin/modules/core/class-register-custom-content-types.php:476
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:299
+#, fuzzy
+msgid "All images are already have alt text."
+msgstr "Toutes les images ont déjà un texte alternatif."
+
+#: admin/modules/core/class-register-custom-content-types.php:276
+#: admin/modules/core/class-register-custom-content-types.php:477
 msgid "All Items"
 msgstr "Tous les articles"
 
-#: admin/class-modules-data.php:1182
+#: admin/class-modules-data.php:1202
 msgid "All modules"
 msgstr "Tous les modules"
 
@@ -626,7 +652,7 @@ msgstr "Tous les modules"
 msgid "All post types"
 msgstr "Tous les types de post"
 
-#: admin/modules/core/class-register-custom-content-types.php:276
+#: admin/modules/core/class-register-custom-content-types.php:277
 msgid "All Posts"
 msgstr "Tous les articles"
 
@@ -639,7 +665,7 @@ msgstr "Tous les liens courts"
 msgid "All Snippets"
 msgstr "Tous les snippets"
 
-#: admin/modules/core/class-register-custom-content-types.php:477
+#: admin/modules/core/class-register-custom-content-types.php:478
 #, fuzzy
 msgid "All Tags"
 msgstr "Toutes les balises"
@@ -653,7 +679,7 @@ msgstr ""
 "Autoriser l'ajout d'éléments aux menus dans l'écran « Apparence » > "
 "« Menus ». Doit être activé dans les « Options d'écran »."
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:651
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:657
 msgid "Allow the post type to be exported from 'Tools' > 'Export'."
 msgstr ""
 "Autoriser l'exportation du type de publication depuis « Outils » > "
@@ -680,8 +706,8 @@ msgid "Alt text completion from file name."
 msgstr ""
 "Saisie semi-automatique du texte alternatif à partir du nom de fichier."
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:460
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:442
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:466
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:454
 msgid ""
 "Alters the permalink structure to add the `WP_Rewrite::$front` prefix to "
 "URLs."
@@ -747,8 +773,13 @@ msgstr "Prise en charge des menus d'apparence"
 msgid "Apple Touch Icon"
 msgstr "Icône Apple Touch"
 
+#: includes/global-functions.php:513
+#, fuzzy
+msgid "Arabic"
+msgstr "arabe"
+
 #: admin/modules/core/class-file-manager.php:1189
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:513
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:519
 msgid "Archive"
 msgstr "Archive"
 
@@ -766,11 +797,11 @@ msgstr "Icône d'archive"
 msgid "Archive not created"
 msgstr "Archive non créée"
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:524
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:530
 msgid "Archive Slug"
 msgstr "Archive Slug"
 
-#: admin/modules/core/class-register-custom-content-types.php:325
+#: admin/modules/core/class-register-custom-content-types.php:326
 msgid "Archives"
 msgstr "Archives"
 
@@ -866,7 +897,7 @@ msgstr "De côté"
 msgid "Aside Icon"
 msgstr "Icône de côté"
 
-#: admin/modules/core/class-register-custom-content-types.php:567
+#: admin/modules/core/class-register-custom-content-types.php:568
 #, fuzzy
 msgid ""
 "Assign a parent term to create a hierarchy. The term Jazz, for example, "
@@ -875,12 +906,12 @@ msgstr ""
 "Attribuez un terme parent pour créer une hiérarchie. Le terme Jazz, par "
 "exemple, serait parent de Bebop et Big Band."
 
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:634
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:646
 #, fuzzy
 msgid "Assign Terms Capability"
 msgstr "Capacité d'attribution de termes"
 
-#: admin/modules/core/class-register-custom-content-types.php:598
+#: admin/modules/core/class-register-custom-content-types.php:599
 #, fuzzy
 msgid ""
 "Assigns a title for navigation link block variation used in the block editor."
@@ -888,102 +919,102 @@ msgstr ""
 "Attribue un titre à la variante de bloc de lien de navigation utilisée dans "
 "l'éditeur de blocs."
 
-#: admin/modules/core/class-register-custom-content-types.php:498
+#: admin/modules/core/class-register-custom-content-types.php:499
 #, fuzzy
 msgid "Assigns the add new item text."
 msgstr "Attribue le texte d'ajout d'un nouvel élément."
 
-#: admin/modules/core/class-register-custom-content-types.php:533
+#: admin/modules/core/class-register-custom-content-types.php:534
 #, fuzzy
 msgid "Assigns the add or remove items text."
 msgstr "Attribue le texte d'ajout ou de suppression d'éléments."
 
-#: admin/modules/core/class-register-custom-content-types.php:478
+#: admin/modules/core/class-register-custom-content-types.php:479
 #, fuzzy
 msgid "Assigns the all items text."
 msgstr "Attribue le texte à tous les éléments."
 
-#: admin/modules/core/class-register-custom-content-types.php:593
+#: admin/modules/core/class-register-custom-content-types.php:594
 #, fuzzy
 msgid "Assigns the back to items text."
 msgstr "Affecte le texte du dos aux éléments."
 
-#: admin/modules/core/class-register-custom-content-types.php:538
+#: admin/modules/core/class-register-custom-content-types.php:539
 #, fuzzy
 msgid "Assigns the choose from most used text."
 msgstr "Attribue le choix parmi les textes les plus utilisés."
 
-#: admin/modules/core/class-register-custom-content-types.php:578
+#: admin/modules/core/class-register-custom-content-types.php:579
 #, fuzzy
 msgid "Assigns the filter by item text."
 msgstr "Affecte le filtre par texte d'élément."
 
-#: admin/modules/core/class-register-custom-content-types.php:583
+#: admin/modules/core/class-register-custom-content-types.php:584
 #, fuzzy
 msgid "Assigns the items list navigation text."
 msgstr "Affecte le texte de navigation de la liste des éléments."
 
-#: admin/modules/core/class-register-custom-content-types.php:588
+#: admin/modules/core/class-register-custom-content-types.php:589
 #, fuzzy
 msgid "Assigns the items list text."
 msgstr "Affecte le texte de la liste des éléments."
 
-#: admin/modules/core/class-register-custom-content-types.php:473
+#: admin/modules/core/class-register-custom-content-types.php:474
 #, fuzzy
 msgid "Assigns the menu name text."
 msgstr "Attribue le texte du nom du menu."
 
-#: admin/modules/core/class-register-custom-content-types.php:543
+#: admin/modules/core/class-register-custom-content-types.php:544
 #, fuzzy
 msgid "Assigns the most used text."
 msgstr "Attribue le texte le plus utilisé."
 
-#: admin/modules/core/class-register-custom-content-types.php:503
+#: admin/modules/core/class-register-custom-content-types.php:504
 #, fuzzy
 msgid "Assigns the new item name text."
 msgstr "Attribue le nouveau texte de nom d'élément."
 
-#: admin/modules/core/class-register-custom-content-types.php:553
+#: admin/modules/core/class-register-custom-content-types.php:554
 #, fuzzy
 msgid "Assigns the no terms text."
 msgstr "Attribue le texte sans conditions."
 
-#: admin/modules/core/class-register-custom-content-types.php:548
+#: admin/modules/core/class-register-custom-content-types.php:549
 #, fuzzy
 msgid "Assigns the not found text."
 msgstr "Assigne le texte non trouvé."
 
-#: admin/modules/core/class-register-custom-content-types.php:508
+#: admin/modules/core/class-register-custom-content-types.php:509
 #, fuzzy
 msgid "Assigns the parent item text."
 msgstr "Affecte le texte de l'élément parent."
 
-#: admin/modules/core/class-register-custom-content-types.php:513
+#: admin/modules/core/class-register-custom-content-types.php:514
 #, fuzzy
 msgid "Assigns the parent item with colon text."
 msgstr "Affecte à l'élément parent un texte deux-points."
 
-#: admin/modules/core/class-register-custom-content-types.php:523
+#: admin/modules/core/class-register-custom-content-types.php:524
 #, fuzzy
 msgid "Assigns the popular items text."
 msgstr "Attribue le texte des éléments populaires."
 
-#: admin/modules/core/class-register-custom-content-types.php:518
+#: admin/modules/core/class-register-custom-content-types.php:519
 #, fuzzy
 msgid "Assigns the search items text."
 msgstr "Affecte le texte des éléments de recherche."
 
-#: admin/modules/core/class-register-custom-content-types.php:528
+#: admin/modules/core/class-register-custom-content-types.php:529
 #, fuzzy
 msgid "Assigns the separate items with commas text."
 msgstr "Attribue les éléments séparés avec du texte entre virgules."
 
-#: admin/modules/core/class-register-custom-content-types.php:493
+#: admin/modules/core/class-register-custom-content-types.php:494
 #, fuzzy
 msgid "Assigns the update item text."
 msgstr "Affecte le texte de l'élément de mise à jour."
 
-#: admin/modules/core/class-register-custom-content-types.php:483
+#: admin/modules/core/class-register-custom-content-types.php:484
 #, fuzzy
 msgid "At the top of the editor screen when editing a term."
 msgstr "En haut de l'écran de l'éditeur lors de l'édition d'un terme."
@@ -992,7 +1023,7 @@ msgstr "En haut de l'écran de l'éditeur lors de l'édition d'un terme."
 msgid "Attempts"
 msgstr "Tentatives"
 
-#: admin/modules/core/class-register-custom-content-types.php:330
+#: admin/modules/core/class-register-custom-content-types.php:331
 msgid "Attributes"
 msgstr "Attributs"
 
@@ -1038,7 +1069,12 @@ msgstr "Mise à jour automatique du thème en arrière-plan"
 msgid "Automatic background update"
 msgstr "Mise à jour automatique en arrière-plan"
 
-#: admin/modules/core/class-media-encoder.php:2481
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:723
+#, fuzzy
+msgid "Automatically activates on image upload"
+msgstr "S'active automatiquement lors du téléchargement de l'image"
+
+#: admin/modules/core/class-media-encoder.php:2497
 msgid ""
 "Automatically converts uploaded images to your selected format (WebP or AVIF)"
 " for better performance and reduced file size."
@@ -1046,6 +1082,11 @@ msgstr ""
 "Convertit automatiquement les images téléchargées au format sélectionné "
 "(WebP ou AVIF) pour de meilleures performances et une taille de fichier "
 "réduite."
+
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:658
+#, fuzzy
+msgid "Automatically generate alternative text using AI."
+msgstr "Générez automatiquement du texte alternatif à l'aide de l'IA."
 
 #: admin/modules/core/class-media-cleaner.php:253
 msgid ""
@@ -1063,7 +1104,7 @@ msgstr ""
 msgid "Available widgets"
 msgstr "Widgets disponibles"
 
-#: admin/modules/core/class-media-encoder.php:2394
+#: admin/modules/core/class-media-encoder.php:2410
 msgid "AVIF"
 msgstr "AVIF"
 
@@ -1090,7 +1131,7 @@ msgstr "Retourner"
 msgid "Back Icon"
 msgstr "Icône Retour"
 
-#: admin/modules/core/class-register-custom-content-types.php:591
+#: admin/modules/core/class-register-custom-content-types.php:592
 #, fuzzy
 msgid "Back To Items"
 msgstr "Retour aux éléments"
@@ -1157,8 +1198,8 @@ msgstr "Interdire les emails choisis."
 msgid "Bank Icon"
 msgstr "Icône de banque"
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:709
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:694
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:715
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:706
 msgid "Base URL"
 msgstr "URL de base"
 
@@ -1170,7 +1211,7 @@ msgstr "Icône bbPress"
 msgid "Beer Icon"
 msgstr "Icône de la bière"
 
-#: admin/modules/core/class-media-encoder.php:2599
+#: admin/modules/core/class-media-encoder.php:2615
 msgid "Before saving, test your configuration with preview mode"
 msgstr "Avant de sauvegarder, testez votre configuration avec le mode aperçu"
 
@@ -1178,7 +1219,7 @@ msgstr "Avant de sauvegarder, testez votre configuration avec le mode aperçu"
 msgid "Bell Icon"
 msgstr "Icône de cloche"
 
-#: admin/templates/core/page-settings.php:308
+#: admin/templates/core/page-settings.php:310
 #, no-php-format
 msgid "Benefit from modules designed 100% for professionals."
 msgstr "Bénéficiez de modules conçus à 100% pour les professionnels."
@@ -1257,7 +1298,23 @@ msgstr "Icône BuddyPress"
 msgid "Building Icon"
 msgstr "Icône de bâtiment"
 
-#: admin/modules/core/class-media-encoder.php:2642
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:286
+#, fuzzy
+msgid "Bulk alt text generation is already running."
+msgstr ""
+"La génération de texte alternatif en masse est déjà en cours d'exécution."
+
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:339
+#, fuzzy
+msgid "Bulk alt text generation stopped."
+msgstr "La génération de texte alternatif en masse a été arrêtée."
+
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:745
+#, fuzzy
+msgid "Bulk generation"
+msgstr "Production en vrac"
+
+#: admin/modules/core/class-media-encoder.php:2658
 msgid "Bulk migration from QuickWebP"
 msgstr "Migration en masse depuis QuickWebP"
 
@@ -1269,7 +1326,7 @@ msgstr "La migration en masse est déjà en cours."
 msgid "Bulk migration stopped."
 msgstr "La migration en masse est arrêtée."
 
-#: admin/modules/core/class-media-encoder.php:2608
+#: admin/modules/core/class-media-encoder.php:2624
 msgid "Bulk optimization"
 msgstr "Optimisation en masse"
 
@@ -1315,7 +1372,7 @@ msgstr "Achetez la version PRO."
 msgid "By"
 msgstr "Par"
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:606
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:612
 #, fuzzy
 msgid ""
 "By default the capabilities of the post type will inherit the 'Post' "
@@ -1372,7 +1429,7 @@ msgstr "Icône Appareil photo (alt)"
 msgid "Camera Icon"
 msgstr "Icône d'appareil photo"
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:647
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:653
 #, fuzzy
 msgid "Can Export"
 msgstr "Peut exporter"
@@ -1578,10 +1635,21 @@ msgstr "URI du thème enfant"
 msgid "Child Theme Version"
 msgstr "Version Thème Enfant"
 
+#: includes/global-functions.php:508
+#, fuzzy
+msgid "Chinese"
+msgstr "Chinois"
+
 #: admin/templates/core/register-custom-content-types/edit-post-select-type.php:10
 #, fuzzy
 msgid "Choice the content type to create"
 msgstr "Choisissez le type de contenu à créer"
+
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:294
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:390
+#, fuzzy
+msgid "Choose an AI model and save the settings."
+msgstr "Choisissez un modèle d’IA et enregistrez les paramètres."
 
 #: admin/modules/core/class-apple-touch-icon.php:104
 msgid "Choose an Icon"
@@ -1597,7 +1665,7 @@ msgstr "Choisissez une image"
 msgid "Choose an image format and save the settings."
 msgstr "Choisissez un format d’image et enregistrez les paramètres."
 
-#: admin/modules/core/class-register-custom-content-types.php:536
+#: admin/modules/core/class-register-custom-content-types.php:537
 #, fuzzy
 msgid "Choose From Most Used"
 msgstr "Choisissez parmi les plus utilisés"
@@ -1612,7 +1680,7 @@ msgstr ""
 "et profitez de fonctionnalités avancées pour optimiser votre site WordPress. "
 "✨"
 
-#: admin/modules/core/class-register-custom-content-types.php:537
+#: admin/modules/core/class-register-custom-content-types.php:538
 #, fuzzy
 msgid "Choose from the most used tags"
 msgstr "Choisissez parmi les tags les plus utilisés"
@@ -1629,7 +1697,7 @@ msgstr "Choisir une image"
 msgid "Choose the frequency to clean for the above period."
 msgstr "Choisissez la fréquence de nettoyage pour la période ci-dessus."
 
-#: admin/modules/core/class-media-encoder.php:2532
+#: admin/modules/core/class-media-encoder.php:2548
 #, fuzzy
 msgid ""
 "Choose the image quality level. Lower quality results in smaller file sizes, "
@@ -1872,7 +1940,7 @@ msgstr "Type de contenu"
 msgid "Content Types"
 msgstr "Types de contenu"
 
-#: admin/class-modules-data.php:1202
+#: admin/class-modules-data.php:1222
 msgid "Contents & Media"
 msgstr "Contenus et médias"
 
@@ -2025,7 +2093,12 @@ msgstr "Créer un nouveau lien court"
 msgid "CreateNow"
 msgstr "Créer maintenant"
 
-#: admin/class-modules-data.php:1242
+#: admin/class-modules-data.php:1262
+#, fuzzy
+msgid "Credentials"
+msgstr "Informations d'identification"
+
+#: admin/class-modules-data.php:1267
 #: admin/templates/core/page-settings-tabs/credits.php:13
 msgid "Credits"
 msgstr "Crédits"
@@ -2077,7 +2150,7 @@ msgstr "Classe du body personnalisée"
 msgid "Custom Character Icon"
 msgstr "Icône de personnage personnalisé"
 
-#: admin/class-modules-data.php:1207
+#: admin/class-modules-data.php:1227
 msgid "Custom Code"
 msgstr "Code personnalisé"
 
@@ -2126,8 +2199,8 @@ msgstr "Lien permanent personnalisé"
 msgid "Custom Post Type"
 msgstr "Type de publication personnalisé"
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:560
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:510
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:566
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:522
 #, fuzzy
 msgid "Custom Query Variable"
 msgstr "Variable de requête personnalisée"
@@ -2138,7 +2211,7 @@ msgstr "Variable de requête personnalisée"
 msgid "Custom Taxonomy"
 msgstr "Taxonomie personnalisée"
 
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:527
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:539
 #, fuzzy
 msgid "Customize the query variable name."
 msgstr "Personnalisez le nom de la variable de requête."
@@ -2147,6 +2220,11 @@ msgstr "Personnalisez le nom de la variable de requête."
 #, fuzzy
 msgid "Customizer Icon"
 msgstr "Icône de personnalisation"
+
+#: includes/global-functions.php:543
+#, fuzzy
+msgid "Czech"
+msgstr "tchèque"
 
 #: admin/modules/core/class-auto-regenerate-salt-keys.php:272
 msgid "Daily"
@@ -2161,7 +2239,7 @@ msgstr "Sombre"
 msgid "Dashboard Icon"
 msgstr "Icône du tableau de bord"
 
-#: admin/templates/core/page-settings.php:222
+#: admin/templates/core/page-settings.php:224
 msgid "Data anonymization"
 msgstr "Anonymisation des données"
 
@@ -2209,7 +2287,7 @@ msgstr "Jour"
 msgid "Days"
 msgstr "Jours"
 
-#: admin/modules/core/class-media-encoder.php:2410
+#: admin/modules/core/class-media-encoder.php:2426
 msgid "Deactivate"
 msgstr "Désactiver"
 
@@ -2226,10 +2304,10 @@ msgstr ""
 "permet de contrôler son utilisation pour des types de publication "
 "spécifiques ou tous les types pertinents."
 
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:558
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:587
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:616
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:645
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:570
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:599
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:628
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:657
 #, fuzzy
 msgid "default"
 msgstr "défaut"
@@ -2292,12 +2370,12 @@ msgstr "Supprimer maintenant"
 msgid "Delete selected files and folders?"
 msgstr "Supprimer les fichiers et dossiers sélectionnés ?"
 
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:605
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:617
 #, fuzzy
 msgid "Delete Terms Capability"
 msgstr "Supprimer les conditions de capacité"
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:666
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:672
 #, fuzzy
 msgid "Delete with User"
 msgstr "Supprimer avec l'utilisateur"
@@ -2320,32 +2398,32 @@ msgstr "Supprimé les événements cron sélectionnés."
 msgid "DENY"
 msgstr "REFUSER"
 
-#: admin/modules/core/class-register-custom-content-types.php:602
+#: admin/modules/core/class-register-custom-content-types.php:603
 #, fuzzy
 msgid "Describes a navigation link block variation used in the block editor."
 msgstr ""
 "Décrit une variante de bloc de lien de navigation utilisée dans l'éditeur de "
 "blocs."
 
-#: admin/modules/core/class-register-custom-content-types.php:573
+#: admin/modules/core/class-register-custom-content-types.php:574
 #, fuzzy
 msgid "Describes the Description field on the Edit Tags screen."
 msgstr "Décrit le champ Description sur l'écran Modifier les balises."
 
-#: admin/modules/core/class-register-custom-content-types.php:568
+#: admin/modules/core/class-register-custom-content-types.php:569
 #, fuzzy
 msgid "Describes the Parent field on the Edit Tags screen."
 msgstr "Décrit le champ Parent sur l'écran Modifier les balises."
 
-#: admin/modules/core/class-register-custom-content-types.php:563
+#: admin/modules/core/class-register-custom-content-types.php:564
 #, fuzzy
 msgid "Describes the Slug field on the Edit Tags screen."
 msgstr "Décrit le champ Slug sur l'écran Modifier les balises."
 
 #: admin/modules/core/class-child-theme-generator.php:411
-#: admin/modules/core/class-code-snippets.php:657
-#: admin/modules/core/class-register-custom-content-types.php:265
-#: admin/modules/core/class-register-custom-content-types.php:466
+#: admin/modules/core/class-code-snippets.php:658
+#: admin/modules/core/class-register-custom-content-types.php:266
+#: admin/modules/core/class-register-custom-content-types.php:467
 #: admin/modules/pro/class-custom-login-design.php:4302
 #: admin/templates/pro/link-shortener/edit-post.php:89
 msgid "Description"
@@ -2355,7 +2433,7 @@ msgstr "Description"
 msgid "Description completion from file name."
 msgstr "Complétion de la description à partir du nom du fichier."
 
-#: admin/modules/core/class-register-custom-content-types.php:571
+#: admin/modules/core/class-register-custom-content-types.php:572
 #, fuzzy
 msgid "Description Field Description"
 msgstr "Description du champ Description"
@@ -2429,7 +2507,7 @@ msgstr "Désactiver les commentaires via XML-RPC"
 msgid "Disable Dashboard Widgets"
 msgstr "Désactiver les widgets du tableau de bord"
 
-#: admin/class-modules-data.php:1212
+#: admin/class-modules-data.php:1232
 msgid "Disable Features"
 msgstr "Désactiver les fonctionnalités"
 
@@ -2491,13 +2569,13 @@ msgstr ""
 "Afficher une colonne pour la taxonomie sur les écrans de liste des types de "
 "publication."
 
-#: admin/modules/core/class-media-encoder.php:2575
+#: admin/modules/core/class-media-encoder.php:2591
 #, fuzzy
 #| msgid "Display images in WebP format on the site"
 msgid "Display images with new format on the site"
 msgstr "Afficher les images au format WebP sur le site"
 
-#: admin/modules/core/class-media-encoder.php:2548
+#: admin/modules/core/class-media-encoder.php:2564
 #, fuzzy
 #| msgid "Do not compress images already in WebP"
 msgid "Do not compress images already in same format"
@@ -2563,6 +2641,11 @@ msgstr "Dupliquer"
 msgid "Duplicate Menu"
 msgstr "Duplication de menu"
 
+#: includes/global-functions.php:493
+#, fuzzy
+msgid "Dutch"
+msgstr "Néerlandais"
+
 #: admin/modules/core/class-duplicate-menu.php:140
 msgid "Easily duplicate your WordPress Menus."
 msgstr "Dupliquez facilement vos menus WordPress."
@@ -2600,8 +2683,8 @@ msgstr "Modifier"
 msgid "Edit Icon"
 msgstr "Modifier l'icône"
 
-#: admin/modules/core/class-register-custom-content-types.php:280
-#: admin/modules/core/class-register-custom-content-types.php:481
+#: admin/modules/core/class-register-custom-content-types.php:281
+#: admin/modules/core/class-register-custom-content-types.php:482
 #, fuzzy
 msgid "Edit Item"
 msgstr "Modifier l'élément"
@@ -2616,7 +2699,7 @@ msgstr "Modifier la grande icône"
 msgid "Edit Page Icon"
 msgstr "Icône Modifier la page"
 
-#: admin/modules/core/class-register-custom-content-types.php:281
+#: admin/modules/core/class-register-custom-content-types.php:282
 #, fuzzy
 msgid "Edit Post"
 msgstr "Modifier la publication"
@@ -2630,12 +2713,12 @@ msgstr "Modifier le lien court"
 msgid "Edit Snippet"
 msgstr "Modifier le code snippet"
 
-#: admin/modules/core/class-register-custom-content-types.php:482
+#: admin/modules/core/class-register-custom-content-types.php:483
 #, fuzzy
 msgid "Edit Tag"
 msgstr "Modifier la balise"
 
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:576
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:588
 #, fuzzy
 msgid "Edit Terms Capability"
 msgstr "Capacité de modification des conditions"
@@ -2811,9 +2894,27 @@ msgstr "FIN Exemple d'inclusion du contenu du fichier"
 msgid "END Exemple of Shortcode content"
 msgstr "FIN Exemple de contenu Shortcode"
 
+#: includes/global-functions.php:463
+#, fuzzy
+msgid "English"
+msgstr "Anglais"
+
 #: admin/modules/core/class-enhance-list-tables.php:56
 msgid "Enhance List Tables"
 msgstr "Améliore les tableaux de liste"
+
+#: admin/modules/core/class-external-links-new-tab.php:231
+#, fuzzy
+msgid ""
+"Ensure that all external links within post content open in a new browser tab "
+"by implementing the \"target=\"_blank\"\" attribute. Additionally, enhance "
+"security and SEO advantages by including the \"rel=\"noopener noreferrer "
+"nofollow\"\" attribute."
+msgstr ""
+"Assurez-vous que tous les liens externes contenus dans les articles "
+"s'ouvrent dans un nouvel onglet de navigateur en implémentant l'attribut "
+"« target=\"_blank\" ». Améliorez également la sécurité et le référencement "
+"en incluant l'attribut « rel=\"noopener noreferrer nofollow\" »."
 
 #: admin/templates/pro/link-shortener/edit-post.php:65
 #, fuzzy
@@ -2825,14 +2926,14 @@ msgstr "Entrez un slug personnalisé"
 msgid "Enter a description"
 msgstr "Entrez une description"
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:437
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:526
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:571
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:615
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:628
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:419
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:524
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:696
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:443
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:532
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:577
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:621
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:634
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:431
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:536
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:708
 #, fuzzy
 msgid "Enter a slug"
 msgstr "Entrez une limace"
@@ -2865,12 +2966,12 @@ msgstr "Entrez un nouveau nom de fichier"
 msgid "Enter new username"
 msgstr "Entrez un nouveau nom d'utilisateur"
 
-#: admin/modules/core/class-register-custom-content-types.php:421
+#: admin/modules/core/class-register-custom-content-types.php:422
 #, fuzzy
 msgid "Enter Post Title Here"
 msgstr "Entrez le titre du message ici"
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:529
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:535
 #, fuzzy
 msgid "Enter the archive slug. Example: \"portfolio\"."
 msgstr "Saisissez le slug de l'archive. Exemple : « portfolio »."
@@ -2910,19 +3011,19 @@ msgstr ""
 msgid "Enter the menu position. Example: \"5\"."
 msgstr "Saisissez la position du menu. Exemple : « 5 »."
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:631
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:637
 #, fuzzy
 msgid "Enter the plural capability name. Example: \"portfolios\"."
 msgstr ""
 "Saisissez le nom de la capacité au pluriel. Exemple : « portefeuilles »."
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:574
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:580
 #, fuzzy
 msgid "Enter the query variable name. Example: \"portfolio\"."
 msgstr ""
 "Saisissez le nom de la variable de requête. Exemple : « portefeuille »."
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:618
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:624
 #, fuzzy
 msgid "Enter the singular capability name. Example: \"portfolio\"."
 msgstr ""
@@ -2945,8 +3046,8 @@ msgstr ""
 "Saisissez l'URL de l'icône personnalisée. Exemple : « https://example."
 "com/icon.png ». Idéalement, l'icône devrait mesurer 20 x 20 pixels."
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:440
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:422
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:446
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:434
 #, fuzzy
 msgid "Enter the URL slug. Example: \"portfolio\"."
 msgstr "Saisissez le slug de l'URL. Exemple : « portfolio »."
@@ -2958,7 +3059,7 @@ msgstr ""
 "Saisissez les URL que vous souhaitez marquer comme 410 dans la zone de texte,"
 " une URL par ligne."
 
-#: admin/modules/core/class-register-custom-content-types.php:420
+#: admin/modules/core/class-register-custom-content-types.php:421
 #, fuzzy
 msgid "Enter Title Here"
 msgstr "Entrez le titre ici"
@@ -3042,6 +3143,7 @@ msgstr "Événements sans action"
 
 #: admin/modules/core/class-media-encoder.php:593
 #: admin/modules/core/class-media-encoder.php:598
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:220
 msgid "Every minute"
 msgstr "Chaque minute"
 
@@ -3189,7 +3291,7 @@ msgid "Failed to write file"
 msgstr "Échec de l'écriture du fichier"
 
 #: admin/modules/core/class-code-snippets.php:102
-#: admin/modules/core/class-register-custom-content-types.php:335
+#: admin/modules/core/class-register-custom-content-types.php:336
 msgid "Featured Image"
 msgstr "L'image sélectionnée"
 
@@ -3197,7 +3299,7 @@ msgstr "L'image sélectionnée"
 msgid "Featured image"
 msgstr "Image mise en avant"
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:475
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:481
 #, fuzzy
 msgid "Feed URL"
 msgstr "URL du flux"
@@ -3313,17 +3415,17 @@ msgstr "Fichiers dans l'archive : %s"
 msgid "Filter"
 msgstr "Filtre"
 
-#: admin/modules/core/class-register-custom-content-types.php:577
+#: admin/modules/core/class-register-custom-content-types.php:578
 #, fuzzy
 msgid "Filter by category"
 msgstr "Filtrer par catégorie"
 
-#: admin/modules/core/class-register-custom-content-types.php:370
+#: admin/modules/core/class-register-custom-content-types.php:371
 #, fuzzy
 msgid "Filter by Date"
 msgstr "Filtrer par date"
 
-#: admin/modules/core/class-register-custom-content-types.php:576
+#: admin/modules/core/class-register-custom-content-types.php:577
 #, fuzzy
 msgid "Filter By Item"
 msgstr "Filtrer par élément"
@@ -3334,17 +3436,17 @@ msgstr "Filtrer par élément"
 msgid "Filter Icon"
 msgstr "Icône de filtre"
 
-#: admin/modules/core/class-register-custom-content-types.php:365
+#: admin/modules/core/class-register-custom-content-types.php:366
 #, fuzzy
 msgid "Filter Items List"
 msgstr "Liste des éléments de filtre"
 
-#: admin/modules/core/class-register-custom-content-types.php:371
+#: admin/modules/core/class-register-custom-content-types.php:372
 #, fuzzy
 msgid "Filter Posts by Date"
 msgstr "Filtrer les publications par date"
 
-#: admin/modules/core/class-register-custom-content-types.php:366
+#: admin/modules/core/class-register-custom-content-types.php:367
 #, fuzzy
 msgid "Filter Posts List"
 msgstr "Filtrer la liste des publications"
@@ -3504,6 +3606,11 @@ msgstr "Icône des forums"
 msgid "Forward Icon"
 msgstr "Icône Suivant"
 
+#: includes/global-functions.php:468
+#, fuzzy
+msgid "French"
+msgstr "Français"
+
 #: admin/modules/pro/class-auto-clean-actionscheduler-actions.php:254
 msgid "Frequency"
 msgstr "Fréquence"
@@ -3519,8 +3626,8 @@ msgstr "Icône Amis"
 msgid "Front end"
 msgstr "L'extrémité avant"
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:456
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:438
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:462
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:450
 #, fuzzy
 msgid "Front URL Prefix"
 msgstr "Préfixe d'URL avant"
@@ -3564,7 +3671,7 @@ msgstr "Pleine taille"
 msgid "Function %s does not exist"
 msgstr "La fonction %s n'existe pas"
 
-#: admin/templates/core/page-settings.php:328
+#: admin/templates/core/page-settings.php:330
 #, fuzzy
 msgid ""
 "Further reduce the number of active plugins and benefit from our resource-"
@@ -3623,25 +3730,40 @@ msgstr ""
 "Générer un thème enfant pour le thème actif actuel. Le thème enfant sera "
 "généré dans un fichier ZIP ou directement dans le répertoire des thèmes."
 
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:436
+#, fuzzy
+msgid "Generate Alt Text"
+msgstr "Générer un texte alternatif"
+
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:69
+#, fuzzy
+msgid "Generate Alt Text With AI"
+msgstr "Générer du texte alternatif avec l'IA"
+
 #: admin/helpers/core/select-dashicon/class-select-dashicon.php:25
 #, fuzzy
 msgid "Generic Icon"
 msgstr "Icône générique"
 
-#: admin/modules/core/class-register-custom-content-types.php:456
+#: admin/modules/core/class-register-custom-content-types.php:457
 #, fuzzy
 msgid "Genre"
 msgstr "Genre"
 
-#: admin/modules/core/class-register-custom-content-types.php:462
+#: admin/modules/core/class-register-custom-content-types.php:463
 #, fuzzy
 msgid "genre"
 msgstr "genre"
 
-#: admin/modules/core/class-register-custom-content-types.php:450
+#: admin/modules/core/class-register-custom-content-types.php:451
 #, fuzzy
 msgid "Genres"
 msgstr "Genres"
+
+#: includes/global-functions.php:478
+#, fuzzy
+msgid "German"
+msgstr "Allemand"
 
 #: admin/modules/pro/class-custom-login-design.php:180
 #: admin/modules/pro/class-custom-login-design.php:309
@@ -3678,6 +3800,11 @@ msgstr "Aller à"
 #, fuzzy
 msgid "Google Icon"
 msgstr "Icône Google"
+
+#: includes/global-functions.php:548
+#, fuzzy
+msgid "Greek"
+msgstr "grec"
 
 #: admin/helpers/core/select-dashicon/class-select-dashicon.php:201
 #, fuzzy
@@ -3721,6 +3848,11 @@ msgstr "Icône de cœur"
 #: admin/modules/core/class-heartbeat-control.php:116
 msgid "Heartbeat Control"
 msgstr "Contrôle du rythme cardiaque"
+
+#: includes/global-functions.php:553
+#, fuzzy
+msgid "Hebrew"
+msgstr "hébreu"
 
 #: admin/modules/pro/class-custom-login-design.php:3866
 #: admin/modules/pro/class-custom-login-design.php:4091
@@ -3793,10 +3925,15 @@ msgstr ""
 msgid "Hierarchical"
 msgstr "Hiérarchique"
 
-#: admin/modules/core/class-media-encoder.php:2402
+#: admin/modules/core/class-media-encoder.php:2418
 #, fuzzy
 msgid "High"
 msgstr "Haut"
+
+#: includes/global-functions.php:523
+#, fuzzy
+msgid "Hindi"
+msgstr "hindi"
 
 #: admin/helpers/core/select-dashicon/class-select-dashicon.php:26
 #, fuzzy
@@ -3864,16 +4001,16 @@ msgstr "https://wpmastertoolkit.com/fr/modules/"
 msgid "https://wpmastertoolkit.com/en/products-2/wpmastertoolkit-pro/"
 msgstr "https://wpmastertoolkit.com/fr/produits/wpmastertoolkit-pro/"
 
-#: admin/templates/core/page-settings.php:261
+#: admin/templates/core/page-settings.php:263
 msgid "I agree to share my configuration with wpmastertoolkit.com."
 msgstr "J'accepte de partager ma configuration avec wpmastertoolkit.com."
 
-#: admin/templates/core/page-settings.php:343
+#: admin/templates/core/page-settings.php:345
 #, fuzzy
 msgid "I already have a license"
 msgstr "J'ai déjà une licence"
 
-#: admin/templates/core/page-settings.php:340
+#: admin/templates/core/page-settings.php:342
 #, fuzzy
 msgid "I no longer wish to see this message"
 msgstr "Je ne souhaite plus voir ce message"
@@ -3901,7 +4038,7 @@ msgstr "Icône ID (alt)"
 msgid "ID Icon"
 msgstr "Icône d'identification"
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:670
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:676
 #, fuzzy
 msgid ""
 "If checked, items of this content type will be deleted when the user is "
@@ -3910,13 +4047,13 @@ msgstr ""
 "Si cette case est cochée, les éléments de ce type de contenu seront "
 "supprimés lorsque l'utilisateur sera supprimé."
 
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:687
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:699
 #, fuzzy
 msgid "If checked, the content type will be available in the REST API."
 msgstr ""
 "Si cette case est cochée, le type de contenu sera disponible dans l'API REST."
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:702
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:708
 #, fuzzy
 msgid ""
 "If checked, the content type will be available in the REST API. Note if you "
@@ -3957,7 +4094,7 @@ msgid "If checked, the content type will be visible in the admin menu."
 msgstr ""
 "Si coché, le type de contenu sera visible dans le menu d'administration."
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:517
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:523
 #, fuzzy
 msgid "If checked, the content type will have an archive page."
 msgstr "Si cette case est cochée, le type de contenu aura une page d'archive."
@@ -3995,6 +4132,11 @@ msgid ""
 msgstr ""
 "Si défini, le service/compte SMTP suivant sera utilisé pour livrer vos e-"
 "mails."
+
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:734
+#, fuzzy
+msgid "If the alternative text is empty"
+msgstr "Si le texte alternatif est vide"
 
 #: admin/modules/pro/class-disallow-countries-ip.php:637
 msgid ""
@@ -4041,7 +4183,7 @@ msgstr "Image"
 msgid "Image already optimized."
 msgstr "Image déjà optimisée."
 
-#: admin/modules/core/class-media-encoder.php:2487
+#: admin/modules/core/class-media-encoder.php:2503
 #, fuzzy
 msgid "Image Format Optimization"
 msgstr "Optimisation du format d'image"
@@ -4091,12 +4233,12 @@ msgstr ""
 "taxonomies, médias, commentaires et utilisateurs en ajoutant/supprimant des "
 "colonnes et des éléments."
 
-#: admin/templates/core/page-settings.php:327
+#: admin/templates/core/page-settings.php:329
 #, fuzzy
 msgid "Improve your performance"
 msgstr "Améliorez vos performances"
 
-#: admin/templates/core/page-settings.php:210
+#: admin/templates/core/page-settings.php:212
 msgid ""
 "In order to improve our modules, we would like to know which modules are "
 "most used, with the aim of improving the most used modules as a priority. "
@@ -4106,7 +4248,7 @@ msgstr ""
 "les plus utilisés, dans le but d'améliorer en priorité les modules les plus "
 "utilisés. Toutes les données sont envoyées de manière anonyme."
 
-#: admin/modules/core/class-register-custom-content-types.php:488
+#: admin/modules/core/class-register-custom-content-types.php:489
 #, fuzzy
 msgid "In the admin bar to view term during editing."
 msgstr ""
@@ -4178,12 +4320,12 @@ msgstr ""
 msgid "Insert Icon"
 msgstr "Insérer une icône"
 
-#: admin/modules/core/class-register-custom-content-types.php:355
+#: admin/modules/core/class-register-custom-content-types.php:356
 #, fuzzy
 msgid "Insert into Item"
 msgstr "Insérer dans l'élément"
 
-#: admin/modules/core/class-register-custom-content-types.php:356
+#: admin/modules/core/class-register-custom-content-types.php:357
 #, fuzzy
 msgid "Insert into Post"
 msgstr "Insérer dans la publication"
@@ -4321,19 +4463,24 @@ msgstr ""
 " il est important de considérer attentivement votre utilisation et vos "
 "besoins en matière de sécurité avant de définir la valeur."
 
+#: includes/global-functions.php:483
+#, fuzzy
+msgid "Italian"
+msgstr "italien"
+
 #: admin/helpers/core/select-dashicon/class-select-dashicon.php:149
 #, fuzzy
 msgid "Italic Icon"
 msgstr "Icône italique"
 
-#: admin/modules/core/class-register-custom-content-types.php:410
-#: admin/modules/core/class-register-custom-content-types.php:596
+#: admin/modules/core/class-register-custom-content-types.php:411
+#: admin/modules/core/class-register-custom-content-types.php:597
 #, fuzzy
 msgid "Item Link"
 msgstr "Lien de l'article"
 
-#: admin/modules/core/class-register-custom-content-types.php:415
-#: admin/modules/core/class-register-custom-content-types.php:601
+#: admin/modules/core/class-register-custom-content-types.php:416
+#: admin/modules/core/class-register-custom-content-types.php:602
 #, fuzzy
 msgid "Item Link Description"
 msgstr "Description du lien de l'article"
@@ -4342,22 +4489,22 @@ msgstr "Description du lien de l'article"
 msgid "Item Name"
 msgstr "Nom de l'article"
 
-#: admin/modules/core/class-register-custom-content-types.php:385
+#: admin/modules/core/class-register-custom-content-types.php:386
 #, fuzzy
 msgid "Item Published"
 msgstr "Article publié"
 
-#: admin/modules/core/class-register-custom-content-types.php:390
+#: admin/modules/core/class-register-custom-content-types.php:391
 #, fuzzy
 msgid "Item Published Privately"
 msgstr "Article publié en privé"
 
-#: admin/modules/core/class-register-custom-content-types.php:395
+#: admin/modules/core/class-register-custom-content-types.php:396
 #, fuzzy
 msgid "Item Reverted to Draft"
 msgstr "Élément remis à l'état de brouillon"
 
-#: admin/modules/core/class-register-custom-content-types.php:400
+#: admin/modules/core/class-register-custom-content-types.php:401
 #, fuzzy
 msgid "Item Scheduled"
 msgstr "Article prévu"
@@ -4366,7 +4513,7 @@ msgstr "Article prévu"
 msgid "Item Type"
 msgstr "Type d'article"
 
-#: admin/modules/core/class-register-custom-content-types.php:405
+#: admin/modules/core/class-register-custom-content-types.php:406
 #, fuzzy
 msgid "Item Updated"
 msgstr "Article mis à jour"
@@ -4379,17 +4526,22 @@ msgstr ""
 "Les éléments peuvent être modifiés et gérés dans le tableau de bord "
 "d'administration."
 
-#: admin/modules/core/class-register-custom-content-types.php:380
-#: admin/modules/core/class-register-custom-content-types.php:586
+#: admin/modules/core/class-register-custom-content-types.php:381
+#: admin/modules/core/class-register-custom-content-types.php:587
 #, fuzzy
 msgid "Items List"
 msgstr "Liste des articles"
 
-#: admin/modules/core/class-register-custom-content-types.php:375
-#: admin/modules/core/class-register-custom-content-types.php:581
+#: admin/modules/core/class-register-custom-content-types.php:376
+#: admin/modules/core/class-register-custom-content-types.php:582
 #, fuzzy
 msgid "Items List Navigation"
 msgstr "Navigation dans la liste des éléments"
+
+#: includes/global-functions.php:503
+#, fuzzy
+msgid "Japanese"
+msgstr "japonais"
 
 #: admin/helpers/core/select-dashicon/class-select-dashicon.php:150
 #, fuzzy
@@ -4413,12 +4565,18 @@ msgstr "Garder tel quel"
 msgid "Kitchen Sink Icon"
 msgstr "Icône d'évier de cuisine"
 
+#: includes/global-functions.php:518
+#, fuzzy
+msgid "Korean"
+msgstr "coréen"
+
 #: admin/templates/core/register-custom-content-types/edit-post-cpt.php:153
 #: admin/templates/core/register-custom-content-types/edit-taxonomy.php:128
 #, fuzzy
 msgid "Labels"
 msgstr "Étiquettes"
 
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:696
 #: admin/templates/pro/custom-login-design/login-page-template.php:132
 #, fuzzy
 msgid "Language"
@@ -4496,7 +4654,7 @@ msgstr "ID de licence"
 msgid "Lightbulb Icon"
 msgstr "Icône d'ampoule"
 
-#: admin/templates/core/page-settings.php:281
+#: admin/templates/core/page-settings.php:283
 #, fuzzy, php-format
 msgid ""
 "Like the free version of WPMasterToolKit? The PRO version lets you go "
@@ -4695,7 +4853,7 @@ msgstr "Mot de passe oublié Connexion Espace réservé"
 msgid "Lost your password?"
 msgstr "Vous avez perdu votre mot de passe?"
 
-#: admin/modules/core/class-media-encoder.php:2400
+#: admin/modules/core/class-media-encoder.php:2416
 #, fuzzy
 msgid "Low"
 msgstr "Faible"
@@ -4749,7 +4907,7 @@ msgstr "Gérer les révisions à globalement"
 msgid "Manage robots.txt"
 msgstr "Gérer le fichier robots.txt"
 
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:547
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:559
 #, fuzzy
 msgid "Manage Terms Capability"
 msgstr "Capacité de gestion des conditions"
@@ -4833,7 +4991,7 @@ msgstr "Encodeur multimédia"
 msgid "Media Icon"
 msgstr "Icône média"
 
-#: admin/modules/core/class-media-encoder.php:2401
+#: admin/modules/core/class-media-encoder.php:2417
 #, fuzzy
 msgid "Medium"
 msgstr "Moyen"
@@ -4868,12 +5026,12 @@ msgstr "Menu dupliqué avec succès."
 msgid "Menu Icon"
 msgstr "Icône de menu"
 
-#: admin/modules/core/class-register-custom-content-types.php:471
+#: admin/modules/core/class-register-custom-content-types.php:472
 #, fuzzy
 msgid "Menu Label"
 msgstr "Étiquette du menu"
 
-#: admin/modules/core/class-register-custom-content-types.php:270
+#: admin/modules/core/class-register-custom-content-types.php:271
 #, fuzzy
 msgid "Menu Name"
 msgstr "Nom du menu"
@@ -4945,19 +5103,19 @@ msgstr ""
 "publication et/ou le frontend. Cela contribuera à réduire la charge CPU sur "
 "le serveur."
 
-#: admin/class-modules-data.php:1063
+#: admin/class-modules-data.php:1075
 msgctxt "Module description"
 msgid "A full-featured database management tool."
 msgstr "Un outil de gestion de base de données complet."
 
-#: admin/class-modules-data.php:915
+#: admin/class-modules-data.php:927
 msgctxt "Module description"
 msgid "A new button to quickly add new posts to speed up your workflow."
 msgstr ""
 "Un nouveau bouton pour ajouter rapidement de nouvelles publications afin "
 "d'accélérer votre flux de travail."
 
-#: admin/class-modules-data.php:927
+#: admin/class-modules-data.php:939
 msgctxt "Module description"
 msgid ""
 "A simple tool to generate a child theme on your WordPress. You can disable "
@@ -4966,13 +5124,13 @@ msgstr ""
 "Un outil simple pour générer un thème enfant sur votre WordPress. Vous "
 "pouvez le désactiver après la génération."
 
-#: admin/class-modules-data.php:1131
+#: admin/class-modules-data.php:1143
 #, fuzzy
 msgctxt "Module description"
 msgid "A simple way to change the type of a post."
 msgstr "Un moyen simple de changer le type d’une publication."
 
-#: admin/class-modules-data.php:791
+#: admin/class-modules-data.php:803
 msgctxt "Module description"
 msgid ""
 "Add an extra layer of security to your website by enabling two-factor "
@@ -4981,7 +5139,7 @@ msgstr ""
 "Ajoutez une couche de sécurité supplémentaire à votre site Web en activant "
 "l'authentification à deux facteurs pour tous les utilisateurs."
 
-#: admin/class-modules-data.php:871
+#: admin/class-modules-data.php:883
 msgctxt "Module description"
 msgid ""
 "Add custom <body> class(es) on the singular view of some or all public post "
@@ -4990,7 +5148,7 @@ msgstr ""
 "Ajoutez des classes <body> personnalisées sur la vue unique de certains ou "
 "de tous les types de publications publiques."
 
-#: admin/class-modules-data.php:735
+#: admin/class-modules-data.php:747
 msgctxt "Module description"
 msgid ""
 "Add custom code snippets to your website without the need to edit the "
@@ -5006,21 +5164,21 @@ msgstr ""
 "ajoutez cette ligne à votre wp-config.php : "
 "définir('WPMASTERTOOLKIT_SNIPPETS_SAFE_MODE', true);"
 
-#: admin/class-modules-data.php:975
+#: admin/class-modules-data.php:987
 msgctxt "Module description"
 msgid "Add custom CSS on all admin pages for all user roles."
 msgstr ""
 "Ajoute du CSS personnalisé sur toutes les pages d'administration pour tous "
 "les rôles d'utilisateur."
 
-#: admin/class-modules-data.php:979
+#: admin/class-modules-data.php:991
 msgctxt "Module description"
 msgid "Add custom CSS on all frontend pages for all user roles."
 msgstr ""
 "Ajoutez du CSS personnalisé sur toutes les pages frontales pour tous les "
 "rôles d'utilisateur."
 
-#: admin/class-modules-data.php:1039
+#: admin/class-modules-data.php:1051
 msgctxt "Module description"
 msgid ""
 "Add security headers quickly to your site to protect it from threats such as "
@@ -5029,7 +5187,7 @@ msgstr ""
 "Ajoutez rapidement des en-têtes de sécurité à votre site pour le protéger "
 "des menaces telles que les attaques de phishing, le vol de données, etc."
 
-#: admin/class-modules-data.php:1095
+#: admin/class-modules-data.php:1107
 #, fuzzy
 msgctxt "Module description"
 msgid ""
@@ -5040,7 +5198,13 @@ msgstr ""
 "(WebP ou AVIF) pour de meilleures performances et une taille de fichier "
 "réduite."
 
-#: admin/class-modules-data.php:731
+#: admin/class-modules-data.php:1155
+#, fuzzy
+msgctxt "Module description"
+msgid "Automatically generate alternative text using AI."
+msgstr "Générez automatiquement du texte alternatif à l'aide de l'IA."
+
+#: admin/class-modules-data.php:743
 msgctxt "Module description"
 msgid ""
 "Automatically initiate the publication of scheduled posts marked with "
@@ -5050,7 +5214,7 @@ msgstr ""
 "« horaire manqué » à chaque visite sur le site Web, pour tous les types de "
 "publications."
 
-#: admin/class-modules-data.php:1099
+#: admin/class-modules-data.php:1111
 msgctxt "Module description"
 msgid ""
 "Automatically sanitize uploaded file names by removing special characters, "
@@ -5063,7 +5227,7 @@ msgstr ""
 "automatiquement les champs de métadonnées clés (titre, légende, texte "
 "alternatif et description) directement à partir du nom de fichier nettoyé."
 
-#: admin/class-modules-data.php:843
+#: admin/class-modules-data.php:855
 msgctxt "Module description"
 msgid ""
 "Avoid overloading the database by setting a cap on the number of revisions "
@@ -5073,12 +5237,12 @@ msgstr ""
 "de révisions à enregistrer pour certains ou tous les types de publications "
 "prenant en charge les révisions."
 
-#: admin/class-modules-data.php:1031
+#: admin/class-modules-data.php:1043
 msgctxt "Module description"
 msgid "Ban the chosen emails."
 msgstr "Interdire les emails choisis."
 
-#: admin/class-modules-data.php:1027
+#: admin/class-modules-data.php:1039
 msgctxt "Module description"
 msgid ""
 "Block user registration from disposable email addresses. Disposable email "
@@ -5090,19 +5254,19 @@ msgstr ""
 "pour s'inscrire sur des sites Web qui nécessitent une vérification par e-"
 "mail."
 
-#: admin/class-modules-data.php:1047
+#: admin/class-modules-data.php:1059
 msgctxt "Module description"
 msgid "Browser and manage your files efficiently and easily."
 msgstr "Naviguez et gérez vos fichiers efficacement et facilement."
 
-#: admin/class-modules-data.php:787
+#: admin/class-modules-data.php:799
 msgctxt "Module description"
 msgid "Change the default login URL to a custom URL of your choice."
 msgstr ""
 "Remplacez l'URL de connexion par défaut par une URL personnalisée de votre "
 "choix."
 
-#: admin/class-modules-data.php:819
+#: admin/class-modules-data.php:831
 msgctxt "Module description"
 msgid ""
 "Check the types of emails you no longer want to receive as an administrator."
@@ -5110,7 +5274,7 @@ msgstr ""
 "Cochez les types d'e-mails que vous ne voulez plus recevoir en tant "
 "qu'administrateur."
 
-#: admin/class-modules-data.php:1075
+#: admin/class-modules-data.php:1087
 msgctxt "Module description"
 msgid ""
 "Clean actionscheduler_actions database table from actions that have been "
@@ -5119,7 +5283,7 @@ msgstr ""
 "Nettoyer la table de base de données actionscheduler_actions des actions qui "
 "ont été terminées | échouées | annulées."
 
-#: admin/class-modules-data.php:887
+#: admin/class-modules-data.php:899
 msgctxt "Module description"
 msgid ""
 "Clean up and speed up the dashboard by completely disabling some or all "
@@ -5130,7 +5294,7 @@ msgstr ""
 "partie des widgets. Les widgets désactivés ne chargeront aucun actif et "
 "n'apparaîtront pas sous Options d'écran."
 
-#: admin/class-modules-data.php:743
+#: admin/class-modules-data.php:755
 msgctxt "Module description"
 msgid ""
 "Completely deactivate RSS, Atom, and RDF feeds across your website. This "
@@ -5144,7 +5308,7 @@ msgstr ""
 "et la recherche. De plus, il efface toutes les références restantes aux URL "
 "de flux de la section <head> de vos pages Web."
 
-#: admin/class-modules-data.php:999
+#: admin/class-modules-data.php:1011
 msgctxt "Module description"
 msgid ""
 "Completely disable core, theme and plugin updates and auto-updates. Will "
@@ -5154,7 +5318,7 @@ msgstr ""
 "noyau, des thèmes et des plugins. Désactivez également les vérifications de "
 "mise à jour, les notifications et les e-mails."
 
-#: admin/class-modules-data.php:903
+#: admin/class-modules-data.php:915
 msgctxt "Module description"
 msgid ""
 "Control your nav menu by allowing you to apply visibility controls to menu."
@@ -5162,7 +5326,7 @@ msgstr ""
 "Contrôlez votre menu de navigation en vous permettant d'appliquer des "
 "contrôles de visibilité au menu."
 
-#: admin/class-modules-data.php:747
+#: admin/class-modules-data.php:759
 msgctxt "Module description"
 msgid ""
 "Deactivate the Gutenberg block editor selectively, allowing you to control "
@@ -5172,14 +5336,14 @@ msgstr ""
 "permet de contrôler son utilisation pour des types de publication "
 "spécifiques ou tous les types pertinents."
 
-#: admin/class-modules-data.php:807
+#: admin/class-modules-data.php:819
 msgctxt "Module description"
 msgid ""
 "Delete the wp-config-sample.php, block access to readme.html, license.txt"
 msgstr ""
 "Supprimez le wp-config-sample.php, bloquez l'accès à readme.html, licence.txt"
 
-#: admin/class-modules-data.php:867
+#: admin/class-modules-data.php:879
 msgctxt "Module description"
 msgid ""
 "Disable block-based widgets settings screen. Restores the classic widgets "
@@ -5190,7 +5354,7 @@ msgstr ""
 "l'écran des paramètres des widgets classiques lors de l'utilisation d'un "
 "thème classique (non bloquant). Cela n'a aucun effet sur les thèmes de bloc."
 
-#: admin/class-modules-data.php:839
+#: admin/class-modules-data.php:851
 msgctxt "Module description"
 msgid ""
 "Disable cart fragments scripts on the front-end for public site visitors. "
@@ -5201,7 +5365,7 @@ msgstr ""
 "visiteurs du site public. Cela pourrait interrompre la fonctionnalité des "
 "pages de panier et de paiement si elles dépendent de fragments de panier."
 
-#: admin/class-modules-data.php:847
+#: admin/class-modules-data.php:859
 msgctxt "Module description"
 msgid ""
 "Disable emoji support for pages, posts and custom post types on the admin "
@@ -5216,7 +5380,7 @@ msgstr ""
 "navigateurs modernes sur différents systèmes d'exploitation et appareils "
 "disposent désormais d'une prise en charge native."
 
-#: admin/class-modules-data.php:851
+#: admin/class-modules-data.php:863
 msgctxt "Module description"
 msgid ""
 "Disable loading of Dashicons CSS and JS files on the front-end for public "
@@ -5230,7 +5394,7 @@ msgstr ""
 "connexion personnalisés, s'ils dépendent de Dashicons. Assurez-vous de "
 "vérifier ces formulaires après la désactivation."
 
-#: admin/class-modules-data.php:995
+#: admin/class-modules-data.php:1007
 msgctxt "Module description"
 msgid ""
 "Disable REST API access for non-authenticated users and remove URL traces "
@@ -5240,7 +5404,7 @@ msgstr ""
 "supprimez les traces d'URL de <head>, des en-têtes HTTP et du point de "
 "terminaison WP RSD."
 
-#: admin/class-modules-data.php:855
+#: admin/class-modules-data.php:867
 msgctxt "Module description"
 msgid ""
 "Disable the default WordPress shortlink <link> tag in <head>. Ignored by "
@@ -5254,7 +5418,7 @@ msgstr ""
 "préféré, ce qui permet d'afficher de jolis noms dans les liens courts et de "
 "suivre les clics lors du partage du lien sur les réseaux sociaux."
 
-#: admin/class-modules-data.php:823
+#: admin/class-modules-data.php:835
 msgctxt "Module description"
 msgid ""
 "Disable the default WordPress sitemap feature, which was introduced in "
@@ -5263,12 +5427,12 @@ msgstr ""
 "Désactivez la fonctionnalité de plan de site WordPress par défaut, "
 "introduite dans WordPress 5.5."
 
-#: admin/class-modules-data.php:815
+#: admin/class-modules-data.php:827
 msgctxt "Module description"
 msgid "Disable the listing of the directories."
 msgstr "Désactivez le listing des répertoires."
 
-#: admin/class-modules-data.php:859
+#: admin/class-modules-data.php:871
 #, fuzzy
 msgctxt "Module description"
 msgid ""
@@ -5281,7 +5445,7 @@ msgstr ""
 "du point de terminaison XML-RPC sur votre site. Si vous n'utilisez pas XML-"
 "RPC, vous pouvez désactiver cette balise en toute sécurité."
 
-#: admin/class-modules-data.php:863
+#: admin/class-modules-data.php:875
 msgctxt "Module description"
 msgid ""
 "Disable the Windows Live Writer (WLW) manifest <link> tag in <head>. The WLW "
@@ -5290,7 +5454,7 @@ msgstr ""
 "Désactivez la balise <link> du manifeste Windows Live Writer (WLW) dans "
 "<head>. L'application WLW a été abandonnée en 2017."
 
-#: admin/class-modules-data.php:751
+#: admin/class-modules-data.php:763
 msgctxt "Module description"
 msgid ""
 "Disable the wp_mail function, which is used by WordPress to send emails. "
@@ -5302,7 +5466,7 @@ msgstr ""
 "d'e-mails, car elle empêche la fonction wp_mail de charger et de consommer "
 "des ressources."
 
-#: admin/class-modules-data.php:803
+#: admin/class-modules-data.php:815
 msgctxt "Module description"
 msgid ""
 "Disable zip file uploads for plugins, which are used to install plugins on "
@@ -5311,7 +5475,7 @@ msgstr ""
 "Désactivez les téléchargements de fichiers zip pour les plugins, qui sont "
 "utilisés pour installer des plugins sur votre site Web."
 
-#: admin/class-modules-data.php:799
+#: admin/class-modules-data.php:811
 msgctxt "Module description"
 msgid ""
 "Disable zip file uploads for themes, which are used to install themes on "
@@ -5320,14 +5484,14 @@ msgstr ""
 "Désactivez les téléchargements de fichiers zip pour les thèmes, qui sont "
 "utilisés pour installer des thèmes sur votre site Web."
 
-#: admin/class-modules-data.php:959
+#: admin/class-modules-data.php:971
 msgctxt "Module description"
 msgid "Display all metadata for a post, user, term, or comment."
 msgstr ""
 "Affiche toutes les métadonnées d'une publication, d'un utilisateur, d'un "
 "terme ou d'un commentaire."
 
-#: admin/class-modules-data.php:1083
+#: admin/class-modules-data.php:1095
 msgctxt "Module description"
 msgid ""
 "Displaying the sequence of action and filter hooks by their origin on a "
@@ -5336,41 +5500,41 @@ msgstr ""
 "Affichage de la séquence d'actions et des filtres de hooks par leur origine "
 "sur une seule page."
 
-#: admin/class-modules-data.php:831
+#: admin/class-modules-data.php:843
 msgctxt "Module description"
 msgid "Download plugins from the plugins page in the WordPress admin panel."
 msgstr ""
 "Téléchargez les plugins depuis la page des plugins dans le panneau "
 "d'administration WordPress."
 
-#: admin/class-modules-data.php:919
+#: admin/class-modules-data.php:931
 msgctxt "Module description"
 msgid "Download your posts and pages to a .csv format."
 msgstr "Téléchargez vos articles et pages au format .csv."
 
-#: admin/class-modules-data.php:907
+#: admin/class-modules-data.php:919
 msgctxt "Module description"
 msgid "Download your user data to a .csv format."
 msgstr "Téléchargez vos données utilisateur au format .csv."
 
-#: admin/class-modules-data.php:923
+#: admin/class-modules-data.php:935
 msgctxt "Module description"
 msgid "Easily duplicate your WordPress Menus"
 msgstr "Dupliquez facilement vos menus WordPress"
 
-#: admin/class-modules-data.php:987
+#: admin/class-modules-data.php:999
 msgctxt "Module description"
 msgid "Easily edit and validate your ads.txt and app-ads.txt content."
 msgstr ""
 "Modifiez et validez facilement le contenu de vos fichiers ads.txt et app-ads."
 "txt."
 
-#: admin/class-modules-data.php:991
+#: admin/class-modules-data.php:1003
 msgctxt "Module description"
 msgid "Easily edit and validate your robots.txt content."
 msgstr "Modifiez et validez facilement le contenu de votre fichier robots.txt."
 
-#: admin/class-modules-data.php:983
+#: admin/class-modules-data.php:995
 msgctxt "Module description"
 msgid ""
 "Easily insert <meta>, <link>, <script> and <style> tags, Google Analytics, "
@@ -5381,7 +5545,7 @@ msgstr ""
 "Analytics, Tag Manager, AdSense, le code Ads Conversion et Optimize, les "
 "pixels Facebook, TikTok et Twitter, etc."
 
-#: admin/class-modules-data.php:1059
+#: admin/class-modules-data.php:1071
 msgctxt "Module description"
 msgid ""
 "Enable assignment of multiple roles during user account creation and editing."
@@ -5393,7 +5557,7 @@ msgstr ""
 "avec des rôles non définis dans le noyau WordPress, par exemple à partir de "
 "plugins de commerce électronique ou de LMS."
 
-#: admin/class-modules-data.php:951
+#: admin/class-modules-data.php:963
 msgctxt "Module description"
 msgid ""
 "Enable custom ordering of various \"hierarchical\" content types or those "
@@ -5404,7 +5568,7 @@ msgstr ""
 "ceux prenant en charge les « attributs de page ». Un nouveau sous-menu "
 "« Commander » apparaîtra pour le(s) type(s) de contenu activé(s)."
 
-#: admin/class-modules-data.php:971
+#: admin/class-modules-data.php:983
 msgctxt "Module description"
 msgid ""
 "Enable log in, log out and dynamic log in/out menu item for addition to any "
@@ -5413,7 +5577,7 @@ msgstr ""
 "Active l'élément de menu de connexion, de déconnexion et de "
 "connexion/déconnexion dynamique pour l'ajouter à n'importe quel menu."
 
-#: admin/class-modules-data.php:943
+#: admin/class-modules-data.php:955
 msgctxt "Module description"
 msgid ""
 "Enable one-click duplication of pages, posts and custom posts. The "
@@ -5423,7 +5587,7 @@ msgstr ""
 "publications personnalisées. Les termes de taxonomie correspondants et la "
 "méta-post seront également dupliqués."
 
-#: admin/class-modules-data.php:955
+#: admin/class-modules-data.php:967
 msgctxt "Module description"
 msgid ""
 "Enable pages, posts and/or custom post types to have permalinks that point "
@@ -5435,7 +5599,7 @@ msgstr ""
 "L'attribut rel=\"noopener noreferrer nofollow\" sera également ajouté pour "
 "une sécurité améliorée et des avantages en matière de référencement."
 
-#: admin/class-modules-data.php:783
+#: admin/class-modules-data.php:795
 msgctxt "Module description"
 msgid ""
 "Enforce the use of strong passwords for all users on your website. This "
@@ -5448,7 +5612,7 @@ msgstr ""
 "utilisateurs disposent d'un mot de passe fort, difficile à deviner ou à "
 "déchiffrer."
 
-#: admin/class-modules-data.php:719
+#: admin/class-modules-data.php:731
 msgctxt "Module description"
 msgid ""
 "Enhance media library functionality to support the seamless uploading of SVG "
@@ -5457,7 +5621,7 @@ msgstr ""
 "Améliorez la fonctionnalité de la bibliothèque multimédia pour prendre en "
 "charge le téléchargement transparent de fichiers SVG."
 
-#: admin/class-modules-data.php:763
+#: admin/class-modules-data.php:775
 msgctxt "Module description"
 msgid ""
 "Enhance your website's security by fortifying it against brute force, (DoS) "
@@ -5470,7 +5634,7 @@ msgstr ""
 "plus, notre solution désactive de manière proactive les rétroliens et les "
 "pingbacks, renforçant ainsi les mécanismes de défense de votre site."
 
-#: admin/class-modules-data.php:723
+#: admin/class-modules-data.php:735
 msgctxt "Module description"
 msgid ""
 "Ensure that all external links within post content open in a new browser tab "
@@ -5484,7 +5648,7 @@ msgstr ""
 "référencement en incluant l'attribut \"rel=\"noopener noreferrer "
 "nofollow\"\"."
 
-#: admin/class-modules-data.php:827
+#: admin/class-modules-data.php:839
 msgctxt "Module description"
 msgid ""
 "Force all emails sent from your website to be sent to a specific email "
@@ -5496,7 +5660,7 @@ msgstr ""
 "fonctionnalité de messagerie sur votre site Web, car elle garantit que tous "
 "les e-mails sont envoyés à une seule adresse e-mail."
 
-#: admin/class-modules-data.php:1127
+#: admin/class-modules-data.php:1139
 #, fuzzy
 msgctxt "Module description"
 msgid "Force HTTPS on your site to ensure all traffic is encrypted and secure."
@@ -5504,14 +5668,14 @@ msgstr ""
 "Forcez HTTPS sur votre site pour garantir que tout le trafic est crypté et "
 "sécurisé."
 
-#: admin/class-modules-data.php:883
+#: admin/class-modules-data.php:895
 msgctxt "Module description"
 msgid "Give the admin menu more room to better accommodate wider items."
 msgstr ""
 "Donnez plus d'espace au menu d'administration pour mieux accueillir des "
 "éléments plus larges."
 
-#: admin/class-modules-data.php:711
+#: admin/class-modules-data.php:723
 msgctxt "Module description"
 msgid ""
 "Hide the admin bar on the front end of your website for either specific user "
@@ -5520,7 +5684,7 @@ msgstr ""
 "Masquez la barre d'administration sur le front-end de votre site Web pour "
 "des rôles d'utilisateur spécifiques ou pour tous les utilisateurs."
 
-#: admin/class-modules-data.php:795
+#: admin/class-modules-data.php:807
 msgctxt "Module description"
 msgid ""
 "Hide the default WordPress login errors that appear when an incorrect "
@@ -5529,12 +5693,23 @@ msgstr ""
 "Masquez les erreurs de connexion WordPress par défaut qui apparaissent "
 "lorsqu'un nom d'utilisateur ou un mot de passe incorrect est saisi."
 
-#: admin/class-modules-data.php:755
+#: admin/class-modules-data.php:767
 msgctxt "Module description"
 msgid "Hide the WordPress version from the source code."
 msgstr "Masquez la version WordPress du code source."
 
-#: admin/class-modules-data.php:967
+#: admin/class-modules-data.php:1159
+#, fuzzy
+msgctxt "Module description"
+msgid ""
+"Improve the default WordPress password hashing algorithm using Argon2. If "
+"Argon2 is not available, it will fallback to the default bcrypt algorithm."
+msgstr ""
+"Améliorez l'algorithme de hachage de mot de passe par défaut de WordPress "
+"avec Argon2. Si Argon2 n'est pas disponible, l'algorithme bcrypt par défaut "
+"sera utilisé."
+
+#: admin/class-modules-data.php:979
 msgctxt "Module description"
 msgid ""
 "Improve the usefulness of listing pages for various post types and "
@@ -5545,7 +5720,7 @@ msgstr ""
 "taxonomies, médias, commentaires et utilisateurs en ajoutant/supprimant des "
 "colonnes et des éléments."
 
-#: admin/class-modules-data.php:703
+#: admin/class-modules-data.php:715
 #, fuzzy
 msgctxt "Module description"
 msgid ""
@@ -5556,24 +5731,24 @@ msgstr ""
 "rassemblant toutes les notifications dans une fenêtre contextuelle (ouverte "
 "en cliquant sur la cloche en haut à droite)."
 
-#: admin/class-modules-data.php:811
+#: admin/class-modules-data.php:823
 msgctxt "Module description"
 msgid "Include/Exclude countries IP"
 msgstr "Inclure/exclure l'adresse IP des pays"
 
-#: admin/class-modules-data.php:1107
+#: admin/class-modules-data.php:1119
 msgctxt "Module description"
 msgid "Insert dynamic variables into your titles and content via shortcodes."
 msgstr ""
 "Insérez des variables dynamiques dans vos titres et contenus via des codes "
 "courts."
 
-#: admin/class-modules-data.php:1091
+#: admin/class-modules-data.php:1103
 msgctxt "Module description"
 msgid "Instant switching between user accounts."
 msgstr "Commutation instantanée entre les comptes utilisateurs."
 
-#: admin/class-modules-data.php:1067
+#: admin/class-modules-data.php:1079
 msgctxt "Module description"
 msgid ""
 "Manage app icon (Apple Touch Icon) individually. Once activated, go to "
@@ -5584,12 +5759,12 @@ msgstr ""
 "activée, accédez à Paramètres / Général pour modifier votre icône Apple "
 "Touch sans impacter votre favicon."
 
-#: admin/class-modules-data.php:1079
+#: admin/class-modules-data.php:1091
 msgctxt "Module description"
 msgid "Manage cron events on your website."
 msgstr "Gérez les événements cron sur votre site Web."
 
-#: admin/class-modules-data.php:739
+#: admin/class-modules-data.php:751
 msgctxt "Module description"
 msgid ""
 "Manage the visibility of comments on your public posts by selectively "
@@ -5603,7 +5778,7 @@ msgstr ""
 "les commentaires existants disparaîtront de manière transparente du front-"
 "end."
 
-#: admin/class-modules-data.php:1111
+#: admin/class-modules-data.php:1123
 msgctxt "Module description"
 msgid ""
 "Managing HTTP 410 statuses on your site. The 410 status indicates that the "
@@ -5614,7 +5789,7 @@ msgstr ""
 "ressource demandée a été supprimée définitivement et que cette suppression "
 "est intentionnelle et définitive."
 
-#: admin/class-modules-data.php:1019
+#: admin/class-modules-data.php:1031
 msgctxt "Module description"
 msgid ""
 "Modify the interval of the WordPress heartbeat API or disable it on admin "
@@ -5626,7 +5801,7 @@ msgstr ""
 "publication et/ou le frontend. Cela contribuera à réduire la charge CPU sur "
 "le serveur."
 
-#: admin/class-modules-data.php:1007
+#: admin/class-modules-data.php:1019
 msgctxt "Module description"
 msgid ""
 "Obfuscate email address to prevent spam bots from harvesting them, but make "
@@ -5638,7 +5813,7 @@ msgstr ""
 "humains, en utilisant le shortcode [wpm_obfuscate email=\"example@email."
 "com\" display=\"newline\"]"
 
-#: admin/class-modules-data.php:1003
+#: admin/class-modules-data.php:1015
 msgctxt "Module description"
 msgid ""
 "Obfuscate publicly exposed author page URLs that shows the user slugs / "
@@ -5652,7 +5827,7 @@ msgstr ""
 "des erreurs 404 pour les URL d'origine. Masquez également le point de "
 "terminaison de l'API REST /wp-json/wp/v2/users/."
 
-#: admin/class-modules-data.php:939
+#: admin/class-modules-data.php:951
 msgctxt "Module description"
 msgid ""
 "Password-protect the entire site to hide the content from public view and "
@@ -5663,7 +5838,7 @@ msgstr ""
 "vue du public et des robots/robots des moteurs de recherche. Les "
 "administrateurs connectés peuvent toujours accéder au site comme d'habitude."
 
-#: admin/class-modules-data.php:1139
+#: admin/class-modules-data.php:1151
 #, fuzzy
 msgctxt "Module description"
 msgid "Personalize your login page to match your brand."
@@ -5671,7 +5846,7 @@ msgstr ""
 "Personnalisez votre page de connexion pour qu'elle corresponde à votre "
 "marque."
 
-#: admin/class-modules-data.php:1023
+#: admin/class-modules-data.php:1035
 msgctxt "Module description"
 msgid ""
 "Prevent brute force attacks by limiting the number of failed login attempts "
@@ -5680,7 +5855,7 @@ msgstr ""
 "Empêchez les attaques par force brute en limitant le nombre de tentatives de "
 "connexion infructueuses autorisées par adresse IP."
 
-#: admin/class-modules-data.php:767
+#: admin/class-modules-data.php:779
 msgctxt "Module description"
 msgid ""
 "Prevent the creation of new user accounts on your website with the native "
@@ -5689,7 +5864,7 @@ msgstr ""
 "Empêchez la création de nouveaux comptes d'utilisateurs sur votre site Web "
 "avec le formulaire d'inscription natif WordPress."
 
-#: admin/class-modules-data.php:779
+#: admin/class-modules-data.php:791
 msgctxt "Module description"
 msgid ""
 "Prevent the creation of new user accounts with predifined blacklisted "
@@ -5699,19 +5874,19 @@ msgstr ""
 "d'utilisateur prédéfinis sur liste noire. Liste noire des noms d'utilisateur "
 "trop courants."
 
-#: admin/class-modules-data.php:775
+#: admin/class-modules-data.php:787
 msgctxt "Module description"
 msgid "Prevent the modification of the admin email address on your website."
 msgstr ""
 "Empêchez la modification de l’adresse e-mail de l’administrateur sur votre "
 "site Web."
 
-#: admin/class-modules-data.php:771
+#: admin/class-modules-data.php:783
 msgctxt "Module description"
 msgid "Prevent the modification of the site URL on your website."
 msgstr "Empêchez la modification de l'URL du site sur votre site Web."
 
-#: admin/class-modules-data.php:759
+#: admin/class-modules-data.php:771
 msgctxt "Module description"
 msgid ""
 "Prevent the modification of your website's core files through the WordPress "
@@ -5720,14 +5895,14 @@ msgstr ""
 "Empêchez la modification des fichiers principaux de votre site Web via le "
 "panneau d'administration WordPress."
 
-#: admin/class-modules-data.php:1043
+#: admin/class-modules-data.php:1055
 msgctxt "Module description"
 msgid "Prevent user enumeration via ?author=X and REST API /users/ endpoints."
 msgstr ""
 "Empêcher l'énumération des utilisateurs via ?author=X et les points de "
 "terminaison REST API /users/."
 
-#: admin/class-modules-data.php:1115
+#: admin/class-modules-data.php:1127
 msgctxt "Module description"
 msgid ""
 "Prevents plugin activation, deactivation, and deletion for enhanced security."
@@ -5735,7 +5910,7 @@ msgstr ""
 "Empêche l'activation, la désactivation et la suppression des plugins pour "
 "une sécurité renforcée."
 
-#: admin/class-modules-data.php:891
+#: admin/class-modules-data.php:903
 msgctxt "Module description"
 msgid ""
 "Protect your site against a wide range of threats. check all incoming "
@@ -5747,7 +5922,7 @@ msgstr ""
 "des éléments désagréables comme eval(, base64_ et des chaînes de requêtes "
 "excessivement longues."
 
-#: admin/class-modules-data.php:835
+#: admin/class-modules-data.php:847
 msgctxt "Module description"
 msgid ""
 "Protect your website from malicious file access in the upload directory."
@@ -5755,7 +5930,7 @@ msgstr ""
 "Protégez votre site Web contre l'accès malveillant aux fichiers dans le "
 "répertoire de téléchargement."
 
-#: admin/class-modules-data.php:1087
+#: admin/class-modules-data.php:1099
 msgctxt "Module description"
 msgid ""
 "Quickly change your WordPress database prefix to save time and enhance "
@@ -5764,7 +5939,7 @@ msgstr ""
 "Modifiez rapidement le préfixe de votre base de données WordPress pour "
 "gagner du temps et améliorer la sécurité."
 
-#: admin/class-modules-data.php:1015
+#: admin/class-modules-data.php:1027
 #, fuzzy
 msgctxt "Module description"
 msgid "Register custom content types for custom post types."
@@ -5772,22 +5947,22 @@ msgstr ""
 "Enregistrez des types de contenu personnalisés pour les types de publication "
 "personnalisés."
 
-#: admin/class-modules-data.php:963
+#: admin/class-modules-data.php:975
 msgctxt "Module description"
 msgid "Remove various elements from the admin bar."
 msgstr "Supprimez divers éléments de la barre d'administration."
 
-#: admin/class-modules-data.php:1051
+#: admin/class-modules-data.php:1063
 msgctxt "Module description"
 msgid "Removes the jQuery Migrate script from the frontend of your site."
 msgstr "Supprime le script jQuery Migrate du frontend de votre site."
 
-#: admin/class-modules-data.php:1071
+#: admin/class-modules-data.php:1083
 msgctxt "Module description"
 msgid "Replaces GRAVATAR management with media management."
 msgstr "Remplace la gestion GRAVATAR par la gestion des médias."
 
-#: admin/class-modules-data.php:1011
+#: admin/class-modules-data.php:1023
 msgctxt "Module description"
 msgid ""
 "Resize newly uploaded, large images to a smaller dimension and delete "
@@ -5799,14 +5974,14 @@ msgstr ""
 "fichiers BMP et PNG non transparents seront convertis en fichiers JPG et "
 "redimensionnés."
 
-#: admin/class-modules-data.php:1055
+#: admin/class-modules-data.php:1067
 msgctxt "Module description"
 msgid "Revert to previous versions of any theme or plugin from WordPress.org."
 msgstr ""
 "Revenir aux versions précédentes de n’importe quel thème ou plugin de "
 "WordPress.org."
 
-#: admin/class-modules-data.php:1135
+#: admin/class-modules-data.php:1147
 #, fuzzy
 msgctxt "Module description"
 msgid ""
@@ -5816,7 +5991,7 @@ msgstr ""
 "Sélectionnez une couleur de balise pour permettre une personnalisation "
 "transparente du thème dans tous les principaux navigateurs."
 
-#: admin/class-modules-data.php:931
+#: admin/class-modules-data.php:943
 msgctxt "Module description"
 msgid ""
 "Sends visitors to your homepage if they try to access a page that doesn't "
@@ -5825,21 +6000,21 @@ msgstr ""
 "Envoie les visiteurs vers votre page d'accueil s'ils tentent d'accéder à une "
 "page qui n'existe pas, garantissant ainsi qu'ils restent sur votre site."
 
-#: admin/class-modules-data.php:879
+#: admin/class-modules-data.php:891
 msgctxt "Module description"
 msgid "Set custom redirect URL for all or some user roles after login."
 msgstr ""
 "Définissez une URL de redirection personnalisée pour tout ou partie des "
 "rôles d'utilisateur après la connexion."
 
-#: admin/class-modules-data.php:875
+#: admin/class-modules-data.php:887
 msgctxt "Module description"
 msgid "Set custom redirect URL for all or some user roles after logout."
 msgstr ""
 "Définissez une URL de redirection personnalisée pour tout ou partie des "
 "rôles d'utilisateur après la déconnexion."
 
-#: admin/class-modules-data.php:1035
+#: admin/class-modules-data.php:1047
 msgctxt "Module description"
 msgid ""
 "Set custom sender name and email. Optionally use external SMTP service to "
@@ -5851,7 +6026,7 @@ msgstr ""
 "mails de notification et de transaction de votre site sont envoyés dans les "
 "boîtes de réception."
 
-#: admin/class-modules-data.php:1119
+#: admin/class-modules-data.php:1131
 #, fuzzy
 msgctxt "Module description"
 msgid ""
@@ -5861,7 +6036,7 @@ msgstr ""
 "Raccourcissez vos liens avec un préfixe personnalisé. Vous pouvez également "
 "suivre le nombre de clics sur chaque lien."
 
-#: admin/class-modules-data.php:935
+#: admin/class-modules-data.php:947
 msgctxt "Module description"
 msgid ""
 "Show a customizable maintenance page on the frontend while performing a "
@@ -5872,7 +6047,7 @@ msgstr ""
 "effectuant une brève maintenance de votre site. Les administrateurs "
 "connectés peuvent toujours consulter le site comme d'habitude."
 
-#: admin/class-modules-data.php:899
+#: admin/class-modules-data.php:911
 msgctxt "Module description"
 msgid ""
 "Some servers send a header called X-Powered-By that contains the PHP version "
@@ -5883,14 +6058,14 @@ msgstr ""
 "version PHP utilisée sur votre site. Cela peut constituer une information "
 "utile pour les attaquants et doit être supprimé."
 
-#: admin/class-modules-data.php:947
+#: admin/class-modules-data.php:959
 msgctxt "Module description"
 msgid "Specifying the number of posts to display per page, for each post type."
 msgstr ""
 "Spécifier le nombre de publications à afficher par page, pour chaque type de "
 "publication."
 
-#: admin/class-modules-data.php:1123
+#: admin/class-modules-data.php:1135
 #, fuzzy
 msgctxt "Module description"
 msgid ""
@@ -5900,14 +6075,14 @@ msgstr ""
 "Ce module analysera votre version principale de WordPress, vos plugins et "
 "vos thèmes à la recherche de vulnérabilités."
 
-#: admin/class-modules-data.php:911
+#: admin/class-modules-data.php:923
 msgctxt "Module description"
 msgid "Tidy up user profiles by removing sections you do not utilise."
 msgstr ""
 "Rangez les profils d'utilisateurs en supprimant les sections que vous "
 "n'utilisez pas."
 
-#: admin/class-modules-data.php:707 admin/class-modules-data.php:715
+#: admin/class-modules-data.php:719 admin/class-modules-data.php:727
 msgctxt "Module description"
 msgid ""
 "Track and record the most recent login activity of site users, then showcase "
@@ -5917,7 +6092,7 @@ msgstr ""
 "utilisateurs du site, puis affichez la date et l'heure dans le tableau de la "
 "liste des utilisateurs"
 
-#: admin/class-modules-data.php:1103
+#: admin/class-modules-data.php:1115
 msgctxt "Module description"
 msgid ""
 "With this feature you can paste directly your picture in WordPress media."
@@ -5925,7 +6100,7 @@ msgstr ""
 "Avec cette fonctionnalité, vous pouvez coller directement votre image dans "
 "le média WordPress."
 
-#: admin/class-modules-data.php:895
+#: admin/class-modules-data.php:907
 msgctxt "Module description"
 msgid ""
 "WordPress salt keys or security keys are codes that help protect important "
@@ -5934,7 +6109,7 @@ msgstr ""
 "Les clés de sel WordPress ou clés de sécurité sont des codes qui aident à "
 "protéger les informations importantes sur votre site Web."
 
-#: admin/class-modules-data.php:727
+#: admin/class-modules-data.php:739
 msgctxt "Module description"
 msgid ""
 "You can enable custom link menu items to open in a separate browser tab with "
@@ -5948,563 +6123,575 @@ msgstr ""
 "avons implémenté l'attribut \"rel=\"noopener noreferrer nofollow\"\" pour "
 "ces liens."
 
-#: admin/class-modules-data.php:1110
+#: admin/class-modules-data.php:1122
 msgctxt "Module name"
 msgid "410 Manager"
 msgstr "Gestionnaire 410"
 
-#: admin/class-modules-data.php:1106
+#: admin/class-modules-data.php:1118
 msgctxt "Module name"
 msgid "Add Essentials Shortcodes"
 msgstr "Ajouter des codes courts essentiels"
 
-#: admin/class-modules-data.php:1062
+#: admin/class-modules-data.php:1074
 msgctxt "Module name"
 msgid "Adminer"
 msgstr "Adminer"
 
-#: admin/class-modules-data.php:726
+#: admin/class-modules-data.php:738
 msgctxt "Module name"
 msgid "Allow Menu Custom Links to Open in New Tab"
 msgstr ""
 "Autoriser l'ouverture des liens personnalisés du menu dans un nouvel onglet"
 
-#: admin/class-modules-data.php:1066
+#: admin/class-modules-data.php:1078
 msgctxt "Module name"
 msgid "Apple Touch Icon"
 msgstr "Icône Apple Touch"
 
-#: admin/class-modules-data.php:1074
+#: admin/class-modules-data.php:1086
 msgctxt "Module name"
 msgid "Auto clean actionscheduler_actions"
 msgstr "Nettoyage automatique de actionscheduler_actions"
 
-#: admin/class-modules-data.php:894
+#: admin/class-modules-data.php:906
 msgctxt "Module name"
 msgid "Auto Regenerate Salt Keys"
 msgstr "Régénération automatique des clés de salage"
 
-#: admin/class-modules-data.php:730
+#: admin/class-modules-data.php:742
 msgctxt "Module name"
 msgid "Auto-Publish Posts with Missed Schedule"
 msgstr "Publication automatique des publications programmées « manquées »"
 
-#: admin/class-modules-data.php:1030
+#: admin/class-modules-data.php:1042
 #| msgid "Ban emails"
 msgctxt "Module name"
 msgid "Ban Emails"
 msgstr "Interdire les e-mails"
 
-#: admin/class-modules-data.php:778
+#: admin/class-modules-data.php:1158
+#, fuzzy
+msgctxt "Module name"
+msgid "Better Password Hash"
+msgstr "Meilleur hachage de mot de passe"
+
+#: admin/class-modules-data.php:790
 msgctxt "Module name"
 msgid "Blacklisted Usernames"
 msgstr "Noms d'utilisateur sur liste noire"
 
-#: admin/class-modules-data.php:1026
+#: admin/class-modules-data.php:1038
 msgctxt "Module name"
 msgid "Block User Registration from Disposable Email"
 msgstr "Bloquer l'enregistrement des utilisateurs à partir d'un e-mail jetable"
 
-#: admin/class-modules-data.php:1134
+#: admin/class-modules-data.php:1146
 #, fuzzy
 msgctxt "Module name"
 msgid "Browser Theme Color"
 msgstr "Couleur du thème du navigateur"
 
-#: admin/class-modules-data.php:1086
+#: admin/class-modules-data.php:1098
 msgctxt "Module name"
 msgid "Change Database Prefix"
 msgstr "Modifier le préfixe de la base de données"
 
-#: admin/class-modules-data.php:926
+#: admin/class-modules-data.php:938
 msgctxt "Module name"
 msgid "Child theme generator"
 msgstr "Générateur de thèmes enfants"
 
-#: admin/class-modules-data.php:910
+#: admin/class-modules-data.php:922
 msgctxt "Module name"
 msgid "Clean Profiles"
 msgstr "Nettoyer les profils"
 
-#: admin/class-modules-data.php:962
+#: admin/class-modules-data.php:974
 msgctxt "Module name"
 msgid "Clean Up Admin Bar"
 msgstr "Nettoyer la barre d'administration"
 
-#: admin/class-modules-data.php:734
+#: admin/class-modules-data.php:746
 msgctxt "Module name"
 msgid "Code Snippets"
 msgstr "Code Snippets"
 
-#: admin/class-modules-data.php:942
+#: admin/class-modules-data.php:954
 msgctxt "Module name"
 msgid "Content Duplication"
 msgstr "Duplication de contenu"
 
-#: admin/class-modules-data.php:950
+#: admin/class-modules-data.php:962
 msgctxt "Module name"
 msgid "Content Order"
 msgstr "Ordre du contenu"
 
-#: admin/class-modules-data.php:1078
+#: admin/class-modules-data.php:1090
 msgctxt "Module name"
 msgid "CRON Manager"
 msgstr "Gestionnaire CRON"
 
-#: admin/class-modules-data.php:974
+#: admin/class-modules-data.php:986
 msgctxt "Module name"
 msgid "Custom Admin CSS"
 msgstr "CSS d'administration personnalisé"
 
-#: admin/class-modules-data.php:870
+#: admin/class-modules-data.php:882
 msgctxt "Module name"
 msgid "Custom Body Class"
 msgstr "Classe de Body personnalisée"
 
-#: admin/class-modules-data.php:978
+#: admin/class-modules-data.php:990
 msgctxt "Module name"
 msgid "Custom Frontend CSS"
 msgstr "CSS personnalisé pour le frontend"
 
-#: admin/class-modules-data.php:1138
+#: admin/class-modules-data.php:1150
 #, fuzzy
 msgctxt "Module name"
 msgid "Custom Login Design"
 msgstr "Conception de connexion personnalisée"
 
-#: admin/class-modules-data.php:998
+#: admin/class-modules-data.php:1010
 msgctxt "Module name"
 msgid "Disable All Updates"
 msgstr "Désactiver toutes les mises à jour"
 
-#: admin/class-modules-data.php:866
+#: admin/class-modules-data.php:878
 msgctxt "Module name"
 msgid "Disable Block-Based Widgets Settings Screen"
 msgstr "Désactiver l'écran des paramètres des widgets basés sur des blocs"
 
-#: admin/class-modules-data.php:838
+#: admin/class-modules-data.php:850
 msgctxt "Module name"
 msgid "Disable cart fragments scripts"
 msgstr "Désactiver les scripts de « cart fragments »"
 
-#: admin/class-modules-data.php:738
+#: admin/class-modules-data.php:750
 msgctxt "Module name"
 msgid "Disable Comments"
 msgstr "Désactiver les commentaires"
 
-#: admin/class-modules-data.php:886
+#: admin/class-modules-data.php:898
 msgctxt "Module name"
 msgid "Disable Dashboard Widgets"
 msgstr "Désactiver les widgets du tableau de bord"
 
-#: admin/class-modules-data.php:850
+#: admin/class-modules-data.php:862
 msgctxt "Module name"
 msgid "Disable dashicons CSS and JS files"
 msgstr "Désactiver les fichiers CSS et JS dashicons"
 
-#: admin/class-modules-data.php:846
+#: admin/class-modules-data.php:858
 msgctxt "Module name"
 msgid "Disable emoji support"
 msgstr "Désactiver la prise en charge des emoji"
 
-#: admin/class-modules-data.php:742
+#: admin/class-modules-data.php:754
 msgctxt "Module name"
 msgid "Disable Feeds"
 msgstr "Désactiver les flux"
 
-#: admin/class-modules-data.php:746
+#: admin/class-modules-data.php:758
 msgctxt "Module name"
 msgid "Disable Gutenberg"
 msgstr "Désactiver Gutenberg"
 
-#: admin/class-modules-data.php:1050
+#: admin/class-modules-data.php:1062
 msgctxt "Module name"
 msgid "Disable jQuery Migrate"
 msgstr "Désactiver jQuery Migrate"
 
-#: admin/class-modules-data.php:858
+#: admin/class-modules-data.php:870
 msgctxt "Module name"
 msgid "Disable Really Simple Discovery (RSD) <link> tag"
 msgstr "Désactiver la balise <link> Really Simple Discovery (RSD)"
 
-#: admin/class-modules-data.php:994
+#: admin/class-modules-data.php:1006
 msgctxt "Module name"
 msgid "Disable REST API"
 msgstr "Désactiver l'API REST"
 
-#: admin/class-modules-data.php:862
+#: admin/class-modules-data.php:874
 msgctxt "Module name"
 msgid "Disable Windows Live Writer (WLW) manifest <link> tag"
 msgstr "Désactiver la balise <link> du manifeste Windows Live Writer (WLW)"
 
-#: admin/class-modules-data.php:854
+#: admin/class-modules-data.php:866
 msgctxt "Module name"
 msgid "Disable WordPress shortlink <link> tag"
 msgstr "Désactiver la balise WordPress shortlink <link>"
 
-#: admin/class-modules-data.php:822
+#: admin/class-modules-data.php:834
 msgctxt "Module name"
 msgid "Disable WP Sitemap"
 msgstr "Désactiver le plan du site WP"
 
-#: admin/class-modules-data.php:750
+#: admin/class-modules-data.php:762
 msgctxt "Module name"
 msgid "Disable wp_mail"
 msgstr "Désactiver wp_mail"
 
-#: admin/class-modules-data.php:762
+#: admin/class-modules-data.php:774
 msgctxt "Module name"
 msgid "Disable XML-RPC"
 msgstr "Désactiver XML-RPC"
 
-#: admin/class-modules-data.php:806
+#: admin/class-modules-data.php:818
 msgctxt "Module name"
 msgid "Disallow Access WP Sensible Files"
 msgstr "Interdire l'accès aux fichiers sensibles WP"
 
-#: admin/class-modules-data.php:890
+#: admin/class-modules-data.php:902
 msgctxt "Module name"
 msgid "Disallow Bad Requests"
 msgstr "Interdire les mauvaises requêtes"
 
-#: admin/class-modules-data.php:810
+#: admin/class-modules-data.php:822
 msgctxt "Module name"
 msgid "Disallow Countries IP"
 msgstr "Interdire les IPs par pays"
 
-#: admin/class-modules-data.php:814
+#: admin/class-modules-data.php:826
 msgctxt "Module name"
 msgid "Disallow Dir Listing"
 msgstr "Interdire la liste des répertoires"
 
-#: admin/class-modules-data.php:834
+#: admin/class-modules-data.php:846
 msgctxt "Module name"
 msgid "Disallow Malicious File Access in upload"
 msgstr "Interdire l'accès aux fichiers malveillants dans le dossier upload"
 
-#: admin/class-modules-data.php:802
+#: admin/class-modules-data.php:814
 msgctxt "Module name"
 msgid "Disallow Plugin Upload"
 msgstr "Interdire le téléversement de plugins"
 
-#: admin/class-modules-data.php:766
+#: admin/class-modules-data.php:778
 msgctxt "Module name"
 msgid "Disallow register user"
 msgstr "Désactiver l’option « Tout le monde peut s’inscrire »"
 
-#: admin/class-modules-data.php:798
+#: admin/class-modules-data.php:810
 msgctxt "Module name"
 msgid "Disallow Theme Upload"
 msgstr "Interdire le téléversement de thème"
 
-#: admin/class-modules-data.php:758
+#: admin/class-modules-data.php:770
 msgctxt "Module name"
 msgid "Disallow WP File Edit"
 msgstr "Interdire l’utilisation de WP File Edit"
 
-#: admin/class-modules-data.php:922
+#: admin/class-modules-data.php:934
 msgctxt "Module name"
 msgid "Duplicate Menu"
 msgstr "Duplication de menu"
 
-#: admin/class-modules-data.php:966
+#: admin/class-modules-data.php:978
 msgctxt "Module name"
 msgid "Enhance List Tables"
 msgstr "Améliorer les tableaux de liste"
 
-#: admin/class-modules-data.php:918
+#: admin/class-modules-data.php:930
 msgctxt "Module name"
 msgid "Export Posts & Pages"
 msgstr "Exporter les articles et les pages"
 
-#: admin/class-modules-data.php:906
+#: admin/class-modules-data.php:918
 msgctxt "Module name"
 msgid "Export Users"
 msgstr "Exporter les utilisateurs"
 
-#: admin/class-modules-data.php:954
+#: admin/class-modules-data.php:966
 msgctxt "Module name"
 msgid "External Permalinks"
 msgstr "Permaliens externes"
 
-#: admin/class-modules-data.php:1046
+#: admin/class-modules-data.php:1058
 msgctxt "Module name"
 msgid "File Manager"
 msgstr "Gestionnaire de fichiers"
 
-#: admin/class-modules-data.php:826
+#: admin/class-modules-data.php:838
 msgctxt "Module name"
 msgid "Force Send All Email To"
 msgstr "Forcer l'envoi de tous les e-mails à"
 
-#: admin/class-modules-data.php:1126
+#: admin/class-modules-data.php:1138
 #, fuzzy
 msgctxt "Module name"
 msgid "Force SSL"
 msgstr "Forcer SSL"
 
-#: admin/class-modules-data.php:782
+#: admin/class-modules-data.php:794
 msgctxt "Module name"
 msgid "Force Strong Password"
 msgstr "Forcer un mot de passe fort"
 
-#: admin/class-modules-data.php:1018
+#: admin/class-modules-data.php:1154
+#, fuzzy
+msgctxt "Module name"
+msgid "Generate Alt Text With AI"
+msgstr "Générer du texte alternatif avec l'IA"
+
+#: admin/class-modules-data.php:1030
 msgctxt "Module name"
 msgid "Heartbeat Control"
 msgstr "Contrôle du rythme cardiaque"
 
-#: admin/class-modules-data.php:710
+#: admin/class-modules-data.php:722
 msgctxt "Module name"
 msgid "Hide Admin Bar"
 msgstr "Masquer la barre d'administration"
 
-#: admin/class-modules-data.php:702
+#: admin/class-modules-data.php:714
 msgctxt "Module name"
 msgid "Hide Admin Notices"
 msgstr "Masquer les notifications d'administration"
 
-#: admin/class-modules-data.php:794
+#: admin/class-modules-data.php:806
 msgctxt "Module name"
 msgid "Hide Login Errors"
 msgstr "Masquer les erreurs de connexion"
 
-#: admin/class-modules-data.php:898
+#: admin/class-modules-data.php:910
 msgctxt "Module name"
 msgid "Hide PHP Versions"
 msgstr "Masquer les versions PHP"
 
-#: admin/class-modules-data.php:754
+#: admin/class-modules-data.php:766
 msgctxt "Module name"
 msgid "Hide WordPress Version"
 msgstr "Masquer la version WordPress"
 
-#: admin/class-modules-data.php:1082
+#: admin/class-modules-data.php:1094
 #| msgid "Hook and filter debugger"
 msgctxt "Module name"
 msgid "Hook And Filter Debugger"
 msgstr "Débogueur de hook et de filtre"
 
-#: admin/class-modules-data.php:1010
+#: admin/class-modules-data.php:1022
 msgctxt "Module name"
 msgid "Image Upload Control"
 msgstr "Contrôle de téléchargement d'images"
 
-#: admin/class-modules-data.php:982
+#: admin/class-modules-data.php:994
 msgctxt "Module name"
 msgid "Insert <head>, <body> and <footer> Code"
 msgstr "Insérer le code <head>, <body> et <footer>"
 
-#: admin/class-modules-data.php:714
+#: admin/class-modules-data.php:726
 msgctxt "Module name"
 msgid "Last Login Column"
 msgstr "Colonne Dernière connexion"
 
-#: admin/class-modules-data.php:1022
+#: admin/class-modules-data.php:1034
 msgctxt "Module name"
 msgid "Limit Login Attempts"
 msgstr "Limiter les tentatives de connexion"
 
-#: admin/class-modules-data.php:1118
+#: admin/class-modules-data.php:1130
 #, fuzzy
 msgctxt "Module name"
 msgid "Link Shortener"
 msgstr "Raccourcisseur de liens"
 
-#: admin/class-modules-data.php:1070
+#: admin/class-modules-data.php:1082
 msgctxt "Module name"
 msgid "Local avatars"
 msgstr "Local avatars"
 
-#: admin/class-modules-data.php:774
+#: admin/class-modules-data.php:786
 msgctxt "Module name"
 msgid "Lock Admin Email"
 msgstr "Verrouiller l'e-mail de l'administrateur"
 
-#: admin/class-modules-data.php:770
+#: admin/class-modules-data.php:782
 msgctxt "Module name"
 msgid "Lock Site URL"
 msgstr "Verrouiller l'URL du site"
 
-#: admin/class-modules-data.php:970
+#: admin/class-modules-data.php:982
 msgctxt "Module name"
 msgid "Log In/Out Menu"
 msgstr "Menu Connexion/Déconnexion"
 
-#: admin/class-modules-data.php:934
+#: admin/class-modules-data.php:946
 msgctxt "Module name"
 msgid "Maintenance Mode"
 msgstr "Maintenance en cours"
 
-#: admin/class-modules-data.php:818
+#: admin/class-modules-data.php:830
 msgctxt "Module name"
 msgid "Manage Admin Emails Notifications"
 msgstr "Gérer les notifications par e-mail de l'administrateur"
 
-#: admin/class-modules-data.php:986
+#: admin/class-modules-data.php:998
 msgctxt "Module name"
 msgid "Manage ads.txt and app-ads.txt"
 msgstr "Gérer les fichiers ads.txt et app-ads.txt"
 
-#: admin/class-modules-data.php:990
+#: admin/class-modules-data.php:1002
 msgctxt "Module name"
 msgid "Manage robots.txt"
 msgstr "Gérer le fichier robots.txt"
 
-#: admin/class-modules-data.php:1098
+#: admin/class-modules-data.php:1110
 msgctxt "Module name"
 msgid "Media Cleaner"
 msgstr "Nettoyeur de médias"
 
-#: admin/class-modules-data.php:1094
+#: admin/class-modules-data.php:1106
 msgctxt "Module name"
 msgid "Media Encoder"
 msgstr "Encodeur multimédia"
 
-#: admin/class-modules-data.php:958
+#: admin/class-modules-data.php:970
 msgctxt "Module name"
 msgid "Meta Debugger"
 msgstr "Méta-débogueur"
 
-#: admin/class-modules-data.php:786
+#: admin/class-modules-data.php:798
 msgctxt "Module name"
 msgid "Move Login URL"
 msgstr "Déplacer l'URL de connexion"
 
-#: admin/class-modules-data.php:1058
+#: admin/class-modules-data.php:1070
 msgctxt "Module name"
 msgid "Multiple User Roles"
 msgstr "Rôles d'utilisateurs multiples"
 
-#: admin/class-modules-data.php:902
+#: admin/class-modules-data.php:914
 msgctxt "Module name"
 msgid "Nav Menu Visibility"
 msgstr "Visibilité du menu de navigation"
 
-#: admin/class-modules-data.php:1114
+#: admin/class-modules-data.php:1126
 msgctxt "Module name"
 msgid "No Plugin Activation / Deactivation / Deletion"
 msgstr "Aucune activation / désactivation / suppression de plugin"
 
-#: admin/class-modules-data.php:1002
+#: admin/class-modules-data.php:1014
 msgctxt "Module name"
 msgid "Obfuscate Author Slugs"
 msgstr "Masquer les slugs des auteurs"
 
-#: admin/class-modules-data.php:1006
+#: admin/class-modules-data.php:1018
 msgctxt "Module name"
 msgid "Obfuscate Email Addresses"
 msgstr "Masquer les adresses e-mail"
 
-#: admin/class-modules-data.php:722
+#: admin/class-modules-data.php:734
 msgctxt "Module name"
 msgid "Open All External Links in New Tab"
 msgstr "Ouvrir tous les liens externes dans un nouvel onglet"
 
-#: admin/class-modules-data.php:938
+#: admin/class-modules-data.php:950
 msgctxt "Module name"
 msgid "Password Protection"
 msgstr "Mot de passe de protection"
 
-#: admin/class-modules-data.php:1102
+#: admin/class-modules-data.php:1114
 msgctxt "Module name"
 msgid "Paste Image In Media"
 msgstr "Coller l'image dans le média"
 
-#: admin/class-modules-data.php:1054
+#: admin/class-modules-data.php:1066
 msgctxt "Module name"
 msgid "Plugin & Theme Rollback"
 msgstr "Restauration des plugins et des thèmes"
 
-#: admin/class-modules-data.php:830
+#: admin/class-modules-data.php:842
 msgctxt "Module name"
 msgid "Plugin Download"
 msgstr "Téléchargement du plugin"
 
-#: admin/class-modules-data.php:946
+#: admin/class-modules-data.php:958
 msgctxt "Module name"
 msgid "Post Per Page"
 msgstr "Publication par page"
 
-#: admin/class-modules-data.php:1130
+#: admin/class-modules-data.php:1142
 #, fuzzy
 msgctxt "Module name"
 msgid "Post Type Switcher"
 msgstr "Sélecteur de type de publication"
 
-#: admin/class-modules-data.php:1042
+#: admin/class-modules-data.php:1054
 msgctxt "Module name"
 msgid "Prevent User Enumeration"
 msgstr "Empêcher l'énumération des utilisateurs"
 
-#: admin/class-modules-data.php:1038
+#: admin/class-modules-data.php:1050
 msgctxt "Module name"
 msgid "Protect Website Headers"
 msgstr "Protéger les en-têtes du site Web"
 
-#: admin/class-modules-data.php:914
+#: admin/class-modules-data.php:926
 msgctxt "Module name"
 msgid "Quick Add Post"
 msgstr "Ajout rapide d'un article"
 
-#: admin/class-modules-data.php:930
+#: admin/class-modules-data.php:942
 msgctxt "Module name"
 msgid "Redirect 404 to Homepage"
 msgstr "Rediriger 404 vers la page d'accueil"
 
-#: admin/class-modules-data.php:878
+#: admin/class-modules-data.php:890
 msgctxt "Module name"
 msgid "Redirect After Login"
 msgstr "Redirection après la connexion"
 
-#: admin/class-modules-data.php:874
+#: admin/class-modules-data.php:886
 msgctxt "Module name"
 msgid "Redirect After Logout"
 msgstr "Redirection après la déconnexion"
 
-#: admin/class-modules-data.php:1014
+#: admin/class-modules-data.php:1026
 #, fuzzy
 msgctxt "Module name"
 msgid "Register Custom Content Types"
 msgstr "Enregistrer les types de contenu personnalisés"
 
-#: admin/class-modules-data.php:842
+#: admin/class-modules-data.php:854
 msgctxt "Module name"
 msgid "Revisions Control"
 msgstr "Contrôle des révisions"
 
-#: admin/class-modules-data.php:1034
+#: admin/class-modules-data.php:1046
 #| msgid "SMTP mailer"
 msgctxt "Module name"
 msgid "SMTP Mailer"
 msgstr "Courrier SMTP"
 
-#: admin/class-modules-data.php:718
+#: admin/class-modules-data.php:730
 msgctxt "Module name"
 msgid "SVG Upload"
 msgstr "Téléchargement SVG"
 
-#: admin/class-modules-data.php:790
+#: admin/class-modules-data.php:802
 msgctxt "Module name"
 msgid "Two Factor Authentication"
 msgstr "Authentification à deux facteurs"
 
-#: admin/class-modules-data.php:706
+#: admin/class-modules-data.php:718
 msgctxt "Module name"
 msgid "Updates Logs"
 msgstr "Journaux de mises à jour"
 
-#: admin/class-modules-data.php:1090
+#: admin/class-modules-data.php:1102
 msgctxt "Module name"
 msgid "User Switching"
 msgstr "Changement d'utilisateur"
 
-#: admin/class-modules-data.php:1122
+#: admin/class-modules-data.php:1134
 #, fuzzy
 msgctxt "Module name"
 msgid "Vulnerabilities Scan"
 msgstr "Analyse des vulnérabilités"
 
-#: admin/class-modules-data.php:882
+#: admin/class-modules-data.php:894
 msgctxt "Module name"
 msgid "Wider Admin Menu"
 msgstr "Menu d’administration plus large"
@@ -6532,8 +6719,8 @@ msgstr "Mois"
 msgid "Monthly"
 msgstr "Mensuel"
 
-#: admin/modules/core/class-register-custom-content-types.php:541
 #: admin/modules/core/class-register-custom-content-types.php:542
+#: admin/modules/core/class-register-custom-content-types.php:543
 #, fuzzy
 msgid "Most Used"
 msgstr "Le plus utilisé"
@@ -6558,17 +6745,17 @@ msgstr "Déplacer l'URL de connexion"
 msgid "Moved from <b>%1$s</b> to <b>%2$s</b>"
 msgstr "Déplacé de <b>%s</b> à <b>%s</b>"
 
-#: admin/modules/core/class-register-custom-content-types.php:255
+#: admin/modules/core/class-register-custom-content-types.php:256
 #, fuzzy
 msgid "Movie"
 msgstr "Film"
 
-#: admin/modules/core/class-register-custom-content-types.php:261
+#: admin/modules/core/class-register-custom-content-types.php:262
 #, fuzzy
 msgid "movie"
 msgstr "film"
 
-#: admin/modules/core/class-register-custom-content-types.php:249
+#: admin/modules/core/class-register-custom-content-types.php:250
 #, fuzzy
 msgid "Movies"
 msgstr "Films"
@@ -6587,7 +6774,7 @@ msgstr "Mon compte"
 msgid "Name"
 msgstr "Nom"
 
-#: admin/modules/core/class-register-custom-content-types.php:556
+#: admin/modules/core/class-register-custom-content-types.php:557
 #, fuzzy
 msgid "Name Field Description"
 msgstr "Nom Champ Description"
@@ -6635,12 +6822,12 @@ msgstr "Nouveau commentaire"
 msgid "New core update"
 msgstr "Nouvelle mise à jour du noyau"
 
-#: admin/modules/core/class-register-custom-content-types.php:300
+#: admin/modules/core/class-register-custom-content-types.php:301
 #: admin/templates/core/file-manager/views/navbar.php:28
 msgid "New Item"
 msgstr "Nouvel article"
 
-#: admin/modules/core/class-register-custom-content-types.php:501
+#: admin/modules/core/class-register-custom-content-types.php:502
 #, fuzzy
 msgid "New Item Name"
 msgstr "Nouveau nom d'élément"
@@ -6650,7 +6837,7 @@ msgstr "Nouveau nom d'élément"
 msgid "New Password"
 msgstr "Nouveau mot de passe"
 
-#: admin/modules/core/class-register-custom-content-types.php:301
+#: admin/modules/core/class-register-custom-content-types.php:302
 #, fuzzy
 msgid "New Post"
 msgstr "Nouveau message"
@@ -6668,7 +6855,7 @@ msgstr "Nouveau lien court"
 msgid "New Snippet"
 msgstr "Nouveau snippet"
 
-#: admin/modules/core/class-register-custom-content-types.php:502
+#: admin/modules/core/class-register-custom-content-types.php:503
 #, fuzzy
 msgid "New Tag Name"
 msgstr "Nouveau nom de balise"
@@ -6702,6 +6889,7 @@ msgstr "Aucune icône (alt)"
 #: admin/modules/core/class-media-encoder.php:884
 #: admin/modules/core/class-media-encoder.php:950
 #: admin/modules/core/class-media-encoder.php:979
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:382
 msgid "No attachment id."
 msgstr "Aucun identifiant de pièce jointe."
 
@@ -6764,18 +6952,18 @@ msgstr "Aucune métadonnée trouvée"
 msgid "No permalink (Prevent URL rewriting)"
 msgstr "Pas de lien permanent (empêcher la réécriture de l'URL)"
 
-#: admin/modules/core/class-register-custom-content-types.php:316
+#: admin/modules/core/class-register-custom-content-types.php:317
 #, fuzzy
 msgid "No Posts Found"
 msgstr "Aucun message trouvé"
 
-#: admin/modules/core/class-register-custom-content-types.php:321
+#: admin/modules/core/class-register-custom-content-types.php:322
 #, fuzzy
 msgid "No Posts Found in Trash"
 msgstr "Aucun message trouvé dans la corbeille"
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:561
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:511
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:567
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:523
 #, fuzzy
 msgid "No Query Variable"
 msgstr "Aucune variable de requête"
@@ -6804,17 +6992,17 @@ msgstr "Aucun lien court trouvé"
 msgid "No Short Links Found in Trash"
 msgstr "Aucun lien court trouvé dans la corbeille"
 
-#: admin/modules/core/class-register-custom-content-types.php:552
+#: admin/modules/core/class-register-custom-content-types.php:553
 #, fuzzy
 msgid "No tags"
 msgstr "Aucune balise"
 
-#: admin/modules/core/class-register-custom-content-types.php:547
+#: admin/modules/core/class-register-custom-content-types.php:548
 #, fuzzy
 msgid "No tags found"
 msgstr "Aucune balise trouvée"
 
-#: admin/modules/core/class-register-custom-content-types.php:551
+#: admin/modules/core/class-register-custom-content-types.php:552
 #, fuzzy
 msgid "No Terms"
 msgstr "Aucune condition"
@@ -6838,8 +7026,8 @@ msgstr "Aucun"
 msgid "Not a valid image."
 msgstr "Ce n'est pas une image valide."
 
-#: admin/modules/core/class-register-custom-content-types.php:315
-#: admin/modules/core/class-register-custom-content-types.php:546
+#: admin/modules/core/class-register-custom-content-types.php:316
+#: admin/modules/core/class-register-custom-content-types.php:547
 #, fuzzy
 msgid "Not Found"
 msgstr "Non trouvé"
@@ -6848,7 +7036,7 @@ msgstr "Non trouvé"
 msgid "Not found"
 msgstr "Pas trouvé"
 
-#: admin/modules/core/class-register-custom-content-types.php:320
+#: admin/modules/core/class-register-custom-content-types.php:321
 #, fuzzy
 msgid "Not Found in Trash"
 msgstr "Non trouvé dans la corbeille"
@@ -6891,7 +7079,7 @@ msgstr "maintenant"
 msgid "OFF"
 msgstr "OFF"
 
-#: admin/modules/core/class-media-encoder.php:2392
+#: admin/modules/core/class-media-encoder.php:2408
 #, fuzzy
 msgid "Off"
 msgstr "Désactivé"
@@ -6955,17 +7143,15 @@ msgstr "OOPS : minimum 3 caractères requis !"
 msgid "Open"
 msgstr "Ouvrir"
 
+#: admin/modules/core/class-external-links-new-tab.php:40
+#, fuzzy
+msgid "Open All External Links in New Tab"
+msgstr "Ouvrir tous les liens externes dans un nouvel onglet"
+
 #: admin/helpers/core/select-dashicon/class-select-dashicon.php:261
 #, fuzzy
 msgid "Open Folder Icon"
 msgstr "Icône de dossier ouvert"
-
-#: admin/modules/core/class-custom-link-menu-new-tab.php:39
-msgid ""
-"Open link in new tab and add rel=\"noopener noreferrer nofollow\" attribute."
-msgstr ""
-"Ouvrez le lien dans un nouvel onglet et ajoutez l'attribut rel=\"noopener "
-"noreferrer nofollow\"."
 
 #: admin/modules/core/class-file-manager.php:821
 #: admin/modules/core/class-file-manager.php:903
@@ -6982,7 +7168,7 @@ msgstr "Optimiser"
 msgid "Option Page"
 msgstr "Page d'options"
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:740
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:746
 #, fuzzy
 msgid ""
 "Optional custom controller to use instead of `WP_REST_Posts_Controller`."
@@ -6990,7 +7176,7 @@ msgstr ""
 "Contrôleur personnalisé facultatif à utiliser à la place de "
 "`WP_REST_Posts_Controller`."
 
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:725
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:737
 #, fuzzy
 msgid ""
 "Optional custom controller to use instead of `WP_REST_Terms_Controller`."
@@ -7014,7 +7200,7 @@ msgstr "Icône de liste ordonnée"
 msgid "Ordered List RTL Icon"
 msgstr "Icône de liste ordonnée RTL"
 
-#: admin/modules/core/class-media-encoder.php:2705
+#: admin/modules/core/class-media-encoder.php:2721
 msgid "Original Image"
 msgstr "Image originale"
 
@@ -7026,7 +7212,7 @@ msgstr "Image originale :"
 msgid "Other"
 msgstr "Autre"
 
-#: admin/class-modules-data.php:1232
+#: admin/class-modules-data.php:1252
 msgid "Other Features"
 msgstr "Autres caractéristiques"
 
@@ -7074,14 +7260,14 @@ msgstr "Icône de page"
 msgid "Page Title"
 msgstr "Titre de la page"
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:494
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:476
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:500
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:488
 #, fuzzy
 msgid "Pagination"
 msgstr "Pagination"
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:498
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:480
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:504
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:492
 #, fuzzy
 msgid "Pagination support for the items URLs such as the archives."
 msgstr ""
@@ -7103,33 +7289,33 @@ msgstr "Icône de trombone"
 msgid "Paragraph Icon"
 msgstr "Icône de paragraphe"
 
-#: admin/modules/core/class-register-custom-content-types.php:507
+#: admin/modules/core/class-register-custom-content-types.php:508
 #, fuzzy
 msgid "Parent Category"
 msgstr "Catégorie parente"
 
-#: admin/modules/core/class-register-custom-content-types.php:512
+#: admin/modules/core/class-register-custom-content-types.php:513
 #, fuzzy
 msgid "Parent Category:"
 msgstr "Catégorie parente :"
 
-#: admin/modules/core/class-register-custom-content-types.php:566
+#: admin/modules/core/class-register-custom-content-types.php:567
 #, fuzzy
 msgid "Parent Field Description"
 msgstr "Description du champ parent"
 
-#: admin/modules/core/class-register-custom-content-types.php:305
-#: admin/modules/core/class-register-custom-content-types.php:506
+#: admin/modules/core/class-register-custom-content-types.php:306
+#: admin/modules/core/class-register-custom-content-types.php:507
 #, fuzzy
 msgid "Parent Item"
 msgstr "Élément parent"
 
-#: admin/modules/core/class-register-custom-content-types.php:511
+#: admin/modules/core/class-register-custom-content-types.php:512
 #, fuzzy
 msgid "Parent Item With Colon"
 msgstr "Élément parent avec deux points"
 
-#: admin/modules/core/class-register-custom-content-types.php:306
+#: admin/modules/core/class-register-custom-content-types.php:307
 #, fuzzy
 msgid "Parent Post"
 msgstr "Article parent"
@@ -7138,7 +7324,7 @@ msgstr "Article parent"
 msgid "Parent Snippet:"
 msgstr "Code snippet parent :"
 
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:461
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:473
 #, fuzzy
 msgid "Parent-child terms in URLs for hierarchical taxonomies."
 msgstr "Termes parent-enfant dans les URL pour les taxonomies hiérarchiques."
@@ -7181,7 +7367,7 @@ msgstr "Le mot de passe ne peut pas être vide."
 msgid "Password change"
 msgstr "Changement de mot de passe"
 
-#: admin/modules/core/class-force-strong-password.php:66
+#: admin/modules/core/class-force-strong-password.php:59
 msgctxt "password mismatch"
 msgid "Mismatch"
 msgstr "Décalage"
@@ -7199,23 +7385,23 @@ msgstr "Mot de passe de protection"
 msgid "Password protection is currently enabled for this site."
 msgstr "La protection par mot de passe est actuellement activée pour ce site."
 
-#: admin/modules/core/class-force-strong-password.php:64
+#: admin/modules/core/class-force-strong-password.php:57
 msgctxt "password strength"
 msgid "Medium"
 msgstr "Moyen"
 
-#: admin/modules/core/class-force-strong-password.php:62
-#: admin/modules/core/class-force-strong-password.php:63
+#: admin/modules/core/class-force-strong-password.php:55
+#: admin/modules/core/class-force-strong-password.php:56
 msgctxt "password strength"
 msgid "Not authorized"
 msgstr "Pas autorisé"
 
-#: admin/modules/core/class-force-strong-password.php:61
+#: admin/modules/core/class-force-strong-password.php:54
 msgctxt "password strength"
 msgid "Password strength unknown"
 msgstr "Force du mot de passe inconnue"
 
-#: admin/modules/core/class-force-strong-password.php:65
+#: admin/modules/core/class-force-strong-password.php:58
 msgctxt "password strength"
 msgid "Strong"
 msgstr "Fort"
@@ -7297,14 +7483,14 @@ msgstr "Période"
 msgid "Permalink Rewrite"
 msgstr "Réécriture du lien permanent"
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:428
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:410
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:434
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:422
 #, fuzzy
 msgid "Permalinks for this taxonomy are disabled."
 msgstr "Les liens permanents pour cette taxonomie sont désactivés."
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:586
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:539
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:592
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:551
 #, fuzzy
 msgid "Permissions"
 msgstr "Autorisations"
@@ -7325,7 +7511,7 @@ msgstr "Contenu de la politique d'autorisation"
 msgid "Perms"
 msgstr "Autorisations"
 
-#: admin/templates/core/page-settings.php:233
+#: admin/templates/core/page-settings.php:235
 msgid "Personal Data"
 msgstr "Données personnelles"
 
@@ -7372,6 +7558,11 @@ msgstr "pixels"
 msgid "Placeholde Color"
 msgstr "Couleur de l'espace réservé"
 
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:715
+#, fuzzy
+msgid "Placeholder will be replaced by language."
+msgstr "L'espace réservé sera remplacé par la langue."
+
 #: admin/helpers/core/select-dashicon/class-select-dashicon.php:116
 #, fuzzy
 msgid "Play Icon"
@@ -7391,7 +7582,7 @@ msgstr "Icône de la liste de lecture vidéo"
 msgid "Please add all information"
 msgstr "Veuillez ajouter toutes les informations"
 
-#: admin/modules/core/class-media-encoder.php:2434
+#: admin/modules/core/class-media-encoder.php:2450
 #, php-format
 msgid "Please deactivate %s plugin."
 msgstr "Veuillez désactiver le plugin %s."
@@ -7454,7 +7645,7 @@ msgstr ""
 msgid "Plugin & Theme Rollback"
 msgstr "Restauration des plugins et des thèmes"
 
-#: admin/templates/core/page-settings.php:244
+#: admin/templates/core/page-settings.php:246
 msgid "Plugin improvement"
 msgstr "Amélioration des plugins"
 
@@ -7485,13 +7676,13 @@ msgstr "Icône des plugins cochés"
 msgid "Plugins Icon"
 msgstr "Icône des plugins"
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:626
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:632
 #, fuzzy
 msgid "Plural Capability Name"
 msgstr "Nom de capacité pluriel"
 
-#: admin/modules/core/class-register-custom-content-types.php:247
-#: admin/modules/core/class-register-custom-content-types.php:448
+#: admin/modules/core/class-register-custom-content-types.php:248
+#: admin/modules/core/class-register-custom-content-types.php:449
 #, fuzzy
 msgid "Plural Label"
 msgstr "Étiquette plurielle"
@@ -7521,12 +7712,17 @@ msgstr "Icône PM"
 msgid "Podio Icon"
 msgstr "Icône Podio"
 
-#: admin/modules/core/class-register-custom-content-types.php:521
+#: includes/global-functions.php:538
+#, fuzzy
+msgid "Polish"
+msgstr "polonais"
+
+#: admin/modules/core/class-register-custom-content-types.php:522
 #, fuzzy
 msgid "Popular Items"
 msgstr "Articles populaires"
 
-#: admin/modules/core/class-register-custom-content-types.php:522
+#: admin/modules/core/class-register-custom-content-types.php:523
 #, fuzzy
 msgid "Popular Tags"
 msgstr "Mots clés populaires"
@@ -7540,6 +7736,11 @@ msgstr "Port"
 msgid "Portfolio Icon"
 msgstr "Icône de portefeuille"
 
+#: includes/global-functions.php:488
+#, fuzzy
+msgid "Portuguese"
+msgstr "portugais"
+
 #: admin/modules/pro/class-custom-login-design.php:3676
 #: admin/modules/pro/class-custom-login-design.php:4046
 #: admin/modules/pro/class-custom-login-design.php:4908
@@ -7551,22 +7752,22 @@ msgstr "Position"
 msgid "Post"
 msgstr "Poste"
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:711
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:717
 #, fuzzy
 msgid "post"
 msgstr "poste"
 
-#: admin/modules/core/class-register-custom-content-types.php:326
+#: admin/modules/core/class-register-custom-content-types.php:327
 #, fuzzy
 msgid "Post Archives"
 msgstr "Archives des articles"
 
-#: admin/modules/core/class-register-custom-content-types.php:331
+#: admin/modules/core/class-register-custom-content-types.php:332
 #, fuzzy
 msgid "Post Attributes"
 msgstr "Attributs de publication"
 
-#: admin/modules/core/class-register-custom-content-types.php:336
+#: admin/modules/core/class-register-custom-content-types.php:337
 #, fuzzy
 msgid "Post Featured Image"
 msgstr "Image en vedette de la publication"
@@ -7576,12 +7777,12 @@ msgstr "Image en vedette de la publication"
 msgid "Post Icon"
 msgstr "Icône de publication"
 
-#: admin/modules/core/class-register-custom-content-types.php:411
+#: admin/modules/core/class-register-custom-content-types.php:412
 #, fuzzy
 msgid "Post Link"
 msgstr "Lien de publication"
 
-#: admin/modules/core/class-register-custom-content-types.php:416
+#: admin/modules/core/class-register-custom-content-types.php:417
 #, fuzzy
 msgid "Post Link Description"
 msgstr "Description du lien de publication"
@@ -7590,22 +7791,22 @@ msgstr "Description du lien de publication"
 msgid "Post Per Page"
 msgstr "Publication par page"
 
-#: admin/modules/core/class-register-custom-content-types.php:386
+#: admin/modules/core/class-register-custom-content-types.php:387
 #, fuzzy
 msgid "Post Published"
 msgstr "Article publié"
 
-#: admin/modules/core/class-register-custom-content-types.php:391
+#: admin/modules/core/class-register-custom-content-types.php:392
 #, fuzzy
 msgid "Post Published Privately"
 msgstr "Article publié en privé"
 
-#: admin/modules/core/class-register-custom-content-types.php:396
+#: admin/modules/core/class-register-custom-content-types.php:397
 #, fuzzy
 msgid "Post Reverted to Draft"
 msgstr "Message rétabli au brouillon"
 
-#: admin/modules/core/class-register-custom-content-types.php:401
+#: admin/modules/core/class-register-custom-content-types.php:402
 #, fuzzy
 msgid "Post Scheduled"
 msgstr "Publication programmée"
@@ -7627,13 +7828,13 @@ msgctxt "Post Type General Name"
 msgid "Code Snippets"
 msgstr "Extraits de code"
 
-#: admin/modules/core/class-register-custom-content-types.php:259
+#: admin/modules/core/class-register-custom-content-types.php:260
 #, fuzzy
 msgid "Post Type Key"
 msgstr "Clé de type de publication"
 
 #: admin/templates/core/register-custom-content-types/edit-post-cpt.php:416
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:559
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:565
 #, fuzzy
 msgid "Post Type Key (default)"
 msgstr "Clé de type de publication (par défaut)"
@@ -7657,22 +7858,22 @@ msgstr "Types de publications"
 msgid "Post types"
 msgstr "Types de messages"
 
-#: admin/modules/core/class-register-custom-content-types.php:406
+#: admin/modules/core/class-register-custom-content-types.php:407
 #, fuzzy
 msgid "Post Updated"
 msgstr "Article mis à jour"
 
-#: admin/modules/core/class-register-custom-content-types.php:271
+#: admin/modules/core/class-register-custom-content-types.php:272
 #, fuzzy
 msgid "Posts"
 msgstr "Articles"
 
-#: admin/modules/core/class-register-custom-content-types.php:381
+#: admin/modules/core/class-register-custom-content-types.php:382
 #, fuzzy
 msgid "Posts List"
 msgstr "Liste des publications"
 
-#: admin/modules/core/class-register-custom-content-types.php:376
+#: admin/modules/core/class-register-custom-content-types.php:377
 #, fuzzy
 msgid "Posts List Navigation"
 msgstr "Navigation dans la liste des articles"
@@ -7709,7 +7910,7 @@ msgstr ""
 "connexion infructueuses autorisées par adresse IP."
 
 #: admin/modules/core/class-child-theme-generator.php:430
-#: admin/modules/core/class-media-encoder.php:2602
+#: admin/modules/core/class-media-encoder.php:2618
 msgid "Preview"
 msgstr "Aperçu"
 
@@ -7746,7 +7947,7 @@ msgstr "PRO"
 msgid "Pro features"
 msgstr "Fonctionnalités Pro"
 
-#: admin/class-modules-data.php:1192
+#: admin/class-modules-data.php:1212
 #, fuzzy
 msgid "PRO modules"
 msgstr "Modules PRO"
@@ -7760,6 +7961,11 @@ msgstr "Icône de produits"
 msgid "Profile Picture"
 msgstr "Photo de profil"
 
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:713
+#, fuzzy
+msgid "Prompt"
+msgstr "Rapide"
+
 #: admin/modules/core/class-protect-website-headers.php:42
 msgid "Protect Website Headers"
 msgstr "Protéger les en-têtes du site Web"
@@ -7770,8 +7976,8 @@ msgstr "Protéger les en-têtes du site Web"
 msgid "Public"
 msgstr "Publique"
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:545
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:495
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:551
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:507
 #, fuzzy
 msgid "Publicly Queryable"
 msgstr "Interrogable publiquement"
@@ -7797,7 +8003,7 @@ msgstr "Code QR"
 msgid "QR code"
 msgstr "Code QR"
 
-#: admin/modules/core/class-media-encoder.php:2526
+#: admin/modules/core/class-media-encoder.php:2542
 msgid "Quality"
 msgstr "Qualité"
 
@@ -7805,14 +8011,14 @@ msgstr "Qualité"
 msgid "Quarterly"
 msgstr "Trimestriel"
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:569
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:522
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:575
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:534
 #, fuzzy
 msgid "Query Variable Name"
 msgstr "Nom de la variable de requête"
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:556
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:506
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:562
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:518
 #, fuzzy
 msgid "Query Variable Support"
 msgstr "Prise en charge des variables de requête"
@@ -7918,10 +8124,17 @@ msgstr "Icône Refaire"
 #: admin/modules/core/class-media-encoder.php:1067
 #: admin/modules/core/class-meta-debugger.php:148
 #: admin/modules/core/class-smtp-mailer.php:117
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:281
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:324
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:335
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:342
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:353
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:377
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:406
 msgid "Refresh the page and try again."
 msgstr "Actualisez la page et réessayez."
 
-#: admin/modules/core/class-code-snippets.php:710
+#: admin/modules/core/class-code-snippets.php:711
 msgid "Regenerate Snippets Files"
 msgstr "Régénérer les fichiers d'extraits"
 
@@ -8072,7 +8285,7 @@ msgstr "Supprimer la colonne de description"
 msgid "Remove email column"
 msgstr "Supprimer la colonne e-mail"
 
-#: admin/modules/core/class-register-custom-content-types.php:345
+#: admin/modules/core/class-register-custom-content-types.php:346
 #, fuzzy
 msgid "Remove Featured Image"
 msgstr "Supprimer l'image sélectionnée"
@@ -8112,7 +8325,7 @@ msgstr "Supprimer la colonne de nom"
 msgid "Remove new content menu"
 msgstr "Supprimer le nouveau menu de contenu"
 
-#: admin/modules/core/class-register-custom-content-types.php:346
+#: admin/modules/core/class-register-custom-content-types.php:347
 #, fuzzy
 msgid "Remove Post Featured Image"
 msgstr "Supprimer l'image sélectionnée de la publication"
@@ -8174,7 +8387,7 @@ msgstr "Supprimer le logo WordPress"
 msgid "Rename"
 msgstr "Rebaptiser"
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:602
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:608
 #, fuzzy
 msgid "Rename Capabilities"
 msgstr "Renommer les capacités"
@@ -8214,14 +8427,14 @@ msgstr ""
 msgid "Resolve duplicate site headers"
 msgstr "Résoudre les en-têtes de site en double"
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:682
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:667
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:688
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:679
 #, fuzzy
 msgid "REST API"
 msgstr "API REST"
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:735
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:720
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:741
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:732
 #, fuzzy
 msgid "REST API Controller Class"
 msgstr "Classe de contrôleur d'API REST"
@@ -8231,8 +8444,8 @@ msgstr "Classe de contrôleur d'API REST"
 msgid "REST API Icon"
 msgstr "Icône de l'API REST"
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:722
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:707
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:728
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:719
 #, fuzzy
 msgid "REST API Namespace"
 msgstr "Espace de noms de l'API REST"
@@ -8264,13 +8477,13 @@ msgstr "Révisions"
 msgid "Revisions Control"
 msgstr "Contrôle des révisions"
 
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:457
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:469
 #, fuzzy
 msgid "Rewrite Hierarchical"
 msgstr "Réécrire hiérarchiquement"
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:425
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:407
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:428
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:416
 #, fuzzy, php-format
 msgid ""
 "Rewrite the URL using a custom slug defined in the input below. Your "
@@ -8288,7 +8501,7 @@ msgstr ""
 "Réécrivez l'URL en utilisant la clé de type de publication comme slug. La "
 "structure de votre permalien sera {slug}."
 
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:404
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:407
 #, fuzzy, php-format
 msgid ""
 "Rewrite the URL using the taxonomy key as the slug. Your permalink structure "
@@ -8346,7 +8559,7 @@ msgstr "Icône de rotation vers la droite"
 msgid "Row"
 msgstr "Rangée"
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:479
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:485
 #, fuzzy
 msgid "RSS feed URL for the post type items."
 msgstr "URL du flux RSS pour les éléments de type publication."
@@ -8365,6 +8578,11 @@ msgstr "Icône RTL"
 msgid "Run now"
 msgstr "Courez maintenant"
 
+#: includes/global-functions.php:498
+#, fuzzy
+msgid "Russian"
+msgstr "russe"
+
 #: admin/modules/core/class-protect-website-headers.php:403
 msgid "SAMEORIGIN"
 msgstr "SAMEORIGIN"
@@ -8378,11 +8596,11 @@ msgstr "SAMEORIGIN"
 msgid "Save"
 msgstr "Sauvegarder"
 
-#: admin/templates/core/page-settings.php:266
+#: admin/templates/core/page-settings.php:268
 msgid "Save & continue"
 msgstr "Enregistrer et continuer"
 
-#: admin/modules/core/class-media-encoder.php:2561
+#: admin/modules/core/class-media-encoder.php:2577
 msgid "Save original images"
 msgstr "Enregistrer les images originales"
 
@@ -8454,13 +8672,13 @@ msgstr "Rechercher des fichiers"
 msgid "Search Icon"
 msgstr "Icône de recherche"
 
-#: admin/modules/core/class-register-custom-content-types.php:310
-#: admin/modules/core/class-register-custom-content-types.php:516
+#: admin/modules/core/class-register-custom-content-types.php:311
+#: admin/modules/core/class-register-custom-content-types.php:517
 #, fuzzy
 msgid "Search Items"
 msgstr "Rechercher des articles"
 
-#: admin/modules/core/class-register-custom-content-types.php:311
+#: admin/modules/core/class-register-custom-content-types.php:312
 #, fuzzy
 msgid "Search Posts"
 msgstr "Rechercher des articles"
@@ -8474,7 +8692,7 @@ msgstr "Rechercher des liens courts"
 msgid "Search Snippet"
 msgstr "Extrait de recherche"
 
-#: admin/modules/core/class-register-custom-content-types.php:517
+#: admin/modules/core/class-register-custom-content-types.php:518
 #, fuzzy
 msgid "Search Tags"
 msgstr "Rechercher des balises"
@@ -8488,7 +8706,7 @@ msgstr "Secondes"
 msgid "Sections to hide"
 msgstr "Sections à masquer"
 
-#: admin/class-modules-data.php:1217
+#: admin/class-modules-data.php:1237
 msgid "Security"
 msgstr "Sécurité"
 
@@ -8505,6 +8723,11 @@ msgid ""
 msgstr ""
 "Sélectionnez une couleur de balise pour permettre une personnalisation "
 "transparente du thème dans tous les principaux navigateurs."
+
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:667
+#, fuzzy
+msgid "Select AI Module"
+msgstr "Sélectionnez le module IA"
 
 #: admin/modules/core/class-login-logout-menu.php:106
 #: admin/templates/core/file-manager/views/default.php:216
@@ -8589,7 +8812,7 @@ msgstr "Sélectionnez les métadonnées de l'utilisateur :"
 msgid "Select user:"
 msgstr "Sélectionner l'utilisateur :"
 
-#: admin/modules/core/class-media-encoder.php:2493
+#: admin/modules/core/class-media-encoder.php:2509
 #, fuzzy
 msgid ""
 "Select “Off” to disable image optimization, “WebP” for wide browser support, "
@@ -8627,12 +8850,12 @@ msgstr "E-mail de l'expéditeur"
 msgid "Sender name"
 msgstr "Nom de l'expéditeur"
 
-#: admin/modules/core/class-register-custom-content-types.php:526
+#: admin/modules/core/class-register-custom-content-types.php:527
 #, fuzzy
 msgid "Separate Items With Commas"
 msgstr "Séparez les éléments par des virgules"
 
-#: admin/modules/core/class-register-custom-content-types.php:527
+#: admin/modules/core/class-register-custom-content-types.php:528
 #, fuzzy
 msgid "Separate tags with commas"
 msgstr "Séparez les balises par des virgules"
@@ -8668,7 +8891,7 @@ msgstr ""
 "mails de notification et de transaction de votre site sont envoyés dans les "
 "boîtes de réception."
 
-#: admin/modules/core/class-register-custom-content-types.php:340
+#: admin/modules/core/class-register-custom-content-types.php:341
 #, fuzzy
 msgid "Set Featured Image"
 msgstr "Définir l'image sélectionnée"
@@ -8683,7 +8906,7 @@ msgstr "Définir l'image sélectionnée"
 msgid "Set interval to once every"
 msgstr "Régler l'intervalle à une fois tous les"
 
-#: admin/modules/core/class-register-custom-content-types.php:341
+#: admin/modules/core/class-register-custom-content-types.php:342
 #, fuzzy
 msgid "Set Post Featured Image"
 msgstr "Définir l'image en vedette de la publication"
@@ -8700,7 +8923,7 @@ msgstr "Définir le mot de passe"
 msgid "Set width to"
 msgstr "Définir la largeur sur"
 
-#: admin/class-modules-data.php:1237
+#: admin/class-modules-data.php:1257
 #: admin/modules/core/class-code-snippets.php:168
 msgid "Settings"
 msgstr "Paramètres"
@@ -8725,7 +8948,7 @@ msgstr "Icône Partager (alt2)"
 msgid "Share Icon"
 msgstr "Icône de partage"
 
-#: admin/templates/core/page-settings.php:209
+#: admin/templates/core/page-settings.php:211
 msgid "Share my configuration"
 msgstr "Partager ma configuration"
 
@@ -8829,8 +9052,8 @@ msgstr "Afficher dans la barre d'administration"
 msgid "Show In Menu"
 msgstr "Afficher dans le menu"
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:698
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:683
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:704
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:695
 #, fuzzy
 msgid "Show In REST API"
 msgstr "Afficher dans l'API REST"
@@ -8888,13 +9111,13 @@ msgstr "Connectez-vous avec votre e-mail"
 msgid "Simply send to this email address"
 msgstr "Envoyez simplement à cette adresse email"
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:613
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:619
 #, fuzzy
 msgid "Singular Capability Name"
 msgstr "Nom de capacité singulier"
 
-#: admin/modules/core/class-register-custom-content-types.php:253
-#: admin/modules/core/class-register-custom-content-types.php:454
+#: admin/modules/core/class-register-custom-content-types.php:254
+#: admin/modules/core/class-register-custom-content-types.php:455
 #, fuzzy
 msgid "Singular Label"
 msgstr "Étiquette singulière"
@@ -8955,7 +9178,7 @@ msgstr "Icône de saut vers l'avant"
 msgid "Slides Icon"
 msgstr "Icône Diapositives"
 
-#: admin/modules/core/class-register-custom-content-types.php:561
+#: admin/modules/core/class-register-custom-content-types.php:562
 #, fuzzy
 msgid "Slug Field Description"
 msgstr "Description du champ Slug"
@@ -9060,13 +9283,18 @@ msgstr "Chemin source non défini"
 msgid "SourceFolder"
 msgstr "Dossier source"
 
+#: includes/global-functions.php:473
+#, fuzzy
+msgid "Spanish"
+msgstr "Espagnol"
+
 #: admin/modules/core/class-post-per-page.php:192
 msgid "Specifying the number of posts to display per page, for each post type."
 msgstr ""
 "Spécifier le nombre de publications à afficher par page, pour chaque type de "
 "publication."
 
-#: admin/class-modules-data.php:1222
+#: admin/class-modules-data.php:1242
 msgid "Speed Optimizations"
 msgstr "Optimisations de vitesse"
 
@@ -9104,15 +9332,16 @@ msgstr "Icône remplie d'étoiles"
 msgid "Star Half Icon"
 msgstr "Icône de demi-étoile"
 
-#: admin/modules/core/class-media-encoder.php:2615
-#: admin/modules/core/class-media-encoder.php:2650
+#: admin/modules/core/class-media-encoder.php:2631
+#: admin/modules/core/class-media-encoder.php:2666
 #: admin/modules/pro/class-custom-login-design.php:3857
 #: admin/modules/pro/class-custom-login-design.php:4001
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:752
 msgid "Start"
 msgstr "Commencer"
 
-#: admin/templates/core/page-settings.php:346
-#: admin/templates/core/page-settings.php:347
+#: admin/templates/core/page-settings.php:348
+#: admin/templates/core/page-settings.php:349
 #, fuzzy
 msgid "Start 15 free trial"
 msgstr "Commencez votre essai gratuit de 15 jours"
@@ -9123,7 +9352,7 @@ msgid "State:"
 msgstr "État:"
 
 #: admin/modules/core/class-code-snippets.php:231
-#: admin/modules/core/class-code-snippets.php:659
+#: admin/modules/core/class-code-snippets.php:660
 #: admin/modules/core/class-register-custom-content-types.php:106
 #: admin/modules/pro/class-link-shortener.php:122
 #: admin/templates/core/register-custom-content-types/edit-post-cpt.php:51
@@ -9142,8 +9371,9 @@ msgstr "Icône d'état"
 msgid "Sticky Icon"
 msgstr "Icône collante"
 
-#: admin/modules/core/class-media-encoder.php:2622
-#: admin/modules/core/class-media-encoder.php:2656
+#: admin/modules/core/class-media-encoder.php:2638
+#: admin/modules/core/class-media-encoder.php:2672
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:759
 msgid "Stop"
 msgstr "Arrêt"
 
@@ -9180,6 +9410,11 @@ msgstr "Soutenez notre travail"
 #, fuzzy
 msgid "Supports"
 msgstr "Soutient"
+
+#: includes/global-functions.php:533
+#, fuzzy
+msgid "Swedish"
+msgstr "suédois"
 
 #: admin/modules/pro/class-user-switching.php:807
 #, php-format
@@ -9244,7 +9479,7 @@ msgstr "Nuage de tags"
 msgid "Tag Icon"
 msgstr "Icône de balise"
 
-#: admin/modules/core/class-register-custom-content-types.php:597
+#: admin/modules/core/class-register-custom-content-types.php:598
 #, fuzzy
 msgid "Tag Link"
 msgstr "Lien de balise"
@@ -9255,16 +9490,16 @@ msgid "Tagcloud Icon"
 msgstr "Icône de nuage de tags"
 
 #: admin/modules/core/class-child-theme-generator.php:389
-#: admin/modules/core/class-register-custom-content-types.php:472
+#: admin/modules/core/class-register-custom-content-types.php:473
 msgid "Tags"
 msgstr "Mots clés"
 
-#: admin/modules/core/class-register-custom-content-types.php:587
+#: admin/modules/core/class-register-custom-content-types.php:588
 #, fuzzy
 msgid "Tags list"
 msgstr "Liste des balises"
 
-#: admin/modules/core/class-register-custom-content-types.php:582
+#: admin/modules/core/class-register-custom-content-types.php:583
 #, fuzzy
 msgid "Tags list navigation"
 msgstr "Navigation dans la liste des balises"
@@ -9283,7 +9518,7 @@ msgstr ""
 "pour faciliter les professionnels du web et vous feront gagner beaucoup de "
 "temps. ✨"
 
-#: admin/templates/core/page-settings.php:318
+#: admin/templates/core/page-settings.php:320
 #, fuzzy
 msgid "Take advantage of PRO features within the free modules, to go further."
 msgstr ""
@@ -9299,13 +9534,13 @@ msgstr "Tar"
 msgid "Taxonomies"
 msgstr "Taxonomies"
 
-#: admin/modules/core/class-register-custom-content-types.php:460
+#: admin/modules/core/class-register-custom-content-types.php:461
 #, fuzzy
 msgid "Taxonomy Key"
 msgstr "Clé de taxonomie"
 
 #: admin/templates/core/register-custom-content-types/edit-taxonomy.php:398
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:509
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:521
 #, fuzzy
 msgid "Taxonomy Key (default)"
 msgstr "Clé de taxonomie (par défaut)"
@@ -9399,7 +9634,7 @@ msgstr "Modèles"
 msgid "Term"
 msgstr "Terme"
 
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:515
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:527
 #, fuzzy
 msgid ""
 "Terms can be accessed using the non-pretty permalink, e.g., {query_var}"
@@ -9467,7 +9702,7 @@ msgstr ""
 "L'indicateur « préchargement » permet au site Web d'être inclus dans la "
 "liste de préchargement HSTS."
 
-#: admin/modules/core/class-register-custom-content-types.php:562
+#: admin/modules/core/class-register-custom-content-types.php:563
 #, fuzzy
 msgid ""
 "The &quot;slug&quot; is the URL-friendly version of the name. It is usually "
@@ -9477,37 +9712,53 @@ msgstr ""
 "généralement écrit en minuscules et ne contient que des lettres, des "
 "chiffres et des traits d&#39;union."
 
-#: admin/modules/core/class-register-custom-content-types.php:292
+#: admin/modules/core/class-register-custom-content-types.php:293
 #, fuzzy
 msgid "The add new item label for the custom post type."
 msgstr ""
 "Ajouter une nouvelle étiquette d'élément pour le type de publication "
 "personnalisé."
 
-#: admin/modules/core/class-register-custom-content-types.php:297
+#: admin/modules/core/class-register-custom-content-types.php:298
 #, fuzzy
 msgid "The add new label for the custom post type."
 msgstr ""
 "Ajoutez une nouvelle étiquette pour le type de publication personnalisé."
 
-#: admin/modules/core/class-register-custom-content-types.php:277
+#: admin/modules/core/class-register-custom-content-types.php:278
 #, fuzzy
 msgid "The all items label for the custom post type."
 msgstr ""
 "L'étiquette de tous les éléments pour le type de publication personnalisé."
 
-#: admin/modules/core/class-register-custom-content-types.php:327
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:304
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:395
+#, fuzzy
+msgid "The API key is invalid."
+msgstr "La clé API n'est pas valide."
+
+#: admin/modules/core/class-register-custom-content-types.php:328
 #, fuzzy
 msgid "The archives label for the custom post type."
 msgstr "L'étiquette des archives pour le type de publication personnalisé."
 
-#: admin/modules/core/class-register-custom-content-types.php:332
+#: admin/modules/pro/class-better-password-hash.php:51
+#, fuzzy
+msgid ""
+"The Argon2id password hashing algorithm is not available on this server. "
+"Please consider updating your PHP version or server configuration."
+msgstr ""
+"L'algorithme de hachage de mot de passe Argon2id n'est pas disponible sur ce "
+"serveur. Veuillez mettre à jour votre version de PHP ou la configuration de "
+"votre serveur."
+
+#: admin/modules/core/class-register-custom-content-types.php:333
 #, fuzzy
 msgid "The attributes label for the custom post type."
 msgstr "L'étiquette des attributs pour le type de publication personnalisé."
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:714
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:699
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:720
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:711
 #, fuzzy
 msgid "The base URL for the post type REST API URLs."
 msgstr "L'URL de base pour les URL de l'API REST de type de publication."
@@ -9525,25 +9776,25 @@ msgstr ""
 "Le lien de contournement permet d'accéder au site même si le site est en "
 "mode maintenance."
 
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:656
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:668
 #, fuzzy
 msgid "The capability name for assigning terms of this taxonomy."
 msgstr ""
 "Le nom de la capacité permettant d'attribuer des termes de cette taxonomie."
 
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:627
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:639
 #, fuzzy
 msgid "The capability name for deleting terms of this taxonomy."
 msgstr ""
 "Le nom de la capacité permettant de supprimer les termes de cette taxonomie."
 
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:598
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:610
 #, fuzzy
 msgid "The capability name for editing terms of this taxonomy."
 msgstr ""
 "Le nom de la capacité permettant d'éditer les termes de cette taxonomie."
 
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:569
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:581
 #, fuzzy
 msgid "The capability name for managing terms of this taxonomy."
 msgstr ""
@@ -9610,7 +9861,7 @@ msgstr ""
 "surveiller les problèmes de sécurité potentiels sur votre site sans "
 "perturber les utilisateurs en signalant les violations à une URL spécifiée."
 
-#: admin/modules/core/class-register-custom-content-types.php:572
+#: admin/modules/core/class-register-custom-content-types.php:573
 #, fuzzy
 msgid ""
 "The description is not prominent by default; however, some themes may show "
@@ -9619,13 +9870,13 @@ msgstr ""
 "La description n'est pas visible par défaut ; cependant, certains thèmes "
 "peuvent l'afficher."
 
-#: admin/modules/core/class-register-custom-content-types.php:282
+#: admin/modules/core/class-register-custom-content-types.php:283
 #, fuzzy
 msgid "The edit item label for the custom post type."
 msgstr ""
 "L'étiquette de l'élément d'édition pour le type de publication personnalisé."
 
-#: admin/modules/core/class-register-custom-content-types.php:422
+#: admin/modules/core/class-register-custom-content-types.php:423
 #, fuzzy
 msgid "The enter title here label for the custom post type."
 msgstr "Saisissez le titre ici pour le type de publication personnalisé."
@@ -9638,19 +9889,19 @@ msgstr ""
 "Le permalien externe s'ouvrira dans un nouvel onglet du navigateur. Laissez "
 "ce champ vide pour utiliser le permalien WordPress par défaut."
 
-#: admin/modules/core/class-register-custom-content-types.php:337
+#: admin/modules/core/class-register-custom-content-types.php:338
 #, fuzzy
 msgid "The featured image label for the custom post type."
 msgstr ""
 "L'étiquette de l'image sélectionnée pour le type de publication personnalisé."
 
-#: admin/modules/core/class-register-custom-content-types.php:372
+#: admin/modules/core/class-register-custom-content-types.php:373
 #, fuzzy
 msgid "The filter by date label for the custom post type."
 msgstr ""
 "Le filtre par étiquette de date pour le type de publication personnalisé."
 
-#: admin/modules/core/class-register-custom-content-types.php:367
+#: admin/modules/core/class-register-custom-content-types.php:368
 #, fuzzy
 msgid "The filter items list label for the custom post type."
 msgstr ""
@@ -9672,67 +9923,67 @@ msgstr ""
 msgid "The icon for the menu item."
 msgstr "L'icône de l'élément de menu."
 
-#: admin/modules/core/class-register-custom-content-types.php:357
+#: admin/modules/core/class-register-custom-content-types.php:358
 #, fuzzy
 msgid "The insert into item label for the custom post type."
 msgstr ""
 "L'insertion dans l'étiquette de l'élément pour le type de publication "
 "personnalisé."
 
-#: admin/modules/core/class-register-custom-content-types.php:417
+#: admin/modules/core/class-register-custom-content-types.php:418
 #, fuzzy
 msgid "The item link description label for the custom post type."
 msgstr ""
 "L'étiquette de description du lien de l'élément pour le type de publication "
 "personnalisé."
 
-#: admin/modules/core/class-register-custom-content-types.php:412
+#: admin/modules/core/class-register-custom-content-types.php:413
 #, fuzzy
 msgid "The item link label for the custom post type."
 msgstr ""
 "L'étiquette du lien de l'élément pour le type de publication personnalisé."
 
-#: admin/modules/core/class-register-custom-content-types.php:387
+#: admin/modules/core/class-register-custom-content-types.php:388
 #, fuzzy
 msgid "The item published label for the custom post type."
 msgstr ""
 "L'étiquette de l'élément publié pour le type de publication personnalisé."
 
-#: admin/modules/core/class-register-custom-content-types.php:392
+#: admin/modules/core/class-register-custom-content-types.php:393
 #, fuzzy
 msgid "The item published privately label for the custom post type."
 msgstr ""
 "L'élément publié est étiqueté en privé pour le type de publication "
 "personnalisé."
 
-#: admin/modules/core/class-register-custom-content-types.php:397
+#: admin/modules/core/class-register-custom-content-types.php:398
 #, fuzzy
 msgid "The item reverted to draft label for the custom post type."
 msgstr ""
 "L'élément est revenu à l'état de brouillon pour le type de publication "
 "personnalisé."
 
-#: admin/modules/core/class-register-custom-content-types.php:402
+#: admin/modules/core/class-register-custom-content-types.php:403
 #, fuzzy
 msgid "The item scheduled label for the custom post type."
 msgstr ""
 "L'étiquette planifiée de l'élément pour le type de publication personnalisé."
 
-#: admin/modules/core/class-register-custom-content-types.php:407
+#: admin/modules/core/class-register-custom-content-types.php:408
 #, fuzzy
 msgid "The item updated label for the custom post type."
 msgstr ""
 "L'étiquette de l'élément a été mise à jour pour le type de publication "
 "personnalisé."
 
-#: admin/modules/core/class-register-custom-content-types.php:382
+#: admin/modules/core/class-register-custom-content-types.php:383
 #, fuzzy
 msgid "The items list label for the custom post type."
 msgstr ""
 "L'étiquette de la liste des éléments pour le type de publication "
 "personnalisé."
 
-#: admin/modules/core/class-register-custom-content-types.php:377
+#: admin/modules/core/class-register-custom-content-types.php:378
 #, fuzzy
 msgid "The items list navigation label for the custom post type."
 msgstr ""
@@ -9747,13 +9998,13 @@ msgstr ""
 "Le paramètre Max-Age spécifie la période de temps (en secondes) pendant "
 "laquelle le navigateur doit stocker les informations HSTS."
 
-#: admin/modules/core/class-register-custom-content-types.php:272
+#: admin/modules/core/class-register-custom-content-types.php:273
 #, fuzzy
 msgid "The menu name for the custom post type."
 msgstr "Le nom du menu pour le type de publication personnalisé."
 
-#: admin/modules/core/class-register-custom-content-types.php:557
 #: admin/modules/core/class-register-custom-content-types.php:558
+#: admin/modules/core/class-register-custom-content-types.php:559
 #, fuzzy
 msgid "The name is how it appears on your site"
 msgstr "Le nom est la façon dont il apparaît sur votre site"
@@ -9762,58 +10013,58 @@ msgstr "Le nom est la façon dont il apparaît sur votre site"
 msgid "The name of the child theme."
 msgstr "Le nom du thème enfant."
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:727
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:712
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:733
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:724
 #, fuzzy
 msgid "The namespace for the post type REST API URLs."
 msgstr "L'espace de noms pour les URL de l'API REST de type de publication."
 
-#: admin/modules/core/class-register-custom-content-types.php:302
+#: admin/modules/core/class-register-custom-content-types.php:303
 #, fuzzy
 msgid "The new item label for the custom post type."
 msgstr ""
 "La nouvelle étiquette d'élément pour le type de publication personnalisé."
 
-#: admin/modules/core/class-register-custom-content-types.php:322
+#: admin/modules/core/class-register-custom-content-types.php:323
 #, fuzzy
 msgid "The not found in trash label for the custom post type."
 msgstr ""
 "L'étiquette « non trouvé dans la corbeille » pour le type de publication "
 "personnalisé."
 
-#: admin/modules/core/class-register-custom-content-types.php:317
+#: admin/modules/core/class-register-custom-content-types.php:318
 #, fuzzy
 msgid "The not found label for the custom post type."
 msgstr "L'étiquette introuvable pour le type de publication personnalisé."
 
-#: admin/modules/core/class-register-custom-content-types.php:307
+#: admin/modules/core/class-register-custom-content-types.php:308
 #, fuzzy
 msgid "The parent item label for the custom post type."
 msgstr ""
 "L'étiquette de l'élément parent pour le type de publication personnalisé."
 
-#: admin/modules/core/class-register-custom-content-types.php:250
+#: admin/modules/core/class-register-custom-content-types.php:251
 #, fuzzy
 msgid "The plural label for the custom post type."
 msgstr "L'étiquette plurielle pour le type de publication personnalisé."
 
-#: admin/modules/core/class-register-custom-content-types.php:451
+#: admin/modules/core/class-register-custom-content-types.php:452
 #, fuzzy
 msgid "The plural label for the taxonomy."
 msgstr "L'étiquette plurielle de la taxonomie."
 
-#: admin/modules/core/class-register-custom-content-types.php:262
+#: admin/modules/core/class-register-custom-content-types.php:263
 #, fuzzy
 msgid "The post type key for the custom post type."
 msgstr ""
 "La clé de type de publication pour le type de publication personnalisé."
 
-#: admin/modules/core/class-register-custom-content-types.php:463
+#: admin/modules/core/class-register-custom-content-types.php:464
 #, fuzzy
 msgid "The post type key for the taxonomy."
 msgstr "La clé de type de publication pour la taxonomie."
 
-#: admin/modules/core/class-register-custom-content-types.php:347
+#: admin/modules/core/class-register-custom-content-types.php:348
 #, fuzzy
 msgid "The remove featured image label for the custom post type."
 msgstr ""
@@ -9825,26 +10076,26 @@ msgstr ""
 msgid "The REST API has been restricted to authenticated users."
 msgstr "L'API REST a été restreinte aux utilisateurs authentifiés."
 
-#: admin/modules/core/class-register-custom-content-types.php:312
+#: admin/modules/core/class-register-custom-content-types.php:313
 #, fuzzy
 msgid "The search items label for the custom post type."
 msgstr ""
 "L'étiquette des éléments de recherche pour le type de publication "
 "personnalisé."
 
-#: admin/modules/core/class-register-custom-content-types.php:342
+#: admin/modules/core/class-register-custom-content-types.php:343
 #, fuzzy
 msgid "The set featured image label for the custom post type."
 msgstr ""
 "L'ensemble présente l'étiquette d'image pour le type de publication "
 "personnalisé."
 
-#: admin/modules/core/class-register-custom-content-types.php:256
+#: admin/modules/core/class-register-custom-content-types.php:257
 #, fuzzy
 msgid "The singular label for the custom post type."
 msgstr "L'étiquette singulière pour le type de publication personnalisé."
 
-#: admin/modules/core/class-register-custom-content-types.php:457
+#: admin/modules/core/class-register-custom-content-types.php:458
 #, fuzzy
 msgid "The singular label for the taxonomy."
 msgstr "L'étiquette singulière de la taxonomie."
@@ -9860,14 +10111,14 @@ msgstr ""
 "com) ou des domaines (par exemple @domain.com) et des parties (par exemple "
 "foo). Les caractères génériques (par exemple *) ne fonctionneront pas."
 
-#: admin/modules/core/class-register-custom-content-types.php:362
+#: admin/modules/core/class-register-custom-content-types.php:363
 #, fuzzy
 msgid "The uploaded to this item label for the custom post type."
 msgstr ""
 "L'étiquette téléchargée sur cet élément pour le type de publication "
 "personnalisé."
 
-#: admin/modules/core/class-register-custom-content-types.php:352
+#: admin/modules/core/class-register-custom-content-types.php:353
 #, fuzzy
 msgid "The use featured image label for the custom post type."
 msgstr ""
@@ -9888,7 +10139,7 @@ msgstr "La version doit être au format x.x.x."
 msgid "The version of the parent theme is %s."
 msgstr "La version du thème parent est %s."
 
-#: admin/modules/core/class-register-custom-content-types.php:287
+#: admin/modules/core/class-register-custom-content-types.php:288
 #, fuzzy
 msgid "The view item label for the custom post type."
 msgstr ""
@@ -9938,8 +10189,8 @@ msgstr "Il n'y a actuellement aucun événement cron programmé."
 msgid "There are no %s cron events to delete."
 msgstr "Il n'y a aucun événement cron %s à supprimer."
 
-#: admin/modules/core/class-register-custom-content-types.php:266
-#: admin/modules/core/class-register-custom-content-types.php:467
+#: admin/modules/core/class-register-custom-content-types.php:267
+#: admin/modules/core/class-register-custom-content-types.php:468
 #, fuzzy
 msgid "This content type is used to..."
 msgstr "Ce type de contenu est utilisé pour..."
@@ -10008,7 +10259,7 @@ msgstr ""
 "Ce module ajoutera des méthodes d'authentification à deux facteurs à la page "
 "de connexion."
 
-#: admin/modules/core/class-media-encoder.php:2581
+#: admin/modules/core/class-media-encoder.php:2597
 #, fuzzy
 #| msgid ""
 #| "This option allows to override the original images by the webp version "
@@ -10047,7 +10298,7 @@ msgstr ""
 "Cette analyse est effectuée régulièrement en arrière-plan et à chaque fois "
 "qu'un plugin ou un thème est installé sur votre site."
 
-#: admin/templates/core/page-settings.php:245
+#: admin/templates/core/page-settings.php:247
 msgid ""
 "This sharing allows us to make the most relevant improvements to the plugin."
 msgstr ""
@@ -10174,6 +10425,11 @@ msgstr "Mis à la poubelle"
 msgid "Try 15 days for free"
 msgstr "Essayer 15 jours gratuitement"
 
+#: includes/global-functions.php:528
+#, fuzzy
+msgid "Turkish"
+msgstr "turc"
+
 #: admin/helpers/core/select-dashicon/class-select-dashicon.php:330
 #, fuzzy
 msgid "Twitch Icon"
@@ -10198,7 +10454,7 @@ msgstr "Authentification à deux facteurs"
 msgid "Two types of snippets are available:"
 msgstr "Deux types de snippets sont disponibles :"
 
-#: admin/modules/core/class-code-snippets.php:658
+#: admin/modules/core/class-code-snippets.php:659
 #: admin/modules/pro/class-post-type-switcher.php:72
 msgid "Type"
 msgstr "Type"
@@ -10281,7 +10537,7 @@ msgstr ""
 "fonctionnalités vous feront gagner encore plus de temps sans surcharger "
 "votre site. ✨"
 
-#: admin/templates/core/page-settings.php:275
+#: admin/templates/core/page-settings.php:277
 #, fuzzy
 msgid "Unlock the full potential of WPMasterToolKit"
 msgstr "Libérez tout le potentiel de WPMasterToolKit"
@@ -10335,7 +10591,7 @@ msgstr "Icône de mise à jour (alt)"
 msgid "Update Icon"
 msgstr "Icône de mise à jour"
 
-#: admin/modules/core/class-register-custom-content-types.php:491
+#: admin/modules/core/class-register-custom-content-types.php:492
 #, fuzzy
 msgid "Update Item"
 msgstr "Mettre à jour l'élément"
@@ -10344,7 +10600,7 @@ msgstr "Mettre à jour l'élément"
 msgid "Update Snippet"
 msgstr "Mettre à jour le snippet"
 
-#: admin/modules/core/class-register-custom-content-types.php:492
+#: admin/modules/core/class-register-custom-content-types.php:493
 #, fuzzy
 msgid "Update Tag"
 msgstr "Mettre à jour la balise"
@@ -10373,12 +10629,12 @@ msgstr "Télécharger des fichiers"
 msgid "Upload Icon"
 msgstr "Icône de téléchargement"
 
-#: admin/modules/core/class-register-custom-content-types.php:360
+#: admin/modules/core/class-register-custom-content-types.php:361
 #, fuzzy
 msgid "Uploaded to this Item"
 msgstr "Téléchargé sur cet élément"
 
-#: admin/modules/core/class-register-custom-content-types.php:361
+#: admin/modules/core/class-register-custom-content-types.php:362
 #, fuzzy
 msgid "Uploaded to this Post"
 msgstr "Téléchargé sur ce post"
@@ -10405,21 +10661,21 @@ msgstr "Événement cron URL enregistré."
 msgid "URL events"
 msgstr "Événements URL"
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:435
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:417
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:441
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:429
 #, fuzzy
 msgid "URL Slug"
 msgstr "URL Slug"
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:549
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:499
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:555
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:511
 #, fuzzy
 msgid "URLs for an item and items can be accessed with a query string."
 msgstr ""
 "Les URL d'un élément et les éléments sont accessibles avec une chaîne de "
 "requête."
 
-#: admin/modules/core/class-media-encoder.php:2411
+#: admin/modules/core/class-media-encoder.php:2427
 msgid "Use <picture> tags"
 msgstr "Utiliser les balises <picture>"
 
@@ -10438,17 +10694,17 @@ msgstr ""
 msgid "Use Dashicon"
 msgstr "Utiliser Dashicon"
 
-#: admin/modules/core/class-register-custom-content-types.php:350
+#: admin/modules/core/class-register-custom-content-types.php:351
 #, fuzzy
 msgid "Use Featured Image"
 msgstr "Utiliser l'image sélectionnée"
 
-#: admin/modules/core/class-register-custom-content-types.php:351
+#: admin/modules/core/class-register-custom-content-types.php:352
 #, fuzzy
 msgid "Use Post Featured Image"
 msgstr "Utiliser l'image sélectionnée de la publication"
 
-#: admin/modules/core/class-media-encoder.php:2412
+#: admin/modules/core/class-media-encoder.php:2428
 msgid "Use rewrite rules"
 msgstr "Utiliser les règles de réécriture"
 
@@ -10611,13 +10867,13 @@ msgstr "Voir"
 msgid "View Content"
 msgstr "Afficher le contenu"
 
-#: admin/modules/core/class-register-custom-content-types.php:285
-#: admin/modules/core/class-register-custom-content-types.php:486
+#: admin/modules/core/class-register-custom-content-types.php:286
+#: admin/modules/core/class-register-custom-content-types.php:487
 #, fuzzy
 msgid "View Item"
 msgstr "Voir l'article"
 
-#: admin/modules/core/class-register-custom-content-types.php:286
+#: admin/modules/core/class-register-custom-content-types.php:287
 #, fuzzy
 msgid "View Post"
 msgstr "Voir la publication"
@@ -10640,7 +10896,7 @@ msgstr "Afficher le snippet"
 msgid "View Snippets"
 msgstr "Afficher les snippets"
 
-#: admin/modules/core/class-register-custom-content-types.php:487
+#: admin/modules/core/class-register-custom-content-types.php:488
 #, fuzzy
 msgid "View Tag"
 msgstr "Voir l'étiquette"
@@ -10702,11 +10958,11 @@ msgstr ""
 "développez les capacités de votre site Web avec des outils fiables et "
 "faciles à utiliser."
 
-#: admin/templates/core/page-settings.php:234
+#: admin/templates/core/page-settings.php:236
 msgid "We never share or get your personal information."
 msgstr "Nous ne partageons ni n'obtenons jamais vos informations personnelles."
 
-#: admin/templates/core/page-settings.php:223
+#: admin/templates/core/page-settings.php:225
 msgid "We only send your WPMasterToolKit configuration."
 msgstr "Nous envoyons uniquement votre configuration WPMasterToolKit."
 
@@ -10735,7 +10991,7 @@ msgstr ""
 "Nous vous recommandons fortement de créer une sauvegarde complète avant "
 "d'entreprendre cette action."
 
-#: admin/modules/core/class-media-encoder.php:2393
+#: admin/modules/core/class-media-encoder.php:2409
 #| msgid "Webp: "
 msgid "WebP"
 msgstr "WebP"
@@ -10745,6 +11001,11 @@ msgstr "WebP"
 msgid "Website : %s"
 msgstr "Sites Internet : %s"
 
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:700
+#, fuzzy
+msgid "Website Language"
+msgstr "Langue du site Web"
+
 #: admin/modules/pro/class-auto-clean-actionscheduler-actions.php:201
 msgid "Week"
 msgstr "Semaine"
@@ -10753,7 +11014,7 @@ msgstr "Semaine"
 msgid "Weekly"
 msgstr "Hebdomadaire"
 
-#: admin/templates/core/page-settings.php:367
+#: admin/templates/core/page-settings.php:369
 #, php-format
 msgid "What's new in v%s"
 msgstr "Quoi de neuf dans v%s"
@@ -10831,7 +11092,7 @@ msgstr "Largeur"
 msgid "With the PRO version you unlock:"
 msgstr "Avec la version PRO vous débloquez :"
 
-#: admin/class-modules-data.php:1227
+#: admin/class-modules-data.php:1247
 msgid "Woocommerce"
 msgstr "Woocommerce"
 
@@ -10866,18 +11127,18 @@ msgstr ""
 "Les clés de sel WordPress ou clés de sécurité sont des codes qui aident à "
 "protéger les informations importantes sur votre site Web."
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:724
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:709
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:730
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:721
 #, fuzzy
 msgid "wp/v2"
 msgstr "wp/v2"
 
-#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:737
+#: admin/templates/core/register-custom-content-types/edit-post-cpt.php:743
 #, fuzzy
 msgid "WP_REST_Posts_Controller"
 msgstr "Contrôleur de publications WP_REST"
 
-#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:722
+#: admin/templates/core/register-custom-content-types/edit-taxonomy.php:734
 #, fuzzy
 msgid "WP_REST_Terms_Controller"
 msgstr "Contrôleur de conditions d'utilisation de WP_REST"
@@ -11063,7 +11324,7 @@ msgstr "Fichier de zéro octet ! Abandon du téléchargement"
 msgid "Zip"
 msgstr "Zip"
 
-#: admin/modules/core/class-register-custom-content-types.php:592
+#: admin/modules/core/class-register-custom-content-types.php:593
 #, fuzzy
 msgid "← Go to tags"
 msgstr "← Aller aux tags"

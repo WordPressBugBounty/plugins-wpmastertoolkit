@@ -29,14 +29,52 @@ class WPMastertoolkit_Custom_Link_Menu_New_Tab {
 
         if ( $menu_item->object === 'custom' ) {
 
-            $checked = get_post_meta( $item_id, 'WPMastertoolkit_open_new_tab', true );
+			$options = get_post_meta( $item_id, 'WPMastertoolkit_open_new_tab_options', true );
+			if ( empty( $options ) ) {
+
+				$old_value = get_post_meta( $item_id, 'WPMastertoolkit_open_new_tab', true );
+				if ( '1' == $old_value ) {
+					$options = array(
+						'target'     => '1',
+						'noopener'   => '1',
+						'noreferrer' => '1',
+						'nofollow'   => '1',
+					);
+				}
+			}
+
+			$target     = $options['target'] ?? '0';
+			$noopener   = $options['noopener'] ?? '0';
+			$noreferrer = $options['noreferrer'] ?? '0';
+			$nofollow   = $options['nofollow'] ?? '0';
 
             ?>
                 <p class="description-wide">
                     <label>
-                        <input type="hidden" name="WPMastertoolkit_open_new_tab[<?php echo esc_attr( $item_id ) ;?>]" value="0">
-                        <input type="checkbox" name="WPMastertoolkit_open_new_tab[<?php echo esc_attr( $item_id ) ;?>]" value="1" <?php echo checked( $checked, '1', false );?> />
-                        <strong>WPMasterToolkit: </strong><?php esc_html_e( 'Open link in new tab and add rel="noopener noreferrer nofollow" attribute.', 'wpmastertoolkit' ); ?>
+                        <input type="hidden" name="WPMastertoolkit_open_new_tab_options[<?php echo esc_attr( $item_id ) ;?>][target]" value="0">
+                        <input type="checkbox" name="WPMastertoolkit_open_new_tab_options[<?php echo esc_attr( $item_id ) ;?>][target]" value="1" <?php echo checked( $target, '1', false );?> />
+                        <strong>WPMasterToolkit: </strong><?php esc_html_e( 'Add "target=_blank"', 'wpmastertoolkit' ); ?>
+                    </label>
+                </p>
+                <p class="description-wide">
+                    <label>
+                        <input type="hidden" name="WPMastertoolkit_open_new_tab_options[<?php echo esc_attr( $item_id ) ;?>][noopener]" value="0">
+                        <input type="checkbox" name="WPMastertoolkit_open_new_tab_options[<?php echo esc_attr( $item_id ) ;?>][noopener]" value="1" <?php echo checked( $noopener, '1', false );?> />
+                        <strong>WPMasterToolkit: </strong><?php esc_html_e( 'Add "rel=noopener"', 'wpmastertoolkit' ); ?>
+                    </label>
+                </p>
+                <p class="description-wide">
+                    <label>
+                        <input type="hidden" name="WPMastertoolkit_open_new_tab_options[<?php echo esc_attr( $item_id ) ;?>][noreferrer]" value="0">
+                        <input type="checkbox" name="WPMastertoolkit_open_new_tab_options[<?php echo esc_attr( $item_id ) ;?>][noreferrer]" value="1" <?php echo checked( $noreferrer, '1', false );?> />
+                        <strong>WPMasterToolkit: </strong><?php esc_html_e( 'Add "rel=noreferrer"', 'wpmastertoolkit' ); ?>
+                    </label>
+                </p>
+                <p class="description-wide">
+                    <label>
+                        <input type="hidden" name="WPMastertoolkit_open_new_tab_options[<?php echo esc_attr( $item_id ) ;?>][nofollow]" value="0">
+                        <input type="checkbox" name="WPMastertoolkit_open_new_tab_options[<?php echo esc_attr( $item_id ) ;?>][nofollow]" value="1" <?php echo checked( $nofollow, '1', false );?> />
+                        <strong>WPMasterToolkit: </strong><?php esc_html_e( 'Add "rel=nofollow"', 'wpmastertoolkit' ); ?>
                     </label>
                 </p>
             <?php
@@ -51,10 +89,17 @@ class WPMastertoolkit_Custom_Link_Menu_New_Tab {
     public function save_checkbox( $menu_id, $menu_item_db_id, $args ) {
 
 		//phpcs:ignore WordPress.Security.NonceVerification.Missing
-        $value = sanitize_text_field( wp_unslash( $_POST['WPMastertoolkit_open_new_tab'][$menu_item_db_id] ?? false ) );
+        $options = array_map( 'sanitize_text_field', wp_unslash( $_POST['WPMastertoolkit_open_new_tab_options'][$menu_item_db_id] ?? [] ) );
 
-        if ( $value !== false ) {
-            update_post_meta( $menu_item_db_id, 'WPMastertoolkit_open_new_tab', $value );
+        if ( ! empty( $options ) ) {
+			$value = [
+				'target'     => $options['target'] ?? '0',
+				'noopener'   => $options['noopener'] ?? '0',
+				'noreferrer' => $options['noreferrer'] ?? '0',
+				'nofollow'   => $options['nofollow'] ?? '0',
+			];
+
+            update_post_meta( $menu_item_db_id, 'WPMastertoolkit_open_new_tab_options', $value );
         }
     }
 
@@ -67,15 +112,44 @@ class WPMastertoolkit_Custom_Link_Menu_New_Tab {
 
         if ( $menu_item->object === 'custom' ) {
 
-            $checked = get_post_meta( $menu_item->ID, 'WPMastertoolkit_open_new_tab', true );
+			$options = get_post_meta( $menu_item->ID, 'WPMastertoolkit_open_new_tab_options', true );
+			if ( empty( $options ) ) {
 
-            if ( $checked === '1' ) {
-                $atts['target'] = '_blank';
-                $atts['rel']    = 'noopener noreferrer nofollow';
-            }
+				$old_value = get_post_meta( $menu_item->ID, 'WPMastertoolkit_open_new_tab', true );
+				if ( '1' == $old_value ) {
+					$options = array(
+						'target'     => '1',
+						'noopener'   => '1',
+						'noreferrer' => '1',
+						'nofollow'   => '1',
+					);
+				}
+			}
+
+			$target     = $options['target'] ?? '0';
+			$noopener   = $options['noopener'] ?? '0';
+			$noreferrer = $options['noreferrer'] ?? '0';
+			$nofollow   = $options['nofollow'] ?? '0';
+
+			if ( '1' == $target ) {
+				$atts['target'] = '_blank';
+			}
+
+			$rel = array();
+			if ( '1' == $noopener ) {
+				$rel[] = 'noopener';
+			}
+			if ( '1' == $noreferrer ) {
+				$rel[] = 'noreferrer';
+			}
+			if ( '1' == $nofollow ) {
+				$rel[] = 'nofollow';
+			}
+			if ( ! empty( $rel ) ) {
+				$atts['rel'] = implode( ' ', $rel );
+			}
         }
 
         return $atts;
     }
-
 }

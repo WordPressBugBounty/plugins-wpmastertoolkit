@@ -4,7 +4,7 @@ Tags: all in one plugin, admin, security, disable features, easy to use
 Requires at least: 6.0.0
 Tested up to: 6.8.0
 Requires PHP: 7.4
-Stable tag: 2.7.0
+Stable tag: 2.8.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
 
@@ -22,9 +22,9 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 = 89 FREE modules =
 
 * Adminer: A full-featured database management tool.
-* Allow Menu Custom Links to Open in New Tab: Enable custom menu links to open in a new tab with a checkbox. For security and SEO, links include the `rel="noopener noreferrer nofollow"` attribute.
-* Apple Touch Icon: Manage app icon (Apple Touch Icon) individually. Once activated, go to Settings / General for change your Apple Touch icon without impact your favicon.
-* Auto Regenerate Salt Keys: WordPress salt keys or security keys are codes that help protect important information on your website.
+* Allow Menu Custom Links to Open in New Tab.
+* Apple Touch Icon: Manage app icon (Apple Touch Icon) individually.
+* Auto Regenerate Salt Keys.
 * Auto-Publish Posts with Missed Schedule: Automatically initiate the publication of scheduled posts marked with &quot;missed schedule&quot; upon each visit to the website, across all post types.
 * Ban Emails: Ban the chosen emails.
 * Blacklisted Usernames: Prevent the creation of new user accounts with predifined blacklisted usernames. Blacklist usernames that are too common.
@@ -32,8 +32,8 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 * Browser Theme Color: Select a tag color to allow seamless theme customization in all major browsers.
 * Child theme generator: A simple tool to generate a child theme on your WordPress. You can disable it after generation.
 * Clean Profiles: Tidy up user profiles by removing sections you do not utilise.
-* Clean Up Admin Bar: Remove various elements from the admin bar.
-* Code Snippets: Add custom code snippets without editing the theme's **functions.php**. Ideal for CSS, JavaScript, and PHP. To disable all snippets, add to **wp-config.php**:  `define('WPMASTERTOOLKIT_SNIPPETS_SAFE_MODE', true);`
+* Clean Up Admin Bar.
+* Code Snippets: Add custom code snippets without editing the theme's **functions.php**.
 * Content Duplication: Enable one-click duplication of pages, posts and custom posts. The corresponding taxonomy terms and post meta will also be duplicated.
 * Content Order: Enable custom ordering of various &quot;hierarchical&quot; content types or those supporting &quot;page attributes&quot;. A new &#039;Order&#039; sub-menu will appear for enabled content type(s).
 * Custom Admin CSS: Add custom CSS on all admin pages for all user roles.
@@ -49,9 +49,9 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 * Disable WP Sitemap: Disable the default WordPress sitemap.
 * Disable Windows Live Writer (WLW) manifest &lt;link&gt; tag: Disable the Windows Live Writer (WLW) manifest &lt;link&gt; tag in &lt;head&gt;. The WLW app was discontinued in 2017.
 * Disable WordPress shortlink &lt;link&gt; tag: Disable the WordPress shortlink `<link>` tag in `<head>`. Replace with a shortlink plugin for custom names and click tracking.
-* Disable XML-RPC: Enhance security with advanced XML-RPC protection against brute force, DoS, and DDoS attacks. Trackbacks and pingbacks are also disabled to strengthen defenses.
+* Disable XML-RPC.
 * Disable cart fragments scripts: Disable cart fragments scripts on the front-end for public site visitors. This might break the functionality of the cart and checkout pages if they depend on cart fragments.
-* Disable dashicons CSS and JS files: Disable loading of Dashicons CSS and JS files on the front-end for public site visitors. This might break the layout or design of custom forms, including custom login forms, if they depend on Dashicons. Make sure to check those forms after disabling.
+* Disable dashicons CSS and JS files.
 * Disable emoji support: Disable emoji support on the admin and frontend for pages, posts, and custom post types. Modern browsers now natively support emojis, making this feature unnecessary.
 * Disable jQuery Migrate: Removes the jQuery Migrate script from the frontend of your site.
 * Disable wp_mail: Disable the wp_mail function, which is used by WordPress to send emails. This feature is useful for websites that do not send emails, as it prevents the wp_mail function from loading and consuming resources.
@@ -111,28 +111,30 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 * SVG Upload: Enable SVG upload support in the media library.
 * Wider Admin Menu
 
-= 20 PRO modules =
-* 410 Manager: Managing HTTP 410 statuses on your site. The 410 status indicates that the requested resource has been permanently deleted and that this deletion is intentional and final.
+= 23 Pro features =
+* 410 Manager: Managing HTTP 410 statuses on your site.
 * Add Essentials Shortcodes: Insert dynamic variables into your titles and content via shortcodes.
 * Auto clean actionscheduler_actions: Clean actionscheduler_actions database table from actions that have been completed | failed | cancelled.
+* Better Password Hash: Use Argon2 password hashing algorithm for better security.
 * CRON Manager: Manage cron events on your website.
 * Change Database Prefix: Quickly change your WordPress database prefix to save time and enhance security.
 * Custom Login Design: Personalize your login page to match your brand.
 * Disable Comments: Manage the visibility of comments on your public posts by selectively disabling them for specific post types or across all posts. Once comments are disabled, any existing comments will seamlessly disappear from the front-end.
 * Disallow Access WP Sensible Files: Delete the wp-config-sample.php, block access to readme.html, license.txt
-* Disallow Countries IP: Include/Exclude countries IP
+* Disallow Countries IP.
 * Force Send All Email To: Force all emails sent from your website to be sent to a specific email address. This feature is useful for testing email functionality on your website, as it ensures that all emails are sent to a single email address.
+* Generate Alt Text With AI: Automatically generate alternative text using AI.
 * Hook And Filter Debugger: Displaying the sequence of action and filter hooks by their origin on a single page.
-* Link Shortener: Shorten your links with a custom prefix.
-* Manage Admin Emails Notifications: Disable admin emails notifications.
+* Link Shortener: Shorten your links with a custom prefix. You can also track the number of clicks on each link.
+* Manage Admin Emails Notifications: Check the types of emails you no longer want to receive as an administrator.
 * No Plugin Activation / Deactivation / Deletion: Prevents plugin activation, deactivation, and deletion for enhanced security.
 * Paste Image In Media: With this feature you can paste directly your picture in WordPress media.
 * Plugin Download: Download plugins from the plugins page in the WordPress admin panel.
-* Post Type Switcher: A simple way to change the type of a post.
-* Two Factor Authentication: Add an extra layer of security to your website by enabling two-factor authentication for all users.
+* Post Type Switcher.
+* Two Factor Authentication.
 * Updates Logs: Track and record the most recent login activity of site users, then showcase the date and time in the users list table
-* User Switching: Instant switching between user accounts.
-* Vulnerabilities Scan: This module will scan your WordPress Core Version, Plugins and Themes for vulnerabilities.
+* User Switching.
+* Vulnerabilities Scan: On Core Version, Plugins and Themes.
 
 = PRO Additionnals Features =
 * Move Login URL: Stop access to /wp-admin with server side 403 error. To prevent ressource loading.
@@ -193,6 +195,14 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 4. Code snippets
 
 == Changelog ==
+
+= 2.8.0 =
+* Add PRO Module: Better Password Hash.
+* Add Pro Module: Generate Alt Text With AI
+* Add Credentials manager on settings page.
+* Update Module: Force Strong Password: Remove zxcvbn password strength check and replace with custom function for better performance and lightweight.
+* Fix Module: Media Encoder: Black background issue when converting to WebP/AVIF for PNG images with transparency.
+* Update Module: Custom Link Menu New Tab: add options for attributes
 
 = 2.7.0 =
 * Modern Post List on Code Snippets, Link Shortener and Register Custom Content Types modules.

@@ -296,6 +296,7 @@ class WPMastertoolkit_Code_Snippets {
      */
     public function admin_body_class( $classes ) {
         global $pagenow;
+		//phpcs:ignore WordPress.Security.NonceVerification.Recommended
         if ( $pagenow === 'edit.php' && isset( $_GET['post_type'] ) && $_GET['post_type'] === $this->post_type ) {
             $classes .= ' wpmtk-modern-post-list';
         }

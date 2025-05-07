@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 		</p>
 		<div class="tab-content" id="myTabContent">
 			<div class="tab-pane fade show active" id="fileUploader" role="tabpanel" aria-labelledby="fileUploader-tab">
-				<form action="<?php echo esc_attr( htmlspecialchars( $this->FM_SELF_URL ) ) . '?page=wp-mastertoolkit-settings-file-manager&token='. $this->TOKEN .'&p=' . esc_attr( $this->fm_enc( $this->FM_PATH ) ); ?>" class="dropzone card-tabs-container" id="fileUploader" enctype="multipart/form-data">
+				<form action="<?php echo esc_attr( htmlspecialchars( $this->FM_SELF_URL ) ) . '?page=wp-mastertoolkit-settings-file-manager&token='. esc_attr( $this->TOKEN ) .'&p=' . esc_attr( $this->fm_enc( $this->FM_PATH ) ); ?>" class="dropzone card-tabs-container" id="fileUploader" enctype="multipart/form-data">
 					<input type="hidden" name="p" value="<?php echo esc_attr( $this->fm_enc( $this->FM_PATH ) ); ?>">
 					<input type="hidden" name="fullpath" id="fullpath" value="<?php echo esc_attr( $this->fm_enc( $this->FM_PATH ) ); ?>">
 					<input type="hidden" name="token" value="<?php echo esc_attr( $this->TOKEN ); ?>">

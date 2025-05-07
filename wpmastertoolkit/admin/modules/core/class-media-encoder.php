@@ -2216,11 +2216,19 @@ class WPMastertoolkit_Media_Encoder {
 			return false;
 		}
 		
-		if (!imageistruecolor($image)) {
-            $truecolor = imagecreatetruecolor(imagesx($image), imagesy($image));
-            imagecopy($truecolor, $image, 0, 0, 0, 0, imagesx($image), imagesy($image));
-            $image = $truecolor;
-        }
+		if ( ! imageistruecolor( $image ) ) {
+			$truecolor = imagecreatetruecolor( imagesx( $image ), imagesy( $image ) );
+	
+			if ( $mime_type === 'image/png' ) {
+				imagealphablending( $truecolor, false );
+				imagesavealpha( $truecolor, true );
+				$transparent = imagecolorallocatealpha( $truecolor, 0, 0, 0, 127 );
+				imagefilledrectangle( $truecolor, 0, 0, imagesx( $image ), imagesy( $image ), $transparent );
+			}
+	
+			imagecopy( $truecolor, $image, 0, 0, 0, 0, imagesx( $image ), imagesy( $image ) );
+			$image = $truecolor;
+		}
 
 		$avif_image = imageavif( $image, $output_path, $quality );
 		imagedestroy( $image );
@@ -2254,11 +2262,19 @@ class WPMastertoolkit_Media_Encoder {
 			return false;
 		}
 		
-		if (!imageistruecolor($image)) {
-            $truecolor = imagecreatetruecolor(imagesx($image), imagesy($image));
-            imagecopy($truecolor, $image, 0, 0, 0, 0, imagesx($image), imagesy($image));
-            $image = $truecolor;
-        }
+		if ( ! imageistruecolor( $image ) ) {
+			$truecolor = imagecreatetruecolor( imagesx( $image ), imagesy( $image ) );
+	
+			if ( $mime_type === 'image/png' ) {
+				imagealphablending( $truecolor, false );
+				imagesavealpha( $truecolor, true );
+				$transparent = imagecolorallocatealpha( $truecolor, 0, 0, 0, 127 );
+				imagefilledrectangle( $truecolor, 0, 0, imagesx( $image ), imagesy( $image ), $transparent );
+			}
+	
+			imagecopy( $truecolor, $image, 0, 0, 0, 0, imagesx( $image ), imagesy( $image ) );
+			$image = $truecolor;
+		}
 
 		$webp_image = imagewebp( $image, $output_path, $quality );
 		imagedestroy( $image );

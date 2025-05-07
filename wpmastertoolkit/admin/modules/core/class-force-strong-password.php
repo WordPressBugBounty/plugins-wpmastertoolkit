@@ -6,13 +6,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * Description: Force users to use strong passwords
  * @since 1.0.0
  */
-
-/**
- * ZxcvbnPhp
- * ZxcvbnPhp is a password strength estimator using pattern matching and minimum entropy calculation.
- */
-use ZxcvbnPhp\Zxcvbn;
-
 class WPMastertoolkit_Force_Strong_Password {
     /**
      * __construct Invoke Wp Hooks
@@ -117,23 +110,52 @@ class WPMastertoolkit_Force_Strong_Password {
         if ( ! $this->is_strong_password( $password ) ) {
             $errors->add( 
                 'pass', 
-                esc_html__( '<strong>ERROR</strong>: Your password is not strong enough. Please use a stronger password.', 'wpmastertoolkit' ),
+                wp_kses_post( '<strong>ERROR</strong>: Your password is not strong enough. Please use a stronger password.', 'wpmastertoolkit' ),
                 array( 'form-field' => 'pass1' ) 
             );
         }
 
         return $errors;
     }
-    
+        
     /**
      * is_strong_password
      *
      * @param  mixed $password
      * @return void
      */
-    private function is_strong_password( $password ) {
-        $zxcvbn = new Zxcvbn();
-        $strength = $zxcvbn->passwordStrength( $password );
-        return $strength['score'] >= 3;
+    private function is_strong_password($password) {
+        $score = 0;
+        $length = strlen($password);
+    
+        if ($length >= 8) $score++;
+        if ($length >= 12) $score++;
+    
+        $hasUpper   = preg_match('/[A-Z]/', $password);
+        $hasLower   = preg_match('/[a-z]/', $password);
+        $hasDigit   = preg_match('/\d/', $password);
+        $hasSymbol  = preg_match('/[\W_]/', $password);
+        $typesUsed  = $hasUpper + $hasLower + $hasDigit + $hasSymbol;
+    
+        if ($typesUsed >= 3) $score++;
+        if ($typesUsed === 4) $score++;
+    
+        if (!preg_match('/(.)\1{2,}/', $password)) $score++;
+    
+        $sequences = ['1234', 'abcd', 'qwerty', 'azerty', 'password', 'admin', 'letmein'];
+        foreach ($sequences as $seq) {
+            if (stripos($password, $seq) !== false) {
+                $score--;
+                break;
+            }
+        }
+    
+        if (in_array(strtolower($password), ['123456', 'password', 'admin', 'azerty', 'qwerty'])) {
+            $score = 0;
+        }
+    
+        $score = max(0, min($score, 4));
+    
+        return $score >= 3;
     }
 }
