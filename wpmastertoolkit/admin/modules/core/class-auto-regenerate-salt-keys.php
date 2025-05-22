@@ -92,7 +92,8 @@ class WPMastertoolkit_Auto_Regenerate_Salt_Keys {
     public function cron_events() {
 
         if ( ! wp_next_scheduled( $this->cron_name . '_hook', array( $this->cron_name ) ) ) {
-            wp_schedule_event( time(), $this->cron_name, $this->cron_name . '_hook', array( $this->cron_name ) );
+			$after_30_min = time() + ( 30 * MINUTE_IN_SECONDS );
+            wp_schedule_event( $after_30_min, $this->cron_name, $this->cron_name . '_hook', array( $this->cron_name ) );
         }
     }
 

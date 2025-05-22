@@ -7,6 +7,9 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  */
 
 $pro_modules_count = 0;
+$modules 		   = wpmastertoolkit_options();
+$order 			   = array_column( $modules, 'name' );
+array_multisort( $order, SORT_ASC, $modules );
 ?>
 
 <div class="wrap wp-mastertoolkit">
@@ -71,16 +74,15 @@ $pro_modules_count = 0;
 
 							if ( $group_key === 'all' ) {
 								$show_counter = true;
-								$counter      = count( wpmastertoolkit_options() );
+								$counter      = count( $modules );
 							}
 
                         } else {
-                            foreach ( wpmastertoolkit_options() as $option_key => $option_data ) {
+                            foreach ( $modules as $option_key => $option_data ) {
                                 if ( $option_data['group'] === $group_key ) {
 									$counter++;
                                     $has_items = true;
                                 }
-
 								$checked = isset( $db_options[$option_key] ) && $db_options[$option_key] === '1';
 								if ( $checked ) {
 									$counter_activated++;
@@ -127,7 +129,7 @@ $pro_modules_count = 0;
 
             <div class="wp-mastertoolkit__body__sections">
 
-                <?php foreach ( wpmastertoolkit_options() as $option_key => $option_data ) :
+                <?php foreach ( $modules as $option_key => $option_data ) :
                         $option_path     = $option_data['path'] ?? '';
                         $coming_soon     = $option_data['coming_soon'] ?? false;
                         $is_addon_module = false;

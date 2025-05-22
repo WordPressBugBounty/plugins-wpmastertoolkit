@@ -2,9 +2,9 @@
 Contributors: ludwigyou
 Tags: all in one plugin, admin, security, disable features, easy to use
 Requires at least: 6.0.0
-Tested up to: 6.8.0
+Tested up to: 6.8.1
 Requires PHP: 7.4
-Stable tag: 2.8.0
+Stable tag: 2.9.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
 
@@ -111,7 +111,7 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 * SVG Upload: Enable SVG upload support in the media library.
 * Wider Admin Menu
 
-= 23 Pro features =
+= 24 Pro features =
 * 410 Manager: Managing HTTP 410 statuses on your site.
 * Add Essentials Shortcodes: Insert dynamic variables into your titles and content via shortcodes.
 * Auto clean actionscheduler_actions: Clean actionscheduler_actions database table from actions that have been completed | failed | cancelled.
@@ -120,6 +120,7 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 * Change Database Prefix: Quickly change your WordPress database prefix to save time and enhance security.
 * Custom Login Design: Personalize your login page to match your brand.
 * Disable Comments: Manage the visibility of comments on your public posts by selectively disabling them for specific post types or across all posts. Once comments are disabled, any existing comments will seamlessly disappear from the front-end.
+* Disable Woocommerce Logout Confirmation.
 * Disallow Access WP Sensible Files: Delete the wp-config-sample.php, block access to readme.html, license.txt
 * Disallow Countries IP.
 * Force Send All Email To: Force all emails sent from your website to be sent to a specific email address. This feature is useful for testing email functionality on your website, as it ensures that all emails are sent to a single email address.
@@ -195,6 +196,17 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 4. Code snippets
 
 == Changelog ==
+
+= 2.9.0 =
+* Update Module: User Switching: Add a new option to switch user from user edit page. Add a new filter for get the switch to user link from another plugin.
+* Update Module: Maintenance Mode: Add a new option to preview the maintenance mode page.
+* Update Module: CRON Manager: Add search input to filter the cron events.
+* Update Module: Register Custom Content Types: Add a popup to manage migration or deletion of post type or taxonomy key. Add export code feature.
+* Update Module: Regenerate Salt Keys: Prevent logout after save with first regeneration after 30min.
+* Update Module: Generate Alt Text With AI: Show notice if no api key exist, track the post id in bulk action
+* Fix incompatibility with other plugins using geoip dependency.
+* Add Pro Module: Disable Woocommerce Logout Confirmation
+* Modules list is now sorted by name.
 
 = 2.8.0 =
 * Add PRO Module: Better Password Hash.

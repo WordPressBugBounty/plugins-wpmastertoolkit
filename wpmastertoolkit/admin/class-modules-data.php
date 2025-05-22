@@ -690,6 +690,12 @@ class WPMastertoolkit_Modules_Data {
 				'pro'           => true,
 				'path'          => 'pro/class-better-password-hash.php',
 			),
+			'WPMastertoolkit_Disable_Woocommerce_Logout_Confirmation' => array(
+				'original_name' => "Disable Woocommerce Logout Confirmation",
+				'group'         => 'woocommerce',
+				'pro'           => true,
+				'path'          => 'pro/class-disable-woocommerce-logout-confirmation.php',
+			),
 		);
 		
 		/**
@@ -1158,6 +1164,10 @@ class WPMastertoolkit_Modules_Data {
 				'name' => esc_html_x( "Better Password Hash", "Module name", 'wpmastertoolkit' ),
 				'desc' => esc_html_x( "Improve the default WordPress password hashing algorithm using Argon2. If Argon2 is not available, it will fallback to the default bcrypt algorithm.", "Module description", 'wpmastertoolkit' ),
 			),
+			'WPMastertoolkit_Disable_Woocommerce_Logout_Confirmation' => array(
+				'name' => esc_html_x( "Disable Woocommerce Logout Confirmation", "Module name", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( "Removed confirmation after clicking on logout on Woocommerce.", "Module description", 'wpmastertoolkit' ),
+			),
 		);
 
 		/**
@@ -1249,7 +1259,7 @@ class WPMastertoolkit_Modules_Data {
 				'exception' => false,
 			),
 			'other-features' => array(
-				'name'      => esc_html__( 'Other Features', 'wpmastertoolkit' ),
+				'name'      => esc_html__( 'Other', 'wpmastertoolkit' ),
 				'logo'      => 'tools.svg',
 				'exception' => false,
 			),

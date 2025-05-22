@@ -7,10 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'enshrined\\svgSanitize\\' => array($vendorDir . '/enshrined/svg-sanitize/src'),
-    'MaxMind\\WebService\\' => array($vendorDir . '/maxmind/web-service-common/src/WebService'),
-    'MaxMind\\Exception\\' => array($vendorDir . '/maxmind/web-service-common/src/Exception'),
     'MaxMind\\Db\\' => array($vendorDir . '/maxmind-db/reader/src/MaxMind/Db'),
     'League\\ISO3166\\' => array($vendorDir . '/league/iso3166/src'),
-    'GeoIp2\\' => array($vendorDir . '/geoip2/geoip2/src'),
-    'Composer\\CaBundle\\' => array($vendorDir . '/composer/ca-bundle/src'),
 );

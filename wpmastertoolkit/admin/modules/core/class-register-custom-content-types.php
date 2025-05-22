@@ -11,9 +11,34 @@ class WPMastertoolkit_Register_Custom_Content_Types {
     protected $post_type             = 'wpmtk-content-type';
     protected $meta_click_count      = 'click_count';
     protected $content_type_settings = 'content_type_settings';
+	protected $export_submenu        = 'wp-mastertoolkit-settings-register-custom-content-types-export';
     
+	private $option_id;
+	private $header_title;
+	private $disable_form;
+    private $nonce_action_02;
     private $code_folder_path;
     private $all_wp_capabilities;
+
+	private $cron_cpt_migrate_hook;
+	private $cron_cpt_migrate_recurrence;
+	private $cron_cpt_delete_hook;
+	private $cron_cpt_delete_recurrence;
+
+	private $cron_taxonomy_migrate_hook;
+	private $cron_taxonomy_migrate_recurrence;
+	private $cron_taxonomy_delete_hook;
+	private $cron_taxonomy_delete_recurrence;
+
+	private $option_cpt_migrate_status;
+	private $option_cpt_migrate_posts;
+	private $option_cpt_delete_status;
+	private $option_cpt_delete_posts;
+
+	private $option_taxonomy_migrate_status;
+	private $option_taxonomy_migrate_terms;
+	private $option_taxonomy_delete_status;
+	private $option_taxonomy_delete_terms;
 
     /**
      * Constructor.
@@ -21,6 +46,28 @@ class WPMastertoolkit_Register_Custom_Content_Types {
      * @since 2.6.0
      */
     public function __construct() {
+		$this->option_id                        = WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_register_custom_content_types';
+		$this->nonce_action_02                  = $this->option_id . '_action';
+
+		$this->cron_cpt_migrate_hook            = $this->option_id . '_cron_cpt_migrate_hook';
+		$this->cron_cpt_migrate_recurrence      = $this->option_id . '_cron_cpt_migrate_recurrence';
+		$this->cron_cpt_delete_hook             = $this->option_id . '_cron_cpt_delete_hook';
+		$this->cron_cpt_delete_recurrence       = $this->option_id . '_cron_cpt_delete_recurrence';
+
+		$this->cron_taxonomy_migrate_hook       = $this->option_id . '_cron_taxonomy_migrate_hook';
+		$this->cron_taxonomy_migrate_recurrence = $this->option_id . '_cron_taxonomy_migrate_recurrence';
+		$this->cron_taxonomy_delete_hook        = $this->option_id . '_cron_taxonomy_delete_hook';
+		$this->cron_taxonomy_delete_recurrence  = $this->option_id . '_cron_taxonomy_delete_recurrence';
+
+		$this->option_cpt_migrate_status        = $this->option_id . '_option_cpt_migrate_status';
+		$this->option_cpt_migrate_posts         = $this->option_id . '_option_cpt_migrate_posts';
+		$this->option_cpt_delete_status         = $this->option_id . '_option_cpt_delete_status';
+		$this->option_cpt_delete_posts          = $this->option_id . '_option_cpt_delete_posts';
+
+		$this->option_taxonomy_migrate_status   = $this->option_id . '_option_taxonomy_migrate_status';
+		$this->option_taxonomy_migrate_terms    = $this->option_id . '_option_taxonomy_migrate_terms';
+		$this->option_taxonomy_delete_status    = $this->option_id . '_option_taxonomy_delete_status';
+		$this->option_taxonomy_delete_terms     = $this->option_id . '_option_taxonomy_delete_terms';
         
         add_action( 'init', array( $this, 'register_content_type_cpt' ) );
         add_filter( 'manage_' . $this->post_type . '_posts_columns', array( $this, 'add_custom_columns' ) );
@@ -37,6 +84,18 @@ class WPMastertoolkit_Register_Custom_Content_Types {
 
         add_filter( 'wpmastertoolkit/folders', array( $this, 'create_folders' ) );
 
+		add_action( 'admin_footer', array( $this, 'render_key_change_popup' ) );
+		add_action( 'wp_ajax_wpmtk_register_custom_content_types', array( $this, 'handle_ajax_actions' ) );
+
+		add_filter( 'cron_schedules', array( $this, 'crons_registrations' ) );
+		add_action( $this->cron_cpt_migrate_hook, array( $this, 'excute_cron_cpt_migrate' ) );
+		add_action( $this->cron_cpt_delete_hook, array( $this, 'excute_cron_cpt_delete' ) );
+		add_action( $this->cron_taxonomy_migrate_hook, array( $this, 'excute_cron_taxonomy_migrate' ) );
+		add_action( $this->cron_taxonomy_delete_hook, array( $this, 'excute_cron_taxonomy_delete' ) );
+
+		add_filter( 'bulk_actions-edit-' . $this->post_type, array( $this, 'bulk_actions' ) );
+		add_filter( 'handle_bulk_actions-edit-' . $this->post_type, array( $this, 'handle_bulk_actions' ), 10, 3 );
+		add_action( 'admin_menu', array( $this, 'add_submenu' ) );
 
         $this->custom_content_types_loader();
 
@@ -104,6 +163,7 @@ class WPMastertoolkit_Register_Custom_Content_Types {
 
         $columns['content_type']    = __( 'Content Type', 'wpmastertoolkit' );
         $columns['status']          = __( 'Status', 'wpmastertoolkit' );
+        $columns['export_code']     = __( 'Export code', 'wpmastertoolkit' );
 
         return $columns;
     }
@@ -127,9 +187,7 @@ class WPMastertoolkit_Register_Custom_Content_Types {
                     echo wp_kses_post( '<span class="dashicons dashicons-admin-generic"></span> ' . __( 'Unknown', 'wpmastertoolkit' ) );
                     break;
             }
-        }
-
-        if ( $column === 'status' ) {
+        } elseif ( $column === 'status' ) {
             $status = get_post_status( $post_id );
             switch( $status ) {
                 case 'publish':
@@ -145,7 +203,33 @@ class WPMastertoolkit_Register_Custom_Content_Types {
                     echo wp_kses_post( '<span class="dashicons dashicons-yes"></span> ' . __( 'Unknown', 'wpmastertoolkit' ) );
                     break;
             }
-        }
+		} elseif ( $column === 'export_code' ) {
+
+			if ( ! wpmastertoolkit_is_pro() ) {
+				?>
+					<a href="javascript:void(0);" class="button" disabled><?php esc_html_e( 'Export Code (Pro Only)', 'wpmastertoolkit' ); ?></a>
+				<?php
+				return;
+			}
+
+			$content_type  = get_post_meta( $post_id, 'content_type', true );
+			$post_ids      = array( $post_id );
+			$content_types = array( $content_type );
+
+			$url = add_query_arg(
+				array(
+					'post_type'     => $this->post_type,
+					'page'          => $this->export_submenu,
+					'nonce'         => wp_create_nonce( $this->nonce_action_02 ),
+					'content_types' => implode( ',', $content_types ),
+					'post_ids'      => implode( ',', $post_ids ),
+				),
+				admin_url( 'edit.php' ),
+			);
+			?>
+				<a href="<?php echo esc_url( $url ); ?>" class="button"><?php esc_html_e( 'Export Code', 'wpmastertoolkit' ); ?></a>
+			<?php
+		}
     }
     
     /**
@@ -189,11 +273,16 @@ class WPMastertoolkit_Register_Custom_Content_Types {
             require_once( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/helpers/core/select-dashicon/class-select-dashicon.php' );
             wp_enqueue_style('dashicons');
             
-            $assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/register-custom-content-types.asset.php' );
+			$settings = $this->get_settings_cpt( get_the_ID() );
+            $assets   = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/register-custom-content-types.asset.php' );
             wp_enqueue_style( 'WPMastertoolkit_custom_content_types_post', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/register-custom-content-types.css', array(), $assets['version'], 'all' );
             wp_enqueue_script( 'WPMastertoolkit_custom_content_types_post', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/register-custom-content-types.js', $assets['dependencies'], $assets['version'], true );
             wp_localize_script( 'WPMastertoolkit_custom_content_types_post', 'wpmtk_custom_content_types', array(
                 'content_type' => get_post_meta( get_the_ID(), 'content_type', true ),
+				'post_type'    => $settings['post_type'] ?? '',
+				'taxonomy'     => $settings['taxonomy'] ?? '',
+				'nonce'        => wp_create_nonce( $this->nonce_action_02 ),
+				'ajaxUrl'      => admin_url( 'admin-ajax.php' ),
             ) );
         }
     }
@@ -1083,4 +1172,590 @@ class WPMastertoolkit_Register_Custom_Content_Types {
             }
         }
     }
+
+	/**
+	 * Render change key popup
+	 * 
+	 * @since   2.8.0
+	 */
+	public function render_key_change_popup() {
+		global $post_type;
+
+		if ( ! $post_type || ( $post_type !== $this->post_type ) ) {
+			return;
+		}
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$action = sanitize_text_field( wp_unslash( $_GET['action'] ?? '' ) );
+		if ( $action !== 'edit' ) {
+			return;
+		}
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$post_id      = sanitize_text_field( wp_unslash( $_GET['post'] ?? '' ) );
+		$content_type = get_post_meta( $post_id, 'content_type', true );
+		$is_pro       = wpmastertoolkit_is_pro();
+
+		if ( 'cpt' === $content_type ) {
+			include ( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/register-custom-content-types/cpt-key-change-popup.php' );
+		} elseif ( 'taxonomy' === $content_type ) {
+			include ( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/register-custom-content-types/taxonomy-key-change-popup.php' );
+		}
+	}
+
+	/**
+	 * Handle ajax actions
+	 * 
+	 * @since   2.8.0
+	 */
+	public function handle_ajax_actions() {
+		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
+		if ( ! wp_verify_nonce( $nonce, $this->nonce_action_02 ) ) {
+			wp_send_json_error( __( 'Refresh the page and try again.', 'wpmastertoolkit' ) );
+		}
+
+		if ( ! wpmastertoolkit_is_pro() ) {
+			wp_send_json_error( __( 'Upgrade to Pro to use this feature.', 'wpmastertoolkit' ) );
+		}
+
+		$content_type = sanitize_text_field( wp_unslash( $_POST['contentType'] ?? '' ) );
+		$type         = sanitize_text_field( wp_unslash( $_POST['type'] ?? '' ) );
+		$old_value    = sanitize_text_field( wp_unslash( $_POST['oldValue'] ?? '' ) );
+		$new_value    = sanitize_text_field( wp_unslash( $_POST['newValue'] ?? '' ) );
+
+		if ( empty( $content_type ) || empty( $type ) || empty( $old_value ) || empty( $new_value ) ) {
+			wp_send_json_error( __( 'Invalid request. Please try again.', 'wpmastertoolkit' ) );
+		}
+
+		if ( 'cpt' === $content_type ) {
+			if ( $type === 'migrate' ) {
+				$this->start_cron_cpt_migrate( $old_value, $new_value );
+				wp_send_json_success();
+			} elseif ( $type === 'delete' ) {
+				$this->start_cron_cpt_delete( $old_value, $new_value );
+				wp_send_json_success();
+			}
+		} elseif ( 'taxonomy' === $content_type ) {
+			if ( $type === 'migrate' ) {
+				$this->start_cron_taxonomy_migrate( $old_value, $new_value );
+				wp_send_json_success();
+			} elseif ( $type === 'delete' ) {
+				$this->start_cron_taxonomy_delete( $old_value, $new_value );
+				wp_send_json_success();
+			}
+		}
+
+		wp_send_json_error();
+	}
+
+	/**
+	 * Register cron jobs
+	 * 
+	 * @since   2.8.0
+	 */
+	public function crons_registrations( $schedules ) {
+		$schedules[ $this->cron_cpt_migrate_recurrence ] = array(
+			'interval' => MINUTE_IN_SECONDS,
+			'display'  => __( 'Every minute', 'wpmastertoolkit' )
+		);
+		$schedules[ $this->cron_cpt_delete_recurrence ] = array(
+			'interval' => MINUTE_IN_SECONDS,
+			'display'  => __( 'Every minute', 'wpmastertoolkit' )
+		);
+		$schedules[ $this->cron_taxonomy_migrate_recurrence ] = array(
+			'interval' => MINUTE_IN_SECONDS,
+			'display'  => __( 'Every minute', 'wpmastertoolkit' )
+		);
+		$schedules[ $this->cron_taxonomy_delete_recurrence ] = array(
+			'interval' => MINUTE_IN_SECONDS,
+			'display'  => __( 'Every minute', 'wpmastertoolkit' )
+		);
+
+		return $schedules;
+	}
+
+	/**
+	 * Execute cron cpt migrate
+	 * 
+	 * @since   2.8.0
+	 */
+	public function excute_cron_cpt_migrate() {
+		$time_start = microtime(true);
+		$status     = get_option( $this->option_cpt_migrate_status, 'finish' );
+
+		if ( $status != 'running' ) {
+			$this->end_cron_cpt_migrate();
+		}
+
+		if ( ! wpmastertoolkit_is_pro() ) {
+			$this->end_cron_cpt_migrate();
+		}
+
+		$post_types = get_option( $this->option_cpt_migrate_posts, array() );
+		$posts      = $this->posts_to_handle( $post_types );
+		foreach ( $posts as $post ) {
+			if ( $time_start + 55 < microtime(true) ) {
+				exit;
+			}
+
+			$args = array(
+				'ID'        => $post['id'],
+				'post_type' => $post['new'],
+			);
+			wp_update_post( $args );
+		}
+
+		$this->end_cron_cpt_migrate();
+	}
+
+	/**
+	 * Execute cron cpt delete
+	 * 
+	 * @since   2.8.0
+	 */
+	public function excute_cron_cpt_delete() {
+		$time_start = microtime(true);
+		$status     = get_option( $this->option_cpt_delete_status, 'finish' );
+
+		if ( $status != 'running' ) {
+			$this->end_cron_cpt_delete();
+		}
+
+		if ( ! wpmastertoolkit_is_pro() ) {
+			$this->end_cron_cpt_delete();
+		}
+
+		$post_types = get_option( $this->option_cpt_delete_posts, array() );
+		$posts      = $this->posts_to_handle( $post_types );
+		foreach ( $posts as $post ) {
+			if ( $time_start + 55 < microtime(true) ) {
+				exit;
+			}
+
+			wp_delete_post( $post['id'], true );
+		}
+
+		$this->end_cron_cpt_delete();
+	}
+
+	/**
+	 * Execute cron taxonomy migrate
+	 * 
+	 * @since   2.8.0
+	 */
+	public function excute_cron_taxonomy_migrate() {
+		global $wpdb;
+
+		$time_start = microtime(true);
+		$status     = get_option( $this->option_taxonomy_migrate_status, 'finish' );
+
+		if ( $status != 'running' ) {
+			$this->end_cron_taxonomy_migrate();
+		}
+
+		if ( ! wpmastertoolkit_is_pro() ) {
+			$this->end_cron_taxonomy_migrate();
+		}
+
+		$taxonomies = get_option( $this->option_taxonomy_migrate_terms, array() );
+		$terms      = $this->terms_to_handle( $taxonomies );
+		foreach ( $terms as $term ) {
+			if ( $time_start + 55 < microtime(true) ) {
+				exit;
+			}
+
+			//phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			$wpdb->update( $wpdb->term_taxonomy, array( 'taxonomy' => $term['new'] ) , array( 'term_taxonomy_id' => $term['id'] ) );
+		}
+
+		delete_option( $this->option_taxonomy_migrate_terms );
+		$this->end_cron_taxonomy_migrate();
+	}
+
+	/**
+	 * Execute cron taxonomy delete
+	 * 
+	 * @since   2.8.0
+	 */
+	public function excute_cron_taxonomy_delete() {
+		global $wpdb;
+
+		$time_start = microtime(true);
+		$status     = get_option( $this->option_taxonomy_delete_status, 'finish' );
+
+		if ( $status != 'running' ) {
+			$this->end_cron_taxonomy_delete();
+		}
+
+		if ( ! wpmastertoolkit_is_pro() ) {
+			$this->end_cron_taxonomy_delete();
+		}
+
+		$taxonomies = get_option( $this->option_taxonomy_delete_terms, array() );
+		$terms      = $this->terms_to_handle( $taxonomies );
+		foreach ( $terms as $term ) {
+			if ( $time_start + 55 < microtime(true) ) {
+				exit;
+			}
+
+			//phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			$wpdb->delete( $wpdb->term_taxonomy, array( 'term_taxonomy_id' => $term['id'] ) );
+			//phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			$wpdb->delete( $wpdb->termmeta, array( 'term_id' => $term['id'] ) );
+			//phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			$wpdb->delete( $wpdb->terms, array( 'term_id' => $term['id'] ) );
+		}
+
+		delete_option( $this->option_taxonomy_delete_terms );
+		$this->end_cron_taxonomy_delete();
+	}
+
+	/**
+	 * Bulk actions
+	 * 
+	 * @since   2.8.0
+	 */
+	public function bulk_actions( $actions ) {
+
+		$title = __( 'Export code', 'wpmastertoolkit' );
+
+		if ( ! wpmastertoolkit_is_pro() ) {
+			$title .= ' (' . __( 'Pro only', 'wpmastertoolkit' ) . ')';
+		}
+
+		$actions[ 'wpmtk-code-export' ] = $title;
+		return $actions;
+	}
+
+	/**
+	 * Handle bulk actions
+	 * 
+	 * @since   2.8.0
+	 */
+	public function handle_bulk_actions( $redirect_to, $doaction, $post_ids ) {
+		
+		if ( wpmastertoolkit_is_pro() && $doaction == 'wpmtk-code-export' ) {
+
+			$content_types = array();
+			foreach ( $post_ids as $post_id ) {
+				$content_type    = get_post_meta( $post_id, 'content_type', true );
+				$content_types[] = $content_type;
+			}
+
+			$redirect_to = add_query_arg(
+				array(
+					'post_type'     => $this->post_type,
+					'page'          => $this->export_submenu,
+					'nonce'         => wp_create_nonce( $this->nonce_action_02 ),
+					'content_types' => implode( ',', $content_types ),
+					'post_ids'      => implode( ',', $post_ids ),
+				),
+				admin_url( 'edit.php' ),
+			);
+		}
+
+		return $redirect_to;
+	}
+
+	/**
+	 * Add submenu pages
+	 * 
+	 * @since   2.8.0
+	 */
+	public function add_submenu() {
+		add_submenu_page(
+			'edit.php?post_type=' . $this->post_type,
+			__( 'Register Custom Content Types Export', 'wpmastertoolkit' ),
+			__( 'Register Custom Content Types Export', 'wpmastertoolkit' ),
+			'manage_options',
+			$this->export_submenu,
+			array( $this, 'render_export_submenu' ),
+			null
+		);
+	}
+
+	/**
+	 * Render export submenu page
+	 * 
+	 * @since   2.8.0
+	 */
+	public function render_export_submenu() {
+		$code_editor = wp_enqueue_code_editor( array( 
+            'type' => 'php',
+            'codemirror' => array(
+                'mode' => array(
+                    'name'      => 'php',
+                    'startOpen' => true
+                ),
+                'inputStyle'      => 'textarea',
+                'matchBrackets'   => true,
+                'extraKeys'       => array(
+                    'Alt-F'      => 'findPersistent',
+                    'Ctrl-Space' => 'autocomplete',
+                    'Ctrl-/'     => 'toggleComment',
+                    'Cmd-/'      => 'toggleComment',
+                    'Alt-Up'     => 'swapLineUp',
+                    'Alt-Down'   => 'swapLineDown',
+                ),
+                'lint'             => true,
+                'direction'        => 'ltr',
+				'readOnly'         => 'nocursor',
+                'colorpicker'      => array( 'mode' => 'read' ),
+                'foldOptions'      => array( 'widget' => '...' ),
+                'theme'            => 'wpmastertoolkit',
+                'continueComments' => true,
+            ),
+        ) );
+
+		$export_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/pro/register-custom-content-types-export.asset.php' );
+        wp_enqueue_style( 'WPMastertoolkit_export_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/pro/register-custom-content-types-export.css', array(), $export_assets['version'], 'all' );
+        wp_enqueue_script( 'WPMastertoolkit_export_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/pro/register-custom-content-types-export.js', $export_assets['dependencies'], $export_assets['version'], true );
+		wp_localize_script( 'WPMastertoolkit_export_submenu', 'wpmastertoolkit_export_submenu', array(
+            'code_editor' => $code_editor,
+        ) );
+
+		$this->header_title = __( 'Register Custom Content Types Export', 'wpmastertoolkit' );
+		$this->disable_form = true;
+		include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/header.php';
+        $this->submenu_content();
+        include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/footer.php';
+	}
+
+	/**
+     * Add the submenu content
+     * 
+     * @since   2.8.0
+     */
+    private function submenu_content() {
+
+		if ( ! wpmastertoolkit_is_pro() ) {
+			return;
+		}
+
+		$nonce = sanitize_text_field( wp_unslash( $_GET['nonce'] ?? '' ) );
+		if ( ! wp_verify_nonce( $nonce, $this->nonce_action_02 ) ) {
+			wp_die( esc_html__( 'Refresh the page and try again.', 'wpmastertoolkit' ) );
+		}
+
+		$content_types = sanitize_text_field( wp_unslash( $_GET['content_types'] ?? '' ) );
+		$post_ids      = sanitize_text_field( wp_unslash( $_GET['post_ids'] ?? '' ) );
+
+		$content_types = explode( ',', $content_types );
+		$post_ids      = explode( ',', $post_ids );
+
+		$posts = array();
+		foreach ( $post_ids as $index => $post_id ) {
+			if ( ! isset( $content_types[ $index ] ) ) {
+				continue;
+			}
+			$posts[ $post_id ] = $content_types[ $index ];
+		}
+
+
+		$content = '';
+		foreach ( $posts as $post_id => $content_type ) {
+			if ( 'cpt' == $content_type ) {
+				$content .= $this->generate_cpt_registration_code( $post_id );
+				$content .= "\n\n";
+			} elseif ( 'taxonomy' == $content_type ) {
+				$content .= $this->generate_taxonomy_registration_code( $post_id );
+				$content .= "\n\n";
+			}
+		}
+
+        ?>
+            <div class="wp-mastertoolkit__section">
+                <div class="wp-mastertoolkit__section__body">
+					<div class="wp-mastertoolkit__section__body__item">
+						<div class="wp-mastertoolkit__section__body__item__content">
+							<textarea id="JS-code-editor"><?php echo esc_textarea( wp_unslash( $content ) ); ?></textarea>
+						</div>
+                    </div>
+                </div>
+            </div>
+        <?php
+    }
+
+	/**
+	 * Start cron job for cpt migrate
+	 * 
+	 * @since   2.8.0
+	 */
+	private function start_cron_cpt_migrate( $old_value, $new_value ) {
+		if ( ! wp_next_scheduled( $this->cron_cpt_migrate_hook ) ) {
+			wp_schedule_event( time(), $this->cron_cpt_migrate_recurrence, $this->cron_cpt_migrate_hook );
+		}
+
+		$posts = get_option( $this->option_cpt_migrate_posts, array() );
+		$posts[$old_value] = $new_value;
+
+		update_option( $this->option_cpt_migrate_posts, $posts );
+		update_option( $this->option_cpt_migrate_status, 'running' );
+	}
+
+	/**
+	 * Start cron job for cpt delete
+	 * 
+	 * @since   2.8.0
+	 */
+	private function start_cron_cpt_delete( $old_value, $new_value ) {
+		if ( ! wp_next_scheduled( $this->cron_cpt_delete_hook ) ) {
+			wp_schedule_event( time(), $this->cron_cpt_delete_recurrence, $this->cron_cpt_delete_hook );
+		}
+
+		$posts = get_option( $this->option_cpt_delete_posts, array() );
+		$posts[$old_value] = $new_value;
+
+		update_option( $this->option_cpt_delete_posts, $posts );
+		update_option( $this->option_cpt_delete_status, 'running' );
+	}
+
+	/**
+	 * Start cron job for taxonomy migrate
+	 * 
+	 * @since   2.8.0
+	 */
+	private function start_cron_taxonomy_migrate( $old_value, $new_value ) {
+		if ( ! wp_next_scheduled( $this->cron_taxonomy_migrate_hook ) ) {
+			wp_schedule_event( time(), $this->cron_taxonomy_migrate_recurrence, $this->cron_taxonomy_migrate_hook );
+		}
+
+		$taxonomies = get_option( $this->option_taxonomy_migrate_terms, array() );
+		$taxonomies[$old_value] = $new_value;
+
+		update_option( $this->option_taxonomy_migrate_terms, $taxonomies );
+		update_option( $this->option_taxonomy_migrate_status, 'running' );
+	}
+
+	/**
+	 * Start cron job for taxonomy delete
+	 * 
+	 * @since   2.8.0
+	 */
+	private function start_cron_taxonomy_delete( $old_value, $new_value ) {
+		if ( ! wp_next_scheduled( $this->cron_taxonomy_delete_hook ) ) {
+			wp_schedule_event( time(), $this->cron_taxonomy_delete_recurrence, $this->cron_taxonomy_delete_hook );
+		}
+
+		$taxonomies = get_option( $this->option_taxonomy_delete_terms, array() );
+		$taxonomies[$old_value] = $new_value;
+
+		update_option( $this->option_taxonomy_delete_terms, $taxonomies );
+		update_option( $this->option_taxonomy_delete_status, 'running' );
+	}
+
+	/**
+	 * End cron job for cpt migrate
+	 * 
+	 * @since   2.8.0
+	 */
+	private function end_cron_cpt_migrate() {
+		update_option( $this->option_cpt_migrate_status, 'finish' );
+
+		if ( wp_next_scheduled( $this->cron_cpt_migrate_hook ) ) {
+			wp_clear_scheduled_hook( $this->cron_cpt_migrate_hook );
+		}
+
+		exit;
+	}
+	
+	/**
+	 * End cron job for cpt delete
+	 * 
+	 * @since   2.8.0
+	 */
+	private function end_cron_cpt_delete() {
+		update_option( $this->option_cpt_delete_status, 'finish' );
+
+		if ( wp_next_scheduled( $this->cron_cpt_delete_hook ) ) {
+			wp_clear_scheduled_hook( $this->cron_cpt_delete_hook );
+		}
+
+		exit;
+	}
+
+	/**
+	 * End cron job for taxonomy migrate
+	 * 
+	 * @since   2.8.0
+	 */
+	private function end_cron_taxonomy_migrate() {
+		update_option( $this->option_taxonomy_migrate_status, 'finish' );
+
+		if ( wp_next_scheduled( $this->cron_taxonomy_migrate_hook ) ) {
+			wp_clear_scheduled_hook( $this->cron_taxonomy_migrate_hook );
+		}
+
+		exit;
+	}
+
+	/**
+	 * End cron job for taxonomy delete
+	 * 
+	 * @since   2.8.0
+	 */
+	private function end_cron_taxonomy_delete() {
+		update_option( $this->option_taxonomy_delete_status, 'finish' );
+
+		if ( wp_next_scheduled( $this->cron_taxonomy_delete_hook ) ) {
+			wp_clear_scheduled_hook( $this->cron_taxonomy_delete_hook );
+		}
+
+		exit;
+	}
+
+	/**
+	 * Get posts to handle
+	 * 
+	 * @since   2.8.0
+	 */
+	private function posts_to_handle( $post_types ) {
+		$result = array();
+		foreach ( $post_types as $old_post_type => $new_post_type ) {
+			$posts = get_posts( array(
+				'post_type'   => $old_post_type,
+				'numberposts' => -1,
+				'fields'      => 'ids',
+			) );
+
+			foreach ( $posts as $post_id ) {
+				$result[] = array(
+					'id'  => $post_id,
+					'old' => $old_post_type,
+					'new' => $new_post_type,
+				);
+			}
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Get terms to handle
+	 * 
+	 * @since   2.8.0
+	 */
+	private function terms_to_handle( $taxonomies ) {
+		$result = array();
+		foreach ( $taxonomies as $old_taxonomy => $new_taxonomy ) {
+			// Dont use get_terms() due to the use of taxonomy_exists().
+			$args = array(
+				'taxonomy'   => $old_taxonomy,
+				'hide_empty' => false,
+				'fields'     => 'ids',
+			);
+			$term_query = new WP_Term_Query();
+			$terms      = $term_query->query( $args );
+
+			foreach ( $terms as $term_id ) {
+				$result[] = array(
+					'id'  => $term_id,
+					'old' => $old_taxonomy,
+					'new' => $new_taxonomy,
+				);
+			}
+		}
+
+		return $result;
+	}
 }

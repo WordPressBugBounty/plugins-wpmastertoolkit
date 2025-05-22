@@ -11,18 +11,21 @@ class WPMastertoolkit_Maintenance_Mode {
 
     private $option_id;
     private $header_title;
-    private $nonce_action;
+    public $nonce_action;
     private $settings;
     private $default_settings;
     private $bypass_param;
+    public $preview_param;
+	private $submenu_page_id;
 
     /**
      * Invoke the hooks
      */
     public function __construct() {
 
-        $this->option_id    = WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_maintenance_mode';
-        $this->nonce_action = $this->option_id . '_action';
+        $this->option_id       = WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_maintenance_mode';
+        $this->nonce_action    = $this->option_id . '_action';
+		$this->submenu_page_id = 'wp-mastertoolkit-settings-maintenance-mode';
 
         add_action( 'init', array( $this, 'class_init' ) );
         add_action( 'admin_menu', array( $this, 'add_submenu' ), 999 );
@@ -39,6 +42,15 @@ class WPMastertoolkit_Maintenance_Mode {
          * @param string   $bypass_param The bypass parameter.
          */
         $this->bypass_param = apply_filters( 'wpmastertoolkit/maintenance-mode/bypass-param', 'wpmtk-maintenance-bypass' );
+
+		/**
+		 * Filter the preview parameter.
+		 *
+		 * @since 2.9.0
+		 *
+		 * @param string   $preview_param The preview parameter.
+		 */
+        $this->preview_param = apply_filters( 'wpmastertoolkit/maintenance-mode/preview-param', 'wpmtk_maintenance_mode_preview' );
     }
 
     /**
@@ -52,6 +64,14 @@ class WPMastertoolkit_Maintenance_Mode {
      * Template include
      */
     public function template_include( $template ) {
+		
+		$preview_nonce = sanitize_text_field( wp_unslash( $_GET[ $this->preview_param ] ?? '' ) );
+		if ( wpmastertoolkit_is_pro() && wp_verify_nonce( $preview_nonce, $this->nonce_action ) ) {
+			if ( file_exists( WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/core/maintenance-mode/preview.php' ) ) {
+				return WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/core/maintenance-mode/preview.php';
+        	}
+		}
+
 		$this->settings = $this->get_settings();
 
 		$enabled = $this->settings['enabled'] ?? '1';
@@ -59,10 +79,9 @@ class WPMastertoolkit_Maintenance_Mode {
 			return $template;
 		}
         
-        $cookie = sanitize_text_field( wp_unslash( $_COOKIE['wpmtk_maintenance_bypass'] ?? '' ) );
-        
         if( $this->settings['bypass_link_status'] === '1' ){
-    
+			
+			$cookie = sanitize_text_field( wp_unslash( $_COOKIE['wpmtk_maintenance_bypass'] ?? '' ) );
             if( !empty($cookie) && $cookie === $this->settings['bypass_link_token'] ){
                 return $template;
             }
@@ -181,7 +200,7 @@ class WPMastertoolkit_Maintenance_Mode {
 
 		?>
 			<div class="wpmastertoolkit-maintenance-mode-normal <?php echo esc_attr( $enabled ? 'active' : '' ); ?>" data-enabled="<?php echo esc_attr( $enabled ); ?>">
-				<span class="wpmastertoolkit-maintenance-mode-normal-title"><?php esc_html_e( 'Maintenance Mode', 'wpmastertoolkit' ); ?>:</span>
+				<span class="wpmastertoolkit-maintenance-mode-normal-title"><a href="<?php echo esc_url( admin_url( 'admin.php?page=' . $this->submenu_page_id ) ); ?>"><?php esc_html_e( 'Maintenance Mode', 'wpmastertoolkit' ); ?>:</a></span>
 				<span class="wpmastertoolkit-maintenance-mode-normal-btn off"><?php esc_html_e( 'OFF', 'wpmastertoolkit' ); ?></span>
 				<span class="wpmastertoolkit-maintenance-mode-normal-btn on"><?php esc_html_e( 'ON', 'wpmastertoolkit' ); ?></span>
 			</div>
@@ -237,7 +256,7 @@ class WPMastertoolkit_Maintenance_Mode {
             $this->header_title,
             $this->header_title,
             'manage_options',
-            'wp-mastertoolkit-settings-maintenance-mode', 
+            $this->submenu_page_id, 
             array( $this, 'render_submenu'),
             null
         );
@@ -255,6 +274,11 @@ class WPMastertoolkit_Maintenance_Mode {
         $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/maintenance-mode.asset.php' );
         wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/maintenance-mode.css', array(), $submenu_assets['version'], 'all' );
         wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/maintenance-mode.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
+		wp_localize_script( 'WPMastertoolkit_submenu', 'wpmastertoolkit_maintenance_mode', array(
+			'nonce'        => wp_create_nonce( $this->nonce_action ),
+			'previewParam' => $this->preview_param,
+			'siteUrl'      => site_url(),
+		));
 
         include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/header.php';
         $this->submenu_content();
@@ -461,8 +485,15 @@ class WPMastertoolkit_Maintenance_Mode {
                     <div class="wp-mastertoolkit__section__body__item">
                         <div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e( 'Body Text', 'wpmastertoolkit' ); ?></div>
                         <div class="wp-mastertoolkit__section__body__item__content">
-                            <div class="wp-mastertoolkit__textarea">
-                                <textarea name="<?php echo esc_attr( $this->option_id ); ?>[body_text]" cols="50" rows="3" style="width: 400px;"><?php echo esc_textarea( wp_unslash( $body_text ) ); ?></textarea>
+                            <div class="wp-mastertoolkit__wysiwyg">
+								<?php
+									wp_editor( $body_text, $this->option_id . '_body_text', array(
+										'wpautop'       => true,
+										'media_buttons' => false,
+										'textarea_name' => $this->option_id . '[body_text]',
+										'textarea_rows' => 3,
+									) );
+								?>
                             </div>
                         </div>
                     </div>
@@ -580,6 +611,16 @@ class WPMastertoolkit_Maintenance_Mode {
                             <div class="wp-mastertoolkit__input-text">
                                 <input type="text" name="<?php echo esc_attr( $this->option_id . '[countdown_background_color]' ); ?>" value="<?php echo esc_attr( $countdown_background_color ); ?>" class="wp-color-picker"/>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="wp-mastertoolkit__section__body__item">
+                        <div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e( 'Preview', 'wpmastertoolkit' ); ?></div>
+                        <div class="wp-mastertoolkit__section__body__item__content">
+                            <div class="wp-mastertoolkit__button">
+								<button id="JS-Maintenance-Mode-Preview" class="secondary" type="button"><?php esc_html_e( 'Preview', 'wpmastertoolkit' ); ?></button>
+								<a id="JS-Maintenance-Mode-Preview-Link" href="javascript:void(0);" target="_blank"></a>
+							</div>
                         </div>
                     </div>
                 </div>

@@ -2,8 +2,8 @@
     "require": {
         "php": "^7.4",
         "enshrined/svg-sanitize": "^0.18.0",
-        "geoip2/geoip2": "~2.0",
-        "league/iso3166": "^4.3"
+        "league/iso3166": "^4.3",
+        "maxmind-db/reader": "~1.8"
     },
     "config": {
         "platform": {
