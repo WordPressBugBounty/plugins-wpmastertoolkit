@@ -161,7 +161,21 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
                 <div class="description">
                     <strong><?php echo esc_html( $data['label'] ?? '' ); ?> <?php echo wp_kses_post( !empty( $data['required'] ) ? '<span class="required">*</span>' : '' ); ?></strong>
                 </div>
-                <input type="text" name="<?php echo esc_attr( $this->content_type_settings . '[' . $key . ']' ); ?>" value="<?php echo esc_attr( $settings[$key] ?? '' ); ?>" placeholder="<?php echo esc_attr( $data['placeholder'] ?? '' ); ?>" <?php echo esc_attr( !empty( $data['required'] ) ? 'required' : '' ); ?>>
+                <input 
+                    type="text" 
+                    name="<?php echo esc_attr( $this->content_type_settings . '[' . $key . ']' ); ?>" 
+                    value="<?php echo esc_attr( $settings[$key] ?? '' ); ?>" 
+                    placeholder="<?php echo esc_attr( $data['placeholder'] ?? '' ); ?>" 
+                    <?php echo esc_attr( !empty( $data['required'] ) ? 'required' : '' ); ?>
+                    <?php
+                    if ( !empty( $data['custom-attributes'] ) && is_array( $data['custom-attributes'] ) ) {
+                        foreach ( $data['custom-attributes'] as $attr => $value ) {
+                            echo esc_attr( $attr ) . '="' . esc_attr( $value ) . '" ';
+                        }
+                    }
+                    ?>
+                
+                >
             </div>
             <?php if ( isset( $data['description'] ) ) : ?>
             <div class="description">
@@ -203,7 +217,20 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
                 <div class="description">
                     <strong><?php echo esc_html( $data['label'] ?? '' ); ?> <?php echo wp_kses_post( !empty( $data['required'] ) ? '<span class="required">*</span>' : '' ); ?></strong>
                 </div>
-                <input type="text" name="<?php echo esc_attr( $this->content_type_settings . '[' . $key . ']' ); ?>" value="<?php echo esc_attr( $settings[$key] ?? '' ); ?>" placeholder="<?php echo esc_attr( $data['placeholder'] ?? '' ); ?>" <?php echo esc_attr( !empty( $data['required'] ) ? 'required' : '' ); ?>>
+                <input 
+                    type="text" 
+                    name="<?php echo esc_attr( $this->content_type_settings . '[' . $key . ']' ); ?>" 
+                    value="<?php echo esc_attr( $settings[$key] ?? '' ); ?>" 
+                    placeholder="<?php echo esc_attr( $data['placeholder'] ?? '' ); ?>" 
+                    <?php echo esc_attr( !empty( $data['required'] ) ? 'required' : '' ); ?>
+                    <?php
+                    if ( !empty( $data['custom-attributes'] ) && is_array( $data['custom-attributes'] ) ) {
+                        foreach ( $data['custom-attributes'] as $attr => $value ) {
+                            echo esc_attr( $attr ) . '="' . esc_attr( $value ) . '" ';
+                        }
+                    }
+                    ?>
+                >
             </div>
             <?php if ( isset( $data['description'] ) ) : ?>
             <div class="description">

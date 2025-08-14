@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
         <input type="radio" name="content_type" id="" value="taxonomy">
         <div>
             <h2>
-                <?php esc_html_e( 'Custom Taxonomy', 'wpmastertoolkit' ); ?> (<?php esc_html_e( 'Coming soon', 'wpmastertoolkit' ); ?>)
+                <?php esc_html_e( 'Custom Taxonomy', 'wpmastertoolkit' ); ?>
             </h2>
             <p>
                 <?php esc_html_e( 'Create a custom taxonomy based on the WordPress taxonomy. Example: Category, Tags, etc.', 'wpmastertoolkit' ); ?>

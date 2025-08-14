@@ -96,6 +96,7 @@ class WPMastertoolkit_Register_Custom_Content_Types {
 		add_filter( 'bulk_actions-edit-' . $this->post_type, array( $this, 'bulk_actions' ) );
 		add_filter( 'handle_bulk_actions-edit-' . $this->post_type, array( $this, 'handle_bulk_actions' ), 10, 3 );
 		add_action( 'admin_menu', array( $this, 'add_submenu' ) );
+		add_action( 'submenu_file', array( $this, 'hide_sub_menu' ) );
 
         $this->custom_content_types_loader();
 
@@ -350,6 +351,9 @@ class WPMastertoolkit_Register_Custom_Content_Types {
                 "required"    => true,
                 "placeholder" => __( 'movie', 'wpmastertoolkit' ),
                 "description" => __( 'The post type key for the custom post type.', 'wpmastertoolkit' ),
+                "custom-attributes" => array(
+                    "maxlength" => 20,
+                ),
             ),
             'description' => array(
                 "label"       => __( 'Description', 'wpmastertoolkit' ),
@@ -1475,6 +1479,23 @@ class WPMastertoolkit_Register_Custom_Content_Types {
 	}
 
 	/**
+	 * Hide submenu
+	 * 
+	 * @since   2.8.0
+	 */
+	public function hide_sub_menu( $submenu_file ) {
+		global $plugin_page;
+
+		if ( $plugin_page && $plugin_page == $this->export_submenu ) {
+			$submenu_file = 'edit.php?post_type=' . $this->post_type;
+		}
+
+		remove_submenu_page( 'edit.php?post_type=' . $this->post_type, $this->export_submenu );
+
+		return $submenu_file;
+	}
+
+	/**
 	 * Render export submenu page
 	 * 
 	 * @since   2.8.0
@@ -1569,6 +1590,10 @@ class WPMastertoolkit_Register_Custom_Content_Types {
 					<div class="wp-mastertoolkit__section__body__item">
 						<div class="wp-mastertoolkit__section__body__item__content">
 							<textarea id="JS-code-editor"><?php echo esc_textarea( wp_unslash( $content ) ); ?></textarea>
+							<button type="button" id="copy-code-btn">
+								<?php esc_html_e( 'Copy', 'wpmastertoolkit' ); ?>
+								<span class="checked"><?php echo wp_kses( file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/checked.svg' ), wpmastertoolkit_allowed_tags_for_svg_files() ); ?></span>
+							</button>
 						</div>
                     </div>
                 </div>

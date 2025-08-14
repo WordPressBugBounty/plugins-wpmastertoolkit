@@ -696,6 +696,18 @@ class WPMastertoolkit_Modules_Data {
 				'pro'           => true,
 				'path'          => 'pro/class-disable-woocommerce-logout-confirmation.php',
 			),
+			'WPMastertoolkit_Head_Sorter' => array(
+				'original_name' => "Head Sorter",
+				'group'         => 'other-features',
+				'pro'           => true,
+				'path'          => 'pro/class-head-sorter.php',
+			),
+			// 'WPMastertoolkit_Media_Replacement' => array(
+			// 	'original_name' => "Media Replacement",
+			// 	'group'         => 'content-media',
+			// 	'pro'           => true,
+			// 	'path'          => 'pro/class-media-replacement.php',
+			// ),
 		);
 		
 		/**
@@ -1167,6 +1179,14 @@ class WPMastertoolkit_Modules_Data {
 			'WPMastertoolkit_Disable_Woocommerce_Logout_Confirmation' => array(
 				'name' => esc_html_x( "Disable Woocommerce Logout Confirmation", "Module name", 'wpmastertoolkit' ),
 				'desc' => esc_html_x( "Removed confirmation after clicking on logout on Woocommerce.", "Module description", 'wpmastertoolkit' ),
+			),
+			'WPMastertoolkit_Head_Sorter' => array(
+				'name' => esc_html_x( "Head Sorter", "Module name", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( "Automatically sorts and optimizes the <head> of your website, making sure important tags load first for better speed and SEO.", "Module description", 'wpmastertoolkit' ),
+			),
+			'WPMastertoolkit_Media_Replacement' => array(
+				'name' => esc_html_x( "Media Replacement", "Module name", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( "Replace any media file with a new version while keeping the original media ID, file name, and publish date intact—ensuring that all existing links remain functional.", "Module description", 'wpmastertoolkit' ),
 			),
 		);
 

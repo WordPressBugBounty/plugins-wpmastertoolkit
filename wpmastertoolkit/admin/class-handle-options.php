@@ -31,6 +31,14 @@ class WPMastertoolkit_Handle_options {
 
         $db_options     = get_option( WPMASTERTOOLKIT_PLUGIN_SETTINGS, array() );
         $options_data   = wpmastertoolkit_options( 'normal' );
+        
+        /**
+         * If you want debug the plugin, you can set the constant WPMASTERTOOLKIT_SAFE_MODE to true.
+         * This will prevent the plugin from loading all modules classes.
+         *
+         * @since 2.10.0
+         */
+        if( defined( 'WPMASTERTOOLKIT_SAFE_MODE' ) && WPMASTERTOOLKIT_SAFE_MODE === true ) return;
 
         foreach ( $db_options as $option_key => $option_status ) {
             

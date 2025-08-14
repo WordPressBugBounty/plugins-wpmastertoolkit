@@ -187,6 +187,8 @@ class WPMastertoolkit_Maintenance_Mode {
 		$status   = sanitize_text_field( wp_unslash( $_POST['status'] ?? '0' ) );
 		$settings = $this->get_settings();
 		$settings['enabled'] = $status;
+
+		$this->clear_cache();
 		$this->save_settings( $settings );
 
 		wp_send_json_success( array( 'message' => __( 'Maintenance mode has been turned on.', 'wpmastertoolkit' ) ) );
@@ -296,6 +298,8 @@ class WPMastertoolkit_Maintenance_Mode {
 
 			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
             $new_settings = $this->sanitize_settings( wp_unslash( $_POST[$this->option_id] ?? array() ) );
+
+			$this->clear_cache();
             
             $this->save_settings( $new_settings );
             wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
@@ -364,6 +368,37 @@ class WPMastertoolkit_Maintenance_Mode {
 
         return $sanitized_settings;
     }
+
+	/**
+	 * Clear the cache after changing the settings
+	 */
+	public function clear_cache() {
+
+		// WP Rocket
+		if ( function_exists( 'rocket_clean_domain' ) ) {
+			rocket_clean_domain();
+		}
+
+		// W3 Total Cache
+		if ( function_exists( 'w3tc_flush_all' ) ) {
+			w3tc_flush_all();
+		}
+
+		// LiteSpeed Cache
+		if ( function_exists( 'litespeed_purge_all' ) ) {
+			do_action( 'litespeed_purge_all' );
+		}
+
+		// SiteGround Optimizer
+		if ( function_exists( 'sg_cachepress_purge_cache' ) ) {
+			do_action( 'sg_cachepress_purge_cache' );
+		}
+
+		// Clear any other known cache plugins
+		if ( function_exists( 'wp_cache_clear_cache' ) ) {
+			wp_cache_clear_cache();
+		}
+	}
 
     /**
      * get_default_settings

@@ -2,9 +2,9 @@
 Contributors: ludwigyou
 Tags: all in one plugin, admin, security, disable features, easy to use
 Requires at least: 6.0.0
-Tested up to: 6.8.1
+Tested up to: 6.8.2
 Requires PHP: 7.4
-Stable tag: 2.9.0
+Stable tag: 2.10.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
 
@@ -196,6 +196,15 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 4. Code snippets
 
 == Changelog ==
+
+= 2.10.0 =
+* Add Pro Module: Head Sorter
+* Add constant for debug the plugin when a module turn down the website
+* Fix: Add max length on post type key input to prevent error on post type key with more than 20 characters.
+* Fix: register custom content types module bugs
+* Add copy button in export page for Register Custom Content Types module
+* Fix: Maintenance Mode module with cache plugins
+* Update Module: Optimize External Permalinks module split target, noopener, noreferrer, nofollow
 
 = 2.9.0 =
 * Update Module: User Switching: Add a new option to switch user from user edit page. Add a new filter for get the switch to user link from another plugin.

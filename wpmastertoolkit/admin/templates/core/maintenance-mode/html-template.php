@@ -19,6 +19,9 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
     <meta property="og:type" content="Maintenance"/>
     <meta property="og:url" content="<?php echo esc_url( site_url() ); ?>"/>
     <meta property="og:description" content="<?php echo esc_attr( get_bloginfo( 'description' ) );?>"/>
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Expires" content="0">
     <?php if ( $countdown_status == '1' ): ?>
         <script>
             const wpmastertoolkit_maintenance_mode_countdown_end_date = "<?php echo esc_js( $countdown_end_date ); ?>";

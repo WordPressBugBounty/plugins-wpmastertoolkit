@@ -52,8 +52,8 @@ class WPMastertoolkit_External_Permalinks {
      */
     public function add_meta_boxes( $post_type ) {
 
-        $settings            = $this->get_settings();
-        $settings_post_types = $settings['post_types'];
+        $this->settings      = $this->get_settings();
+        $settings_post_types = $this->settings['post_types'];
 
         if ( empty( $settings_post_types ) || ! is_array( $settings_post_types ) ) {
             return;
@@ -126,8 +126,8 @@ class WPMastertoolkit_External_Permalinks {
         }
 
         $post_type           = $post->post_type;
-        $settings            = $this->get_settings();
-        $settings_post_types = $settings['post_types'];
+        $this->settings      = $this->get_settings();
+        $settings_post_types = $this->settings['post_types'];
 
         if ( empty( $settings_post_types ) || ! is_array( $settings_post_types ) ) {
             return $permalink;
@@ -166,8 +166,8 @@ class WPMastertoolkit_External_Permalinks {
         }
 
         $post_type           = $post->post_type;
-        $settings            = $this->get_settings();
-        $settings_post_types = $settings['post_types'];
+        $this->settings      = $this->get_settings();
+        $settings_post_types = $this->settings['post_types'];
 
         if ( empty( $settings_post_types ) || ! is_array( $settings_post_types ) ) {
             return;
@@ -194,9 +194,17 @@ class WPMastertoolkit_External_Permalinks {
      * @since   1.4.0
      */
     public function enqueue_scripts() {
+		$this->settings         = $this->get_settings();
+		$this->default_settings = $this->get_default_settings();
 
         $external_permalink_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/external-permalinks-front.asset.php' );
         wp_enqueue_script( 'WPMastertoolkit_external_permalink_front', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/external-permalinks-front.js', $external_permalink_assets['dependencies'], $external_permalink_assets['version'], true );
+		wp_localize_script( 'WPMastertoolkit_external_permalink_front', 'WPMastertoolkit_external_permalink_front', array(
+			'target'     => $this->settings['target'] ?? $this->default_settings['target'],
+			'noopener'   => $this->settings['noopener'] ?? $this->default_settings['noopener'],
+			'noreferrer' => $this->settings['noreferrer'] ?? $this->default_settings['noreferrer'],
+			'nofollow'   => $this->settings['nofollow'] ?? $this->default_settings['nofollow'],
+		));
     }
 
     /**
@@ -222,9 +230,9 @@ class WPMastertoolkit_External_Permalinks {
      * @since   1.4.0
      */
     public function render_submenu() {
-        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/content-order.asset.php' );
-        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/content-order.css', array(), $submenu_assets['version'], 'all' );
-        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/content-order.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
+        $submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/external-permalinks.asset.php' );
+        wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/external-permalinks.css', array(), $submenu_assets['version'], 'all' );
+        wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/external-permalinks.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
 
         include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/header.php';
         $this->submenu_content();
@@ -266,6 +274,9 @@ class WPMastertoolkit_External_Permalinks {
                         $sanitized_settings[ $settings_key ][ $post_type ] = sanitize_text_field( $new_settings[ $settings_key ][ $post_type ] ?? '0' );
                     }
                 break;
+				default:
+					$sanitized_settings[$settings_key] = sanitize_text_field( $new_settings[$settings_key] ?? $settings_value );
+				break;
             }
         }
 
@@ -303,6 +314,10 @@ class WPMastertoolkit_External_Permalinks {
 
         return array(
             'post_types' => $this->get_post_types_settings(),
+			'target'     => '1',
+			'noopener'   => '1',
+            'noreferrer' => '1',
+            'nofollow'   => '1',
         );
     }
 
@@ -313,13 +328,19 @@ class WPMastertoolkit_External_Permalinks {
      * @return void
      */
     private function submenu_content() {
-        $this->settings = $this->get_settings();
-        $post_types     = $this->get_post_types( false );
+        $this->settings         = $this->get_settings();
+		$this->default_settings = $this->get_default_settings();
+        $post_types             = $this->get_post_types( false );
+		$target                 = $this->settings['target'] ?? $this->default_settings['target'];
+		$noopener               = $this->settings['noopener'] ?? $this->default_settings['noopener'];
+		$noreferrer             = $this->settings['noreferrer'] ?? $this->default_settings['noreferrer'];
+		$nofollow               = $this->settings['nofollow'] ?? $this->default_settings['nofollow'];
 
         ?>
             <div class="wp-mastertoolkit__section">
                 <div class="wp-mastertoolkit__section__desc"><?php esc_html_e( "Enable pages, posts and/or custom post types to have permalinks that point to external URLs. The rel=\"noopener noreferrer nofollow\" attribute will also be added for enhanced security and SEO benefits.", 'wpmastertoolkit'); ?></div>
                 <div class="wp-mastertoolkit__section__body">
+
                     <div class="wp-mastertoolkit__section__body__item">
                         <div class="wp-mastertoolkit__section__body__item__content flex flex-wrap">
                             <?php foreach ( $post_types as $post_type ): ?>
@@ -334,6 +355,51 @@ class WPMastertoolkit_External_Permalinks {
                             <?php endforeach; ?>
                         </div>
                     </div>
+
+					<div class="wp-mastertoolkit__section__body__item">
+                        <div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e( "Add \"target=_blank\"", 'wpmastertoolkit' ); ?></div>
+						<div class="wp-mastertoolkit__section__body__item__content">
+							<label class="wp-mastertoolkit__toggle">
+								<input type="hidden" name="<?php echo esc_attr( $this->option_id . '[target]' ); ?>" value="0">
+								<input type="checkbox" name="<?php echo esc_attr( $this->option_id . '[target]' ); ?>" value="1" <?php checked( $target, '1' ); ?>>
+								<span class="wp-mastertoolkit__toggle__slider round"></span>
+							</label>
+						</div>
+                    </div>
+
+					<div class="wp-mastertoolkit__section__body__item">
+                        <div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e( "Add \"rel=noopener\"", 'wpmastertoolkit' ); ?></div>
+						<div class="wp-mastertoolkit__section__body__item__content">
+							<label class="wp-mastertoolkit__toggle">
+								<input type="hidden" name="<?php echo esc_attr( $this->option_id . '[noopener]' ); ?>" value="0">
+								<input type="checkbox" name="<?php echo esc_attr( $this->option_id . '[noopener]' ); ?>" value="1" <?php checked( $noopener, '1' ); ?>>
+								<span class="wp-mastertoolkit__toggle__slider round"></span>
+							</label>
+						</div>
+                    </div>
+
+					<div class="wp-mastertoolkit__section__body__item">
+                        <div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e( "Add \"rel=noreferrer\"", 'wpmastertoolkit' ); ?></div>
+						<div class="wp-mastertoolkit__section__body__item__content">
+							<label class="wp-mastertoolkit__toggle">
+								<input type="hidden" name="<?php echo esc_attr( $this->option_id . '[noreferrer]' ); ?>" value="0">
+								<input type="checkbox" name="<?php echo esc_attr( $this->option_id . '[noreferrer]' ); ?>" value="1" <?php checked( $noreferrer, '1' ); ?>>
+								<span class="wp-mastertoolkit__toggle__slider round"></span>
+							</label>
+						</div>
+                    </div>
+
+					<div class="wp-mastertoolkit__section__body__item">
+                        <div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e( "Add \"rel=nofollow\"", 'wpmastertoolkit' ); ?></div>
+						<div class="wp-mastertoolkit__section__body__item__content">
+							<label class="wp-mastertoolkit__toggle">
+								<input type="hidden" name="<?php echo esc_attr( $this->option_id . '[nofollow]' ); ?>" value="0">
+								<input type="checkbox" name="<?php echo esc_attr( $this->option_id . '[nofollow]' ); ?>" value="1" <?php checked( $nofollow, '1' ); ?>>
+								<span class="wp-mastertoolkit__toggle__slider round"></span>
+							</label>
+						</div>
+                    </div>
+
                 </div>
             </div>
         <?php
