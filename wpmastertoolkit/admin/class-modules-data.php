@@ -702,12 +702,12 @@ class WPMastertoolkit_Modules_Data {
 				'pro'           => true,
 				'path'          => 'pro/class-head-sorter.php',
 			),
-			// 'WPMastertoolkit_Media_Replacement' => array(
-			// 	'original_name' => "Media Replacement",
-			// 	'group'         => 'content-media',
-			// 	'pro'           => true,
-			// 	'path'          => 'pro/class-media-replacement.php',
-			// ),
+			'WPMastertoolkit_Media_Replacement' => array(
+				'original_name' => "Media Replacement",
+				'group'         => 'content-media',
+				'pro'           => true,
+				'path'          => 'pro/class-media-replacement.php',
+			),
 		);
 		
 		/**

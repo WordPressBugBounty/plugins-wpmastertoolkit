@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WPMasterToolKit\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-31 17:04+0100\n"
-"PO-Revision-Date: 2025-08-14 11:22+0000\n"
+"PO-Revision-Date: 2025-09-18 14:17+0000\n"
 "Last-Translator: \n"
 "Language-Team: Français\n"
 "Language: fr_FR\n"
@@ -1752,7 +1752,7 @@ msgid_plural "Clicks"
 msgstr[0] "Cliquez"
 msgstr[1] "Clics"
 
-#: admin/modules/pro/class-media-replacement.php:335
+#: admin/modules/pro/class-media-replacement.php:377
 #, fuzzy
 msgid "Click here to upload or drop file in area"
 msgstr "Cliquez ici pour télécharger ou déposer un fichier dans la zone"
@@ -2123,7 +2123,7 @@ msgstr "Contenu de l'en-tête CSP"
 msgid "CSP Report URI"
 msgstr "URI du rapport CSP"
 
-#: admin/modules/pro/class-media-replacement.php:291
+#: admin/modules/pro/class-media-replacement.php:329
 #, fuzzy
 msgid "Current"
 msgstr "Actuel"
@@ -3285,6 +3285,11 @@ msgstr ""
 msgid "Failed to change the prefix in wp-config.php."
 msgstr "Impossible de modifier le préfixe dans wp-config.php."
 
+#: admin/modules/pro/class-media-replacement.php:258
+#, fuzzy
+msgid "Failed to copy the new file."
+msgstr "Échec de la copie du nouveau fichier."
+
 #: admin/modules/pro/class-cron-manager.php:610
 #, php-format
 msgid "Failed to pause the cron event %s."
@@ -3445,12 +3450,17 @@ msgstr "Taille du fichier"
 msgid "File size"
 msgstr "Taille du fichier"
 
-#: admin/modules/pro/class-media-replacement.php:197
+#: admin/modules/pro/class-media-replacement.php:246
+#, fuzzy
+msgid "File type does not match the original file type."
+msgstr "Le type de fichier ne correspond pas au type de fichier d'origine."
+
+#: admin/modules/pro/class-media-replacement.php:235
 #, fuzzy
 msgid "File type not allowed."
 msgstr "Type de fichier non autorisé."
 
-#: admin/modules/pro/class-media-replacement.php:192
+#: admin/modules/pro/class-media-replacement.php:216
 #, fuzzy
 msgid "File upload failed."
 msgstr "Le téléchargement du fichier a échoué."
@@ -3927,8 +3937,8 @@ msgstr "hébreu"
 
 #: admin/modules/pro/class-custom-login-design.php:3866
 #: admin/modules/pro/class-custom-login-design.php:4091
-#: admin/modules/pro/class-media-replacement.php:306
-#: admin/modules/pro/class-media-replacement.php:330
+#: admin/modules/pro/class-media-replacement.php:345
+#: admin/modules/pro/class-media-replacement.php:371
 #, fuzzy
 msgid "Height"
 msgstr "Hauteur"
@@ -4422,11 +4432,6 @@ msgstr "Icône Instagram"
 msgid "Interactive Icon"
 msgstr "Icône interactive"
 
-#: admin/modules/pro/class-media-replacement.php:202
-#, fuzzy
-msgid "Invalid attachment ID."
-msgstr "ID de pièce jointe non valide."
-
 #: admin/modules/core/class-file-manager.php:605
 msgid "Invalid characters in file name"
 msgstr "Caractères non valides dans le nom du fichier"
@@ -4442,6 +4447,11 @@ msgstr "Nom de fichier non valide !"
 #: admin/modules/core/class-file-manager.php:302
 msgid "Invalid file or folder name"
 msgstr "Nom de fichier ou de dossier non valide"
+
+#: admin/modules/pro/class-media-replacement.php:224
+#, fuzzy
+msgid "Invalid Media ID."
+msgstr "ID média non valide."
 
 #: admin/modules/pro/class-two-factor-authentication.php:474
 #: admin/modules/pro/class-two-factor-authentication.php:501
@@ -5074,10 +5084,14 @@ msgstr "Encodeur multimédia"
 msgid "Media Icon"
 msgstr "Icône média"
 
-#: admin/modules/pro/class-media-replacement.php:43
+#: admin/modules/pro/class-media-replacement.php:268
 #, fuzzy
+msgid "Media replaced successfully."
+msgstr "Le support a été remplacé avec succès."
+
+#: admin/modules/pro/class-media-replacement.php:43
 msgid "Media Replacement"
-msgstr "Remplacement des supports"
+msgstr "Remplacement de média"
 
 #: admin/modules/core/class-media-encoder.php:2417
 #, fuzzy
@@ -6692,10 +6706,9 @@ msgid "Media Encoder"
 msgstr "Encodeur multimédia"
 
 #: admin/class-modules-data.php:1188
-#, fuzzy
 msgctxt "Module name"
 msgid "Media Replacement"
-msgstr "Remplacement des supports"
+msgstr "Remplacement des médias"
 
 #: admin/class-modules-data.php:988
 msgctxt "Module name"
@@ -6959,7 +6972,7 @@ msgstr "Icône de réseau"
 
 #: admin/modules/core/class-quick-add-post.php:35
 #: admin/modules/core/class-register-custom-content-types.php:135
-#: admin/modules/pro/class-media-replacement.php:315
+#: admin/modules/pro/class-media-replacement.php:355
 #, fuzzy
 msgid "New"
 msgstr "Nouveau"
@@ -7065,6 +7078,12 @@ msgstr "Aucune table de base de données trouvée."
 #, fuzzy
 msgid "No file selected."
 msgstr "Aucun fichier sélectionné."
+
+#: admin/modules/pro/class-media-replacement.php:197
+#: admin/modules/pro/class-media-replacement.php:209
+#, fuzzy
+msgid "No file uploaded."
+msgstr "Aucun fichier téléchargé."
 
 #: admin/modules/core/class-file-manager.php:785
 #: admin/modules/core/class-file-manager.php:837
@@ -8602,12 +8621,12 @@ msgstr "Renommé de <b>%s</b> à <b>%s</b>"
 msgid "Repeat Icon"
 msgstr "Icône de répétition"
 
-#: admin/modules/pro/class-media-replacement.php:346
+#: admin/modules/pro/class-media-replacement.php:390
 #, fuzzy
 msgid "Replace"
 msgstr "Remplacer"
 
-#: admin/modules/pro/class-media-replacement.php:263
+#: admin/modules/pro/class-media-replacement.php:304
 #, fuzzy
 msgid ""
 "Replace any media file with a new version while keeping the original media "
@@ -8622,9 +8641,8 @@ msgstr ""
 #: admin/modules/pro/class-media-replacement.php:85
 #: admin/modules/pro/class-media-replacement.php:104
 #: admin/modules/pro/class-media-replacement.php:121
-#, fuzzy
 msgid "Replace media"
-msgstr "Remplacer le support"
+msgstr "Remplacer le média"
 
 #: admin/helpers/core/select-dashicon/class-select-dashicon.php:83
 #, fuzzy
@@ -9384,8 +9402,8 @@ msgstr "logo du site"
 msgid "Site will be available soon. Thank you for your patience!"
 msgstr "Le site sera bientôt disponible. Merci pour votre patience!"
 
-#: admin/modules/pro/class-media-replacement.php:298
-#: admin/modules/pro/class-media-replacement.php:322
+#: admin/modules/pro/class-media-replacement.php:336
+#: admin/modules/pro/class-media-replacement.php:362
 #: admin/templates/core/file-manager/views/default.php:21
 msgid "Size"
 msgstr "Taille"
@@ -10698,8 +10716,8 @@ msgid "Two types of snippets are available:"
 msgstr "Deux types de snippets sont disponibles :"
 
 #: admin/modules/core/class-code-snippets.php:659
-#: admin/modules/pro/class-media-replacement.php:294
-#: admin/modules/pro/class-media-replacement.php:318
+#: admin/modules/pro/class-media-replacement.php:332
+#: admin/modules/pro/class-media-replacement.php:358
 #: admin/modules/pro/class-post-type-switcher.php:72
 msgid "Type"
 msgstr "Type"
@@ -11338,8 +11356,8 @@ msgstr "Icône de menus de widgets"
 
 #: admin/modules/pro/class-custom-login-design.php:3691
 #: admin/modules/pro/class-custom-login-design.php:4074
-#: admin/modules/pro/class-media-replacement.php:302
-#: admin/modules/pro/class-media-replacement.php:326
+#: admin/modules/pro/class-media-replacement.php:341
+#: admin/modules/pro/class-media-replacement.php:367
 #, fuzzy
 msgid "Width"
 msgstr "Largeur"

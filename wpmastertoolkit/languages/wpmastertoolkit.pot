@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPMasterToolKit\n"
 "Report-Msgid-Bugs-To: Webdeclic <contact@webdeclic.com>\n"
-"POT-Creation-Date: 2025-08-14 12:21+0100\n"
+"POT-Creation-Date: 2025-09-18 15:15+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Webdeclic <contact@webdeclic.com>\n"
 "Language-Team: Webdeclic <contact@webdeclic.com>\n"
@@ -3530,8 +3530,8 @@ msgstr ""
 msgid "You can use JS in <script> tag or CSS in <style> tag in your snippet."
 msgstr ""
 
-#: admin/modules/core/class-code-snippets.php:659 admin/modules/pro/class-media-replacement.php:294
-#: admin/modules/pro/class-media-replacement.php:318 admin/modules/pro/class-post-type-switcher.php:72
+#: admin/modules/core/class-code-snippets.php:659 admin/modules/pro/class-media-replacement.php:332
+#: admin/modules/pro/class-media-replacement.php:358 admin/modules/pro/class-post-type-switcher.php:72
 msgid "Type"
 msgstr ""
 
@@ -5425,7 +5425,7 @@ msgid ""
 msgstr ""
 
 #: admin/modules/core/class-quick-add-post.php:35 admin/modules/core/class-register-custom-content-types.php:135
-#: admin/modules/pro/class-media-replacement.php:315
+#: admin/modules/pro/class-media-replacement.php:355
 msgid "New"
 msgstr ""
 
@@ -7070,7 +7070,7 @@ msgid "Right"
 msgstr ""
 
 #: admin/modules/pro/class-custom-login-design.php:3691 admin/modules/pro/class-custom-login-design.php:4074
-#: admin/modules/pro/class-media-replacement.php:302 admin/modules/pro/class-media-replacement.php:326
+#: admin/modules/pro/class-media-replacement.php:341 admin/modules/pro/class-media-replacement.php:367
 msgid "Width"
 msgstr ""
 
@@ -7111,7 +7111,7 @@ msgid "End"
 msgstr ""
 
 #: admin/modules/pro/class-custom-login-design.php:3866 admin/modules/pro/class-custom-login-design.php:4091
-#: admin/modules/pro/class-media-replacement.php:306 admin/modules/pro/class-media-replacement.php:330
+#: admin/modules/pro/class-media-replacement.php:345 admin/modules/pro/class-media-replacement.php:371
 msgid "Height"
 msgstr ""
 
@@ -7605,38 +7605,54 @@ msgstr ""
 msgid "File does not have the same file type."
 msgstr ""
 
-#: admin/modules/pro/class-media-replacement.php:192
+#: admin/modules/pro/class-media-replacement.php:197 admin/modules/pro/class-media-replacement.php:209
+msgid "No file uploaded."
+msgstr ""
+
+#: admin/modules/pro/class-media-replacement.php:216
 msgid "File upload failed."
 msgstr ""
 
-#: admin/modules/pro/class-media-replacement.php:197
+#: admin/modules/pro/class-media-replacement.php:224
+msgid "Invalid Media ID."
+msgstr ""
+
+#: admin/modules/pro/class-media-replacement.php:235
 msgid "File type not allowed."
 msgstr ""
 
-#: admin/modules/pro/class-media-replacement.php:202
-msgid "Invalid attachment ID."
+#: admin/modules/pro/class-media-replacement.php:246
+msgid "File type does not match the original file type."
 msgstr ""
 
-#: admin/modules/pro/class-media-replacement.php:263
+#: admin/modules/pro/class-media-replacement.php:258
+msgid "Failed to copy the new file."
+msgstr ""
+
+#: admin/modules/pro/class-media-replacement.php:268
+msgid "Media replaced successfully."
+msgstr ""
+
+#: admin/modules/pro/class-media-replacement.php:304
 msgid ""
 "Replace any media file with a new version while keeping the original media ID, file name, and publish date "
 "intact—ensuring that all existing links remain functional."
 msgstr ""
 
-#: admin/modules/pro/class-media-replacement.php:291
+#: admin/modules/pro/class-media-replacement.php:329
 msgid "Current"
 msgstr ""
 
-#: admin/modules/pro/class-media-replacement.php:298 admin/modules/pro/class-media-replacement.php:322
+#: admin/modules/pro/class-media-replacement.php:336 admin/modules/pro/class-media-replacement.php:362
 #: admin/templates/core/file-manager/views/default.php:21
 msgid "Size"
 msgstr ""
 
-#: admin/modules/pro/class-media-replacement.php:335
+#: admin/modules/pro/class-media-replacement.php:377
 msgid "Click here to upload or drop file in area"
 msgstr ""
 
-#: admin/modules/pro/class-media-replacement.php:346
+#: admin/modules/pro/class-media-replacement.php:390
 msgid "Replace"
 msgstr ""
 

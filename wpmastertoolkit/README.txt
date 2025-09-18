@@ -4,7 +4,7 @@ Tags: all in one plugin, admin, security, disable features, easy to use
 Requires at least: 6.0.0
 Tested up to: 6.8.2
 Requires PHP: 7.4
-Stable tag: 2.10.0
+Stable tag: 2.11.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
 
@@ -111,31 +111,33 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 * SVG Upload: Enable SVG upload support in the media library.
 * Wider Admin Menu
 
-= 24 Pro features =
-* 410 Manager: Managing HTTP 410 statuses on your site.
-* Add Essentials Shortcodes: Insert dynamic variables into your titles and content via shortcodes.
+= 26 Pro features =
+* 410 Manager
+* Add Essentials Shortcodes
 * Auto clean actionscheduler_actions: Clean actionscheduler_actions database table from actions that have been completed | failed | cancelled.
-* Better Password Hash: Use Argon2 password hashing algorithm for better security.
+* Better Password Hash
 * CRON Manager: Manage cron events on your website.
 * Change Database Prefix: Quickly change your WordPress database prefix to save time and enhance security.
 * Custom Login Design: Personalize your login page to match your brand.
 * Disable Comments: Manage the visibility of comments on your public posts by selectively disabling them for specific post types or across all posts. Once comments are disabled, any existing comments will seamlessly disappear from the front-end.
-* Disable Woocommerce Logout Confirmation.
+* Disable Woocommerce Logout Confirmation
 * Disallow Access WP Sensible Files: Delete the wp-config-sample.php, block access to readme.html, license.txt
-* Disallow Countries IP.
+* Disallow Countries IP
 * Force Send All Email To: Force all emails sent from your website to be sent to a specific email address. This feature is useful for testing email functionality on your website, as it ensures that all emails are sent to a single email address.
 * Generate Alt Text With AI: Automatically generate alternative text using AI.
+* Head Sorter: Automatically sorts and optimizes the &lt;head&gt; of your website, making sure important tags load first for better speed and SEO.
 * Hook And Filter Debugger: Displaying the sequence of action and filter hooks by their origin on a single page.
 * Link Shortener: Shorten your links with a custom prefix. You can also track the number of clicks on each link.
 * Manage Admin Emails Notifications: Check the types of emails you no longer want to receive as an administrator.
+* Media Replacement
 * No Plugin Activation / Deactivation / Deletion: Prevents plugin activation, deactivation, and deletion for enhanced security.
 * Paste Image In Media: With this feature you can paste directly your picture in WordPress media.
 * Plugin Download: Download plugins from the plugins page in the WordPress admin panel.
-* Post Type Switcher.
-* Two Factor Authentication.
+* Post Type Switcher
+* Two Factor Authentication
 * Updates Logs: Track and record the most recent login activity of site users, then showcase the date and time in the users list table
-* User Switching.
-* Vulnerabilities Scan: On Core Version, Plugins and Themes.
+* User Switching
+* Vulnerabilities Scan
 
 = PRO Additionnals Features =
 * Move Login URL: Stop access to /wp-admin with server side 403 error. To prevent ressource loading.
@@ -196,6 +198,9 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 4. Code snippets
 
 == Changelog ==
+
+= 2.11.0 =
+* Add Pro Module: Media Replacement
 
 = 2.10.0 =
 * Add Pro Module: Head Sorter
