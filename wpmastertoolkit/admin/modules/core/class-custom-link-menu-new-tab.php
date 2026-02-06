@@ -53,28 +53,44 @@ class WPMastertoolkit_Custom_Link_Menu_New_Tab {
                     <label>
                         <input type="hidden" name="WPMastertoolkit_open_new_tab_options[<?php echo esc_attr( $item_id ) ;?>][target]" value="0">
                         <input type="checkbox" name="WPMastertoolkit_open_new_tab_options[<?php echo esc_attr( $item_id ) ;?>][target]" value="1" <?php echo checked( $target, '1', false );?> />
-                        <strong>WPMasterToolkit: </strong><?php esc_html_e( 'Add "target=_blank"', 'wpmastertoolkit' ); ?>
+                        <?php echo wp_kses_post( sprintf( 
+                            /* translators: %s is the HTML code for target=_blank */
+                            __( 'Add %s', 'wpmastertoolkit' ), 
+                            '<code>target=_blank</code>' 
+                        ) ); ?>
                     </label>
                 </p>
                 <p class="description-wide">
                     <label>
                         <input type="hidden" name="WPMastertoolkit_open_new_tab_options[<?php echo esc_attr( $item_id ) ;?>][noopener]" value="0">
                         <input type="checkbox" name="WPMastertoolkit_open_new_tab_options[<?php echo esc_attr( $item_id ) ;?>][noopener]" value="1" <?php echo checked( $noopener, '1', false );?> />
-                        <strong>WPMasterToolkit: </strong><?php esc_html_e( 'Add "rel=noopener"', 'wpmastertoolkit' ); ?>
+                        <?php echo wp_kses_post( sprintf( 
+                            /* translators: %s is the HTML code for rel=noopener */
+                            __( 'Add %s', 'wpmastertoolkit' ), 
+                            '<code>rel=noopener</code>' 
+                        ) ); ?>
                     </label>
                 </p>
                 <p class="description-wide">
                     <label>
                         <input type="hidden" name="WPMastertoolkit_open_new_tab_options[<?php echo esc_attr( $item_id ) ;?>][noreferrer]" value="0">
                         <input type="checkbox" name="WPMastertoolkit_open_new_tab_options[<?php echo esc_attr( $item_id ) ;?>][noreferrer]" value="1" <?php echo checked( $noreferrer, '1', false );?> />
-                        <strong>WPMasterToolkit: </strong><?php esc_html_e( 'Add "rel=noreferrer"', 'wpmastertoolkit' ); ?>
+                        <?php echo wp_kses_post( sprintf( 
+                            /* translators: %s is the HTML code for rel=noreferrer */
+                            __( 'Add %s', 'wpmastertoolkit' ), 
+                            '<code>rel=noreferrer</code>' 
+                        ) ); ?>
                     </label>
                 </p>
                 <p class="description-wide">
                     <label>
                         <input type="hidden" name="WPMastertoolkit_open_new_tab_options[<?php echo esc_attr( $item_id ) ;?>][nofollow]" value="0">
                         <input type="checkbox" name="WPMastertoolkit_open_new_tab_options[<?php echo esc_attr( $item_id ) ;?>][nofollow]" value="1" <?php echo checked( $nofollow, '1', false );?> />
-                        <strong>WPMasterToolkit: </strong><?php esc_html_e( 'Add "rel=nofollow"', 'wpmastertoolkit' ); ?>
+                        <?php echo wp_kses_post( sprintf( 
+                            /* translators: %s is the HTML code for rel=nofollow */
+                            __( 'Add %s', 'wpmastertoolkit' ), 
+                            '<code>rel=nofollow</code>' 
+                        ) ); ?>
                     </label>
                 </p>
             <?php

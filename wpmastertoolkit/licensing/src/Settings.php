@@ -1,6 +1,7 @@
 <?php
-
 namespace SureCart\Licensing;
+
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
  * The settings class.
@@ -420,8 +421,10 @@ class Settings {
 		if ( $this->activation_id ) {
 			$activation = $this->client->activation()->get( $this->activation_id );
 			if ( is_wp_error( $activation ) ) {
-				$this->add_error( 'deactivaed', __( 'Your license has been deactivated for this site.', 'wpmastertoolkit' ) );
-				$this->clear_options();
+				if ( 'not_found' === $activation->get_error_code() ) {
+					$this->add_error( 'deactivaed', __( 'Your license has been deactivated for this site.', 'wpmastertoolkit' ) );
+					$this->clear_options();
+				}
 			}
 		}
 		return $activation;

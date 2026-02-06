@@ -183,6 +183,11 @@ class WPMastertoolkit {
 		$this->loader->add_action( 'admin_enqueue_scripts', $wpmastertoolkit_settings, 'enqueue_scripts' );
 		$this->loader->add_action( 'admin_menu', $wpmastertoolkit_settings, 'add_settings_menu' );
 		$this->loader->add_action( 'admin_init', $wpmastertoolkit_settings, 'settings_submit_button' );
+		$this->loader->add_action( 'init', $wpmastertoolkit_settings, 'add_shortcodes' );
+		$this->loader->add_action( 'init', $wpmastertoolkit_settings, 'schedule_cron_event' );
+		$this->loader->add_action( 'wpmastertoolkit_daily_regenerate_assets', $wpmastertoolkit_settings, 'cron_regenerate_assets' );
+		$this->loader->add_action( 'wp_ajax_wpmastertoolkit_regenerate_assets', $wpmastertoolkit_settings, 'ajax_regenerate_assets' );
+		$this->loader->add_action( 'wp_ajax_wpmastertoolkit_get_system_info', $wpmastertoolkit_settings, 'ajax_get_system_info' );
 
 		$wpmastertoolkit_surecart = new WPMastertoolkit_Surecart();
 		$this->loader->add_action( 'init', $wpmastertoolkit_surecart, 'init_surecart' );

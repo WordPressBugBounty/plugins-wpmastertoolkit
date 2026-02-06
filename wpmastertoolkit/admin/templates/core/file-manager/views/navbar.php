@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 						<div class="input-group-append btn-group">
 							<span class="input-group-text dropdown-toggle brl-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></span>
 							<div class="dropdown-menu dropdown-menu-right">
-								<a class="dropdown-item" href="<?php echo esc_attr( $path2 = $path ? $path : '.' ); ?>" id="js-search-modal" data-bs-toggle="modal" data-bs-target="#searchModal"><?php esc_html_e( 'Advanced Search', 'wpmastertoolkit' ); ?></a>
+								<a class="dropdown-item" href="<?php echo esc_attr( $path ? $path : '.' ); ?>" id="js-search-modal" data-bs-toggle="modal" data-bs-target="#searchModal"><?php esc_html_e( 'Advanced Search', 'wpmastertoolkit' ); ?></a>
 							</div>
 						</div>
 					</div>

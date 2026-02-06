@@ -33,9 +33,11 @@ class WPMastertoolkit_Disable_All_Updates {
 		// Disable auto updates
 		add_filter( 'automatic_updater_disabled', '__return_true' );
 		if ( ! defined( 'AUTOMATIC_UPDATER_DISABLED' ) ) {
+			//phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound
 			define( 'AUTOMATIC_UPDATER_DISABLED', true );
 		}
 		if ( ! defined( 'WP_AUTO_UPDATE_CORE' ) ) {
+			//phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound
 			define( 'WP_AUTO_UPDATE_CORE', false );
 		}
 		add_filter( 'auto_update_core', '__return_false' );

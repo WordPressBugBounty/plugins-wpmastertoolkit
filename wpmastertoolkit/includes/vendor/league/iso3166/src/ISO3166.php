@@ -43,6 +43,8 @@ final class ISO3166 implements \Countable, \IteratorAggregate, ISO3166DataProvid
      */
     public function name(string $name): array
     {
+        Guards::guardAgainstInvalidName($name);
+
         return $this->lookup(self::KEY_NAME, $name);
     }
 
@@ -81,6 +83,8 @@ final class ISO3166 implements \Countable, \IteratorAggregate, ISO3166DataProvid
      */
     public function exactName(string $name): array
     {
+        Guards::guardAgainstInvalidName($name);
+        
         $value = mb_strtolower($name);
 
         foreach ($this->countries as $country) {
@@ -2259,7 +2263,7 @@ final class ISO3166 implements \Countable, \IteratorAggregate, ISO3166DataProvid
             ],
         ],
         [
-            'name' => 'Turkey',
+            'name' => 'Türkiye',
             'alpha2' => 'TR',
             'alpha3' => 'TUR',
             'numeric' => '792',

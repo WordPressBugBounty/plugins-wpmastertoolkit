@@ -138,6 +138,8 @@ class WPMastertoolkit_Local_Avatars {
 	public function change_avatar_data( $args, $id_or_email ) {
 		global $current_screen;
 
+		$user = null;
+
 		if ( isset( $current_screen ) ) {
 			if ( 'options-discussion' == $current_screen->id ) {
 				return $args;

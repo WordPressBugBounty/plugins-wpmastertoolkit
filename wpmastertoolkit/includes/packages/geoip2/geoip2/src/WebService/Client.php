@@ -120,20 +120,20 @@ class Client implements ProviderInterface
      *                          address is provided, the address that the web service is called
      *                          from will be used.
      *
-     * @throws \GeoIp2\Exception\AddressNotFoundException if the address you
+     * @throws WPMTK\GeoIp2\Exception\AddressNotFoundException if the address you
      *                                                    provided is not in our database (e.g., a private address).
-     * @throws \GeoIp2\Exception\AuthenticationException  if there is a problem
+     * @throws WPMTK\GeoIp2\Exception\AuthenticationException  if there is a problem
      *                                                    with the account ID or license key that you provided
-     * @throws \GeoIp2\Exception\OutOfQueriesException    if your account is out
+     * @throws WPMTK\GeoIp2\Exception\OutOfQueriesException    if your account is out
      *                                                    of queries
-     * @throws \GeoIp2\Exception\InvalidRequestException} if your request was received by the web service but is
+     * @throws WPMTK\GeoIp2\Exception\InvalidRequestException} if your request was received by the web service but is
      *                                                    invalid for some other reason.  This may indicate an issue
      *                                                    with this API. Please report the error to MaxMind.
-     * @throws \GeoIp2\Exception\HttpException   if an unexpected HTTP error code or message was returned.
+     * @throws WPMTK\GeoIp2\Exception\HttpException   if an unexpected HTTP error code or message was returned.
      *                                           This could indicate a problem with the connection between
      *                                           your server and the web service or that the web service
      *                                           returned an invalid document or 500 error code
-     * @throws \GeoIp2\Exception\GeoIp2Exception This serves as the parent
+     * @throws WPMTK\GeoIp2\Exception\GeoIp2Exception This serves as the parent
      *                                           class to the above exceptions. It will be thrown directly
      *                                           if a 200 status code is returned but the body is invalid.
      */
@@ -150,20 +150,20 @@ class Client implements ProviderInterface
      *                          address is provided, the address that the web service is called
      *                          from will be used.
      *
-     * @throws \GeoIp2\Exception\AddressNotFoundException if the address you provided is not in our database (e.g.,
+     * @throws WPMTK\GeoIp2\Exception\AddressNotFoundException if the address you provided is not in our database (e.g.,
      *                                                    a private address).
-     * @throws \GeoIp2\Exception\AuthenticationException  if there is a problem
+     * @throws WPMTK\GeoIp2\Exception\AuthenticationException  if there is a problem
      *                                                    with the account ID or license key that you provided
-     * @throws \GeoIp2\Exception\OutOfQueriesException    if your account is out of queries
-     * @throws \GeoIp2\Exception\InvalidRequestException} if your request was received by the web service but is
+     * @throws WPMTK\GeoIp2\Exception\OutOfQueriesException    if your account is out of queries
+     * @throws WPMTK\GeoIp2\Exception\InvalidRequestException} if your request was received by the web service but is
      *                                                    invalid for some other reason.  This may indicate an
      *                                                    issue with this API. Please report the error to MaxMind.
-     * @throws \GeoIp2\Exception\HttpException   if an unexpected HTTP error
+     * @throws WPMTK\GeoIp2\Exception\HttpException   if an unexpected HTTP error
      *                                           code or message was returned. This could indicate a problem
      *                                           with the connection between your server and the web service
      *                                           or that the web service returned an invalid document or 500
      *                                           error code.
-     * @throws \GeoIp2\Exception\GeoIp2Exception This serves as the parent class to the above exceptions. It
+     * @throws WPMTK\GeoIp2\Exception\GeoIp2Exception This serves as the parent class to the above exceptions. It
      *                                           will be thrown directly if a 200 status code is returned but
      *                                           the body is invalid.
      */
@@ -180,20 +180,20 @@ class Client implements ProviderInterface
      *                          address is provided, the address that the web service is called
      *                          from will be used.
      *
-     * @throws \GeoIp2\Exception\AddressNotFoundException if the address you
+     * @throws WPMTK\GeoIp2\Exception\AddressNotFoundException if the address you
      *                                                    provided is not in our database (e.g., a private address).
-     * @throws \GeoIp2\Exception\AuthenticationException  if there is a problem
+     * @throws WPMTK\GeoIp2\Exception\AuthenticationException  if there is a problem
      *                                                    with the account ID or license key that you provided
-     * @throws \GeoIp2\Exception\OutOfQueriesException    if your account is out
+     * @throws WPMTK\GeoIp2\Exception\OutOfQueriesException    if your account is out
      *                                                    of queries
-     * @throws \GeoIp2\Exception\InvalidRequestException} if your request was received by the web service but is
+     * @throws WPMTK\GeoIp2\Exception\InvalidRequestException} if your request was received by the web service but is
      *                                                    invalid for some other reason.  This may indicate an
      *                                                    issue with this API. Please report the error to MaxMind.
-     * @throws \GeoIp2\Exception\HttpException   if an unexpected HTTP error code or message was returned.
+     * @throws WPMTK\GeoIp2\Exception\HttpException   if an unexpected HTTP error code or message was returned.
      *                                           This could indicate a problem with the connection between
      *                                           your server and the web service or that the web service
      *                                           returned an invalid document or 500 error code
-     * @throws \GeoIp2\Exception\GeoIp2Exception This serves as the parent
+     * @throws WPMTK\GeoIp2\Exception\GeoIp2Exception This serves as the parent
      *                                           class to the above exceptions. It will be thrown directly
      *                                           if a 200 status code is returned but the body is invalid.
      */

@@ -11,51 +11,51 @@ namespace WPMTK\GeoIp2\Model;
  * See https://dev.maxmind.com/geoip/docs/web-services?lang=en for more
  * details.
  *
- * @property-read \GeoIp2\Record\City $city City data for the requested IP
+ * @property-read WPMTK\GeoIp2\Record\City $city City data for the requested IP
  * address.
- * @property-read \GeoIp2\Record\Location $location Location data for the
+ * @property-read WPMTK\GeoIp2\Record\Location $location Location data for the
  * requested IP address.
- * @property-read \GeoIp2\Record\Postal $postal Postal data for the
+ * @property-read WPMTK\GeoIp2\Record\Postal $postal Postal data for the
  * requested IP address.
- * @property-read array $subdivisions An array \GeoIp2\Record\Subdivision
+ * @property-read array $subdivisions An array WPMTK\GeoIp2\Record\Subdivision
  * objects representing the country subdivisions for the requested IP
  * address. The number and type of subdivisions varies by country, but a
  * subdivision is typically a state, province, county, etc. Subdivisions
  * are ordered from most general (largest) to most specific (smallest).
  * If the response did not contain any subdivisions, this method returns
  * an empty array.
- * @property-read \GeoIp2\Record\Subdivision $mostSpecificSubdivision An object
+ * @property-read WPMTK\GeoIp2\Record\Subdivision $mostSpecificSubdivision An object
  * representing the most specific subdivision returned. If the response
  * did not contain any subdivisions, this method returns an empty
- * \GeoIp2\Record\Subdivision object.
+ * WPMTK\GeoIp2\Record\Subdivision object.
  */
 class City extends Country
 {
     /**
      * @ignore
      *
-     * @var \GeoIp2\Record\City
+     * @var WPMTK\GeoIp2\Record\City
      */
     protected $city;
 
     /**
      * @ignore
      *
-     * @var \GeoIp2\Record\Location
+     * @var WPMTK\GeoIp2\Record\Location
      */
     protected $location;
 
     /**
      * @ignore
      *
-     * @var \GeoIp2\Record\Postal
+     * @var WPMTK\GeoIp2\Record\Postal
      */
     protected $postal;
 
     /**
      * @ignore
      *
-     * @var array<\GeoIp2\Record\Subdivision>
+     * @var array<WPMTK\GeoIp2\Record\Subdivision>
      */
     protected $subdivisions = [];
 
@@ -66,9 +66,9 @@ class City extends Country
     {
         parent::__construct($raw, $locales);
 
-        $this->city = new \GeoIp2\Record\City($this->get('city'), $locales);
-        $this->location = new \GeoIp2\Record\Location($this->get('location'));
-        $this->postal = new \GeoIp2\Record\Postal($this->get('postal'));
+        $this->city = new \WPMTK\GeoIp2\Record\City($this->get('city'), $locales);
+        $this->location = new \WPMTK\GeoIp2\Record\Location($this->get('location'));
+        $this->postal = new \WPMTK\GeoIp2\Record\Postal($this->get('postal'));
 
         $this->createSubdivisions($raw, $locales);
     }
@@ -81,7 +81,7 @@ class City extends Country
 
         foreach ($raw['subdivisions'] as $sub) {
             $this->subdivisions[] =
-                new \GeoIp2\Record\Subdivision($sub, $locales)
+                new \WPMTK\GeoIp2\Record\Subdivision($sub, $locales)
             ;
         }
     }
@@ -114,10 +114,10 @@ class City extends Country
         return parent::__isset($attr);
     }
 
-    private function mostSpecificSubdivision(): \GeoIp2\Record\Subdivision
+    private function mostSpecificSubdivision(): \WPMTK\GeoIp2\Record\Subdivision
     {
         return empty($this->subdivisions) ?
-            new \GeoIp2\Record\Subdivision([], $this->locales) :
+            new \WPMTK\GeoIp2\Record\Subdivision([], $this->locales) :
             end($this->subdivisions);
     }
 }

@@ -26,7 +26,7 @@ class WPMastertoolkit_Modules_Data {
 			),
 			'WPMastertoolkit_Update_Logs' => array(
 				'original_name' =>'Updates Logs',
-				'group'         => 'administration',
+				'group'         => 'debug',
 				'pro'           => true,
 				'path'          => 'pro/class-update-logs.php',
 			),
@@ -38,7 +38,7 @@ class WPMastertoolkit_Modules_Data {
 			),
 			'WPMastertoolkit_Last_Login_Column' => array(
 				'original_name' =>'Last Login Column',
-				'group'         => 'administration',
+				'group'         => 'users',
 				'pro'           => false,
 				'path'          => 'core/class-last-login-column.php',
 			),
@@ -92,7 +92,7 @@ class WPMastertoolkit_Modules_Data {
 			),
 			'WPMastertoolkit_Disable_WP_Mail' => array(
 				'original_name' =>'Disable wp_mail',
-				'group'         => 'disable-features',
+				'group'         => 'debug',
 				'pro'           => false,
 				'path'          => 'core/class-disable-wp-mail.php',
 			),
@@ -200,13 +200,13 @@ class WPMastertoolkit_Modules_Data {
 			),
 			'WPMastertoolkit_Disable_WP_Sitemap' => array(
 				'original_name' =>'Disable WP Sitemap',
-				'group'         => 'other-features',
+				'group'         => 'seo-and-speed-optimizations',
 				'pro'           => false,
 				'path'          => 'core/class-disable-wp-sitemap.php',
 			),
 			'WPMastertoolkit_Force_Send_All_Email_To' => array(
 				'original_name' =>"Force Send All Email To",
-				'group'         => 'other-features',
+				'group'         => 'debug',
 				'pro'           => true,
 				'path'          => 'pro/class-force-send-all-email-to.php',
 			),
@@ -326,13 +326,13 @@ class WPMastertoolkit_Modules_Data {
 			),
 			'WPMastertoolkit_Export_Users' => array(
 				'original_name' => "Export Users",
-				'group'         => 'other-features',
+				'group'         => 'users',
 				'pro'           => false,
 				'path'          => 'core/class-export-users.php',
 			),
 			'WPMastertoolkit_Clean_Profiles' => array(
 				'original_name' => "Clean Profiles",
-				'group'         => 'other-features',
+				'group'         => 'users',
 				'pro'           => false,
 				'path'          => 'core/class-clean-profiles.php',
 			),
@@ -350,7 +350,7 @@ class WPMastertoolkit_Modules_Data {
 			),
 			'WPMastertoolkit_Duplicate_Menu' => array(
 				'original_name' => "Duplicate Menu",
-				'group'         => 'other-features',
+				'group'         => 'content-media',
 				'pro'           => false,
 				'path'          => 'core/class-duplicate-menu.php',
 			),
@@ -404,7 +404,7 @@ class WPMastertoolkit_Modules_Data {
 			),
 			'WPMastertoolkit_Meta_Debugger' => array(
 				'original_name' => "Meta Debugger",
-				'group'         => 'administration',
+				'group'         => 'debug',
 				'pro'           => false,
 				'path'          => 'core/class-meta-debugger.php',
 			),
@@ -464,7 +464,7 @@ class WPMastertoolkit_Modules_Data {
 			),
 			'WPMastertoolkit_Disable_All_Updates' => array(
 				'original_name' => "Disable All Updates",
-				'group'         => 'disable-features',
+				'group'         => 'debug',
 				'pro'           => false,
 				'path'          => 'core/class-disable-all-updates.php',
 			),
@@ -476,7 +476,7 @@ class WPMastertoolkit_Modules_Data {
 			),
 			'WPMastertoolkit_Obfuscate_Email_Address' => array(
 				'original_name' => "Obfuscate Email Addresses",
-				'group'         => 'security',
+				'group'         => 'content-media',
 				'pro'           => false,
 				'path'          => 'core/class-obfuscate-email-address.php',
 			),
@@ -494,7 +494,7 @@ class WPMastertoolkit_Modules_Data {
 			),
 			'WPMastertoolkit_Heartbeat_Control' => array(
 				'original_name' => "Heartbeat Control",
-				'group'         => 'content-media',
+				'group'         => 'administration',
 				'pro'           => false,
 				'path'          => 'core/class-heartbeat-control.php',
 			),
@@ -536,7 +536,7 @@ class WPMastertoolkit_Modules_Data {
 			),
 			'WPMastertoolkit_File_Manager' => array(
 				'original_name' => "File Manager",
-				'group'         => 'other-features',
+				'group'         => 'debug',
 				'pro'           => false,
 				'path'          => 'core/class-file-manager.php',
 			),
@@ -552,15 +552,21 @@ class WPMastertoolkit_Modules_Data {
 				'pro'           => false,
 				'path'          => 'core/class-plugin-theme-rollback.php',
 			),
+			'WPMastertoolkit_Advanced_Debug_Mode' => array(
+				'original_name' => "Advanced Debug Mode",
+				'group'         => 'debug',
+				'pro'           => false,
+				'path'          => 'core/class-advanced-debug-mode.php',
+			),
 			'WPMastertoolkit_Multiple_User_Roles' => array(
 				'original_name' => "Multiple User Roles",
-				'group'         => 'other-features',
+				'group'         => 'users',
 				'pro'           => false,
 				'path'          => 'core/class-multiple-user-roles.php',
 			),
 			'WPMastertoolkit_Adminer' => array(
 				'original_name' => "Adminer",
-				'group'         => 'other-features',
+				'group'         => 'debug',
 				'pro'           => false,
 				'path'          => 'core/class-adminer.php',
 			),
@@ -572,7 +578,7 @@ class WPMastertoolkit_Modules_Data {
 			),
 			'WPMastertoolkit_Local_Avatars' => array(
 				'original_name' => "Local avatars",
-				'group'         => 'other-features',
+				'group'         => 'users',
 				'pro'           => false,
 				'path'          => 'core/class-local-avatars.php',
 			),
@@ -584,13 +590,13 @@ class WPMastertoolkit_Modules_Data {
 			),
 			'WPMastertoolkit_Cron_Manager' => array(
 				'original_name' => "CRON Manager",
-				'group'         => 'other-features',
+				'group'         => 'debug',
 				'pro'           => true,
 				'path'          => 'pro/class-cron-manager.php',
 			),
 			'WPMastertoolkit_Hook_Filter_Debugger' => array(
 				'original_name' => "Hook And Filter Debugger",
-				'group'         => 'other-features',
+				'group'         => 'debug',
 				'pro'           => true,
 				'path'          => 'pro/class-hook-filter-debugger.php',
 			),
@@ -602,7 +608,7 @@ class WPMastertoolkit_Modules_Data {
 			),
 			'WPMastertoolkit_User_Switching' => array(
 				'original_name' => "User Switching",
-				'group'         => 'other-features',
+				'group'         => 'users',
 				'pro'           => true,
 				'path'          => 'pro/class-user-switching.php',
 			),
@@ -632,7 +638,7 @@ class WPMastertoolkit_Modules_Data {
 			),
 			'WPMastertoolkit_410_manager' => array(
 				'original_name' => "410 Manager",
-				'group'         => 'content-media',
+				'group'         => 'seo-and-speed-optimizations',
 				'pro'           => true,
 				'path'          => 'pro/class-410-manager.php',
 			),
@@ -644,7 +650,7 @@ class WPMastertoolkit_Modules_Data {
 			),
 			'WPMastertoolkit_Link_Shortener' => array(
 				'original_name' => "Link Shortener",
-				'group'         => 'other-features',
+				'group'         => 'seo-and-speed-optimizations',
 				'pro'           => true,
 				'path'          => 'pro/class-link-shortener.php',
 			),
@@ -698,7 +704,7 @@ class WPMastertoolkit_Modules_Data {
 			),
 			'WPMastertoolkit_Head_Sorter' => array(
 				'original_name' => "Head Sorter",
-				'group'         => 'other-features',
+				'group'         => 'seo-and-speed-optimizations',
 				'pro'           => true,
 				'path'          => 'pro/class-head-sorter.php',
 			),
@@ -707,6 +713,42 @@ class WPMastertoolkit_Modules_Data {
 				'group'         => 'content-media',
 				'pro'           => true,
 				'path'          => 'pro/class-media-replacement.php',
+			),
+			'WPMastertoolkit_My_Account_Menu_Customizer' => array(
+				'original_name' => "My Account Menu Customizer",
+				'group'         => 'woocommerce',
+				'pro'           => true,
+				'path'          => 'pro/class-my-account-menu-customizer.php',
+			),
+			'WPMastertoolkit_Disable_Plugin_For_Debug' => array(
+				'original_name' => "Disable Plugin For Debug",
+				'group'         => 'debug',
+				'pro'           => true,
+				'path'          => 'pro/class-disable-plugin-for-debug.php',
+			),
+			'WPMastertoolkit_Admin_Menu_Organizer' => array(
+				'original_name' => "Admin Menu Organizer",
+				'group'         => 'administration',
+				'pro'           => true,
+				'path'          => 'pro/class-admin-menu-organizer.php',
+			),
+			'WPMastertoolkit_Download_Medias_As_Zip' => array(
+				'original_name' => "Download medias as zip",
+				'group'         => 'content-media',
+				'pro'           => true,
+				'path'          => 'pro/class-download-medias-as-zip.php',
+			),
+			'WPMastertoolkit_Mail_Catcher' => array(
+				'original_name' => "Mail catcher",
+				'group'         => 'debug',
+				'pro'           => false,
+				'path'          => 'core/class-mail-catcher.php',
+			),
+			'WPMastertoolkit_Temporary_Login' => array(
+				'original_name' => "Temporary Login",
+				'group'         => 'users',
+				'pro'           => false,
+				'path'          => 'core/class-temporary-login.php',
 			),
 		);
 		
@@ -734,7 +776,7 @@ class WPMastertoolkit_Modules_Data {
 			),
 			'WPMastertoolkit_Update_Logs' => array(
 				'name' => esc_html_x('Updates Logs', "Module name", 'wpmastertoolkit'),
-				'desc' => esc_html_x('Track and record the most recent login activity of site users, then showcase the date and time in the users list table', "Module description", 'wpmastertoolkit'),
+				'desc' => esc_html_x('Track and record updates, activations, deactivations of plugins and themes, as well as WordPress core updates.', "Module description", 'wpmastertoolkit'),
 			),
 			'WPMastertoolkit_Hide_Admin_Bar' => array(
 				'name' => esc_html_x('Hide Admin Bar', "Module name", 'wpmastertoolkit'),
@@ -1084,6 +1126,14 @@ class WPMastertoolkit_Modules_Data {
 				'name' => esc_html_x( "Plugin & Theme Rollback", "Module name", 'wpmastertoolkit' ),
 				'desc' => esc_html_x( "Revert to previous versions of any theme or plugin from WordPress.org.", "Module description", 'wpmastertoolkit' ),
 			),
+			'WPMastertoolkit_Advanced_Debug_Mode' => array(
+				'name' => esc_html_x( "Advanced Debug Mode", "Module name", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( "Enable advanced debug mode to log PHP errors, notices, warnings, database queries, hooks and more to help troubleshoot issues on your site.", "Module description", 'wpmastertoolkit' ),
+			),
+			'WPMastertoolkit_Temporary_Login' => array(
+				'name' => esc_html_x( "Temporary Login", "Module name", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( "Enable temporary login functionality to allow users to access your site without creating a permanent account.", "Module description", 'wpmastertoolkit' ),
+			),
 			'WPMastertoolkit_Multiple_User_Roles' => array(
 				'name' => esc_html_x( "Multiple User Roles", "Module name", 'wpmastertoolkit' ),
 				'desc' => esc_html_x( "Enable assignment of multiple roles during user account creation and editing. This maybe useful for working with roles not defined in WordPress core, e.g. from e-commerce or LMS plugins.", "Module description", 'wpmastertoolkit' ),
@@ -1188,6 +1238,26 @@ class WPMastertoolkit_Modules_Data {
 				'name' => esc_html_x( "Media Replacement", "Module name", 'wpmastertoolkit' ),
 				'desc' => esc_html_x( "Replace any media file with a new version while keeping the original media ID, file name, and publish date intact—ensuring that all existing links remain functional.", "Module description", 'wpmastertoolkit' ),
 			),
+			'WPMastertoolkit_My_Account_Menu_Customizer' => array(
+				'name' => esc_html_x( "My Account Menu Customizer", "Module name", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( "Customize the WooCommerce My Account page by adding, editing, or removing endpoints to tailor the navigation and user experience.", "Module description", 'wpmastertoolkit' ),
+			),
+			'WPMastertoolkit_Disable_Plugin_For_Debug' => array(
+				'name' => esc_html_x( "Disable Plugin For Debug", "Module name", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( "Deactivate all or specific plugins based on custom conditions — such as IP address or cookies. Ideal for testing and debugging.", "Module description", 'wpmastertoolkit' ),
+			),
+			'WPMastertoolkit_Admin_Menu_Organizer' => array(
+				'name' => esc_html_x( "Admin Menu Organizer", "Module name", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( "Reorder, rename, or hide WordPress admin menu items to create a more organized dashboard.", "Module description", 'wpmastertoolkit' ),
+			),
+			'WPMastertoolkit_Download_Medias_As_Zip' => array(
+				'name' => esc_html_x( "Download medias as zip", "Module name", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( "Easily download multiple media files as a ZIP archive directly from your WordPress Media Library.", "Module description", 'wpmastertoolkit' ),
+			),
+			'WPMastertoolkit_Mail_Catcher' => array(
+				'name' => esc_html_x( "Mail catcher", "Module name", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( "Track every email WordPress sends with an easy-to-use admin viewer.", "Module description", 'wpmastertoolkit' ),
+			),
 		);
 
 		/**
@@ -1248,6 +1318,16 @@ class WPMastertoolkit_Modules_Data {
 				'logo'      => 'wordpress.svg',
 				'exception' => false,
 			),
+			'users' => array(
+				'name'      => esc_html__( 'Users', 'wpmastertoolkit' ),
+				'logo'      => 'user.svg',
+				'exception' => false,
+			),
+			'debug' => array(
+				'name'      => esc_html__( 'Debug', 'wpmastertoolkit' ),
+				'logo'      => 'bug.svg',
+				'exception' => false,
+			),
 			'content-media' => array(
 				'name'      => esc_html__( 'Contents & Media', 'wpmastertoolkit' ),
 				'logo'      => 'content.svg',
@@ -1263,19 +1343,19 @@ class WPMastertoolkit_Modules_Data {
 				'logo'      => 'stop.svg',
 				'exception' => false,
 			),
-			'security' => array(
-				'name'      => esc_html__( 'Security', 'wpmastertoolkit' ),
-				'logo'      => 'shield.svg',
-				'exception' => false,
-			),
-			'speed-optimizations' => array(
-				'name'      => esc_html__( 'Speed Optimizations', 'wpmastertoolkit' ),
+			'seo-and-speed-optimizations' => array(
+				'name'      => esc_html__( 'SEO & Speed Optimizations', 'wpmastertoolkit' ),
 				'logo'      => 'rocket.svg',
 				'exception' => false,
 			),
 			'woocommerce' => array(
 				'name'      => esc_html__( 'Woocommerce', 'wpmastertoolkit' ),
 				'logo'      => 'woocommerce.svg',
+				'exception' => false,
+			),
+			'security' => array(
+				'name'      => esc_html__( 'Security', 'wpmastertoolkit' ),
+				'logo'      => 'shield.svg',
 				'exception' => false,
 			),
 			'other-features' => array(

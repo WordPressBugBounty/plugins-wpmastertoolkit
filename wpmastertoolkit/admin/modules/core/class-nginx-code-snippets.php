@@ -53,8 +53,8 @@ class WPMastertoolkit_Nginx_Code_Snippets {
 
         if ( !empty($settings) ) {
 
-            add_submenu_page(
-                'wp-mastertoolkit-settings',
+            WPMastertoolkit_Settings::add_submenu_page(
+            'wp-mastertoolkit-settings',
                 $this->header_title,
                 $this->header_title,
                 'manage_options',

@@ -122,7 +122,7 @@ class WPMastertoolkit_Heartbeat_Control {
      * @since   1.5.0
      */
     public function add_submenu(){
-        add_submenu_page(
+        WPMastertoolkit_Settings::add_submenu_page(
             'wp-mastertoolkit-settings',
             $this->header_title,
             $this->header_title,

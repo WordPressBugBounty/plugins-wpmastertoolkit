@@ -2,11 +2,11 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 global $post;
-$title        = get_the_title( $post->ID );
-$settings     = $this->get_settings_taxonomy( $post->ID );
-$settings     = is_array( $settings ) ? $settings : array();
-$post_status  = get_post_status( $post->ID );
-$post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish' : $post_status;
+$wpmtk_title        = get_the_title( $post->ID );
+$wpmtk_settings     = $this->get_settings_taxonomy( $post->ID );
+$wpmtk_settings     = is_array( $wpmtk_settings ) ? $wpmtk_settings : array();
+$wpmtk_post_status  = get_post_status( $post->ID );
+$wpmtk_post_status  = $wpmtk_post_status == 'draft' && empty( $wpmtk_settings['name'] ) ? 'publish' : $wpmtk_post_status;
 
 ?>
 <hr><br>
@@ -14,7 +14,7 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
     
     <div class="wp-mastertoolkit__header__center">
         <div class="wp-mastertoolkit__header__left__title">
-            <input type="text" name="post_title" value="<?php echo esc_attr( $title ); ?>" placeholder="<?php esc_html_e( 'Enter a title', 'wpmastertoolkit' ); ?>" required>
+            <input type="text" name="post_title" value="<?php echo esc_attr( $wpmtk_title ); ?>" placeholder="<?php esc_html_e( 'Enter a title', 'wpmastertoolkit' ); ?>" required>
         </div>
     </div>
 
@@ -43,7 +43,7 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
                 <div>
                     <label class="wp-mastertoolkit__toggle">
                         <input type="hidden" name="post_status" value="draft">
-                        <input type="checkbox" name="post_status" value="publish" <?php checked( $post_status, 'publish' ); ?>>
+                        <input type="checkbox" name="post_status" value="publish" <?php checked( $wpmtk_post_status, 'publish' ); ?>>
                         <span class="wp-mastertoolkit__toggle__slider round"></span>
                     </label>
                 </div>
@@ -60,7 +60,7 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
             <div class="wp-mastertoolkit__section__body__item__title activable">
                 <label class="wp-mastertoolkit__toggle">
                     <input type="hidden" name="<?php echo esc_attr( $this->content_type_settings . '[public]' ); ?>" value="0">
-                    <input type="checkbox" name="<?php echo esc_attr( $this->content_type_settings . '[public]' ); ?>" value="1" <?php checked( $settings['public'] ?? 1, 1 ); ?>>
+                    <input type="checkbox" name="<?php echo esc_attr( $this->content_type_settings . '[public]' ); ?>" value="1" <?php checked( $wpmtk_settings['public'] ?? 1, 1 ); ?>>
                     <span class="wp-mastertoolkit__toggle__slider round"></span>
                 </label>
                 <div class="description"><strong><?php esc_html_e( 'Public', 'wpmastertoolkit' ); ?></strong></div>
@@ -74,7 +74,7 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
             <div class="wp-mastertoolkit__section__body__item__title activable">
                 <label class="wp-mastertoolkit__toggle">
                     <input type="hidden" name="<?php echo esc_attr( $this->content_type_settings . '[hierarchical]' ); ?>" value="0">
-                    <input type="checkbox" name="<?php echo esc_attr( $this->content_type_settings . '[hierarchical]' ); ?>" value="1" <?php checked( $settings['hierarchical'] ?? 0, 1 ); ?>>
+                    <input type="checkbox" name="<?php echo esc_attr( $this->content_type_settings . '[hierarchical]' ); ?>" value="1" <?php checked( $wpmtk_settings['hierarchical'] ?? 0, 1 ); ?>>
                     <span class="wp-mastertoolkit__toggle__slider round"></span>
                 </label>
                 <div class="description"><strong><?php esc_html_e( 'Hierarchical', 'wpmastertoolkit' ); ?></strong></div>
@@ -89,11 +89,11 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
                 <div class="description"><strong><?php esc_html_e( 'Post Types', 'wpmastertoolkit' ); ?></strong></div>
                 <select class="js-multiselect" name="<?php echo esc_attr( $this->content_type_settings . '[object_type]' ); ?>[]" multiple>
                     <?php
-                    $cpts = get_post_types( array( 'public' => true ), 'objects' );
-                    foreach ( $cpts as $cpt ) {
+                    $wpmtk_cpts = get_post_types( array( 'public' => true ), 'objects' );
+                    foreach ( $wpmtk_cpts as $wpmtk_cpt ) {
                         ?>
-                        <option value="<?php echo esc_attr( $cpt->name ); ?>" <?php selected( in_array( $cpt->name, $settings['object_type'] ?? array() ) ); ?>>
-                            <?php echo esc_html( $cpt->label ); ?>
+                        <option value="<?php echo esc_attr( $wpmtk_cpt->name ); ?>" <?php selected( in_array( $wpmtk_cpt->name, $wpmtk_settings['object_type'] ?? array() ) ); ?>>
+                            <?php echo esc_html( $wpmtk_cpt->label ); ?>
                         </option>
                         <?php
                     }
@@ -109,7 +109,7 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
             <div class="wp-mastertoolkit__section__body__item__title activable">
                 <label class="wp-mastertoolkit__toggle">
                     <input type="hidden" name="<?php echo esc_attr( $this->content_type_settings . '[sort]' ); ?>" value="0">
-                    <input type="checkbox" name="<?php echo esc_attr( $this->content_type_settings . '[sort]' ); ?>" value="1" <?php checked( $settings['sort'] ?? 0, 1 ); ?>>
+                    <input type="checkbox" name="<?php echo esc_attr( $this->content_type_settings . '[sort]' ); ?>" value="1" <?php checked( $wpmtk_settings['sort'] ?? 0, 1 ); ?>>
                     <span class="wp-mastertoolkit__toggle__slider round"></span>
                 </label>
                 <div class="description"><strong><?php esc_html_e( 'Sort Terms', 'wpmastertoolkit' ); ?></strong></div>
@@ -130,17 +130,17 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
             <hr>
         </div>
 
-        <?php foreach( $this->get_taxonomy_labels('required') as $key => $data ) : ?>
+        <?php foreach( $this->get_taxonomy_labels('required') as $wpmtk_key => $wpmtk_data ) : ?>
         <div class="wp-mastertoolkit__section__body__item">
             <div class="wp-mastertoolkit__input-text">
                 <div class="description">
-                    <strong><?php echo esc_html( $data['label'] ?? '' ); ?> <?php echo wp_kses_post( !empty( $data['required'] ) ? '<span class="required">*</span>' : '' ); ?></strong>
+                    <strong><?php echo esc_html( $wpmtk_data['label'] ?? '' ); ?> <?php echo wp_kses_post( !empty( $wpmtk_data['required'] ) ? '<span class="required">*</span>' : '' ); ?></strong>
                 </div>
-                <input type="text" name="<?php echo esc_attr( $this->content_type_settings . '[' . $key . ']' ); ?>" value="<?php echo esc_attr( $settings[$key] ?? '' ); ?>" placeholder="<?php echo esc_attr( $data['placeholder'] ?? '' ); ?>" <?php echo esc_attr( !empty( $data['required'] ) ? 'required' : '' ); ?>>
+                <input type="text" name="<?php echo esc_attr( $this->content_type_settings . '[' . $wpmtk_key . ']' ); ?>" value="<?php echo esc_attr( $wpmtk_settings[$wpmtk_key] ?? '' ); ?>" placeholder="<?php echo esc_attr( $wpmtk_data['placeholder'] ?? '' ); ?>" <?php echo esc_attr( !empty( $wpmtk_data['required'] ) ? 'required' : '' ); ?>>
             </div>
-            <?php if ( isset( $data['description'] ) ) : ?>
+            <?php if ( isset( $wpmtk_data['description'] ) ) : ?>
             <div class="description">
-                <?php echo esc_html( $data['description'] ); ?>
+                <?php echo esc_html( $wpmtk_data['description'] ); ?>
             </div>
             <?php endif; ?>
         </div>
@@ -151,7 +151,7 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
                 <div class="description">
                     <strong><?php esc_html_e( 'Text Domain', 'wpmastertoolkit' ); ?></strong>
                 </div>
-                <input type="text" name="<?php echo esc_attr( $this->content_type_settings . '[text_domain]' ); ?>" value="<?php echo esc_attr( $settings['text_domain'] ?? '' ); ?>" placeholder="<?php esc_html_e( 'your-text-domain', 'wpmastertoolkit' ); ?>">
+                <input type="text" name="<?php echo esc_attr( $this->content_type_settings . '[text_domain]' ); ?>" value="<?php echo esc_attr( $wpmtk_settings['text_domain'] ?? '' ); ?>" placeholder="<?php esc_html_e( 'your-text-domain', 'wpmastertoolkit' ); ?>">
             </div>
             <div class="description">
                 <?php esc_html_e( "Enter the text domain for translation. Example: 'your-text-domain'.", 'wpmastertoolkit' ); ?>
@@ -162,7 +162,7 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
             <div class="wp-mastertoolkit__section__body__item__title activable">
                 <label class="wp-mastertoolkit__toggle">
                     <input type="hidden" name="<?php echo esc_attr( $this->content_type_settings . '[manage_optional_labels]' ); ?>" value="0">
-                    <input type="checkbox" name="<?php echo esc_attr( $this->content_type_settings . '[manage_optional_labels]' ); ?>" value="1" <?php checked( $settings['manage_optional_labels'] ?? 0, 1 ); ?>>
+                    <input type="checkbox" name="<?php echo esc_attr( $this->content_type_settings . '[manage_optional_labels]' ); ?>" value="1" <?php checked( $wpmtk_settings['manage_optional_labels'] ?? 0, 1 ); ?>>
                     <span class="wp-mastertoolkit__toggle__slider round"></span>
                 </label>
                 <div class="description"><strong><?php esc_html_e( 'Manage Optional Labels', 'wpmastertoolkit' ); ?></strong></div>
@@ -172,17 +172,17 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
             </div>
         </div>
         
-        <?php foreach( $this->get_taxonomy_labels('optional') as $key => $data ) : ?>
+        <?php foreach( $this->get_taxonomy_labels('optional') as $wpmtk_key => $wpmtk_data ) : ?>
         <div class="wp-mastertoolkit__section__body__item" data-show-if="<?php echo esc_attr( $this->content_type_settings . '[manage_optional_labels]' ); ?>=1">
             <div class="wp-mastertoolkit__input-text">
                 <div class="description">
-                    <strong><?php echo esc_html( $data['label'] ?? '' ); ?> <?php echo wp_kses_post( !empty( $data['required'] ) ? '<span class="required">*</span>' : '' ); ?></strong>
+                    <strong><?php echo esc_html( $wpmtk_data['label'] ?? '' ); ?> <?php echo wp_kses_post( !empty( $wpmtk_data['required'] ) ? '<span class="required">*</span>' : '' ); ?></strong>
                 </div>
-                <input type="text" name="<?php echo esc_attr( $this->content_type_settings . '[' . $key . ']' ); ?>" value="<?php echo esc_attr( $settings[$key] ?? '' ); ?>" placeholder="<?php echo esc_attr( $data['placeholder'] ?? '' ); ?>" <?php echo esc_attr( !empty( $data['required'] ) ? 'required' : '' ); ?>>
+                <input type="text" name="<?php echo esc_attr( $this->content_type_settings . '[' . $wpmtk_key . ']' ); ?>" value="<?php echo esc_attr( $wpmtk_settings[$wpmtk_key] ?? '' ); ?>" placeholder="<?php echo esc_attr( $wpmtk_data['placeholder'] ?? '' ); ?>" <?php echo esc_attr( !empty( $wpmtk_data['required'] ) ? 'required' : '' ); ?>>
             </div>
-            <?php if ( isset( $data['description'] ) ) : ?>
+            <?php if ( isset( $wpmtk_data['description'] ) ) : ?>
             <div class="description">
-                <?php echo esc_html( $data['description'] ); ?>
+                <?php echo esc_html( $wpmtk_data['description'] ); ?>
             </div>
             <?php endif; ?>
         </div>
@@ -207,7 +207,7 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
                 <div>
                     <label class="wp-mastertoolkit__toggle">
                         <input type="hidden" name="<?php echo esc_attr( $this->content_type_settings . '[show_ui]' ); ?>" value="0">
-                        <input type="checkbox" name="<?php echo esc_attr( $this->content_type_settings . '[show_ui]' ); ?>" value="1" <?php checked( $settings['show_ui'] ?? 1, 1 ); ?>>
+                        <input type="checkbox" name="<?php echo esc_attr( $this->content_type_settings . '[show_ui]' ); ?>" value="1" <?php checked( $wpmtk_settings['show_ui'] ?? 1, 1 ); ?>>
                         <span class="wp-mastertoolkit__toggle__slider round"></span>
                     </label>
                 </div>
@@ -226,7 +226,7 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
                 <div>
                     <label class="wp-mastertoolkit__toggle">
                         <input type="hidden" name="<?php echo esc_attr( $this->content_type_settings . '[show_in_menu]' ); ?>" value="0">
-                        <input type="checkbox" name="<?php echo esc_attr( $this->content_type_settings . '[show_in_menu]' ); ?>" value="1" <?php checked( $settings['show_in_menu'] ?? 1, 1 ); ?>>
+                        <input type="checkbox" name="<?php echo esc_attr( $this->content_type_settings . '[show_in_menu]' ); ?>" value="1" <?php checked( $wpmtk_settings['show_in_menu'] ?? 1, 1 ); ?>>
                         <span class="wp-mastertoolkit__toggle__slider round"></span>
                     </label>
                 </div>
@@ -245,7 +245,7 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
                 <div>
                     <label class="wp-mastertoolkit__toggle">
                         <input type="hidden" name="<?php echo esc_attr( $this->content_type_settings . '[show_in_nav_menus]' ); ?>" value="0">
-                        <input type="checkbox" name="<?php echo esc_attr( $this->content_type_settings . '[show_in_nav_menus]' ); ?>" value="1" <?php checked( $settings['show_in_nav_menus'] ?? 1, 1 ); ?>>
+                        <input type="checkbox" name="<?php echo esc_attr( $this->content_type_settings . '[show_in_nav_menus]' ); ?>" value="1" <?php checked( $wpmtk_settings['show_in_nav_menus'] ?? 1, 1 ); ?>>
                         <span class="wp-mastertoolkit__toggle__slider round"></span>
                     </label>
                 </div>
@@ -264,7 +264,7 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
                 <div>
                     <label class="wp-mastertoolkit__toggle">
                         <input type="hidden" name="<?php echo esc_attr( $this->content_type_settings . '[show_tagcloud]' ); ?>" value="0">
-                        <input type="checkbox" name="<?php echo esc_attr( $this->content_type_settings . '[show_tagcloud]' ); ?>" value="1" <?php checked( $settings['show_tagcloud'] ?? 1, 1 ); ?>>
+                        <input type="checkbox" name="<?php echo esc_attr( $this->content_type_settings . '[show_tagcloud]' ); ?>" value="1" <?php checked( $wpmtk_settings['show_tagcloud'] ?? 1, 1 ); ?>>
                         <span class="wp-mastertoolkit__toggle__slider round"></span>
                     </label>
                 </div>
@@ -283,7 +283,7 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
                 <div>
                     <label class="wp-mastertoolkit__toggle">
                         <input type="hidden" name="<?php echo esc_attr( $this->content_type_settings . '[show_in_quick_edit]' ); ?>" value="0">
-                        <input type="checkbox" name="<?php echo esc_attr( $this->content_type_settings . '[show_in_quick_edit]' ); ?>" value="1" <?php checked( $settings['show_in_quick_edit'] ?? 1, 1 ); ?>>
+                        <input type="checkbox" name="<?php echo esc_attr( $this->content_type_settings . '[show_in_quick_edit]' ); ?>" value="1" <?php checked( $wpmtk_settings['show_in_quick_edit'] ?? 1, 1 ); ?>>
                         <span class="wp-mastertoolkit__toggle__slider round"></span>
                     </label>
                 </div>
@@ -302,7 +302,7 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
                 <div>
                     <label class="wp-mastertoolkit__toggle">
                         <input type="hidden" name="<?php echo esc_attr( $this->content_type_settings . '[show_admin_column]' ); ?>" value="0">
-                        <input type="checkbox" name="<?php echo esc_attr( $this->content_type_settings . '[show_admin_column]' ); ?>" value="1" <?php checked( $settings['show_admin_column'] ?? 0, 1 ); ?>>
+                        <input type="checkbox" name="<?php echo esc_attr( $this->content_type_settings . '[show_admin_column]' ); ?>" value="1" <?php checked( $wpmtk_settings['show_admin_column'] ?? 0, 1 ); ?>>
                         <span class="wp-mastertoolkit__toggle__slider round"></span>
                     </label>
                 </div>
@@ -331,7 +331,7 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
             <div class="wp-mastertoolkit__section__body__item__title activable">
                 <label class="wp-mastertoolkit__toggle">
                     <input type="hidden" name="<?php echo esc_attr( $this->content_type_settings . '[default_term_enabled]' ); ?>" value="0">
-                    <input type="checkbox" name="<?php echo esc_attr( $this->content_type_settings . '[default_term_enabled]' ); ?>" value="1" <?php checked( $settings['default_term_enabled'] ?? 0, 1 ); ?>>
+                    <input type="checkbox" name="<?php echo esc_attr( $this->content_type_settings . '[default_term_enabled]' ); ?>" value="1" <?php checked( $wpmtk_settings['default_term_enabled'] ?? 0, 1 ); ?>>
                     <span class="wp-mastertoolkit__toggle__slider round"></span>
                 </label>
                 <div class="description"><strong><?php esc_html_e( 'Default Term', 'wpmastertoolkit' ); ?></strong></div>
@@ -346,7 +346,7 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
                 <div class="description">
                     <strong><?php esc_html_e( 'Default Term Name', 'wpmastertoolkit' ); ?></strong>
                 </div>
-                <input type="text" name="<?php echo esc_attr( $this->content_type_settings . '[default_term_name]' ); ?>" value="<?php echo esc_attr( $settings['default_term_name'] ?? '' ); ?>" placeholder="<?php esc_html_e( 'Unassigned', 'wpmastertoolkit' ); ?>">
+                <input type="text" name="<?php echo esc_attr( $this->content_type_settings . '[default_term_name]' ); ?>" value="<?php echo esc_attr( $wpmtk_settings['default_term_name'] ?? '' ); ?>" placeholder="<?php esc_html_e( 'Unassigned', 'wpmastertoolkit' ); ?>">
             </div>
             <div class="description">
                 <?php esc_html_e( 'Enter the default term name.', 'wpmastertoolkit' ); ?>
@@ -358,7 +358,7 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
                 <div class="description">
                     <strong><?php esc_html_e( 'Default Term Slug', 'wpmastertoolkit' ); ?></strong>
                 </div>
-                <input type="text" name="<?php echo esc_attr( $this->content_type_settings . '[default_term_slug]' ); ?>" value="<?php echo esc_attr( $settings['default_term_slug'] ?? '' ); ?>" placeholder="<?php esc_html_e( 'unassigned', 'wpmastertoolkit' ); ?>">
+                <input type="text" name="<?php echo esc_attr( $this->content_type_settings . '[default_term_slug]' ); ?>" value="<?php echo esc_attr( $wpmtk_settings['default_term_slug'] ?? '' ); ?>" placeholder="<?php esc_html_e( 'unassigned', 'wpmastertoolkit' ); ?>">
             </div>
             <div class="description">
                 <?php esc_html_e( 'Enter the default term slug.', 'wpmastertoolkit' ); ?>
@@ -370,7 +370,7 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
                 <div class="description">
                     <strong><?php esc_html_e( 'Default Term Description', 'wpmastertoolkit' ); ?></strong>
                 </div>
-                <input type="text" name="<?php echo esc_attr( $this->content_type_settings . '[default_term_description]' ); ?>" value="<?php echo esc_attr( $settings['default_term_description'] ?? '' ); ?>" placeholder="<?php esc_html_e( 'Unassigned', 'wpmastertoolkit' ); ?>">
+                <input type="text" name="<?php echo esc_attr( $this->content_type_settings . '[default_term_description]' ); ?>" value="<?php echo esc_attr( $wpmtk_settings['default_term_description'] ?? '' ); ?>" placeholder="<?php esc_html_e( 'Unassigned', 'wpmastertoolkit' ); ?>">
             </div>
             <div class="description">
                 <?php esc_html_e( 'Enter the default term description.', 'wpmastertoolkit' ); ?>
@@ -395,9 +395,9 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
                     <strong><?php esc_html_e( 'Permalink Rewrite', 'wpmastertoolkit' ); ?></strong>
                 </div>
                 <select name="<?php echo esc_attr( $this->content_type_settings . '[permalink_rewrite]' ); ?>">
-                    <option value="taxonomy_key" <?php selected( $settings['permalink_rewrite'] ?? 'taxonomy_key', 'taxonomy_key' ); ?>><?php esc_html_e( 'Taxonomy Key (default)', 'wpmastertoolkit' ); ?></option>
-                    <option value="custom_permalink" <?php selected( $settings['permalink_rewrite'] ?? 'taxonomy_key', 'custom_permalink' ); ?>><?php esc_html_e( 'Custom Permalink', 'wpmastertoolkit' ); ?></option>
-                    <option value="no_permalink" <?php selected( $settings['permalink_rewrite'] ?? 'taxonomy_key', 'no_permalink' ); ?>><?php esc_html_e( 'No permalink (Prevent URL rewriting)', 'wpmastertoolkit' ); ?></option>
+                    <option value="taxonomy_key" <?php selected( $wpmtk_settings['permalink_rewrite'] ?? 'taxonomy_key', 'taxonomy_key' ); ?>><?php esc_html_e( 'Taxonomy Key (default)', 'wpmastertoolkit' ); ?></option>
+                    <option value="custom_permalink" <?php selected( $wpmtk_settings['permalink_rewrite'] ?? 'taxonomy_key', 'custom_permalink' ); ?>><?php esc_html_e( 'Custom Permalink', 'wpmastertoolkit' ); ?></option>
+                    <option value="no_permalink" <?php selected( $wpmtk_settings['permalink_rewrite'] ?? 'taxonomy_key', 'no_permalink' ); ?>><?php esc_html_e( 'No permalink (Prevent URL rewriting)', 'wpmastertoolkit' ); ?></option>
                 </select>
             </div>
             <div class="description" data-show-if="<?php echo esc_attr( $this->content_type_settings . '[permalink_rewrite]' ); ?>=taxonomy_key">
@@ -428,7 +428,7 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
                 <div class="description">
                     <strong><?php esc_html_e( 'URL Slug', 'wpmastertoolkit' ); ?></strong>
                 </div>
-                <input type="text" name="<?php echo esc_attr( $this->content_type_settings . '[slug]' ); ?>" value="<?php echo esc_attr( $settings['slug'] ?? '' ); ?>" placeholder="<?php esc_html_e( 'Enter a slug', 'wpmastertoolkit' ); ?>">
+                <input type="text" name="<?php echo esc_attr( $this->content_type_settings . '[slug]' ); ?>" value="<?php echo esc_attr( $wpmtk_settings['slug'] ?? '' ); ?>" placeholder="<?php esc_html_e( 'Enter a slug', 'wpmastertoolkit' ); ?>">
                 
                 <div class="description">
                     <?php esc_html_e( 'Enter the URL slug. Example: "portfolio".', 'wpmastertoolkit' ); ?>
@@ -442,7 +442,7 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
                 <div>
                     <label class="wp-mastertoolkit__toggle">
                         <input type="hidden" name="<?php echo esc_attr( $this->content_type_settings . '[with_front]' ); ?>" value="0">
-                        <input type="checkbox" name="<?php echo esc_attr( $this->content_type_settings . '[with_front]' ); ?>" value="1" <?php checked( $settings['with_front'] ?? 1, 1 ); ?>>
+                        <input type="checkbox" name="<?php echo esc_attr( $this->content_type_settings . '[with_front]' ); ?>" value="1" <?php checked( $wpmtk_settings['with_front'] ?? 1, 1 ); ?>>
                         <span class="wp-mastertoolkit__toggle__slider round"></span>
                     </label>
                 </div>
@@ -461,7 +461,7 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
                 <div>
                     <label class="wp-mastertoolkit__toggle">
                         <input type="hidden" name="<?php echo esc_attr( $this->content_type_settings . '[rewrite_hierarchical]' ); ?>" value="0">
-                        <input type="checkbox" name="<?php echo esc_attr( $this->content_type_settings . '[rewrite_hierarchical]' ); ?>" value="1" <?php checked( $settings['rewrite_hierarchical'] ?? 0, 1 ); ?>>
+                        <input type="checkbox" name="<?php echo esc_attr( $this->content_type_settings . '[rewrite_hierarchical]' ); ?>" value="1" <?php checked( $wpmtk_settings['rewrite_hierarchical'] ?? 0, 1 ); ?>>
                         <span class="wp-mastertoolkit__toggle__slider round"></span>
                     </label>
                 </div>
@@ -480,7 +480,7 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
                 <div>
                     <label class="wp-mastertoolkit__toggle">
                         <input type="hidden" name="<?php echo esc_attr( $this->content_type_settings . '[pages]' ); ?>" value="0">
-                        <input type="checkbox" name="<?php echo esc_attr( $this->content_type_settings . '[pages]' ); ?>" value="1" <?php checked( $settings['with_front'] ?? 1, 1 ); ?>>
+                        <input type="checkbox" name="<?php echo esc_attr( $this->content_type_settings . '[pages]' ); ?>" value="1" <?php checked( $wpmtk_settings['with_front'] ?? 1, 1 ); ?>>
                         <span class="wp-mastertoolkit__toggle__slider round"></span>
                     </label>
                 </div>
@@ -499,7 +499,7 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
                 <div>
                     <label class="wp-mastertoolkit__toggle">
                         <input type="hidden" name="<?php echo esc_attr( $this->content_type_settings . '[publicly_queryable]' ); ?>" value="0">
-                        <input type="checkbox" name="<?php echo esc_attr( $this->content_type_settings . '[publicly_queryable]' ); ?>" value="1" <?php checked( $settings['publicly_queryable'] ?? 1, 1 ); ?>>
+                        <input type="checkbox" name="<?php echo esc_attr( $this->content_type_settings . '[publicly_queryable]' ); ?>" value="1" <?php checked( $wpmtk_settings['publicly_queryable'] ?? 1, 1 ); ?>>
                         <span class="wp-mastertoolkit__toggle__slider round"></span>
                     </label>
                 </div>
@@ -518,9 +518,9 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
                     <strong><?php esc_html_e( 'Query Variable Support', 'wpmastertoolkit' ); ?></strong>
                 </div>
                 <select name="<?php echo esc_attr( $this->content_type_settings . '[query_var]' ); ?>">
-                    <option value="taxonomy_key" <?php selected( $settings['query_var'] ?? '', 'taxonomy_key' ); ?>><?php esc_html_e( 'Taxonomy Key (default)', 'wpmastertoolkit' ); ?></option>
-                    <option value="custom_query_var" <?php selected( $settings['query_var'] ?? '', 'custom_query_var' ); ?>><?php esc_html_e( 'Custom Query Variable', 'wpmastertoolkit' ); ?></option>
-                    <option value="none" <?php selected( $settings['query_var'] ?? '', 'none' ); ?>><?php esc_html_e( 'No Query Variable', 'wpmastertoolkit' ); ?></option>
+                    <option value="taxonomy_key" <?php selected( $wpmtk_settings['query_var'] ?? '', 'taxonomy_key' ); ?>><?php esc_html_e( 'Taxonomy Key (default)', 'wpmastertoolkit' ); ?></option>
+                    <option value="custom_query_var" <?php selected( $wpmtk_settings['query_var'] ?? '', 'custom_query_var' ); ?>><?php esc_html_e( 'Custom Query Variable', 'wpmastertoolkit' ); ?></option>
+                    <option value="none" <?php selected( $wpmtk_settings['query_var'] ?? '', 'none' ); ?>><?php esc_html_e( 'No Query Variable', 'wpmastertoolkit' ); ?></option>
                 </select>
             </div>
             <div class="description" data-show-if="<?php echo esc_attr( $this->content_type_settings . '[query_var]' ); ?>=taxonomy_key">
@@ -533,7 +533,7 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
                 <div class="description">
                     <strong><?php esc_html_e( 'Query Variable Name', 'wpmastertoolkit' ); ?></strong>
                 </div>
-                <input type="text" name="<?php echo esc_attr( $this->content_type_settings . '[query_var_name]' ); ?>" value="<?php echo esc_attr( $settings['query_var_name'] ?? '' ); ?>" placeholder="<?php esc_html_e( 'Enter a slug', 'wpmastertoolkit' ); ?>">
+                <input type="text" name="<?php echo esc_attr( $this->content_type_settings . '[query_var_name]' ); ?>" value="<?php echo esc_attr( $wpmtk_settings['query_var_name'] ?? '' ); ?>" placeholder="<?php esc_html_e( 'Enter a slug', 'wpmastertoolkit' ); ?>">
                 
                 <div class="description">
                     <?php esc_html_e( 'Customize the query variable name.', 'wpmastertoolkit' ); ?>
@@ -560,13 +560,13 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
                 </div>
                 <select name="<?php echo esc_attr( $this->content_type_settings . '[manage_terms]' ); ?>">
                    <?php
-                    $all_capabilities = $this->get_all_wp_capabilities();
-                    foreach( $all_capabilities as $capability => $label ) {
+                    $wpmtk_all_capabilities = $this->get_all_wp_capabilities();
+                    foreach( $wpmtk_all_capabilities as $wpmtk_capability => $wpmtk_label ) {
                         ?>
-                        <option value="<?php echo esc_attr( $capability ); ?>" <?php selected( $settings['manage_terms'] ?? 'manage_categories', $capability ); ?>>
+                        <option value="<?php echo esc_attr( $wpmtk_capability ); ?>" <?php selected( $wpmtk_settings['manage_terms'] ?? 'manage_categories', $wpmtk_capability ); ?>>
                             <?php 
-                            echo esc_html( $label ); 
-                            if( $capability === 'manage_categories' ) {
+                            echo esc_html( $wpmtk_label ); 
+                            if( $wpmtk_capability === 'manage_categories' ) {
                                 echo ' (' . esc_html__( 'default', 'wpmastertoolkit' ) . ')';
                             }
                             ?>
@@ -589,13 +589,13 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
                 </div>
                 <select name="<?php echo esc_attr( $this->content_type_settings . '[edit_terms]' ); ?>">
                    <?php
-                    $all_capabilities = $this->get_all_wp_capabilities();
-                    foreach( $all_capabilities as $capability => $label ) {
+                    $wpmtk_all_capabilities = $this->get_all_wp_capabilities();
+                    foreach( $wpmtk_all_capabilities as $wpmtk_capability => $wpmtk_label ) {
                         ?>
-                        <option value="<?php echo esc_attr( $capability ); ?>" <?php selected( $settings['edit_terms'] ?? 'manage_categories', $capability ); ?>>
+                        <option value="<?php echo esc_attr( $wpmtk_capability ); ?>" <?php selected( $wpmtk_settings['edit_terms'] ?? 'manage_categories', $wpmtk_capability ); ?>>
                             <?php 
-                            echo esc_html( $label ); 
-                            if( $capability === 'manage_categories' ) {
+                            echo esc_html( $wpmtk_label ); 
+                            if( $wpmtk_capability === 'manage_categories' ) {
                                 echo ' (' . esc_html__( 'default', 'wpmastertoolkit' ) . ')';
                             }
                             ?>
@@ -618,13 +618,13 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
                 </div>
                 <select name="<?php echo esc_attr( $this->content_type_settings . '[delete_terms]' ); ?>">
                    <?php
-                    $all_capabilities = $this->get_all_wp_capabilities();
-                    foreach( $all_capabilities as $capability => $label ) {
+                    $wpmtk_all_capabilities = $this->get_all_wp_capabilities();
+                    foreach( $wpmtk_all_capabilities as $wpmtk_capability => $wpmtk_label ) {
                         ?>
-                        <option value="<?php echo esc_attr( $capability ); ?>" <?php selected( $settings['delete_terms'] ?? 'manage_categories', $capability ); ?>>
+                        <option value="<?php echo esc_attr( $wpmtk_capability ); ?>" <?php selected( $wpmtk_settings['delete_terms'] ?? 'manage_categories', $wpmtk_capability ); ?>>
                             <?php 
-                            echo esc_html( $label ); 
-                            if( $capability === 'manage_categories' ) {
+                            echo esc_html( $wpmtk_label ); 
+                            if( $wpmtk_capability === 'manage_categories' ) {
                                 echo ' (' . esc_html__( 'default', 'wpmastertoolkit' ) . ')';
                             }
                             ?>
@@ -647,13 +647,13 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
                 </div>
                 <select name="<?php echo esc_attr( $this->content_type_settings . '[assign_terms]' ); ?>">
                    <?php
-                    $all_capabilities = $this->get_all_wp_capabilities();
-                    foreach( $all_capabilities as $capability => $label ) {
+                    $wpmtk_all_capabilities = $this->get_all_wp_capabilities();
+                    foreach( $wpmtk_all_capabilities as $wpmtk_capability => $wpmtk_label ) {
                         ?>
-                        <option value="<?php echo esc_attr( $capability ); ?>" <?php selected( $settings['assign_terms'] ?? 'edit_posts', $capability ); ?>>
+                        <option value="<?php echo esc_attr( $wpmtk_capability ); ?>" <?php selected( $wpmtk_settings['assign_terms'] ?? 'edit_posts', $wpmtk_capability ); ?>>
                             <?php 
-                            echo esc_html( $label ); 
-                            if( $capability === 'edit_posts' ) {
+                            echo esc_html( $wpmtk_label ); 
+                            if( $wpmtk_capability === 'edit_posts' ) {
                                 echo ' (' . esc_html__( 'default', 'wpmastertoolkit' ) . ')';
                             }
                             ?>
@@ -687,7 +687,7 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
                 <div>
                     <label class="wp-mastertoolkit__toggle">
                         <input type="hidden" name="<?php echo esc_attr( $this->content_type_settings . '[show_in_rest]' ); ?>" value="0">
-                        <input type="checkbox" name="<?php echo esc_attr( $this->content_type_settings . '[show_in_rest]' ); ?>" value="1" <?php checked( $settings['show_in_rest'] ?? 0, 1 ); ?>>
+                        <input type="checkbox" name="<?php echo esc_attr( $this->content_type_settings . '[show_in_rest]' ); ?>" value="1" <?php checked( $wpmtk_settings['show_in_rest'] ?? 0, 1 ); ?>>
                         <span class="wp-mastertoolkit__toggle__slider round"></span>
                     </label>
                 </div>
@@ -705,7 +705,7 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
                 <div class="description">
                     <strong><?php esc_html_e( 'Base URL', 'wpmastertoolkit' ); ?></strong>
                 </div>
-                <input type="text" name="<?php echo esc_attr( $this->content_type_settings . '[rest_base]' ); ?>" value="<?php echo esc_attr( $settings['rest_base'] ?? '' ); ?>" placeholder="<?php esc_html_e( 'Enter a slug', 'wpmastertoolkit' ); ?>">
+                <input type="text" name="<?php echo esc_attr( $this->content_type_settings . '[rest_base]' ); ?>" value="<?php echo esc_attr( $wpmtk_settings['rest_base'] ?? '' ); ?>" placeholder="<?php esc_html_e( 'Enter a slug', 'wpmastertoolkit' ); ?>">
                 
                 <div class="description">
                     <?php esc_html_e( 'The base URL for the post type REST API URLs.', 'wpmastertoolkit' ); ?>
@@ -718,7 +718,7 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
                 <div class="description">
                     <strong><?php esc_html_e( 'REST API Namespace', 'wpmastertoolkit' ); ?></strong>
                 </div>
-                <input type="text" name="<?php echo esc_attr( $this->content_type_settings . '[rest_namespace]' ); ?>" value="<?php echo esc_attr( $settings['rest_namespace'] ?? 'wp/v2' ); ?>" placeholder="<?php esc_html_e( 'wp/v2', 'wpmastertoolkit' ); ?>">
+                <input type="text" name="<?php echo esc_attr( $this->content_type_settings . '[rest_namespace]' ); ?>" value="<?php echo esc_attr( $wpmtk_settings['rest_namespace'] ?? 'wp/v2' ); ?>" placeholder="<?php esc_html_e( 'wp/v2', 'wpmastertoolkit' ); ?>">
                 
                 <div class="description">
                     <?php esc_html_e( 'The namespace for the post type REST API URLs.', 'wpmastertoolkit' ); ?>
@@ -731,7 +731,7 @@ $post_status  = $post_status == 'draft' && empty( $settings['name'] ) ? 'publish
                 <div class="description">
                     <strong><?php esc_html_e( 'REST API Controller Class', 'wpmastertoolkit' ); ?></strong>
                 </div>
-                <input type="text" name="<?php echo esc_attr( $this->content_type_settings . '[rest_controller_class]' ); ?>" value="<?php echo esc_attr( $settings['rest_controller_class'] ?? 'WP_REST_Terms_Controller' ); ?>" placeholder="<?php esc_html_e( 'WP_REST_Terms_Controller', 'wpmastertoolkit' ); ?>">
+                <input type="text" name="<?php echo esc_attr( $this->content_type_settings . '[rest_controller_class]' ); ?>" value="<?php echo esc_attr( $wpmtk_settings['rest_controller_class'] ?? 'WP_REST_Terms_Controller' ); ?>" placeholder="<?php esc_html_e( 'WP_REST_Terms_Controller', 'wpmastertoolkit' ); ?>">
                 
                 <div class="description">
                     <?php esc_html_e( 'Optional custom controller to use instead of `WP_REST_Terms_Controller`.', 'wpmastertoolkit' ); ?>

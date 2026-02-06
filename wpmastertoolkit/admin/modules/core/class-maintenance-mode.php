@@ -68,6 +68,7 @@ class WPMastertoolkit_Maintenance_Mode {
 		$preview_nonce = sanitize_text_field( wp_unslash( $_GET[ $this->preview_param ] ?? '' ) );
 		if ( wpmastertoolkit_is_pro() && wp_verify_nonce( $preview_nonce, $this->nonce_action ) ) {
 			if ( file_exists( WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/core/maintenance-mode/preview.php' ) ) {
+				header( 'HTTP/1.1 503 Service Unavailable', true, 503 );
 				return WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/core/maintenance-mode/preview.php';
         	}
 		}
@@ -77,6 +78,27 @@ class WPMastertoolkit_Maintenance_Mode {
 		$enabled = $this->settings['enabled'] ?? '1';
 		if ( '1' !== $enabled ) {
 			return $template;
+		}
+
+		if ( wpmastertoolkit_is_pro() ) {
+			$current_url         = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) );
+			$current_path        = wp_parse_url( $current_url, PHP_URL_PATH );
+			$excluded_urls       = stripslashes( $this->settings['excluded_urls'] ?? '' );
+			$excluded_urls_array = !empty($excluded_urls) ? explode( "\n", $excluded_urls ) : array();
+
+			foreach ( $excluded_urls_array as $excluded_url ) {
+				$excluded_url      = trim( $excluded_url );
+				$excluded_url      = trailingslashit( wp_unslash( $excluded_url ) );
+				$excluded_url_path = wp_parse_url( $excluded_url, PHP_URL_PATH );
+	
+				if ( ! $excluded_url_path ) {
+					continue;
+				}
+	
+				if ( $excluded_url_path === $current_path ) {
+					return $template;
+				}
+			}
 		}
         
         if( $this->settings['bypass_link_status'] === '1' ){
@@ -123,6 +145,7 @@ class WPMastertoolkit_Maintenance_Mode {
             }
 
             if ( file_exists( WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/core/maintenance-mode/index.php' ) ) {
+				header( 'HTTP/1.1 503 Service Unavailable', true, 503 );
                 $template =  WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/templates/core/maintenance-mode/index.php';
             }
         }
@@ -160,6 +183,20 @@ class WPMastertoolkit_Maintenance_Mode {
 			),
 		));
 
+		$is_pro = wpmastertoolkit_is_pro();
+		if ( $is_pro ) {
+			$bypass_link_status = $this->settings['bypass_link_status'] ?? '0';
+        	$bypass_link_token  = $this->settings['bypass_link_token'] ?? md5(time());
+
+			if ( $enabled === '1' && $bypass_link_status === '1' ){
+				$wp_admin_bar->add_menu( array(
+					'id'     => 'wpmtk-maintenance-mode-bypass',
+					'parent' => 'top-secondary',
+					'title'  => $this->copy_bypass_link( $bypass_link_token ),
+				) );
+			}
+		}
+
 		$content = '';
 		if ( 'show_normal' === $show_in_adminbar ) {
 			$content = $this->normal_toggle( $enabled );
@@ -192,6 +229,28 @@ class WPMastertoolkit_Maintenance_Mode {
 		$this->save_settings( $settings );
 
 		wp_send_json_success( array( 'message' => __( 'Maintenance mode has been turned on.', 'wpmastertoolkit' ) ) );
+	}
+
+	/**
+	 * Copy bypass link HTML
+	 */
+	private function copy_bypass_link( $bypass_link_token ) {
+
+        if( isset( $_SERVER['HTTP_HOST'], $_SERVER['REQUEST_URI'] ) === false ) {
+            $current_url = home_url();
+        } else {
+            $current_url = ( is_ssl() ? 'https://' : 'http://' ) . sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) . sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) );
+        }
+        $url = esc_url_raw( add_query_arg( $this->bypass_param, $bypass_link_token, $current_url ) );
+
+		ob_start();
+		?>
+			<div class="wpmastertoolkit-maintenance-mode-bypass-link">
+				<span class="wpmastertoolkit-maintenance-mode-bypass-link-btn" data-content="<?php echo esc_attr( $url ); ?>"><?php esc_html_e( 'Copy bypass link', 'wpmastertoolkit' ); ?></span>
+				<span class="wpmastertoolkit-maintenance-mode-bypass-link-icon"><?php echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/check.svg'), wpmastertoolkit_allowed_tags_for_svg_files() ); ?></span>
+			</div>
+		<?php
+		return ob_get_clean();
 	}
 
 	/**
@@ -253,7 +312,7 @@ class WPMastertoolkit_Maintenance_Mode {
      */
     public function add_submenu(){
 
-        add_submenu_page(
+        WPMastertoolkit_Settings::add_submenu_page(
             'wp-mastertoolkit-settings',
             $this->header_title,
             $this->header_title,
@@ -362,7 +421,10 @@ class WPMastertoolkit_Maintenance_Mode {
                 case 'bypass_link_token':
                     $is_pro = wpmastertoolkit_is_pro();
                     $sanitized_settings[$settings_key] = $is_pro ? sanitize_text_field( $new_settings[$settings_key] ?? md5(time()) ) : md5(time());
-                break;                
+                break;               
+				case 'excluded_urls':
+					$sanitized_settings[ $settings_key ] = sanitize_textarea_field( stripslashes( $new_settings[ $settings_key ] ?? $settings_value ) );
+				break; 
             }
         }
 
@@ -386,11 +448,13 @@ class WPMastertoolkit_Maintenance_Mode {
 
 		// LiteSpeed Cache
 		if ( function_exists( 'litespeed_purge_all' ) ) {
+			//phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 			do_action( 'litespeed_purge_all' );
 		}
 
 		// SiteGround Optimizer
 		if ( function_exists( 'sg_cachepress_purge_cache' ) ) {
+			//phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 			do_action( 'sg_cachepress_purge_cache' );
 		}
 
@@ -434,6 +498,7 @@ class WPMastertoolkit_Maintenance_Mode {
             'countdown_background_color' => '#ffffff',
             'bypass_link_status'         => '0',
             'bypass_link_token'          => md5(time()),
+			'excluded_urls'              => '',
         );
     }
 
@@ -696,6 +761,25 @@ class WPMastertoolkit_Maintenance_Mode {
                                 <button class="copy-button">
 									<?php echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/copy.svg'), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
                                 </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wp-mastertoolkit__section pro-section <?php echo esc_attr( $is_pro ? 'is-pro' : 'is-not-pro' ); ?>">
+                <div class="wp-mastertoolkit__section__pro-only">
+                    <?php esc_html_e( 'This feature is only available in the Pro version.', 'wpmastertoolkit' ); ?>
+                </div>
+                <div class="wp-mastertoolkit__section__desc">
+                    <?php esc_html_e("Enter URLs to exclude from maintenance mode, one per line.", 'wpmastertoolkit'); ?>
+                </div>
+                <div class="wp-mastertoolkit__section__body">
+					<div class="wp-mastertoolkit__section__body__item">
+                        <div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e( 'The Exluded URLs', 'wpmastertoolkit' ); ?></div>
+                        <div class="wp-mastertoolkit__section__body__item__content">
+							<div class="wp-mastertoolkit__textarea">
+                                <textarea name="<?php echo esc_attr( $this->option_id ); ?>[excluded_urls]" cols="50" rows="3" style="width: 400px;"><?php echo esc_textarea( stripslashes( $this->settings['excluded_urls'] ?? '') ); ?></textarea>
                             </div>
                         </div>
                     </div>

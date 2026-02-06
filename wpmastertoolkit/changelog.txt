@@ -1,0 +1,326 @@
+== Changelog ==
+
+= 2.16.2 =
+Fix: Module: Temporary Login: Change condition for showing save button to handle empty values.
+
+= 2.16.1 =
+Fix: Improve error handling for wp-config.php operations
+
+= 2.16.0 =
+Fix: Module: 410 Manager: Ensure .htaccess rules are correctly updated when settings change.
+Fix: Module: Apple Touch Icon: Ensure default icon is displayed correctly in preview when no custom icon is set.
+Fix: Module: Blacklisted Usernames: Change capability name.
+Update: Pro Module: Add Essentials Shortcodes: Replace static dropdowns with AJAX-powered autocomplete search for Users, Posts, and Terms for better performance on large sites. Add dynamic meta keys loading based on selected User/Post/Term. Add new shortcodes for retrieving option values and site information.
+Update: Pro Module: Disable Comments: Add by default disable comments on all post types if no selection exists.
+Update: Module: SMTP Mailer: Add support for Brevo, MailJet, Postmark, SparkPost, MailerSender, Resend, SendLayer, SMTP.com, SMTP2GO, ElasticEmail, ZohoMail, SendPulse, Mandrill, Pepipost and Twilio SendGrid.
+Tweak: Pro Module: Add Essentials Shortcodes: Improve UI with readonly fields after selection and enhanced parameter documentation.
+Tweak: Module: Custom Link Menu New Tab: Improve checkbox labels with code formatting for better clarity.
+Fix: Prevent added triple, or more, consecutive line breaks in wp-config.php when updating constants.
+Fix: CRITICAL - Add validation before writing wp-config.php to prevent file corruption. Add automatic backup of wp-config.php before any modification. This prevents complete site failures when preg_replace returns null or empty content.
+Feat: Add system information retrieval and copy functionality for helpful debugging.
+
+= 2.15.0 =
+Fix: Exception code error when license activation fails.
+Fix: Module: Media Encoder: Added EXIF ​​orientation handling for correct image rotation during optimization
+Feat: Module: SMTP Mailer: Add Amazon SES integration using SMTP credentials.
+Feat: Module: SMTP Mailer: Add Brevo integration.
+Feat: Module: SMTP Mailer: Add Mailgun integration.
+Fix: Module: SMTP Mailer: Better transition from <2.14.0.
+Fix: Module: SMTP Mailer: Correct the provider name for php and other.
+
+= 2.14.1 =
+Security: Module: Blacklisted Usernames: Restrict change admin username action to users with 'manage_users' capability to prevent privilege escalation.
+
+= 2.14.0 =
+Add: Module: Mail Catcher.
+Add: Module: Advanced Debug Mode.
+Add: Module: Temporary Login.
+Update: Pro Module: Two-Factor Authentication: Add Google Authenticator support.
+Update: Pro Module: CRON Manager: Add late events filtering.
+Tweak: Settings: Enhance UI for AI Modules and API key management.
+Tweak: Menu: Change menu title for better clarity.
+Tweak: Settings: Improve settings page structure and styling.
+Tweak: Settings: Better changelog display in modal.
+Tweak: Settings: New categories for better modules organization.
+Fix: Publication type verification in survey functions for better management of administrative assets.
+Feat: Pro Module: Update Logs: Track plugin activations, deactivations, and theme switches.
+Feat: Pro Module: Update Logs: Add user ID tracking for manual actions vs automatic updates.
+Feat: Module: SMTP Mailer: Add Gmail integration using OAuth 2.0.
+Feat: Module: SMTP Mailer: Add Outlook integration using OAuth 2.0.
+Feat: Module: SMTP Mailer: Add Twilio SendGrid integration using API key.
+Tweak: Module: SMTP Mailer: New integration UI for better user experience.
+Fix: Module: Force SSL: Prevent redirect loop on CLI or server CRON requests.
+Fix: Module: Maintenance Mode: Problem with excluded URLs when none defined.
+Fix: Pro Module: Admin Menu Organizer: Added missing filter to enable custom menu order.
+
+= 2.13.1 =
+Security: Module: Code Snippets: Restrict access to Administrator-only capability to prevent code injection vulnerability (CVE-2025-14166).
+
+= 2.13.0 =
+Update: Pro Module: Maintenance Mode: Add input to exclude pages from maintenance mode.
+Fix: Pro Module: Maintenance Mode: Copy bypass link displayed only when maintenance is active; improved FR label text.
+Update: Pro Module: Admin Menu Organizer: Add reset button, separators, highlighted separators, and restore original icon option.
+Fix: Pro Module: Vulnerabilities Scan: Use slug instead of text domain for better compatibility.
+Fix: Pro Module: Disallow Countries IP: Resolve geoip2 library errors.
+Fix: Module: Lock Site URL: Prevent unintended option updates; retrieve option from wp-config for better compatibility with WPML and multilingual plugins.
+Fix: Prevent license key from being cleared if server does not respond.
+
+= 2.12.0 =
+Add: Pro Module: Admin Menu Organizer.
+Add: Pro Module: Disable Plugin For Debug.
+Add: Pro Module: Download Medias as ZIP.
+Add: Pro Module: My Account Menu Customizer.
+Fix: Module: Code Snippets: Save snippet in post_content instead of custom meta.
+Fix: Initialize user variable in change_avatar_data() method.
+Fix: Module: Move Login URL: Allow JS/CSS/IMG files inside wp-admin when 403 redirection is enabled.
+Update: Module: Maintenance Mode: Copy bypass link in admin bar.
+
+= 2.11.0 =
+Add: Pro Module: Media Replacement.
+
+= 2.10.0 =
+Add: Pro Module: Head Sorter.
+Add: Debug constant when a module breaks the website.
+Fix: Module: Register Custom Content Types: Limit post type key length (max 20 chars) to prevent errors.
+Fix: Module: Register Custom Content Types: Multiple bugs fixed.
+Add: Module: Register Custom Content Types: Copy button on export page.
+Fix: Module: Maintenance Mode: Compatibility with cache plugins.
+Update: Module: Optimize External Permalinks: Split target, noopener, noreferrer, nofollow options.
+
+= 2.9.0 =
+Update: Module: User Switching: Add switch option from user edit page + filter for third-party use.
+Update: Module: Maintenance Mode: Add preview option.
+Update: Module: CRON Manager: Add search input.
+Update: Module: Register Custom Content Types: Add popup for migration/deletion + code export.
+Update: Module: Regenerate Salt Keys: Avoid logout by delaying first regeneration 30 minutes.
+Update: Pro Module: Generate Alt Text with AI: Add notice when API key missing + track post ID in bulk.
+Fix: Pro Module: Disallow Countries IP: GeoIP dependency compatibility.
+Add: Pro Module: Disable WooCommerce Logout Confirmation.
+Tweak: Sort modules list alphabetically.
+
+= 2.8.0 =
+Add: Pro Module: Better Password Hash.
+Add: Pro Module: Generate Alt Text With AI.
+Add: Credentials manager in settings for modules using AI.
+Update: Module: Force Strong Password: Remove zxcvbn; replace with lightweight custom function.
+Fix: Module: Media Encoder: Black background on PNG → WebP/AVIF.
+Update: Module: Custom Link Menu New Tab: Add more attribute options.
+
+= 2.7.0 =
+Tweak: Modern post list UI for Code Snippets, Link Shortener, Register Custom Content Types.
+Fix: Module: File Manager: Incorrect sprintf syntax.
+Fix: Module: File Manager: Security improvements on handle_actions().
+Update: Module: Register Custom Content Types: Add taxonomy creation support.
+
+= 2.6.0 =
+Fix: Module: Move Login URL: Fix AJAX issues when 403 protection is active.
+Add: Module: Register Custom Content Types.
+Security: Module: File Manager: Patch [CVE-2025-3300](https://www.wordfence.com/threat-intel/vulnerabilities/wordpress-plugins/wpmastertoolkit/wpmastertoolkit-wpmtk-all-in-one-plugin-252-authenticated-administrator-to-arbitrary-file-read-and-write) (arbitrary file read/write).
+Tweak: Improved admin CSS.
+Update: Module: Media Encoder: Add AVIF support (PRO, PHP ≥ 8.1).
+Update: Module: Media Encoder: UI improvements + new image conversion library.
+
+= 2.5.2 =
+Fix: Module: Media Encoder: EXIF rotation issues.
+Fix: Module: Image Upload Control: WebP compression preventing oversized images.
+Update: Module: Image Upload Control: Disable big_image_size_threshold to avoid conflicts.
+
+= 2.5.1 =
+Fix: Missing assets after refactoring affecting multiple modules.
+
+= 2.5.0 =
+Add: Module: Browser Theme Color.
+Add: Pro Module: Post Type Switcher.
+Fix: Module: Quick Add Post: Fullscreen mode issues.
+
+= 2.4.1 =
+Fix: Module: Adminer: session_start() causing issues on REST-API. [Related support ticket](https://wordpress.org/support/topic/problemes-critiques/#post-18381082)
+Fix: Module: Multiple User Roles: Prevent admin from removing own admin role. [Related support ticket](https://wordpress.org/support/topic/multiple-user-roles-generates-a-403-forbidden-error-2/#post-18381136)
+
+= 2.4.0 =
+Add: Module: Force SSL.
+Fix: Module: Enhance List Tables: Missing CSS after path change.
+Fix: PRO modules incorrectly flagged as "coming soon".
+
+= 2.3.0 =
+Add: PRO modules information.
+Tweak: Better UX on Upgrade to Pro page.
+Add: Hooks/filters documentation for addon developers. [Addon Exemple](https://github.com/Ludwig44/wpmastertoolkit-addon-exemple)
+Update: Module: Disallow Access WP Sensible Files: Delete unwanted files after core update.
+Update: Module: Maintenance Mode: Add PRO bypass link.
+Update: Module: SMTP Mailer: Prefill test email input with current user email.
+Fix: Text domain mismatch.
+Fix: Missing translators comments.
+Fix: Non-singular strings.
+Fix: Replace rand() with wp_rand().
+Fix: Replace date() with wp_date().
+Refactor: Full plugin check and improved code structure.
+
+= 2.2.0 =
+Add: PRO modules information.
+Tweak: Improved HTML/CSS for module settings.
+
+= 2.1.0 =
+Add: PRO modules information.
+
+= 2.0.0 =
+Add: License system for PRO version.
+Add: Doc links under each module.
+Add: Inline documentation for hooks/filters.
+Fix: Module: Move Login URL: TranslatePress issue with default language subdirectory.
+Fix: Module: Local Avatars: Updated CSS for WP 6.7+.
+Fix: Module: Apple Touch Icon: Updated CSS/JS for WP 6.7+.
+Fix: Module: Clean Up Admin Bar: Howdy removal not applied.
+Update: Module: Hide Admin Notices: Full redesign with modal + storage system.
+Update: Module: Maintenance Mode: (PRO ONLY) Add countdown.
+
+= 1.15.0 =
+Add: Module: Prevent User Enumeration.
+
+= 1.14.0 =
+Add: Module: Media Cleaner.
+Security: Module: Child Theme Generator: Fix arbitrary upload + download vulnerabilities.
+
+= 1.13.1 =
+Fix: WP 6.7 translation compatibility.
+
+= 1.13.0 =
+Fix: WP 6.7 translation compatibility.
+Add: Module: Media Encoder.
+
+= 1.12.5 =
+Fix: Module: Auto Regenerate Salt Keys: Issue on some installations.
+
+= 1.12.4 =
+Fix: Module: Protect Website Headers: CSP header issue (upgrade-insecure-requests).
+
+= 1.12.3 =
+Fix: Stats modal consent when clicking bottom save button.
+
+= 1.12.2 =
+Fix: Better constant replacement in wp-config.php.
+
+= 1.12.1 =
+Fix: Constant replacement in wp-config.php.
+
+= 1.12.0 =
+Update: Module: Limit Login Attempts: Add delete blocked IP option.
+Update: Module: Maintenance Mode: Add admin bar and settings switches.
+Update: Module: Protect Website Headers: Improve header explanations.
+Tweak: Add filter to show only active modules.
+Add: Config sharing feature.
+Add: Data collection consent modal.
+Fix: Module: Local Avatars: PHP warning.
+
+= 1.11.0 =
+Add: Module: Adminer.
+Add: Module: Apple Touch Icon.
+Add: Module: Local Avatars.
+
+= 1.10.2 =
+Fix: Escaping issue on textarea fields.
+
+= 1.10.1 =
+Fix: Module: Child Theme Generator: Improved ZIP creation.
+
+= 1.10.0 =
+Add: Module: Disable jQuery Migrate.
+Add: Module: Multiple User Roles.
+Add: Module: Plugin & Theme Rollback.
+Fix: Module: Child Theme Generator: Fix issues on some servers.
+Update: Module: File Manager: Better UX + edit files directly.
+
+= 1.9.0 =
+Add: Module: Child Theme Generator.
+Add: Module: File Manager.
+Add: Module: Protect Website Headers.
+Fix: Prevent form submission on Enter.
+Tweak: Better search results in settings.
+
+= 1.8.1 =
+Fix: Parsedown library missing.
+
+= 1.8.0 =
+Update: Module: SMTP Mailer: Replace password input type.
+Tweak: New admin logo and header version.
+Add: What's new modal.
+
+= 1.7.0 =
+Add: Module: Ban Emails.
+Add: Module: SMTP Mailer.
+Update: Module: Auto Regenerate Salt Keys: Improved regeneration logic.
+
+= 1.6.0 =
+Add: Module: Block User Registration from Disposable Email.
+
+= 1.5.1 =
+Fix: Meta Debugger support on edit_user_profile.
+
+= 1.5.0 =
+Add: Module: Custom Frontend CSS.
+Add: Module: Disable All Updates.
+Add: Module: Disable REST API.
+Add: Module: Heartbeat Control.
+Add: Module: Image Upload Control.
+Add: Module: Insert <head>, <body>, <footer> Code.
+Add: Module: Limit Login Attempts.
+Add: Module: Manage ads.txt / app-ads.txt.
+Add: Module: Manage robots.txt.
+Add: Module: Obfuscate Author Slugs.
+Add: Module: Obfuscate Email Addresses.
+Fix: Module: Clean Up Admin Bar: priority.
+Fix: Module: Disallow Bad Requests: issue.
+
+= 1.4.0 =
+Add: Module: Clean Up Admin Bar.
+Add: Module: Content Duplication.
+Add: Module: Content Order.
+Add: Module: Custom Admin CSS.
+Add: Module: Enhance List Tables.
+Add: Module: External Permalinks.
+Add: Module: Log In/Out Menu.
+Add: Module: Meta Debugger.
+Add: Module: Post Per Page.
+Fix: Import/export settings issue.
+
+= 1.3.0 =
+Add: Module: Auto Regenerate Salt Keys.
+Add: Module: Auto-Publish Missed Scheduled Posts.
+Add: Module: Clean Profiles.
+Add: Module: Custom Body Class.
+Add: Module: Disable Block-Based Widgets Screen.
+Add: Module: Disable Dashboard Widgets.
+Add: Module: Disable RSD Tag.
+Add: Module: Disable Dashicons.
+Add: Module: Disable Emoji Support.
+Add: Module: Disallow Bad Requests.
+Add: Module: Disallow Directory Listing.
+Add: Module: Disallow Malicious Upload Access.
+Add: Module: Duplicate Menu.
+Add: Module: Export Posts & Pages.
+Add: Module: Export Users.
+Add: Module: Hide PHP Version.
+Add: Module: Maintenance Mode.
+Add: Module: Nav Menu Visibility.
+Add: Module: Password Protection.
+Add: Module: Quick Add Post.
+Add: Module: Redirect 404 to Homepage.
+Add: Module: Redirect After Login.
+Add: Module: Redirect After Logout.
+Add: Module: Revisions Control.
+Add: Module: Wider Admin Menu.
+Update: Module: Blacklisted Usernames: Add fix tool.
+
+= 1.2.1 =
+Fix: Module: SVG Upload: Upload issue.
+Security: Module: SVG Upload: Sanitize uploaded SVG files.
+
+= 1.2.0 =
+Add: Module: Code Snippets.
+
+= 1.1.0 =
+Add: Module: Hide WordPress Version.
+Fix: Module activation/deactivation process.
+
+= 1.0.0 =
+Add: Initial release.

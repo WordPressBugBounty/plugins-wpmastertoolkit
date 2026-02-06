@@ -29,11 +29,19 @@ class WPMastertoolkit_Force_SSL {
      */
     public function redirect_to_ssl() {
 
-		$host = sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ?? '' ) );
-		$uri  = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) );
+        if ( is_ssl() || ( defined('WP_CLI') && WP_CLI ) ) return;
 
-        if ( ! is_ssl() ) {
-            wp_redirect( 'https://' . $host . $uri, 301 );
+        $is_https = (
+            ( isset( $_SERVER['HTTPS'] ) && 'on' === strtolower( sanitize_text_field( wp_unslash( $_SERVER['HTTPS'] ) ) ) ) ||
+            ( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) && 'https' === strtolower( sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) ) ) ||
+            ( isset( $_SERVER['HTTP_X_FORWARDED_SSL'] ) && 'on' === strtolower( sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_FORWARDED_SSL'] ) ) ) )
+        );
+
+        if ( ! $is_https && isset( $_SERVER['HTTP_HOST'], $_SERVER['REQUEST_URI'] ) ) {
+            $host = sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) );
+            $uri  = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) );
+            
+            wp_safe_redirect( 'https://' . $host . $uri, 301 );
             exit;
         }
     }

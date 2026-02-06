@@ -5,7 +5,7 @@
  * 
  * @since   1.9.0
  */
-class FM_Zipper_Tar {
+class WPMastertoolkit_FM_Zipper_Tar {
 	private $tar;
 
 	public function __construct() {

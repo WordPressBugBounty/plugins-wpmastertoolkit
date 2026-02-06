@@ -107,11 +107,12 @@ class WPMastertoolkit_Move_Login_URL {
 		return trim("
 <IfModule mod_rewrite.c>
 	RewriteEngine On
-	RewriteCond %{REQUEST_URI} ^/wp-admin [NC]
-	RewriteCond %{REQUEST_URI} !^/wp-admin/admin-ajax\.php$ [NC]
-	RewriteCond %{REQUEST_URI} !^/wp-admin/load-(styles|scripts)\.php$ [NC]
-	RewriteCond %{HTTP_COOKIE} !^.*wordpress_logged_in_.*$ [NC]
-	RewriteRule ^(.*)$ - [R=403,L]
+    RewriteCond %{REQUEST_URI} ^/wp-admin [NC]
+    RewriteCond %{REQUEST_URI} !^/wp-admin/admin-ajax\.php$ [NC]
+    RewriteCond %{REQUEST_URI} !^/wp-admin/load-(styles|scripts)\.php$ [NC]
+    RewriteCond %{REQUEST_URI} !\.(css|js|jpg|jpeg|png|gif|webp|svg|ico|woff|woff2|ttf|eot|map)$ [NC]
+    RewriteCond %{HTTP_COOKIE} !wordpress_logged_in_ [NC]
+    RewriteRule ^wp-admin/ - [R=403,L]
 </IfModule>
 		");
 	}
@@ -127,11 +128,12 @@ location ^~ /wp-admin {
     location = /wp-admin/admin-ajax.php {
         allow all;
     }
-
     location ~* ^/wp-admin/load-(styles|scripts)\.php$ {
         allow all;
     }
-
+    location ~* \.(css|js|jpg|jpeg|png|gif|webp|svg|ico|woff|woff2|ttf|eot|map)$ {
+        allow all;
+    }
     if ($http_cookie !~* "wordpress_logged_in_") {
         return 403;
     }
@@ -302,6 +304,7 @@ location ^~ /wp-admin {
 		$pagenow = 'index.php';
 
 		if ( ! defined( 'WP_USE_THEMES' ) ) {
+			//phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound
 			define( 'WP_USE_THEMES', true );
 		}
 
@@ -459,7 +462,7 @@ location ^~ /wp-admin {
 			$key        = sanitize_text_field( wp_unslash( $_GET['confirm_key'] ) );
 			$result     = wp_validate_user_request_key( $request_id, $key );
 			if ( ! is_wp_error( $result ) ) {
-				wp_redirect( add_query_arg( array(
+				wp_safe_redirect( add_query_arg( array(
 					'action'      => 'confirmaction',
 					'request_id'  => $request_id,
 					'confirm_key' => $key
@@ -793,7 +796,7 @@ location ^~ /wp-admin {
      */
     public function add_submenu(){
 
-        add_submenu_page(
+        WPMastertoolkit_Settings::add_submenu_page(
             'wp-mastertoolkit-settings',
             $this->header_title,
             $this->header_title,

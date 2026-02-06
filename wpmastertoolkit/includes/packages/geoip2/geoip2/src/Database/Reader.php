@@ -37,7 +37,7 @@ use MaxMind\Db\Reader\InvalidDatabaseException;
  * on the record class will have a `null` value.
  *
  * If the address is not in the database, an
- * {@link \GeoIp2\Exception\AddressNotFoundException} exception will be
+ * {@link WPMTK\GeoIp2\Exception\AddressNotFoundException} exception will be
  * thrown. If an invalid IP address is passed to one of the methods, a
  * SPL {@link \InvalidArgumentException} will be thrown. If the database is
  * corrupt or invalid, a {@link \MaxMind\Db\Reader\InvalidDatabaseException}
@@ -84,7 +84,7 @@ class Reader implements ProviderInterface
      *
      * @param string $ipAddress an IPv4 or IPv6 address as a string
      *
-     * @throws \GeoIp2\Exception\AddressNotFoundException  if the address is
+     * @throws WPMTK\GeoIp2\Exception\AddressNotFoundException  if the address is
      *                                                     not in the database
      * @throws \MaxMind\Db\Reader\InvalidDatabaseException if the database
      *                                                     is corrupt or invalid
@@ -100,7 +100,7 @@ class Reader implements ProviderInterface
      *
      * @param string $ipAddress an IPv4 or IPv6 address as a string
      *
-     * @throws \GeoIp2\Exception\AddressNotFoundException  if the address is
+     * @throws WPMTK\GeoIp2\Exception\AddressNotFoundException  if the address is
      *                                                     not in the database
      * @throws \MaxMind\Db\Reader\InvalidDatabaseException if the database
      *                                                     is corrupt or invalid
@@ -116,7 +116,7 @@ class Reader implements ProviderInterface
      *
      * @param string $ipAddress an IPv4 or IPv6 address as a string
      *
-     * @throws \GeoIp2\Exception\AddressNotFoundException  if the address is
+     * @throws WPMTK\GeoIp2\Exception\AddressNotFoundException  if the address is
      *                                                     not in the database
      * @throws \MaxMind\Db\Reader\InvalidDatabaseException if the database
      *                                                     is corrupt or invalid
@@ -136,7 +136,7 @@ class Reader implements ProviderInterface
      *
      * @param string $ipAddress an IPv4 or IPv6 address as a string
      *
-     * @throws \GeoIp2\Exception\AddressNotFoundException  if the address is
+     * @throws WPMTK\GeoIp2\Exception\AddressNotFoundException  if the address is
      *                                                     not in the database
      * @throws \MaxMind\Db\Reader\InvalidDatabaseException if the database
      *                                                     is corrupt or invalid
@@ -156,7 +156,7 @@ class Reader implements ProviderInterface
      *
      * @param string $ipAddress an IPv4 or IPv6 address as a string
      *
-     * @throws \GeoIp2\Exception\AddressNotFoundException  if the address is
+     * @throws WPMTK\GeoIp2\Exception\AddressNotFoundException  if the address is
      *                                                     not in the database
      * @throws \MaxMind\Db\Reader\InvalidDatabaseException if the database
      *                                                     is corrupt or invalid
@@ -176,7 +176,7 @@ class Reader implements ProviderInterface
      *
      * @param string $ipAddress an IPv4 or IPv6 address as a string
      *
-     * @throws \GeoIp2\Exception\AddressNotFoundException  if the address is
+     * @throws WPMTK\GeoIp2\Exception\AddressNotFoundException  if the address is
      *                                                     not in the database
      * @throws \MaxMind\Db\Reader\InvalidDatabaseException if the database
      *                                                     is corrupt or invalid
@@ -196,7 +196,7 @@ class Reader implements ProviderInterface
      *
      * @param string $ipAddress an IPv4 or IPv6 address as a string
      *
-     * @throws \GeoIp2\Exception\AddressNotFoundException  if the address is
+     * @throws WPMTK\GeoIp2\Exception\AddressNotFoundException  if the address is
      *                                                     not in the database
      * @throws \MaxMind\Db\Reader\InvalidDatabaseException if the database
      *                                                     is corrupt or invalid
@@ -212,7 +212,7 @@ class Reader implements ProviderInterface
      *
      * @param string $ipAddress an IPv4 or IPv6 address as a string
      *
-     * @throws \GeoIp2\Exception\AddressNotFoundException  if the address is
+     * @throws WPMTK\GeoIp2\Exception\AddressNotFoundException  if the address is
      *                                                     not in the database
      * @throws \MaxMind\Db\Reader\InvalidDatabaseException if the database
      *                                                     is corrupt or invalid

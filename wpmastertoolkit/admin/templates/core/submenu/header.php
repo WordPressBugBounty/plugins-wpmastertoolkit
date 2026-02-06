@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
             <div class="wp-mastertoolkit__header__right">
 
-            <?php if ( isset($this->nonce_action) ) : ?>
+            <?php if ( isset($this->nonce_action) && ( ! isset($this->disable_save_form) || empty($this->disable_save_form) ) ) : ?>
                 <div class="wp-mastertoolkit__header__right__save">
                     <?php
                         wp_nonce_field( $this->nonce_action );

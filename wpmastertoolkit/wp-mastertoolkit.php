@@ -4,7 +4,7 @@
  * Plugin Name:       WPMasterToolKit
  * Plugin URI:        https://wpmastertoolkit.com/
  * Description:       WPMasterToolKit enhances your WordPress administration experience by providing a powerful suite of features designed to optimize and streamline your website management. From media enhancements to user experience improvements and security fortifications, this toolkit is essential for any WordPress site owner looking to elevate their admin interface. With easy-to-use settings and impactful tweaks, you can tailor your site's backend to your specific needs.
- * Version:           2.11.0
+ * Version:           2.16.2
  * Author:            Webdeclic
  * Author URI:        https://webdeclic.com
  * License:           GPL-2.0+
@@ -21,21 +21,21 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Check if your are in local or production environment
  */
-$is_local = isset($_SERVER['REMOTE_ADDR']) && ($_SERVER['REMOTE_ADDR'] == '127.0.0.1' || $_SERVER['REMOTE_ADDR'] == '::1');
+$wpmtk_is_local = isset($_SERVER['REMOTE_ADDR']) && ($_SERVER['REMOTE_ADDR'] == '127.0.0.1' || $_SERVER['REMOTE_ADDR'] == '::1');
 
-$version  = get_file_data( __FILE__, array( 'Version' => 'Version' ), false )['Version'];
+$wpmtk_version  = get_file_data( __FILE__, array( 'Version' => 'Version' ), false )['Version'];
 
 /**
  * Currently plugin version.
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'WPMASTERTOOLKIT_VERSION', $version );
+define( 'WPMASTERTOOLKIT_VERSION', $wpmtk_version );
 
 /**
  * You can use this const for check if you are in local environment
  */
-define( 'WPMASTERTOOLKIT_DEV_MOD', $is_local );
+define( 'WPMASTERTOOLKIT_DEV_MOD', $wpmtk_is_local );
 
 /**
  * Plugin File
@@ -95,10 +95,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-wp-mastertoolkit.php';
  *
  * @since    1.0.0
  */
-function run_wpmastertoolkit() {
+function wpmtk_run_wpmastertoolkit() {
 
 	$plugin = new WPMastertoolkit();
 	$plugin->run();
 
 }
-run_wpmastertoolkit();
+wpmtk_run_wpmastertoolkit();

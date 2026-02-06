@@ -5,7 +5,7 @@
  * 
  * @since   1.9.0
  */
-class FM_Zipper {
+class WPMastertoolkit_FM_Zipper {
 	private $zip;
 
 	public function __construct() {

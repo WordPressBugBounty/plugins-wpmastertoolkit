@@ -128,7 +128,16 @@ class WPMastertoolkit_Code_Snippets {
             'has_archive'           => false,
             'exclude_from_search'   => true,
             'publicly_queryable'    => false,
-            'capability_type'       => 'post',
+            'capability_type'       => 'page',
+            'capabilities'          => array(
+                'edit_post'          => 'manage_options',
+                'read_post'          => 'manage_options',
+                'delete_post'        => 'manage_options',
+                'edit_posts'         => 'manage_options',
+                'edit_others_posts'  => 'manage_options',
+                'publish_posts'      => 'manage_options',
+                'read_private_posts' => 'manage_options',
+            ),
             'show_in_rest'          => false,
             'rewrite'               => false,
         );
@@ -190,7 +199,11 @@ class WPMastertoolkit_Code_Snippets {
      * @return void
      */
     public function render_code_snippets_metabox( $post ){
-        $code_snippet       = get_post_meta( $post->ID, 'code_snippet', true );
+        $code_snippet       = get_post_field( 'post_content', $post->ID, 'raw' );
+		// fallback for older versions
+		if ( ! $code_snippet ) {
+			$code_snippet = get_post_meta( $post->ID, 'code_snippet', true );
+		}
         $code_snippet_error = get_post_meta( $post->ID, 'code_snippet_error', true );
         if( !empty($code_snippet_error) ){
             // add notice
@@ -212,7 +225,7 @@ class WPMastertoolkit_Code_Snippets {
         $placeholder .= "// ". __('END Exemple of Shortcode content', "wpmastertoolkit" );
 
         ?>
-        <textarea name="code_snippet" id="code_snippet" placeholder="<?php echo esc_attr( $placeholder ); ?>" class="widefat" rows="10"><?php echo esc_textarea( stripslashes( $code_snippet ) ); ?></textarea>
+        <textarea name="code_snippet" id="code_snippet" placeholder="<?php echo esc_attr( $placeholder ); ?>" class="widefat" rows="10"><?php echo esc_textarea( $code_snippet ); ?></textarea>
         <?php
     }
     
@@ -311,7 +324,8 @@ class WPMastertoolkit_Code_Snippets {
      */
     public function enqueue_scripts( $hook_suffix ){
         if ( $hook_suffix === 'edit.php' ) {
-            if ( get_post_type() !== $this->post_type ) return;
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            if ( get_post_type() !== $this->post_type && ( isset($_GET['post_type']) && $_GET['post_type'] !== $this->post_type ) ) return;
 
             $assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/modern-post-list.asset.php' );
             wp_enqueue_style( 'WPMastertoolkit_modern_post_list', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/modern-post-list.css', array(), $assets['version'], 'all' );
@@ -361,6 +375,7 @@ class WPMastertoolkit_Code_Snippets {
      * @return void
      */
     public function save_code_snippet( $post_id ){
+		global $wpdb;
 
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing
         if ( ! isset( $_POST['code_snippet'], $_POST['snippet_status'], $_POST['snippet_type'] ) ) {
@@ -397,7 +412,15 @@ class WPMastertoolkit_Code_Snippets {
             delete_post_meta( $post_id, 'code_snippet_error' );
         }
 
-        update_post_meta( $post_id, 'code_snippet', $code_snippet );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+		$wpdb->update(
+			$wpdb->posts,
+			array( 'post_content' => $code_snippet ),
+			array( 'ID' => $post_id ),
+			array( '%s' ),
+			array( '%d' )
+		);
+		clean_post_cache( $post_id );
 
         if( is_wp_error($validation) ){
             $status = 0;
@@ -491,7 +514,11 @@ class WPMastertoolkit_Code_Snippets {
             $usage = 'This snippet is included in your website. You can used add_action or add_filter in this type of snippet. The code is included before WordPress hooks.';
         }
 
-        $code_snippet = get_post_meta( $post_id, 'code_snippet', true );
+		$code_snippet = get_post_field( 'post_content', $post_id, 'raw' );
+		// fallback for older versions
+		if ( ! $code_snippet ) {
+			$code_snippet = get_post_meta( $post_id, 'code_snippet', true );
+		}
         $code_snippet = preg_replace('/^<\?php/', '', $code_snippet);
         $code_snippet = preg_replace('/^\s*[\r\n]/', '', $code_snippet);
         $code_snippet = preg_replace('/[\r\n]\s*$/', '', $code_snippet);
@@ -671,7 +698,9 @@ class WPMastertoolkit_Code_Snippets {
     public function add_custom_columns_data( $column, $post_id ){
         switch( $column ){
             case 'snippet_description':
-                echo esc_html( get_the_excerpt( $post_id ) );
+				if ( has_excerpt( $post_id ) ) {
+					echo esc_html( get_the_excerpt( $post_id ) );
+				}
                 break;
             case 'snippet_status':
                 $status = get_post_meta( $post_id, 'snippet_status', true );

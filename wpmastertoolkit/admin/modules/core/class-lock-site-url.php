@@ -15,12 +15,10 @@ class WPMastertoolkit_Lock_Site_URL {
      */
     public function __construct() {
         add_action( 'admin_head-options-general.php', array( $this, 'disable_users_can_register' ) );
-        remove_all_filters( 'pre_option_home' );
-        remove_all_filters( 'option_home' );
-        remove_all_filters( 'home_url' );
-        remove_all_filters( 'pre_option_siteurl' );
-        remove_all_filters( 'option_siteurl' );
-        remove_all_filters( 'site_url' );
+		add_filter( 'pre_option_home', array( $this, 'force_home_from_wp_config' ) );
+        add_filter( 'pre_option_siteurl', array( $this, 'force_siteurl_from_wp_config' ) );
+		add_filter( 'pre_update_option_home', array( $this, 'block_update' ), 10, 2 );
+        add_filter( 'pre_update_option_siteurl', array( $this, 'block_update' ), 10, 2 );
     }
 
     /**
@@ -30,8 +28,8 @@ class WPMastertoolkit_Lock_Site_URL {
      */
     public static function activate(){
         require_once WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/class-wp-config.php';
-        if( !defined('WP_HOME') )    WPMastertoolkit_WP_Config::replace_or_add_constant('WP_HOME', get_home_url(), 'string' );
-        if( !defined('WP_SITEURL') ) WPMastertoolkit_WP_Config::replace_or_add_constant('WP_SITEURL', get_site_url(), 'string' );
+        if( !defined('WP_HOME') )    WPMastertoolkit_WP_Config::replace_or_add_constant('WP_HOME', get_option('home'), 'string' );
+        if( !defined('WP_SITEURL') ) WPMastertoolkit_WP_Config::replace_or_add_constant('WP_SITEURL', get_option('siteurl'), 'string' );
         if( !defined('RELOCATE') )   WPMastertoolkit_WP_Config::replace_or_add_constant('RELOCATE', false );
     }
 
@@ -63,4 +61,39 @@ class WPMastertoolkit_Lock_Site_URL {
             ),
         ) );
     }
+
+	/**
+	 * Force home url from wp-config
+	 * 
+	 * @since   2.13.0
+	 */
+	public function force_home_from_wp_config( $value ) {
+		if ( defined( 'WP_HOME' ) ) {
+			$value = untrailingslashit( WP_HOME );
+		}
+
+		return $value;
+	}
+
+	/**
+	 * Force site url from wp-config
+	 * 
+	 * @since   2.13.0
+	 */
+	public function force_siteurl_from_wp_config( $value ) {
+		if ( defined( 'WP_SITEURL' ) ) {
+			$value = untrailingslashit( WP_SITEURL );
+		}
+
+		return $value;
+	}
+
+	/**
+	 * Prevent updating the option from general settings
+	 * 
+	 * @since   2.13.0
+	 */
+	public function block_update( $new_value, $old_value ) {
+		return $old_value;
+	}
 }

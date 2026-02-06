@@ -229,6 +229,10 @@ function wpmastertoolkit_allowed_tags_for_svg_files() {
             'cy'   => true,
             'r'    => true,
             'fill' => true,
+            'stroke' => true,
+            'stroke-width' => true,
+            'stroke-dasharray' => true,
+            'stroke-linecap' => true,
         ),
         'mask' => array(
             'id'        => true,
@@ -557,4 +561,27 @@ function wpmastertoolkit_languages() {
 	);
 
 	return $languages;	
+}
+
+/**
+ * Get current IP
+ * 
+ * @since 2.12.0
+ */
+function wpmastertoolkit_get_current_ip() {
+	if ( isset( $_SERVER['HTTP_CLIENT_IP'] ) ) {
+		return sanitize_text_field( wp_unslash( $_SERVER['HTTP_CLIENT_IP'] ) );
+	} elseif ( isset( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
+		return sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_FORWARDED_FOR'] ) );
+	} elseif ( isset( $_SERVER['HTTP_X_FORWARDED'] ) ) {
+		return sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_FORWARDED'] ) );
+	} elseif ( isset( $_SERVER['HTTP_FORWARDED_FOR'] ) ) {
+		return sanitize_text_field( wp_unslash( $_SERVER['HTTP_FORWARDED_FOR'] ) );
+	} elseif ( isset( $_SERVER['HTTP_FORWARDED'] ) ) {
+		return sanitize_text_field( wp_unslash( $_SERVER['HTTP_FORWARDED'] ) );
+	} elseif ( isset( $_SERVER['REMOTE_ADDR'] ) ) {
+		return sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) );
+	} else {
+		return '';
+	}
 }

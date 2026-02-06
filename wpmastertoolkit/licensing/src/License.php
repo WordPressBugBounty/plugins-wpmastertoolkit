@@ -63,7 +63,11 @@ class License {
 			// create the activation.
 			$activation = $this->client->activation()->create( $license->id );
 			if ( is_wp_error( $activation ) ) {
-				throw new \Exception( $activation->get_error_message() );
+				$exception_code = 0;
+				if ( 'not_found' === $activation->get_error_code() ) {
+					$exception_code = 404;
+				}
+				throw new \Exception( $activation->get_error_message(), $exception_code );
 			}
 			$this->client->settings()->activation_id = $activation->id;
 			// validate the release.
@@ -74,8 +78,12 @@ class License {
 			if ( $activation ) {
 				$this->client->activation()->delete();
 			}
+
 			// on error, clear options.
-			$this->client->settings()->clear_options();
+			if ( 404 == $e->getCode() ) {
+				$this->client->settings()->clear_options();
+			}
+
 			// return \WP_Error.
 			return new \WP_Error( 'error', $e->getMessage() );
 		}
@@ -152,15 +160,15 @@ class License {
 		$license = $this->retrieve( sanitize_text_field( $key ) );
 		if ( is_wp_error( $license ) ) {
 			if ( 'not_found' === $license->get_error_code() ) {
-				throw new \Exception( esc_html__( 'This is not a valid license. Please double-check it and try again.', 'wpmastertoolkit' ) );
+				throw new \Exception( esc_html__( 'This is not a valid license. Please double-check it and try again.', 'wpmastertoolkit' ), 404 );
 			}
 			throw new \Exception( esc_html( $license->get_error_message() ) );
 		}
 		if ( empty( $license->id ) ) {
-			throw new \Exception( esc_html__( 'This is not a valid license. Please double-check it and try again.', 'wpmastertoolkit' ) );
+			throw new \Exception( esc_html__( 'This is not a valid license. Please double-check it and try again.', 'wpmastertoolkit' ), 404 );
 		}
 		if ( 'revoked' === ( isset( $license->status ) ? $license->status : 'revoked' ) ) {
-			throw new \Exception( esc_html__( 'This license has been revoked. Please re-purchase to obtain a new license.', 'wpmastertoolkit' ) );
+			throw new \Exception( esc_html__( 'This license has been revoked. Please re-purchase to obtain a new license.', 'wpmastertoolkit' ), 404 );
 		}
 
 		if ( $store ) {
@@ -180,7 +188,11 @@ class License {
 	public function validate_release() {
 		$current_release = $this->get_current_release();
 		if ( is_wp_error( $current_release ) ) {
-			throw new \Exception( esc_html( $current_release->get_error_message() ) );
+			$exception_code = 0;
+			if ( 'not_found' === $current_release->get_error_code() ) {
+				$exception_code = 404;
+			}
+			throw new \Exception( esc_html( $current_release->get_error_message() ), esc_html( $exception_code ) );
 		}
 			// if there is no slug or it does not match.
 		if ( empty( $current_release->release_json->slug ) || $this->client->slug !== $current_release->release_json->slug ) {

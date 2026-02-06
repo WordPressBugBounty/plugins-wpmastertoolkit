@@ -21,9 +21,9 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 				<li><a href="?page=wp-mastertoolkit-settings-file-manager&token=<?php echo esc_attr( $this->TOKEN ); ?>&p=<?php echo urlencode( $this->PARENT_PATH ); ?>&amp;copy=<?php echo urlencode( $copy ); ?>"><i class="fa fa-chevron-circle-left"></i> ..</a></li>
 			<?php
 		}
-		foreach ( $folders as $f ) {
+		foreach ( $folders as $wpmtk_f ) {
 			?>
-				<li><a href="?page=wp-mastertoolkit-settings-file-manager&token=<?php echo esc_attr( $this->TOKEN ); ?>&p=<?php echo urlencode( trim( $this->FM_PATH . '/' . $f, '/' ) ); ?>&amp;copy=<?php echo urlencode( $copy ); ?>"><i class="fa fa-folder-o"></i> <?php echo esc_html( $this->fm_convert_win( $f ) ); ?></a></li>
+				<li><a href="?page=wp-mastertoolkit-settings-file-manager&token=<?php echo esc_attr( $this->TOKEN ); ?>&p=<?php echo urlencode( trim( $this->FM_PATH . '/' . $wpmtk_f, '/' ) ); ?>&amp;copy=<?php echo urlencode( $copy ); ?>"><i class="fa fa-folder-o"></i> <?php echo esc_html( $this->fm_convert_win( $wpmtk_f ) ); ?></a></li>
 			<?php
 		}
 		?>

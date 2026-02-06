@@ -11,8 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 			<form action="" method="post">
 				<input type="hidden" name="p" value="<?php echo esc_attr( $this->fm_enc( $this->FM_PATH ) ); ?>">
 				<input type="hidden" name="finish" value="1">
-				<?php foreach ( $copy_files as $cf ) : ?>
-					<input type="hidden" name="file[]" value="<?php echo esc_attr( $this->fm_enc( $cf ) ); ?>"><?php echo PHP_EOL;?>
+				<?php foreach ( $copy_files as $wpmtk_cf ) : ?>
+					<input type="hidden" name="file[]" value="<?php echo esc_attr( $this->fm_enc( $wpmtk_cf ) ); ?>"><?php echo PHP_EOL;?>
 				<?php endforeach;?>
 				<p class="break-word">
 					<strong><?php esc_html_e( 'Files', 'wpmastertoolkit' ); ?></strong>: <b><?php echo wp_kses_post( implode( '</b>, <b>', $copy_files ) ); ?></b>

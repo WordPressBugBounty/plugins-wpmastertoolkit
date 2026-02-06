@@ -59,7 +59,7 @@ class WPMastertoolkit_Limit_Login_Attempts {
 		$lockout_count    = 0;
 		$last_fail_on     = '';
 		$settings         = $this->get_settings();
-		$ip_address       = $this->get_current_ip();
+		$ip_address       = wpmastertoolkit_get_current_ip();
 		$table_name       = $this->get_table_name();
 		$default_settings = $this->get_default_settings();
 		$fails_allowed    = $settings['fails_allowed'] ?? $default_settings['fails_allowed'];
@@ -366,7 +366,7 @@ class WPMastertoolkit_Limit_Login_Attempts {
      * @since   1.5.0
      */
     public function add_submenu(){
-        add_submenu_page(
+        WPMastertoolkit_Settings::add_submenu_page(
             'wp-mastertoolkit-settings',
             $this->header_title,
             $this->header_title,
@@ -635,29 +635,6 @@ class WPMastertoolkit_Limit_Login_Attempts {
 		require_once ABSPATH . '/wp-admin/includes/upgrade.php';
 		dbDelta( $sql );
 	}
-
-	/**
-	 * Get current IP
-	 * 
-	 * @since 1.5.0
-	 */
-	private function get_current_ip() {
-        if ( isset( $_SERVER['HTTP_CLIENT_IP'] ) ) {
-            return sanitize_text_field( wp_unslash( $_SERVER['HTTP_CLIENT_IP'] ) );
-        } elseif ( isset( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
-            return sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_FORWARDED_FOR'] ) );
-        } elseif ( isset( $_SERVER['HTTP_X_FORWARDED'] ) ) {
-            return sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_FORWARDED'] ) );
-        } elseif ( isset( $_SERVER['HTTP_FORWARDED_FOR'] ) ) {
-            return sanitize_text_field( wp_unslash( $_SERVER['HTTP_FORWARDED_FOR'] ) );
-        } elseif ( isset( $_SERVER['HTTP_FORWARDED'] ) ) {
-            return sanitize_text_field( wp_unslash( $_SERVER['HTTP_FORWARDED'] ) );
-        } elseif ( isset( $_SERVER['REMOTE_ADDR'] ) ) {
-            return sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) );
-        } else {
-            return '';
-        }
-    }
 
 	/**
 	 * Format seconds to period

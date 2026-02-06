@@ -174,32 +174,43 @@ class WPMastertoolkit_Content_Order {
         ?>
             <li class="wp-mastertoolkit__sortable__item">
                 <div class="wp-mastertoolkit__sortable__item__container">
-                    <div class="wp-mastertoolkit__sortable__item__handle">
-						<?php
-							//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-							echo file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/drag.svg' );
-						?>
+                	<div class="wp-mastertoolkit__sortable__item__container__header">
+                		<div class="wp-mastertoolkit__sortable__item__container__header__left">
+							<div class="wp-mastertoolkit__sortable__item__handle">
+								<?php
+									//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+									echo file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/drag.svg' );
+								?>
+							</div>
+							<a class="wp-mastertoolkit__sortable__item__title link" href="<?php echo esc_attr( get_edit_post_link( $post->ID ) ); ?>"><?php echo esc_html( $post->post_title ); ?></a>
+							<?php if ( $post->post_status != 'publish' && 'attachment' != $post->post_type ):
+							$post_status_object = get_post_status_object( $post->post_status );
+							$post_status_label  = ' — ' . $post_status_object->label;
+							?>
+								<div class="wp-mastertoolkit__sortable__item__status"><?php echo esc_html( $post_status_label ); ?></div>
+							<?php endif; ?>
+							<?php if ( $has_child == 'true' ) : ?>
+								<div class="wp-mastertoolkit__sortable__item__haschild">
+									<?php 
+									echo esc_html( sprintf( 
+										/* translators: %s: post type label */
+										__( 'Has child %s', 'wpmastertoolkit' ), 
+										strtolower( $post_type_object->label ) 
+									) ); 
+									?>
+								</div>
+							<?php endif; ?>
+						</div>
+                		<div class="wp-mastertoolkit__sortable__item__container__header__right">
+							<div class="wp-mastertoolkit__sortable__item__actions">
+								<div class="wp-mastertoolkit__button">
+									<a class="wpmtk-button secondary" href="<?php echo esc_attr( get_the_permalink( $post->ID ) ); ?>" target="_blank"><?php echo esc_html__( 'View', 'wpmastertoolkit' ); ?></a>
+								</div>
+							</div>
+						</div>
 					</div>
-                    <a class="wp-mastertoolkit__sortable__item__title" href="<?php echo esc_attr( get_edit_post_link( $post->ID ) ); ?>"><?php echo esc_html( $post->post_title ); ?></a>
-                    <?php if ( $post->post_status != 'publish' && 'attachment' != $post->post_type ):
-                        $post_status_object = get_post_status_object( $post->post_status );
-                        $post_status_label  = ' — ' . $post_status_object->label;
-                    ?>
-                        <div class="wp-mastertoolkit__sortable__item__status"><?php echo esc_html( $post_status_label ); ?></div>
-                    <?php endif; ?>
-                    <?php if ( $has_child == 'true' ) : ?>
-                        <div class="wp-mastertoolkit__sortable__item__haschild">
-                            <?php 
-                            echo esc_html( sprintf( 
-                                /* translators: %s: post type label */
-                                __( 'Has child %s', 'wpmastertoolkit' ), 
-                                strtolower( $post_type_object->label ) 
-                            ) ); 
-                            ?>
-                        </div>
-                    <?php endif; ?>
-                    <a class="wp-mastertoolkit__sortable__item__view" href="<?php echo esc_attr( get_the_permalink( $post->ID ) ); ?>" target="_blank"><?php echo esc_html__( 'View', 'wpmastertoolkit' ); ?></a>
-                    <input type="hidden" name="WPMastertoolkit_sortable[<?php echo esc_attr( $post->ID ); ?>]" value="<?php echo esc_attr( $post->menu_order ); ?>">
+
+					<input type="hidden" class="wp-mastertoolkit__sortable__item__order" name="WPMastertoolkit_sortable[<?php echo esc_attr( $post->ID ); ?>]" value="<?php echo esc_attr( $post->menu_order ); ?>">
                 </div>
             </li>
         <?php
@@ -233,7 +244,7 @@ class WPMastertoolkit_Content_Order {
      * @since   1.4.0
      */
     public function add_submenu(){
-        add_submenu_page(
+        WPMastertoolkit_Settings::add_submenu_page(
             'wp-mastertoolkit-settings',
             $this->header_title,
             $this->header_title,

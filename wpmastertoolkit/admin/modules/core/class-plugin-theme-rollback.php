@@ -258,8 +258,8 @@ class WPMastertoolkit_Plugin_Theme_Rollback {
 				$current_url =  "#";
 			}
 
-			add_submenu_page(
-				'wp-mastertoolkit-settings',
+			WPMastertoolkit_Settings::add_submenu_page(
+            'wp-mastertoolkit-settings',
 				$this->header_title,
 				'<a href=' . $current_url . '>' . $this->header_title . '</a>',
 				'manage_options',
@@ -360,31 +360,31 @@ class WPMastertoolkit_Plugin_Theme_Rollback {
 	 * @since    1.10.0
 	 */
 	private function set_svn_versions_data( $html ) {
-		global $versions;
+		global $wpmtk_versions;
 
 		if ( ! $html ) {
 			return false;
 		}
 
 		if ( ( $json = json_decode( $html ) ) && ( $html != $json ) ) {
-			$versions = array_keys( (array) $json->versions );
+			$wpmtk_versions = array_keys( (array) $json->versions );
 		} else {
 			$obj = new DOMDocument();
 			$obj->loadHTML( $html );
-			$versions = array();
+			$wpmtk_versions = array();
 			$items    = $obj->getElementsByTagName( 'a' );
 
 			foreach ( $items as $item ) {
 				$href = str_replace( '/', '', $item->getAttribute( 'href' ) );
 
 				if ( strpos( $href, 'http' ) === false && '..' !== $href ) {
-					$versions[] = $href;
+					$wpmtk_versions[] = $href;
 				}
 			}
 		}
 
-		$versions = array_reverse( $versions );
-		return $versions;
+		$wpmtk_versions = array_reverse( $wpmtk_versions );
+		return $wpmtk_versions;
 	}
 
 	/**
@@ -473,14 +473,14 @@ class WPMastertoolkit_Plugin_Theme_Rollback {
 
 		//phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		if ( isset( $args['plugin_file'] ) && in_array( $args['plugin_file'], array_keys( $plugins ) ) ) {
-			$versions = $this->versions_select( 'plugin', $args );
+			$wpmtk_versions = $this->versions_select( 'plugin', $args );
 			//phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		} elseif ( $theme_rollback == true && isset( $_GET['theme_file'] ) ) {
 			//phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$theme_file = sanitize_text_field( wp_unslash( $_GET['theme_file'] ) );
 			$svn_tags = $this->wpext_svn_tags( 'theme', $theme_file );
 			$this->set_svn_versions_data( $svn_tags );
-			$versions = $this->versions_select( 'theme', $args );
+			$wpmtk_versions = $this->versions_select( 'theme', $args );
 		}
 
 		?>
@@ -521,7 +521,7 @@ class WPMastertoolkit_Plugin_Theme_Rollback {
 							<div class="wp-mastertoolkit__section__body__item__content">
 								<?php
 								//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-								echo $versions;
+								echo $wpmtk_versions;
 								?>
 							</div>
 						</div>
@@ -557,9 +557,9 @@ class WPMastertoolkit_Plugin_Theme_Rollback {
 	 * @since    1.10.0
 	 */
 	private function versions_select( $type, $args ) {
-		global $versions;
+		global $wpmtk_versions;
 
-		if ( empty( $versions ) ) {
+		if ( empty( $wpmtk_versions ) ) {
 			return '<div class="description">' . sprintf(
 				/* translators: %s: type */
 				__( 'It appears there are no version to select. This is likely due to the %s author not using tags for their versions and only committing new releases to the repository trunk.', 'wpmastertoolkit' ), 
@@ -567,12 +567,12 @@ class WPMastertoolkit_Plugin_Theme_Rollback {
 			) . '</div>';
 		}
 
-		usort( $versions, 'version_compare' );
-		$versions = array_reverse( $versions );
+		usort( $wpmtk_versions, 'version_compare' );
+		$wpmtk_versions = array_reverse( $wpmtk_versions );
 
 		$versions_html = '<div class="wp-mastertoolkit__select">';
 		$versions_html .= '<select name="' . esc_attr( $type . '_version' ) .'">';
-		foreach ( $versions as $version ) {
+		foreach ( $wpmtk_versions as $version ) {
 			$versions_html .= '<option value="' . esc_attr( $version ) . '" ' . disabled( $args['current_version'], $version, false ) . '>';
 			$versions_html .= esc_html( $version );
 			$versions_html .= '</option>';

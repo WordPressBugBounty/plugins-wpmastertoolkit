@@ -3,7 +3,12 @@
         "php": "^7.4",
         "enshrined/svg-sanitize": "^0.18.0",
         "league/iso3166": "^4.3",
-        "maxmind-db/reader": "~1.8"
+        "maxmind-db/reader": "~1.8",
+        "maxmind/web-service-common": "^0.9.0",
+        "sonata-project/google-authenticator": "^2.3",
+        "google/auth": "^1.37",
+        "google/apiclient": "^2.16",
+        "aws/aws-sdk-php": "^3.337"
     },
     "config": {
         "platform": {

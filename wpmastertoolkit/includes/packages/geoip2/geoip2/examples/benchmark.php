@@ -1,5 +1,6 @@
 <?php
 //phpcs:disable
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -15,7 +16,7 @@ for ($i = 0; $i < $count; ++$i) {
 
     try {
         $t = $reader->city($ip);
-    } catch (\GeoIp2\Exception\AddressNotFoundException $e) {
+    } catch (WPMTK\GeoIp2\Exception\AddressNotFoundException $e) {
     }
     if ($i % 10000 === 0) {
         echo $i . ' ' . $ip . "\n";

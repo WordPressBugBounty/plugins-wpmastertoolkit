@@ -14,60 +14,61 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 			<?php
 			// ZIP info
 			if ( ( $is_zip || $is_gzip ) && $filenames !== false ) {
-				$total_files  = 0;
-				$total_comp   = 0;
-				$total_uncomp = 0;
-				foreach ( $filenames as $fn ) {
-					if ( ! $fn['folder'] ) {
-						$total_files++;
+				$wpmtk_total_files  = 0;
+				$wpmtk_total_comp   = 0;
+				$wpmtk_total_uncomp = 0;
+				foreach ( $filenames as $wpmtk_fn ) {
+					if ( ! $wpmtk_fn['folder'] ) {
+						$wpmtk_total_files++;
 					}
-					$total_comp   += $fn['compressed_size'];
-					$total_uncomp += $fn['filesize'];
+					$wpmtk_total_comp   += $wpmtk_fn['compressed_size'];
+					$wpmtk_total_uncomp += $wpmtk_fn['filesize'];
 				}
 
 				echo esc_html(
 					sprintf(
 						/* translators: %s: Number of files */
 						__( 'Files in archive: %s', 'wpmastertoolkit' ),
-						$total_files,
+						$wpmtk_total_files,
 					)
 				) . '<br>';
 				echo esc_html(
 					sprintf(
 						/* translators: %s: Total size */
 						__( 'Total size: %s', 'wpmastertoolkit' ),
-						$this->fm_get_filesize( $total_uncomp ),
+						$this->fm_get_filesize( $wpmtk_total_uncomp ),
 					)
 				) . '<br>';
 				echo esc_html(
 					sprintf(
 						/* translators: %s: Total compressed size */
 						__( 'Size in archive: %s', 'wpmastertoolkit' ),
-						$this->fm_get_filesize( $total_comp ),
+						$this->fm_get_filesize( $wpmtk_total_comp ),
 					)
 				) . '<br>';
 				echo esc_html(
 					sprintf(
 						/* translators: %s: Compression percentage */
 						__( 'Compression: %s%%', 'wpmastertoolkit' ),
-						round( ( $total_comp / max( $total_uncomp , 1 ) ) * 100 ),
+						round( ( $wpmtk_total_comp / max( $wpmtk_total_uncomp , 1 ) ) * 100 ),
 					)
 				) . '<br>';
 			}
 			// Image info
 			if ( $is_image ) {
-				$image_size = getimagesize( $file_path );
-				echo '<strong>' . esc_html__( 'Image size', 'wpmastertoolkit' ) . ':</strong> ' . ( isset( $image_size[0] ) ? esc_html( $image_size[0] ) : '0' ) . ' x ' . ( isset( $image_size[1] ) ? esc_html( $image_size[1] ) : '0' ) . '<br>';
+				$wpmtk_image_size = getimagesize( $file_path );
+				echo '<strong>' . esc_html__( 'Image size', 'wpmastertoolkit' ) . ':</strong> ' . ( isset( $wpmtk_image_size[0] ) ? esc_html( $wpmtk_image_size[0] ) : '0' ) . ' x ' . ( isset( $wpmtk_image_size[1] ) ? esc_html( $wpmtk_image_size[1] ) : '0' ) . '<br>';
 			}
 			// Text info
 			if ( $is_text ) {
-				$is_utf8 = $this->fm_is_utf8( $content );
+				$wpmtk_is_utf8 = $this->fm_is_utf8( $content );
 				if ( function_exists('iconv') ) {
-					if ( ! $is_utf8 ) {
+					if ( ! $wpmtk_is_utf8 ) {
+						//phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 						$content = iconv( 'UTF-8', 'UTF-8//IGNORE', $content );
 					}
 				}
-				echo '<strong>' . esc_html__( 'Charset', 'wpmastertoolkit' ) . ':</strong> ' . ( $is_utf8 ? 'utf-8' : '8 bit' ) . '<br>';
+				echo '<strong>' . esc_html__( 'Charset', 'wpmastertoolkit' ) . ':</strong> ' . ( $wpmtk_is_utf8 ? 'utf-8' : '8 bit' ) . '<br>';
 			}
 			?>
 		</p>
@@ -80,7 +81,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 			<?php
 			// ZIP actions
 			if ( ( $is_zip || $is_gzip ) && $filenames !== false ) {
-				$zip_name = pathinfo( $file_path, PATHINFO_FILENAME );
+				$wpmtk_zip_name = pathinfo( $file_path, PATHINFO_FILENAME );
 				?>
 				<form method="post" class="d-inline ms-2">
 					<input type="hidden" name="token" value="<?php echo esc_attr( $this->TOKEN ); ?>">
@@ -91,7 +92,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 					<input type="hidden" name="token" value="<?php echo esc_attr( $this->TOKEN ); ?>">
 					<input type="hidden" name="unzip" value="<?php echo esc_attr( urlencode( $file ) ); ?>">
 					<input type="hidden" name="tofolder" value="1">
-					<button type="submit" class="btn btn-link text-decoration-none fw-bold p-0" style="font-size: 14px;" title="<?php echo esc_attr__( 'UnZip to', 'wpmastertoolkit' ) . ' ' . esc_attr( $this->fm_enc( $zip_name ) ); ?>"><i class="fa fa-check-circle"></i> <?php esc_html_e( 'UnZipToFolder', 'wpmastertoolkit' ); ?></button>
+					<button type="submit" class="btn btn-link text-decoration-none fw-bold p-0" style="font-size: 14px;" title="<?php echo esc_attr__( 'UnZip to', 'wpmastertoolkit' ) . ' ' . esc_attr( $this->fm_enc( $wpmtk_zip_name ) ); ?>"><i class="fa fa-check-circle"></i> <?php esc_html_e( 'UnZipToFolder', 'wpmastertoolkit' ); ?></button>
 				</form>&nbsp;
 				<?php
 			}
@@ -114,11 +115,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 			// ZIP content
 			if ( $filenames !== false ) {
 				echo '<code class="maxheight">';
-				foreach ( $filenames as $fn ) {
-					if ( $fn['folder'] ) {
-						echo '<b>' . esc_html( $this->fm_enc( $fn['name'] ) ) . '</b><br>';
+				foreach ( $filenames as $wpmtk_fn ) {
+					if ( $wpmtk_fn['folder'] ) {
+						echo '<b>' . esc_html( $this->fm_enc( $wpmtk_fn['name'] ) ) . '</b><br>';
 					} else {
-						echo esc_html( $fn['name'] ) . ' (' . esc_html( $this->fm_get_filesize( $fn['filesize'] ) ) . ')<br>';
+						echo esc_html( $wpmtk_fn['name'] ) . ' (' . esc_html( $this->fm_get_filesize( $wpmtk_fn['filesize'] ) ) . ')<br>';
 					}
 				}
 				echo '</code>';
@@ -138,18 +139,18 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 			// Video content
 			echo '<div class="preview-video"><video src="' . esc_attr( $this->fm_enc( $file_url ) ) . '" width="640" height="360" controls preload="metadata"></video></div>';
 		} elseif ( $is_text ) {
-			$hljs_classes = array(
+			$wpmtk_hljs_classes = array(
 				'shtml'    => 'xml',
 				'htaccess' => 'apache',
 				'phtml'    => 'php',
 				'lock'     => 'json',
 				'svg'      => 'xml'
 			);
-			$hljs_class = isset( $hljs_classes[$ext] ) ? 'lang-' . $hljs_classes[$ext] : 'lang-' . $ext;
+			$wpmtk_hljs_class = isset( $wpmtk_hljs_classes[$ext] ) ? 'lang-' . $wpmtk_hljs_classes[$ext] : 'lang-' . $ext;
 			if ( empty( $ext ) || in_array( strtolower( $file ), $this->fm_get_text_names() ) || preg_match( '#\.min\.(css|js)$#i', $file ) ) {
-				$hljs_class = 'nohighlight';
+				$wpmtk_hljs_class = 'nohighlight';
 			}
-			echo '<pre class="with-hljs"><code class="' . esc_attr( $hljs_class ) . '">' . esc_html( $this->fm_enc( $content ) ) . '</code></pre>';
+			echo '<pre class="with-hljs"><code class="' . esc_attr( $wpmtk_hljs_class ) . '">' . esc_html( $this->fm_enc( $content ) ) . '</code></pre>';
 		}
 		?>
 	</div>

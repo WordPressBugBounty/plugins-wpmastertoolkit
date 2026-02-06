@@ -101,6 +101,7 @@ class WPMastertoolkit_Password_Protection {
     public function disable_page_caching() {
 
         if ( !defined( 'DONOTCACHEPAGE' ) ) {
+			//phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound
             define( 'DONOTCACHEPAGE', true );
         }
     }
@@ -147,8 +148,8 @@ class WPMastertoolkit_Password_Protection {
      * Process login to access protected page content
      */
     public function process_login() {
-        global $password_protection_errors;
-        $password_protection_errors = new WP_Error();
+        global $wpmtk_password_protection_errors;
+        $wpmtk_password_protection_errors = new WP_Error();
 
         $settings        = $this->get_settings();
         $stored_password = $settings['password'] ?? '';
@@ -173,11 +174,11 @@ class WPMastertoolkit_Password_Protection {
                     exit;
 
                 } else {
-                    $password_protection_errors->add( 'incorrect_password', __( 'Incorrect password.', 'wpmastertoolkit' ) );
+                    $wpmtk_password_protection_errors->add( 'incorrect_password', __( 'Incorrect password.', 'wpmastertoolkit' ) );
                 }
 
             } else {
-                $password_protection_errors->add( 'empty_password', __( 'Password can not be empty.', 'wpmastertoolkit' ) );
+                $wpmtk_password_protection_errors->add( 'empty_password', __( 'Password can not be empty.', 'wpmastertoolkit' ) );
             }
         }
     }
@@ -186,17 +187,17 @@ class WPMastertoolkit_Password_Protection {
      * Add login error messages
      */
     public function add_login_error_messages() {
-        global $password_protection_errors;
+        global $wpmtk_password_protection_errors;
 
-        if ( $password_protection_errors->get_error_code() ) {
+        if ( $wpmtk_password_protection_errors->get_error_code() ) {
 
             $messages = '';
             $errors   = '';
 
-            foreach ( $password_protection_errors->get_error_codes() as $code ) {
+            foreach ( $wpmtk_password_protection_errors->get_error_codes() as $code ) {
 
-                $severity = $password_protection_errors->get_error_data( $code );
-                foreach ( $password_protection_errors->get_error_messages( $code ) as $error ) {
+                $severity = $wpmtk_password_protection_errors->get_error_data( $code );
+                foreach ( $wpmtk_password_protection_errors->get_error_messages( $code ) as $error ) {
                     if ( 'message' == $severity ) {
                         $messages .= $error . '<br />';
                     } else {
@@ -238,7 +239,7 @@ class WPMastertoolkit_Password_Protection {
      */
     public function add_submenu(){
 
-        add_submenu_page(
+        WPMastertoolkit_Settings::add_submenu_page(
             'wp-mastertoolkit-settings',
             $this->header_title,
             $this->header_title,

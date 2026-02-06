@@ -139,7 +139,7 @@ class WPMastertoolkit_Auto_Regenerate_Salt_Keys {
      */
     public function add_submenu(){
 
-        add_submenu_page(
+        WPMastertoolkit_Settings::add_submenu_page(
             'wp-mastertoolkit-settings',
             $this->header_title,
             $this->header_title,

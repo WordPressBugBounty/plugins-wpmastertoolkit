@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 global $error, $password_protected_errors, $is_iphone;
 
@@ -6,6 +7,7 @@ global $error, $password_protected_errors, $is_iphone;
  * WP Shake JS
  */
 if ( ! function_exists( 'wp_shake_js' ) ) {
+	//phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound
 	function wp_shake_js() {
 		if ( isset( $is_iphone ) ) {
 			if ( $is_iphone ) {
@@ -27,8 +29,8 @@ if ( ! function_exists( 'wp_shake_js' ) ) {
 nocache_headers();
 header( 'Content-Type: ' . get_bloginfo( 'html_type' ) . '; charset=' . get_bloginfo( 'charset' ) );
 
-$shake_error_codes = array( 'empty_password', 'incorrect_password' );
-if ( $password_protected_errors && $password_protected_errors->get_error_code() && in_array( $password_protected_errors->get_error_code(), $shake_error_codes ) ) {
+$wpmtk_shake_error_codes = array( 'empty_password', 'incorrect_password' );
+if ( $password_protected_errors && $password_protected_errors->get_error_code() && in_array( $password_protected_errors->get_error_code(), $wpmtk_shake_error_codes ) ) {
 	add_action( WPMastertoolkit_Password_Protection::LOGIN_HEAD_ACTION, 'wp_shake_js', 12 );
 }
 
@@ -59,7 +61,10 @@ if ( $password_protected_errors && $password_protected_errors->get_error_code() 
 	</form>
 </div>
 
-<?php do_action( 'login_footer' ); ?>
+<?php
+	//phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+	do_action( 'login_footer' );
+?>
 
 </body>
 </html>

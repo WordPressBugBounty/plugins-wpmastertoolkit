@@ -263,7 +263,8 @@ class WPMastertoolkit_Register_Custom_Content_Types {
      */
     public function enqueue_admin_assets( $hook ) {
         if ( $hook === 'edit.php' ) {
-            if ( get_post_type() !== $this->post_type ) return;
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            if ( get_post_type() !== $this->post_type && ( isset($_GET['post_type']) && $_GET['post_type'] !== $this->post_type ) ) return;
 
             $assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/modern-post-list.asset.php' );
             wp_enqueue_style( 'WPMastertoolkit_modern_post_list', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/modern-post-list.css', array(), $assets['version'], 'all' );

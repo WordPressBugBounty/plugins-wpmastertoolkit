@@ -61,6 +61,7 @@ class WPMastertoolkit_Ban_Emails {
 		if ( $email_not_accepted ) {
 
 			if ( '1' === $redirect && filter_var( $redirect_url, FILTER_VALIDATE_URL ) ) {
+				//phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect
 				wp_redirect( $redirect_url );
 				exit;
 			}
@@ -81,7 +82,7 @@ class WPMastertoolkit_Ban_Emails {
      * @since   1.7.0
      */
     public function add_submenu(){
-        add_submenu_page(
+        WPMastertoolkit_Settings::add_submenu_page(
             'wp-mastertoolkit-settings',
             $this->header_title,
             $this->header_title,

@@ -136,6 +136,11 @@ class WPMastertoolkit_Blacklisted_Usernames {
      */
     public function change_admin_name() {
 
+        // Check if user has admin capabilities
+        if ( ! current_user_can( 'manage_options' ) || ! current_user_can( 'list_users' ) ) {
+            wp_send_json_error( array( 'message' => __( 'You do not have permission to perform this action.', 'wpmastertoolkit' ) ) );
+        }
+
         $nonce    = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
         $username = sanitize_text_field( wp_unslash( $_POST['username'] ?? '' ) );
         if ( ! wp_verify_nonce( $nonce, self::NONCE ) || empty( $username ) ) {
@@ -174,6 +179,12 @@ class WPMastertoolkit_Blacklisted_Usernames {
                     ) 
                 ) 
             );
+        }
+
+        // Verify the target user is an administrator
+        $user_roles = $admin_user->roles ?? array();
+        if ( ! in_array( 'administrator', $user_roles ) ) {
+            wp_send_json_error( array( 'message' => __( 'This action can only be performed on administrator accounts.', 'wpmastertoolkit' ) ) );
         }
 
         global $wpdb;

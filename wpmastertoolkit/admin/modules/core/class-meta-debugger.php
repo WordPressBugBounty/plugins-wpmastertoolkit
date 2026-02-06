@@ -21,6 +21,7 @@ class WPMastertoolkit_Meta_Debugger {
         add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
         add_action( 'show_user_profile', array( $this, 'render_user_meta_box' ) );
         add_action( 'edit_user_profile', array( $this, 'render_user_meta_box' ) );
+		add_action( 'woocommerce_after_order_itemmeta', array( $this, 'render_order_meta_box' ), PHP_INT_MAX, 3 );
         add_action( 'wp_ajax_' . $this->action, array( $this, 'get_meta_data' ) );
     }
 
@@ -58,7 +59,10 @@ class WPMastertoolkit_Meta_Debugger {
             array( $this, 'render_post_and_comment_meta_box' ),
             $post_type,
             'normal',
-            'low'
+            'low',
+			array(
+				'post_type' => $post_type
+			),
         );
     }
 
@@ -67,15 +71,28 @@ class WPMastertoolkit_Meta_Debugger {
      * 
      * @since   1.4.0
      */
-    public function render_post_and_comment_meta_box( $post ) {
+    public function render_post_and_comment_meta_box( $post, $meta_box ) {
 
-        $type = 'post';
-        $id   = $post->ID;
+		$args      = $meta_box['args'] ?? array();
+		$post_type = $args['post_type'] ?? '';
+
+		if ( $this->is_wc_order( $post_type ) && ! wpmastertoolkit_is_pro() ) {
+			$this->render_fake_meta_debugger();
+			return;
+		}
+
+		$type = 'post';
+        $id   = $post->ID ?? '';
 
         if ( ! empty( $post->comment_ID ) ) {
             $type = 'comment';
             $id   = $post->comment_ID;
         }
+
+		if ( is_a( $post, 'Automattic\WooCommerce\Admin\Overrides\Order' ) ) {
+			$type = 'order';
+			$id   = $post->get_id();
+		}
 
         $this->render_meta_debugger( $id, $type );
     }
@@ -109,6 +126,27 @@ class WPMastertoolkit_Meta_Debugger {
         <?php
     }
 
+	/**
+	 * Render order meta box
+	 * 
+	 * @since   2.12.0
+	 */
+	public function render_order_meta_box( $item_id, $item, $product ) {
+
+		if ( ! $item->is_type( 'line_item' ) ) {
+			return;
+		}
+
+		if ( ! wpmastertoolkit_is_pro() ) {
+			$this->render_fake_meta_debugger();
+			return;
+		}
+
+		$order_id = $item->get_order_id();
+
+		$this->render_meta_debugger( $order_id . '_' . $item_id, 'order_item' );
+	}
+
     /**
      * Render meta debugger
      * 
@@ -127,14 +165,34 @@ class WPMastertoolkit_Meta_Debugger {
 
         ?>
             <div class="wpmastertoolkit-meta-debugger">
-                <button class="wpmastertoolkit-meta-debugger__button button" id="JSWPMastertoolkit_meta_debugger_button" data-id="<?php echo esc_attr( $id ); ?>" data-type="<?php echo esc_attr( $type ); ?>" type="button">
+                <button class="wpmastertoolkit-meta-debugger__button button" data-id="<?php echo esc_attr( $id ); ?>" data-type="<?php echo esc_attr( $type ); ?>" type="button">
                     <?php esc_html_e( 'Show all meta data', 'wpmastertoolkit' ); ?>
                     <div class="spinner"></div>
                 </button>
-                <div class="wpmastertoolkit-meta-debugger__container" id="JSWPMastertoolkit_meta_debugger_container"></div>
+                <div class="wpmastertoolkit-meta-debugger__container"></div>
             </div>
         <?php
     }
+
+	/**
+	 * Render fake meta debugger
+	 * 
+	 * @since   2.13.0
+	 */
+	public function render_fake_meta_debugger() {
+
+		$meta_debugger_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/meta-debugger.asset.php' );
+        wp_enqueue_style( 'WPMastertoolkit_meta_debugger', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/meta-debugger.css', array(), $meta_debugger_assets['version'], 'all' );
+
+		?>
+            <div class="wpmastertoolkit-meta-debugger">
+                <button class="wpmastertoolkit-meta-debugger__button button not-pro" type="button" disabled>
+                    <?php esc_html_e( 'Show all meta data', 'wpmastertoolkit' ); ?>
+					<span class="pro-tag"><?php esc_html_e( 'PRO', 'wpmastertoolkit' ); ?></span>
+                </button>
+            </div>
+        <?php
+	}
 
     /**
      * Get meta data
@@ -168,6 +226,25 @@ class WPMastertoolkit_Meta_Debugger {
             case 'comment':
                 $data = get_comment_meta( $id );
                 break;
+            case 'order':
+				$order = wc_get_order( $id );
+				if ( $order ) {
+					$order_metas = $order->get_meta_data();
+					$data        = $this->format_wc_metas( $order_metas );
+				}
+                break;
+            case 'order_item':
+				$desired_ids      = explode( '_', $id );
+				$desired_order_id = $desired_ids[0] ?? '';
+				$desired_item_id  = $desired_ids[1] ?? '';
+
+				$order = wc_get_order( $desired_order_id );
+				if ( $order ) {
+					$order_item = $order->get_item( $desired_item_id );
+					$item_metas = $order_item->get_meta_data();
+					$data       = $this->format_wc_metas( $item_metas );
+				}
+                break;
             default:
                 $data = array();
                 break;
@@ -184,6 +261,31 @@ class WPMastertoolkit_Meta_Debugger {
 
         wp_send_json_success( $result );
     }
+
+	/**
+	 * Is WC order
+	 *
+	 * @since   2.13.0
+	 */
+	private function is_wc_order( $post_type ) {
+		return in_array( $post_type, array( 'woocommerce_page_wc-orders', 'shop_order' ) );
+	}
+
+	/**
+	 * Format WC metas
+	 * 
+	 * @since   2.12.0
+	 */
+	private function format_wc_metas( $wc_metas ) {
+		$item_metas_data = array();
+
+		foreach ( $wc_metas as $item_meta ) {
+			$item_meta_data = $item_meta->get_data();
+			$item_metas_data[ $item_meta_data['key'] ] = array( $item_meta_data['value'] );
+		}
+
+		return $item_metas_data;
+	}
 
     /**
      * Is user allowed

@@ -1,7 +1,5 @@
 <?php
 
-use function Sodium\compare;
-
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
@@ -123,7 +121,7 @@ class WPMastertoolkit_Media_Encoder {
      * @since   1.13.0
      */
     public function add_submenu(){
-        add_submenu_page(
+        WPMastertoolkit_Settings::add_submenu_page(
             'wp-mastertoolkit-settings',
             $this->header_title,
             $this->header_title,
@@ -2215,6 +2213,48 @@ class WPMastertoolkit_Media_Encoder {
 		if ( ! $image ) {
 			return false;
 		}
+
+		// Handle EXIF orientation for proper image rotation
+		$exif_data = @exif_read_data( $file_path );
+		if ( ! empty( $exif_data['Orientation'] ) ) {
+			$orientation = (int) $exif_data['Orientation'];
+			//phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+			$orientation = apply_filters( 'wp_image_maybe_exif_rotate', $orientation, $file_path );
+			if ( $orientation && 1 !== $orientation ) {
+				switch ( $orientation ) {
+					case 2:
+						// Flip horizontally.
+						imageflip( $image, IMG_FLIP_HORIZONTAL );
+						break;
+					case 3:
+						// Rotate 180 degrees.
+						$image = imagerotate( $image, 180, 0 );
+						break;
+					case 4:
+						// Flip vertically.
+						imageflip( $image, IMG_FLIP_VERTICAL );
+						break;
+					case 5:
+						// Rotate 90 degrees counter-clockwise and flip vertically.
+						$image = imagerotate( $image, -90, 0 );
+						imageflip( $image, IMG_FLIP_VERTICAL );
+						break;
+					case 6:
+						// Rotate 90 degrees clockwise (270 counter-clockwise).
+						$image = imagerotate( $image, -90, 0 );
+						break;
+					case 7:
+						// Rotate 90 degrees counter-clockwise and flip horizontally.
+						$image = imagerotate( $image, 90, 0 );
+						imageflip( $image, IMG_FLIP_HORIZONTAL );
+						break;
+					case 8:
+						// Rotate 90 degrees counter-clockwise.
+						$image = imagerotate( $image, 90, 0 );
+						break;
+				}
+			}
+		}
 		
 		if ( ! imageistruecolor( $image ) ) {
 			$truecolor = imagecreatetruecolor( imagesx( $image ), imagesy( $image ) );
@@ -2260,6 +2300,48 @@ class WPMastertoolkit_Media_Encoder {
 
 		if ( ! $image ) {
 			return false;
+		}
+
+		// Handle EXIF orientation for proper image rotation
+		$exif_data = @exif_read_data( $file_path );
+		if ( ! empty( $exif_data['Orientation'] ) ) {
+			$orientation = (int) $exif_data['Orientation'];
+			//phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+			$orientation = apply_filters( 'wp_image_maybe_exif_rotate', $orientation, $file_path );
+			if ( $orientation && 1 !== $orientation ) {
+				switch ( $orientation ) {
+					case 2:
+						// Flip horizontally.
+						imageflip( $image, IMG_FLIP_HORIZONTAL );
+						break;
+					case 3:
+						// Rotate 180 degrees.
+						$image = imagerotate( $image, 180, 0 );
+						break;
+					case 4:
+						// Flip vertically.
+						imageflip( $image, IMG_FLIP_VERTICAL );
+						break;
+					case 5:
+						// Rotate 90 degrees counter-clockwise and flip vertically.
+						$image = imagerotate( $image, -90, 0 );
+						imageflip( $image, IMG_FLIP_VERTICAL );
+						break;
+					case 6:
+						// Rotate 90 degrees clockwise (270 counter-clockwise).
+						$image = imagerotate( $image, -90, 0 );
+						break;
+					case 7:
+						// Rotate 90 degrees counter-clockwise and flip horizontally.
+						$image = imagerotate( $image, 90, 0 );
+						imageflip( $image, IMG_FLIP_HORIZONTAL );
+						break;
+					case 8:
+						// Rotate 90 degrees counter-clockwise.
+						$image = imagerotate( $image, 90, 0 );
+						break;
+				}
+			}
 		}
 		
 		if ( ! imageistruecolor( $image ) ) {

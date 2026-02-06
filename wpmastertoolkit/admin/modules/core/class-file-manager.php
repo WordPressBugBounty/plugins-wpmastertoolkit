@@ -74,7 +74,7 @@ class WPMastertoolkit_File_Manager {
      * @since   1.9.0
      */
     public function add_submenu(){
-        add_submenu_page(
+        WPMastertoolkit_Settings::add_submenu_page(
             'wp-mastertoolkit-settings',
             $this->header_title,
             $this->header_title,
@@ -851,11 +851,11 @@ class WPMastertoolkit_File_Manager {
 
 				if ( $ext == 'zip' ) {
 					include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/helpers/core/file-manager/class-fm-zipper.php';
-					$zipper = new FM_Zipper();
+					$zipper = new WPMastertoolkit_FM_Zipper();
 					$res    = $zipper->create( $zipname, $files_to_zip );
 				} elseif ( $ext == 'tar' ) {
 					include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/helpers/core/file-manager/class-fm-zipper-tar.php';
-					$tar = new FM_Zipper_Tar();
+					$tar = new WPMastertoolkit_FM_Zipper_Tar();
 					$res = $tar->create( $zipname, $files_to_zip );
 				}
 
@@ -916,7 +916,7 @@ class WPMastertoolkit_File_Manager {
 
 				if( $ext == "zip" ) {
 					include WPMASTERTOOLKIT_PLUGIN_PATH . '/admin/helpers/core/file-manager/class-fm-zipper.php';
-					$zipper = new FM_Zipper();
+					$zipper = new WPMastertoolkit_FM_Zipper();
 					$res    = $zipper->unzip( $zip_path, $path );
 				} elseif ( $ext == "tar" ) {
 					try {

@@ -80,10 +80,11 @@ class WPMastertoolkit_Surecart {
 		$surecart_license_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/surecart-license.asset.php' );
 		wp_enqueue_style( 'WPMastertoolkit_surecart_license', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/surecart-license.css', array(), $surecart_license_assets['version'], 'all' );
 		wp_enqueue_script( 'WPMastertoolkit_surecart_license', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/surecart-license.js', $surecart_license_assets['dependencies'], $surecart_license_assets['version'], true );
+		$upgrade_label = wpmastertoolkit_is_pro() ? __( 'Activate License', 'wpmastertoolkit' ) : __( 'Upgrade Pro', 'wpmastertoolkit' );
 		wp_localize_script( 'WPMastertoolkit_surecart_license', 'WPMastertoolkit_surecart_license', array(
 			'activated' => $this->license_activated(),
 			'i18n'      => array(
-				'upgrade' => esc_js( '★ ' . esc_html__( 'Upgrade PRO', 'wpmastertoolkit' ) ),
+				'upgrade' => esc_js( '★ ' . esc_html( $upgrade_label ) ),
 			),
 		));
 	}

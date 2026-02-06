@@ -1,6 +1,8 @@
 <?php
 namespace SureCart\Licensing;
 
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 /**
  * SureCart Client
  *

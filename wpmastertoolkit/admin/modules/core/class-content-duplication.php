@@ -106,7 +106,7 @@ class WPMastertoolkit_Content_Duplication {
             }
         }
 
-        wp_redirect( admin_url( 'post.php?action=edit&post=' . $new_post_id ) );
+        wp_safe_redirect( admin_url( 'post.php?action=edit&post=' . $new_post_id ) );
         exit;
     }
 }

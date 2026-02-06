@@ -183,6 +183,7 @@ class WPMastertoolkit_External_Permalinks {
 
         $external_permalink = get_post_meta( $post->ID, 'wpmastertoolkit_external_permalink', true );
         if ( ! empty( $external_permalink ) && filter_var( $external_permalink, FILTER_VALIDATE_URL ) ) {
+			//phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect
             wp_redirect( $external_permalink );
             exit;
         }
@@ -213,7 +214,7 @@ class WPMastertoolkit_External_Permalinks {
      * @since   1.4.0
      */
     public function add_submenu(){
-        add_submenu_page(
+        WPMastertoolkit_Settings::add_submenu_page(
             'wp-mastertoolkit-settings',
             $this->header_title,
             $this->header_title,

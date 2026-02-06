@@ -43,6 +43,7 @@ class WPMastertoolkit_Disallow_WP_File_Edit {
      * @return void
      */
     public function disable_wp_file_edit() {
+		//phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound
         if( !defined('DISALLOW_FILE_EDIT') ) define( 'DISALLOW_FILE_EDIT', true );
     }
 

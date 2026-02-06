@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
-    <title><?php echo esc_html( $title_text ); ?></title>
+    <title><?php echo esc_html( $wpmtk_title_text ); ?></title>
     <meta charset="<?php echo esc_attr( get_bloginfo( 'charset' ) ); ?>" />
     <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, minimum-scale=1">
     <meta name="description" content="<?php echo esc_attr( get_bloginfo( 'description' ) ); ?>"/>
@@ -22,19 +22,19 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 	<meta http-equiv="Pragma" content="no-cache">
 	<meta http-equiv="Expires" content="0">
-    <?php if ( $countdown_status == '1' ): ?>
+    <?php if ( $wpmtk_countdown_status == '1' ): ?>
         <script>
-            const wpmastertoolkit_maintenance_mode_countdown_end_date = "<?php echo esc_js( $countdown_end_date ); ?>";
+            const wpmastertoolkit_maintenance_mode_countdown_end_date = "<?php echo esc_js( $wpmtk_countdown_end_date ); ?>";
         </script>
     <?php endif; ?>
     <style>
         :root {
-            --text-color: <?php echo ! empty( $text_color ) ? esc_attr( $text_color ) : esc_attr( '#000000' ); ?>;
-            --background-color: <?php echo ! empty( $background_color ) ? esc_attr( $background_color ) : esc_attr( '#FFFFFF' ); ?>;
-            --logo-height: <?php echo ! empty( $logo_height ) ? esc_attr( $logo_height ) : esc_attr( '180' ); ?>px;
-            --logo-width: <?php echo ! empty( $logo_width ) ? esc_attr( $logo_width ) : esc_attr( '180' ); ?>px;
-            --countdown-text-color: <?php echo esc_attr( $countdown_text_color ); ?>;
-            --countdown-background-color: <?php echo esc_attr( $countdown_background_color ); ?>;
+            --text-color: <?php echo ! empty( $wpmtk_text_color ) ? esc_attr( $wpmtk_text_color ) : esc_attr( '#000000' ); ?>;
+            --background-color: <?php echo ! empty( $wpmtk_background_color ) ? esc_attr( $wpmtk_background_color ) : esc_attr( '#FFFFFF' ); ?>;
+            --logo-height: <?php echo ! empty( $wpmtk_logo_height ) ? esc_attr( $wpmtk_logo_height ) : esc_attr( '180' ); ?>px;
+            --logo-width: <?php echo ! empty( $wpmtk_logo_width ) ? esc_attr( $wpmtk_logo_width ) : esc_attr( '180' ); ?>px;
+            --countdown-text-color: <?php echo esc_attr( $wpmtk_countdown_text_color ); ?>;
+            --countdown-background-color: <?php echo esc_attr( $wpmtk_countdown_background_color ); ?>;
         }
     </style>
 	<?php //phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedStylesheet ?>
@@ -52,20 +52,20 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
             <header class="wp-mastertoolkit__header">
 
-                <?php if ( ! empty( $logo ) ): ?>
+                <?php if ( ! empty( $wpmtk_logo ) ): ?>
 
                     <div class="wp-mastertoolkit__header__logo">
 						<?php //phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
-                        <img src="<?php echo esc_url( $logo ); ?>" alt="<?php esc_attr_e( 'site logo', 'wpmastertoolkit' ); ?>">
+                        <img src="<?php echo esc_url( $wpmtk_logo ); ?>" alt="<?php esc_attr_e( 'site logo', 'wpmastertoolkit' ); ?>">
                     </div>
                     <div class="wp-mastertoolkit__header__title screen-reader-text">
-                        <h1><?php echo esc_html( $title_text ); ?></h1>
+                        <h1><?php echo esc_html( $wpmtk_title_text ); ?></h1>
                     </div>
 
                 <?php else: ?>
 
                     <div class="wp-mastertoolkit__header__title">
-                        <h1><?php echo esc_html( $title_text ); ?></h1>
+                        <h1><?php echo esc_html( $wpmtk_title_text ); ?></h1>
                     </div>
 
                 <?php endif; ?>
@@ -74,13 +74,13 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
             <div class="wp-mastertoolkit__body">
 
-                <h2 class="wp-mastertoolkit__body__heading"><?php echo esc_html( $headline_text ); ?></h2>
+                <h2 class="wp-mastertoolkit__body__heading"><?php echo esc_html( $wpmtk_headline_text ); ?></h2>
 
                 <div class="wp-mastertoolkit__body__description">
-                    <?php echo wp_kses_post( wpautop( stripslashes( $body_text ) ) ); ?>
+                    <?php echo wp_kses_post( wpautop( stripslashes( $wpmtk_body_text ) ) ); ?>
                 </div>
                 
-                <?php if ( $countdown_status == '1' ): ?>
+                <?php if ( $wpmtk_countdown_status == '1' ): ?>
                     <ul class="wp-mastertoolkit__body__countdown">
                         <li><span id="days"></span>
                             <?php esc_html_e( 'Days', 'wpmastertoolkit' ); ?>
@@ -101,15 +101,15 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
         </main>
 
         <footer class="wp-mastertoolkit__footer">
-            <p><?php echo esc_html( $footer_text ); ?></p>
+            <p><?php echo esc_html( $wpmtk_footer_text ); ?></p>
         </footer>
 
-        <?php if ( ! empty( $background_image ) ): ?>
+        <?php if ( ! empty( $wpmtk_background_image ) ): ?>
 
             <picture class="wp-mastertoolkit__background">
-                <source media="(max-width: 100vh)" srcset="<?php echo esc_url( $background_image ); ?>">
+                <source media="(max-width: 100vh)" srcset="<?php echo esc_url( $wpmtk_background_image ); ?>">
 				<?php //phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
-                <img src="<?php echo esc_url( $background_image ); ?>">
+                <img src="<?php echo esc_url( $wpmtk_background_image ); ?>">
             </picture>
 
         <?php endif; ?>

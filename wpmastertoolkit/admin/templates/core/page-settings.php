@@ -6,10 +6,12 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * @since      1.0.0
  */
 
-$pro_modules_count = 0;
-$modules 		   = wpmastertoolkit_options();
-$order 			   = array_column( $modules, 'name' );
-array_multisort( $order, SORT_ASC, $modules );
+global $wpmtk_module_settings_submenu_pages;
+
+$wpmtk_pro_modules_count = 0;
+$wpmtk_modules           = wpmastertoolkit_options();
+$wpmtk_order             = array_column( $wpmtk_modules, 'name' );
+array_multisort( $wpmtk_order, SORT_ASC, $wpmtk_modules );
 ?>
 
 <div class="wrap wp-mastertoolkit">
@@ -26,7 +28,7 @@ array_multisort( $order, SORT_ASC, $modules );
                 </div>
 
                 <div class="wp-mastertoolkit__header__left__title">
-                    <?php esc_html_e( 'WPMasterToolKit', 'wpmastertoolkit' ); ?>
+                    <?php esc_html_e( 'WPMasterToolKit', 'wpmastertoolkit' ); ?> <?php echo esc_html( wpmastertoolkit_is_pro() ? __( 'Pro', 'wpmastertoolkit' ) : '' ); ?>
                     <div class="wp-mastertoolkit__header__left__title__version">
                         <?php esc_html_e( 'Version', 'wpmastertoolkit' ); ?> <?php echo esc_html( WPMASTERTOOLKIT_VERSION ); ?> - <a href="#" class="wp-mastertoolkit__header__left__title__version__open-modal-button"><?php esc_html_e("What's new?", 'wpmastertoolkit'); ?></a>
                     </div>
@@ -58,68 +60,68 @@ array_multisort( $order, SORT_ASC, $modules );
 
             <div class="wp-mastertoolkit__body__groups">
 
-                <?php foreach ( wpmastertoolkit_settings_groups() as $group_key => $group_data ) : ?>
+                <?php foreach ( wpmastertoolkit_settings_groups() as $wpmtk_group_key => $wpmtk_group_data ) : ?>
 
                     <?php
 
-                        $has_items           = false;
-                        $is_exception        = $group_data['exception'] ?? false;
-						$show_counter        = ! $is_exception;
-						$counter             = 0;
-						$counter_activated   = 0;
-						$counter_pro_modules = 0;
+                        $wpmtk_has_items           = false;
+                        $wpmtk_is_exception        = $wpmtk_group_data['exception'] ?? false;
+						$wpmtk_show_counter        = ! $wpmtk_is_exception;
+						$wpmtk_counter             = 0;
+						$wpmtk_counter_activated   = 0;
+						$wpmtk_counter_pro_modules = 0;
 
-                        if ( $is_exception ) {
-                            $has_items = true;
+                        if ( $wpmtk_is_exception ) {
+                            $wpmtk_has_items = true;
 
-							if ( $group_key === 'all' ) {
-								$show_counter = true;
-								$counter      = count( $modules );
+							if ( $wpmtk_group_key === 'all' ) {
+								$wpmtk_show_counter = true;
+								$wpmtk_counter      = count( $wpmtk_modules );
 							}
 
                         } else {
-                            foreach ( $modules as $option_key => $option_data ) {
-                                if ( $option_data['group'] === $group_key ) {
-									$counter++;
-                                    $has_items = true;
+                            foreach ( $wpmtk_modules as $wpmtk_option_key => $wpmtk_option_data ) {
+                                if ( $wpmtk_option_data['group'] === $wpmtk_group_key ) {
+									$wpmtk_counter++;
+                                    $wpmtk_has_items = true;
                                 }
-								$checked = isset( $db_options[$option_key] ) && $db_options[$option_key] === '1';
-								if ( $checked ) {
-									$counter_activated++;
+								$wpmtk_checked = isset( $db_options[$wpmtk_option_key] ) && $db_options[$wpmtk_option_key] === '1';
+								if ( $wpmtk_checked ) {
+									$wpmtk_counter_activated++;
 								}
 
-								if ( $option_data['pro'] ) {
-									$counter_pro_modules++;
+								if ( $wpmtk_option_data['pro'] ) {
+									$wpmtk_counter_pro_modules++;
 								}
                             }
 
-							if ( $group_key === 'activated' && $counter_activated > 0 ) {
-								$has_items = true;
-								$counter   = $counter_activated;
+							if ( $wpmtk_group_key === 'activated' && $wpmtk_counter_activated > 0 ) {
+								$wpmtk_has_items = true;
+								$wpmtk_counter   = $wpmtk_counter_activated;
 							}
 
-							if ( $group_key === 'pro-modules' && $counter_pro_modules > 0 ) {
-								$has_items = true;
-								$counter   = $counter_pro_modules;
+							if ( $wpmtk_group_key === 'pro-modules' && $wpmtk_counter_pro_modules > 0 ) {
+								$wpmtk_has_items = true;
+								$wpmtk_counter   = $wpmtk_counter_pro_modules;
 							}
                         }
 
-                        if ( ! $has_items ) {
+                        if ( ! $wpmtk_has_items ) {
                             continue;
                         }
                     ?>
 
-                    <div class="wp-mastertoolkit__body__groups__item" data-key="<?php echo esc_attr($group_key); ?>" >
+                    <div class="wp-mastertoolkit__body__groups__item" data-key="<?php echo esc_attr($wpmtk_group_key); ?>" >
                         <span class="logo">
                             <?php
-                                if ( isset($group_data['logo']) && file_exists(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/' . $group_data['logo'] ) ) {
-									echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/' . $group_data['logo'] ), wpmastertoolkit_allowed_tags_for_svg_files() );
+                                if ( isset($wpmtk_group_data['logo']) && file_exists(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/' . $wpmtk_group_data['logo'] ) ) {
+									echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/' . $wpmtk_group_data['logo'] ), wpmastertoolkit_allowed_tags_for_svg_files() );
                                 }
                             ?>
                         </span>
-                        <?php echo esc_html($group_data['name'] ?? ''); ?>
-						<?php if ( $show_counter ): ?>
-							<span class="counter"><?php echo esc_html($counter); ?></span>
+                        <?php echo esc_html($wpmtk_group_data['name'] ?? ''); ?>
+						<?php if ( $wpmtk_show_counter ): ?>
+							<span class="counter"><?php echo esc_html($wpmtk_counter); ?></span>
 						<?php endif; ?>
                     </div>
 
@@ -129,35 +131,35 @@ array_multisort( $order, SORT_ASC, $modules );
 
             <div class="wp-mastertoolkit__body__sections">
 
-                <?php foreach ( $modules as $option_key => $option_data ) :
-                        $option_path     = $option_data['path'] ?? '';
-                        $coming_soon     = $option_data['coming_soon'] ?? false;
-                        $is_addon_module = false;
+                <?php foreach ( $wpmtk_modules as $wpmtk_option_key => $wpmtk_option_data ) :
+                        $wpmtk_option_path     = $wpmtk_option_data['path'] ?? '';
+                        $wpmtk_coming_soon     = $wpmtk_option_data['coming_soon'] ?? false;
+                        $wpmtk_is_addon_module = false;
 
-						if ( $option_data['pro'] ) {
-							$pro_modules_count++;
+						if ( $wpmtk_option_data['pro'] ) {
+							$wpmtk_pro_modules_count++;
 						}
 
                         /**
                          * Check if is relative path in plugin folder.
                          */
-                        if ( strpos( $option_path, 'pro/' ) === 0 || strpos( $option_path, 'core/' ) === 0 ) {
-                            $option_path = WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/modules/' . $option_path;
+                        if ( strpos( $wpmtk_option_path, 'pro/' ) === 0 || strpos( $wpmtk_option_path, 'core/' ) === 0 ) {
+                            $wpmtk_option_path = WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/modules/' . $wpmtk_option_path;
                         } else {
-                            $is_addon_module = true;
+                            $wpmtk_is_addon_module = true;
                         }
-                        $file_exist = is_file( $option_path );
-                        $disabled   = $file_exist ? false : true;
-                        $checked    = isset($db_options[$option_key]) && $db_options[$option_key] === '1' && !$disabled;
+                        $wpmtk_file_exist = is_file( $wpmtk_option_path );
+                        $wpmtk_disabled   = $wpmtk_file_exist ? false : true;
+                        $wpmtk_checked    = isset($db_options[$wpmtk_option_key]) && $db_options[$wpmtk_option_key] === '1' && !$wpmtk_disabled;
                 ?>
-                    <div class="wp-mastertoolkit__body__sections__item <?php echo esc_attr( $disabled ? 'disabled' : '' ); ?>" data-key="<?php echo esc_attr($option_data['group'] ?? ''); ?><?php echo $checked ? ' activated' : ''; ?><?php echo $option_data['pro'] ? ' pro-modules' : ''; ?>" data-title="<?php echo esc_attr($option_data['name'] ?? ''); ?>" data-originaltitle="<?php echo esc_attr($option_data['original_name'] ?? ''); ?>">
-                        <div class="wp-mastertoolkit__body__sections__item__top">
+                    <div class="wp-mastertoolkit__body__sections__item module-item <?php echo esc_attr( $wpmtk_checked ? 'activated' : '' ); ?> <?php echo esc_attr( $wpmtk_disabled ? 'disabled' : '' ); ?>" data-key="<?php echo esc_attr($wpmtk_option_data['group'] ?? ''); ?><?php echo $wpmtk_checked ? ' activated' : ''; ?><?php echo $wpmtk_option_data['pro'] ? ' pro-modules' : ''; ?>" data-title="<?php echo esc_attr($wpmtk_option_data['name'] ?? ''); ?>" data-originaltitle="<?php echo esc_attr($wpmtk_option_data['original_name'] ?? ''); ?>">
+                        <div class="wp-mastertoolkit__body__sections__item__top module-header">
                             <div class="wp-mastertoolkit__body__sections__item__title">
                                 <span class="wp-mastertoolkit__body__sections__item__title__text">
-                                    <?php echo esc_html($option_data['name'] ?? ''); ?>
+                                    <?php echo esc_html($wpmtk_option_data['name'] ?? ''); ?>
                                 </span>
                                 <span class="wp-mastertoolkit__body__sections__item__title__tags">
-                                    <?php if($option_data['pro'] ?? false): ?>
+                                    <?php if($wpmtk_option_data['pro'] ?? false): ?>
                                         <span class="pro"><?php esc_html_e('PRO', 'wpmastertoolkit'); ?></span>
 
 										<?php if( ! wpmastertoolkit_is_pro() ): ?>
@@ -167,24 +169,27 @@ array_multisort( $order, SORT_ASC, $modules );
 										<?php endif; ?>
 
                                     <?php endif; ?>
-                                    <?php if ( $coming_soon ): ?>
+                                    <?php if ( $wpmtk_coming_soon ): ?>
                                         <span class="comming-soon"><?php esc_html_e('coming soon', 'wpmastertoolkit'); ?></span>
                                     <?php endif; ?>
+									<?php if ( !$wpmtk_is_addon_module && !$wpmtk_coming_soon ): ?>
+										<a class="documentation" href="https://wpmastertoolkit.com/?module_documentation=<?php echo esc_attr( $wpmtk_option_key ); ?>" target="_blank"><?php echo wp_kses( file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/images/documentation-icon.svg' ), wpmastertoolkit_allowed_tags_for_svg_files() ); ?><?php esc_html_e('DOC', 'wpmastertoolkit'); ?></a>
+									<?php endif; ?>
+									<?php if ( is_array($wpmtk_module_settings_submenu_pages) && isset($wpmtk_module_settings_submenu_pages[$wpmtk_option_key]) ): ?>
+										<a class="module-settings" href="<?php echo esc_url( admin_url( 'admin.php?page=' . $wpmtk_module_settings_submenu_pages[$wpmtk_option_key] ) ); ?>"><?php echo wp_kses( file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/gear.svg' ), wpmastertoolkit_allowed_tags_for_svg_files() ); ?><?php esc_html_e('SETTINGS', 'wpmastertoolkit'); ?></a>
+									<?php endif; ?>
                                 </span>
                             </div>
                             <div class="wp-mastertoolkit__body__sections__item__toggle">
                                 <label class="wp-mastertoolkit__toggle">
-                                    <input type="hidden" name="<?php echo esc_attr( WPMASTERTOOLKIT_PLUGIN_SETTINGS . '[' .  $option_key . ']'); ?>" value="0">
-                                    <input type="checkbox" name="<?php echo esc_attr(WPMASTERTOOLKIT_PLUGIN_SETTINGS . '[' . $option_key . ']'); ?>" value="1" <?php echo esc_attr( checked($checked, true, false) ); ?> <?php echo esc_attr( $disabled ? 'disabled' : '' ); ?>>
+                                    <input type="hidden" name="<?php echo esc_attr( WPMASTERTOOLKIT_PLUGIN_SETTINGS . '[' .  $wpmtk_option_key . ']'); ?>" value="0">
+                                    <input type="checkbox" name="<?php echo esc_attr(WPMASTERTOOLKIT_PLUGIN_SETTINGS . '[' . $wpmtk_option_key . ']'); ?>" value="1" <?php echo esc_attr( checked($wpmtk_checked, true, false) ); ?> <?php echo esc_attr( $wpmtk_disabled ? 'disabled' : '' ); ?>>
                                     <span class="wp-mastertoolkit__toggle__slider round"></span>
                                 </label>
                             </div>
                         </div>
                         <div class="wp-mastertoolkit__body__sections__item__bottom">
-                            <div class="wp-mastertoolkit__body__sections__item__description"><?php echo esc_html($option_data['desc'] ?? ''); ?></div>
-                            <?php if ( !$is_addon_module ): ?>
-                                <div class="wp-mastertoolkit__body__sections__item__documentation"><a href="https://wpmastertoolkit.com/?module_documentation=<?php echo esc_attr( $option_key ); ?>" target="_blank"><?php esc_html_e( 'Learn more', 'wpmastertoolkit' ); ?></a></div>
-                            <?php endif; ?>
+                            <div class="wp-mastertoolkit__body__sections__item__description"><?php echo esc_html($wpmtk_option_data['desc'] ?? ''); ?></div>
                         </div>
                     </div>
 
@@ -283,7 +288,7 @@ array_multisort( $order, SORT_ASC, $modules );
 									sprintf(
 										/* translators: %s: pro modules count */
 										__( 'Like the free version of WPMasterToolKit? The PRO version lets you go further with %s additional modules and additional features in the free modules.', 'wpmastertoolkit' ),
-										$pro_modules_count,
+										$wpmtk_pro_modules_count,
 									)
 								);
 							?>
@@ -304,7 +309,7 @@ array_multisort( $order, SORT_ASC, $modules );
 												sprintf(
 													/* translators: %s: pro modules count */
 													__( '+%s modules', 'wpmastertoolkit' ),
-													$pro_modules_count,
+													$wpmtk_pro_modules_count,
 												)
 											);
 										?>
@@ -361,9 +366,7 @@ array_multisort( $order, SORT_ASC, $modules );
 
 <div class="wp-mastertoolkit__changelog-modal">
     <div class="wp-mastertoolkit__changelog-modal__content">
-        <div class="wp-mastertoolkit__changelog-modal__content__close">
-            ✕
-        </div>
+        <div class="wp-mastertoolkit__changelog-modal__content__close"><?php echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/times.svg'), wpmastertoolkit_allowed_tags_for_svg_files() ); ?></div>
         <div>
             <h2><?php echo esc_html(
 				sprintf(
@@ -372,9 +375,12 @@ array_multisort( $order, SORT_ASC, $modules );
 					WPMASTERTOOLKIT_VERSION,
 				)); ?>
 			</h2>
-            <hr>
 			<div class="wp-mastertoolkit__changelog-modal__content__body">
-				<?php echo wp_kses_post( WPMastertoolkit_Settings::get_changelog() ); ?>
+				<?php echo do_shortcode( '[wpmtk_changelog limit="3"]' ); ?>
+
+				<div class="wp-mastertoolkit__changelog-modal__content__body__link">
+					<a href="<?php echo esc_url( __( 'https://wpmastertoolkit.com/en/changelog/', 'wpmastertoolkit' ) ); ?>" target="_blank"><?php esc_html_e( 'View all changelogs', 'wpmastertoolkit' ); ?></a>
+				</div>
 			</div>
         </div>
     </div>
