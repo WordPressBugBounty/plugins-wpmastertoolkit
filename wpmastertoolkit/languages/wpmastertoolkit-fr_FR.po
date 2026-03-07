@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WPMasterToolKit\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-31 17:04+0100\n"
-"PO-Revision-Date: 2026-01-08 09:09+0000\n"
+"PO-Revision-Date: 2026-03-07 15:54+0000\n"
 "Last-Translator: \n"
 "Language-Team: French (France)\n"
 "Language: fr_FR\n"
@@ -38,6 +38,16 @@ msgstr "%a jours, %h heures, %i minutes et %s secondes"
 #| msgid "%h hours, %i minutes and %s seconds"
 msgid "%1$h hours, %2$i minutes and %3$s seconds"
 msgstr "%h heures, %i minutes et %s secondes"
+
+#: admin/modules/core/class-search-replace-in-database.php:1396
+#: admin/modules/core/class-search-replace-in-database.php:1439
+#, fuzzy, php-format
+msgid ""
+"%1$s tables were searched, %2$s cells were found that need to be updated, "
+"%3$s changes were made."
+msgstr ""
+"la recherche a porté sur %1$s tables, %2$s cellules à mettre à jour ont été "
+"trouvées, %3$s modifications ont été effectuées."
 
 #: admin/modules/core/class-ban-emails.php:71
 #, fuzzy, php-format
@@ -386,12 +396,12 @@ msgstr ""
 msgid "Access Key ID"
 msgstr "ID de la clé d'accès"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:311
+#: admin/modules/pro/class-add-essentials-shortcodes.php:347
 #, fuzzy
 msgid "Access nested array value in user meta"
 msgstr "Accéder à la valeur d'un tableau imbriqué dans les méta utilisateurs"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:213
+#: admin/modules/pro/class-add-essentials-shortcodes.php:240
 #, fuzzy
 msgid "Access to this option is restricted for security reasons."
 msgstr "L'accès à cette option est limité pour des raisons de sécurité."
@@ -433,7 +443,16 @@ msgstr ""
 msgid "Activate License"
 msgstr "Activer la licence"
 
-#: admin/class-modules-data.php:1307
+#: admin/modules/core/class-search-replace-in-database.php:1332
+#, fuzzy
+msgid ""
+"Activate this option to include 'guid' columns in the search and replace "
+"operation."
+msgstr ""
+"Activez cette option pour inclure les colonnes \"guid\" dans l'opération de "
+"recherche et de remplacement."
+
+#: admin/class-modules-data.php:1317
 msgid "Activated modules"
 msgstr "Modules activés"
 
@@ -603,6 +622,11 @@ msgstr "Ajouter ou supprimer des balises"
 msgid "Add Page Icon"
 msgstr "Ajouter une icône de page"
 
+#: admin/modules/core/class-search-replace-in-database.php:1258
+#, fuzzy
+msgid "Add row"
+msgstr "Ajouter une ligne"
+
 #: admin/modules/core/class-protect-website-headers.php:426
 msgid ""
 "Add security headers quickly to your site to protect it from threats such as "
@@ -611,7 +635,7 @@ msgstr ""
 "Ajoutez rapidement des en-têtes de sécurité à votre site pour le protéger "
 "des menaces telles que les attaques de phishing, le vol de données, etc."
 
-#: admin/modules/pro/class-admin-menu-organizer.php:803
+#: admin/modules/pro/class-admin-menu-organizer.php:810
 #, fuzzy
 msgid "Add Separator"
 msgstr "Ajouter un séparateur"
@@ -663,7 +687,7 @@ msgstr "Notices d'administration"
 msgid "Adminer"
 msgstr "Adminer"
 
-#: admin/class-modules-data.php:1317
+#: admin/class-modules-data.php:1327
 msgid "Administration"
 msgstr "Administration"
 
@@ -690,7 +714,7 @@ msgid "After changing the username you'll need to login again."
 msgstr ""
 "Après avoir modifié le nom d'utilisateur, vous devrez vous reconnecter."
 
-#: admin/modules/core/class-smtp-mailer.php:1077
+#: admin/modules/core/class-smtp-mailer.php:1084
 msgid ""
 "After saving the settings above, check if everything is configured properly "
 "below."
@@ -783,7 +807,7 @@ msgstr "Toutes les images ont déjà un texte alternatif."
 msgid "All Items"
 msgstr "Tous les articles"
 
-#: admin/class-modules-data.php:1302
+#: admin/class-modules-data.php:1312
 msgid "All modules"
 msgstr "Tous les modules"
 
@@ -943,7 +967,7 @@ msgstr "Anonyme"
 #: admin/helpers/pro/smtp-mailer/resend.php:36
 #: admin/helpers/pro/smtp-mailer/sendgrid.php:37
 #: admin/helpers/pro/smtp-mailer/sendlayer.php:36
-#: admin/helpers/pro/smtp-mailer/sendpulse.php:37
+#: admin/helpers/pro/smtp-mailer/sendpulse.php:38
 #: admin/helpers/pro/smtp-mailer/smtp2go.php:36
 #: admin/helpers/pro/smtp-mailer/smtpcom.php:37
 #: admin/helpers/pro/smtp-mailer/sparkpost.php:37
@@ -997,7 +1021,7 @@ msgstr "Prise en charge des menus d'apparence"
 msgid "Apple Touch Icon"
 msgstr "Icône Apple Touch"
 
-#: admin/helpers/pro/smtp-mailer/outlook.php:79
+#: admin/helpers/pro/smtp-mailer/outlook.php:82
 #, fuzzy
 msgid "Application (client) ID"
 msgstr "ID de l'application (client)"
@@ -1336,7 +1360,7 @@ msgstr "Audio"
 msgid "Audio Icon"
 msgstr "Icône audio"
 
-#: admin/helpers/pro/smtp-mailer/zohomail.php:162
+#: admin/helpers/pro/smtp-mailer/zohomail.php:163
 #, fuzzy
 msgid "Australia (zoho.com.au)"
 msgstr "Australie (zoho.com.au)"
@@ -1355,9 +1379,9 @@ msgstr "Auteur"
 msgid "Author URI"
 msgstr "URI de l'auteur"
 
-#: admin/helpers/pro/smtp-mailer/gmail.php:108
-#: admin/helpers/pro/smtp-mailer/outlook.php:105
-#: admin/helpers/pro/smtp-mailer/zohomail.php:119
+#: admin/helpers/pro/smtp-mailer/gmail.php:109
+#: admin/helpers/pro/smtp-mailer/outlook.php:108
+#: admin/helpers/pro/smtp-mailer/zohomail.php:120
 #, fuzzy
 msgid "Authorization Connect"
 msgstr "Autorisation Connect"
@@ -1376,8 +1400,8 @@ msgstr ""
 "L'autorisation a échoué. Veuillez vérifier vos informations d'identification "
 "pour l'API Outlook."
 
-#: admin/helpers/pro/smtp-mailer/gmail.php:92
-#: admin/helpers/pro/smtp-mailer/zohomail.php:103
+#: admin/helpers/pro/smtp-mailer/gmail.php:93
+#: admin/helpers/pro/smtp-mailer/zohomail.php:104
 #, fuzzy
 msgid "Authorized Redirect URI"
 msgstr "URI de redirection autorisé"
@@ -1437,7 +1461,7 @@ msgstr ""
 "automatiquement les champs de métadonnées clés (titre, légende, texte "
 "alternatif et description) directement à partir du nom de fichier nettoyé."
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:300
+#: admin/modules/pro/class-add-essentials-shortcodes.php:333
 #, fuzzy
 msgid "Available parameters:"
 msgstr "Paramètres disponibles :"
@@ -1816,7 +1840,7 @@ msgstr "Peut exporter"
 msgid "Canada (Central)"
 msgstr "Canada (Central)"
 
-#: admin/helpers/pro/smtp-mailer/zohomail.php:166
+#: admin/helpers/pro/smtp-mailer/zohomail.php:167
 #, fuzzy
 msgid "Canada (zohocloud.ca)"
 msgstr "Canada (zohocloud.ca)"
@@ -1902,7 +1926,7 @@ msgid "Center"
 msgstr "Centre"
 
 #: admin/modules/core/class-blacklisted-usernames.php:128
-#: admin/modules/pro/class-admin-menu-organizer.php:942
+#: admin/modules/pro/class-admin-menu-organizer.php:949
 #: admin/modules/pro/class-my-account-menu-customizer.php:914
 #: admin/templates/core/file-manager/views/chmod.php:46
 #: admin/templates/pro/custom-login-design/login-page-template.php:168
@@ -2034,7 +2058,7 @@ msgstr "URI du thème enfant"
 msgid "Child Theme Version"
 msgstr "Version Thème Enfant"
 
-#: admin/helpers/pro/smtp-mailer/zohomail.php:168
+#: admin/helpers/pro/smtp-mailer/zohomail.php:169
 #, fuzzy
 msgid "China (zoho.com.cn)"
 msgstr "Chine (zoho.com.cn)"
@@ -2059,7 +2083,7 @@ msgstr "Choisissez un modèle d’IA et enregistrez les paramètres."
 msgid "Choose an Icon"
 msgstr "Choisissez une icône"
 
-#: admin/modules/pro/class-admin-menu-organizer.php:848
+#: admin/modules/pro/class-admin-menu-organizer.php:855
 #: admin/modules/pro/class-my-account-menu-customizer.php:805
 #, fuzzy
 msgid "Choose an icon"
@@ -2157,10 +2181,10 @@ msgstr ""
 "partie des widgets. Les widgets désactivés ne chargeront aucun actif et "
 "n'apparaîtront pas sous Options d'écran."
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:334
-#: admin/modules/pro/class-add-essentials-shortcodes.php:378
-#: admin/modules/pro/class-add-essentials-shortcodes.php:422
-#: admin/modules/pro/class-add-essentials-shortcodes.php:465
+#: admin/modules/pro/class-add-essentials-shortcodes.php:372
+#: admin/modules/pro/class-add-essentials-shortcodes.php:424
+#: admin/modules/pro/class-add-essentials-shortcodes.php:476
+#: admin/modules/pro/class-add-essentials-shortcodes.php:527
 #, fuzzy
 msgid "Clear"
 msgstr "Clair"
@@ -2190,9 +2214,9 @@ msgstr "Cliquez ici pour télécharger ou déposer un fichier dans la zone"
 msgid "Click here, and paste your image."
 msgstr "Cliquez ici et collez votre image."
 
-#: admin/helpers/pro/smtp-mailer/gmail.php:122
-#: admin/helpers/pro/smtp-mailer/outlook.php:119
-#: admin/helpers/pro/smtp-mailer/zohomail.php:132
+#: admin/helpers/pro/smtp-mailer/gmail.php:123
+#: admin/helpers/pro/smtp-mailer/outlook.php:122
+#: admin/helpers/pro/smtp-mailer/zohomail.php:133
 #, fuzzy
 msgid "Click the button above to confirm authorization."
 msgstr "Cliquez sur le bouton ci-dessus pour confirmer l'autorisation."
@@ -2207,15 +2231,15 @@ msgstr "Cliquez sur le lien ci-dessous pour vous connecter :"
 msgid "Clicks"
 msgstr "Clics"
 
-#: admin/helpers/pro/smtp-mailer/gmail.php:82
-#: admin/helpers/pro/smtp-mailer/zohomail.php:85
+#: admin/helpers/pro/smtp-mailer/gmail.php:83
+#: admin/helpers/pro/smtp-mailer/zohomail.php:86
 #, fuzzy
 msgid "Client ID"
 msgstr "Identifiant du client"
 
-#: admin/helpers/pro/smtp-mailer/gmail.php:86
-#: admin/helpers/pro/smtp-mailer/outlook.php:83
-#: admin/helpers/pro/smtp-mailer/zohomail.php:89
+#: admin/helpers/pro/smtp-mailer/gmail.php:87
+#: admin/helpers/pro/smtp-mailer/outlook.php:86
+#: admin/helpers/pro/smtp-mailer/zohomail.php:90
 #, fuzzy
 msgid "Client Secret"
 msgstr "Secret du client"
@@ -2329,6 +2353,11 @@ msgstr "Icône de sélecteur de couleurs"
 msgid "Column"
 msgstr "Colonne"
 
+#: admin/modules/core/class-search-replace-in-database.php:1549
+#, fuzzy
+msgid "Column:"
+msgstr "Colonne :"
+
 #: admin/helpers/core/select-dashicon/class-select-dashicon.php:112
 #, fuzzy
 msgid "Columns Icon"
@@ -2369,17 +2398,17 @@ msgstr "Compression : %s%%"
 msgid "Condition type"
 msgstr "Type de condition"
 
-#: admin/helpers/pro/smtp-mailer/gmail.php:112
-#: admin/helpers/pro/smtp-mailer/gmail.php:120
-#: admin/helpers/pro/smtp-mailer/outlook.php:109
-#: admin/helpers/pro/smtp-mailer/outlook.php:117
-#: admin/helpers/pro/smtp-mailer/zohomail.php:123
-#: admin/helpers/pro/smtp-mailer/zohomail.php:130
+#: admin/helpers/pro/smtp-mailer/gmail.php:113
+#: admin/helpers/pro/smtp-mailer/gmail.php:121
+#: admin/helpers/pro/smtp-mailer/outlook.php:112
+#: admin/helpers/pro/smtp-mailer/outlook.php:120
+#: admin/helpers/pro/smtp-mailer/zohomail.php:124
+#: admin/helpers/pro/smtp-mailer/zohomail.php:131
 #, fuzzy
 msgid "Confirm Authorization"
 msgstr "Confirmer l'autorisation"
 
-#: admin/modules/core/class-smtp-mailer.php:386
+#: admin/modules/core/class-smtp-mailer.php:389
 #, fuzzy
 msgid "Congratulations! Your SMTP settings are working correctly."
 msgstr "Nous vous félicitons ! Vos paramètres SMTP fonctionnent correctement."
@@ -2423,7 +2452,7 @@ msgstr "Type de contenu"
 msgid "Content Types"
 msgstr "Types de contenu"
 
-#: admin/class-modules-data.php:1332
+#: admin/class-modules-data.php:1342
 msgid "Contents & Media"
 msgstr "Contenus et médias"
 
@@ -2442,7 +2471,7 @@ msgstr "Icône de contrat"
 msgid "Cookie"
 msgstr "Cookie"
 
-#: admin/modules/core/class-smtp-mailer.php:1136
+#: admin/modules/core/class-smtp-mailer.php:1143
 #, fuzzy
 msgid "Coomming Soon"
 msgstr "Bientôt disponible"
@@ -2649,12 +2678,12 @@ msgstr "Créée"
 msgid "CreateNow"
 msgstr "Créer maintenant"
 
-#: admin/class-modules-data.php:1372
+#: admin/class-modules-data.php:1382
 #, fuzzy
 msgid "Credentials"
 msgstr "Informations d'identification"
 
-#: admin/class-modules-data.php:1377
+#: admin/class-modules-data.php:1387
 #: admin/templates/core/page-settings-tabs/credits.php:13
 msgid "Credits"
 msgstr "Crédits"
@@ -2702,6 +2731,21 @@ msgstr "Expiration en cours : %s"
 msgid "Current IP: "
 msgstr "Adresse IP actuelle :"
 
+#: admin/modules/pro/class-add-essentials-shortcodes.php:418
+#, fuzzy
+msgid "Current post"
+msgstr "Poste actuel"
+
+#: admin/modules/pro/class-add-essentials-shortcodes.php:470
+#, fuzzy
+msgid "Current term"
+msgstr "Mandat en cours"
+
+#: admin/modules/pro/class-add-essentials-shortcodes.php:366
+#, fuzzy
+msgid "Current user"
+msgstr "Utilisateur actuel"
+
 #: admin/modules/core/class-plugin-theme-rollback.php:511
 msgid "Current Version"
 msgstr "Version actuelle"
@@ -2719,7 +2763,7 @@ msgstr "Classe du body personnalisée"
 msgid "Custom Character Icon"
 msgstr "Icône de personnage personnalisé"
 
-#: admin/class-modules-data.php:1337
+#: admin/class-modules-data.php:1347
 msgid "Custom Code"
 msgstr "Code personnalisé"
 
@@ -2920,7 +2964,7 @@ msgstr ""
 "permet de contrôler son utilisation pour des types de publication "
 "spécifiques ou tous les types pertinents."
 
-#: admin/class-modules-data.php:1327
+#: admin/class-modules-data.php:1337
 #, fuzzy
 msgid "Debug"
 msgstr "Débogage"
@@ -2973,7 +3017,7 @@ msgstr "Slug de terme par défaut"
 #: admin/modules/core/class-code-snippets.php:267
 #: admin/modules/core/class-limit-login-attempts.php:543
 #: admin/modules/core/class-temporary-login.php:419
-#: admin/modules/pro/class-admin-menu-organizer.php:904
+#: admin/modules/pro/class-admin-menu-organizer.php:911
 #: admin/modules/pro/class-my-account-menu-customizer.php:857
 #: admin/templates/core/file-manager/views/default.php:98
 #: admin/templates/core/file-manager/views/default.php:172
@@ -3161,7 +3205,7 @@ msgstr "Désactiver les commentaires via XML-RPC"
 msgid "Disable Dashboard Widgets"
 msgstr "Désactiver les widgets du tableau de bord"
 
-#: admin/class-modules-data.php:1342
+#: admin/class-modules-data.php:1352
 msgid "Disable Features"
 msgstr "Désactiver les fonctionnalités"
 
@@ -3252,7 +3296,7 @@ msgstr ""
 msgid "Display cleared. Start streaming to view logs..."
 msgstr "Affichage effacé. Démarrer le streaming pour voir les journaux..."
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:309
+#: admin/modules/pro/class-add-essentials-shortcodes.php:345
 #, fuzzy
 msgid "Display email of user #5"
 msgstr "Afficher l'email de l'utilisateur n°5"
@@ -3267,12 +3311,12 @@ msgstr "Afficher les erreurs"
 msgid "Display images with new format on the site"
 msgstr "Afficher les images au format WebP sur le site"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:312
+#: admin/modules/pro/class-add-essentials-shortcodes.php:348
 #, fuzzy
 msgid "Display site name from WordPress options"
 msgstr "Afficher le nom du site dans les options de WordPress"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:310
+#: admin/modules/pro/class-add-essentials-shortcodes.php:346
 #, fuzzy
 msgid "Display title of current post"
 msgstr "Afficher le titre de l'article en cours"
@@ -3307,6 +3351,11 @@ msgstr "Icône de document"
 #: admin/modules/core/class-maintenance-mode.php:480
 msgid "Don't see in admin bar"
 msgstr "Ne pas voir dans la barre d'administration"
+
+#: admin/modules/core/class-search-replace-in-database.php:86
+#, fuzzy
+msgid "Done"
+msgstr "Terminé"
 
 #: admin/modules/core/class-adminer.php:451
 #: admin/templates/core/file-manager/views/default.php:179
@@ -3356,6 +3405,11 @@ msgstr "Brouillon"
 msgid "Drumstick Icon"
 msgstr "Icône de baguette"
 
+#: admin/modules/core/class-search-replace-in-database.php:1368
+#, fuzzy
+msgid "Dry run"
+msgstr "Essai à blanc"
+
 #: admin/modules/core/class-content-duplication.php:39
 #: admin/modules/core/class-content-duplication.php:83
 msgid "Duplicate"
@@ -3370,7 +3424,7 @@ msgstr "Duplication de menu"
 msgid "Dutch"
 msgstr "Néerlandais"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:476
+#: admin/modules/pro/class-add-essentials-shortcodes.php:538
 #, fuzzy
 msgid "e.g., key1->key2 for array options"
 msgstr "par exemple, clé1->clé2 pour les options de tableau"
@@ -3485,7 +3539,7 @@ msgid "Ellipsis Icon"
 msgstr "Icône d'ellipse"
 
 #: admin/modules/core/class-clean-profiles.php:220
-#: admin/modules/core/class-smtp-mailer.php:1080
+#: admin/modules/core/class-smtp-mailer.php:1087
 #: admin/modules/core/class-temporary-login.php:379
 #: admin/modules/pro/class-custom-login-design.php:152
 #: admin/modules/pro/class-custom-login-design.php:281
@@ -3556,7 +3610,7 @@ msgstr "Courriel envoyé avec succès."
 msgid "Email sent!"
 msgstr "Courriel envoyé !"
 
-#: admin/modules/core/class-smtp-mailer.php:1075
+#: admin/modules/core/class-smtp-mailer.php:1082
 msgid "Email test"
 msgstr "Test de courrier électronique"
 
@@ -3933,6 +3987,11 @@ msgstr "Erreur lors de la suppression d'un utilisateur"
 msgid "Error resending email"
 msgstr "Erreur lors de la réexpédition d'un courriel"
 
+#: admin/modules/core/class-search-replace-in-database.php:458
+#, fuzzy, php-format
+msgid "Error updating row: %d."
+msgstr "Erreur de mise à jour de la ligne : %d."
+
 #: admin/modules/core/class-file-manager.php:461
 #: admin/modules/core/class-file-manager.php:501
 #, fuzzy, php-format
@@ -3973,7 +4032,7 @@ msgid "Error while uploading files."
 msgstr "Erreur lors du téléchargement des fichiers."
 
 #: admin/modules/core/class-limit-login-attempts.php:163
-#: admin/modules/core/class-smtp-mailer.php:405
+#: admin/modules/core/class-smtp-mailer.php:408
 msgid "Error:"
 msgstr "Erreur:"
 
@@ -4030,7 +4089,7 @@ msgstr "Europe (Paris)"
 msgid "Europe (Stockholm)"
 msgstr "Europe (Stockholm)"
 
-#: admin/helpers/pro/smtp-mailer/zohomail.php:161
+#: admin/helpers/pro/smtp-mailer/zohomail.php:162
 #, fuzzy
 msgid "Europe (zoho.eu)"
 msgstr "Europe (zoho.eu)"
@@ -4053,7 +4112,7 @@ msgstr "Chaque minute"
 msgid "Everyone"
 msgstr "Tout le monde"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:307
+#: admin/modules/pro/class-add-essentials-shortcodes.php:343
 #, fuzzy
 msgid "Examples:"
 msgstr "Exemples :"
@@ -4258,7 +4317,7 @@ msgstr ""
 msgid "Failed to send email."
 msgstr "Échec de l'envoi de l'email."
 
-#: admin/modules/core/class-smtp-mailer.php:402
+#: admin/modules/core/class-smtp-mailer.php:405
 #, fuzzy
 msgid "Failed to send test email. Please check your SMTP settings."
 msgstr ""
@@ -4597,7 +4656,7 @@ msgstr ""
 "et de désactivation. Cela peut aider à résoudre des problèmes liés à des "
 "fichiers de modules manquants ou obsolètes."
 
-#: admin/modules/core/class-smtp-mailer.php:1066
+#: admin/modules/core/class-smtp-mailer.php:1073
 msgid ""
 "Force the usage of the sender name/email defined above. It will override "
 "those set by other plugins."
@@ -4847,7 +4906,7 @@ msgstr ""
 msgid "Global"
 msgstr "Global"
 
-#: admin/modules/pro/class-admin-menu-organizer.php:817
+#: admin/modules/pro/class-admin-menu-organizer.php:824
 #, fuzzy
 msgid "Global settings"
 msgstr "Paramètres globaux"
@@ -4859,7 +4918,7 @@ msgstr ""
 "Le quota de l'API Gmail a été dépassé. Veuillez patienter et réessayer plus "
 "tard."
 
-#: admin/helpers/pro/smtp-mailer/gmail.php:77
+#: admin/helpers/pro/smtp-mailer/gmail.php:78
 #, fuzzy
 msgid "Gmail Config"
 msgstr "Config Gmail"
@@ -5040,7 +5099,7 @@ msgstr "Masquer la barre d'administration"
 msgid "Hide in My Account"
 msgstr "Masquer dans Mon compte"
 
-#: admin/modules/pro/class-admin-menu-organizer.php:913
+#: admin/modules/pro/class-admin-menu-organizer.php:920
 #, fuzzy
 msgid "Hide in the menu"
 msgstr "Masquer dans le menu"
@@ -5064,7 +5123,7 @@ msgstr "Hiérarchique"
 msgid "High"
 msgstr "Haut"
 
-#: admin/modules/pro/class-admin-menu-organizer.php:820
+#: admin/modules/pro/class-admin-menu-organizer.php:827
 #, fuzzy
 msgid "Highlighting the separators"
 msgstr "Mise en évidence des séparateurs"
@@ -5169,7 +5228,7 @@ msgstr "J'ai déjà une licence"
 msgid "I no longer wish to see this message"
 msgstr "Je ne souhaite plus voir ce message"
 
-#: admin/modules/pro/class-admin-menu-organizer.php:935
+#: admin/modules/pro/class-admin-menu-organizer.php:942
 #: admin/modules/pro/class-my-account-menu-customizer.php:909
 #, fuzzy
 msgid "Icon"
@@ -5285,7 +5344,7 @@ msgstr ""
 "S'il est désactivé, l'e-mail sera envoyé au destinataire et à l'e-mail "
 "fourni ci-dessus."
 
-#: admin/modules/core/class-smtp-mailer.php:1050
+#: admin/modules/core/class-smtp-mailer.php:1057
 msgid ""
 "If set, the following sender name/email overrides WordPress core defaults "
 "but can still be overridden by other plugins that enables custom sender "
@@ -5325,6 +5384,15 @@ msgstr ""
 "WordPress, pensez à soutenir notre travail. Votre contribution nous aide à "
 "maintenir le projet, à développer de nouvelles fonctionnalités et à fournir "
 "une assistance continue. Voici comment vous pouvez contribuer :"
+
+#: admin/modules/core/class-search-replace-in-database.php:1317
+#, fuzzy
+msgid ""
+"If you notice timeouts or are unable to backup/import the database, try "
+"decreasing this value."
+msgstr ""
+"Si vous constatez des dépassements de délai ou si vous ne parvenez pas à "
+"sauvegarder/importer la base de données, essayez de diminuer cette valeur."
 
 #: admin/templates/core/register-custom-content-types/edit-post-cpt.php:55
 #, fuzzy
@@ -5457,7 +5525,7 @@ msgstr "Icône de retrait"
 msgid "Index Card Icon"
 msgstr "Icône de fiche"
 
-#: admin/helpers/pro/smtp-mailer/zohomail.php:163
+#: admin/helpers/pro/smtp-mailer/zohomail.php:164
 #, fuzzy
 msgid "India (zoho.in)"
 msgstr "Inde (zoho.in)"
@@ -5490,7 +5558,7 @@ msgstr "Insérer après l'icône"
 msgid "Insert Before Icon"
 msgstr "Insérer avant l'icône"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:299
+#: admin/modules/pro/class-add-essentials-shortcodes.php:332
 msgid "Insert dynamic variables into your titles and content via shortcodes."
 msgstr ""
 "Insérez des variables dynamiques dans vos titres et contenus via des codes "
@@ -5810,7 +5878,7 @@ msgstr "Liste des articles"
 msgid "Items List Navigation"
 msgstr "Navigation dans la liste des éléments"
 
-#: admin/helpers/pro/smtp-mailer/zohomail.php:164
+#: admin/helpers/pro/smtp-mailer/zohomail.php:165
 #, fuzzy
 msgid "Japan (zoho.jp)"
 msgstr "Japon (zoho.jp)"
@@ -5847,7 +5915,7 @@ msgstr "Icône d'évier de cuisine"
 msgid "Korean"
 msgstr "coréen"
 
-#: admin/modules/pro/class-admin-menu-organizer.php:925
+#: admin/modules/pro/class-admin-menu-organizer.php:932
 #: admin/modules/pro/class-my-account-menu-customizer.php:867
 #, fuzzy
 msgid "Label"
@@ -6282,7 +6350,7 @@ msgstr "Le mode maintenance a été activé."
 msgid "Maintenance mode status"
 msgstr "État du mode maintenance"
 
-#: admin/modules/pro/class-admin-menu-organizer.php:827
+#: admin/modules/pro/class-admin-menu-organizer.php:834
 #, fuzzy
 msgid "Make separators more visible by showing them in a different color."
 msgstr ""
@@ -6393,9 +6461,19 @@ msgstr "Marge supérieure"
 msgid "Marker Icon"
 msgstr "Icône de marqueur"
 
+#: admin/modules/core/class-search-replace-in-database.php:1520
+#, fuzzy
+msgid "Match case"
+msgstr "Mallette de correspondance"
+
 #: admin/modules/core/class-image-upload-control.php:313
 msgid "Max Height"
 msgstr "Hauteur maximale"
+
+#: admin/modules/core/class-search-replace-in-database.php:1311
+#, fuzzy
+msgid "Max Page Size"
+msgstr "Taille maximale de la page"
 
 #: admin/modules/core/class-image-upload-control.php:303
 #: admin/modules/pro/class-custom-login-design.php:3880
@@ -6633,19 +6711,19 @@ msgstr ""
 msgid "Module assets regeneration failed: "
 msgstr "La régénération des actifs du module a échoué :"
 
-#: admin/class-modules-data.php:1143
+#: admin/class-modules-data.php:1149
 msgctxt "Module description"
 msgid "A full-featured database management tool."
 msgstr "Un outil de gestion de base de données complet."
 
-#: admin/class-modules-data.php:987
+#: admin/class-modules-data.php:993
 msgctxt "Module description"
 msgid "A new button to quickly add new posts to speed up your workflow."
 msgstr ""
 "Un nouveau bouton pour ajouter rapidement de nouvelles publications afin "
 "d'accélérer votre flux de travail."
 
-#: admin/class-modules-data.php:999
+#: admin/class-modules-data.php:1005
 msgctxt "Module description"
 msgid ""
 "A simple tool to generate a child theme on your WordPress. You can disable "
@@ -6654,13 +6732,13 @@ msgstr ""
 "Un outil simple pour générer un thème enfant sur votre WordPress. Vous "
 "pouvez le désactiver après la génération."
 
-#: admin/class-modules-data.php:1211
+#: admin/class-modules-data.php:1217
 #, fuzzy
 msgctxt "Module description"
 msgid "A simple way to change the type of a post."
 msgstr "Un moyen simple de changer le type d’une publication."
 
-#: admin/class-modules-data.php:863
+#: admin/class-modules-data.php:869
 msgctxt "Module description"
 msgid ""
 "Add an extra layer of security to your website by enabling two-factor "
@@ -6669,7 +6747,7 @@ msgstr ""
 "Ajoutez une couche de sécurité supplémentaire à votre site Web en activant "
 "l'authentification à deux facteurs pour tous les utilisateurs."
 
-#: admin/class-modules-data.php:943
+#: admin/class-modules-data.php:949
 msgctxt "Module description"
 msgid ""
 "Add custom <body> class(es) on the singular view of some or all public post "
@@ -6678,7 +6756,7 @@ msgstr ""
 "Ajoutez des classes <body> personnalisées sur la vue unique de certains ou "
 "de tous les types de publications publiques."
 
-#: admin/class-modules-data.php:807
+#: admin/class-modules-data.php:813
 msgctxt "Module description"
 msgid ""
 "Add custom code snippets to your website without the need to edit the "
@@ -6694,21 +6772,21 @@ msgstr ""
 "ajoutez cette ligne à votre wp-config.php : "
 "définir('WPMASTERTOOLKIT_SNIPPETS_SAFE_MODE', true);"
 
-#: admin/class-modules-data.php:1047
+#: admin/class-modules-data.php:1053
 msgctxt "Module description"
 msgid "Add custom CSS on all admin pages for all user roles."
 msgstr ""
 "Ajoute du CSS personnalisé sur toutes les pages d'administration pour tous "
 "les rôles d'utilisateur."
 
-#: admin/class-modules-data.php:1051
+#: admin/class-modules-data.php:1057
 msgctxt "Module description"
 msgid "Add custom CSS on all frontend pages for all user roles."
 msgstr ""
 "Ajoutez du CSS personnalisé sur toutes les pages frontales pour tous les "
 "rôles d'utilisateur."
 
-#: admin/class-modules-data.php:1111
+#: admin/class-modules-data.php:1117
 msgctxt "Module description"
 msgid ""
 "Add security headers quickly to your site to protect it from threats such as "
@@ -6717,7 +6795,7 @@ msgstr ""
 "Ajoutez rapidement des en-têtes de sécurité à votre site pour le protéger "
 "des menaces telles que les attaques de phishing, le vol de données, etc."
 
-#: admin/class-modules-data.php:1175
+#: admin/class-modules-data.php:1181
 #, fuzzy
 msgctxt "Module description"
 msgid ""
@@ -6728,13 +6806,13 @@ msgstr ""
 "(WebP ou AVIF) pour de meilleures performances et une taille de fichier "
 "réduite."
 
-#: admin/class-modules-data.php:1223
+#: admin/class-modules-data.php:1229
 #, fuzzy
 msgctxt "Module description"
 msgid "Automatically generate alternative text using AI."
 msgstr "Générez automatiquement du texte alternatif à l'aide de l'IA."
 
-#: admin/class-modules-data.php:803
+#: admin/class-modules-data.php:809
 msgctxt "Module description"
 msgid ""
 "Automatically initiate the publication of scheduled posts marked with "
@@ -6744,7 +6822,7 @@ msgstr ""
 "« horaire manqué » à chaque visite sur le site Web, pour tous les types de "
 "publications."
 
-#: admin/class-modules-data.php:1179
+#: admin/class-modules-data.php:1185
 msgctxt "Module description"
 msgid ""
 "Automatically sanitize uploaded file names by removing special characters, "
@@ -6757,7 +6835,7 @@ msgstr ""
 "automatiquement les champs de métadonnées clés (titre, légende, texte "
 "alternatif et description) directement à partir du nom de fichier nettoyé."
 
-#: admin/class-modules-data.php:1235
+#: admin/class-modules-data.php:1241
 #, fuzzy
 msgctxt "Module description"
 msgid ""
@@ -6768,7 +6846,7 @@ msgstr ""
 "ce que les balises importantes se chargent en premier pour une meilleure "
 "vitesse et un meilleur référencement."
 
-#: admin/class-modules-data.php:915
+#: admin/class-modules-data.php:921
 msgctxt "Module description"
 msgid ""
 "Avoid overloading the database by setting a cap on the number of revisions "
@@ -6778,12 +6856,12 @@ msgstr ""
 "de révisions à enregistrer pour certains ou tous les types de publications "
 "prenant en charge les révisions."
 
-#: admin/class-modules-data.php:1103
+#: admin/class-modules-data.php:1109
 msgctxt "Module description"
 msgid "Ban the chosen emails."
 msgstr "Interdire les emails choisis."
 
-#: admin/class-modules-data.php:1099
+#: admin/class-modules-data.php:1105
 msgctxt "Module description"
 msgid ""
 "Block user registration from disposable email addresses. Disposable email "
@@ -6795,19 +6873,19 @@ msgstr ""
 "pour s'inscrire sur des sites Web qui nécessitent une vérification par e-"
 "mail."
 
-#: admin/class-modules-data.php:1119
+#: admin/class-modules-data.php:1125
 msgctxt "Module description"
 msgid "Browser and manage your files efficiently and easily."
 msgstr "Naviguez et gérez vos fichiers efficacement et facilement."
 
-#: admin/class-modules-data.php:859
+#: admin/class-modules-data.php:865
 msgctxt "Module description"
 msgid "Change the default login URL to a custom URL of your choice."
 msgstr ""
 "Remplacez l'URL de connexion par défaut par une URL personnalisée de votre "
 "choix."
 
-#: admin/class-modules-data.php:891
+#: admin/class-modules-data.php:897
 msgctxt "Module description"
 msgid ""
 "Check the types of emails you no longer want to receive as an administrator."
@@ -6815,7 +6893,7 @@ msgstr ""
 "Cochez les types d'e-mails que vous ne voulez plus recevoir en tant "
 "qu'administrateur."
 
-#: admin/class-modules-data.php:1155
+#: admin/class-modules-data.php:1161
 msgctxt "Module description"
 msgid ""
 "Clean actionscheduler_actions database table from actions that have been "
@@ -6824,7 +6902,7 @@ msgstr ""
 "Nettoyer la table de base de données actionscheduler_actions des actions qui "
 "ont été terminées | échouées | annulées."
 
-#: admin/class-modules-data.php:959
+#: admin/class-modules-data.php:965
 msgctxt "Module description"
 msgid ""
 "Clean up and speed up the dashboard by completely disabling some or all "
@@ -6835,7 +6913,7 @@ msgstr ""
 "partie des widgets. Les widgets désactivés ne chargeront aucun actif et "
 "n'apparaîtront pas sous Options d'écran."
 
-#: admin/class-modules-data.php:815
+#: admin/class-modules-data.php:821
 msgctxt "Module description"
 msgid ""
 "Completely deactivate RSS, Atom, and RDF feeds across your website. This "
@@ -6849,7 +6927,7 @@ msgstr ""
 "et la recherche. De plus, il efface toutes les références restantes aux URL "
 "de flux de la section <head> de vos pages Web."
 
-#: admin/class-modules-data.php:1071
+#: admin/class-modules-data.php:1077
 msgctxt "Module description"
 msgid ""
 "Completely disable core, theme and plugin updates and auto-updates. Will "
@@ -6859,7 +6937,7 @@ msgstr ""
 "noyau, des thèmes et des plugins. Désactivez également les vérifications de "
 "mise à jour, les notifications et les e-mails."
 
-#: admin/class-modules-data.php:975
+#: admin/class-modules-data.php:981
 msgctxt "Module description"
 msgid ""
 "Control your nav menu by allowing you to apply visibility controls to menu."
@@ -6867,7 +6945,7 @@ msgstr ""
 "Contrôlez votre menu de navigation en vous permettant d'appliquer des "
 "contrôles de visibilité au menu."
 
-#: admin/class-modules-data.php:1243
+#: admin/class-modules-data.php:1249
 #, fuzzy
 msgctxt "Module description"
 msgid ""
@@ -6878,7 +6956,7 @@ msgstr ""
 "ou supprimant des points de terminaison afin d'adapter la navigation et "
 "l'expérience utilisateur."
 
-#: admin/class-modules-data.php:1247
+#: admin/class-modules-data.php:1253
 #, fuzzy
 msgctxt "Module description"
 msgid ""
@@ -6889,7 +6967,7 @@ msgstr ""
 "conditions personnalisées, telles que l'adresse IP ou les cookies. Idéal "
 "pour les tests et le débogage."
 
-#: admin/class-modules-data.php:819
+#: admin/class-modules-data.php:825
 msgctxt "Module description"
 msgid ""
 "Deactivate the Gutenberg block editor selectively, allowing you to control "
@@ -6899,14 +6977,14 @@ msgstr ""
 "permet de contrôler son utilisation pour des types de publication "
 "spécifiques ou tous les types pertinents."
 
-#: admin/class-modules-data.php:879
+#: admin/class-modules-data.php:885
 msgctxt "Module description"
 msgid ""
 "Delete the wp-config-sample.php, block access to readme.html, license.txt"
 msgstr ""
 "Supprimez le wp-config-sample.php, bloquez l'accès à readme.html, licence.txt"
 
-#: admin/class-modules-data.php:939
+#: admin/class-modules-data.php:945
 msgctxt "Module description"
 msgid ""
 "Disable block-based widgets settings screen. Restores the classic widgets "
@@ -6917,7 +6995,7 @@ msgstr ""
 "l'écran des paramètres des widgets classiques lors de l'utilisation d'un "
 "thème classique (non bloquant). Cela n'a aucun effet sur les thèmes de bloc."
 
-#: admin/class-modules-data.php:911
+#: admin/class-modules-data.php:917
 msgctxt "Module description"
 msgid ""
 "Disable cart fragments scripts on the front-end for public site visitors. "
@@ -6928,7 +7006,7 @@ msgstr ""
 "visiteurs du site public. Cela pourrait interrompre la fonctionnalité des "
 "pages de panier et de paiement si elles dépendent de fragments de panier."
 
-#: admin/class-modules-data.php:919
+#: admin/class-modules-data.php:925
 msgctxt "Module description"
 msgid ""
 "Disable emoji support for pages, posts and custom post types on the admin "
@@ -6943,7 +7021,7 @@ msgstr ""
 "navigateurs modernes sur différents systèmes d'exploitation et appareils "
 "disposent désormais d'une prise en charge native."
 
-#: admin/class-modules-data.php:923
+#: admin/class-modules-data.php:929
 msgctxt "Module description"
 msgid ""
 "Disable loading of Dashicons CSS and JS files on the front-end for public "
@@ -6957,7 +7035,7 @@ msgstr ""
 "connexion personnalisés, s'ils dépendent de Dashicons. Assurez-vous de "
 "vérifier ces formulaires après la désactivation."
 
-#: admin/class-modules-data.php:1067
+#: admin/class-modules-data.php:1073
 msgctxt "Module description"
 msgid ""
 "Disable REST API access for non-authenticated users and remove URL traces "
@@ -6967,7 +7045,7 @@ msgstr ""
 "supprimez les traces d'URL de <head>, des en-têtes HTTP et du point de "
 "terminaison WP RSD."
 
-#: admin/class-modules-data.php:927
+#: admin/class-modules-data.php:933
 msgctxt "Module description"
 msgid ""
 "Disable the default WordPress shortlink <link> tag in <head>. Ignored by "
@@ -6981,7 +7059,7 @@ msgstr ""
 "préféré, ce qui permet d'afficher de jolis noms dans les liens courts et de "
 "suivre les clics lors du partage du lien sur les réseaux sociaux."
 
-#: admin/class-modules-data.php:895
+#: admin/class-modules-data.php:901
 msgctxt "Module description"
 msgid ""
 "Disable the default WordPress sitemap feature, which was introduced in "
@@ -6990,12 +7068,12 @@ msgstr ""
 "Désactivez la fonctionnalité de plan de site WordPress par défaut, "
 "introduite dans WordPress 5.5."
 
-#: admin/class-modules-data.php:887
+#: admin/class-modules-data.php:893
 msgctxt "Module description"
 msgid "Disable the listing of the directories."
 msgstr "Désactivez le listing des répertoires."
 
-#: admin/class-modules-data.php:931
+#: admin/class-modules-data.php:937
 #, fuzzy
 msgctxt "Module description"
 msgid ""
@@ -7008,7 +7086,7 @@ msgstr ""
 "du point de terminaison XML-RPC sur votre site. Si vous n'utilisez pas XML-"
 "RPC, vous pouvez désactiver cette balise en toute sécurité."
 
-#: admin/class-modules-data.php:935
+#: admin/class-modules-data.php:941
 msgctxt "Module description"
 msgid ""
 "Disable the Windows Live Writer (WLW) manifest <link> tag in <head>. The WLW "
@@ -7017,7 +7095,7 @@ msgstr ""
 "Désactivez la balise <link> du manifeste Windows Live Writer (WLW) dans "
 "<head>. L'application WLW a été abandonnée en 2017."
 
-#: admin/class-modules-data.php:823
+#: admin/class-modules-data.php:829
 msgctxt "Module description"
 msgid ""
 "Disable the wp_mail function, which is used by WordPress to send emails. "
@@ -7029,7 +7107,7 @@ msgstr ""
 "d'e-mails, car elle empêche la fonction wp_mail de charger et de consommer "
 "des ressources."
 
-#: admin/class-modules-data.php:875
+#: admin/class-modules-data.php:881
 msgctxt "Module description"
 msgid ""
 "Disable zip file uploads for plugins, which are used to install plugins on "
@@ -7038,7 +7116,7 @@ msgstr ""
 "Désactivez les téléchargements de fichiers zip pour les plugins, qui sont "
 "utilisés pour installer des plugins sur votre site Web."
 
-#: admin/class-modules-data.php:871
+#: admin/class-modules-data.php:877
 msgctxt "Module description"
 msgid ""
 "Disable zip file uploads for themes, which are used to install themes on "
@@ -7047,14 +7125,14 @@ msgstr ""
 "Désactivez les téléchargements de fichiers zip pour les thèmes, qui sont "
 "utilisés pour installer des thèmes sur votre site Web."
 
-#: admin/class-modules-data.php:1031
+#: admin/class-modules-data.php:1037
 msgctxt "Module description"
 msgid "Display all metadata for a post, user, term, or comment."
 msgstr ""
 "Affiche toutes les métadonnées d'une publication, d'un utilisateur, d'un "
 "terme ou d'un commentaire."
 
-#: admin/class-modules-data.php:1163
+#: admin/class-modules-data.php:1169
 msgctxt "Module description"
 msgid ""
 "Displaying the sequence of action and filter hooks by their origin on a "
@@ -7063,24 +7141,24 @@ msgstr ""
 "Affichage de la séquence d'actions et des filtres de hooks par leur origine "
 "sur une seule page."
 
-#: admin/class-modules-data.php:903
+#: admin/class-modules-data.php:909
 msgctxt "Module description"
 msgid "Download plugins from the plugins page in the WordPress admin panel."
 msgstr ""
 "Téléchargez les plugins depuis la page des plugins dans le panneau "
 "d'administration WordPress."
 
-#: admin/class-modules-data.php:991
+#: admin/class-modules-data.php:997
 msgctxt "Module description"
 msgid "Download your posts and pages to a .csv format."
 msgstr "Téléchargez vos articles et pages au format .csv."
 
-#: admin/class-modules-data.php:979
+#: admin/class-modules-data.php:985
 msgctxt "Module description"
 msgid "Download your user data to a .csv format."
 msgstr "Téléchargez vos données utilisateur au format .csv."
 
-#: admin/class-modules-data.php:1255
+#: admin/class-modules-data.php:1261
 #, fuzzy
 msgctxt "Module description"
 msgid ""
@@ -7090,24 +7168,24 @@ msgstr ""
 "Téléchargez facilement plusieurs fichiers multimédias sous forme d'archive "
 "ZIP directement depuis votre bibliothèque de médias WordPress."
 
-#: admin/class-modules-data.php:995
+#: admin/class-modules-data.php:1001
 msgctxt "Module description"
 msgid "Easily duplicate your WordPress Menus"
 msgstr "Dupliquez facilement vos menus WordPress"
 
-#: admin/class-modules-data.php:1059
+#: admin/class-modules-data.php:1065
 msgctxt "Module description"
 msgid "Easily edit and validate your ads.txt and app-ads.txt content."
 msgstr ""
 "Modifiez et validez facilement le contenu de vos fichiers ads.txt et app-ads."
 "txt."
 
-#: admin/class-modules-data.php:1063
+#: admin/class-modules-data.php:1069
 msgctxt "Module description"
 msgid "Easily edit and validate your robots.txt content."
 msgstr "Modifiez et validez facilement le contenu de votre fichier robots.txt."
 
-#: admin/class-modules-data.php:1055
+#: admin/class-modules-data.php:1061
 msgctxt "Module description"
 msgid ""
 "Easily insert <meta>, <link>, <script> and <style> tags, Google Analytics, "
@@ -7118,7 +7196,7 @@ msgstr ""
 "Analytics, Tag Manager, AdSense, le code Ads Conversion et Optimize, les "
 "pixels Facebook, TikTok et Twitter, etc."
 
-#: admin/class-modules-data.php:1131
+#: admin/class-modules-data.php:1137
 #, fuzzy
 msgctxt "Module description"
 msgid ""
@@ -7130,7 +7208,7 @@ msgstr ""
 "d'autres choses encore pour vous aider à résoudre les problèmes de votre "
 "site."
 
-#: admin/class-modules-data.php:1139
+#: admin/class-modules-data.php:1145
 msgctxt "Module description"
 msgid ""
 "Enable assignment of multiple roles during user account creation and editing."
@@ -7142,7 +7220,7 @@ msgstr ""
 "avec des rôles non définis dans le noyau WordPress, par exemple à partir de "
 "plugins de commerce électronique ou de LMS."
 
-#: admin/class-modules-data.php:1023
+#: admin/class-modules-data.php:1029
 msgctxt "Module description"
 msgid ""
 "Enable custom ordering of various \"hierarchical\" content types or those "
@@ -7153,7 +7231,7 @@ msgstr ""
 "ceux prenant en charge les « attributs de page ». Un nouveau sous-menu "
 "« Commander » apparaîtra pour le(s) type(s) de contenu activé(s)."
 
-#: admin/class-modules-data.php:1043
+#: admin/class-modules-data.php:1049
 msgctxt "Module description"
 msgid ""
 "Enable log in, log out and dynamic log in/out menu item for addition to any "
@@ -7162,7 +7240,7 @@ msgstr ""
 "Active l'élément de menu de connexion, de déconnexion et de "
 "connexion/déconnexion dynamique pour l'ajouter à n'importe quel menu."
 
-#: admin/class-modules-data.php:1015
+#: admin/class-modules-data.php:1021
 msgctxt "Module description"
 msgid ""
 "Enable one-click duplication of pages, posts and custom posts. The "
@@ -7172,7 +7250,7 @@ msgstr ""
 "publications personnalisées. Les termes de taxonomie correspondants et la "
 "méta-post seront également dupliqués."
 
-#: admin/class-modules-data.php:1027
+#: admin/class-modules-data.php:1033
 msgctxt "Module description"
 msgid ""
 "Enable pages, posts and/or custom post types to have permalinks that point "
@@ -7184,7 +7262,7 @@ msgstr ""
 "L'attribut rel=\"noopener noreferrer nofollow\" sera également ajouté pour "
 "une sécurité améliorée et des avantages en matière de référencement."
 
-#: admin/class-modules-data.php:1135
+#: admin/class-modules-data.php:1141
 #, fuzzy
 msgctxt "Module description"
 msgid ""
@@ -7194,7 +7272,7 @@ msgstr ""
 "Activez la fonctionnalité de connexion temporaire pour permettre aux "
 "utilisateurs d'accéder à votre site sans créer de compte permanent."
 
-#: admin/class-modules-data.php:855
+#: admin/class-modules-data.php:861
 msgctxt "Module description"
 msgid ""
 "Enforce the use of strong passwords for all users on your website. This "
@@ -7207,7 +7285,7 @@ msgstr ""
 "utilisateurs disposent d'un mot de passe fort, difficile à deviner ou à "
 "déchiffrer."
 
-#: admin/class-modules-data.php:791
+#: admin/class-modules-data.php:797
 msgctxt "Module description"
 msgid ""
 "Enhance media library functionality to support the seamless uploading of SVG "
@@ -7216,7 +7294,7 @@ msgstr ""
 "Améliorez la fonctionnalité de la bibliothèque multimédia pour prendre en "
 "charge le téléchargement transparent de fichiers SVG."
 
-#: admin/class-modules-data.php:835
+#: admin/class-modules-data.php:841
 msgctxt "Module description"
 msgid ""
 "Enhance your website's security by fortifying it against brute force, (DoS) "
@@ -7229,7 +7307,7 @@ msgstr ""
 "plus, notre solution désactive de manière proactive les rétroliens et les "
 "pingbacks, renforçant ainsi les mécanismes de défense de votre site."
 
-#: admin/class-modules-data.php:795
+#: admin/class-modules-data.php:801
 msgctxt "Module description"
 msgid ""
 "Ensure that all external links within post content open in a new browser tab "
@@ -7243,7 +7321,7 @@ msgstr ""
 "référencement en incluant l'attribut \"rel=\"noopener noreferrer "
 "nofollow\"\"."
 
-#: admin/class-modules-data.php:899
+#: admin/class-modules-data.php:905
 msgctxt "Module description"
 msgid ""
 "Force all emails sent from your website to be sent to a specific email "
@@ -7255,7 +7333,7 @@ msgstr ""
 "fonctionnalité de messagerie sur votre site Web, car elle garantit que tous "
 "les e-mails sont envoyés à une seule adresse e-mail."
 
-#: admin/class-modules-data.php:1207
+#: admin/class-modules-data.php:1213
 #, fuzzy
 msgctxt "Module description"
 msgid "Force HTTPS on your site to ensure all traffic is encrypted and secure."
@@ -7263,14 +7341,14 @@ msgstr ""
 "Forcez HTTPS sur votre site pour garantir que tout le trafic est crypté et "
 "sécurisé."
 
-#: admin/class-modules-data.php:955
+#: admin/class-modules-data.php:961
 msgctxt "Module description"
 msgid "Give the admin menu more room to better accommodate wider items."
 msgstr ""
 "Donnez plus d'espace au menu d'administration pour mieux accueillir des "
 "éléments plus larges."
 
-#: admin/class-modules-data.php:783
+#: admin/class-modules-data.php:789
 msgctxt "Module description"
 msgid ""
 "Hide the admin bar on the front end of your website for either specific user "
@@ -7279,7 +7357,7 @@ msgstr ""
 "Masquez la barre d'administration sur le front-end de votre site Web pour "
 "des rôles d'utilisateur spécifiques ou pour tous les utilisateurs."
 
-#: admin/class-modules-data.php:867
+#: admin/class-modules-data.php:873
 msgctxt "Module description"
 msgid ""
 "Hide the default WordPress login errors that appear when an incorrect "
@@ -7288,12 +7366,12 @@ msgstr ""
 "Masquez les erreurs de connexion WordPress par défaut qui apparaissent "
 "lorsqu'un nom d'utilisateur ou un mot de passe incorrect est saisi."
 
-#: admin/class-modules-data.php:827
+#: admin/class-modules-data.php:833
 msgctxt "Module description"
 msgid "Hide the WordPress version from the source code."
 msgstr "Masquez la version WordPress du code source."
 
-#: admin/class-modules-data.php:1227
+#: admin/class-modules-data.php:1233
 #, fuzzy
 msgctxt "Module description"
 msgid ""
@@ -7304,7 +7382,7 @@ msgstr ""
 "avec Argon2. Si Argon2 n'est pas disponible, l'algorithme bcrypt par défaut "
 "sera utilisé."
 
-#: admin/class-modules-data.php:1039
+#: admin/class-modules-data.php:1045
 msgctxt "Module description"
 msgid ""
 "Improve the usefulness of listing pages for various post types and "
@@ -7315,7 +7393,7 @@ msgstr ""
 "taxonomies, médias, commentaires et utilisateurs en ajoutant/supprimant des "
 "colonnes et des éléments."
 
-#: admin/class-modules-data.php:775
+#: admin/class-modules-data.php:781
 #, fuzzy
 msgctxt "Module description"
 msgid ""
@@ -7326,24 +7404,24 @@ msgstr ""
 "rassemblant toutes les notifications dans une fenêtre contextuelle (ouverte "
 "en cliquant sur la cloche en haut à droite)."
 
-#: admin/class-modules-data.php:883
+#: admin/class-modules-data.php:889
 msgctxt "Module description"
 msgid "Include/Exclude countries IP"
 msgstr "Inclure/exclure l'adresse IP des pays"
 
-#: admin/class-modules-data.php:1187
+#: admin/class-modules-data.php:1193
 msgctxt "Module description"
 msgid "Insert dynamic variables into your titles and content via shortcodes."
 msgstr ""
 "Insérez des variables dynamiques dans vos titres et contenus via des codes "
 "courts."
 
-#: admin/class-modules-data.php:1171
+#: admin/class-modules-data.php:1177
 msgctxt "Module description"
 msgid "Instant switching between user accounts."
 msgstr "Commutation instantanée entre les comptes utilisateurs."
 
-#: admin/class-modules-data.php:1147
+#: admin/class-modules-data.php:1153
 msgctxt "Module description"
 msgid ""
 "Manage app icon (Apple Touch Icon) individually. Once activated, go to "
@@ -7354,12 +7432,12 @@ msgstr ""
 "activée, accédez à Paramètres / Général pour modifier votre icône Apple "
 "Touch sans impacter votre favicon."
 
-#: admin/class-modules-data.php:1159
+#: admin/class-modules-data.php:1165
 msgctxt "Module description"
 msgid "Manage cron events on your website."
 msgstr "Gérez les événements cron sur votre site Web."
 
-#: admin/class-modules-data.php:811
+#: admin/class-modules-data.php:817
 msgctxt "Module description"
 msgid ""
 "Manage the visibility of comments on your public posts by selectively "
@@ -7373,7 +7451,7 @@ msgstr ""
 "les commentaires existants disparaîtront de manière transparente du front-"
 "end."
 
-#: admin/class-modules-data.php:1191
+#: admin/class-modules-data.php:1197
 msgctxt "Module description"
 msgid ""
 "Managing HTTP 410 statuses on your site. The 410 status indicates that the "
@@ -7384,7 +7462,7 @@ msgstr ""
 "ressource demandée a été supprimée définitivement et que cette suppression "
 "est intentionnelle et définitive."
 
-#: admin/class-modules-data.php:1091
+#: admin/class-modules-data.php:1097
 msgctxt "Module description"
 msgid ""
 "Modify the interval of the WordPress heartbeat API or disable it on admin "
@@ -7396,19 +7474,25 @@ msgstr ""
 "publication et/ou le frontend. Cela contribuera à réduire la charge CPU sur "
 "le serveur."
 
-#: admin/class-modules-data.php:1079
+#: admin/class-modules-data.php:1085
+#, fuzzy
+#| msgid ""
+#| "Obfuscate email address to prevent spam bots from harvesting them, but "
+#| "make it readable like a regular email address for human visitors, using "
+#| "shortcode [wpm_obfuscate email=\"example@email.com\" display=\"newline\"]"
 msgctxt "Module description"
 msgid ""
 "Obfuscate email address to prevent spam bots from harvesting them, but make "
 "it readable like a regular email address for human visitors, using shortcode "
-"[wpm_obfuscate email=\"example@email.com\" display=\"newline\"]"
+"[wpm_obfuscate email=\"example@email.com\" display=\"newline\" rtl=\"no\" "
+"mailto=\"yes\"]"
 msgstr ""
 "Masquez l'adresse e-mail pour empêcher les robots spammeurs de la récupérer, "
 "mais rendez-la lisible comme une adresse e-mail ordinaire pour les visiteurs "
 "humains, en utilisant le shortcode [wpm_obfuscate email=\"example@email."
 "com\" display=\"newline\"]"
 
-#: admin/class-modules-data.php:1075
+#: admin/class-modules-data.php:1081
 msgctxt "Module description"
 msgid ""
 "Obfuscate publicly exposed author page URLs that shows the user slugs / "
@@ -7422,7 +7506,7 @@ msgstr ""
 "des erreurs 404 pour les URL d'origine. Masquez également le point de "
 "terminaison de l'API REST /wp-json/wp/v2/users/."
 
-#: admin/class-modules-data.php:1011
+#: admin/class-modules-data.php:1017
 msgctxt "Module description"
 msgid ""
 "Password-protect the entire site to hide the content from public view and "
@@ -7433,7 +7517,7 @@ msgstr ""
 "vue du public et des robots/robots des moteurs de recherche. Les "
 "administrateurs connectés peuvent toujours accéder au site comme d'habitude."
 
-#: admin/class-modules-data.php:1219
+#: admin/class-modules-data.php:1225
 #, fuzzy
 msgctxt "Module description"
 msgid "Personalize your login page to match your brand."
@@ -7441,7 +7525,7 @@ msgstr ""
 "Personnalisez votre page de connexion pour qu'elle corresponde à votre "
 "marque."
 
-#: admin/class-modules-data.php:1095
+#: admin/class-modules-data.php:1101
 msgctxt "Module description"
 msgid ""
 "Prevent brute force attacks by limiting the number of failed login attempts "
@@ -7450,7 +7534,7 @@ msgstr ""
 "Empêchez les attaques par force brute en limitant le nombre de tentatives de "
 "connexion infructueuses autorisées par adresse IP."
 
-#: admin/class-modules-data.php:839
+#: admin/class-modules-data.php:845
 msgctxt "Module description"
 msgid ""
 "Prevent the creation of new user accounts on your website with the native "
@@ -7459,7 +7543,7 @@ msgstr ""
 "Empêchez la création de nouveaux comptes d'utilisateurs sur votre site Web "
 "avec le formulaire d'inscription natif WordPress."
 
-#: admin/class-modules-data.php:851
+#: admin/class-modules-data.php:857
 msgctxt "Module description"
 msgid ""
 "Prevent the creation of new user accounts with predifined blacklisted "
@@ -7469,19 +7553,19 @@ msgstr ""
 "d'utilisateur prédéfinis sur liste noire. Liste noire des noms d'utilisateur "
 "trop courants."
 
-#: admin/class-modules-data.php:847
+#: admin/class-modules-data.php:853
 msgctxt "Module description"
 msgid "Prevent the modification of the admin email address on your website."
 msgstr ""
 "Empêchez la modification de l’adresse e-mail de l’administrateur sur votre "
 "site Web."
 
-#: admin/class-modules-data.php:843
+#: admin/class-modules-data.php:849
 msgctxt "Module description"
 msgid "Prevent the modification of the site URL on your website."
 msgstr "Empêchez la modification de l'URL du site sur votre site Web."
 
-#: admin/class-modules-data.php:831
+#: admin/class-modules-data.php:837
 msgctxt "Module description"
 msgid ""
 "Prevent the modification of your website's core files through the WordPress "
@@ -7490,14 +7574,14 @@ msgstr ""
 "Empêchez la modification des fichiers principaux de votre site Web via le "
 "panneau d'administration WordPress."
 
-#: admin/class-modules-data.php:1115
+#: admin/class-modules-data.php:1121
 msgctxt "Module description"
 msgid "Prevent user enumeration via ?author=X and REST API /users/ endpoints."
 msgstr ""
 "Empêcher l'énumération des utilisateurs via ?author=X et les points de "
 "terminaison REST API /users/."
 
-#: admin/class-modules-data.php:1195
+#: admin/class-modules-data.php:1201
 msgctxt "Module description"
 msgid ""
 "Prevents plugin activation, deactivation, and deletion for enhanced security."
@@ -7505,7 +7589,7 @@ msgstr ""
 "Empêche l'activation, la désactivation et la suppression des plugins pour "
 "une sécurité renforcée."
 
-#: admin/class-modules-data.php:963
+#: admin/class-modules-data.php:969
 msgctxt "Module description"
 msgid ""
 "Protect your site against a wide range of threats. check all incoming "
@@ -7517,7 +7601,7 @@ msgstr ""
 "des éléments désagréables comme eval(, base64_ et des chaînes de requêtes "
 "excessivement longues."
 
-#: admin/class-modules-data.php:907
+#: admin/class-modules-data.php:913
 msgctxt "Module description"
 msgid ""
 "Protect your website from malicious file access in the upload directory."
@@ -7525,7 +7609,7 @@ msgstr ""
 "Protégez votre site Web contre l'accès malveillant aux fichiers dans le "
 "répertoire de téléchargement."
 
-#: admin/class-modules-data.php:1167
+#: admin/class-modules-data.php:1173
 msgctxt "Module description"
 msgid ""
 "Quickly change your WordPress database prefix to save time and enhance "
@@ -7534,7 +7618,7 @@ msgstr ""
 "Modifiez rapidement le préfixe de votre base de données WordPress pour "
 "gagner du temps et améliorer la sécurité."
 
-#: admin/class-modules-data.php:1087
+#: admin/class-modules-data.php:1093
 #, fuzzy
 msgctxt "Module description"
 msgid "Register custom content types for custom post types."
@@ -7542,24 +7626,24 @@ msgstr ""
 "Enregistrez des types de contenu personnalisés pour les types de publication "
 "personnalisés."
 
-#: admin/class-modules-data.php:1035
+#: admin/class-modules-data.php:1041
 msgctxt "Module description"
 msgid "Remove various elements from the admin bar."
 msgstr "Supprimez divers éléments de la barre d'administration."
 
-#: admin/class-modules-data.php:1231
+#: admin/class-modules-data.php:1237
 #, fuzzy
 msgctxt "Module description"
 msgid "Removed confirmation after clicking on logout on Woocommerce."
 msgstr ""
 "Confirmation supprimée après avoir cliqué sur déconnexion sur Woocommerce."
 
-#: admin/class-modules-data.php:1123
+#: admin/class-modules-data.php:1129
 msgctxt "Module description"
 msgid "Removes the jQuery Migrate script from the frontend of your site."
 msgstr "Supprime le script jQuery Migrate du frontend de votre site."
 
-#: admin/class-modules-data.php:1251
+#: admin/class-modules-data.php:1257
 #, fuzzy
 msgctxt "Module description"
 msgid ""
@@ -7569,7 +7653,7 @@ msgstr ""
 "Réorganisez, renommez ou masquez les éléments du menu d'administration "
 "WordPress pour créer un tableau de bord plus organisé."
 
-#: admin/class-modules-data.php:1239
+#: admin/class-modules-data.php:1245
 #, fuzzy
 msgctxt "Module description"
 msgid ""
@@ -7582,12 +7666,12 @@ msgstr ""
 "publication intacts, garantissant ainsi que tous les liens existants restent "
 "fonctionnels."
 
-#: admin/class-modules-data.php:1151
+#: admin/class-modules-data.php:1157
 msgctxt "Module description"
 msgid "Replaces GRAVATAR management with media management."
 msgstr "Remplace la gestion GRAVATAR par la gestion des médias."
 
-#: admin/class-modules-data.php:1083
+#: admin/class-modules-data.php:1089
 msgctxt "Module description"
 msgid ""
 "Resize newly uploaded, large images to a smaller dimension and delete "
@@ -7599,14 +7683,23 @@ msgstr ""
 "fichiers BMP et PNG non transparents seront convertis en fichiers JPG et "
 "redimensionnés."
 
-#: admin/class-modules-data.php:1127
+#: admin/class-modules-data.php:1133
 msgctxt "Module description"
 msgid "Revert to previous versions of any theme or plugin from WordPress.org."
 msgstr ""
 "Revenir aux versions précédentes de n’importe quel thème ou plugin de "
 "WordPress.org."
 
-#: admin/class-modules-data.php:1215
+#: admin/class-modules-data.php:1269
+#, fuzzy
+msgctxt "Module description"
+msgid ""
+"Search and replace data in your WordPress database safely and efficiently."
+msgstr ""
+"Recherchez et remplacez des données dans votre base de données WordPress de "
+"manière sûre et efficace."
+
+#: admin/class-modules-data.php:1221
 #, fuzzy
 msgctxt "Module description"
 msgid ""
@@ -7616,7 +7709,7 @@ msgstr ""
 "Sélectionnez une couleur de balise pour permettre une personnalisation "
 "transparente du thème dans tous les principaux navigateurs."
 
-#: admin/class-modules-data.php:1003
+#: admin/class-modules-data.php:1009
 msgctxt "Module description"
 msgid ""
 "Sends visitors to your homepage if they try to access a page that doesn't "
@@ -7625,21 +7718,21 @@ msgstr ""
 "Envoie les visiteurs vers votre page d'accueil s'ils tentent d'accéder à une "
 "page qui n'existe pas, garantissant ainsi qu'ils restent sur votre site."
 
-#: admin/class-modules-data.php:951
+#: admin/class-modules-data.php:957
 msgctxt "Module description"
 msgid "Set custom redirect URL for all or some user roles after login."
 msgstr ""
 "Définissez une URL de redirection personnalisée pour tout ou partie des "
 "rôles d'utilisateur après la connexion."
 
-#: admin/class-modules-data.php:947
+#: admin/class-modules-data.php:953
 msgctxt "Module description"
 msgid "Set custom redirect URL for all or some user roles after logout."
 msgstr ""
 "Définissez une URL de redirection personnalisée pour tout ou partie des "
 "rôles d'utilisateur après la déconnexion."
 
-#: admin/class-modules-data.php:1107
+#: admin/class-modules-data.php:1113
 msgctxt "Module description"
 msgid ""
 "Set custom sender name and email. Optionally use external SMTP service to "
@@ -7651,7 +7744,7 @@ msgstr ""
 "mails de notification et de transaction de votre site sont envoyés dans les "
 "boîtes de réception."
 
-#: admin/class-modules-data.php:1199
+#: admin/class-modules-data.php:1205
 #, fuzzy
 msgctxt "Module description"
 msgid ""
@@ -7661,7 +7754,7 @@ msgstr ""
 "Raccourcissez vos liens avec un préfixe personnalisé. Vous pouvez également "
 "suivre le nombre de clics sur chaque lien."
 
-#: admin/class-modules-data.php:1007
+#: admin/class-modules-data.php:1013
 msgctxt "Module description"
 msgid ""
 "Show a customizable maintenance page on the frontend while performing a "
@@ -7672,7 +7765,7 @@ msgstr ""
 "effectuant une brève maintenance de votre site. Les administrateurs "
 "connectés peuvent toujours consulter le site comme d'habitude."
 
-#: admin/class-modules-data.php:971
+#: admin/class-modules-data.php:977
 msgctxt "Module description"
 msgid ""
 "Some servers send a header called X-Powered-By that contains the PHP version "
@@ -7683,14 +7776,14 @@ msgstr ""
 "version PHP utilisée sur votre site. Cela peut constituer une information "
 "utile pour les attaquants et doit être supprimé."
 
-#: admin/class-modules-data.php:1019
+#: admin/class-modules-data.php:1025
 msgctxt "Module description"
 msgid "Specifying the number of posts to display per page, for each post type."
 msgstr ""
 "Spécifier le nombre de publications à afficher par page, pour chaque type de "
 "publication."
 
-#: admin/class-modules-data.php:1203
+#: admin/class-modules-data.php:1209
 #, fuzzy
 msgctxt "Module description"
 msgid ""
@@ -7700,14 +7793,14 @@ msgstr ""
 "Ce module analysera votre version principale de WordPress, vos plugins et "
 "vos thèmes à la recherche de vulnérabilités."
 
-#: admin/class-modules-data.php:983
+#: admin/class-modules-data.php:989
 msgctxt "Module description"
 msgid "Tidy up user profiles by removing sections you do not utilise."
 msgstr ""
 "Rangez les profils d'utilisateurs en supprimant les sections que vous "
 "n'utilisez pas."
 
-#: admin/class-modules-data.php:787
+#: admin/class-modules-data.php:793
 msgctxt "Module description"
 msgid ""
 "Track and record the most recent login activity of site users, then showcase "
@@ -7717,7 +7810,7 @@ msgstr ""
 "utilisateurs du site, puis affichez la date et l'heure dans le tableau de la "
 "liste des utilisateurs"
 
-#: admin/class-modules-data.php:779
+#: admin/class-modules-data.php:785
 #, fuzzy
 msgctxt "Module description"
 msgid ""
@@ -7728,7 +7821,7 @@ msgstr ""
 "désactivations de plugins et de thèmes, ainsi que les mises à jour du noyau "
 "de WordPress."
 
-#: admin/class-modules-data.php:1259
+#: admin/class-modules-data.php:1265
 #, fuzzy
 msgctxt "Module description"
 msgid "Track every email WordPress sends with an easy-to-use admin viewer."
@@ -7736,7 +7829,7 @@ msgstr ""
 "Suivez chaque email envoyé par WordPress grâce à une interface "
 "d'administration facile à utiliser."
 
-#: admin/class-modules-data.php:1183
+#: admin/class-modules-data.php:1189
 msgctxt "Module description"
 msgid ""
 "With this feature you can paste directly your picture in WordPress media."
@@ -7744,7 +7837,7 @@ msgstr ""
 "Avec cette fonctionnalité, vous pouvez coller directement votre image dans "
 "le média WordPress."
 
-#: admin/class-modules-data.php:967
+#: admin/class-modules-data.php:973
 msgctxt "Module description"
 msgid ""
 "WordPress salt keys or security keys are codes that help protect important "
@@ -7753,7 +7846,7 @@ msgstr ""
 "Les clés de sel WordPress ou clés de sécurité sont des codes qui aident à "
 "protéger les informations importantes sur votre site Web."
 
-#: admin/class-modules-data.php:799
+#: admin/class-modules-data.php:805
 msgctxt "Module description"
 msgid ""
 "You can enable custom link menu items to open in a separate browser tab with "
@@ -7767,628 +7860,634 @@ msgstr ""
 "avons implémenté l'attribut \"rel=\"noopener noreferrer nofollow\"\" pour "
 "ces liens."
 
-#: admin/class-modules-data.php:1190
+#: admin/class-modules-data.php:1196
 msgctxt "Module name"
 msgid "410 Manager"
 msgstr "Gestionnaire 410"
 
-#: admin/class-modules-data.php:1186
+#: admin/class-modules-data.php:1192
 msgctxt "Module name"
 msgid "Add Essentials Shortcodes"
 msgstr "Ajouter des shortcodes essentiels"
 
-#: admin/class-modules-data.php:1250
+#: admin/class-modules-data.php:1256
 #, fuzzy
 msgctxt "Module name"
 msgid "Admin Menu Organizer"
 msgstr "Organisateur de menu d'administration"
 
-#: admin/class-modules-data.php:1142
+#: admin/class-modules-data.php:1148
 msgctxt "Module name"
 msgid "Adminer"
 msgstr "Adminer"
 
-#: admin/class-modules-data.php:1130
+#: admin/class-modules-data.php:1136
 #, fuzzy
 msgctxt "Module name"
 msgid "Advanced Debug Mode"
 msgstr "Mode de débogage avancé"
 
-#: admin/class-modules-data.php:798
+#: admin/class-modules-data.php:804
 msgctxt "Module name"
 msgid "Allow Menu Custom Links to Open in New Tab"
 msgstr ""
 "Autoriser l'ouverture des liens personnalisés du menu dans un nouvel onglet"
 
-#: admin/class-modules-data.php:1146
+#: admin/class-modules-data.php:1152
 msgctxt "Module name"
 msgid "Apple Touch Icon"
 msgstr "Icône Apple Touch"
 
-#: admin/class-modules-data.php:1154
+#: admin/class-modules-data.php:1160
 msgctxt "Module name"
 msgid "Auto clean actionscheduler_actions"
 msgstr "Nettoyage automatique de actionscheduler_actions"
 
-#: admin/class-modules-data.php:966
+#: admin/class-modules-data.php:972
 msgctxt "Module name"
 msgid "Auto Regenerate Salt Keys"
 msgstr "Régénération automatique des clés de salage"
 
-#: admin/class-modules-data.php:802
+#: admin/class-modules-data.php:808
 msgctxt "Module name"
 msgid "Auto-Publish Posts with Missed Schedule"
 msgstr "Publication automatique des publications programmées « manquées »"
 
-#: admin/class-modules-data.php:1102
+#: admin/class-modules-data.php:1108
 #| msgid "Ban emails"
 msgctxt "Module name"
 msgid "Ban Emails"
 msgstr "Interdire les e-mails"
 
-#: admin/class-modules-data.php:1226
+#: admin/class-modules-data.php:1232
 #, fuzzy
 msgctxt "Module name"
 msgid "Better Password Hash"
 msgstr "Meilleur hachage de mot de passe"
 
-#: admin/class-modules-data.php:850
+#: admin/class-modules-data.php:856
 msgctxt "Module name"
 msgid "Blacklisted Usernames"
 msgstr "Noms d'utilisateur sur liste noire"
 
-#: admin/class-modules-data.php:1098
+#: admin/class-modules-data.php:1104
 msgctxt "Module name"
 msgid "Block User Registration from Disposable Email"
 msgstr "Bloquer l'enregistrement des utilisateurs à partir d'un e-mail jetable"
 
-#: admin/class-modules-data.php:1214
+#: admin/class-modules-data.php:1220
 #, fuzzy
 msgctxt "Module name"
 msgid "Browser Theme Color"
 msgstr "Couleur du thème du navigateur"
 
-#: admin/class-modules-data.php:1166
+#: admin/class-modules-data.php:1172
 msgctxt "Module name"
 msgid "Change Database Prefix"
 msgstr "Modifier le préfixe de la base de données"
 
-#: admin/class-modules-data.php:998
+#: admin/class-modules-data.php:1004
 msgctxt "Module name"
 msgid "Child theme generator"
 msgstr "Générateur de thèmes enfants"
 
-#: admin/class-modules-data.php:982
+#: admin/class-modules-data.php:988
 msgctxt "Module name"
 msgid "Clean Profiles"
 msgstr "Nettoyer les profils"
 
-#: admin/class-modules-data.php:1034
+#: admin/class-modules-data.php:1040
 msgctxt "Module name"
 msgid "Clean Up Admin Bar"
 msgstr "Nettoyer la barre d'administration"
 
-#: admin/class-modules-data.php:806
+#: admin/class-modules-data.php:812
 msgctxt "Module name"
 msgid "Code Snippets"
 msgstr "Code Snippets"
 
-#: admin/class-modules-data.php:1014
+#: admin/class-modules-data.php:1020
 msgctxt "Module name"
 msgid "Content Duplication"
 msgstr "Duplication de contenu"
 
-#: admin/class-modules-data.php:1022
+#: admin/class-modules-data.php:1028
 msgctxt "Module name"
 msgid "Content Order"
 msgstr "Ordre du contenu"
 
-#: admin/class-modules-data.php:1158
+#: admin/class-modules-data.php:1164
 msgctxt "Module name"
 msgid "CRON Manager"
 msgstr "Gestionnaire CRON"
 
-#: admin/class-modules-data.php:1046
+#: admin/class-modules-data.php:1052
 msgctxt "Module name"
 msgid "Custom Admin CSS"
 msgstr "CSS d'administration personnalisé"
 
-#: admin/class-modules-data.php:942
+#: admin/class-modules-data.php:948
 msgctxt "Module name"
 msgid "Custom Body Class"
 msgstr "Classe de Body personnalisée"
 
-#: admin/class-modules-data.php:1050
+#: admin/class-modules-data.php:1056
 msgctxt "Module name"
 msgid "Custom Frontend CSS"
 msgstr "CSS personnalisé pour le frontend"
 
-#: admin/class-modules-data.php:1218
+#: admin/class-modules-data.php:1224
 msgctxt "Module name"
 msgid "Custom Login Design"
 msgstr "Personnalisation de la page de connexion"
 
-#: admin/class-modules-data.php:1070
+#: admin/class-modules-data.php:1076
 msgctxt "Module name"
 msgid "Disable All Updates"
 msgstr "Désactiver toutes les mises à jour"
 
-#: admin/class-modules-data.php:938
+#: admin/class-modules-data.php:944
 msgctxt "Module name"
 msgid "Disable Block-Based Widgets Settings Screen"
 msgstr "Désactiver l'écran des paramètres des widgets basés sur des blocs"
 
-#: admin/class-modules-data.php:910
+#: admin/class-modules-data.php:916
 msgctxt "Module name"
 msgid "Disable cart fragments scripts"
 msgstr "Désactiver les scripts de « cart fragments »"
 
-#: admin/class-modules-data.php:810
+#: admin/class-modules-data.php:816
 msgctxt "Module name"
 msgid "Disable Comments"
 msgstr "Désactiver les commentaires"
 
-#: admin/class-modules-data.php:958
+#: admin/class-modules-data.php:964
 msgctxt "Module name"
 msgid "Disable Dashboard Widgets"
 msgstr "Désactiver les widgets du tableau de bord"
 
-#: admin/class-modules-data.php:922
+#: admin/class-modules-data.php:928
 msgctxt "Module name"
 msgid "Disable dashicons CSS and JS files"
 msgstr "Désactiver les fichiers CSS et JS dashicons"
 
-#: admin/class-modules-data.php:918
+#: admin/class-modules-data.php:924
 msgctxt "Module name"
 msgid "Disable emoji support"
 msgstr "Désactiver la prise en charge des emoji"
 
-#: admin/class-modules-data.php:814
+#: admin/class-modules-data.php:820
 msgctxt "Module name"
 msgid "Disable Feeds"
 msgstr "Désactiver les flux"
 
-#: admin/class-modules-data.php:818
+#: admin/class-modules-data.php:824
 msgctxt "Module name"
 msgid "Disable Gutenberg"
 msgstr "Désactiver Gutenberg"
 
-#: admin/class-modules-data.php:1122
+#: admin/class-modules-data.php:1128
 msgctxt "Module name"
 msgid "Disable jQuery Migrate"
 msgstr "Désactiver jQuery Migrate"
 
-#: admin/class-modules-data.php:1246
+#: admin/class-modules-data.php:1252
 msgctxt "Module name"
 msgid "Disable Plugin For Debug"
 msgstr "Désactiver les extensions pour le débogage"
 
-#: admin/class-modules-data.php:930
+#: admin/class-modules-data.php:936
 msgctxt "Module name"
 msgid "Disable Really Simple Discovery (RSD) <link> tag"
 msgstr "Désactiver la balise <link> Really Simple Discovery (RSD)"
 
-#: admin/class-modules-data.php:1066
+#: admin/class-modules-data.php:1072
 msgctxt "Module name"
 msgid "Disable REST API"
 msgstr "Désactiver l'API REST"
 
-#: admin/class-modules-data.php:934
+#: admin/class-modules-data.php:940
 msgctxt "Module name"
 msgid "Disable Windows Live Writer (WLW) manifest <link> tag"
 msgstr "Désactiver la balise <link> du manifeste Windows Live Writer (WLW)"
 
-#: admin/class-modules-data.php:1230
+#: admin/class-modules-data.php:1236
 #, fuzzy
 msgctxt "Module name"
 msgid "Disable Woocommerce Logout Confirmation"
 msgstr "Désactiver la confirmation de déconnexion de Woocommerce"
 
-#: admin/class-modules-data.php:926
+#: admin/class-modules-data.php:932
 msgctxt "Module name"
 msgid "Disable WordPress shortlink <link> tag"
 msgstr "Désactiver la balise WordPress shortlink <link>"
 
-#: admin/class-modules-data.php:894
+#: admin/class-modules-data.php:900
 msgctxt "Module name"
 msgid "Disable WP Sitemap"
 msgstr "Désactiver le plan du site WP"
 
-#: admin/class-modules-data.php:822
+#: admin/class-modules-data.php:828
 msgctxt "Module name"
 msgid "Disable wp_mail"
 msgstr "Désactiver wp_mail"
 
-#: admin/class-modules-data.php:834
+#: admin/class-modules-data.php:840
 msgctxt "Module name"
 msgid "Disable XML-RPC"
 msgstr "Désactiver XML-RPC"
 
-#: admin/class-modules-data.php:878
+#: admin/class-modules-data.php:884
 msgctxt "Module name"
 msgid "Disallow Access WP Sensible Files"
 msgstr "Interdire l'accès aux fichiers sensibles WP"
 
-#: admin/class-modules-data.php:962
+#: admin/class-modules-data.php:968
 msgctxt "Module name"
 msgid "Disallow Bad Requests"
 msgstr "Interdire les mauvaises requêtes"
 
-#: admin/class-modules-data.php:882
+#: admin/class-modules-data.php:888
 msgctxt "Module name"
 msgid "Disallow Countries IP"
 msgstr "Interdire les IPs par pays"
 
-#: admin/class-modules-data.php:886
+#: admin/class-modules-data.php:892
 msgctxt "Module name"
 msgid "Disallow Dir Listing"
 msgstr "Interdire la liste des répertoires"
 
-#: admin/class-modules-data.php:906
+#: admin/class-modules-data.php:912
 msgctxt "Module name"
 msgid "Disallow Malicious File Access in upload"
 msgstr "Interdire l'accès aux fichiers malveillants dans le dossier upload"
 
-#: admin/class-modules-data.php:874
+#: admin/class-modules-data.php:880
 msgctxt "Module name"
 msgid "Disallow Plugin Upload"
 msgstr "Interdire le téléversement de plugins"
 
-#: admin/class-modules-data.php:838
+#: admin/class-modules-data.php:844
 msgctxt "Module name"
 msgid "Disallow register user"
 msgstr "Désactiver l’option « Tout le monde peut s’inscrire »"
 
-#: admin/class-modules-data.php:870
+#: admin/class-modules-data.php:876
 msgctxt "Module name"
 msgid "Disallow Theme Upload"
 msgstr "Interdire le téléversement de thème"
 
-#: admin/class-modules-data.php:830
+#: admin/class-modules-data.php:836
 msgctxt "Module name"
 msgid "Disallow WP File Edit"
 msgstr "Interdire l’utilisation de WP File Edit"
 
-#: admin/class-modules-data.php:1254
+#: admin/class-modules-data.php:1260
 #, fuzzy
 msgctxt "Module name"
 msgid "Download medias as zip"
 msgstr "Télécharger les fichiers multimédias au format zip"
 
-#: admin/class-modules-data.php:994
+#: admin/class-modules-data.php:1000
 msgctxt "Module name"
 msgid "Duplicate Menu"
 msgstr "Duplication de menu"
 
-#: admin/class-modules-data.php:1038
+#: admin/class-modules-data.php:1044
 msgctxt "Module name"
 msgid "Enhance List Tables"
 msgstr "Améliorer les tableaux de liste"
 
-#: admin/class-modules-data.php:990
+#: admin/class-modules-data.php:996
 msgctxt "Module name"
 msgid "Export Posts & Pages"
 msgstr "Exporter les articles et les pages"
 
-#: admin/class-modules-data.php:978
+#: admin/class-modules-data.php:984
 msgctxt "Module name"
 msgid "Export Users"
 msgstr "Exporter les utilisateurs"
 
-#: admin/class-modules-data.php:1026
+#: admin/class-modules-data.php:1032
 msgctxt "Module name"
 msgid "External Permalinks"
 msgstr "Permaliens externes"
 
-#: admin/class-modules-data.php:1118
+#: admin/class-modules-data.php:1124
 msgctxt "Module name"
 msgid "File Manager"
 msgstr "Gestionnaire de fichiers"
 
-#: admin/class-modules-data.php:898
+#: admin/class-modules-data.php:904
 msgctxt "Module name"
 msgid "Force Send All Email To"
 msgstr "Forcer l'envoi de tous les e-mails à"
 
-#: admin/class-modules-data.php:1206
+#: admin/class-modules-data.php:1212
 #, fuzzy
 msgctxt "Module name"
 msgid "Force SSL"
 msgstr "Forcer SSL"
 
-#: admin/class-modules-data.php:854
+#: admin/class-modules-data.php:860
 msgctxt "Module name"
 msgid "Force Strong Password"
 msgstr "Forcer un mot de passe fort"
 
-#: admin/class-modules-data.php:1222
+#: admin/class-modules-data.php:1228
 msgctxt "Module name"
 msgid "Generate Alt Text With AI"
 msgstr "Générer les textes alternatif avec l'IA"
 
-#: admin/class-modules-data.php:1234
+#: admin/class-modules-data.php:1240
 msgctxt "Module name"
 msgid "Head Sorter"
 msgstr "Trieur d'entêtes"
 
-#: admin/class-modules-data.php:1090
+#: admin/class-modules-data.php:1096
 msgctxt "Module name"
 msgid "Heartbeat Control"
 msgstr "Contrôle du rythme cardiaque"
 
-#: admin/class-modules-data.php:782
+#: admin/class-modules-data.php:788
 msgctxt "Module name"
 msgid "Hide Admin Bar"
 msgstr "Masquer la barre d'administration"
 
-#: admin/class-modules-data.php:774
+#: admin/class-modules-data.php:780
 msgctxt "Module name"
 msgid "Hide Admin Notices"
 msgstr "Masquer les notifications d'administration"
 
-#: admin/class-modules-data.php:866
+#: admin/class-modules-data.php:872
 msgctxt "Module name"
 msgid "Hide Login Errors"
 msgstr "Masquer les erreurs de connexion"
 
-#: admin/class-modules-data.php:970
+#: admin/class-modules-data.php:976
 msgctxt "Module name"
 msgid "Hide PHP Versions"
 msgstr "Masquer les versions PHP"
 
-#: admin/class-modules-data.php:826
+#: admin/class-modules-data.php:832
 msgctxt "Module name"
 msgid "Hide WordPress Version"
 msgstr "Masquer la version WordPress"
 
-#: admin/class-modules-data.php:1162
+#: admin/class-modules-data.php:1168
 #| msgid "Hook and filter debugger"
 msgctxt "Module name"
 msgid "Hook And Filter Debugger"
 msgstr "Débogueur de hook et de filtre"
 
-#: admin/class-modules-data.php:1082
+#: admin/class-modules-data.php:1088
 msgctxt "Module name"
 msgid "Image Upload Control"
 msgstr "Contrôle d'upload d'images"
 
-#: admin/class-modules-data.php:1054
+#: admin/class-modules-data.php:1060
 msgctxt "Module name"
 msgid "Insert <head>, <body> and <footer> Code"
 msgstr "Insérer le code <head>, <body> et <footer>"
 
-#: admin/class-modules-data.php:786
+#: admin/class-modules-data.php:792
 msgctxt "Module name"
 msgid "Last Login Column"
 msgstr "Colonne Dernière connexion"
 
-#: admin/class-modules-data.php:1094
+#: admin/class-modules-data.php:1100
 msgctxt "Module name"
 msgid "Limit Login Attempts"
 msgstr "Limiter les tentatives de connexion"
 
-#: admin/class-modules-data.php:1198
+#: admin/class-modules-data.php:1204
 #, fuzzy
 msgctxt "Module name"
 msgid "Link Shortener"
 msgstr "Raccourcisseur de liens"
 
-#: admin/class-modules-data.php:1150
+#: admin/class-modules-data.php:1156
 msgctxt "Module name"
 msgid "Local avatars"
 msgstr "Avatars en locale"
 
-#: admin/class-modules-data.php:846
+#: admin/class-modules-data.php:852
 msgctxt "Module name"
 msgid "Lock Admin Email"
 msgstr "Verrouiller l'e-mail de l'administrateur"
 
-#: admin/class-modules-data.php:842
+#: admin/class-modules-data.php:848
 msgctxt "Module name"
 msgid "Lock Site URL"
 msgstr "Verrouiller l'URL du site"
 
-#: admin/class-modules-data.php:1042
+#: admin/class-modules-data.php:1048
 msgctxt "Module name"
 msgid "Log In/Out Menu"
 msgstr "Menu Connexion/Déconnexion"
 
-#: admin/class-modules-data.php:1258
+#: admin/class-modules-data.php:1264
 msgctxt "Module name"
 msgid "Mail catcher"
 msgstr "Collecteur d'e-mail"
 
-#: admin/class-modules-data.php:1006
+#: admin/class-modules-data.php:1012
 msgctxt "Module name"
 msgid "Maintenance Mode"
 msgstr "Mode maintenance"
 
-#: admin/class-modules-data.php:890
+#: admin/class-modules-data.php:896
 msgctxt "Module name"
 msgid "Manage Admin Emails Notifications"
 msgstr "Gérer les notifications par e-mail de l'administrateur"
 
-#: admin/class-modules-data.php:1058
+#: admin/class-modules-data.php:1064
 msgctxt "Module name"
 msgid "Manage ads.txt and app-ads.txt"
 msgstr "Gérer les fichiers ads.txt et app-ads.txt"
 
-#: admin/class-modules-data.php:1062
+#: admin/class-modules-data.php:1068
 msgctxt "Module name"
 msgid "Manage robots.txt"
 msgstr "Gérer le fichier robots.txt"
 
-#: admin/class-modules-data.php:1178
+#: admin/class-modules-data.php:1184
 msgctxt "Module name"
 msgid "Media Cleaner"
 msgstr "Nettoyeur de médias"
 
-#: admin/class-modules-data.php:1174
+#: admin/class-modules-data.php:1180
 msgctxt "Module name"
 msgid "Media Encoder"
 msgstr "Encodeur multimédia"
 
-#: admin/class-modules-data.php:1238
+#: admin/class-modules-data.php:1244
 msgctxt "Module name"
 msgid "Media Replacement"
 msgstr "Remplacement des médias"
 
-#: admin/class-modules-data.php:1030
+#: admin/class-modules-data.php:1036
 msgctxt "Module name"
 msgid "Meta Debugger"
 msgstr "Méta-débogueur"
 
-#: admin/class-modules-data.php:858
+#: admin/class-modules-data.php:864
 msgctxt "Module name"
 msgid "Move Login URL"
 msgstr "Déplacer l'URL de connexion"
 
-#: admin/class-modules-data.php:1138
+#: admin/class-modules-data.php:1144
 msgctxt "Module name"
 msgid "Multiple User Roles"
 msgstr "Rôles d'utilisateurs multiples"
 
-#: admin/class-modules-data.php:1242
+#: admin/class-modules-data.php:1248
 #, fuzzy
 msgctxt "Module name"
 msgid "My Account Menu Customizer"
 msgstr "Personnalisateur de menu Mon compte"
 
-#: admin/class-modules-data.php:974
+#: admin/class-modules-data.php:980
 msgctxt "Module name"
 msgid "Nav Menu Visibility"
 msgstr "Visibilité du menu de navigation"
 
-#: admin/class-modules-data.php:1194
+#: admin/class-modules-data.php:1200
 msgctxt "Module name"
 msgid "No Plugin Activation / Deactivation / Deletion"
 msgstr "Aucune activation / désactivation / suppression de plugin"
 
-#: admin/class-modules-data.php:1074
+#: admin/class-modules-data.php:1080
 msgctxt "Module name"
 msgid "Obfuscate Author Slugs"
 msgstr "Masquer les slugs des auteurs"
 
-#: admin/class-modules-data.php:1078
+#: admin/class-modules-data.php:1084
 msgctxt "Module name"
 msgid "Obfuscate Email Addresses"
 msgstr "Masquer les adresses e-mail"
 
-#: admin/class-modules-data.php:794
+#: admin/class-modules-data.php:800
 msgctxt "Module name"
 msgid "Open All External Links in New Tab"
 msgstr "Ouvrir tous les liens externes dans un nouvel onglet"
 
-#: admin/class-modules-data.php:1010
+#: admin/class-modules-data.php:1016
 msgctxt "Module name"
 msgid "Password Protection"
 msgstr "Protection par mot de passe"
 
-#: admin/class-modules-data.php:1182
+#: admin/class-modules-data.php:1188
 msgctxt "Module name"
 msgid "Paste Image In Media"
 msgstr "Coller l'image dans le média"
 
-#: admin/class-modules-data.php:1126
+#: admin/class-modules-data.php:1132
 msgctxt "Module name"
 msgid "Plugin & Theme Rollback"
 msgstr "Restauration des plugins et des thèmes"
 
-#: admin/class-modules-data.php:902
+#: admin/class-modules-data.php:908
 msgctxt "Module name"
 msgid "Plugin Download"
 msgstr "Téléchargement d'extension"
 
-#: admin/class-modules-data.php:1018
+#: admin/class-modules-data.php:1024
 msgctxt "Module name"
 msgid "Post Per Page"
 msgstr "Publication par page"
 
-#: admin/class-modules-data.php:1210
+#: admin/class-modules-data.php:1216
 #, fuzzy
 msgctxt "Module name"
 msgid "Post Type Switcher"
 msgstr "Sélecteur de type de publication"
 
-#: admin/class-modules-data.php:1114
+#: admin/class-modules-data.php:1120
 msgctxt "Module name"
 msgid "Prevent User Enumeration"
 msgstr "Empêcher l'énumération des utilisateurs"
 
-#: admin/class-modules-data.php:1110
+#: admin/class-modules-data.php:1116
 msgctxt "Module name"
 msgid "Protect Website Headers"
 msgstr "Protéger les en-têtes du site Web"
 
-#: admin/class-modules-data.php:986
+#: admin/class-modules-data.php:992
 msgctxt "Module name"
 msgid "Quick Add Post"
 msgstr "Ajout rapide d'un article"
 
-#: admin/class-modules-data.php:1002
+#: admin/class-modules-data.php:1008
 msgctxt "Module name"
 msgid "Redirect 404 to Homepage"
 msgstr "Rediriger les erreurs 404 vers la page d'accueil"
 
-#: admin/class-modules-data.php:950
+#: admin/class-modules-data.php:956
 msgctxt "Module name"
 msgid "Redirect After Login"
 msgstr "Redirection après la connexion"
 
-#: admin/class-modules-data.php:946
+#: admin/class-modules-data.php:952
 msgctxt "Module name"
 msgid "Redirect After Logout"
 msgstr "Redirection après la déconnexion"
 
-#: admin/class-modules-data.php:1086
+#: admin/class-modules-data.php:1092
 msgctxt "Module name"
 msgid "Register Custom Content Types"
 msgstr "Enregistrer des types de contenu"
 
-#: admin/class-modules-data.php:914
+#: admin/class-modules-data.php:920
 msgctxt "Module name"
 msgid "Revisions Control"
 msgstr "Contrôle des révisions"
 
-#: admin/class-modules-data.php:1106
+#: admin/class-modules-data.php:1268
+#, fuzzy
+msgctxt "Module name"
+msgid "Search Replace in database"
+msgstr "Rechercher Remplacer dans la base de données"
+
+#: admin/class-modules-data.php:1112
 #| msgid "SMTP mailer"
 msgctxt "Module name"
 msgid "SMTP Mailer"
 msgstr "Courrier SMTP"
 
-#: admin/class-modules-data.php:790
+#: admin/class-modules-data.php:796
 msgctxt "Module name"
 msgid "SVG Upload"
 msgstr "Téléchargement SVG"
 
-#: admin/class-modules-data.php:1134
+#: admin/class-modules-data.php:1140
 #, fuzzy
 msgctxt "Module name"
 msgid "Temporary Login"
 msgstr "Connexion temporaire"
 
-#: admin/class-modules-data.php:862
+#: admin/class-modules-data.php:868
 msgctxt "Module name"
 msgid "Two Factor Authentication"
 msgstr "Authentification à deux facteurs"
 
-#: admin/class-modules-data.php:778
+#: admin/class-modules-data.php:784
 msgctxt "Module name"
 msgid "Updates Logs"
 msgstr "Journaux de mises à jour"
 
-#: admin/class-modules-data.php:1170
+#: admin/class-modules-data.php:1176
 msgctxt "Module name"
 msgid "User Switching"
 msgstr "Changement d'utilisateur"
 
-#: admin/class-modules-data.php:1202
+#: admin/class-modules-data.php:1208
 #, fuzzy
 msgctxt "Module name"
 msgid "Vulnerabilities Scan"
 msgstr "Analyse des vulnérabilités"
 
-#: admin/class-modules-data.php:954
+#: admin/class-modules-data.php:960
 msgctxt "Module name"
 msgid "Wider Admin Menu"
 msgstr "Menu d’administration plus large"
@@ -8497,7 +8596,7 @@ msgstr "Nom Champ Description"
 msgid "Nametag Icon"
 msgstr "Icône d'étiquette nominative"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:305
+#: admin/modules/pro/class-add-essentials-shortcodes.php:338
 #, fuzzy
 msgid ""
 "Navigate through array values using \"->\" separator (e.g., \"address->"
@@ -8793,7 +8892,7 @@ msgid "Non-repeating"
 msgstr "Non répétitif"
 
 #: admin/helpers/pro/cron-manager/class-event-list-table.php:544
-#: admin/modules/core/class-smtp-mailer.php:633
+#: admin/modules/core/class-smtp-mailer.php:640
 msgid "None"
 msgstr "Aucun"
 
@@ -8848,7 +8947,7 @@ msgstr ""
 msgid "Note: Saving settings will enable debug mode."
 msgstr "Remarque : la sauvegarde des paramètres activera le mode de débogage."
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:479
+#: admin/modules/pro/class-add-essentials-shortcodes.php:541
 #, fuzzy
 msgid ""
 "Note: Sensitive options (passwords, keys, tokens) are automatically blocked "
@@ -8984,9 +9083,9 @@ msgstr ""
 "Contrôleur personnalisé facultatif à utiliser à la place de "
 "`WP_REST_Terms_Controller`."
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:350
-#: admin/modules/pro/class-add-essentials-shortcodes.php:394
-#: admin/modules/pro/class-add-essentials-shortcodes.php:438
+#: admin/modules/pro/class-add-essentials-shortcodes.php:388
+#: admin/modules/pro/class-add-essentials-shortcodes.php:440
+#: admin/modules/pro/class-add-essentials-shortcodes.php:492
 msgid "Or add a custom meta:"
 msgstr "Ou ajoutez une méta personnalisée :"
 
@@ -9008,14 +9107,14 @@ msgstr "Image originale"
 msgid "Original Image: "
 msgstr "Image originale :"
 
-#: admin/class-modules-data.php:1362
+#: admin/class-modules-data.php:1372
 #: admin/templates/core/file-manager/views/chmod.php:22
 msgid "Other"
 msgstr "Autre"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:346
-#: admin/modules/pro/class-add-essentials-shortcodes.php:390
-#: admin/modules/pro/class-add-essentials-shortcodes.php:434
+#: admin/modules/pro/class-add-essentials-shortcodes.php:384
+#: admin/modules/pro/class-add-essentials-shortcodes.php:436
+#: admin/modules/pro/class-add-essentials-shortcodes.php:488
 #, fuzzy
 msgid "Other meta"
 msgstr "Autre méta"
@@ -9037,7 +9136,7 @@ msgstr ""
 "La limite de taux de l'API Outlook a été dépassée. Veuillez patienter et "
 "réessayer plus tard."
 
-#: admin/helpers/pro/smtp-mailer/outlook.php:74
+#: admin/helpers/pro/smtp-mailer/outlook.php:77
 #, fuzzy
 msgid "Outlook Config"
 msgstr "Config Outlook"
@@ -9259,7 +9358,7 @@ msgstr "Icône Coller Word"
 msgid "Patched"
 msgstr "Corrigé"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:471
+#: admin/modules/pro/class-add-essentials-shortcodes.php:533
 #, fuzzy
 msgid "Path (optional):"
 msgstr "Chemin d'accès (facultatif) :"
@@ -9444,7 +9543,7 @@ msgstr "Icône de la liste de lecture vidéo"
 msgid "Please add all information"
 msgstr "Veuillez ajouter toutes les informations"
 
-#: admin/helpers/pro/smtp-mailer/zohomail.php:114
+#: admin/helpers/pro/smtp-mailer/zohomail.php:115
 #, fuzzy
 msgid ""
 "Please copy this URL into \"Create New Client > Authorized Redirect URIs\" "
@@ -9453,7 +9552,7 @@ msgstr ""
 "Copiez cette URL dans le champ \"Create New Client > Authorized Redirect "
 "URIs\" de votre application sur Zoho Developer Console."
 
-#: admin/helpers/pro/smtp-mailer/gmail.php:103
+#: admin/helpers/pro/smtp-mailer/gmail.php:104
 #, fuzzy
 msgid ""
 "Please copy this URL into the \"Authorized redirect URIs\" field of your "
@@ -9462,7 +9561,7 @@ msgstr ""
 "Veuillez copier cette URL dans le champ \"Authorized redirect URIs\" de "
 "votre application web Google."
 
-#: admin/helpers/pro/smtp-mailer/outlook.php:100
+#: admin/helpers/pro/smtp-mailer/outlook.php:103
 #, fuzzy
 msgid ""
 "Please copy this URL into the \"Redirect URI\" field of your application on "
@@ -9484,7 +9583,12 @@ msgstr "Veuillez saisir une clé de licence"
 msgid "Please enter a license key."
 msgstr "Veuillez entrer une clé de licence."
 
-#: admin/modules/core/class-smtp-mailer.php:374
+#: admin/modules/core/class-search-replace-in-database.php:82
+#, fuzzy
+msgid "Please enter a search term."
+msgstr "Veuillez saisir un terme de recherche."
+
+#: admin/modules/core/class-smtp-mailer.php:377
 msgid "Please enter a valid email address."
 msgstr "S'il vous plaît, mettez une adresse email valide."
 
@@ -9557,17 +9661,32 @@ msgstr ""
 "Veuillez accorder à nouveau les autorisations d'utilisation de l'application "
 "Google !"
 
+#: admin/modules/core/class-smtp-mailer.php:474
+#, fuzzy
+msgid "Please save your settings before confirming the authorization."
+msgstr "Veuillez enregistrer vos paramètres avant de confirmer l'autorisation."
+
+#: admin/modules/core/class-smtp-mailer.php:473
+#, fuzzy
+msgid "Please save your settings before testing the email."
+msgstr "Veuillez enregistrer vos paramètres avant de tester l'e-mail."
+
 #: admin/modules/core/class-duplicate-menu.php:46
 #: admin/modules/core/class-duplicate-menu.php:51
 #: admin/modules/core/class-duplicate-menu.php:56
 msgid "Please select a menu and enter a name for the new menu."
 msgstr "Veuillez sélectionner un menu et saisir un nom pour le nouveau menu."
 
-#: admin/modules/pro/class-admin-menu-organizer.php:857
+#: admin/modules/pro/class-admin-menu-organizer.php:864
 #: admin/modules/pro/class-my-account-menu-customizer.php:814
 #, fuzzy
 msgid "Please select an icon for this menu item"
 msgstr "Veuillez sélectionner une icône pour cet élément de menu."
+
+#: admin/modules/core/class-search-replace-in-database.php:83
+#, fuzzy
+msgid "Please select at least one table."
+msgstr "Veuillez sélectionner au moins une table."
 
 #: admin/modules/pro/class-two-factor-authentication.php:326
 msgid "Please select your preferred method for two-factor authentication."
@@ -9683,7 +9802,7 @@ msgstr "portugais"
 msgid "Position"
 msgstr "Position"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:361
+#: admin/modules/pro/class-add-essentials-shortcodes.php:407
 msgid "Post"
 msgstr "Poste"
 
@@ -9889,6 +10008,11 @@ msgstr "Aperçu"
 msgid "Preview & generation"
 msgstr "Aperçu et génération"
 
+#: admin/modules/core/class-search-replace-in-database.php:1452
+#, fuzzy
+msgid "Preview change"
+msgstr "Modification de l'aperçu"
+
 #: admin/helpers/core/select-dashicon/class-select-dashicon.php:279
 #, fuzzy
 msgid "Printer Icon"
@@ -9913,7 +10037,10 @@ msgstr "Icône de confidentialité"
 #: admin/modules/core/class-advanced-debug-mode.php:456
 #: admin/modules/core/class-advanced-debug-mode.php:484
 #: admin/modules/core/class-meta-debugger.php:191
-#: admin/modules/core/class-smtp-mailer.php:1118
+#: admin/modules/core/class-search-replace-in-database.php:1264
+#: admin/modules/core/class-search-replace-in-database.php:1461
+#: admin/modules/core/class-search-replace-in-database.php:1514
+#: admin/modules/core/class-smtp-mailer.php:1125
 #: admin/modules/core/class-temporary-login.php:531
 #: admin/modules/core/class-temporary-login.php:570
 #: admin/modules/core/class-temporary-login.php:582
@@ -9938,7 +10065,7 @@ msgstr "Pro"
 msgid "Pro features"
 msgstr "Fonctionnalités Pro"
 
-#: admin/class-modules-data.php:1312
+#: admin/class-modules-data.php:1322
 #, fuzzy
 msgid "PRO modules"
 msgstr "Modules PRO"
@@ -9962,6 +10089,13 @@ msgstr "Plan professionnel"
 msgid "Profile Picture"
 msgstr "Photo de profil"
 
+#: admin/modules/core/class-search-replace-in-database.php:85
+#: admin/modules/core/class-search-replace-in-database.php:1370
+#: admin/modules/core/class-search-replace-in-database.php:1413
+#, fuzzy
+msgid "Progression"
+msgstr "Progression"
+
 #: admin/modules/pro/class-generate-alt-text-with-ai.php:750
 msgid "Prompt"
 msgstr "Prompt"
@@ -9979,9 +10113,9 @@ msgstr "Protéger les autres utilisateurs de l'administration"
 msgid "Protect Website Headers"
 msgstr "Protéger les en-têtes du site Web"
 
-#: admin/modules/core/class-smtp-mailer.php:1102
-#: admin/modules/core/class-smtp-mailer.php:1117
-#: admin/modules/core/class-smtp-mailer.php:1135
+#: admin/modules/core/class-smtp-mailer.php:1109
+#: admin/modules/core/class-smtp-mailer.php:1124
+#: admin/modules/core/class-smtp-mailer.php:1142
 #, fuzzy
 msgid "Providers"
 msgstr "Prestataires"
@@ -10105,7 +10239,7 @@ msgstr "Rediriger les connexions ayant échoué vers une URL personnalisée."
 msgid "Redirect to"
 msgstr "Rediriger vers"
 
-#: admin/helpers/pro/smtp-mailer/outlook.php:89
+#: admin/helpers/pro/smtp-mailer/outlook.php:92
 #, fuzzy
 msgid "Redirect URI"
 msgstr "Redirection de l'URI"
@@ -10155,7 +10289,8 @@ msgstr "Icône Refaire"
 #: admin/modules/core/class-meta-debugger.php:206
 #: admin/modules/core/class-register-custom-content-types.php:1219
 #: admin/modules/core/class-register-custom-content-types.php:1559
-#: admin/modules/core/class-smtp-mailer.php:369
+#: admin/modules/core/class-search-replace-in-database.php:104
+#: admin/modules/core/class-smtp-mailer.php:372
 #: admin/modules/pro/class-download-medias-as-zip.php:123
 #: admin/modules/pro/class-download-medias-as-zip.php:165
 #: admin/modules/pro/class-generate-alt-text-with-ai.php:289
@@ -10298,9 +10433,9 @@ msgstr "Supprimer « Bonjour »"
 msgid "Remove author column"
 msgstr "Supprimer la colonne auteur"
 
-#: admin/helpers/pro/smtp-mailer/gmail.php:127
-#: admin/helpers/pro/smtp-mailer/outlook.php:124
-#: admin/helpers/pro/smtp-mailer/zohomail.php:137
+#: admin/helpers/pro/smtp-mailer/gmail.php:128
+#: admin/helpers/pro/smtp-mailer/outlook.php:127
+#: admin/helpers/pro/smtp-mailer/zohomail.php:138
 #, fuzzy
 msgid "Remove Authorization"
 msgstr "Supprimer l'autorisation"
@@ -10457,7 +10592,7 @@ msgstr "Renommer les capacités"
 msgid "Renamed from <b>%1$s</b> to <b>%2$s</b>"
 msgstr "Renommé de <b>%s</b> à <b>%s</b>"
 
-#: admin/modules/pro/class-admin-menu-organizer.php:769
+#: admin/modules/pro/class-admin-menu-organizer.php:776
 #, fuzzy
 msgid ""
 "Reorder, rename, or hide WordPress admin menu items to create a more "
@@ -10488,11 +10623,21 @@ msgstr ""
 "publication intacts, garantissant ainsi que tous les liens existants restent "
 "fonctionnels."
 
+#: admin/modules/core/class-search-replace-in-database.php:1329
+#, fuzzy
+msgid "Replace GUIDs"
+msgstr "Remplacer les GUID"
+
 #: admin/modules/pro/class-media-replacement.php:85
 #: admin/modules/pro/class-media-replacement.php:104
 #: admin/modules/pro/class-media-replacement.php:121
 msgid "Replace media"
 msgstr "Remplacer le média"
+
+#: admin/modules/core/class-search-replace-in-database.php:1502
+#, fuzzy
+msgid "Replace with"
+msgstr "Remplacer par"
 
 #: admin/helpers/core/select-dashicon/class-select-dashicon.php:83
 #, fuzzy
@@ -10522,7 +10667,7 @@ msgstr ""
 "rapide et fiable. Si vous débutez, vous pouvez envoyer jusqu'à 3000 emails "
 "par mois sans carte de crédit."
 
-#: admin/modules/pro/class-admin-menu-organizer.php:835
+#: admin/modules/pro/class-admin-menu-organizer.php:842
 #, fuzzy
 msgid "Reset"
 msgstr "Remise à zéro"
@@ -10531,7 +10676,7 @@ msgstr "Remise à zéro"
 msgid "Reset Password"
 msgstr "Réinitialiser le mot de passe"
 
-#: admin/modules/pro/class-admin-menu-organizer.php:832
+#: admin/modules/pro/class-admin-menu-organizer.php:839
 #, fuzzy
 msgid "Reset to default"
 msgstr "Rétablissement des valeurs par défaut"
@@ -10574,7 +10719,7 @@ msgstr "Icône de l'API REST"
 msgid "REST API Namespace"
 msgstr "Espace de noms de l'API REST"
 
-#: admin/modules/pro/class-admin-menu-organizer.php:943
+#: admin/modules/pro/class-admin-menu-organizer.php:950
 #, fuzzy
 msgid "Restore"
 msgstr "Restaurer"
@@ -10596,6 +10741,16 @@ msgstr "Reprendre ce crochet"
 #, php-format
 msgid "Resumed the %s hook."
 msgstr "Reprise du hook %s."
+
+#: admin/modules/pro/class-add-essentials-shortcodes.php:350
+#, fuzzy
+msgid "Retrieve ACF field value for current post"
+msgstr "Récupérer la valeur du champ ACF pour le message en cours"
+
+#: admin/modules/pro/class-add-essentials-shortcodes.php:350
+#, fuzzy
+msgid "Retrieve ACF option field value"
+msgstr "Récupérer la valeur du champ d'option de l'ACF"
 
 #: admin/templates/core/register-custom-content-types/edit-post-cpt.php:120
 #, fuzzy
@@ -10690,6 +10845,11 @@ msgstr "Icône de rotation vers la droite"
 msgid "Row"
 msgstr "Rangée"
 
+#: admin/modules/core/class-search-replace-in-database.php:1545
+#, fuzzy
+msgid "Row ID:"
+msgstr "ID de rang :"
+
 #: admin/templates/core/register-custom-content-types/edit-post-cpt.php:512
 #, fuzzy
 msgid "RSS feed URL for the post type items."
@@ -10705,6 +10865,11 @@ msgstr "Icône RSS"
 msgid "RTL Icon"
 msgstr "Icône RTL"
 
+#: admin/modules/core/class-search-replace-in-database.php:1342
+#, fuzzy
+msgid "Run as dry run"
+msgstr "Marche à blanc"
+
 #: admin/helpers/pro/cron-manager/class-event-list-table.php:337
 msgid "Run now"
 msgstr "Exécuter maintenant"
@@ -10718,7 +10883,7 @@ msgstr "russe"
 msgid "SAMEORIGIN"
 msgstr "SAMEORIGIN"
 
-#: admin/helpers/pro/smtp-mailer/zohomail.php:167
+#: admin/helpers/pro/smtp-mailer/zohomail.php:168
 #, fuzzy
 msgid "Saudi Arabia (zoho.sa)"
 msgstr "Arabie Saoudite (zoho.sa)"
@@ -10818,6 +10983,20 @@ msgstr "Se connecter"
 msgid "Search"
 msgstr "Recherche"
 
+#: admin/modules/core/class-search-replace-in-database.php:1350
+#: admin/modules/core/class-search-replace-in-database.php:1411
+#, fuzzy
+msgid "Search & Replace"
+msgstr "Rechercher et remplacer"
+
+#: admin/modules/core/class-search-replace-in-database.php:1247
+#, fuzzy
+msgid ""
+"Search and replace data in your WordPress database safely and efficiently."
+msgstr ""
+"Recherchez et remplacez des données dans votre base de données WordPress de "
+"manière sûre et efficace."
+
 #: admin/templates/core/file-manager/modals/search.php:21
 msgid "Search file in folder and subfolders..."
 msgstr "Rechercher un fichier dans un dossier et des sous-dossiers..."
@@ -10825,6 +11004,11 @@ msgstr "Rechercher un fichier dans un dossier et des sous-dossiers..."
 #: admin/templates/core/file-manager/modals/search.php:11
 msgid "Search files"
 msgstr "Rechercher des fichiers"
+
+#: admin/modules/core/class-search-replace-in-database.php:1495
+#, fuzzy
+msgid "Search for"
+msgstr "Rechercher"
 
 #: admin/helpers/core/select-dashicon/class-select-dashicon.php:291
 #, fuzzy
@@ -10837,12 +11021,12 @@ msgstr "Icône de recherche"
 msgid "Search Items"
 msgstr "Rechercher des articles"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:453
+#: admin/modules/pro/class-add-essentials-shortcodes.php:515
 #, fuzzy
 msgid "Search option:"
 msgstr "Option de recherche :"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:366
+#: admin/modules/pro/class-add-essentials-shortcodes.php:412
 #, fuzzy
 msgid "Search post:"
 msgstr "Rechercher un poste :"
@@ -10851,6 +11035,11 @@ msgstr "Rechercher un poste :"
 #, fuzzy
 msgid "Search Posts"
 msgstr "Rechercher des articles"
+
+#: admin/modules/core/class-search-replace-in-database.php:46
+#, fuzzy
+msgid "Search Replace in database"
+msgstr "Rechercher Remplacer dans la base de données"
 
 #: admin/modules/pro/class-link-shortener.php:74
 #, fuzzy
@@ -10866,13 +11055,13 @@ msgstr "Extrait de recherche"
 msgid "Search Tags"
 msgstr "Rechercher des balises"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:410
+#: admin/modules/pro/class-add-essentials-shortcodes.php:464
 #, fuzzy
 #| msgid "Select term:"
 msgid "Search term:"
 msgstr "Sélectionnez le terme:"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:322
+#: admin/modules/pro/class-add-essentials-shortcodes.php:360
 #, fuzzy
 #| msgid "Select user:"
 msgid "Search user:"
@@ -10899,7 +11088,7 @@ msgid "Secret Access Key"
 msgstr "Clé d'accès secrète"
 
 #: admin/helpers/pro/smtp-mailer/mailjet.php:41
-#: admin/helpers/pro/smtp-mailer/sendpulse.php:41
+#: admin/helpers/pro/smtp-mailer/sendpulse.php:42
 #, fuzzy
 msgid "Secret Key"
 msgstr "Clé secrète"
@@ -10913,7 +11102,7 @@ msgstr "Clé secrète :"
 msgid "Sections to hide"
 msgstr "Sections à masquer"
 
-#: admin/class-modules-data.php:1357
+#: admin/class-modules-data.php:1367
 msgid "Security"
 msgstr "Sécurité"
 
@@ -10923,7 +11112,7 @@ msgstr "Sécurité"
 msgid "Security check failed."
 msgstr "Le contrôle de sécurité a échoué."
 
-#: admin/modules/pro/class-admin-menu-organizer.php:872
+#: admin/modules/pro/class-admin-menu-organizer.php:879
 #: admin/modules/pro/class-my-account-menu-customizer.php:825
 #, fuzzy
 msgid "Select"
@@ -10949,6 +11138,7 @@ msgid "Select AI Model"
 msgstr "Sélectionnez le modèle d'IA"
 
 #: admin/modules/core/class-login-logout-menu.php:106
+#: admin/modules/core/class-search-replace-in-database.php:1288
 #: admin/templates/core/file-manager/views/default.php:217
 msgid "Select All"
 msgstr "Tout sélectionner"
@@ -10984,16 +11174,21 @@ msgstr "Sélectionner le menu"
 msgid "Select Mode"
 msgstr "Sélectionner le mode"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:384
+#: admin/modules/pro/class-add-essentials-shortcodes.php:430
 msgid "Select post meta:"
 msgstr "Sélectionnez les méta-informations de la publication :"
+
+#: admin/modules/core/class-search-replace-in-database.php:1281
+#, fuzzy
+msgid "Select Tables"
+msgstr "Sélectionner les tableaux"
 
 #: admin/modules/pro/class-custom-login-design.php:3625
 #, fuzzy
 msgid "Select Template"
 msgstr "Sélectionner un modèle"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:428
+#: admin/modules/pro/class-add-essentials-shortcodes.php:482
 msgid "Select term meta:"
 msgstr "Sélectionnez le terme méta :"
 
@@ -11033,7 +11228,7 @@ msgstr "Sélectionnez le rôle à attribuer à l'utilisateur temporaire."
 msgid "Select Theme"
 msgstr "Sélectionnez le thème"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:340
+#: admin/modules/pro/class-add-essentials-shortcodes.php:378
 msgid "Select user meta:"
 msgstr "Sélectionnez les métadonnées de l'utilisateur :"
 
@@ -11072,15 +11267,15 @@ msgstr ""
 msgid "Send email to new user"
 msgstr "Envoyer un courriel à un nouvel utilisateur"
 
-#: admin/modules/core/class-smtp-mailer.php:1086
+#: admin/modules/core/class-smtp-mailer.php:1093
 msgid "Send Now"
 msgstr "Envoyer maintenant"
 
-#: admin/modules/core/class-smtp-mailer.php:1048
+#: admin/modules/core/class-smtp-mailer.php:1055
 msgid "Sender Config"
 msgstr "Configuration de l'expéditeur"
 
-#: admin/modules/core/class-smtp-mailer.php:1054
+#: admin/modules/core/class-smtp-mailer.php:1061
 msgid "Sender email"
 msgstr "E-mail de l'expéditeur"
 
@@ -11089,7 +11284,7 @@ msgstr "E-mail de l'expéditeur"
 msgid "Sender Name"
 msgstr "Nom de l'expéditeur"
 
-#: admin/modules/core/class-smtp-mailer.php:1053
+#: admin/modules/core/class-smtp-mailer.php:1060
 msgid "Sender name"
 msgstr "Nom de l'expéditeur"
 
@@ -11156,12 +11351,12 @@ msgstr ""
 "sortants pour s'assurer qu'ils arrivent toujours dans les boîtes de "
 "réception des clients"
 
-#: admin/helpers/pro/smtp-mailer/sendpulse.php:32
+#: admin/helpers/pro/smtp-mailer/sendpulse.php:33
 #, fuzzy
 msgid "SendPulse Config"
 msgstr "SendPulse Config"
 
-#: admin/helpers/pro/smtp-mailer/sendpulse.php:34
+#: admin/helpers/pro/smtp-mailer/sendpulse.php:35
 #, fuzzy
 msgid ""
 "SendPulse is a versatile email delivery service suitable for websites "
@@ -11172,12 +11367,12 @@ msgstr ""
 "qui envoient des volumes d'e-mails faibles à moyens. Il permet l'envoi par "
 "SMTP et API, avec des fonctions intégrées d'analyse et d'automatisation."
 
-#: admin/modules/core/class-smtp-mailer.php:391
+#: admin/modules/core/class-smtp-mailer.php:394
 #, fuzzy, php-format
 msgid "Sent at: %s"
 msgstr "Envoyé à : %s"
 
-#: admin/class-modules-data.php:1347
+#: admin/class-modules-data.php:1357
 #, fuzzy
 #| msgid "Speed Optimizations"
 msgid "SEO & Speed Optimizations"
@@ -11193,8 +11388,8 @@ msgstr "Séparez les éléments par des virgules"
 msgid "Separate tags with commas"
 msgstr "Séparez les balises par des virgules"
 
-#: admin/modules/pro/class-admin-menu-organizer.php:783
-#: admin/modules/pro/class-admin-menu-organizer.php:809
+#: admin/modules/pro/class-admin-menu-organizer.php:790
+#: admin/modules/pro/class-admin-menu-organizer.php:816
 #, fuzzy
 msgid "Separator"
 msgstr "Séparateur"
@@ -11229,7 +11424,7 @@ msgstr ""
 "Définissez une URL de redirection personnalisée pour tout ou partie des "
 "rôles d'utilisateur après la déconnexion."
 
-#: admin/modules/core/class-smtp-mailer.php:1044
+#: admin/modules/core/class-smtp-mailer.php:1051
 msgid ""
 "Set custom sender name and email. Optionally use external SMTP service to "
 "ensure notification and transactional emails from your site are being "
@@ -11268,6 +11463,15 @@ msgstr "Définir l'URL de redirection (exemple : http://exemple.com)."
 msgid "Set the password"
 msgstr "Définir le mot de passe"
 
+#: admin/modules/pro/class-add-essentials-shortcodes.php:340
+#, fuzzy
+msgid ""
+"Set to \"1\" to use ACF get_field() instead of standard meta functions "
+"(requires ACF plugin)."
+msgstr ""
+"La valeur \"1\" permet d'utiliser la fonction ACF get_field() au lieu des "
+"fonctions méta standard (nécessite le plugin ACF)."
+
 #: admin/modules/core/class-wider-admin-menu.php:228
 msgid "Set width to"
 msgstr "Définir la largeur sur"
@@ -11277,7 +11481,7 @@ msgstr "Définir la largeur sur"
 msgid "SETTINGS"
 msgstr "PARAMÈTRES"
 
-#: admin/class-modules-data.php:1367
+#: admin/class-modules-data.php:1377
 #: admin/modules/core/class-code-snippets.php:177
 msgid "Settings"
 msgstr "Paramètres"
@@ -11514,7 +11718,7 @@ msgstr "logo du site"
 msgid "Site will be available soon. Thank you for your patience!"
 msgstr "Le site sera bientôt disponible. Merci pour votre patience!"
 
-#: admin/modules/core/class-smtp-mailer.php:389
+#: admin/modules/core/class-smtp-mailer.php:392
 #, fuzzy, php-format
 msgid "Site: %s"
 msgstr "Site : %s"
@@ -11634,6 +11838,11 @@ msgstr "Liste de snippet"
 msgid "Snippets list navigation"
 msgstr "Navigation dans la liste des snippets"
 
+#: admin/modules/core/class-search-replace-in-database.php:84
+#, fuzzy
+msgid "Something went wrong. Please try again."
+msgstr "Un problème s'est produit. Veuillez réessayer."
+
 #: admin/modules/core/class-svg-upload.php:67
 msgid "Sorry, please check your file"
 msgstr "Désolé, veuillez vérifier votre fichier"
@@ -11734,7 +11943,7 @@ msgstr "Icône Spotify"
 msgid "Spreadsheet Icon"
 msgstr "Icône de feuille de calcul"
 
-#: admin/modules/core/class-smtp-mailer.php:634
+#: admin/modules/core/class-smtp-mailer.php:641
 msgid "SSL"
 msgstr "SSL"
 
@@ -11798,6 +12007,8 @@ msgstr "Icône collante"
 
 #: admin/modules/core/class-media-encoder.php:2720
 #: admin/modules/core/class-media-encoder.php:2754
+#: admin/modules/core/class-search-replace-in-database.php:1382
+#: admin/modules/core/class-search-replace-in-database.php:1425
 #: admin/modules/pro/class-generate-alt-text-with-ai.php:796
 msgid "Stop"
 msgstr "Arrêt"
@@ -12113,7 +12324,7 @@ msgstr "L'utilisateur temporaire a été créé avec succès !"
 msgid "Temporary user updated successfully!"
 msgstr "L'utilisateur temporaire a été mis à jour avec succès !"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:405
+#: admin/modules/pro/class-add-essentials-shortcodes.php:459
 msgid "Term"
 msgstr "Terme"
 
@@ -12126,7 +12337,7 @@ msgstr ""
 "Les termes sont accessibles en utilisant le lien permanent non esthétique, "
 "par exemple, {query_var}={term_slug}."
 
-#: admin/modules/core/class-smtp-mailer.php:398
+#: admin/modules/core/class-smtp-mailer.php:401
 #, fuzzy
 msgid "Test email sent successfully! Please check your inbox."
 msgstr ""
@@ -12415,7 +12626,7 @@ msgstr ""
 "L'étiquette de la liste des éléments de filtre pour le type de publication "
 "personnalisé."
 
-#: admin/helpers/pro/smtp-mailer/gmail.php:79
+#: admin/helpers/pro/smtp-mailer/gmail.php:80
 #, fuzzy
 msgid ""
 "The Gmail mailer works well for sites that send low numbers of emails. "
@@ -12442,7 +12653,7 @@ msgstr ""
 msgid "The icon for the menu item."
 msgstr "L'icône de l'élément de menu."
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:302
+#: admin/modules/pro/class-add-essentials-shortcodes.php:335
 #, fuzzy
 msgid "The ID of the user, post, or term (leave empty for current)."
 msgstr ""
@@ -12528,7 +12739,7 @@ msgstr ""
 msgid "The menu name for the custom post type."
 msgstr "Le nom du menu pour le type de publication personnalisé."
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:303
+#: admin/modules/pro/class-add-essentials-shortcodes.php:336
 #, fuzzy
 msgid "The meta key or field name to retrieve."
 msgstr "La clé méta ou le nom du champ à récupérer."
@@ -12567,7 +12778,7 @@ msgstr ""
 msgid "The not found label for the custom post type."
 msgstr "L'étiquette introuvable pour le type de publication personnalisé."
 
-#: admin/helpers/pro/smtp-mailer/outlook.php:76
+#: admin/helpers/pro/smtp-mailer/outlook.php:79
 #, fuzzy
 msgid ""
 "The Outlook mailer works well for sites that send low numbers of emails."
@@ -12698,7 +12909,7 @@ msgid "The view item label for the custom post type."
 msgstr ""
 "L'étiquette de l'élément de vue pour le type de publication personnalisé."
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:304
+#: admin/modules/pro/class-add-essentials-shortcodes.php:337
 #, fuzzy
 msgid "The WordPress option name (for wpmtk_aes_option shortcode)."
 msgstr "Le nom de l'option WordPress (pour le shortcode wpmtk_aes_option)."
@@ -12836,7 +13047,7 @@ msgstr ""
 "Cet intervalle est inférieur à la constante %1$s qui est définie sur %2$s "
 "secondes. Les événements qui l'utilisent peuvent ne pas s'exécuter à temps."
 
-#: admin/modules/core/class-smtp-mailer.php:387
+#: admin/modules/core/class-smtp-mailer.php:390
 #, fuzzy
 msgid ""
 "This is a test email sent from your WordPress site to verify your SMTP "
@@ -13000,7 +13211,7 @@ msgstr "Titre"
 msgid "Title completion from file name"
 msgstr "Complétion du titre à partir du nom du fichier"
 
-#: admin/modules/core/class-smtp-mailer.php:635
+#: admin/modules/core/class-smtp-mailer.php:642
 msgid "TLS"
 msgstr "TLS"
 
@@ -13012,6 +13223,17 @@ msgid ""
 msgstr ""
 "Pour exclure une image de la conversion et du redimensionnement, ajoutez le "
 "suffixe « %1$s » au nom du fichier, par exemple mon-image%1$s.jpg"
+
+#: admin/modules/core/class-search-replace-in-database.php:1263
+#: admin/modules/core/class-search-replace-in-database.php:1513
+#, fuzzy
+msgid "To go further, upgrade to the version"
+msgstr "Pour aller plus loin, passez à la version"
+
+#: admin/modules/core/class-search-replace-in-database.php:1460
+#, fuzzy
+msgid "To view all hidden results, upgrade to the version"
+msgstr "Pour afficher tous les résultats cachés, passez à la version"
 
 #: admin/modules/core/class-clean-profiles.php:208
 msgid "Toolbar"
@@ -13102,22 +13324,7 @@ msgstr "Deux types de snippets sont disponibles :"
 msgid "Type"
 msgstr "Type"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:372
-#, fuzzy
-msgid "Type to search or leave empty for current post"
-msgstr "Tapez pour rechercher ou laissez vide pour le poste actuel"
-
-#: admin/modules/pro/class-add-essentials-shortcodes.php:416
-#, fuzzy
-msgid "Type to search or leave empty for current term"
-msgstr "Tapez pour rechercher ou laissez vide pour le terme actuel"
-
-#: admin/modules/pro/class-add-essentials-shortcodes.php:328
-#, fuzzy
-msgid "Type to search or leave empty for current user"
-msgstr "Tapez pour rechercher ou laissez vide pour l'utilisateur actuel"
-
-#: admin/modules/pro/class-add-essentials-shortcodes.php:459
+#: admin/modules/pro/class-add-essentials-shortcodes.php:521
 #, fuzzy
 msgid "Type to search WordPress options"
 msgstr "Tapez pour rechercher les options de WordPress"
@@ -13160,12 +13367,12 @@ msgstr "Annuler l'optimisation"
 msgid "Unexpected response code: %d"
 msgstr "Code de réponse inattendu : %d"
 
-#: admin/helpers/pro/smtp-mailer/zohomail.php:165
+#: admin/helpers/pro/smtp-mailer/zohomail.php:166
 #, fuzzy
 msgid "United Kingdom (zoho.uk)"
 msgstr "Royaume-Uni (zoho.uk)"
 
-#: admin/helpers/pro/smtp-mailer/zohomail.php:160
+#: admin/helpers/pro/smtp-mailer/zohomail.php:161
 #, fuzzy
 msgid "United States (zoho.com)"
 msgstr "États-Unis (zoho.com)"
@@ -13405,6 +13612,26 @@ msgstr "Ouest des États-Unis (Oregon)"
 msgid "Use <picture> tags"
 msgstr "Utiliser les balises <picture>"
 
+#: admin/modules/pro/class-add-essentials-shortcodes.php:449
+#, fuzzy
+msgid "Use ACF get_field() instead of get_post_meta()"
+msgstr "Utiliser ACF get_field() au lieu de get_post_meta()"
+
+#: admin/modules/pro/class-add-essentials-shortcodes.php:501
+#, fuzzy
+msgid "Use ACF get_field() instead of get_term_meta()"
+msgstr "Utiliser ACF get_field() au lieu de get_term_meta()"
+
+#: admin/modules/pro/class-add-essentials-shortcodes.php:397
+#, fuzzy
+msgid "Use ACF get_field() instead of get_user_meta()"
+msgstr "Utiliser ACF get_field() au lieu de get_user_meta()"
+
+#: admin/modules/pro/class-add-essentials-shortcodes.php:549
+#, fuzzy
+msgid "Use ACF get_field() with option context"
+msgstr "Utiliser ACF get_field() avec le contexte de l'option"
+
 #: admin/modules/core/class-code-snippets.php:105
 msgid "Use as featured image"
 msgstr "Utiliser comme image sélectionnée"
@@ -13435,6 +13662,11 @@ msgstr "Utiliser l'image sélectionnée"
 msgid "Use Post Featured Image"
 msgstr "Utiliser l'image sélectionnée de la publication"
 
+#: admin/modules/core/class-search-replace-in-database.php:1507
+#, fuzzy
+msgid "Use regular expressions"
+msgstr "Utiliser des expressions régulières"
+
 #: admin/modules/core/class-media-encoder.php:2510
 msgid "Use rewrite rules"
 msgstr "Utiliser les règles de réécriture"
@@ -13451,7 +13683,7 @@ msgstr ""
 "Utiliser le sous-menu WordPress pour les réglages des modules de "
 "WPMasterToolkit"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:317
+#: admin/modules/pro/class-add-essentials-shortcodes.php:355
 msgid "User"
 msgstr "Utilisateur"
 
@@ -13555,7 +13787,7 @@ msgstr "Nom d'utilisateur ou adresse e-mail"
 msgid "Username:"
 msgstr "Nom d'utilisateur :"
 
-#: admin/class-modules-data.php:1322
+#: admin/class-modules-data.php:1332
 #: admin/modules/core/class-enhance-list-tables.php:547
 msgid "Users"
 msgstr "Utilisateurs"
@@ -13885,7 +14117,7 @@ msgstr "Largeur"
 msgid "With the PRO version you unlock:"
 msgstr "Avec la version PRO vous débloquez :"
 
-#: admin/class-modules-data.php:1352
+#: admin/class-modules-data.php:1362
 msgid "Woocommerce"
 msgstr "Woocommerce"
 
@@ -13912,7 +14144,7 @@ msgstr "Événements principaux de WordPress"
 msgid "WordPress Icon"
 msgstr "Icône WordPress"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:448
+#: admin/modules/pro/class-add-essentials-shortcodes.php:510
 #, fuzzy
 msgid "WordPress Option"
 msgstr "Option WordPress"
@@ -13951,7 +14183,7 @@ msgstr "WPMasterToolKit"
 msgid "WPMasterToolkit"
 msgstr "WPMasterToolkit"
 
-#: admin/modules/core/class-smtp-mailer.php:385
+#: admin/modules/core/class-smtp-mailer.php:388
 #, fuzzy
 #| msgid "WP Master Toolkit - SMTP Test Email"
 msgid "WPMasterToolkit - SMTP Test Email"
@@ -14144,9 +14376,9 @@ msgstr ""
 "Vous avez atteint la limite de %1$s 5 emails %2$s capturés par jour. Pour "
 "aller plus loin, passez à la version suivante."
 
-#: admin/helpers/pro/smtp-mailer/gmail.php:114
-#: admin/helpers/pro/smtp-mailer/outlook.php:111
-#: admin/helpers/pro/smtp-mailer/zohomail.php:125
+#: admin/helpers/pro/smtp-mailer/gmail.php:115
+#: admin/helpers/pro/smtp-mailer/outlook.php:114
+#: admin/helpers/pro/smtp-mailer/zohomail.php:126
 #, fuzzy
 msgid ""
 "You need to save settings with Client ID and Client Secret before you can "
@@ -14192,12 +14424,12 @@ msgstr "Fichier de zéro octet ! Abandon du téléchargement"
 msgid "Zip"
 msgstr "Zip"
 
-#: admin/helpers/pro/smtp-mailer/zohomail.php:80
+#: admin/helpers/pro/smtp-mailer/zohomail.php:81
 #, fuzzy
 msgid "Zoho Mail Config"
 msgstr "Zoho Mail Config"
 
-#: admin/helpers/pro/smtp-mailer/zohomail.php:82
+#: admin/helpers/pro/smtp-mailer/zohomail.php:83
 #, fuzzy
 msgid ""
 "Zoho Mail is a reliable email service suitable for websites that send low to "

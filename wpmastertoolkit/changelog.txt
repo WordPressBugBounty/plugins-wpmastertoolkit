@@ -1,5 +1,15 @@
 == Changelog ==
 
+= 2.17.0 =
+Update: Pro Module: Add Essentials Shortcodes: Add permakink support in [wpmtk_post_meta] & [wpmtk_term_meta] shortcodes. Add ACF support for using ACF get_field() function in [wpmtk_post_meta] & [wpmtk_term_meta] shortcodes.
+Update: Module: Obfuscate Email Addresses: Add `rtl` shortcode option to disable right-to-left rendering when it hurts UX. Obfuscate Email Addresses: Add protected `mailto` shortcode option with deferred Base64 decode on click via data attribute.
+Add: Module: Search Replace in database.
+Security: Module: Prevent User Enumeration: Prevent use of uppercase letters in URI.
+Fix: Preserve existing non-plugin .htaccess rules and resync WordPress rewrite block after plugin updates to prevent Apache 404 on /wp-json/ and broken permalinks.
+
+= 2.16.3 =
+Fix: Pro Module: Admin Menu Organizer: Correct menu order saving issue.
+
 = 2.16.2 =
 Fix: Module: Temporary Login: Change condition for showing save button to handle empty values.
 

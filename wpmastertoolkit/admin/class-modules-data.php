@@ -750,6 +750,12 @@ class WPMastertoolkit_Modules_Data {
 				'pro'           => false,
 				'path'          => 'core/class-temporary-login.php',
 			),
+			'WPMastertoolkit_Search_Replace_In_Database' => array(
+				'original_name' => "Search Replace in database",
+				'group'         => 'content-media',
+				'pro'           => false,
+				'path'          => 'core/class-search-replace-in-database.php',
+			),
 		);
 		
 		/**
@@ -1076,7 +1082,7 @@ class WPMastertoolkit_Modules_Data {
 			),
 			'WPMastertoolkit_Obfuscate_Email_Address' => array(
 				'name' => esc_html_x( "Obfuscate Email Addresses", "Module name", 'wpmastertoolkit' ),
-				'desc' => esc_html_x( "Obfuscate email address to prevent spam bots from harvesting them, but make it readable like a regular email address for human visitors, using shortcode [wpm_obfuscate email=\"example@email.com\" display=\"newline\"]", "Module description", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( "Obfuscate email address to prevent spam bots from harvesting them, but make it readable like a regular email address for human visitors, using shortcode [wpm_obfuscate email=\"example@email.com\" display=\"newline\" rtl=\"no\" mailto=\"yes\"]", "Module description", 'wpmastertoolkit' ),
 			),
 			'WPMastertoolkit_Image_Upload_Control' => array(
 				'name' => esc_html_x( "Image Upload Control", "Module name", 'wpmastertoolkit' ),
@@ -1257,6 +1263,10 @@ class WPMastertoolkit_Modules_Data {
 			'WPMastertoolkit_Mail_Catcher' => array(
 				'name' => esc_html_x( "Mail catcher", "Module name", 'wpmastertoolkit' ),
 				'desc' => esc_html_x( "Track every email WordPress sends with an easy-to-use admin viewer.", "Module description", 'wpmastertoolkit' ),
+			),
+			'WPMastertoolkit_Search_Replace_In_Database' => array(
+				'name' => esc_html_x( "Search Replace in database", "Module name", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( "Search and replace data in your WordPress database safely and efficiently.", "Module description", 'wpmastertoolkit' ),
 			),
 		);
 

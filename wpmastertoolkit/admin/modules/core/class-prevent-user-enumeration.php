@@ -67,7 +67,7 @@ class WPMasterToolKit_Prevent_User_Enumeration {
      * @return WP_Error|null Modified response object or original response.
      */
     public function block_author_page_rest( $response ) {
-        if ( ! current_user_can( 'list_users' ) && strpos( $this->get_current_rest_url(), '/wp/v2/users' ) !== false ) {
+        if ( ! current_user_can( 'list_users' ) && strpos( strtolower( $this->get_current_rest_url() ), '/wp/v2/users' ) !== false ) {
             wp_send_json( 
                 array(
                     'code'    => 'rest_cannot_access',

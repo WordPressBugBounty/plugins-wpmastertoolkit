@@ -169,6 +169,9 @@ class WPMastertoolkit_SMTP_Mailer {
 
 			if ( $result ) {
 				$this->save_settings( $result );
+
+				wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
+				exit;
 			}
 		}
 	}
@@ -466,6 +469,10 @@ class WPMastertoolkit_SMTP_Mailer {
 			'ajaxUrl' => admin_url( 'admin-ajax.php' ),
 			'action'  => $this->ajax_action,
 			'nonce'   => wp_create_nonce( $this->ajax_nonce ),
+			'i18n'    => array(
+				'save_before_test'    => esc_html__( 'Please save your settings before testing the email.', 'wpmastertoolkit' ),
+				'save_before_confirm' => esc_html__( 'Please save your settings before confirming the authorization.', 'wpmastertoolkit' ),
+			),
 		));
 
 		include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/header.php';

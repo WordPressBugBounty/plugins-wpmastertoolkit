@@ -2,9 +2,9 @@
 Contributors: ludwigyou
 Tags: all in one plugin, admin, security, disable features, easy to use
 Requires at least: 6.0.0
-Tested up to: 6.9
+Tested up to: 6.9.1
 Requires PHP: 7.4
-Stable tag: 2.16.2
+Stable tag: 2.17.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
 
@@ -250,24 +250,18 @@ Yes, the Media Encoder module automatically converts uploaded images to WebP for
 
 == Changelog ==
 
+= 2.17.0 =
+Update: Pro Module: Add Essentials Shortcodes: Add permakink support in [wpmtk_post_meta] & [wpmtk_term_meta] shortcodes. Add ACF support for using ACF get_field() function in [wpmtk_post_meta] & [wpmtk_term_meta] shortcodes.
+Update: Module: Obfuscate Email Addresses: Add `rtl` shortcode option to disable right-to-left rendering when it hurts UX. Obfuscate Email Addresses: Add protected `mailto` shortcode option with deferred Base64 decode on click via data attribute.
+Add: Module: Search Replace in database.
+Security: Module: Prevent User Enumeration: Prevent use of uppercase letters in URI.
+Fix: Preserve existing non-plugin .htaccess rules and resync WordPress rewrite block after plugin updates to prevent Apache 404 on /wp-json/ and broken permalinks.
+
+= 2.16.3 =
+Fix: Pro Module: Admin Menu Organizer: Correct menu order saving issue.
+
 = 2.16.2 =
 Fix: Module: Temporary Login: Change condition for showing save button to handle empty values.
-
-= 2.16.1 =
-Fix: Improve error handling for wp-config.php operations
-
-= 2.16.0 =
-Fix: Module: 410 Manager: Ensure .htaccess rules are correctly updated when settings change.
-Fix: Module: Apple Touch Icon: Ensure default icon is displayed correctly in preview when no custom icon is set.
-Fix: Module: Blacklisted Usernames: Change capability name.
-Update: Pro Module: Add Essentials Shortcodes: Replace static dropdowns with AJAX-powered autocomplete search for Users, Posts, and Terms for better performance on large sites. Add dynamic meta keys loading based on selected User/Post/Term. Add new shortcodes for retrieving option values and site information.
-Update: Pro Module: Disable Comments: Add by default disable comments on all post types if no selection exists.
-Update: Module: SMTP Mailer: Add support for Brevo, MailJet, Postmark, SparkPost, MailerSender, Resend, SendLayer, SMTP.com, SMTP2GO, ElasticEmail, ZohoMail, SendPulse, Mandrill, Pepipost and Twilio SendGrid.
-Tweak: Pro Module: Add Essentials Shortcodes: Improve UI with readonly fields after selection and enhanced parameter documentation.
-Tweak: Module: Custom Link Menu New Tab: Improve checkbox labels with code formatting for better clarity.
-Fix: Prevent added triple, or more, consecutive line breaks in wp-config.php when updating constants.
-Fix: CRITICAL - Add validation before writing wp-config.php to prevent file corruption. Add automatic backup of wp-config.php before any modification. This prevents complete site failures when preg_replace returns null or empty content.
-Feat: Add system information retrieval and copy functionality for helpful debugging.
 
 
 [See changelog for all versions.](https://wpmastertoolkit.com/en/changelog/)

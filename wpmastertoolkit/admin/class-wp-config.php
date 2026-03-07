@@ -39,11 +39,13 @@ class WPMastertoolkit_WP_Config {
         $wp_config_path = self::get_wp_config_path();
         
         if ( ! file_exists( $wp_config_path ) ) {
+			//phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
             error_log( 'WPMastertoolkit: wp-config.php does not exist: ' . $wp_config_path );
             return false;
         }
         
         if ( ! is_readable( $wp_config_path ) ) {
+			//phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
             error_log( 'WPMastertoolkit: wp-config.php is not readable: ' . $wp_config_path );
             return false;
         }
@@ -51,6 +53,7 @@ class WPMastertoolkit_WP_Config {
         $wp_config_content = file_get_contents( $wp_config_path );
         
         if ( $wp_config_content === false ) {
+			//phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
             error_log( 'WPMastertoolkit: Failed to read wp-config.php: ' . $wp_config_path );
             return false;
         }
@@ -77,7 +80,9 @@ class WPMastertoolkit_WP_Config {
 
         $path = WP_CONTENT_DIR . '/wpmastertoolkit/wp-config-backup';
 
+		//phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_is_writable
         if( ! file_exists( $path ) ||  ! is_writable( $path ) ) {
+			//phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
             error_log( 'WPMastertoolkit: wp-config-backup folder does not exist or is not writable: ' . $path );
             return false;
         }
@@ -95,6 +100,7 @@ class WPMastertoolkit_WP_Config {
         $wp_config_path = self::get_wp_config_path();
         
         if ( ! file_exists( $wp_config_path ) || ! is_readable( $wp_config_path ) ) {
+			//phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
             error_log( 'WPMastertoolkit: Cannot backup wp-config.php - file does not exist or is not readable: ' . $wp_config_path );
             return false;
         }
@@ -102,6 +108,7 @@ class WPMastertoolkit_WP_Config {
         $backup_folder = self::get_backup_folder_path();
         
         if ( $backup_folder === false ) {
+			//phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
             error_log( 'WPMastertoolkit: Cannot backup wp-config.php - backup folder is not available' );
             return false;
         }
@@ -119,6 +126,7 @@ class WPMastertoolkit_WP_Config {
     public static function restore_wp_config_backup() {
         $wp_config_path = self::get_wp_config_path();
         
+		//phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_is_writable
         if ( ! is_writable( $wp_config_path ) ) {
 			//phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
             error_log( 'WPMastertoolkit: Cannot restore wp-config.php - file is not writable: ' . $wp_config_path );
@@ -289,6 +297,7 @@ class WPMastertoolkit_WP_Config {
     public static function add_constant( $constant_name, $constant_value, $var_export_skip = false ) {
         $wp_config_path    = self::get_wp_config_path();
         
+		//phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_is_writable
         if ( ! file_exists( $wp_config_path ) || ! is_writable( $wp_config_path ) ) {
 			//phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
             error_log( 'WPMastertoolkit: Cannot add constant - wp-config.php does not exist or is not writable: ' . $wp_config_path );
@@ -342,6 +351,7 @@ class WPMastertoolkit_WP_Config {
     public static function replace_constant_value( $constant_name, $constant_value, $type = null, $var_export_skip = false ) {
         $wp_config_path    = self::get_wp_config_path();
         
+		//phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_is_writable
         if ( ! file_exists( $wp_config_path ) || ! is_writable( $wp_config_path ) ) {
 			//phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
             error_log( 'WPMastertoolkit: Cannot replace constant - wp-config.php does not exist or is not writable: ' . $wp_config_path );
@@ -411,6 +421,7 @@ class WPMastertoolkit_WP_Config {
     public static function remove_constant( $constant_name ) {
         $wp_config_path    = self::get_wp_config_path();
         
+		//phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_is_writable
         if ( ! file_exists( $wp_config_path ) || ! is_writable( $wp_config_path ) ) {
 			//phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
             error_log( 'WPMastertoolkit: Cannot remove constant - wp-config.php does not exist or is not writable: ' . $wp_config_path );
@@ -463,6 +474,7 @@ class WPMastertoolkit_WP_Config {
 	public static function change_php_variable( $variable_name, $new_value ) {
 		$wp_config_path    = self::get_wp_config_path();
 		
+		//phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_is_writable
 		if ( ! file_exists( $wp_config_path ) || ! is_writable( $wp_config_path ) ) {
 			//phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
 			error_log( 'WPMastertoolkit: Cannot change variable - wp-config.php does not exist or is not writable: ' . $wp_config_path );
