@@ -4,7 +4,7 @@ Tags: all in one plugin, admin, security, disable features, easy to use
 Requires at least: 6.0.0
 Tested up to: 6.9.1
 Requires PHP: 7.4
-Stable tag: 2.17.0
+Stable tag: 2.17.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
 
@@ -19,7 +19,7 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 **Test by Enzo (Easy WordPress) :**
 [youtube https://www.youtube.com/watch?v=I1GdHeeJp6E&t]
 
-= 92 FREE modules =
+= 93 FREE modules =
 
 * Adminer: A full-featured database management tool.
 * Advanced Debug Mode
@@ -109,6 +109,7 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 * Redirect After Logout
 * Revisions Control: Limit number of revisions saved per post type.
 * Register Custom Content Types: Register custom post types and taxonomies.
+* Search Replace in database
 * SMTP Mailer: Configure sender name/email and external SMTP for reliable email delivery.
 * SVG Upload: Enable SVG file uploads.
 * Temporary Login
@@ -152,6 +153,7 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 * Media Encoder: Convert images to AVIF format (PHP ≥ 8.1). Free version limited to WebP only.
 * Mail Catcher: Unlimited email capture. Free version limited to 5 emails per day.
 * Advanced Debug Mode: Live log streaming viewer with real-time monitoring. Daily logs with date suffix. Custom log path with enhanced protection.
+* Search Replace in database: several search/replace pairs, support for regular expressions and a much more complete detailed overview of detected changes.
 * SMTP Mailer: 19+ premium providers including Gmail, Outlook, SendGrid, AWS SES, Brevo, Mailgun, Mailjet, Postmark, SparkPost, MailerSend, Resend, SendLayer, SMTP.com, SMTP2GO, Elastic Email, Zoho Mail, SendPulse, Mandrill, and Pepipost. Free version limited to PHP mail and generic SMTP.
 
 [youtube https://youtu.be/ynV1BhAegtg]
@@ -250,6 +252,9 @@ Yes, the Media Encoder module automatically converts uploaded images to WebP for
 
 == Changelog ==
 
+= 2.17.1 =
+Fix: Module: Multiple User Roles: Ensure roles are correctly assigned and removed for users, including administrators.
+
 = 2.17.0 =
 Update: Pro Module: Add Essentials Shortcodes: Add permakink support in [wpmtk_post_meta] & [wpmtk_term_meta] shortcodes. Add ACF support for using ACF get_field() function in [wpmtk_post_meta] & [wpmtk_term_meta] shortcodes.
 Update: Module: Obfuscate Email Addresses: Add `rtl` shortcode option to disable right-to-left rendering when it hurts UX. Obfuscate Email Addresses: Add protected `mailto` shortcode option with deferred Base64 decode on click via data attribute.
@@ -259,9 +264,6 @@ Fix: Preserve existing non-plugin .htaccess rules and resync WordPress rewrite b
 
 = 2.16.3 =
 Fix: Pro Module: Admin Menu Organizer: Correct menu order saving issue.
-
-= 2.16.2 =
-Fix: Module: Temporary Login: Change condition for showing save button to handle empty values.
 
 
 [See changelog for all versions.](https://wpmastertoolkit.com/en/changelog/)

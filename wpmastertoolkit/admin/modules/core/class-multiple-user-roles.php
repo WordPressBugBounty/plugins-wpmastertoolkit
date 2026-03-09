@@ -51,12 +51,15 @@ class WPMastertoolkit_Multiple_User_Roles {
 	public function render_user_meta_box( $user ) {
 		$roles      	 	   = get_editable_roles();
 		$user_roles 	 	   = array();
+		$is_current_user_admin = false;
 
-		if ( ! empty( $user->roles ) ) {
-        	$user_roles = array_intersect( array_values( $user->roles ), array_keys( $roles ) );
-        }
+		if ( $user instanceof WP_User ) {
+			if ( ! empty( $user->roles ) ) {
+				$user_roles = array_intersect( array_values( $user->roles ), array_keys( $roles ) );
+			}
 
-		$is_current_user_admin = get_current_user_id() == $user->ID && in_array( 'administrator', $user->roles );
+			$is_current_user_admin = get_current_user_id() == $user->ID && in_array( 'administrator', $user->roles, true );
+		}
 
 		if ( current_user_can( 'promote_users', get_current_user_id() ) ) : ?>
 			<div class="wpmastertoolkit-multiple-roles">

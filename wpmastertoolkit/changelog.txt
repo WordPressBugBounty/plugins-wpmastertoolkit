@@ -1,5 +1,8 @@
 == Changelog ==
 
+= 2.17.1 =
+Fix: Module: Multiple User Roles: Ensure roles are correctly assigned and removed for users, including administrators.
+
 = 2.17.0 =
 Update: Pro Module: Add Essentials Shortcodes: Add permakink support in [wpmtk_post_meta] & [wpmtk_term_meta] shortcodes. Add ACF support for using ACF get_field() function in [wpmtk_post_meta] & [wpmtk_term_meta] shortcodes.
 Update: Module: Obfuscate Email Addresses: Add `rtl` shortcode option to disable right-to-left rendering when it hurts UX. Obfuscate Email Addresses: Add protected `mailto` shortcode option with deferred Base64 decode on click via data attribute.
