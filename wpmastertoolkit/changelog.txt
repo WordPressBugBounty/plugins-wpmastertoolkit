@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 2.18.0 =
+Update: Pro Module: Two-Factor Authentication: Add a global option to force Email as default when no method is selected, show this option only when Email is active, enforce backend fallback disabling when Email is off, and move default/method toggles to the left for UI consistency.
+
+
 = 2.17.1 =
 Fix: Module: Multiple User Roles: Ensure roles are correctly assigned and removed for users, including administrators.
 
