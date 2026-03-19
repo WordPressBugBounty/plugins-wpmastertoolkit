@@ -1,8 +1,12 @@
 == Changelog ==
 
+= 2.19.0 =
+Update: Pro Module: Add Essentials Shortcodes: Add `id-from-get` parameter support for User, Post, and Term shortcodes to retrieve IDs from URL query parameters (e.g. `id-from-get="post_id"`). When provided, `id-from-get` takes precedence over `id`. Add this option to the shortcode generator in the dashboard.
+Fix: CRITICAL - Rewrite .htaccess write logic to use atomic temp-file + rename, preventing file truncation on interrupted writes. Add mandatory timestamped backup before every modification (last 5 kept), automatic restore on validation failure, and full logging via WPMastertoolkit_Logs.
+Fix: CRITICAL - Rewrite wp-config.php write logic to use atomic temp-file + rename, preventing file truncation on interrupted writes. Add mandatory timestamped backup before every modification (last 5 kept), automatic restore on validation failure. Fix `change_php_variable()` where `$pattern` was undefined. Fix `add_constant()` ignoring `$var_export_skip` parameter. Replace all `error_log()` calls with WPMastertoolkit_Logs.
+
 = 2.18.0 =
 Update: Pro Module: Two-Factor Authentication: Add a global option to force Email as default when no method is selected, show this option only when Email is active, enforce backend fallback disabling when Email is off, and move default/method toggles to the left for UI consistency.
-
 
 = 2.17.1 =
 Fix: Module: Multiple User Roles: Ensure roles are correctly assigned and removed for users, including administrators.

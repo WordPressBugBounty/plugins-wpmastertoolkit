@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: WPMasterToolKit\n"
 "Report-Msgid-Bugs-To: Webdeclic <contact@webdeclic.com>\n"
 "POT-Creation-Date: 2025-09-18 15:15+0100\n"
-"PO-Revision-Date: 2026-03-07 15:54+0000\n"
+"PO-Revision-Date: 2026-03-13 12:48+0000\n"
 "Last-Translator: \n"
 "Language-Team: Spanish (Spain)\n"
 "Language: es_ES\n"
@@ -205,7 +205,7 @@ msgstr ""
 "(WordPress no pudo establecer una conexión segura con WordPress.org. "
 "Comuníquese con el administrador del servidor)."
 
-#: admin/modules/core/class-multiple-user-roles.php:76
+#: admin/modules/core/class-multiple-user-roles.php:79
 #, fuzzy
 msgid "(You cannot remove this role)"
 msgstr "(No puedes eliminar este rol)"
@@ -420,12 +420,12 @@ msgstr ""
 msgid "Access Key ID"
 msgstr "Clave de acceso ID"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:347
+#: admin/modules/pro/class-add-essentials-shortcodes.php:371
 #, fuzzy
 msgid "Access nested array value in user meta"
 msgstr "Acceso al valor de la matriz anidada en user meta"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:240
+#: admin/modules/pro/class-add-essentials-shortcodes.php:262
 #, fuzzy
 msgid "Access to this option is restricted for security reasons."
 msgstr "El acceso a esta opción está restringido por motivos de seguridad."
@@ -490,7 +490,7 @@ msgstr "Módulos activados"
 msgid "Activation ID"
 msgstr "ID de activación"
 
-#: admin/modules/pro/class-two-factor-authentication.php:208
+#: admin/modules/pro/class-two-factor-authentication.php:214
 #, fuzzy
 msgid "Active for user roles"
 msgstr "Activo para roles de usuario"
@@ -1595,7 +1595,7 @@ msgstr ""
 "automáticamente campos de metadatos clave (título, subtítulo, texto "
 "alternativo y descripción) directamente desde el nombre del archivo limpio."
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:333
+#: admin/modules/pro/class-add-essentials-shortcodes.php:355
 #, fuzzy
 msgid "Available parameters:"
 msgstr "Parámetros disponibles:"
@@ -2383,10 +2383,10 @@ msgstr ""
 "todos los widgets. Los widgets desactivados no cargarán ningún recurso ni "
 "aparecerán en las Opciones de pantalla."
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:372
-#: admin/modules/pro/class-add-essentials-shortcodes.php:424
-#: admin/modules/pro/class-add-essentials-shortcodes.php:476
-#: admin/modules/pro/class-add-essentials-shortcodes.php:527
+#: admin/modules/pro/class-add-essentials-shortcodes.php:396
+#: admin/modules/pro/class-add-essentials-shortcodes.php:455
+#: admin/modules/pro/class-add-essentials-shortcodes.php:514
+#: admin/modules/pro/class-add-essentials-shortcodes.php:572
 #, fuzzy
 msgid "Clear"
 msgstr "Claro"
@@ -2458,7 +2458,7 @@ msgstr "Icono del portapapeles"
 msgid "Clock Icon"
 msgstr "Icono de reloj"
 
-#: admin/modules/pro/class-two-factor-authentication.php:312
+#: admin/modules/pro/class-two-factor-authentication.php:330
 #, fuzzy
 msgid "Close button"
 msgstr "Botón de cerrar"
@@ -2494,18 +2494,18 @@ msgstr "Editor de código"
 msgid "Code Icon"
 msgstr "Icono de código"
 
-#: admin/modules/pro/class-two-factor-authentication.php:674
+#: admin/modules/pro/class-two-factor-authentication.php:713
 #, fuzzy
 msgid "Code not found"
 msgstr "Código no encontrado"
 
-#: admin/modules/pro/class-two-factor-authentication.php:689
-#: admin/modules/pro/class-two-factor-authentication.php:698
+#: admin/modules/pro/class-two-factor-authentication.php:728
+#: admin/modules/pro/class-two-factor-authentication.php:737
 #, fuzzy
 msgid "Code not valid"
 msgstr "Código no válido"
 
-#: admin/modules/pro/class-two-factor-authentication.php:640
+#: admin/modules/pro/class-two-factor-authentication.php:679
 #, fuzzy
 msgid "Code sent"
 msgstr "Código enviado"
@@ -2964,17 +2964,17 @@ msgstr "Vencimiento actual: %s"
 msgid "Current IP: "
 msgstr "IP actual:"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:418
+#: admin/modules/pro/class-add-essentials-shortcodes.php:449
 #, fuzzy
 msgid "Current post"
 msgstr "Puesto actual"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:470
+#: admin/modules/pro/class-add-essentials-shortcodes.php:508
 #, fuzzy
 msgid "Current term"
 msgstr "Vigencia actual"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:366
+#: admin/modules/pro/class-add-essentials-shortcodes.php:390
 #, fuzzy
 msgid "Current user"
 msgstr "Usuario actual"
@@ -3156,7 +3156,7 @@ msgstr "Icono de eliminación de base de datos"
 msgid "Database View Icon"
 msgstr "Icono de vista de base de datos"
 
-#: admin/modules/pro/class-two-factor-authentication.php:603
+#: admin/modules/pro/class-two-factor-authentication.php:642
 #, fuzzy, php-format
 msgid "Date : %s"
 msgstr "Fecha: %s"
@@ -3237,6 +3237,11 @@ msgstr "por defecto"
 #, fuzzy
 msgid "Default Icon"
 msgstr "Icono predeterminado"
+
+#: admin/modules/pro/class-two-factor-authentication.php:237
+#, fuzzy
+msgid "Default method: force Email"
+msgstr "Método por defecto: forzar Correo electrónico"
 
 #: admin/templates/core/register-custom-content-types/edit-taxonomy.php:325
 #: admin/templates/core/register-custom-content-types/edit-taxonomy.php:337
@@ -3578,7 +3583,7 @@ msgstr ""
 msgid "Display cleared. Start streaming to view logs..."
 msgstr "Pantalla borrada. Inicie la transmisión para ver los registros..."
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:345
+#: admin/modules/pro/class-add-essentials-shortcodes.php:368
 #, fuzzy
 msgid "Display email of user #5"
 msgstr "Mostrar email del usuario #5"
@@ -3593,15 +3598,20 @@ msgstr "Errores de visualización"
 msgid "Display images with new format on the site"
 msgstr "Mostrar imágenes con nuevo formato en el sitio"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:348
+#: admin/modules/pro/class-add-essentials-shortcodes.php:372
 #, fuzzy
 msgid "Display site name from WordPress options"
 msgstr "Mostrar el nombre del sitio desde las opciones de WordPress"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:346
+#: admin/modules/pro/class-add-essentials-shortcodes.php:369
 #, fuzzy
 msgid "Display title of current post"
 msgstr "Mostrar el título del mensaje actual"
+
+#: admin/modules/pro/class-add-essentials-shortcodes.php:370
+#, fuzzy
+msgid "Display title of the post whose ID comes from $_GET[\"post_id\"]"
+msgstr "Mostrar el título del post cuyo ID proviene de $_GET[\"post_id\"]"
 
 #: admin/modules/core/class-media-encoder.php:2646
 #, fuzzy
@@ -3714,7 +3724,22 @@ msgstr "Menú duplicado"
 msgid "Dutch"
 msgstr "Holandés"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:538
+#: admin/modules/pro/class-add-essentials-shortcodes.php:462
+#, fuzzy
+msgid "e.g. post_id"
+msgstr "por ejemplo, post_id"
+
+#: admin/modules/pro/class-add-essentials-shortcodes.php:521
+#, fuzzy
+msgid "e.g. term_id"
+msgstr "p. ej. term_id"
+
+#: admin/modules/pro/class-add-essentials-shortcodes.php:403
+#, fuzzy
+msgid "e.g. user_id"
+msgstr "por ejemplo user_id"
+
+#: admin/modules/pro/class-add-essentials-shortcodes.php:583
 #, fuzzy
 msgid "e.g., key1->key2 for array options"
 msgstr "por ejemplo, clave1->clave2 para opciones de matriz"
@@ -4152,7 +4177,7 @@ msgstr "Introduzca el título de la publicación aquí"
 msgid "Enter the archive slug. Example: \"portfolio\"."
 msgstr "Introducir el slug del archivo. Ejemplo: \"portafolio\"."
 
-#: admin/modules/pro/class-two-factor-authentication.php:365
+#: admin/modules/pro/class-two-factor-authentication.php:383
 #, fuzzy
 msgid "Enter the code"
 msgstr "Introduzca el código"
@@ -4437,7 +4462,7 @@ msgstr "Cada minuto"
 msgid "Everyone"
 msgstr "Todos"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:343
+#: admin/modules/pro/class-add-essentials-shortcodes.php:366
 #, fuzzy
 msgid "Examples:"
 msgstr "Ejemplos:"
@@ -5327,13 +5352,13 @@ msgstr ""
 "Vaya a la página de configuración del plugin WPMastertoolkit. Haga clic en "
 "el botón \"Eliminar conexión OAuth\"."
 
-#: admin/modules/pro/class-two-factor-authentication.php:348
-#: admin/modules/pro/class-two-factor-authentication.php:466
+#: admin/modules/pro/class-two-factor-authentication.php:366
+#: admin/modules/pro/class-two-factor-authentication.php:494
 #, fuzzy
 msgid "Google Authenticator"
 msgstr "Autenticador de Google"
 
-#: admin/modules/pro/class-two-factor-authentication.php:683
+#: admin/modules/pro/class-two-factor-authentication.php:722
 #, fuzzy
 msgid "Google Authenticator not configured"
 msgstr "Google Authenticator no está configurado"
@@ -5412,7 +5437,7 @@ msgstr "hebreo"
 msgid "Height"
 msgstr "Altura"
 
-#: admin/modules/pro/class-two-factor-authentication.php:590
+#: admin/modules/pro/class-two-factor-authentication.php:629
 #, fuzzy, php-format
 msgid "Hello %s,"
 msgstr "Hola %s,"
@@ -5442,7 +5467,7 @@ msgstr "Ayude a WPMasterToolkit a mejorar con el seguimiento del uso"
 msgid "Here are the login credentials. Make sure to copy them now:"
 msgstr "Aquí están las credenciales de acceso. Asegúrese de copiarlas ahora:"
 
-#: admin/modules/pro/class-two-factor-authentication.php:593
+#: admin/modules/pro/class-two-factor-authentication.php:632
 #, fuzzy
 msgid "Here is your login code :"
 msgstr "Aquí está su código de inicio de sesión:"
@@ -5658,10 +5683,25 @@ msgstr "IDENTIFICACIÓN"
 msgid "ID (alt) Icon"
 msgstr "Icono de identificación (alt)"
 
+#: admin/modules/pro/class-add-essentials-shortcodes.php:402
+#: admin/modules/pro/class-add-essentials-shortcodes.php:461
+#: admin/modules/pro/class-add-essentials-shortcodes.php:520
+#, fuzzy
+msgid "ID from GET:"
+msgstr "ID de GET:"
+
 #: admin/helpers/core/select-dashicon/class-select-dashicon.php:209
 #, fuzzy
 msgid "ID Icon"
 msgstr "Icono de identificación"
+
+#: admin/modules/pro/class-two-factor-authentication.php:241
+#, fuzzy
+msgid ""
+"If a user has not selected any method, Email will be applied automatically."
+msgstr ""
+"Si un usuario no ha seleccionado ningún método, el correo electrónico se "
+"aplicará automáticamente."
 
 #: admin/templates/core/register-custom-content-types/edit-post-cpt.php:703
 #, fuzzy
@@ -5966,7 +6006,7 @@ msgstr "Insertar después del icono"
 msgid "Insert Before Icon"
 msgstr "Insertar antes del icono"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:332
+#: admin/modules/pro/class-add-essentials-shortcodes.php:354
 #, fuzzy
 msgid "Insert dynamic variables into your titles and content via shortcodes."
 msgstr ""
@@ -6087,8 +6127,8 @@ msgstr "Enlace de inicio de sesión no válido."
 msgid "Invalid Media ID."
 msgstr "ID de medio no válido"
 
-#: admin/modules/pro/class-two-factor-authentication.php:533
-#: admin/modules/pro/class-two-factor-authentication.php:560
+#: admin/modules/pro/class-two-factor-authentication.php:572
+#: admin/modules/pro/class-two-factor-authentication.php:599
 #, fuzzy
 msgid "Invalid nonce"
 msgstr "Nonce no válido"
@@ -6167,7 +6207,7 @@ msgstr ""
 msgid "Invert Selection"
 msgstr "Invertir selección"
 
-#: admin/modules/pro/class-two-factor-authentication.php:598
+#: admin/modules/pro/class-two-factor-authentication.php:637
 #, fuzzy, php-format
 msgid "IP : %s"
 msgstr "Dirección IP: %s"
@@ -7045,18 +7085,18 @@ msgstr "ID del flujo de mensajes"
 msgid "Message Stream ID:"
 msgstr "ID del flujo de mensajes:"
 
-#: admin/modules/pro/class-two-factor-authentication.php:226
+#: admin/modules/pro/class-two-factor-authentication.php:253
 #, fuzzy
 msgid "Method 1 : Send code via Email"
 msgstr "Método 1: Enviar código por correo electrónico"
 
-#: admin/modules/pro/class-two-factor-authentication.php:244
+#: admin/modules/pro/class-two-factor-authentication.php:269
 #, fuzzy
 msgid "Method 2 : Google Authenticator (TOTP)"
 msgstr "Método 2 : Google Authenticator (TOTP)"
 
-#: admin/modules/pro/class-two-factor-authentication.php:577
-#: admin/modules/pro/class-two-factor-authentication.php:665
+#: admin/modules/pro/class-two-factor-authentication.php:616
+#: admin/modules/pro/class-two-factor-authentication.php:704
 #, fuzzy
 msgid "Method not found"
 msgstr "Método no encontrado"
@@ -9265,7 +9305,7 @@ msgstr "Nombre Campo Descripción"
 msgid "Nametag Icon"
 msgstr "Icono de etiqueta de nombre"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:338
+#: admin/modules/pro/class-add-essentials-shortcodes.php:361
 #, fuzzy
 msgid ""
 "Navigate through array values using \"->\" separator (e.g., \"address->"
@@ -9646,7 +9686,7 @@ msgstr "Nota: Al guardar los ajustes se activará el registro de depuración."
 msgid "Note: Saving settings will enable debug mode."
 msgstr "Nota: Al guardar los ajustes se activará el modo de depuración."
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:541
+#: admin/modules/pro/class-add-essentials-shortcodes.php:586
 #, fuzzy
 msgid ""
 "Note: Sensitive options (passwords, keys, tokens) are automatically blocked "
@@ -9717,7 +9757,7 @@ msgstr "En las pantallas de creación y edición de publicaciones"
 msgid "On the frontend"
 msgstr "En el frontend"
 
-#: admin/modules/pro/class-two-factor-authentication.php:323
+#: admin/modules/pro/class-two-factor-authentication.php:341
 #, fuzzy
 msgid "One more step"
 msgstr "Un paso más"
@@ -9797,9 +9837,9 @@ msgstr ""
 "Controlador personalizado opcional para usar en lugar de "
 "`WP_REST_Terms_Controller`."
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:388
-#: admin/modules/pro/class-add-essentials-shortcodes.php:440
-#: admin/modules/pro/class-add-essentials-shortcodes.php:492
+#: admin/modules/pro/class-add-essentials-shortcodes.php:419
+#: admin/modules/pro/class-add-essentials-shortcodes.php:478
+#: admin/modules/pro/class-add-essentials-shortcodes.php:537
 #, fuzzy
 msgid "Or add a custom meta:"
 msgstr "O agregue un meta personalizado:"
@@ -9830,9 +9870,9 @@ msgstr "Imagen original:"
 msgid "Other"
 msgstr "Otro"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:384
-#: admin/modules/pro/class-add-essentials-shortcodes.php:436
-#: admin/modules/pro/class-add-essentials-shortcodes.php:488
+#: admin/modules/pro/class-add-essentials-shortcodes.php:415
+#: admin/modules/pro/class-add-essentials-shortcodes.php:474
+#: admin/modules/pro/class-add-essentials-shortcodes.php:533
 #, fuzzy
 msgid "Other meta"
 msgstr "Otros meta"
@@ -10093,7 +10133,7 @@ msgstr "Pegar icono de Word"
 msgid "Patched"
 msgstr "Parcheado"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:533
+#: admin/modules/pro/class-add-essentials-shortcodes.php:578
 #, fuzzy
 msgid "Path (optional):"
 msgstr "Ruta (opcional):"
@@ -10350,7 +10390,7 @@ msgstr "Por favor, introduce una dirección de correo electrónico válida."
 msgid "Please enter the name of your image"
 msgstr "Por favor, introduzca el nombre de su imagen"
 
-#: admin/modules/pro/class-two-factor-authentication.php:368
+#: admin/modules/pro/class-two-factor-authentication.php:386
 #, fuzzy
 msgid "Please enter your two factor authentication code here."
 msgstr "Ingrese aquí su código de autenticación de dos factores."
@@ -10440,7 +10480,7 @@ msgstr "Seleccione un icono para este elemento del menú."
 msgid "Please select at least one table."
 msgstr "Seleccione al menos una mesa."
 
-#: admin/modules/pro/class-two-factor-authentication.php:326
+#: admin/modules/pro/class-two-factor-authentication.php:344
 #, fuzzy
 msgid "Please select your preferred method for two-factor authentication."
 msgstr "Seleccione su método preferido para la autenticación de dos factores."
@@ -10559,7 +10599,7 @@ msgstr "portugués"
 msgid "Position"
 msgstr "Posición"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:407
+#: admin/modules/pro/class-add-essentials-shortcodes.php:438
 #, fuzzy
 msgid "Post"
 msgstr "Correo"
@@ -10915,7 +10955,7 @@ msgstr "Publicar"
 msgid "Published"
 msgstr "Publicado"
 
-#: admin/modules/pro/class-two-factor-authentication.php:482
+#: admin/modules/pro/class-two-factor-authentication.php:510
 #: admin/templates/pro/link-shortener/edit-post.php:115
 #, fuzzy
 msgid "QR Code"
@@ -10978,7 +11018,16 @@ msgstr "Icono aleatorio"
 msgid "Read"
 msgstr "Leer"
 
-#: admin/modules/pro/class-two-factor-authentication.php:335
+#: admin/modules/pro/class-add-essentials-shortcodes.php:358
+#, fuzzy
+msgid ""
+"Read the ID from a GET parameter in the URL (e.g., post_id). If provided, "
+"this overrides id."
+msgstr ""
+"Lee el ID de un parámetro GET en la URL (por ejemplo, post_id). Si se "
+"proporciona, anula id."
+
+#: admin/modules/pro/class-two-factor-authentication.php:353
 #, fuzzy
 msgid "Receive an email"
 msgstr "Recibir un correo electrónico"
@@ -11571,12 +11620,12 @@ msgstr "Reanudar este gancho"
 msgid "Resumed the %s hook."
 msgstr "Se reanudó el gancho %s."
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:350
+#: admin/modules/pro/class-add-essentials-shortcodes.php:374
 #, fuzzy
 msgid "Retrieve ACF field value for current post"
 msgstr "Recuperar el valor del campo ACF para el puesto actual"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:350
+#: admin/modules/pro/class-add-essentials-shortcodes.php:374
 #, fuzzy
 msgid "Retrieve ACF option field value"
 msgstr "Recuperar el valor del campo de opción ACF"
@@ -11646,7 +11695,7 @@ msgstr "robots.txt"
 msgid "Role"
 msgstr "Role"
 
-#: admin/modules/core/class-multiple-user-roles.php:65
+#: admin/modules/core/class-multiple-user-roles.php:68
 #, fuzzy
 msgid "Roles"
 msgstr "Roles"
@@ -11770,7 +11819,7 @@ msgstr "Guardado exitosamente"
 msgid "Saved the cron event %s."
 msgstr "Se guardó el evento cron %s."
 
-#: admin/modules/pro/class-two-factor-authentication.php:481
+#: admin/modules/pro/class-two-factor-authentication.php:509
 #, fuzzy
 msgid "Scan this QR code with your Google Authenticator app:"
 msgstr "Escanea este código QR con tu aplicación Google Authenticator:"
@@ -11814,7 +11863,7 @@ msgstr "Icono de opciones de pantalla"
 msgid "Screenshot (1200x900)"
 msgstr "Captura de pantalla (1200x900)"
 
-#: admin/modules/pro/class-two-factor-authentication.php:381
+#: admin/modules/pro/class-two-factor-authentication.php:399
 #, fuzzy
 msgid "Se connecter"
 msgstr "Se connecter"
@@ -11868,12 +11917,12 @@ msgstr "Icono de búsqueda"
 msgid "Search Items"
 msgstr "Buscar elementos"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:515
+#: admin/modules/pro/class-add-essentials-shortcodes.php:560
 #, fuzzy
 msgid "Search option:"
 msgstr "Opción de búsqueda:"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:412
+#: admin/modules/pro/class-add-essentials-shortcodes.php:443
 #, fuzzy
 msgid "Search post:"
 msgstr "Puesto de búsqueda:"
@@ -11903,13 +11952,13 @@ msgstr "Fragmento de búsqueda"
 msgid "Search Tags"
 msgstr "Buscar etiquetas"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:464
+#: admin/modules/pro/class-add-essentials-shortcodes.php:502
 #, fuzzy
 #| msgid "Select term:"
 msgid "Search term:"
 msgstr "Seleccionar término:"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:360
+#: admin/modules/pro/class-add-essentials-shortcodes.php:384
 #, fuzzy
 #| msgid "Select user:"
 msgid "Search user:"
@@ -11941,7 +11990,7 @@ msgstr "Clave de acceso secreta"
 msgid "Secret Key"
 msgstr "Clave secreta"
 
-#: admin/modules/pro/class-two-factor-authentication.php:483
+#: admin/modules/pro/class-two-factor-authentication.php:511
 #, fuzzy
 msgid "Secret key:"
 msgstr "Llave secreta:"
@@ -12031,7 +12080,7 @@ msgstr "Seleccionar Menú"
 msgid "Select Mode"
 msgstr "Seleccionar modo"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:430
+#: admin/modules/pro/class-add-essentials-shortcodes.php:468
 #, fuzzy
 msgid "Select post meta:"
 msgstr "Seleccionar meta de la publicación:"
@@ -12046,7 +12095,7 @@ msgstr "Seleccionar tablas"
 msgid "Select Template"
 msgstr "Seleccionar plantilla"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:482
+#: admin/modules/pro/class-add-essentials-shortcodes.php:527
 #, fuzzy
 msgid "Select term meta:"
 msgstr "Seleccionar término meta:"
@@ -12088,7 +12137,7 @@ msgstr "Seleccione la función que desea asignar al usuario temporal."
 msgid "Select Theme"
 msgstr "Seleccionar tema"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:378
+#: admin/modules/pro/class-add-essentials-shortcodes.php:409
 #, fuzzy
 msgid "Select user meta:"
 msgstr "Seleccionar metadatos del usuario:"
@@ -12341,7 +12390,7 @@ msgstr "Establecer URL de redireccionamiento (ejemplo: http://example.com)."
 msgid "Set the password"
 msgstr "Establecer la contraseña"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:340
+#: admin/modules/pro/class-add-essentials-shortcodes.php:363
 #, fuzzy
 msgid ""
 "Set to \"1\" to use ACF get_field() instead of standard meta functions "
@@ -13248,7 +13297,7 @@ msgstr "Usuario temporal creado con éxito"
 msgid "Temporary user updated successfully!"
 msgstr "¡Usuario temporal actualizado correctamente!"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:459
+#: admin/modules/pro/class-add-essentials-shortcodes.php:497
 #, fuzzy
 msgid "Term"
 msgstr "Término"
@@ -13587,7 +13636,7 @@ msgstr ""
 msgid "The icon for the menu item."
 msgstr "El icono del elemento del menú."
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:335
+#: admin/modules/pro/class-add-essentials-shortcodes.php:357
 #, fuzzy
 msgid "The ID of the user, post, or term (leave empty for current)."
 msgstr "El ID del usuario, puesto o término (dejar vacío para el actual)."
@@ -13673,7 +13722,7 @@ msgstr ""
 msgid "The menu name for the custom post type."
 msgstr "El nombre del menú para el tipo de publicación personalizada."
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:336
+#: admin/modules/pro/class-add-essentials-shortcodes.php:359
 #, fuzzy
 msgid "The meta key or field name to retrieve."
 msgstr "La meta clave o nombre de campo a recuperar."
@@ -13848,7 +13897,7 @@ msgstr ""
 "La etiqueta del elemento de visualización para el tipo de publicación "
 "personalizada."
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:337
+#: admin/modules/pro/class-add-essentials-shortcodes.php:360
 #, fuzzy
 msgid "The WordPress option name (for wpmtk_aes_option shortcode)."
 msgstr ""
@@ -14036,7 +14085,7 @@ msgid "This license key is not valid. Please double check it and try again."
 msgstr ""
 "Esta clave de licencia no es válida. Compruébela y vuelva a intentarlo."
 
-#: admin/modules/pro/class-two-factor-authentication.php:202
+#: admin/modules/pro/class-two-factor-authentication.php:208
 #, fuzzy
 msgid ""
 "This module will add two factor authentication methods to the login page."
@@ -14265,7 +14314,7 @@ msgid "Twitter Icon"
 msgstr "Icono de Twitter"
 
 #: admin/modules/pro/class-two-factor-authentication.php:54
-#: admin/modules/pro/class-two-factor-authentication.php:449
+#: admin/modules/pro/class-two-factor-authentication.php:477
 #, fuzzy
 msgid "Two factor authentication"
 msgstr "Autenticación de dos factores"
@@ -14283,7 +14332,7 @@ msgstr "Hay dos tipos de fragmentos disponibles:"
 msgid "Type"
 msgstr "Tipo"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:521
+#: admin/modules/pro/class-add-essentials-shortcodes.php:566
 #, fuzzy
 msgid "Type to search WordPress options"
 msgstr "Escriba para buscar opciones de WordPress"
@@ -14589,22 +14638,22 @@ msgstr "Oeste de EE.UU. (Oregón)"
 msgid "Use <picture> tags"
 msgstr "Utilice etiquetas <picture>"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:449
+#: admin/modules/pro/class-add-essentials-shortcodes.php:487
 #, fuzzy
 msgid "Use ACF get_field() instead of get_post_meta()"
 msgstr "Utilizar ACF get_field() en lugar de get_post_meta()"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:501
+#: admin/modules/pro/class-add-essentials-shortcodes.php:546
 #, fuzzy
 msgid "Use ACF get_field() instead of get_term_meta()"
 msgstr "Utilice ACF get_field() en lugar de get_term_meta()"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:397
+#: admin/modules/pro/class-add-essentials-shortcodes.php:428
 #, fuzzy
 msgid "Use ACF get_field() instead of get_user_meta()"
 msgstr "Utilizar ACF get_field() en lugar de get_user_meta()"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:549
+#: admin/modules/pro/class-add-essentials-shortcodes.php:594
 #, fuzzy
 msgid "Use ACF get_field() with option context"
 msgstr "Utilizar ACF get_field() con contexto de opción"
@@ -14661,12 +14710,12 @@ msgid "Use WordPress Submenu for WPMasterToolkit modules settings"
 msgstr ""
 "Usar el submenú de WordPress para configurar los módulos de WPMasterToolkit"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:355
+#: admin/modules/pro/class-add-essentials-shortcodes.php:379
 #, fuzzy
 msgid "User"
 msgstr "Usuario"
 
-#: admin/modules/pro/class-two-factor-authentication.php:608
+#: admin/modules/pro/class-two-factor-authentication.php:647
 #, fuzzy, php-format
 msgid "User agent : %s"
 msgstr "Agente de usuario: %s"
@@ -14676,7 +14725,7 @@ msgstr "Agente de usuario: %s"
 msgid "User deleted successfully."
 msgstr "Usuario eliminado correctamente."
 
-#: admin/modules/pro/class-two-factor-authentication.php:568
+#: admin/modules/pro/class-two-factor-authentication.php:607
 #, fuzzy
 msgid "User not found"
 msgstr "Usuario no encontrado"
@@ -14809,7 +14858,7 @@ msgstr "Versión %s"
 msgid "Version :"
 msgstr "Versión :"
 
-#: admin/modules/pro/class-two-factor-authentication.php:455
+#: admin/modules/pro/class-two-factor-authentication.php:483
 #, fuzzy
 msgid "Via email"
 msgstr "Por correo electrónico"
@@ -14920,7 +14969,7 @@ msgstr "Icono de volumen activado"
 msgid "Vulnerabilities Scan"
 msgstr "Análisis de vulnerabilidades"
 
-#: admin/modules/pro/class-two-factor-authentication.php:316
+#: admin/modules/pro/class-two-factor-authentication.php:334
 #, fuzzy
 msgid "Wait please..."
 msgstr "Espere por favor..."
@@ -14999,7 +15048,7 @@ msgstr ""
 msgid "WebP"
 msgstr "WebP"
 
-#: admin/modules/pro/class-two-factor-authentication.php:613
+#: admin/modules/pro/class-two-factor-authentication.php:652
 #, fuzzy, php-format
 msgid "Website : %s"
 msgstr "Sitio web: %s"
@@ -15152,7 +15201,7 @@ msgstr "Eventos principales de WordPress"
 msgid "WordPress Icon"
 msgstr "Icono de WordPress"
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:510
+#: admin/modules/pro/class-add-essentials-shortcodes.php:555
 #, fuzzy
 msgid "WordPress Option"
 msgstr "Opción WordPress"
@@ -15422,7 +15471,7 @@ msgstr "Su licencia ha sido desactivada para este sitio."
 msgid "Your license is succesfully activated for this site."
 msgstr "Su licencia se ha activado correctamente para este sitio."
 
-#: admin/modules/pro/class-two-factor-authentication.php:587
+#: admin/modules/pro/class-two-factor-authentication.php:626
 #, fuzzy
 msgid "Your login code"
 msgstr "Su código de inicio de sesión"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPMasterToolKit\n"
 "Report-Msgid-Bugs-To: Webdeclic <contact@webdeclic.com>\n"
-"POT-Creation-Date: 2026-03-07 15:53+0200\n"
+"POT-Creation-Date: 2026-03-13 12:47+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Webdeclic <contact@webdeclic.com>\n"
 "Language-Team: Webdeclic <contact@webdeclic.com>\n"
@@ -6277,11 +6277,11 @@ msgid ""
 "redirection URL will be ignored."
 msgstr ""
 
-#: admin/modules/core/class-multiple-user-roles.php:65
+#: admin/modules/core/class-multiple-user-roles.php:68
 msgid "Roles"
 msgstr ""
 
-#: admin/modules/core/class-multiple-user-roles.php:76
+#: admin/modules/core/class-multiple-user-roles.php:79
 msgid "(You cannot remove this role)"
 msgstr ""
 
@@ -8082,172 +8082,198 @@ msgstr ""
 msgid "Add Essentials Shortcodes"
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:240
+#: admin/modules/pro/class-add-essentials-shortcodes.php:262
 msgid "Access to this option is restricted for security reasons."
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:332
+#: admin/modules/pro/class-add-essentials-shortcodes.php:354
 msgid "Insert dynamic variables into your titles and content via shortcodes."
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:333
+#: admin/modules/pro/class-add-essentials-shortcodes.php:355
 msgid "Available parameters:"
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:335
+#: admin/modules/pro/class-add-essentials-shortcodes.php:357
 msgid "The ID of the user, post, or term (leave empty for current)."
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:336
+#: admin/modules/pro/class-add-essentials-shortcodes.php:358
+msgid "Read the ID from a GET parameter in the URL (e.g., post_id). If provided, this overrides id."
+msgstr ""
+
+#: admin/modules/pro/class-add-essentials-shortcodes.php:359
 msgid "The meta key or field name to retrieve."
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:337
+#: admin/modules/pro/class-add-essentials-shortcodes.php:360
 msgid "The WordPress option name (for wpmtk_aes_option shortcode)."
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:338
+#: admin/modules/pro/class-add-essentials-shortcodes.php:361
 msgid ""
 "Navigate through array values using \"->\" separator (e.g., \"address->city\" to access $meta[\"address\"]"
 "[\"city\"])."
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:340
+#: admin/modules/pro/class-add-essentials-shortcodes.php:363
 msgid "Set to \"1\" to use ACF get_field() instead of standard meta functions (requires ACF plugin)."
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:343
+#: admin/modules/pro/class-add-essentials-shortcodes.php:366
 msgid "Examples:"
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:345
+#: admin/modules/pro/class-add-essentials-shortcodes.php:368
 msgid "Display email of user #5"
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:346
+#: admin/modules/pro/class-add-essentials-shortcodes.php:369
 msgid "Display title of current post"
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:347
+#: admin/modules/pro/class-add-essentials-shortcodes.php:370
+msgid "Display title of the post whose ID comes from $_GET[\"post_id\"]"
+msgstr ""
+
+#: admin/modules/pro/class-add-essentials-shortcodes.php:371
 msgid "Access nested array value in user meta"
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:348
+#: admin/modules/pro/class-add-essentials-shortcodes.php:372
 msgid "Display site name from WordPress options"
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:350
+#: admin/modules/pro/class-add-essentials-shortcodes.php:374
 msgid "Retrieve ACF field value for current post"
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:350
+#: admin/modules/pro/class-add-essentials-shortcodes.php:374
 msgid "Retrieve ACF option field value"
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:355
+#: admin/modules/pro/class-add-essentials-shortcodes.php:379
 msgid "User"
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:360
+#: admin/modules/pro/class-add-essentials-shortcodes.php:384
 msgid "Search user:"
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:366
+#: admin/modules/pro/class-add-essentials-shortcodes.php:390
 msgid "Current user"
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:372
-#: admin/modules/pro/class-add-essentials-shortcodes.php:424
-#: admin/modules/pro/class-add-essentials-shortcodes.php:476
-#: admin/modules/pro/class-add-essentials-shortcodes.php:527
+#: admin/modules/pro/class-add-essentials-shortcodes.php:396
+#: admin/modules/pro/class-add-essentials-shortcodes.php:455
+#: admin/modules/pro/class-add-essentials-shortcodes.php:514
+#: admin/modules/pro/class-add-essentials-shortcodes.php:572
 msgid "Clear"
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:378
+#: admin/modules/pro/class-add-essentials-shortcodes.php:402
+#: admin/modules/pro/class-add-essentials-shortcodes.php:461
+#: admin/modules/pro/class-add-essentials-shortcodes.php:520
+msgid "ID from GET:"
+msgstr ""
+
+#: admin/modules/pro/class-add-essentials-shortcodes.php:403
+msgid "e.g. user_id"
+msgstr ""
+
+#: admin/modules/pro/class-add-essentials-shortcodes.php:409
 msgid "Select user meta:"
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:384
-#: admin/modules/pro/class-add-essentials-shortcodes.php:436
-#: admin/modules/pro/class-add-essentials-shortcodes.php:488
+#: admin/modules/pro/class-add-essentials-shortcodes.php:415
+#: admin/modules/pro/class-add-essentials-shortcodes.php:474
+#: admin/modules/pro/class-add-essentials-shortcodes.php:533
 msgid "Other meta"
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:388
-#: admin/modules/pro/class-add-essentials-shortcodes.php:440
-#: admin/modules/pro/class-add-essentials-shortcodes.php:492
+#: admin/modules/pro/class-add-essentials-shortcodes.php:419
+#: admin/modules/pro/class-add-essentials-shortcodes.php:478
+#: admin/modules/pro/class-add-essentials-shortcodes.php:537
 msgid "Or add a custom meta:"
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:397
+#: admin/modules/pro/class-add-essentials-shortcodes.php:428
 msgid "Use ACF get_field() instead of get_user_meta()"
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:407
+#: admin/modules/pro/class-add-essentials-shortcodes.php:438
 msgid "Post"
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:412
+#: admin/modules/pro/class-add-essentials-shortcodes.php:443
 msgid "Search post:"
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:418
+#: admin/modules/pro/class-add-essentials-shortcodes.php:449
 msgid "Current post"
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:430
+#: admin/modules/pro/class-add-essentials-shortcodes.php:462
+msgid "e.g. post_id"
+msgstr ""
+
+#: admin/modules/pro/class-add-essentials-shortcodes.php:468
 msgid "Select post meta:"
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:449
+#: admin/modules/pro/class-add-essentials-shortcodes.php:487
 msgid "Use ACF get_field() instead of get_post_meta()"
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:459
+#: admin/modules/pro/class-add-essentials-shortcodes.php:497
 msgid "Term"
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:464
+#: admin/modules/pro/class-add-essentials-shortcodes.php:502
 msgid "Search term:"
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:470
+#: admin/modules/pro/class-add-essentials-shortcodes.php:508
 msgid "Current term"
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:482
+#: admin/modules/pro/class-add-essentials-shortcodes.php:521
+msgid "e.g. term_id"
+msgstr ""
+
+#: admin/modules/pro/class-add-essentials-shortcodes.php:527
 msgid "Select term meta:"
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:501
+#: admin/modules/pro/class-add-essentials-shortcodes.php:546
 msgid "Use ACF get_field() instead of get_term_meta()"
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:510
+#: admin/modules/pro/class-add-essentials-shortcodes.php:555
 msgid "WordPress Option"
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:515
+#: admin/modules/pro/class-add-essentials-shortcodes.php:560
 msgid "Search option:"
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:521
+#: admin/modules/pro/class-add-essentials-shortcodes.php:566
 msgid "Type to search WordPress options"
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:533
+#: admin/modules/pro/class-add-essentials-shortcodes.php:578
 msgid "Path (optional):"
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:538
+#: admin/modules/pro/class-add-essentials-shortcodes.php:583
 msgid "e.g., key1->key2 for array options"
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:541
+#: admin/modules/pro/class-add-essentials-shortcodes.php:586
 msgid "Note: Sensitive options (passwords, keys, tokens) are automatically blocked for security."
 msgstr ""
 
-#: admin/modules/pro/class-add-essentials-shortcodes.php:549
+#: admin/modules/pro/class-add-essentials-shortcodes.php:594
 msgid "Use ACF get_field() with option context"
 msgstr ""
 
@@ -9650,141 +9676,149 @@ msgid "&mdash; No Change &mdash;"
 msgstr ""
 
 #: admin/modules/pro/class-two-factor-authentication.php:54
-#: admin/modules/pro/class-two-factor-authentication.php:449
+#: admin/modules/pro/class-two-factor-authentication.php:477
 msgid "Two factor authentication"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:202
+#: admin/modules/pro/class-two-factor-authentication.php:208
 msgid "This module will add two factor authentication methods to the login page."
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:208
+#: admin/modules/pro/class-two-factor-authentication.php:214
 msgid "Active for user roles"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:226
+#: admin/modules/pro/class-two-factor-authentication.php:237
+msgid "Default method: force Email"
+msgstr ""
+
+#: admin/modules/pro/class-two-factor-authentication.php:241
+msgid "If a user has not selected any method, Email will be applied automatically."
+msgstr ""
+
+#: admin/modules/pro/class-two-factor-authentication.php:253
 msgid "Method 1 : Send code via Email"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:244
+#: admin/modules/pro/class-two-factor-authentication.php:269
 msgid "Method 2 : Google Authenticator (TOTP)"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:312
+#: admin/modules/pro/class-two-factor-authentication.php:330
 msgid "Close button"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:316
+#: admin/modules/pro/class-two-factor-authentication.php:334
 msgid "Wait please..."
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:323
+#: admin/modules/pro/class-two-factor-authentication.php:341
 msgid "One more step"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:326
+#: admin/modules/pro/class-two-factor-authentication.php:344
 msgid "Please select your preferred method for two-factor authentication."
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:335
+#: admin/modules/pro/class-two-factor-authentication.php:353
 msgid "Receive an email"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:348
-#: admin/modules/pro/class-two-factor-authentication.php:466
+#: admin/modules/pro/class-two-factor-authentication.php:366
+#: admin/modules/pro/class-two-factor-authentication.php:494
 msgid "Google Authenticator"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:365
+#: admin/modules/pro/class-two-factor-authentication.php:383
 msgid "Enter the code"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:368
+#: admin/modules/pro/class-two-factor-authentication.php:386
 msgid "Please enter your two factor authentication code here."
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:381
+#: admin/modules/pro/class-two-factor-authentication.php:399
 msgid "Se connecter"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:455
+#: admin/modules/pro/class-two-factor-authentication.php:483
 msgid "Via email"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:481
+#: admin/modules/pro/class-two-factor-authentication.php:509
 msgid "Scan this QR code with your Google Authenticator app:"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:482
+#: admin/modules/pro/class-two-factor-authentication.php:510
 #: admin/templates/pro/link-shortener/edit-post.php:115
 msgid "QR Code"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:483
+#: admin/modules/pro/class-two-factor-authentication.php:511
 msgid "Secret key:"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:533
-#: admin/modules/pro/class-two-factor-authentication.php:560
+#: admin/modules/pro/class-two-factor-authentication.php:572
+#: admin/modules/pro/class-two-factor-authentication.php:599
 msgid "Invalid nonce"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:568
+#: admin/modules/pro/class-two-factor-authentication.php:607
 msgid "User not found"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:577
-#: admin/modules/pro/class-two-factor-authentication.php:665
+#: admin/modules/pro/class-two-factor-authentication.php:616
+#: admin/modules/pro/class-two-factor-authentication.php:704
 msgid "Method not found"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:587
+#: admin/modules/pro/class-two-factor-authentication.php:626
 msgid "Your login code"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:590
+#: admin/modules/pro/class-two-factor-authentication.php:629
 #, php-format
 msgid "Hello %s,"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:593
+#: admin/modules/pro/class-two-factor-authentication.php:632
 msgid "Here is your login code :"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:598
+#: admin/modules/pro/class-two-factor-authentication.php:637
 #, php-format
 msgid "IP : %s"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:603
+#: admin/modules/pro/class-two-factor-authentication.php:642
 #, php-format
 msgid "Date : %s"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:608
+#: admin/modules/pro/class-two-factor-authentication.php:647
 #, php-format
 msgid "User agent : %s"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:613
+#: admin/modules/pro/class-two-factor-authentication.php:652
 #, php-format
 msgid "Website : %s"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:640
+#: admin/modules/pro/class-two-factor-authentication.php:679
 msgid "Code sent"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:674
+#: admin/modules/pro/class-two-factor-authentication.php:713
 msgid "Code not found"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:683
+#: admin/modules/pro/class-two-factor-authentication.php:722
 msgid "Google Authenticator not configured"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:689
-#: admin/modules/pro/class-two-factor-authentication.php:698
+#: admin/modules/pro/class-two-factor-authentication.php:728
+#: admin/modules/pro/class-two-factor-authentication.php:737
 msgid "Code not valid"
 msgstr ""
 

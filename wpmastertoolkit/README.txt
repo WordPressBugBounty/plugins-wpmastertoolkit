@@ -2,9 +2,9 @@
 Contributors: ludwigyou
 Tags: all in one plugin, admin, security, disable features, easy to use
 Requires at least: 6.0.0
-Tested up to: 6.9.3
+Tested up to: 6.9.4
 Requires PHP: 7.4
-Stable tag: 2.18.0
+Stable tag: 2.19.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
 
@@ -252,19 +252,16 @@ Yes, the Media Encoder module automatically converts uploaded images to WebP for
 
 == Changelog ==
 
+= 2.19.0 =
+Update: Pro Module: Add Essentials Shortcodes: Add `id-from-get` parameter support for User, Post, and Term shortcodes to retrieve IDs from URL query parameters (e.g. `id-from-get="post_id"`). When provided, `id-from-get` takes precedence over `id`. Add this option to the shortcode generator in the dashboard.
+Fix: CRITICAL - Rewrite .htaccess write logic to use atomic temp-file + rename, preventing file truncation on interrupted writes. Add mandatory timestamped backup before every modification (last 5 kept), automatic restore on validation failure, and full logging via WPMastertoolkit_Logs.
+Fix: CRITICAL - Rewrite wp-config.php write logic to use atomic temp-file + rename, preventing file truncation on interrupted writes. Add mandatory timestamped backup before every modification (last 5 kept), automatic restore on validation failure. Fix `change_php_variable()` where `$pattern` was undefined. Fix `add_constant()` ignoring `$var_export_skip` parameter. Replace all `error_log()` calls with WPMastertoolkit_Logs.
+
 = 2.18.0 =
 Update: Pro Module: Two-Factor Authentication: Add a global option to force Email as default when no method is selected, show this option only when Email is active, enforce backend fallback disabling when Email is off, and move default/method toggles to the left for UI consistency.
 
-
 = 2.17.1 =
 Fix: Module: Multiple User Roles: Ensure roles are correctly assigned and removed for users, including administrators.
-
-= 2.17.0 =
-Update: Pro Module: Add Essentials Shortcodes: Add permakink support in [wpmtk_post_meta] & [wpmtk_term_meta] shortcodes. Add ACF support for using ACF get_field() function in [wpmtk_post_meta] & [wpmtk_term_meta] shortcodes.
-Update: Module: Obfuscate Email Addresses: Add `rtl` shortcode option to disable right-to-left rendering when it hurts UX. Obfuscate Email Addresses: Add protected `mailto` shortcode option with deferred Base64 decode on click via data attribute.
-Add: Module: Search Replace in database.
-Security: Module: Prevent User Enumeration: Prevent use of uppercase letters in URI.
-Fix: Preserve existing non-plugin .htaccess rules and resync WordPress rewrite block after plugin updates to prevent Apache 404 on /wp-json/ and broken permalinks.
 
 
 [See changelog for all versions.](https://wpmastertoolkit.com/en/changelog/)
