@@ -154,6 +154,10 @@ class WPMastertoolkit_Mail_Catcher {
 	 */
 	public function mail_catcher_preview() {
 
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( __( 'You are not allowed to perform this action.', 'wpmastertoolkit' ) );
+		}
+
 		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
 		if ( ! wp_verify_nonce( $nonce, $this->nonce ) ) {
 			wp_send_json_error( __( 'Refresh the page and try again.', 'wpmastertoolkit' ) );
@@ -338,6 +342,10 @@ class WPMastertoolkit_Mail_Catcher {
 	 * @since   2.14.0
 	 */
 	public function save_submenu() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
 		$nonce = sanitize_text_field( wp_unslash( $_POST[ $this->nonce_name ] ?? '' ) );
 		if ( wp_verify_nonce( $nonce, $this->nonce ) ) {
 			if ( isset( $_POST['delete'] ) ) {
@@ -352,6 +360,10 @@ class WPMastertoolkit_Mail_Catcher {
 	 * @since   2.14.0
 	 */
 	public function show_email_message() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
 		$nonce_get = sanitize_text_field( wp_unslash( $_GET[ $this->nonce_name ] ?? '' ) );
 		if ( wp_verify_nonce( $nonce_get, $this->nonce ) ) {
 			$email_id = sanitize_text_field( wp_unslash( $_GET['email_id'] ?? '' ) );

@@ -39,7 +39,8 @@ class WPMastertoolkit_Disallow_Bad_Requests {
         $request_uri_string = '';
 
         if ( isset( $_SERVER['REQUEST_URI'] ) && ! empty( $_SERVER['REQUEST_URI'] ) ) {
-            $request_uri_string = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) );
+			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized --Preserves Cyrillic and other Unicode characters.
+			$request_uri_string = rawurldecode( wp_unslash( $_SERVER['REQUEST_URI'] ) );
         }
 
         if ( strlen( $request_uri_string ) > self::LONG_REQUEST_LENGTH ) {
@@ -60,7 +61,8 @@ class WPMastertoolkit_Disallow_Bad_Requests {
         $query_string_string = '';
 
         if ( isset( $_SERVER['QUERY_STRING'] ) && ! empty( $_SERVER['QUERY_STRING'] ) ) {
-            $query_string_string = sanitize_text_field( wp_unslash( $_SERVER['QUERY_STRING'] ) );
+			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized --Preserves Cyrillic and other Unicode characters.
+			$query_string_string = rawurldecode( wp_unslash( $_SERVER['QUERY_STRING'] ) );
         }
 
         if ( ! empty( $query_string_string ) && preg_match( '/' . implode( '|', $query_string_array ) . '/i', $query_string_string, $matches ) ) {
@@ -77,7 +79,8 @@ class WPMastertoolkit_Disallow_Bad_Requests {
         $user_agent_string = '';
 
         if ( isset( $_SERVER['HTTP_USER_AGENT'] ) && ! empty( $_SERVER['HTTP_USER_AGENT'] ) ) {
-            $user_agent_string = sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) );
+			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized --Preserves Cyrillic and other Unicode characters.
+            $user_agent_string = rawurldecode( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) );
         }
 
         if ( ! empty( $user_agent_string ) && preg_match( '/' . implode( '|', $user_agent_array ) . '/i', $user_agent_string, $matches ) ) {
@@ -94,7 +97,8 @@ class WPMastertoolkit_Disallow_Bad_Requests {
         $referrer_string = '';
 
         if ( isset( $_SERVER['HTTP_REFERER'] ) && ! empty( $_SERVER['HTTP_REFERER'] ) ) {
-            $referrer_string = sanitize_text_field( wp_unslash( $_SERVER['HTTP_REFERER'] ) );
+			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized --Preserves Cyrillic and other Unicode characters.
+            $referrer_string = rawurldecode( wp_unslash( $_SERVER['HTTP_REFERER'] ) );
         }
 
         if ( strlen( $referrer_string ) > self::LONG_REQUEST_LENGTH ) {

@@ -188,6 +188,7 @@ class WPMastertoolkit {
 		$this->loader->add_action( 'wpmastertoolkit_daily_regenerate_assets', $wpmastertoolkit_settings, 'cron_regenerate_assets' );
 		$this->loader->add_action( 'wp_ajax_wpmastertoolkit_regenerate_assets', $wpmastertoolkit_settings, 'ajax_regenerate_assets' );
 		$this->loader->add_action( 'wp_ajax_wpmastertoolkit_get_system_info', $wpmastertoolkit_settings, 'ajax_get_system_info' );
+		$this->loader->add_filter( 'removable_query_args', $wpmastertoolkit_settings, 'filter_removable_query_args' );
 
 		$wpmastertoolkit_surecart = new WPMastertoolkit_Surecart();
 		$this->loader->add_action( 'init', $wpmastertoolkit_surecart, 'init_surecart' );

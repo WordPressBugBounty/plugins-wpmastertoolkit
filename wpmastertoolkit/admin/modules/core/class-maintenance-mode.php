@@ -61,6 +61,19 @@ class WPMastertoolkit_Maintenance_Mode {
     }
 
     /**
+     * Generate a secure bypass token.
+     *
+     * @return string
+     */
+    private function generate_bypass_token() {
+        try {
+            return bin2hex( random_bytes( 16 ) );
+        } catch ( Exception $e ) {
+            return wp_generate_password( 32, false, false );
+        }
+    }
+
+    /**
      * Template include
      */
     public function template_include( $template ) {
@@ -186,7 +199,7 @@ class WPMastertoolkit_Maintenance_Mode {
 		$is_pro = wpmastertoolkit_is_pro();
 		if ( $is_pro ) {
 			$bypass_link_status = $this->settings['bypass_link_status'] ?? '0';
-        	$bypass_link_token  = $this->settings['bypass_link_token'] ?? md5(time());
+            $bypass_link_token  = $this->settings['bypass_link_token'] ?? $this->generate_bypass_token();
 
 			if ( $enabled === '1' && $bypass_link_status === '1' ){
 				$wp_admin_bar->add_menu( array(
@@ -215,6 +228,10 @@ class WPMastertoolkit_Maintenance_Mode {
 	 * Change maintenance mode
 	 */
 	public function change_maintenance_mode() {
+
+        if ( ! current_user_can( 'manage_options' ) ) {
+            wp_send_json_error( array( 'message' => __( 'You are not allowed to perform this action.', 'wpmastertoolkit' ) ) );
+        }
 
 		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
 		if ( ! wp_verify_nonce( $nonce, $this->nonce_action ) ) {
@@ -420,7 +437,11 @@ class WPMastertoolkit_Maintenance_Mode {
                 break;
                 case 'bypass_link_token':
                     $is_pro = wpmastertoolkit_is_pro();
-                    $sanitized_settings[$settings_key] = $is_pro ? sanitize_text_field( $new_settings[$settings_key] ?? md5(time()) ) : md5(time());
+                    $sanitized_token = sanitize_text_field( $new_settings[$settings_key] ?? '' );
+                    if ( empty( $sanitized_token ) ) {
+                        $sanitized_token = $this->generate_bypass_token();
+                    }
+                    $sanitized_settings[$settings_key] = $is_pro ? $sanitized_token : $this->generate_bypass_token();
                 break;               
 				case 'excluded_urls':
 					$sanitized_settings[ $settings_key ] = sanitize_textarea_field( stripslashes( $new_settings[ $settings_key ] ?? $settings_value ) );
@@ -497,7 +518,7 @@ class WPMastertoolkit_Maintenance_Mode {
             'countdown_text_color'       => '#000000',
             'countdown_background_color' => '#ffffff',
             'bypass_link_status'         => '0',
-            'bypass_link_token'          => md5(time()),
+            'bypass_link_token'          => $this->generate_bypass_token(),
 			'excluded_urls'              => '',
         );
     }
@@ -533,7 +554,7 @@ class WPMastertoolkit_Maintenance_Mode {
         $countdown_text_color       = $this->settings['countdown_text_color'] ?? '';
         $countdown_background_color = $this->settings['countdown_background_color'] ?? '';
         $bypass_link_status         = $is_pro ? $this->settings['bypass_link_status'] ?? '0' : '0';
-        $bypass_link_token          = $is_pro ? $this->settings['bypass_link_token'] ?? md5(time()) : '';
+        $bypass_link_token          = $is_pro ? $this->settings['bypass_link_token'] ?? $this->generate_bypass_token() : '';
 
         ?>
             <div class="wp-mastertoolkit__section">

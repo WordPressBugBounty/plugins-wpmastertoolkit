@@ -35,6 +35,10 @@ class WPMastertoolkit_Duplicate_Menu {
      */
     public function duplicate_menu() {
 
+        if ( ! current_user_can( 'edit_theme_options' ) ) {
+            wp_send_json_error( array( 'message' => __( 'You are not allowed to perform this action.', 'wpmastertoolkit' ) ) );
+        }
+
         $nonce  = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
         if ( ! wp_verify_nonce( $nonce, self::NONCE ) ) {
             wp_send_json_error( array( 'message' => __( 'Refresh the page and try again.', 'wpmastertoolkit' ) ) );

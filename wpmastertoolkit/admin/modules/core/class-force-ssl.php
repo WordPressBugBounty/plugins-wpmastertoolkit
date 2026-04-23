@@ -37,11 +37,14 @@ class WPMastertoolkit_Force_SSL {
             ( isset( $_SERVER['HTTP_X_FORWARDED_SSL'] ) && 'on' === strtolower( sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_FORWARDED_SSL'] ) ) ) )
         );
 
-        if ( ! $is_https && isset( $_SERVER['HTTP_HOST'], $_SERVER['REQUEST_URI'] ) ) {
-            $host = sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) );
-            $uri  = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) );
-            
-            wp_safe_redirect( 'https://' . $host . $uri, 301 );
+        if ( ! $is_https && isset( $_SERVER['REQUEST_URI'] ) ) {
+            $canonical_host = wp_parse_url( home_url(), PHP_URL_HOST );
+            if ( empty( $canonical_host ) ) {
+                return;
+            }
+
+            $uri = wp_sanitize_redirect( wp_unslash( $_SERVER['REQUEST_URI'] ) );
+            wp_safe_redirect( 'https://' . $canonical_host . $uri, 301 );
             exit;
         }
     }

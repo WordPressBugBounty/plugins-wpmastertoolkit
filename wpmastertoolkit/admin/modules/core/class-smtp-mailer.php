@@ -143,6 +143,10 @@ class WPMastertoolkit_SMTP_Mailer {
 	 */
 	public function for_smtps_has_auth() {
 		if ( is_admin() ) {
+			if ( ! current_user_can( 'manage_options' ) ) {
+				return;
+			}
+
 			$this->settings         = $this->get_settings();
 			$this->default_settings = $this->get_default_settings();
 			
@@ -182,6 +186,10 @@ class WPMastertoolkit_SMTP_Mailer {
 	 * @since   2.14.0
 	 */
 	public function maybe_save_auth() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
 		$this->settings         = $this->get_settings();
 		$this->default_settings = $this->get_default_settings();
 
@@ -366,6 +374,10 @@ class WPMastertoolkit_SMTP_Mailer {
 	 */
 	public function send_test_email() {
 
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array( 'message' => __( 'You are not allowed to perform this action.', 'wpmastertoolkit' ) ) );
+		}
+
 		// Verify nonce
 		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
 		if ( ! wp_verify_nonce( $nonce, $this->ajax_nonce ) ) {
@@ -486,6 +498,10 @@ class WPMastertoolkit_SMTP_Mailer {
 	 * @since   1.7.0
 	 */
 	public function save_submenu() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
 		$nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ?? '' ) );
 		if ( wp_verify_nonce( $nonce, $this->nonce_action ) ) {
 

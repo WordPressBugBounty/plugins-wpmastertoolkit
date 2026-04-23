@@ -276,6 +276,10 @@ class WPMastertoolkit_Content_Order {
      * @since   1.4.0
      */
     public function save_submenu() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
 		$nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ?? '' ) );
 
 		if ( wp_verify_nonce( $nonce, $this->nonce_action ) ) {

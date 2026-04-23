@@ -64,6 +64,10 @@ class WPMastertoolkit_Export_Users {
             return $sendback;
         }
 
+        if ( ! current_user_can( 'list_users' ) ) {
+            return $sendback;
+        }
+
         $users = $this->get_users_array( $ids );
 
         if ( ! $users || empty( $users ) ) {
@@ -79,6 +83,10 @@ class WPMastertoolkit_Export_Users {
      * Download user
      */
     public function download_user() {
+
+        if ( ! current_user_can( 'list_users' ) ) {
+            wp_die();
+        }
 
         $nonce = isset( $_GET[ 'nonce' ] ) ? sanitize_text_field( wp_unslash( $_GET[ 'nonce' ] ) ) : '';
 

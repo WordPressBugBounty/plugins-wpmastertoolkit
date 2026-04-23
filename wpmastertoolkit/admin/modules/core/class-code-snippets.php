@@ -761,8 +761,11 @@ class WPMastertoolkit_Code_Snippets {
     public function regenerate_snippet_file(){
         if( !isset($_GET['post_type']) || $_GET['post_type'] !== 'wpmtk_code_snippets' ) return;
 
+        if ( ! current_user_can( 'manage_options' ) ) return;
+
         if( isset($_GET['regenerate_snippet_file']) && $_GET['regenerate_snippet_file'] === 'true' ){
-            if( !isset($_GET['_wpnonce']) || !wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'], 'regenerate_snippet_file' ) ) ) ) return;
+            $nonce = sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ?? '' ) );
+            if ( ! wp_verify_nonce( $nonce, 'regenerate_snippet_file' ) ) return;
 
             $this->delete_all_non_active_snippet_file();
             $this->generate_all_active_snippets();

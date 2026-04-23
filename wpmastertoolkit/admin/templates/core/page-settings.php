@@ -12,6 +12,7 @@ $wpmtk_pro_modules_count = 0;
 $wpmtk_modules           = wpmastertoolkit_options();
 $wpmtk_order             = array_column( $wpmtk_modules, 'name' );
 array_multisort( $wpmtk_order, SORT_ASC, $wpmtk_modules );
+$search_term             = sanitize_text_field( wp_unslash( $_GET['wpmastertoolkit_search'] ?? '' ) );
 ?>
 
 <div class="wrap wp-mastertoolkit">
@@ -39,7 +40,7 @@ array_multisort( $wpmtk_order, SORT_ASC, $wpmtk_modules );
             <div class="wp-mastertoolkit__header__right">
 
                 <div class="wp-mastertoolkit__header__right__search">
-                    <input type="text" placeholder="<?php esc_html_e('Search', 'wpmastertoolkit'); ?>" >
+                    <input type="text" placeholder="<?php esc_html_e('Search', 'wpmastertoolkit'); ?>" name="wpmastertoolkit_search" value="<?php echo esc_attr( $search_term ); ?>">
                     <span class="loop">
 						<?php echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/loop.svg'), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
                     </span>

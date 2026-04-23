@@ -100,6 +100,12 @@ class WPMastertoolkit_Nginx_Code_Snippets {
         ?>
             <div class="wp-mastertoolkit__section">
                 <div class="wp-mastertoolkit__section__desc"><?php esc_html_e( 'Past this code snippets to your .conf file.', 'wpmastertoolkit'); ?></div>
+				<div class="wp-mastertoolkit__section__copy-global">
+					<div class="wp-mastertoolkit__section__copy-global__title"><?php esc_html_e( 'Copy All', 'wpmastertoolkit'); ?></div>
+					<div class="wp-mastertoolkit__section__copy-global__button">
+						<?php echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/copy.svg'), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
+					</div>
+				</div>
                 <div class="wp-mastertoolkit__section__body">
 
                     <?php foreach ( $settings as $module_id => $code_snippet ) :?>

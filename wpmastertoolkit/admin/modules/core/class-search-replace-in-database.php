@@ -98,6 +98,13 @@ class WPMastertoolkit_Search_Replace_In_Database {
 	 * @since   2.17.0
 	 */
 	public function ajax_search_replace_in_database_start(){
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array(
+				'message'      => __( 'You are not allowed to perform this action.', 'wpmastertoolkit' ),
+				'message_type' => 'danger',
+			) );
+		}
+
 		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
 		if ( ! wp_verify_nonce( $nonce, $this->nonce_name ) ) {
 			wp_send_json_error( array(
@@ -116,7 +123,7 @@ class WPMastertoolkit_Search_Replace_In_Database {
 			$raw_data = sanitize_text_field( wp_unslash( $_POST['data'] ?? '' ) );
 			$args     = json_decode( $raw_data, true );
 
-			if ( isset( $args['tables'] ) || ! is_array( $args['tables'] ) ) {
+			if ( isset( $args['tables'] ) && ! is_array( $args['tables'] ) ) {
 				$args['tables'] = explode( ' ', $args['tables'] );
 			}
 
@@ -134,6 +141,24 @@ class WPMastertoolkit_Search_Replace_In_Database {
 				'cells_processed' => 0,
 			);
 
+			$allowed_tables = $this->get_tables();
+			$args['tables'] = array_values(
+				array_filter(
+					$args['tables'],
+					static function ( $table ) use ( $allowed_tables ) {
+						$table = trim( (string) $table );
+						return '' !== $table && in_array( $table, $allowed_tables, true );
+					}
+				)
+			);
+
+			if ( empty( $args['tables'] ) ) {
+				wp_send_json_error( array(
+					'message'      => __( 'No valid tables selected. Please refresh and try again.', 'wpmastertoolkit' ),
+					'message_type' => 'danger',
+				) );
+			}
+
 			$args['total_pages'] = isset( $args['total_pages'] ) ? absint( $args['total_pages'] ) : $this->get_total_pages( $args );
 
 			// Clear the results of the last run.
@@ -141,6 +166,18 @@ class WPMastertoolkit_Search_Replace_In_Database {
 			delete_option( $this->option_name );
 		} else {
 			$args = get_option( $this->option_name, array() );
+
+			$allowed_tables = $this->get_tables();
+			$args['tables'] = isset( $args['tables'] ) && is_array( $args['tables'] ) ? $args['tables'] : array();
+			$args['tables'] = array_values(
+				array_filter(
+					$args['tables'],
+					static function ( $table ) use ( $allowed_tables ) {
+						$table = trim( (string) $table );
+						return '' !== $table && in_array( $table, $allowed_tables, true );
+					}
+				)
+			);
 		}
 
 		// Start processing data.
@@ -299,11 +336,26 @@ class WPMastertoolkit_Search_Replace_In_Database {
 	public function search_replace_db( $table, $page, $args ) {
 		global $wpdb;
 
-		$data_processed[$table] = array();
+		$original_table = $table;
+		$data_processed[$original_table] = array();
+
+		if ( false === $this->table_exists( $original_table ) ) {
+			return array(
+				'table_complete' => true,
+				'table_report'   => array(
+					'change'  => 0,
+					'updates' => 0,
+					'start'   => microtime( true ),
+					'end'     => microtime( true ),
+					'errors'  => array(),
+					'skipped' => true,
+				),
+			);
+		}
 
 		// Load up the default settings for this chunk.
 		$page_size    = absint( $args['page_size'] );
-		$table        = esc_sql( $table );
+		$table        = esc_sql( $original_table );
 		$current_page = absint( $page );
 		$pages        = $this->get_pages_in_table( $table, $page_size );
 		$done         = false;
@@ -331,8 +383,8 @@ class WPMastertoolkit_Search_Replace_In_Database {
 		$end         = $page_size;
 
 		// Grab the content of the table.
-		//phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
-		$data = $wpdb->get_results( "SELECT * FROM `$table` LIMIT $start, $end", ARRAY_A );
+		//phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter, WordPress.DB.PreparedSQL.NotPrepared
+		$data = $wpdb->get_results( 'SELECT * FROM ' . $this->quote_identifier( $table ) . " LIMIT $start, $end", ARRAY_A );
 
 		// Loop through the data.
 		foreach ( $data as $row ) {
@@ -342,11 +394,14 @@ class WPMastertoolkit_Search_Replace_In_Database {
 			$upd        = false;
 
 			foreach( $columns as $column ) {
+				if ( ! $this->is_valid_sql_identifier( $column ) ) {
+					continue;
+				}
 
 				$data_to_fix = $row[ $column ];
 
 				if ( $column == $primary_key ) {
-					$where_sql[] = $column . ' = "' .  $this->mysql_escape_mimic( $data_to_fix ) . '"';
+					$where_sql[] = $this->quote_identifier( $column ) . ' = "' .  $this->mysql_escape_mimic( $data_to_fix ) . '"';
 					continue;
 				}
 
@@ -432,7 +487,7 @@ class WPMastertoolkit_Search_Replace_In_Database {
 
 				// Something was changed
 				if ( $edited_data != $data_to_fix ) {
-					$update_sql[] = $column . ' = "' . $this->mysql_escape_mimic( $edited_data ) . '"';
+					$update_sql[] = $this->quote_identifier( $column ) . ' = "' . $this->mysql_escape_mimic( $edited_data ) . '"';
 					$upd = true;
 					$table_report['change']++;
 
@@ -449,7 +504,7 @@ class WPMastertoolkit_Search_Replace_In_Database {
 				// Don't do anything if a dry run
 			} elseif ( $upd && ! empty( $where_sql ) ) {
 				// If there are changes to make, run the query.
-				$sql    = 'UPDATE ' . $table . ' SET ' . implode( ', ', $update_sql ) . ' WHERE ' . implode( ' AND ', array_filter( $where_sql ) );
+				$sql    = 'UPDATE ' . $this->quote_identifier( $table ) . ' SET ' . implode( ', ', $update_sql ) . ' WHERE ' . implode( ' AND ', array_filter( $where_sql ) );
 				//phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
 				$result = $wpdb->query( $sql );
 
@@ -929,13 +984,19 @@ class WPMastertoolkit_Search_Replace_In_Database {
 		}
 
 		//phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
-		$fields = $wpdb->get_results( 'DESCRIBE ' . $table );
+		$fields = $wpdb->get_results( 'DESCRIBE ' . $this->quote_identifier( $table ) );
 
 		if ( is_array( $fields ) ) {
 			foreach ( $fields as $column ) {
-				$columns[] = $column->Field;
+				$field = (string) ( $column->Field ?? '' );
+
+				if ( ! $this->is_valid_sql_identifier( $field ) ) {
+					continue;
+				}
+
+				$columns[] = $field;
 				if ( $column->Key == 'PRI' ) {
-					$primary_key = $column->Field;
+					$primary_key = $field;
 				}
 			}
 		}
@@ -985,8 +1046,8 @@ class WPMastertoolkit_Search_Replace_In_Database {
 		}
 
 		$table = esc_sql( $table );
-		//phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-		$rows  = $wpdb->get_var( "SELECT COUNT(*) FROM `$table`" );
+		//phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter
+		$rows  = $wpdb->get_var( 'SELECT COUNT(*) FROM ' . $this->quote_identifier( $table ) );
 		$pages = ceil( $rows / $page_size );
 
 		return absint( $pages );
@@ -1120,7 +1181,12 @@ class WPMastertoolkit_Search_Replace_In_Database {
 	public function str_replace( $from, $to, $data, $case_insensitive = false, $is_regex = false ) {
 		if ( $is_regex ) {
 			// Use regex replacement
-			$pattern = $from;
+			$pattern = (string) $from;
+
+			if ( strlen( $pattern ) > 500 ) {
+				return $data;
+			}
+
 			// Add case insensitive flag if needed
 			if ( $case_insensitive ) {
 				// Check if pattern has delimiters, if not add them
@@ -1134,6 +1200,10 @@ class WPMastertoolkit_Search_Replace_In_Database {
 				if ( ! preg_match( '/^[#\/~].*[#\/~][imsxADSUXJu]*$/', $pattern ) ) {
 					$pattern = '/' . $pattern . '/';
 				}
+			}
+
+			if ( false === @preg_match( $pattern, '' ) ) {
+				return $data;
 			}
 			
 			// Suppress warnings for invalid regex patterns
@@ -1175,7 +1245,39 @@ class WPMastertoolkit_Search_Replace_In_Database {
 	 * @return bool
 	 */
 	public function table_exists( $table ) {
-		return in_array( $table, $this->get_tables() );
+		$table = trim( (string) $table );
+
+		if ( '' === $table || ! $this->is_valid_sql_identifier( $table ) ) {
+			return false;
+		}
+
+		return in_array( $table, $this->get_tables(), true );
+	}
+
+	/**
+	 * Check whether a SQL identifier (table/column) is valid.
+	 *
+	 * @since   2.20.0
+	 * @return bool
+	 */
+	private function is_valid_sql_identifier( $identifier ) {
+		$identifier = trim( (string) $identifier );
+
+		if ( '' === $identifier ) {
+			return false;
+		}
+
+		return 1 === preg_match( '/^[A-Za-z0-9_]+$/', $identifier );
+	}
+
+	/**
+	 * Quote a validated SQL identifier.
+	 *
+	 * @since   2.20.0
+	 * @return string
+	 */
+	private function quote_identifier( $identifier ) {
+		return '`' . str_replace( '`', '', (string) $identifier ) . '`';
 	}
 
 	/**

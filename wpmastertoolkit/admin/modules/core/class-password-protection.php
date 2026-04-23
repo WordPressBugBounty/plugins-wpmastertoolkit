@@ -9,7 +9,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 class WPMastertoolkit_Password_Protection {
 
     const COOKIE_ID             = 'wpmastertoolkit_password_protection';
-    const COOKIE_PASSWORD       = 'MOeldTVhGnL18VfbDtXM7znSYXIUQn3z';
     const LOGIN_HEAD_ACTION     = 'wpmastertoolkit_password_protection_login_head';
     const ERROR_MESSAGES_ACTION = 'wpmastertoolkit_password_protection_error_messages';
 
@@ -107,6 +106,29 @@ class WPMastertoolkit_Password_Protection {
     }
 
     /**
+     * Validate redirect URL is internal to the site
+     */
+    private function is_safe_redirect_url( $url ) {
+        if ( empty( $url ) ) {
+            return false;
+        }
+        
+        $home = home_url();
+        $home_parts = wp_parse_url( $home );
+        $url_parts = wp_parse_url( $url );
+        
+        if ( empty( $url_parts['host'] ) ) {
+            return true;
+        }
+        
+        if ( $url_parts['host'] !== $home_parts['host'] ) {
+            return false;
+        }
+        
+        return true;
+    }
+
+    /**
      * Show login form
      */
     public function show_login_form() {
@@ -119,7 +141,9 @@ class WPMastertoolkit_Password_Protection {
 
         $auth_cookie = ( isset( $_COOKIE[ self::COOKIE_ID ] ) ? sanitize_text_field( wp_unslash( $_COOKIE[ self::COOKIE_ID ] ) ) : '' );
 
-        if ( wp_check_password( self::COOKIE_PASSWORD, $auth_cookie ) ) {
+        $settings        = $this->get_settings();
+        $stored_password = $settings['password'] ?? '';
+        if ( wp_check_password( $stored_password, $auth_cookie ) ) {
             return;
         }
 
@@ -161,15 +185,20 @@ class WPMastertoolkit_Password_Protection {
 
             if ( ! empty( $password_input ) ) {
 
-                if ( $password_input == $stored_password ) {
+                if ( $password_input === $stored_password ) {
 
                     $expiration          = 0;
-                    $hashed_cookie_value = wp_hash_password( self::COOKIE_PASSWORD );
+                    $hashed_cookie_value = wp_hash_password( $password_input );
 
-                    setcookie( self::COOKIE_ID, $hashed_cookie_value, $expiration, COOKIEPATH, COOKIE_DOMAIN, false, true );
+                    setcookie( self::COOKIE_ID, $hashed_cookie_value, $expiration, COOKIEPATH, COOKIE_DOMAIN, is_ssl(), true );
 
 					// phpcs:ignore WordPress.Security.NonceVerification.Recommended
                     $redirect_to_url = ( isset( $_REQUEST['source'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['source'] ) ) : '' );
+                    
+                    if ( ! $this->is_safe_redirect_url( $redirect_to_url ) ) {
+                        $redirect_to_url = home_url();
+                    }
+                    
                     wp_safe_redirect( $redirect_to_url );
                     exit;
 
@@ -270,18 +299,22 @@ class WPMastertoolkit_Password_Protection {
      *
      */
     public function save_submenu() {
+        if ( ! current_user_can( 'manage_options' ) ) {
+            return;
+        }
 
 		$nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ?? '' ) );
 		
-		if ( wp_verify_nonce($nonce, $this->nonce_action) ) {
+        if ( ! wp_verify_nonce( $nonce, $this->nonce_action ) ) {
+            return;
+        }
 
-			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-            $new_settings = $this->sanitize_settings( wp_unslash( $_POST[$this->option_id] ?? array() ) );
-            
-            $this->save_settings( $new_settings );
-            wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
-			exit;
-		}
+        // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+        $new_settings = $this->sanitize_settings( wp_unslash( $_POST[$this->option_id] ?? array() ) );
+
+        $this->save_settings( $new_settings );
+        wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
+        exit;
     }
 
     /**

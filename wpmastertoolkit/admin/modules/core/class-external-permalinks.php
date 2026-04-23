@@ -87,6 +87,7 @@ class WPMastertoolkit_External_Permalinks {
 
         ?>
             <div>
+                <?php wp_nonce_field( 'wpmastertoolkit_external_permalink_save', 'wpmastertoolkit_external_permalink_nonce' ); ?>
                 <input class="large-text" name="wpmastertoolkit_external_permalink" id="wpmastertoolkit_external_permalink" type="url" value="<?php echo esc_attr( $value ); ?>" />
                 <p class="howto"><?php esc_html_e( 'The external permalink will open in a new browser tab, Leave this field empty to use the default WordPress permalink.', 'wpmastertoolkit' ); ?></p>
             </div>
@@ -99,6 +100,23 @@ class WPMastertoolkit_External_Permalinks {
      * @since   1.4.0
      */
     public function save_meta_boxes( $post_id ) {
+
+        if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+            return;
+        }
+
+        if ( wp_is_post_revision( $post_id ) ) {
+            return;
+        }
+
+        $nonce = sanitize_text_field( wp_unslash( $_POST['wpmastertoolkit_external_permalink_nonce'] ?? '' ) );
+        if ( ! wp_verify_nonce( $nonce, 'wpmastertoolkit_external_permalink_save' ) ) {
+            return;
+        }
+
+        if ( ! current_user_can( 'edit_post', $post_id ) ) {
+            return;
+        }
 
 		//phpcs:ignore WordPress.Security.NonceVerification.Missing
         if ( isset( $_POST['wpmastertoolkit_external_permalink'] ) ) {

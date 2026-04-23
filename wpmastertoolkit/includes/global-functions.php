@@ -585,3 +585,12 @@ function wpmastertoolkit_get_current_ip() {
 		return '';
 	}
 }
+
+/**
+ * Get current user agent
+ * 
+ * @since 2.20.0
+ */
+function wpmastertoolkit_get_current_user_agent() {
+	return isset( $_SERVER['HTTP_USER_AGENT'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ) : '';
+}

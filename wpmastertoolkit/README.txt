@@ -4,7 +4,7 @@ Tags: all in one plugin, admin, security, disable features, easy to use
 Requires at least: 6.0.0
 Tested up to: 6.9.4
 Requires PHP: 7.4
-Stable tag: 2.19.0
+Stable tag: 2.20.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
 
@@ -30,6 +30,7 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 * Ban Emails: Ban the chosen emails.
 * Blacklisted Usernames: Prevent creation of user accounts with predefined blacklisted or common usernames.
 * Block User Registration from Disposable Email: Block user registration from temporary disposable email addresses.
+* Block 404 PHP File Scanning
 * Browser Theme Color: Select a tag color to allow seamless theme customization in all major browsers.
 * Child theme generator: Generate a child theme directly from WordPress dashboard.
 * Clean Profiles: Tidy up user profiles by removing sections you do not utilise.
@@ -39,6 +40,7 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 * Content Order: Custom ordering for hierarchical content types and those supporting page attributes.
 * Custom Admin CSS: Add custom CSS on all admin pages for all user roles.
 * Custom Body Class: Add custom &lt;body&gt; class(es) on the singular view of some or all public post types.
+* Custom COOKIEHASH
 * Custom Frontend CSS: Add custom CSS on all frontend pages for all user roles.
 * Disable All Updates: Completely disable core, theme and plugin updates and auto-updates. Will also disable update checks, notices and emails.
 * Disable Block-Based Widgets Settings Screen: Restore classic widgets settings screen for non-block themes.
@@ -107,6 +109,7 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 * Redirect 404 to Homepage: Redirect non-existent pages to homepage.
 * Redirect After Login
 * Redirect After Logout
+* Redirect Manager
 * Revisions Control: Limit number of revisions saved per post type.
 * Register Custom Content Types: Register custom post types and taxonomies.
 * Search Replace in database
@@ -121,6 +124,7 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 * Admin Menu Organizer
 * Auto clean actionscheduler_actions: Clean actionscheduler_actions database table from actions that have been completed | failed | cancelled.
 * Better Password Hash
+* Password Expiration
 * CRON Manager: Manage cron events on your website.
 * Change Database Prefix: Quickly change your WordPress database prefix to save time and enhance security.
 * Custom Login Design: Personalize your login page to match your brand.
@@ -245,12 +249,43 @@ Yes, the Code Snippets module allows you to add custom PHP, CSS, and JavaScript 
 Yes, the Media Encoder module automatically converts uploaded images to WebP format (or AVIF in the PRO version with PHP 8.1+). This significantly reduces image file sizes and improves your site's loading speed without sacrificing quality.
 
 == Screenshots ==
-1. Admin page
-2. Import / Export settings
-3. Move login submenu
-4. Code snippets
+1. Activate the modules you need to customize your WordPress according to your needs. A disabled module will have no impact on your site.
+2. Create temporary users to give limited access to your site, ideal for developers, customer support or collaborators.
+3. Adminer for managing your database and File manager for managing your files directly from the WordPress dashboard.
+4. Unlock full potential of your WordPress with the PRO version, including advanced debugging tools, media encoding to AVIF, and much more.
+5. Configure the SMTP Mailer module to send emails reliably through your own SMTP server, with support for authentication, encryption, and a test email feature.
+6. WPMTK includes many security features to protect your site, such as Disallow Access WP Sensible Files, Limit Login Attempts, Move Login URL, and more.
+7. Code Snippets module allows you to add custom PHP without editing your theme's files, keeping your customizations safe during updates.
+8. Media Encoder module automatically converts your images to WebP (and AVIF in PRO) for faster loading times and better performance.
 
 == Changelog ==
+
+= 2.20.0 =
+Add: Module: Block 404 PHP File Scanning: Return `403 Forbidden` for requests to nonexistent `.php` URLs that WordPress resolves as 404, with a bypass filter and `PHP404` log marker.
+Add: Module: Custom COOKIEHASH: Generate and inject a random `COOKIEHASH` constant in `wp-config.php` when activated.
+Add: Module: Redirect Manager: Manage redirects with an integrated interface (create/edit/delete), import/export CSV, and request logs.
+Add: Pro Module: Password Expiration: Enforce password rotation policies by role and force reset flow when passwords expire.
+Security: Global hardening across admin/settings/AJAX flows: explicit capability checks are now systematically enforced (`manage_options`, `edit_post`, `edit_theme_options`, `upload_files`, `install_plugins`, `list_users`) before processing sensitive actions.
+Security: Global CSRF protection hardening: stricter nonce validation has been standardized across settings forms, `save_submenu` handlers, and critical AJAX/admin entry points.
+Security: Global input validation hardening: stricter sanitization/whitelisting for request parameters, dynamic identifiers, filenames, paths, and regex usage.
+Security: Global database safety hardening: search/replace routines now enforce runtime table whitelist checks, strict table matching, and validated/quoted SQL identifiers.
+Security: Global filesystem safety hardening: stronger path-boundary controls, archive/copy/delete validation, and symlink protections to prevent traversal outside allowed roots.
+Security: Global auth/login abuse hardening: improved throttling and anti-enumeration behavior on exposed authentication-related endpoints.
+Security: Module: Password Protection: Replace hardcoded cookie secret with password-derived hash (like WP core post passwords). Each site now has a unique cookie tied to the admin-chosen password. Changing the password invalidates all existing cookies. Fix cookie `secure` flag to respect HTTPS. Validate redirect URL to remain internal to site domain to prevent open redirects.
+Security: Module: Temporary Login: Remove plaintext password from admin URL flow by using short-lived server-side credentials token and one-time password display.
+Security: Module: Temporary Login: Add per-user/IP rate limiting on failed magic-link authentication attempts and clear throttle on successful login.
+Security: Pro Module: Two-Factor Authentication: Harden public (`wp_ajax_nopriv`) endpoints with throttling + uniform responses to reduce enumeration/abuse, and reset rate-limit counters after successful code validation.
+Tweak: Pro Module: Two-Factor Authentication: Improve rate-limit feedback in the login popup with a dedicated user-friendly message and integrated alert styling.
+Security: Module: Force SSL: Build HTTPS redirects from canonical site host (`home_url`) with sanitized request URI instead of user-controlled `HTTP_HOST`.
+Security: Module: Maintenance Mode: Improve bypass token entropy by using cryptographically secure `random_bytes()` instead of weak `md5(time())`.
+Security: Module: Adminer: Complete security overhaul. Credentials are no longer exposed in HTML or URLs. Secure session-based authentication with auto-login, file self-deletion on expiry, and full compatibility with Adminer v5+.
+Security: Pro Module: Add Essentials Shortcodes: Implement whitelist-based access for WordPress options shortcode. Options are blocked by default and must be explicitly whitelisted by an admin. Escape all shortcode outputs to prevent XSS.
+Update: Module: Disallow Access WP Sensible Files: Block access to `readme` and `changelog` files in `.txt`, `.md`, and `.html` formats (alongside `license.txt`). Block direct access to `/wp-admin/install.php`, `/wp-admin/network/menu.php`, `/wp-admin/user/menu.php`, and `/wp-includes/admin-bar.php`.
+Fix: Module: Disallow Bad Requests: Whitelist `/?s=` search queries to prevent 403 errors when using Cyrillic or other non-Latin characters that produce long UTF-encoded URLs.
+Update: Module: Blacklisted Usernames: Add 24 new blacklisted usernames based on recent trends and security reports.
+Update: Module: Auto Regenerate Salt Keys: Change default frequency to "Never" to prevent issues with plugins that use salt keys to encrypt sensitive data (API keys, etc.). Add a warning notice on the settings page explaining potential risks. Automatic regeneration is now opt-in only; manual regeneration remains available.
+Fix: Pro Module: Two-Factor Authentication: Fix incorrect user retrieval in AJAX handlers when login input is an email address, causing 2FA method retrieval and code generation to fail for email-based logins.
+
 
 = 2.19.0 =
 Update: Pro Module: Add Essentials Shortcodes: Add `id-from-get` parameter support for User, Post, and Term shortcodes to retrieve IDs from URL query parameters (e.g. `id-from-get="post_id"`). When provided, `id-from-get` takes precedence over `id`. Add this option to the shortcode generator in the dashboard.
@@ -259,9 +294,6 @@ Fix: CRITICAL - Rewrite wp-config.php write logic to use atomic temp-file + rena
 
 = 2.18.0 =
 Update: Pro Module: Two-Factor Authentication: Add a global option to force Email as default when no method is selected, show this option only when Email is active, enforce backend fallback disabling when Email is off, and move default/method toggles to the left for UI consistency.
-
-= 2.17.1 =
-Fix: Module: Multiple User Roles: Ensure roles are correctly assigned and removed for users, including administrators.
 
 
 [See changelog for all versions.](https://wpmastertoolkit.com/en/changelog/)

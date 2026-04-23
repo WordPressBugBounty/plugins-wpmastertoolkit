@@ -257,6 +257,7 @@ class WPMastertoolkit_WP_Config {
             return false;
         }
 
+		//phpcs:ignore WordPress.WP.AlternativeFunctions.rename_rename
         if ( ! rename( $tmp_path, $wp_config_path ) ) {
             WPMastertoolkit_Logs::add_error( 'WPMastertoolkit: Failed to rename temp file to wp-config.php' . $log_context );
             if ( file_exists( $tmp_path ) ) {

@@ -45,6 +45,19 @@ if ( $password_protected_errors && $password_protected_errors->get_error_code() 
 	wp_admin_css( 'login', true );
 	do_action( WPMastertoolkit_Password_Protection::LOGIN_HEAD_ACTION );
 	?>
+	<style>
+		.login .button-primary {
+			background: #2271b1;
+			border-color: #2271b1;
+			color: #fff;
+		}
+		.login .button-primary:hover,
+		.login .button-primary:focus {
+			background: #135e96;
+			border-color: #135e96;
+			color: #fff;
+		}
+	</style>
 </head>
 <body class="login protected-page-login wp-core-ui">
 

@@ -11,31 +11,37 @@ class WPMastertoolkit_Blacklisted_Usernames {
 
     const ACTION    = 'wpmastertoolkit-blacklisted-usernames-action';
     const NONCE     = 'wpmastertoolkit-blacklisted-usernames-nonce';
+    
+    /**
+     * Blacklisted usernames list.
+     * Based on the blacklist from SecuPress plugin by Julio Potier (@juliobox).
+     * @see https://secupress.me/
+     */
     const BLACKLIST = array(
         '!','@','#','$','%','^','&','*','(',')','-','_','+','=','{','}','[',']','|','\\',':',';','"',"'",'<','>',',','.','?','/','`','~','0','1','2','3','4','5','6','7','8','9',
-        'a', 'about', 'access', 'account', 'accounts', 'ad', 'address', 'adm', 'admin', 'adminaccount', 'adminaccounts', 'adminapi', 'adminarea', 'admindb', 'adminftp', 'administration', 'administrator', 'adminmail', 'adminnetwork', 'adminpage', 'adminpanel', 'adminroot', 'adminserver', 'adminservice', 'adminsite', 'adminssh', 'adminsys', 'adminuser', 'adminusers', 'adminweb', 'adult', 'advertising', 'affiliate', 'affiliates', 'ajax', 'analytics', 'android', 'anon', 'anonymous', 'api', 'apiadmin', 'apis', 'apiuser', 'app', 'apps', 'archive', 'atom', 'auth', 'authentication', 'avatar',
+        'a', 'about', 'abuse', 'access', 'account', 'accounts', 'ad', 'address', 'adm', 'admin', 'adminaccount', 'adminaccounts', 'adminapi', 'adminarea', 'admindb', 'adminftp', 'administration', 'administrator', 'adminmail', 'adminnetwork', 'adminpage', 'adminpanel', 'adminroot', 'adminserver', 'adminservice', 'adminsite', 'adminssh', 'adminsys', 'adminuser', 'adminusers', 'adminweb', 'adult', 'advertising', 'affiliate', 'affiliates', 'ajax', 'analytics', 'android', 'anon', 'anonymous', 'api', 'apiadmin', 'apis', 'apiuser', 'app', 'apps', 'archive', 'atom', 'auth', 'authentication', 'avatar',
         'b', 'backup', 'banner', 'banners', 'billing', 'bin', 'blog', 'blogadmin', 'blogs', 'board', 'bot', 'bots', 'business',
-        'c', 'cache', 'cadastro', 'calendar', 'campaign', 'careers', 'cdn', 'cgi', 'chat', 'client', 'cliente', 'code', 'comercial', 'compare', 'compras', 'config', 'connect', 'contact', 'contest', 'controlpanel', 'create', 'css', 'customer', 'customers',
-        'd', 'dashboard', 'data', 'database', 'db', 'dbadmin', 'dbuser', 'default', 'delete', 'demo', 'design', 'designer', 'dev', 'devel', 'dir', 'directory', 'doc', 'docs', 'documentation', 'domain', 'download', 'downloads',
+        'c', 'cache', 'cadastro', 'calendar', 'campaign', 'careers', 'cdn', 'ceo', 'cfo', 'cgi', 'chat', 'client', 'cliente', 'code', 'comercial', 'compare', 'compras', 'config', 'connect', 'contact', 'contest', 'controlpanel', 'coo', 'cpanel', 'create', 'cron', 'css', 'cto', 'customer', 'customers',
+        'd', 'daemon', 'dashboard', 'data', 'database', 'db', 'dbadmin', 'dbuser', 'default', 'delete', 'demo', 'design', 'designer', 'dev', 'devel', 'dir', 'directory', 'doc', 'docs', 'documentation', 'domain', 'download', 'downloads',
         'e', 'ecommerce', 'edit', 'editor', 'email',
         'f', 'faq', 'favorite', 'feed', 'feedback', 'file', 'files', 'flog', 'follow', 'forum', 'forums', 'free', 'ftp', 'ftpadmin', 'ftpuser',
         'g', 'gadget', 'gadgets', 'games', 'group', 'groups', 'guest', 'guests',
-        'h', 'help', 'home', 'homepage', 'host', 'hosting', 'hostname', 'hpg', 'htm', 'html', 'http', 'httpd', 'https',
+        'h', 'help', 'home', 'homepage', 'host', 'hosting', 'hostmaster', 'hostname', 'hpg', 'htm', 'html', 'http', 'httpd', 'https',
         'i', 'image', 'images', 'imap', 'img', 'index', 'indice', 'info', 'information', 'intranet', 'invite', 'ipad', 'iphone', 'irc',
         'j', 'java', 'javascript', 'job', 'jobs', 'js',
         'k', 'kb', 'knowledgebase',
         'l', 'list', 'lists', 'log', 'login', 'logout', 'logs',
         'm', 'mail', 'mail1', 'mail2', 'mail3', 'mail4', 'mail5', 'mailadmin', 'mailer', 'mailing', 'mailuser', 'main', 'manager', 'marketing', 'master', 'me', 'media', 'member', 'memberarea', 'members', 'message', 'messenger', 'microblog', 'microblogs', 'mine', 'mob', 'mobile', 'moderator', 'moderators', 'movie', 'movies', 'mp3', 'msg', 'msn', 'music', 'musicas', 'mx', 'my', 'mysql',
-        'n', 'name', 'named', 'net', 'network', 'networkadmin', 'new', 'news', 'newsletter', 'nick', 'nickname', 'notes', 'noticias', 'ns', 'ns1', 'ns2', 'ns3', 'ns4', 'ns5', 'ns6', 'ns7', 'ns8', 'ns9',
-        'o', 'old', 'online', 'operator', 'order', 'orders',
-        'p', 'page', 'pager', 'pages', 'panel', 'password', 'perl', 'photo', 'photoalbum', 'photos', 'php', 'pic', 'pics', 'plugin', 'plugins', 'pop', 'pop3', 'post', 'postfix', 'postmaster', 'posts', 'private', 'profile', 'project', 'projects', 'promo', 'pub', 'public', 'python',
+        'n', 'name', 'named', 'net', 'network', 'networkadmin', 'new', 'news', 'newsletter', 'nick', 'nickname', 'nobody', 'noreply', 'notes', 'noticias', 'ns', 'ns1', 'ns2', 'ns3', 'ns4', 'ns5', 'ns6', 'ns7', 'ns8', 'ns9', 'null',
+        'o', 'oauth', 'old', 'online', 'operator', 'order', 'orders',
+        'p', 'page', 'pager', 'pages', 'panel', 'password', 'perl', 'photo', 'photoalbum', 'photos', 'php', 'phpmyadmin', 'pic', 'pics', 'plesk', 'plugin', 'plugins', 'pop', 'pop3', 'post', 'postfix', 'postmaster', 'posts', 'private', 'profile', 'project', 'projects', 'promo', 'pub', 'public', 'python',
         'q', 'query',
         'r', 'random', 'register', 'registration', 'root', 'rootadmin', 'rootuser', 'rss', 'ruby',
-        's', 'sale', 'sales', 'sample', 'samples', 'script', 'scripts', 'search', 'secure', 'security', 'send', 'server', 'serveradmin', 'service', 'services', 'setting', 'settings', 'setup', 'sex', 'shop', 'signin', 'signup', 'site', 'sitemap', 'sites', 'smtp', 'soporte', 'sql', 'ssh', 'sshadmin', 'sshuser', 'staff', 'stage', 'staging', 'start', 'stat', 'static', 'stats', 'status', 'store', 'stores', 'subdomain', 'subscribe', 'superadmin', 'superuser', 'suporte', 'support', 'sys', 'sysadmin', 'system', 'systemadmin', 'sysuser',
+        's', 'sale', 'sales', 'sample', 'samples', 'script', 'scripts', 'search', 'secure', 'security', 'send', 'server', 'serveradmin', 'service', 'services', 'setting', 'settings', 'setup', 'sex', 'shop', 'signin', 'signup', 'site', 'sitemap', 'sites', 'smtp', 'soporte', 'spam', 'sql', 'ssh', 'sshadmin', 'sshuser', 'ssl', 'sso', 'staff', 'stage', 'staging', 'start', 'stat', 'static', 'stats', 'status', 'store', 'stores', 'subdomain', 'subscribe', 'sudo', 'superadmin', 'superuser', 'suporte', 'support', 'sys', 'sysadmin', 'system', 'systemadmin', 'sysuser',
         't', 'tablet', 'tablets', 'talk', 'task', 'tasks', 'tech', 'telnet', 'test', 'test1', 'test2', 'test3', 'teste', 'tests', 'theme', 'themes', 'tmp', 'todo', 'tools', 'tv',
-        'u', 'update', 'upload', 'url', 'usage', 'user', 'useradmin', 'userapi', 'userdb', 'userftp', 'usermail', 'username', 'usernetwork', 'userpage', 'userroot', 'users', 'userserver', 'userservice', 'usersite', 'userssh', 'usersys', 'userweb', 'usr', 'usuario',
+        'u', 'undefined', 'update', 'upload', 'url', 'usage', 'user', 'useradmin', 'userapi', 'userdb', 'userftp', 'usermail', 'username', 'usernetwork', 'userpage', 'userroot', 'users', 'userserver', 'userservice', 'usersite', 'userssh', 'usersys', 'userweb', 'usr', 'usuario',
         'v', 'vendas', 'video', 'videos', 'visitor',
-        'w', 'web', 'webadmin', 'webmail', 'webmaster', 'webpage', 'webpages', 'webserver', 'webservices', 'website', 'websites', 'webuser', 'win', 'workshop', 'ww', 'wws', 'www', 'www1', 'www2', 'www3', 'www4', 'www5', 'www6', 'www7', 'www9', 'wwws', 'wwww',
+        'w', 'web', 'webadmin', 'webmail', 'webmaster', 'webpage', 'webpages', 'webserver', 'webservices', 'website', 'websites', 'webuser', 'win', 'wordpress', 'workshop', 'wp', 'wpadmin', 'ww', 'wws', 'www', 'www1', 'www2', 'www3', 'www4', 'www5', 'www6', 'www7', 'www8', 'www9', 'wwws', 'wwww',
         'x', 'xpg', 'xxx',
         'y', 'you',
         'z', 'zzz',
@@ -68,6 +74,10 @@ class WPMastertoolkit_Blacklisted_Usernames {
      * Check the current username
      */
     public function check_the_current_username() {
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
 
         if ( defined( 'DOING_AJAX' ) && DOING_AJAX ){
             return;

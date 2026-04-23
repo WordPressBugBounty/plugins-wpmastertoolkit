@@ -439,6 +439,12 @@ class Settings {
 			return;
 		}
 
+		$required_capability = $this->menu_args['capability'] ?? 'manage_options';
+		if ( ! current_user_can( $required_capability ) ) {
+			$this->add_error( 'unauthorized', __( "You don't have permission to manage licenses.", 'wpmastertoolkit' ) );
+			return;
+		}
+
 		// Check nonce.
 		if ( ! isset( $_POST['_nonce'], $_POST['_action'] ) ) {
 			$this->add_error( 'missing_info', __( 'Please add all information', 'wpmastertoolkit' ) );

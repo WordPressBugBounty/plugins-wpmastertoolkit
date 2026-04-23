@@ -70,13 +70,14 @@ class WPMastertoolkit_Custom_Body_Class {
      * Save the metabox
      */
     public function save_meta_box( $post_id, $post, $update ) {
+        if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+        $nonce = sanitize_text_field( wp_unslash( $_POST['wpmastertoolkit_custom_body_class_nonce'] ?? '' ) );
+        if ( ! wp_verify_nonce( $nonce, 'wpmastertoolkit_custom_body_class_save' ) ) return;
+        if ( ! current_user_can( 'edit_post', $post_id ) ) return;
 
-		//phpcs:ignore WordPress.Security.NonceVerification.Missing
         if ( isset( $_POST[ self::CUSTOM_BODY_CLASS_ID ] ) ) {
-
-            //phpcs:ignore WordPress.Security.NonceVerification.Missing
             $custom_body_class = sanitize_text_field( wp_unslash( $_POST[ self::CUSTOM_BODY_CLASS_ID ] ?? '' ) );
-            update_post_meta( $post_id, self::CUSTOM_BODY_CLASS_ID, $custom_body_class ); 
+            update_post_meta( $post_id, self::CUSTOM_BODY_CLASS_ID, $custom_body_class );
         }
     }
 
@@ -117,6 +118,7 @@ class WPMastertoolkit_Custom_Body_Class {
 
         $input_value = get_post_meta( $post->ID, self::CUSTOM_BODY_CLASS_ID, true );
 
+        wp_nonce_field( 'wpmastertoolkit_custom_body_class_save', 'wpmastertoolkit_custom_body_class_nonce' );
         ?>
             <div>
                 <input type="text" class="large-text" id="<?php echo esc_attr( self::CUSTOM_BODY_CLASS_ID ); ?>" name="<?php echo esc_attr( self::CUSTOM_BODY_CLASS_ID ); ?>" value="<?php echo esc_attr( $input_value ); ?>"/>
@@ -180,6 +182,9 @@ class WPMastertoolkit_Custom_Body_Class {
      *
      */
     public function save_submenu() {
+        if ( ! current_user_can( 'manage_options' ) ) {
+            return;
+        }
 
 		$nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ?? '' ) );
 		

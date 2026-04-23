@@ -719,7 +719,8 @@ class WPMastertoolkit_Register_Custom_Content_Types {
      */
     public function save_post( $post_id ) {
         if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
-		//phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ?? '' ) );
+		if ( ! wp_verify_nonce( $nonce, 'update-post_' . $post_id ) ) return;
         if ( ! current_user_can( 'edit_post', $post_id ) ) return;
 		//phpcs:ignore WordPress.Security.NonceVerification.Missing
         if ( ! isset( $_POST['post_type'] ) || $_POST['post_type'] !== $this->post_type ) return;
@@ -1214,6 +1215,10 @@ class WPMastertoolkit_Register_Custom_Content_Types {
 	 * @since   2.8.0
 	 */
 	public function handle_ajax_actions() {
+        if ( ! current_user_can( 'manage_options' ) ) {
+            wp_send_json_error( __( 'You are not allowed to perform this action.', 'wpmastertoolkit' ) );
+        }
+
 		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
 		if ( ! wp_verify_nonce( $nonce, $this->nonce_action_02 ) ) {
 			wp_send_json_error( __( 'Refresh the page and try again.', 'wpmastertoolkit' ) );

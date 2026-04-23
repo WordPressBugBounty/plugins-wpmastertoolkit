@@ -528,6 +528,12 @@ class WPMastertoolkit_File_Manager {
 					$copy_to_path .= '/' . $copy_to;
 				}
 
+				if ( ! $this->is_allowed_fs_path( $copy_to_path, false ) ) {
+					$this->set_notice( __( 'Invalid destination path', 'wpmastertoolkit' ) );
+					wp_safe_redirect( $this->FM_SELF_URL . '?page=wp-mastertoolkit-settings-file-manager&p=' . urlencode( $this->FM_PATH ) );
+					exit;
+				}
+
 				if ( $this->PATH == $copy_to_path ) {
 					$this->set_notice( __( 'Paths must be not equal', 'wpmastertoolkit' ) );
 					wp_safe_redirect( $this->FM_SELF_URL . '?page=wp-mastertoolkit-settings-file-manager&p=' . urlencode( $this->FM_PATH ) );
@@ -546,6 +552,7 @@ class WPMastertoolkit_File_Manager {
 				$errors        = 0;
 				//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				$files_to_copy = wpmastertoolkit_clean( wp_unslash( $_POST['file'] ?? array() ) );
+				$files_to_copy = $this->sanitize_selected_entries( $files_to_copy );
 
 				if ( ! is_array( $files_to_copy ) || ! count( $files_to_copy ) ) {
 					$this->set_notice( __( 'Nothing selected', 'wpmastertoolkit' ) );
@@ -679,12 +686,12 @@ class WPMastertoolkit_File_Manager {
 					'info'   => __( 'Oops! Try again', 'wpmastertoolkit' ),
 				);
 	
-				$filename       = $f['file']['name'];
+				$filename       = basename( $f['file']['name'] );
 				$tmp_name       = $f['file']['tmp_name'];
 				$ext            = pathinfo( $filename, PATHINFO_FILENAME ) != '' ? strtolower( pathinfo( $filename, PATHINFO_EXTENSION ) ) : '';
 				$isFileAllowed  = ($allowed) ? in_array($ext, $allowed) : true;
 	
-				if ( ! $this->fm_isvalid_filename( $filename ) && ! $this->fm_isvalid_filename( $fullPathInput ) ) {
+				if ( ! $this->fm_isvalid_filename( $filename ) || ! $this->fm_isvalid_filename( $fullPathInput ) ) {
 					wp_send_json( array( 'status' => 'error', 'info' => __( 'Invalid File name!', 'wpmastertoolkit' ) ) );
 				}
 	
@@ -780,6 +787,7 @@ class WPMastertoolkit_File_Manager {
 				$errors          = 0;
 				//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				$files_to_delete = wpmastertoolkit_clean( wp_unslash( $_POST['file'] ?? array() ) );
+				$files_to_delete = $this->sanitize_selected_entries( $files_to_delete );
 
 				if ( ! is_array( $files_to_delete ) || ! count( $files_to_delete ) ) {
 					$this->set_notice( __( 'No files selected', 'wpmastertoolkit' ) );
@@ -825,13 +833,7 @@ class WPMastertoolkit_File_Manager {
 
 				//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 				$files_to_zip    = wpmastertoolkit_clean( wp_unslash( $_POST['file'] ?? array() ) );
-				$sanitized_files = array();
-
-				foreach( $files_to_zip as $file ){
-					array_push( $sanitized_files, $this->fm_clean_path( $file ) );
-				}
-
-				$files_to_zip = $sanitized_files;
+				$files_to_zip    = $this->sanitize_selected_entries( $files_to_zip, true );
 
 				if ( empty( $files_to_zip ) ) {
 					$this->set_notice( __( 'No files selected', 'wpmastertoolkit' ) );
@@ -1323,6 +1325,31 @@ class WPMastertoolkit_File_Manager {
 	}
 
 	/**
+	 * Validate that a path resolves inside FM root path.
+	 *
+	 * @since   2.20.0
+	 * @return bool
+	 */
+	private function is_allowed_fs_path( $path, $must_exist = true ) {
+		$path = (string) $path;
+
+		$root = realpath( $this->FM_ROOT_PATH );
+		if ( false === $root ) {
+			return false;
+		}
+
+		$target = $must_exist ? realpath( $path ) : realpath( dirname( $path ) );
+		if ( false === $target ) {
+			return false;
+		}
+
+		$target = rtrim( str_replace( '\\', '/', $target ), '/' ) . '/';
+		$root   = rtrim( str_replace( '\\', '/', $root ), '/' ) . '/';
+
+		return 0 === strpos( $target, $root );
+	}
+
+	/**
 	 * File manager navbar
 	 * 
 	 * @since   1.9.0
@@ -1751,8 +1778,44 @@ class WPMastertoolkit_File_Manager {
 	 * @since   1.9.0
      */
     private function fm_isvalid_filename( $text ) {
-        return ( strpbrk( $text, '/?%*:|"<>' ) === FALSE ) ? true : false;
+		return ( strpbrk( $text, '/\\?%*:|"<>' ) === FALSE ) ? true : false;
     }
+
+	/**
+	 * Sanitize and validate selected relative entries in current folder context.
+	 *
+	 * @since   2.20.0
+	 * @return array
+	 */
+	private function sanitize_selected_entries( $entries, $disallow_symlinks = false ) {
+		if ( ! is_array( $entries ) ) {
+			return array();
+		}
+
+		$sanitized = array();
+
+		foreach ( $entries as $entry ) {
+			$entry = $this->fm_clean_path( (string) $entry );
+
+			if ( '' === $entry || '.' === $entry || '..' === $entry ) {
+				continue;
+			}
+
+			$absolute_entry = $this->PATH . '/' . $entry;
+
+			if ( ! $this->is_allowed_fs_path( $absolute_entry, true ) || ! file_exists( $absolute_entry ) ) {
+				continue;
+			}
+
+			if ( $disallow_symlinks && is_link( $absolute_entry ) ) {
+				continue;
+			}
+
+			$sanitized[] = $entry;
+		}
+
+		return array_values( array_unique( $sanitized ) );
+	}
 
 	/**
      * Safely rename
@@ -1767,6 +1830,10 @@ class WPMastertoolkit_File_Manager {
 		}
 
 		WP_Filesystem();
+
+		if ( ! $this->is_allowed_fs_path( $old, true ) || ! $this->is_allowed_fs_path( $new, false ) ) {
+			return false;
+		}
 
         $isFileAllowed = $this->fm_is_valid_ext( $new );
 
@@ -1809,6 +1876,14 @@ class WPMastertoolkit_File_Manager {
 	 * @since   1.9.0
      */
     private function fm_rcopy( $path, $dest, $upd = true, $force = true ) {
+		if ( is_link( $path ) ) {
+			return false;
+		}
+
+		if ( ! $this->is_allowed_fs_path( $path, true ) || ! $this->is_allowed_fs_path( $dest, false ) ) {
+			return false;
+		}
+
         if ( is_dir( $path ) ) {
             if ( ! $this->fm_mkdir( $dest, $force ) ) {
                 return false;
@@ -1845,6 +1920,10 @@ class WPMastertoolkit_File_Manager {
 
 		WP_Filesystem();
 
+		if ( ! $this->is_allowed_fs_path( $dir, false ) ) {
+			return false;
+		}
+
         if ( file_exists( $dir ) ) {
             if ( is_dir( $dir ) ) {
                 return $dir;
@@ -1869,6 +1948,10 @@ class WPMastertoolkit_File_Manager {
 		}
 
 		WP_Filesystem();
+
+		if ( ! $this->is_allowed_fs_path( $f1, true ) || ! $this->is_allowed_fs_path( $f2, false ) ) {
+			return false;
+		}
 
         $time1 = filemtime( $f1 );
         if ( file_exists( $f2 ) ) {
@@ -1897,6 +1980,10 @@ class WPMastertoolkit_File_Manager {
 		}
 
 		WP_Filesystem();
+
+		if ( ! $this->is_allowed_fs_path( $path, true ) ) {
+			return false;
+		}
 
         if ( is_link( $path ) ) {
             return wp_delete_file( $path );

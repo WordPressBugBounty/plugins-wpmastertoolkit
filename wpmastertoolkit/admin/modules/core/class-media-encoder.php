@@ -138,6 +138,10 @@ class WPMastertoolkit_Media_Encoder {
      * @since   1.13.0
      */
     public function save_submenu() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
 		$nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ?? '' ) );
 
 		if ( wp_verify_nonce( $nonce, $this->nonce_action ) ) {
@@ -712,11 +716,24 @@ class WPMastertoolkit_Media_Encoder {
 	}
 
 	/**
+	 * Ensure AJAX actions are restricted to administrators.
+	 *
+	 * @since   2.20.0
+	 */
+	private function ensure_ajax_permissions() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( __( 'You are not allowed to perform this action.', 'wpmastertoolkit' ) );
+		}
+	}
+
+	/**
 	 * Preview mode callback
 	 * 
 	 * @since   1.13.0
 	 */
 	public function preview_mode_cb() {
+		$this->ensure_ajax_permissions();
+
 		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
 		if ( ! wp_verify_nonce( $nonce, $this->nonce_action ) ) {
 			wp_send_json_error( __( 'Refresh the page and try again.', 'wpmastertoolkit' ) );
@@ -773,6 +790,8 @@ class WPMastertoolkit_Media_Encoder {
 	 * @since   1.13.0
 	 */
 	public function start_bulk_cb() {
+		$this->ensure_ajax_permissions();
+
 		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
 		if ( ! wp_verify_nonce( $nonce, $this->nonce_action ) ) {
 			wp_send_json_error( __( 'Refresh the page and try again.', 'wpmastertoolkit' ) );
@@ -822,6 +841,8 @@ class WPMastertoolkit_Media_Encoder {
 	 * @since   1.13.0
 	 */
 	public function stop_bulk_cb() {
+		$this->ensure_ajax_permissions();
+
 		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
 		if ( ! wp_verify_nonce( $nonce, $this->nonce_action ) ) {
 			wp_send_json_error( __( 'Refresh the page and try again.', 'wpmastertoolkit' ) );
@@ -840,6 +861,8 @@ class WPMastertoolkit_Media_Encoder {
 	 * @since   1.13.0
 	 */
 	public function progress_bulk_cb() {
+		$this->ensure_ajax_permissions();
+
 		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
 		if ( ! wp_verify_nonce( $nonce, $this->nonce_action ) ) {
 			wp_send_json_error( __( 'Refresh the page and try again.', 'wpmastertoolkit' ) );
@@ -864,6 +887,8 @@ class WPMastertoolkit_Media_Encoder {
 	 * @since   1.13.0
 	 */
 	public function start_single_cb() {
+		$this->ensure_ajax_permissions();
+
 		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
 		if ( ! wp_verify_nonce( $nonce, $this->nonce_action ) ) {
 			wp_send_json_error( __( 'Refresh the page and try again.', 'wpmastertoolkit' ) );
@@ -938,6 +963,8 @@ class WPMastertoolkit_Media_Encoder {
 	 * @since   1.13.0
 	 */
 	public function undo_single_cb() {
+		$this->ensure_ajax_permissions();
+
 		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
 		if ( ! wp_verify_nonce( $nonce, $this->nonce_action ) ) {
 			wp_send_json_error( __( 'Refresh the page and try again.', 'wpmastertoolkit' ) );
@@ -967,6 +994,8 @@ class WPMastertoolkit_Media_Encoder {
 	 * @since   1.13.0
 	 */
 	public function start_single_migration_cb() {
+		$this->ensure_ajax_permissions();
+
 		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
 		if ( ! wp_verify_nonce( $nonce, $this->nonce_action ) ) {
 			wp_send_json_error( __( 'Refresh the page and try again.', 'wpmastertoolkit' ) );
@@ -1001,6 +1030,8 @@ class WPMastertoolkit_Media_Encoder {
 	 * @since   1.13.0
 	 */
 	public function start_bulk_migration_cb() {
+		$this->ensure_ajax_permissions();
+
 		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
 		if ( ! wp_verify_nonce( $nonce, $this->nonce_action ) ) {
 			wp_send_json_error( __( 'Refresh the page and try again.', 'wpmastertoolkit' ) );
@@ -1042,6 +1073,8 @@ class WPMastertoolkit_Media_Encoder {
 	 * @since   1.13.0
 	 */
 	public function stop_bulk_migration_cb() {
+		$this->ensure_ajax_permissions();
+
 		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
 		if ( ! wp_verify_nonce( $nonce, $this->nonce_action ) ) {
 			wp_send_json_error( __( 'Refresh the page and try again.', 'wpmastertoolkit' ) );
@@ -1060,6 +1093,8 @@ class WPMastertoolkit_Media_Encoder {
 	 * @since   1.13.0
 	 */
 	public function progress_bulk_migration_cb() {
+		$this->ensure_ajax_permissions();
+
 		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
 		if ( ! wp_verify_nonce( $nonce, $this->nonce_action ) ) {
 			wp_send_json_error( __( 'Refresh the page and try again.', 'wpmastertoolkit' ) );

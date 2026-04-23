@@ -64,6 +64,10 @@ class WPMastertoolkit_Export_Posts_Pages {
             wp_die();
         }
 
+        if ( ! current_user_can( 'edit_post', (int) $post_id ) ) {
+            wp_die();
+        }
+
         $posts = $this->get_posts_array( array( $post_id ) );
 
         if ( ! $posts || empty( $posts ) ) {
@@ -96,6 +100,17 @@ class WPMastertoolkit_Export_Posts_Pages {
             return $sendback;
         }
 
+        $ids = array_filter(
+            array_map( 'absint', (array) $ids ),
+            static function( $post_id ) {
+                return current_user_can( 'edit_post', $post_id );
+            }
+        );
+
+        if ( empty( $ids ) ) {
+            return $sendback;
+        }
+
         $posts = $this->get_posts_array( $ids );
 
         if ( ! $posts || empty( $posts ) ) {
@@ -112,7 +127,7 @@ class WPMastertoolkit_Export_Posts_Pages {
      */
     public function download_pages( $sendback, $doaction, $ids ) {
 
-        $this->download_posts( $sendback, $doaction, $ids, 'pages' );
+		return $this->download_posts( $sendback, $doaction, $ids, 'pages' );
     }
 
     /**

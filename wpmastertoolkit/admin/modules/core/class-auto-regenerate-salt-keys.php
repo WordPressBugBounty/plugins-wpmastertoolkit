@@ -57,6 +57,10 @@ class WPMastertoolkit_Auto_Regenerate_Salt_Keys {
         $default_settings = $this->get_default_settings();
         $value            = $settings['frequently']['value'] ?? $default_settings['frequently']['value'];
 
+        if ( $value === 'never' ) {
+            return $schedules;
+        }
+
         switch ( $value ) {
             case 'daily':
                 $interval = DAY_IN_SECONDS;
@@ -90,6 +94,15 @@ class WPMastertoolkit_Auto_Regenerate_Salt_Keys {
 	* Start the next cron event
 	*/
     public function cron_events() {
+
+        $settings         = $this->get_settings();
+        $default_settings = $this->get_default_settings();
+        $value            = $settings['frequently']['value'] ?? $default_settings['frequently']['value'];
+
+        if ( $value === 'never' ) {
+            wp_clear_scheduled_hook( $this->cron_name . '_hook', array( $this->cron_name ) );
+            return;
+        }
 
         if ( ! wp_next_scheduled( $this->cron_name . '_hook', array( $this->cron_name ) ) ) {
 			$after_30_min = time() + ( 30 * MINUTE_IN_SECONDS );
@@ -170,6 +183,9 @@ class WPMastertoolkit_Auto_Regenerate_Salt_Keys {
      *
      */
     public function save_submenu() {
+        if ( ! current_user_can( 'manage_options' ) ) {
+            return;
+        }
 
         $submit        = isset( $_POST[$this->change_now_btn_name] ) ?? false;
         $now_btn_nonce = sanitize_text_field( wp_unslash( $_POST[$this->change_now_nonce_name] ?? '' ) );
@@ -207,6 +223,15 @@ class WPMastertoolkit_Auto_Regenerate_Salt_Keys {
         ?>
             <div class="wp-mastertoolkit__section">
                 <div class="wp-mastertoolkit__section__desc"><?php esc_html_e( 'WordPress salt keys or security keys are codes that help protect important information on your website.', 'wpmastertoolkit' ); ?></div>
+                <div class="wp-mastertoolkit__section__notice__apikeys">
+                    <div class="wp-mastertoolkit__section__notice__apikeys__icon">
+                        <?php echo wp_kses( file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/triangle-warning.svg' ), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
+                    </div>
+                    <div class="wp-mastertoolkit__section__notice__apikeys__text">
+                        <strong><?php esc_html_e( 'Warning!', 'wpmastertoolkit' ); ?></strong>
+                        <?php esc_html_e( 'Some plugins use salt keys to encrypt sensitive data such as API keys. Regenerating salt keys may break these encryptions and cause issues with those plugins. Use this feature with caution.', 'wpmastertoolkit' ); ?>
+                    </div>
+                </div>
                 <div class="wp-mastertoolkit__section__body">
                     <div class="wp-mastertoolkit__section__body__item">
                         <div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e( 'Scheduled Change', 'wpmastertoolkit' ); ?></div>
@@ -268,8 +293,9 @@ class WPMastertoolkit_Auto_Regenerate_Salt_Keys {
 
         return array(
             'frequently' => array(
-                'value'   => 'monthly',
+                'value'   => 'never',
                 'options' => array(
+                    'never'      => __( 'Never', 'wpmastertoolkit' ),
                     'daily'      => __( 'Daily', 'wpmastertoolkit' ),
                     'weekly'     => __( 'Weekly', 'wpmastertoolkit' ),
                     'monthly'    => __( 'Monthly', 'wpmastertoolkit' ),

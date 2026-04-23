@@ -176,6 +176,10 @@ class WPMastertoolkit_Settings {
 	 */
 	public function settings_submit_button() {
 
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
 		$nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ?? '' ) );
 		
 		if ( ! wp_verify_nonce($nonce, WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_action') ) {
@@ -318,8 +322,15 @@ class WPMastertoolkit_Settings {
 
 			$class_stats = new WPMastertoolkit_Stats();
 			$class_stats->send_stats();
+
+			$redirect_url = sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) );
+			$search_term  = sanitize_text_field( wp_unslash( $_POST['wpmastertoolkit_search'] ?? '' ) );
+
+			if ( $search_term ) {
+				$redirect_url = add_query_arg( 'wpmastertoolkit_search', $search_term, sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
+			}
 	
-			wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
+			wp_safe_redirect( $redirect_url );
 			exit;
 		}
 	}
@@ -865,4 +876,12 @@ class WPMastertoolkit_Settings {
 		}
 	}
 
+	/**
+	 * Filter removable query args to prevent certain parameters from being removed during redirection
+	 */
+	public function filter_removable_query_args( array $args ) {
+		return array_merge( $args, array(
+			'wpmastertoolkit_search',
+		) );
+	}
 }

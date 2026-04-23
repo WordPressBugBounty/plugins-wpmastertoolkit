@@ -9,6 +9,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 class WPMastertoolkit_Temporary_Login {
 
     const MODULE_ID = 'Temporary Login';
+    const MAGIC_LOGIN_MAX_ATTEMPTS = 8;
+    const MAGIC_LOGIN_ATTEMPT_TTL  = 15 * MINUTE_IN_SECONDS;
 
     private $option_id;
     private $header_title_menu;
@@ -253,13 +255,14 @@ class WPMastertoolkit_Temporary_Login {
         $this->settings = $this->get_settings();
         $is_pro = wpmastertoolkit_is_pro();
         
-        // Display success message for new user
+		// Display success message for new user
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-        if ( isset( $_GET['user_created'] ) && $_GET['user_created'] === '1' && isset( $_GET['user_id'] ) && isset( $_GET['password'] ) ) {
+        if ( isset( $_GET['user_created'] ) && $_GET['user_created'] === '1' && isset( $_GET['user_id'] ) ) {
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
             $new_user_id = absint( $_GET['user_id'] );
+            $password = '';
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-            $password = urldecode( base64_decode( sanitize_text_field( wp_unslash( $_GET['password']) ) ) );
+            $credentials_token = sanitize_text_field( wp_unslash( $_GET['cred_token'] ?? '' ) );
             $user = get_user_by( 'id', $new_user_id );
             
             if ( $user ) {
@@ -276,6 +279,14 @@ class WPMastertoolkit_Temporary_Login {
                         ),
                         home_url()
                     );
+                }
+
+                if ( empty( $magic_link ) && ! empty( $credentials_token ) ) {
+                    $credentials_data = get_transient( 'wpmtk_temp_login_creds_' . $credentials_token );
+                    if ( is_array( $credentials_data ) && isset( $credentials_data['user_id'], $credentials_data['password'] ) && absint( $credentials_data['user_id'] ) === $new_user_id ) {
+                        $password = (string) $credentials_data['password'];
+                        delete_transient( 'wpmtk_temp_login_creds_' . $credentials_token );
+                    }
                 }
                 ?>
                 <div class="wpmtk-credentials-notice">
@@ -307,10 +318,14 @@ class WPMastertoolkit_Temporary_Login {
                             <div class="wpmtk-credential-item">
                                 <strong><?php esc_html_e( 'Password:', 'wpmastertoolkit' ); ?></strong>
                                 <div class="wpmtk-credential-value">
-                                    <input type="text" readonly value="<?php echo esc_attr( $password ); ?>" class="wpmtk-copy-input" id="password-input" />
-                                    <button type="button" class="wpmtk-button wpmtk-copy-btn" data-target="password-input">
-                                        <?php esc_html_e( 'Copy', 'wpmastertoolkit' ); ?>
-                                    </button>
+                                    <?php if ( ! empty( $password ) ) : ?>
+                                        <input type="text" readonly value="<?php echo esc_attr( $password ); ?>" class="wpmtk-copy-input" id="password-input" />
+                                        <button type="button" class="wpmtk-button wpmtk-copy-btn" data-target="password-input">
+                                            <?php esc_html_e( 'Copy', 'wpmastertoolkit' ); ?>
+                                        </button>
+                                    <?php else : ?>
+                                        <span class="wpmtk-credential-value-plain"><?php esc_html_e( 'Password available only once at creation.', 'wpmastertoolkit' ); ?></span>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             
@@ -792,8 +807,16 @@ class WPMastertoolkit_Temporary_Login {
             if ( isset( $_POST['wpmtk_send_email_to_new_user'] ) && $_POST['wpmtk_send_email_to_new_user'] === '1' ) {
                 $this->send_temporary_login_email( $user_id, $password );
             }
-            $password_base64 = urlencode( base64_encode( $password ) );
-            wp_safe_redirect( add_query_arg( array( 'page' => $this->submenu_page_id, 'user_created' => '1', 'user_id' => $user_id, 'password' => $password_base64 ), admin_url( 'admin.php' ) ) );
+            $credentials_token = wp_generate_password( 24, false, false );
+            set_transient(
+                'wpmtk_temp_login_creds_' . $credentials_token,
+                array(
+                    'user_id'  => $user_id,
+                    'password' => $password,
+                ),
+                10 * MINUTE_IN_SECONDS
+            );
+            wp_safe_redirect( add_query_arg( array( 'page' => $this->submenu_page_id, 'user_created' => '1', 'user_id' => $user_id, 'cred_token' => $credentials_token ), admin_url( 'admin.php' ) ) );
             exit;
 
         } else {
@@ -870,6 +893,54 @@ class WPMastertoolkit_Temporary_Login {
     private function generate_login_token( $user_id ) {
         return wp_hash( $user_id . time() . wp_generate_password( 32, false ) ) . wp_hash( wp_generate_password( 32, false ) );
     }
+
+    /**
+     * Build rate-limit transient key for magic login attempts.
+     *
+     * @since 2.20.0
+     */
+    private function get_magic_login_attempt_key( $user_id ) {
+        $ip_address = sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ?? '' ) );
+        if ( '' === $ip_address ) {
+            $ip_address = 'unknown';
+        }
+
+        return 'wpmtk_magic_login_attempts_' . md5( absint( $user_id ) . '|' . $ip_address );
+    }
+
+    /**
+     * Increment failed magic-login attempts.
+     *
+     * @since 2.20.0
+     */
+    private function increase_magic_login_attempts( $user_id ) {
+        $key      = $this->get_magic_login_attempt_key( $user_id );
+        $attempts = absint( get_transient( $key ) );
+        $attempts++;
+
+        set_transient( $key, $attempts, self::MAGIC_LOGIN_ATTEMPT_TTL );
+    }
+
+    /**
+     * Whether magic-login attempts are rate limited.
+     *
+     * @since 2.20.0
+     */
+    private function is_magic_login_rate_limited( $user_id ) {
+        $key      = $this->get_magic_login_attempt_key( $user_id );
+        $attempts = absint( get_transient( $key ) );
+
+        return $attempts >= self::MAGIC_LOGIN_MAX_ATTEMPTS;
+    }
+
+    /**
+     * Clear failed magic-login attempts after success.
+     *
+     * @since 2.20.0
+     */
+    private function clear_magic_login_attempts( $user_id ) {
+        delete_transient( $this->get_magic_login_attempt_key( $user_id ) );
+    }
     
     /**
      * Check if temporary user is expired
@@ -908,36 +979,47 @@ class WPMastertoolkit_Temporary_Login {
         $user_id = absint( $_GET['wpmtk_login'] );
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
         $token = sanitize_text_field( wp_unslash( $_GET['token'] ) );
+
+		if ( $user_id <= 0 || $this->is_magic_login_rate_limited( $user_id ) ) {
+			wp_die( esc_html__( 'Invalid login link.', 'wpmastertoolkit' ) );
+		}
         
         $user = get_user_by( 'id', $user_id );
         if ( ! $user ) {
+			$this->increase_magic_login_attempts( $user_id );
             wp_die( esc_html__( 'Invalid login link.', 'wpmastertoolkit' ) );
         }
         
         // Check if it's a temporary user
         $is_temp_user = get_user_meta( $user_id, 'wpmastertoolkit_temporary_login', true );
         if ( ! $is_temp_user ) {
+			$this->increase_magic_login_attempts( $user_id );
             wp_die( esc_html__( 'Invalid login link.', 'wpmastertoolkit' ) );
         }
         
         // Check if connexion link is enabled
         $connexion_link = get_user_meta( $user_id, 'wpmtk_connexion_link', true );
         if ( $connexion_link !== '1' ) {
+			$this->increase_magic_login_attempts( $user_id );
             wp_die( esc_html__( 'Invalid login link.', 'wpmastertoolkit' ) );
         }
         
         // Verify token
         $stored_token = get_user_meta( $user_id, 'wpmtk_login_token', true );
         if ( $token !== $stored_token ) {
+			$this->increase_magic_login_attempts( $user_id );
             wp_die( esc_html__( 'Invalid login link.', 'wpmastertoolkit' ) );
         }
         
         // Check expiration
         $expiration = get_user_meta( $user_id, 'wpmtk_temporary_login_expiration', true );
         if ( $expiration && time() > $expiration ) {
+			$this->increase_magic_login_attempts( $user_id );
             $this->delete_expired_temporary_users();
             wp_die( esc_html__( 'This temporary login has expired.', 'wpmastertoolkit' ) );
         }
+
+		$this->clear_magic_login_attempts( $user_id );
         
         // Log the user in
         wp_set_current_user( $user_id );

@@ -394,6 +394,10 @@ class WPMastertoolkit_Plugin_Theme_Rollback {
      */
     private function submenu_content() {
 
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
 		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ?? '' ) ), $this->user_nonce ) ) {
 			return;
 		}

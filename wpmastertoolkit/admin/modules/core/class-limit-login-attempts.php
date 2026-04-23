@@ -60,6 +60,10 @@ class WPMastertoolkit_Limit_Login_Attempts {
 		$last_fail_on     = '';
 		$settings         = $this->get_settings();
 		$ip_address       = wpmastertoolkit_get_current_ip();
+
+		if ( $this->is_ip_whitelisted( $ip_address, $settings ) ) {
+			return $user;
+		}
 		$table_name       = $this->get_table_name();
 		$default_settings = $this->get_default_settings();
 		$fails_allowed    = $settings['fails_allowed'] ?? $default_settings['fails_allowed'];
@@ -244,6 +248,11 @@ class WPMastertoolkit_Limit_Login_Attempts {
 	public function log_failed_login( $username ) {
 		global $wpdb, $wpmastertoolkit_limit_login;
 
+		$ip_address_check = $wpmastertoolkit_limit_login['ip_address'] ?? wpmastertoolkit_get_current_ip();
+		if ( $this->is_ip_whitelisted( $ip_address_check ) ) {
+			return;
+		}
+
 		$table_name              = $this->get_table_name();
 		$ip_address              = $wpmastertoolkit_limit_login['ip_address'] ?? '';
 		$ip_address_log          = $wpmastertoolkit_limit_login['ip_address_log'] ?? array();
@@ -398,6 +407,10 @@ class WPMastertoolkit_Limit_Login_Attempts {
      * @since   1.4.0
      */
     public function save_submenu() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
 		$nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ?? '' ) );
 
 		if ( wp_verify_nonce( $nonce, $this->nonce_action ) ) {
@@ -426,7 +439,11 @@ class WPMastertoolkit_Limit_Login_Attempts {
         $sanitized_settings     = array();
 
         foreach ( $this->default_settings as $settings_key => $settings_value ) {
-			$sanitized_settings[ $settings_key ] = sanitize_text_field( $new_settings[ $settings_key ] ?? $settings_value );
+			if ( 'ip_whitelist' === $settings_key ) {
+				$sanitized_settings[ $settings_key ] = sanitize_textarea_field( $new_settings[ $settings_key ] ?? $settings_value );
+			} else {
+				$sanitized_settings[ $settings_key ] = sanitize_text_field( $new_settings[ $settings_key ] ?? $settings_value );
+			}
         }
 
         return $sanitized_settings;
@@ -464,6 +481,7 @@ class WPMastertoolkit_Limit_Login_Attempts {
         return array(
 			'fails_allowed'    => '3',
 			'lockout_maxcount' => '3',
+			'ip_whitelist'     => '',
         );
     }
 
@@ -479,6 +497,7 @@ class WPMastertoolkit_Limit_Login_Attempts {
         $this->settings   = $this->get_settings();
 		$fails_allowed    = $this->settings['fails_allowed'] ?? '3';
 		$lockout_maxcount = $this->settings['lockout_maxcount'] ?? '3';
+		$ip_whitelist     = $this->settings['ip_whitelist'] ?? '';
 		$date_format      = get_option( 'date_format', 'Y-m-d' );
 		$time_format      = get_option( 'time_format', 'H:i' );
 
@@ -529,7 +548,8 @@ class WPMastertoolkit_Limit_Login_Attempts {
 										<th><?php esc_html_e( 'Attempts', 'wpmastertoolkit' ); ?></th>
 										<th><?php esc_html_e( 'Lockouts', 'wpmastertoolkit' ); ?></th>
 										<th><?php esc_html_e( 'Last Attempt On', 'wpmastertoolkit' ); ?></th>
-										<th><?php esc_html_e( 'Actions', 'wpmastertoolkit' ); ?></th>
+										<th><?php esc_html_e( 'Whitelisted', 'wpmastertoolkit' ); ?></th>
+						<th><?php esc_html_e( 'Actions', 'wpmastertoolkit' ); ?></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -539,13 +559,22 @@ class WPMastertoolkit_Limit_Login_Attempts {
 											<td><?php echo esc_html( $entry['username'] ?? '' ); ?></td>
 											<td><?php echo esc_html( $entry['fail_count'] ?? '' ); ?></td>
 											<td><?php echo esc_html( $entry['lockout_count'] ?? '' ); ?></td>
-											<td><?php echo esc_html( wp_date( $date_format . ' ' . $time_format, $entry['unixtime'] ?? null ) ); ?></td>
-											<td><button onclick="return confirm('<?php esc_html_e( 'Are you sure?', 'wpmastertoolkit' ); ?>')" class="button button-link-delete" type="submit" name="delete" value="<?php echo esc_attr( $entry['ip_address'] ); ?>"><?php esc_html_e( 'Delete', 'wpmastertoolkit' ); ?></button></td>
+											<td><?php echo esc_html( wp_date( $date_format . ' ' . $time_format, $entry['unixtime'] ?? null ) ); ?></td>									<td><?php echo $this->is_ip_whitelisted( $entry['ip_address'] ?? '' ) ? '<span style="color:#0a0;">&#10003;</span>' : '&mdash;'; ?></td>											<td><button onclick="return confirm('<?php esc_html_e( 'Are you sure?', 'wpmastertoolkit' ); ?>')" class="button button-link-delete" type="submit" name="delete" value="<?php echo esc_attr( $entry['ip_address'] ); ?>"><?php esc_html_e( 'Delete', 'wpmastertoolkit' ); ?></button></td>
 										</tr>
 									<?php endforeach; ?>
 								</tbody>
 							</table>
-							
+					
+                        </div>
+                    </div>
+
+					<div class="wp-mastertoolkit__section__body__item">
+                        <div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e( 'IP Whitelist', 'wpmastertoolkit' ); ?></div>
+                        <div class="wp-mastertoolkit__section__body__item__content">
+							<div class="wp-mastertoolkit__input-text">
+								<textarea name="<?php echo esc_attr( $this->option_id . '[ip_whitelist]' ); ?>" rows="6" style="width:100%;font-family:monospace;"><?php echo esc_textarea( $ip_whitelist ); ?></textarea>
+								<p class="description"><?php esc_html_e( 'One IP address per line. Whitelisted IPs are never blocked, regardless of failed login attempts.', 'wpmastertoolkit' ); ?></p>
+							</div>
                         </div>
                     </div>
 
@@ -573,6 +602,26 @@ class WPMastertoolkit_Limit_Login_Attempts {
             $where,
             $where_format
         );
+	}
+
+	/**
+	 * Check if an IP address is whitelisted
+	 *
+	 * @since 1.16.0
+	 * @param string     $ip_address The IP to check.
+	 * @param array|null $settings   Optional pre-loaded settings array.
+	 * @return bool
+	 */
+	private function is_ip_whitelisted( $ip_address, $settings = null ) {
+		if ( empty( $ip_address ) ) {
+			return false;
+		}
+		if ( null === $settings ) {
+			$settings = $this->get_settings();
+		}
+		$ip_whitelist  = $settings['ip_whitelist'] ?? '';
+		$whitelist_ips = array_filter( array_map( 'trim', explode( "\n", $ip_whitelist ) ) );
+		return in_array( $ip_address, $whitelist_ips, true );
 	}
 
 	/**

@@ -14,7 +14,6 @@ class WPMastertoolkit_Adminer {
 	private $cron_name;
 	private $settings;
     private $default_settings;
-	private $disable_form;
 	private $folder_path;
 	private $folder_url;
 
@@ -56,11 +55,6 @@ class WPMastertoolkit_Adminer {
      */
     public function class_init() {
         $this->header_title = esc_html__( 'Adminer', 'wpmastertoolkit' );
-
-		$is_adminer_file_request = preg_match( '/wpmastertoolkit-adminer-.*\.php/', sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
-		if ( $is_adminer_file_request && ! headers_sent() && ! session_id() ) {
-			session_start();
-		}
     }
 
 	/**
@@ -88,30 +82,15 @@ class WPMastertoolkit_Adminer {
      */
     public function render_submenu() {
 
-		//phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$status           = sanitize_text_field( wp_unslash( $_GET['wpmastertoolkit_status'] ?? '' ) );
-		//phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$adminer_url      = sanitize_url( wp_unslash( $_GET['wpmastertoolkit_url'] ?? '' ) );
-		$redirection_form = false;
-
-		if ( 'adminer' == $status && ! empty( $adminer_url ) ) {
-			$this->disable_form = true;
-			$redirection_form   = true;
-		}
-
 		$submenu_assets = include( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/adminer.asset.php' );
 		wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/adminer.css', array(), $submenu_assets['version'], 'all' );
-		wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/adminer.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );		
+		wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/adminer.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
 		wp_localize_script( 'WPMastertoolkit_submenu', 'wpmastertoolkit_adminer', array(
 			'page_url' => get_admin_url( null, 'admin.php?page=wp-mastertoolkit-settings-adminer' ),
 		) );
 
 		include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/header.php';
-		if ( $redirection_form ) {
-			$this->redirection_form();
-		} else {
-			$this->submenu_content();
-		}
+		$this->submenu_content();
 		include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/footer.php';
     }
 
@@ -121,6 +100,10 @@ class WPMastertoolkit_Adminer {
 	 * @since 1.11.0
 	 */
 	public function save_submenu() {
+
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
 
 		if ( ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ?? '' ) ), $this->nonce_action ) ) {
 			return;
@@ -132,42 +115,92 @@ class WPMastertoolkit_Adminer {
 
 			$this->delete_old_files();
 
-			// $file_content = file_get_contents( 'https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1-mysql.php' );
-			$file_content = wp_remote_retrieve_body( wp_remote_get( 'https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1-mysql.php' ) );
-			$folder_path  = $this->get_folder_path();
-			$folder_url   = $this->get_folder_url();
-			$file_name    = 'wpmastertoolkit-adminer-' . md5( time() ) . '.php' ;
-			$file_path    = "$folder_path/$file_name";
-			$file_url     = "$folder_url/$file_name";
+			$tmp_file = download_url( 'https://www.adminer.org/latest-mysql-en.php', 30 );
 
-			$content      = '<?php session_start();';
-			$content     .= 'if ( empty( $_GET["username"] ) && empty( $_GET["file"] ) ) {';
-			$content     .= '$wpmastertoolkit_user_token = $_POST["token"] ?? ""; $wpmastertoolkit_saved_token = $_SESSION["wpmastertoolkit_settings_adminer"]["token"] ?? "";';
-			$content     .= 'if ( empty( $wpmastertoolkit_user_token ) || empty( $wpmastertoolkit_saved_token ) || $wpmastertoolkit_user_token != $wpmastertoolkit_saved_token ) {return;} }';
-			$file_content = preg_replace( '/^<\?php/', '', $file_content );
-			$file_content = $content . $file_content;
-			$file_created = file_put_contents( $file_path, $file_content );
-
-			if ( $file_created ) {
-				$settings = $this->get_settings();
-				$settings['creationtime'] = time();
-
-				$new_settings = $this->sanitize_settings( $settings );
-            	$this->save_settings( $new_settings );
-
-				$new_url = add_query_arg(
-					array(
-						'wpmastertoolkit_status' => 'adminer',
-						'wpmastertoolkit_url'    => $file_url,
-					),
-					sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ),
-				);
-
-				wp_safe_redirect( $new_url );
+			if ( is_wp_error( $tmp_file ) ) {
+				wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
 				exit;
 			}
 
+			$file_content = file_get_contents( $tmp_file );
+			wp_delete_file( $tmp_file );
+
+			if ( empty( $file_content ) ) {
+				wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
+				exit;
+			}
+			$folder_path  = $this->get_folder_path();
+			$file_hash    = bin2hex( random_bytes( 16 ) );
+
+			// Save the raw Adminer engine file (dot prefix to restrict direct access)
+			$engine_filename  = '.wpmastertoolkit-engine-' . $file_hash . '.php';
+			$engine_path      = "$folder_path/$engine_filename";
+
+			// Save the wrapper file (secure entry point)
+			$wrapper_filename = 'wpmastertoolkit-adminer-' . $file_hash . '.php';
+			$wrapper_path     = "$folder_path/$wrapper_filename";
+
+			$engine_created = file_put_contents( $engine_path, $file_content );
+
+			if ( $engine_created ) {
+				$settings  = $this->get_settings();
+				$lifetime  = $settings['lifetime']['value'] ?? '3600';
+
+				$wrapper_content = $this->generate_wrapper_content( $engine_filename, time(), $lifetime );
+				$wrapper_created = file_put_contents( $wrapper_path, $wrapper_content );
+
+				$this->create_htaccess();
+
+				if ( $wrapper_created ) {
+					$settings                 = $this->get_settings();
+					$settings['creationtime'] = time();
+					$settings['file_hash']    = $file_hash;
+
+					$new_settings = $this->sanitize_settings( $settings );
+					$this->save_settings( $new_settings );
+				}
+			}
+
 			wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
+			exit;
+
+		} elseif ( 'connect' == $submit ) {
+
+			$settings  = $this->get_settings();
+			$file_hash = $settings['file_hash'] ?? '';
+
+			if ( empty( $file_hash ) || ! preg_match( '/^[a-f0-9]{32}$/', $file_hash ) ) {
+				wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
+				exit;
+			}
+
+			$folder_path      = $this->get_folder_path();
+			$folder_url       = $this->get_folder_url();
+			$wrapper_filename = 'wpmastertoolkit-adminer-' . $file_hash . '.php';
+			$wrapper_path     = "$folder_path/$wrapper_filename";
+			$wrapper_url      = "$folder_url/$wrapper_filename";
+
+			if ( ! file_exists( $wrapper_path ) ) {
+				wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
+				exit;
+			}
+
+			// Store credentials in session (server-side only, never exposed in HTML)
+			if ( session_status() === PHP_SESSION_NONE ) {
+				session_start();
+			}
+
+			$_SESSION['wpmastertoolkit_adminer_credentials'] = array(
+				'server'   => DB_HOST,
+				'username' => DB_USER,
+				'password' => DB_PASSWORD,
+				'db'       => DB_NAME,
+				'expires'  => time() + 30,
+				'ip'       => sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ?? '' ) ),
+			);
+
+			// phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect
+			wp_redirect( $wrapper_url );
 			exit;
 
 		} elseif ( 'delete' == $submit ) {
@@ -177,7 +210,14 @@ class WPMastertoolkit_Adminer {
 			exit;
 		} else {
 			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-			$new_settings = $this->sanitize_settings( wp_unslash( $_POST[$this->option_id] ?? array() ) );
+			$post_settings = wp_unslash( $_POST[$this->option_id] ?? array() );
+
+			// Preserve server-managed values from DB (never trust from POST)
+			$existing_settings              = $this->get_settings();
+			$post_settings['creationtime']  = $existing_settings['creationtime'] ?? '0';
+			$post_settings['file_hash']     = $existing_settings['file_hash'] ?? '';
+
+			$new_settings = $this->sanitize_settings( $post_settings );
             
             $this->save_settings( $new_settings );
             wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
@@ -238,12 +278,15 @@ class WPMastertoolkit_Adminer {
 	 */
 	private function delete_old_files() {
 		$folder_path = $this->get_folder_path();
-		$all_files   = glob( "$folder_path/*" );
+		$all_files   = array_merge(
+			glob( "$folder_path/*" ) ?: array(),
+			glob( "$folder_path/.*" ) ?: array()
+		);
 
 		foreach ( $all_files as $file ) {
 			$file_name = basename( $file );
 
-			if ( 'index.php' == $file_name ) {
+			if ( in_array( $file_name, array( '.', '..', 'index.php', '.htaccess' ), true ) ) {
 				continue;
 			}
 
@@ -252,8 +295,9 @@ class WPMastertoolkit_Adminer {
 			}
 		}
 
-		$settings = $this->get_settings();
+		$settings                 = $this->get_settings();
 		$settings['creationtime'] = '0';
+		$settings['file_hash']    = '';
 
 		$new_settings = $this->sanitize_settings( $settings );
 		$this->save_settings( $new_settings );
@@ -299,9 +343,12 @@ class WPMastertoolkit_Adminer {
         foreach ( $this->default_settings as $settings_key => $settings_value ) {
             switch ($settings_key) {
 				case 'lifetime':
-					$sanitized_settings[$settings_key]['value'] = sanitize_text_field( $new_settings[$settings_key]['value'] ??$this->default_settings[$settings_key]['value'] );
+					$allowed_lifetimes = array_keys( $this->default_settings['lifetime']['options'] );
+					$lifetime_value    = sanitize_text_field( $new_settings[$settings_key]['value'] ?? $this->default_settings[$settings_key]['value'] );
+					$sanitized_settings[$settings_key]['value'] = in_array( $lifetime_value, $allowed_lifetimes, true ) ? $lifetime_value : $this->default_settings[$settings_key]['value'];
 				break;
 				case 'creationtime':
+				case 'file_hash':
 					$sanitized_settings[$settings_key] = sanitize_text_field( $new_settings[$settings_key] ?? $settings_value );
 				break;
             }
@@ -349,46 +396,129 @@ class WPMastertoolkit_Adminer {
                 ),
             ),
 			'creationtime' => '0',
+			'file_hash'    => '',
         );
     }
 
 	/**
-	 * Redirection form
-	 * 
+	 * Generate the secure wrapper file content
+	 *
 	 * @since 1.11.0
 	 */
-	private function redirection_form() {
-		//phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$adminer_url    = sanitize_url( wp_unslash( $_GET['wpmastertoolkit_url'] ?? '' ) );
-		$token          = md5( time() );
-		$db_host        = DB_HOST;
-		$db_user        = DB_USER;
-		$db_password    = DB_PASSWORD;
-		$db_name        = DB_NAME;
+	private function generate_wrapper_content( $engine_filename, $creationtime, $lifetime ) {
+		$template = <<<'WRAPPER'
+<?php
+/**
+ * WP MasterToolkit - Adminer Secure Wrapper
+ * Auto-generated file. Do not edit.
+ */
 
-		$_SESSION[$this->option_id]['token'] = $token;
-		?>
-			<div class="wp-mastertoolkit__section">
-				<div class="wp-mastertoolkit__section__body">
-					<form id="wpmastertoolkit_adminer_form" action="<?php echo esc_url( $adminer_url ); ?>" method="post" target="_blank">
-						<input type="hidden" name="auth[driver]" value="server">
-						<input type="hidden" name="auth[db]" value="<?php echo esc_attr( $db_name ); ?>">
-						<input type="hidden" name="auth[username]" value="<?php echo esc_attr( $db_user ); ?>">
-						<input type="hidden" name="auth[password]" value="<?php echo esc_attr( $db_password ); ?>">
-						<input type="hidden" name="auth[server]" value="<?php echo esc_attr( $db_host ); ?>">
-						<input type="hidden" name="token" value="<?php echo esc_attr( $token ); ?>">
-						<div class="wp-mastertoolkit__section__body__item">
-							<div class="wp-mastertoolkit__section__body__item__content">
-								<div class="wp-mastertoolkit__button">
-									<button type="submit" value="login"><?php esc_html_e( 'Connect', 'wpmastertoolkit' ); ?></button>
-								</div>
-								<div class="description"><?php  esc_html_e( 'Connect to your database', 'wpmastertoolkit' ); ?></div>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		<?php
+// Phase 0: Self-deletion if file lifetime has expired
+$wpmastertoolkit_creationtime = {{CREATIONTIME}};
+$wpmastertoolkit_lifetime     = {{LIFETIME}};
+if ( time() > ( $wpmastertoolkit_creationtime + $wpmastertoolkit_lifetime ) ) {
+	$wpmastertoolkit_engine = __DIR__ . '/{{ENGINE_FILENAME}}';
+	if ( is_file( $wpmastertoolkit_engine ) ) {
+		@unlink( $wpmastertoolkit_engine );
+	}
+	@unlink( __FILE__ );
+	http_response_code( 410 );
+	exit( 'This Adminer instance has expired and has been deleted.' );
+}
+
+if ( session_status() === PHP_SESSION_NONE ) {
+	session_start();
+}
+
+$wpmastertoolkit_auth_key   = 'wpmastertoolkit_adminer_credentials';
+$wpmastertoolkit_access_key = 'wpmastertoolkit_adminer_active';
+
+// Phase 1: Auto-login using credentials stored in session by WordPress admin
+if ( ! empty( $_SESSION[ $wpmastertoolkit_auth_key ] ) ) {
+	$wpmastertoolkit_auth = $_SESSION[ $wpmastertoolkit_auth_key ];
+
+	// Validate expiry (30-second window)
+	if ( ! isset( $wpmastertoolkit_auth['expires'] ) || time() > $wpmastertoolkit_auth['expires'] ) {
+		unset( $_SESSION[ $wpmastertoolkit_auth_key ] );
+		http_response_code( 403 );
+		exit( 'Session expired. Please reconnect from WordPress admin.' );
+	}
+
+	// Validate IP consistency
+	$wpmastertoolkit_ip = $_SERVER['REMOTE_ADDR'] ?? '';
+	if ( isset( $wpmastertoolkit_auth['ip'] ) && $wpmastertoolkit_auth['ip'] !== $wpmastertoolkit_ip ) {
+		unset( $_SESSION[ $wpmastertoolkit_auth_key ] );
+		http_response_code( 403 );
+		exit( 'IP mismatch. Please reconnect from WordPress admin.' );
+	}
+
+	// Prepare Adminer auto-login via POST simulation
+	$_POST['auth'] = array(
+		'driver'   => 'server',
+		'server'   => $wpmastertoolkit_auth['server'],
+		'username' => $wpmastertoolkit_auth['username'],
+		'password' => $wpmastertoolkit_auth['password'],
+		'db'       => $wpmastertoolkit_auth['db'],
+	);
+
+	// Set matching CSRF token for Adminer internal validation
+	$wpmastertoolkit_csrf        = bin2hex( random_bytes( 16 ) );
+	$_SESSION['token']           = $wpmastertoolkit_csrf;
+	$_POST['token']              = $wpmastertoolkit_csrf;
+	$_SERVER['REQUEST_METHOD']   = 'POST';
+
+	// Mark session as having active Adminer access
+	$_SESSION[ $wpmastertoolkit_access_key ] = time();
+
+	// Clear credentials from session (one-time use)
+	unset( $_SESSION[ $wpmastertoolkit_auth_key ] );
+}
+
+// Phase 2: Access control - session timeout check (max 4 hours)
+if ( ! empty( $_SESSION[ $wpmastertoolkit_access_key ] ) ) {
+	if ( time() - (int) $_SESSION[ $wpmastertoolkit_access_key ] > 14400 ) {
+		unset( $_SESSION[ $wpmastertoolkit_access_key ] );
+	}
+}
+
+// Phase 3: Deny access if no valid session
+if ( empty( $_POST['auth'] ) && empty( $_SESSION[ $wpmastertoolkit_access_key ] ) ) {
+	http_response_code( 403 );
+	exit( 'Access denied. Please connect from WordPress admin.' );
+}
+
+// Phase 4: Include the Adminer engine
+require_once __DIR__ . '/{{ENGINE_FILENAME}}';
+WRAPPER;
+
+		return str_replace(
+			array( '{{ENGINE_FILENAME}}', '{{CREATIONTIME}}', '{{LIFETIME}}' ),
+			array( $engine_filename, (string) $creationtime, (string) $lifetime ),
+			$template
+		);
+	}
+
+	/**
+	 * Create .htaccess to protect engine file from direct access
+	 *
+	 * @since 1.11.0
+	 */
+	private function create_htaccess() {
+		$folder_path   = $this->get_folder_path();
+		$htaccess_path = "$folder_path/.htaccess";
+
+		$content  = "# WP MasterToolkit - Protect Adminer engine files from direct access\n";
+		$content .= "<FilesMatch \"^\\.wpmastertoolkit-engine-\">\n";
+		$content .= "    <IfModule mod_authz_core.c>\n";
+		$content .= "        Require all denied\n";
+		$content .= "    </IfModule>\n";
+		$content .= "    <IfModule !mod_authz_core.c>\n";
+		$content .= "        Order allow,deny\n";
+		$content .= "        Deny from all\n";
+		$content .= "    </IfModule>\n";
+		$content .= "</FilesMatch>\n";
+
+		file_put_contents( $htaccess_path, $content );
 	}
 
 	/**
@@ -402,6 +532,7 @@ class WPMastertoolkit_Adminer {
 		$lifetime         = $this->settings['lifetime']['value'] ?? '';
         $options          = $default_settings['lifetime']['options'] ?? array();
 		$creationtime     = $this->settings['creationtime'] ?? '0';
+		$file_hash        = $this->settings['file_hash'] ?? '';
 		$deletiontime     = $creationtime + $lifetime;
 		$time_formate     = get_option( 'date_format' ) . ' ' . get_option( 'time_format' );
 
@@ -424,13 +555,12 @@ class WPMastertoolkit_Adminer {
                         </div>
                     </div>
 
-					<?php if ( $creationtime ): ?>
+					<?php if ( $creationtime && $file_hash ): ?>
 					<div class="wp-mastertoolkit__section__body__item">
                         <div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e( 'File Creation', 'wpmastertoolkit' ); ?></div>
                         <div class="wp-mastertoolkit__section__body__item__content">
                             <p><?php echo esc_html( wp_date( $time_formate, $creationtime ) ); ?></p>
                         </div>
-						<input type="hidden" name="<?php echo esc_attr( $this->option_id . '[creationtime]' ); ?>" value="<?php echo esc_attr( $creationtime ); ?>">
                     </div>
 
 					<div class="wp-mastertoolkit__section__body__item">
@@ -442,6 +572,16 @@ class WPMastertoolkit_Adminer {
 							</div>
                         </div>
                     </div>
+
+					<div class="wp-mastertoolkit__section__body__item">
+						<div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e( 'Connect to database', 'wpmastertoolkit' ); ?></div>
+						<div class="wp-mastertoolkit__section__body__item__content">
+							<div class="wp-mastertoolkit__button">
+								<button type="submit" name="submit" value="connect" formtarget="_blank"><?php esc_html_e( 'Connect', 'wpmastertoolkit' ); ?></button>
+							</div>
+							<div class="description"><?php esc_html_e( 'Securely connect to your database via Adminer', 'wpmastertoolkit' ); ?></div>
+						</div>
+					</div>
 					<?php endif; ?>
 
 					<div class="wp-mastertoolkit__section__body__item">

@@ -108,6 +108,12 @@ class WPMastertoolkit_Modules_Data {
 				'pro'           => false,
 				'path'          => 'core/class-disallow-wp-file-edit.php',
 			),
+			'WPMastertoolkit_Custom_COOKIEHASH' => array(
+				'original_name' =>'Custom COOKIEHASH',
+				'group'         => 'security',
+				'pro'           => false,
+				'path'          => 'core/class-custom-cookiehash.php',
+			),
 			'WPMastertoolkit_Disable_Xmlrpc' => array(
 				'original_name' =>'Disable XML-RPC',
 				'group'         => 'security',
@@ -534,6 +540,12 @@ class WPMastertoolkit_Modules_Data {
 				'pro'           => false,
 				'path'          => 'core/class-prevent-user-enumeration.php',
 			),
+			'WPMastertoolkit_Block_404_Php_File_Scanning' => array(
+				'original_name' => 'Block 404 PHP File Scanning',
+				'group'         => 'security',
+				'pro'           => false,
+				'path'          => 'core/class-block-404-php-file-scanning.php',
+			),
 			'WPMastertoolkit_File_Manager' => array(
 				'original_name' => "File Manager",
 				'group'         => 'debug',
@@ -756,6 +768,24 @@ class WPMastertoolkit_Modules_Data {
 				'pro'           => false,
 				'path'          => 'core/class-search-replace-in-database.php',
 			),
+			'WPMastertoolkit_Media_Library_Post_Folders' => array(
+				'original_name' => "Media Library & Post Folders",
+				'group'         => 'content-media',
+				'pro'           => false,
+				'path'          => 'core/class-media-library-post-folders.php',
+			),
+			'WPMastertoolkit_Redirect_Manager' => array(
+				'original_name' => "Redirect Manager",
+				'group'         => 'seo-and-speed-optimizations',
+				'pro'           => false,
+				'path'          => 'core/class-redirect-manager.php',
+			),
+			'WPMastertoolkit_Password_Expiration' => array(
+				'original_name' => "Password Expiration",
+				'group'         => 'security',
+				'pro'           => true,
+				'path'          => 'pro/class-password-expiration.php',
+			),
 		);
 		
 		/**
@@ -835,6 +865,10 @@ class WPMastertoolkit_Modules_Data {
 			'WPMastertoolkit_Disallow_WP_File_Edit' => array(
 				'name' => esc_html_x('Disallow WP File Edit', "Module name", 'wpmastertoolkit'),
 				'desc' => esc_html_x("Prevent the modification of your website's core files through the WordPress admin panel.", "Module description", 'wpmastertoolkit'),
+			),
+			'WPMastertoolkit_Custom_COOKIEHASH' => array(
+				'name' => esc_html_x('Custom COOKIEHASH', "Module name", 'wpmastertoolkit'),
+				'desc' => esc_html_x('Generate and inject a random COOKIEHASH constant into wp-config.php when the module is activated.', "Module description", 'wpmastertoolkit'),
 			),
 			'WPMastertoolkit_Disable_Xmlrpc' => array(
 				'name' => esc_html_x('Disable XML-RPC', "Module name", 'wpmastertoolkit'),
@@ -1120,6 +1154,10 @@ class WPMastertoolkit_Modules_Data {
 				'name' => esc_html_x( "Prevent User Enumeration", "Module name", 'wpmastertoolkit' ),
 				'desc' => esc_html_x( "Prevent user enumeration via ?author=X and REST API /users/ endpoints.", "Module description", 'wpmastertoolkit' ),
 			),
+			'WPMastertoolkit_Block_404_Php_File_Scanning' => array(
+				'name' => esc_html_x( 'Block 404 PHP File Scanning', 'Module name', 'wpmastertoolkit' ),
+				'desc' => esc_html_x( 'Return a 403 response when a request targets a nonexistent .php file that WordPress resolved as a 404.', 'Module description', 'wpmastertoolkit' ),
+			),
 			'WPMastertoolkit_File_Manager' => array(
 				'name' => esc_html_x( "File Manager", "Module name", 'wpmastertoolkit' ),
 				'desc' => esc_html_x( "Browser and manage your files efficiently and easily.", "Module description", 'wpmastertoolkit' ),
@@ -1267,6 +1305,18 @@ class WPMastertoolkit_Modules_Data {
 			'WPMastertoolkit_Search_Replace_In_Database' => array(
 				'name' => esc_html_x( "Search Replace in database", "Module name", 'wpmastertoolkit' ),
 				'desc' => esc_html_x( "Search and replace data in your WordPress database safely and efficiently.", "Module description", 'wpmastertoolkit' ),
+			),
+			'WPMastertoolkit_Media_Library_Post_Folders' => array(
+				'name' => esc_html_x( "Media Library & Post Folders", "Module name", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( "Organize your media library and posts into folders for better management and accessibility.", "Module description", 'wpmastertoolkit' ),
+			),
+			'WPMastertoolkit_Redirect_Manager' => array(
+				'name' => esc_html_x( "Redirect Manager", "Module name", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( "Manage 301 redirects, fix broken links, and improve SEO by directing traffic to the correct pages.", "Module description", 'wpmastertoolkit' ),
+			),
+			'WPMastertoolkit_Password_Expiration' => array(
+				'name' => esc_html_x( "Password Expiration", "Module name", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( "Manage password expiration policies to enhance security by enforcing regular password updates.", "Module description", 'wpmastertoolkit' ),
 			),
 		);
 

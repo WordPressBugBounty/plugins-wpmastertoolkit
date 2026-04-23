@@ -316,6 +316,7 @@ class WPMastertoolkit_Htaccess {
             return false;
         }
 
+		//phpcs:ignore WordPress.WP.AlternativeFunctions.rename_rename
         if ( ! rename( $tmp_path, $file_path ) ) {
             WPMastertoolkit_Logs::add_error( 'WPMastertoolkit: Failed to rename temp file to .htaccess' . $log_context );
             if ( file_exists( $tmp_path ) ) {
@@ -327,6 +328,7 @@ class WPMastertoolkit_Htaccess {
 
         // Apply correct permissions.
         $chmod_file = fileperms( ABSPATH . 'index.php' ) & 0777 | 0644;
+		//phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_chmod
         chmod( $file_path, $chmod_file );
 
         // Post-write validation; restore from backup if the file looks corrupt.
