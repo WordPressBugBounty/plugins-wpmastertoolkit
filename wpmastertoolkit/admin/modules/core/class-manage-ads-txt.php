@@ -244,7 +244,13 @@ class WPMastertoolkit_Manage_Ads_Txt {
                                 <?php esc_html_e( 'Validate with', 'wpmastertoolkit'); ?>
                                 : <a target="_blank" href="https://adstxt.guru/validator/url/?url=<?php echo urlencode( site_url( 'ads.txt' ) ); ?>">adstxt.guru</a>
                             </div>
+							<div class="wpmtk-code-editor-wrap">
+							<button type="button" class="wpmtk-code-editor-fullscreen-btn" title="<?php esc_attr_e( 'Toggle fullscreen', 'wpmastertoolkit' ); ?>">
+								<span class="dashicons dashicons-fullscreen-alt wpmtk-icon-expand"></span>
+								<span class="dashicons dashicons-fullscreen-exit-alt wpmtk-icon-compress"></span>
+							</button>
 							<textarea name="<?php echo esc_attr( $this->option_id . '[ads][code_snippet]' ); ?>" id="ads_code_snippet" class="widefat" rows="10"><?php echo esc_textarea( stripslashes( $ads['code_snippet'] ?? '' ) ); ?></textarea>
+						</div>
 						</div>
                     </div>
 					<div class="wp-mastertoolkit__section__body__item">
@@ -254,7 +260,13 @@ class WPMastertoolkit_Manage_Ads_Txt {
                                 <?php esc_html_e( 'Validate with', 'wpmastertoolkit'); ?>
                                 : <a target="_blank" href="https://adstxt.guru/validator/url/?url=<?php echo urlencode( site_url( 'app-ads.txt' ) ); ?>">adstxt.guru</a>
                             </div>
+							<div class="wpmtk-code-editor-wrap">
+							<button type="button" class="wpmtk-code-editor-fullscreen-btn" title="<?php esc_attr_e( 'Toggle fullscreen', 'wpmastertoolkit' ); ?>">
+								<span class="dashicons dashicons-fullscreen-alt wpmtk-icon-expand"></span>
+								<span class="dashicons dashicons-fullscreen-exit-alt wpmtk-icon-compress"></span>
+							</button>
 							<textarea name="<?php echo esc_attr( $this->option_id . '[app_ads][code_snippet]' ); ?>" id="app_ads_code_snippet" class="widefat" rows="10"><?php echo esc_textarea( stripslashes( $app_ads['code_snippet'] ?? '' ) ); ?></textarea>
+						</div>
 						</div>
                     </div>
                 </div>

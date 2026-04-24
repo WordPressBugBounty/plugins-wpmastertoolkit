@@ -228,7 +228,13 @@ class WPMastertoolkit_Manage_Robots_Txt {
                                 <?php esc_html_e( 'Validate with', 'wpmastertoolkit'); ?>
                                 : <a target="_blank" href="https://en.ryte.com/free-tools/robots-txt/?refresh=1&url=<?php echo urlencode( site_url( 'robots.txt' ) ); ?>&useragent=Googlebot&submit=Evaluate">ryte.com</a>
                             </div>
+							<div class="wpmtk-code-editor-wrap">
+							<button type="button" class="wpmtk-code-editor-fullscreen-btn" title="<?php esc_attr_e( 'Toggle fullscreen', 'wpmastertoolkit' ); ?>">
+								<span class="dashicons dashicons-fullscreen-alt wpmtk-icon-expand"></span>
+								<span class="dashicons dashicons-fullscreen-exit-alt wpmtk-icon-compress"></span>
+							</button>
 							<textarea name="<?php echo esc_attr( $this->option_id . '[robots][code_snippet]' ); ?>" id="robots_code_snippet" class="widefat" rows="10"><?php echo esc_textarea( wp_unslash( $robots['code_snippet'] ?? '' ) ); ?></textarea>
+						</div>
 						</div>
                     </div>
                 </div>

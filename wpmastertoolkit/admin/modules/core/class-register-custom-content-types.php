@@ -1595,7 +1595,13 @@ class WPMastertoolkit_Register_Custom_Content_Types {
                 <div class="wp-mastertoolkit__section__body">
 					<div class="wp-mastertoolkit__section__body__item">
 						<div class="wp-mastertoolkit__section__body__item__content">
+							<div class="wpmtk-code-editor-wrap">
+							<button type="button" class="wpmtk-code-editor-fullscreen-btn" title="<?php esc_attr_e( 'Toggle fullscreen', 'wpmastertoolkit' ); ?>">
+								<span class="dashicons dashicons-fullscreen-alt wpmtk-icon-expand"></span>
+								<span class="dashicons dashicons-fullscreen-exit-alt wpmtk-icon-compress"></span>
+							</button>
 							<textarea id="JS-code-editor"><?php echo esc_textarea( wp_unslash( $content ) ); ?></textarea>
+						</div>
 							<button type="button" id="copy-code-btn">
 								<?php esc_html_e( 'Copy', 'wpmastertoolkit' ); ?>
 								<span class="checked"><?php echo wp_kses( file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/checked.svg' ), wpmastertoolkit_allowed_tags_for_svg_files() ); ?></span>

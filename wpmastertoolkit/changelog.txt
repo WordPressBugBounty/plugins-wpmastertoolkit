@@ -1,5 +1,9 @@
 == Changelog ==
 
+= 2.20.1 =
+Tweak: Add a toggle button to switch between fullscreen and normal mode for better focus and usability when editing code snippets in various modules.
+Fix: SMTP Mailer: Fix redirect loop when using Gmail/Outlook integrations with incorrect credentials.
+
 = 2.20.0 =
 Add: Module: Block 404 PHP File Scanning: Return `403 Forbidden` for requests to nonexistent `.php` URLs that WordPress resolves as 404, with a bypass filter and `PHP404` log marker.
 Add: Module: Custom COOKIEHASH: Generate and inject a random `COOKIEHASH` constant in `wp-config.php` when activated.

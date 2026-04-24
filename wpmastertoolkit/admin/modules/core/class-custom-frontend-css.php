@@ -214,7 +214,13 @@ class WPMastertoolkit_Custom_Frontend_CSS {
                 <div class="wp-mastertoolkit__section__body">
                     <div class="wp-mastertoolkit__section__body__item">
                         <div class="wp-mastertoolkit__section__body__item__content flex flex-wrap">
-                            <textarea name="<?php echo esc_attr( $this->option_id . '[code_snippet]' ); ?>" id="code_snippet" class="widefat" rows="10"><?php echo esc_textarea( wp_unslash( $code_snippet ) ); ?></textarea>
+                            <div class="wpmtk-code-editor-wrap">
+                                <button type="button" class="wpmtk-code-editor-fullscreen-btn" title="<?php esc_attr_e( 'Toggle fullscreen', 'wpmastertoolkit' ); ?>">
+                                    <span class="dashicons dashicons-fullscreen-alt wpmtk-icon-expand"></span>
+                                    <span class="dashicons dashicons-fullscreen-exit-alt wpmtk-icon-compress"></span>
+                                </button>
+                                <textarea name="<?php echo esc_attr( $this->option_id . '[code_snippet]' ); ?>" id="code_snippet" class="widefat" rows="10"><?php echo esc_textarea( wp_unslash( $code_snippet ) ); ?></textarea>
+                            </div>
                         </div>
                     </div>
                 </div>

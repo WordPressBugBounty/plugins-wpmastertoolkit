@@ -225,7 +225,13 @@ class WPMastertoolkit_Code_Snippets {
         $placeholder .= "// ". __('END Exemple of Shortcode content', "wpmastertoolkit" );
 
         ?>
-        <textarea name="code_snippet" id="code_snippet" placeholder="<?php echo esc_attr( $placeholder ); ?>" class="widefat" rows="10"><?php echo esc_textarea( $code_snippet ); ?></textarea>
+        <div class="wpmtk-code-editor-wrap">
+            <button type="button" class="wpmtk-code-editor-fullscreen-btn" title="<?php esc_attr_e( 'Toggle fullscreen', 'wpmastertoolkit' ); ?>">
+                <span class="dashicons dashicons-fullscreen-alt wpmtk-icon-expand"></span>
+                <span class="dashicons dashicons-fullscreen-exit-alt wpmtk-icon-compress"></span>
+            </button>
+            <textarea name="code_snippet" id="code_snippet" placeholder="<?php echo esc_attr( $placeholder ); ?>" class="widefat" rows="10"><?php echo esc_textarea( $code_snippet ); ?></textarea>
+        </div>
         <?php
     }
     

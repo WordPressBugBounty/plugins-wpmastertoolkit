@@ -4,7 +4,7 @@ Tags: all in one plugin, admin, security, disable features, easy to use
 Requires at least: 6.0.0
 Tested up to: 6.9.4
 Requires PHP: 7.4
-Stable tag: 2.20.0
+Stable tag: 2.20.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
 
@@ -260,6 +260,10 @@ Yes, the Media Encoder module automatically converts uploaded images to WebP for
 
 == Changelog ==
 
+= 2.20.1 =
+Tweak: Add a toggle button to switch between fullscreen and normal mode for better focus and usability when editing code snippets in various modules.
+Fix: SMTP Mailer: Fix redirect loop when using Gmail/Outlook integrations with incorrect credentials.
+
 = 2.20.0 =
 Add: Module: Block 404 PHP File Scanning: Return `403 Forbidden` for requests to nonexistent `.php` URLs that WordPress resolves as 404, with a bypass filter and `PHP404` log marker.
 Add: Module: Custom COOKIEHASH: Generate and inject a random `COOKIEHASH` constant in `wp-config.php` when activated.
@@ -291,9 +295,6 @@ Fix: Pro Module: Two-Factor Authentication: Fix incorrect user retrieval in AJAX
 Update: Pro Module: Add Essentials Shortcodes: Add `id-from-get` parameter support for User, Post, and Term shortcodes to retrieve IDs from URL query parameters (e.g. `id-from-get="post_id"`). When provided, `id-from-get` takes precedence over `id`. Add this option to the shortcode generator in the dashboard.
 Fix: CRITICAL - Rewrite .htaccess write logic to use atomic temp-file + rename, preventing file truncation on interrupted writes. Add mandatory timestamped backup before every modification (last 5 kept), automatic restore on validation failure, and full logging via WPMastertoolkit_Logs.
 Fix: CRITICAL - Rewrite wp-config.php write logic to use atomic temp-file + rename, preventing file truncation on interrupted writes. Add mandatory timestamped backup before every modification (last 5 kept), automatic restore on validation failure. Fix `change_php_variable()` where `$pattern` was undefined. Fix `add_constant()` ignoring `$var_export_skip` parameter. Replace all `error_log()` calls with WPMastertoolkit_Logs.
-
-= 2.18.0 =
-Update: Pro Module: Two-Factor Authentication: Add a global option to force Email as default when no method is selected, show this option only when Email is active, enforce backend fallback disabling when Email is off, and move default/method toggles to the left for UI consistency.
 
 
 [See changelog for all versions.](https://wpmastertoolkit.com/en/changelog/)

@@ -294,7 +294,13 @@ class WPMastertoolkit_Insert_Head_Body_Footer_Code {
 									<?php esc_html_e( 'Larger number insert code closer to </head>', 'wpmastertoolkit' ); ?>
 								</div>
 							</div>
+							<div class="wpmtk-code-editor-wrap">
+							<button type="button" class="wpmtk-code-editor-fullscreen-btn" title="<?php esc_attr_e( 'Toggle fullscreen', 'wpmastertoolkit' ); ?>">
+								<span class="dashicons dashicons-fullscreen-alt wpmtk-icon-expand"></span>
+								<span class="dashicons dashicons-fullscreen-exit-alt wpmtk-icon-compress"></span>
+							</button>
 							<textarea name="<?php echo esc_attr( $this->option_id . '[head][code_snippet]' ); ?>" id="head_code_snippet" class="widefat" rows="10"><?php echo esc_textarea( wp_unslash( $head['code_snippet'] ?? '' ) ); ?></textarea>
+						</div>
 						</div>
                     </div>
 					<div class="wp-mastertoolkit__section__body__item">
@@ -309,7 +315,13 @@ class WPMastertoolkit_Insert_Head_Body_Footer_Code {
 									<?php esc_html_e( 'Smaller number insert code closer to <body>', 'wpmastertoolkit' ); ?>
 								</div>
 							</div>
+							<div class="wpmtk-code-editor-wrap">
+							<button type="button" class="wpmtk-code-editor-fullscreen-btn" title="<?php esc_attr_e( 'Toggle fullscreen', 'wpmastertoolkit' ); ?>">
+								<span class="dashicons dashicons-fullscreen-alt wpmtk-icon-expand"></span>
+								<span class="dashicons dashicons-fullscreen-exit-alt wpmtk-icon-compress"></span>
+							</button>
 							<textarea name="<?php echo esc_attr( $this->option_id . '[body][code_snippet]' ); ?>" id="body_code_snippet" class="widefat" rows="10"><?php echo esc_textarea( wp_unslash( $body['code_snippet'] ?? '' ) ); ?></textarea>
+						</div>
 						</div>
                     </div>
 					<div class="wp-mastertoolkit__section__body__item">
@@ -324,7 +336,13 @@ class WPMastertoolkit_Insert_Head_Body_Footer_Code {
 									<?php esc_html_e( 'Larger number insert code closer to </body>', 'wpmastertoolkit' ); ?>
 								</div>
 							</div>
+							<div class="wpmtk-code-editor-wrap">
+							<button type="button" class="wpmtk-code-editor-fullscreen-btn" title="<?php esc_attr_e( 'Toggle fullscreen', 'wpmastertoolkit' ); ?>">
+								<span class="dashicons dashicons-fullscreen-alt wpmtk-icon-expand"></span>
+								<span class="dashicons dashicons-fullscreen-exit-alt wpmtk-icon-compress"></span>
+							</button>
 							<textarea name="<?php echo esc_attr( $this->option_id . '[footer][code_snippet]' ); ?>" id="footer_code_snippet" class="widefat" rows="10"><?php echo esc_textarea( wp_unslash( $footer['code_snippet'] ?? '' ) ); ?></textarea>
+						</div>
 						</div>
                     </div>
                 </div>
