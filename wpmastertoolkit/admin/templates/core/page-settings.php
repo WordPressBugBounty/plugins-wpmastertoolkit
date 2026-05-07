@@ -5,14 +5,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * The admin settings of the plugin.
  * @since      1.0.0
  */
-
-global $wpmtk_module_settings_submenu_pages;
-
-$wpmtk_pro_modules_count = 0;
-$wpmtk_modules           = wpmastertoolkit_options();
-$wpmtk_order             = array_column( $wpmtk_modules, 'name' );
-array_multisort( $wpmtk_order, SORT_ASC, $wpmtk_modules );
-$search_term             = sanitize_text_field( wp_unslash( $_GET['wpmastertoolkit_search'] ?? '' ) );
 ?>
 
 <div class="wrap wp-mastertoolkit">

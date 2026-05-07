@@ -179,6 +179,15 @@ class WPMastertoolkit {
 	 */
 	private function define_admin_hooks() {
 
+		$wpmastertoolkit_logs = new WPMastertoolkit_Logs();
+		$this->loader->add_action( 'init', $wpmastertoolkit_logs, 'class_init' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $wpmastertoolkit_logs, 'enqueue_scripts' );
+		$this->loader->add_action( 'admin_menu', $wpmastertoolkit_logs, 'add_logs_submenu', 9999 );
+		$this->loader->add_action( 'wp_ajax_wpmastertoolkit_get_log_files', $wpmastertoolkit_logs, 'ajax_get_log_files' );
+		$this->loader->add_action( 'wp_ajax_wpmastertoolkit_get_log_content', $wpmastertoolkit_logs, 'ajax_get_log_content' );
+		$this->loader->add_action( 'wp_ajax_wpmastertoolkit_clear_log_files', $wpmastertoolkit_logs, 'ajax_clear_log_files' );
+		$this->loader->add_action( 'wp_ajax_wpmastertoolkit_get_log_stream', $wpmastertoolkit_logs, 'ajax_get_log_stream' );
+
 		$wpmastertoolkit_settings = new WPMastertoolkit_Settings( $this->get_plugin_name(), $this->get_version() );
 		$this->loader->add_action( 'admin_enqueue_scripts', $wpmastertoolkit_settings, 'enqueue_scripts' );
 		$this->loader->add_action( 'admin_menu', $wpmastertoolkit_settings, 'add_settings_menu' );
@@ -191,7 +200,7 @@ class WPMastertoolkit {
 		$this->loader->add_filter( 'removable_query_args', $wpmastertoolkit_settings, 'filter_removable_query_args' );
 
 		$wpmastertoolkit_surecart = new WPMastertoolkit_Surecart();
-		$this->loader->add_action( 'init', $wpmastertoolkit_surecart, 'init_surecart' );
+		$this->loader->add_action( 'init', $wpmastertoolkit_surecart, 'init_surecart', 1 );
 		$this->loader->add_action( 'admin_enqueue_scripts', $wpmastertoolkit_surecart, 'enqueue_scripts_styles' );
 		$this->loader->add_action( 'wpmastertoolkit_licensing/after_submit_section', $wpmastertoolkit_surecart, 'show_warning_if_new_version' );
 		$this->loader->add_action( 'wpmastertoolkit_licensing/license_activated', $wpmastertoolkit_surecart, 'after_activated' );

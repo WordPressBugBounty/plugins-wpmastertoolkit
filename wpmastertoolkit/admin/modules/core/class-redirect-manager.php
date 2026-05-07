@@ -322,7 +322,13 @@ class WPMastertoolkit_Redirect_Manager {
 			exit;
 		}
 
-		$header = fgetcsv( $handle );
+		// Detect separator by reading the first line and checking for ; vs ,
+		$first_line = fgets( $handle );
+		$separator  = ( $first_line !== false && substr_count( $first_line, ';' ) > substr_count( $first_line, ',' ) ) ? ';' : ',';
+		// Move the file pointer back to the beginning of the file before reading the header.
+		rewind( $handle );
+
+		$header = fgetcsv( $handle, null, $separator );
 		if ( $header === false || array_diff( $this->import_csv_header, $header ) ) {
 			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
 			fclose( $handle );
@@ -335,7 +341,7 @@ class WPMastertoolkit_Redirect_Manager {
 		}
 
 		$redirects_with_errors = array();
-		while ( ( $row = fgetcsv( $handle ) ) !== false ) {
+		while ( ( $row = fgetcsv( $handle, null, $separator ) ) !== false ) {
 
 			$errors        = array();
 			$redirect_data = array_combine( $this->import_csv_header, $row );
@@ -439,7 +445,7 @@ class WPMastertoolkit_Redirect_Manager {
 		header( 'Content-Disposition: attachment; filename=wpmastertoolkit-redirects-' . gmdate( 'Y-m-d' ) . '.csv' );
 
 		$output = fopen( 'php://output', 'w' );
-		fputcsv( $output, $this->import_csv_header );
+		fputcsv( $output, $this->import_csv_header, ';' );
 
 		foreach ( $redirects as $redirect ) {
 			fputcsv( $output, array(
@@ -452,7 +458,7 @@ class WPMastertoolkit_Redirect_Manager {
 				$redirect['internal'],
 				$redirect['status'],
 				$redirect['logs'],
-			) );
+			), ';' );
 		}
 		exit;
 	}
@@ -468,8 +474,8 @@ class WPMastertoolkit_Redirect_Manager {
 		header( 'Content-Disposition: attachment; filename=wpmastertoolkit-redirects-template.csv' );
 
 		$output = fopen( 'php://output', 'w' );
-		fputcsv( $output, $this->import_csv_header );
-		fputcsv( $output, array( '/old-page/', '/new-page/', '0', '0', '301', '0', '1', '1', '0' ) );
+		fputcsv( $output, $this->import_csv_header, ';' );
+		fputcsv( $output, array( '/old-page/', '/new-page/', '0', '0', '301', '0', '1', '1', '0' ), ';' );
 		exit;
 	}
 
@@ -871,7 +877,7 @@ class WPMastertoolkit_Redirect_Manager {
 	/**
 	 * Get an exact-match redirect by URL from the database.
 	 *
-	 * @since   2.22.0
+	 * @since   2.20.0
 	 */
 	public function get_redirect_by_url( $request_path, $full_request ) {
 		global $wpdb;
@@ -897,7 +903,7 @@ class WPMastertoolkit_Redirect_Manager {
 	/**
 	 * Get all regex redirects for PHP model from the database.
 	 *
-	 * @since   2.22.0
+	 * @since   2.20.0
 	 */
 	public function get_regex_redirects() {
 		global $wpdb;

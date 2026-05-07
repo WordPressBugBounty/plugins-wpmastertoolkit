@@ -4,7 +4,7 @@ Tags: all in one plugin, admin, security, disable features, easy to use
 Requires at least: 6.0.0
 Tested up to: 6.9.4
 Requires PHP: 7.4
-Stable tag: 2.20.1
+Stable tag: 2.21.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
 
@@ -19,7 +19,7 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 **Test by Enzo (Easy WordPress) :**
 [youtube https://www.youtube.com/watch?v=I1GdHeeJp6E&t]
 
-= 93 FREE modules =
+= 97 FREE modules =
 
 * Adminer: A full-featured database management tool.
 * Advanced Debug Mode
@@ -118,7 +118,7 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 * Temporary Login
 * Wider Admin Menu
 
-= 30 Pro Modules =
+= 31 Pro Modules =
 * 410 Manager
 * Add Essentials Shortcodes
 * Admin Menu Organizer
@@ -159,6 +159,7 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 * Advanced Debug Mode: Live log streaming viewer with real-time monitoring. Daily logs with date suffix. Custom log path with enhanced protection.
 * Search Replace in database: several search/replace pairs, support for regular expressions and a much more complete detailed overview of detected changes.
 * SMTP Mailer: 19+ premium providers including Gmail, Outlook, SendGrid, AWS SES, Brevo, Mailgun, Mailjet, Postmark, SparkPost, MailerSend, Resend, SendLayer, SMTP.com, SMTP2GO, Elastic Email, Zoho Mail, SendPulse, Mandrill, and Pepipost. Free version limited to PHP mail and generic SMTP.
+* Redirect Manager: Advanced redirect engines (Apache and Nginx), redirect logs, and CSV import/export. Free version limited to WordPress (PHP) redirects without logs/import-export.
 
 [youtube https://youtu.be/ynV1BhAegtg]
 
@@ -260,6 +261,19 @@ Yes, the Media Encoder module automatically converts uploaded images to WebP for
 
 == Changelog ==
 
+= 2.21.0 =
+Add: Logs page: Add a dedicated admin interface to browse, monitor, download, and clear plugin log files.
+Add: Module: Meta Debugger: Display metadata for each WooCommerce product variation directly from the variation editor.
+Update: License page: Add the plugin license constant to the generated `wp-config.php` snippet and embed a help video for faster setup.
+Fix: Module: Redirect Manager: Improve CSV import compatibility by auto-detecting delimiters and using semicolon-separated imports more reliably. Update version annotations for redirect retrieval methods.
+Fix: Module: Media Encoder: Validate attachment IDs earlier and improve error messages during processing.
+Fix: Module: Adminer: Suppress conflicting `Cache-Control` headers and improve CSRF token handling.
+Fix: Module: Meta Debugger: Improve handling when multiple WooCommerce order items share the same meta key.
+Fix: Module: Disallow Countries IP: Add clearer notices when the GeoIP database path is invalid and handle corrupted `.mmdb` files more safely.
+Fix: Module: Custom Login Design: Improve compatibility with the WordPress admin email confirmation screen.
+Fix: Module: Local Avatars: Add dynamic classes to the avatar preview container for more reliable styling.
+Fix: General: Improve plugin checks and related admin-side robustness.
+
 = 2.20.1 =
 Tweak: Add a toggle button to switch between fullscreen and normal mode for better focus and usability when editing code snippets in various modules.
 Fix: SMTP Mailer: Fix redirect loop when using Gmail/Outlook integrations with incorrect credentials.
@@ -290,11 +304,6 @@ Update: Module: Blacklisted Usernames: Add 24 new blacklisted usernames based on
 Update: Module: Auto Regenerate Salt Keys: Change default frequency to "Never" to prevent issues with plugins that use salt keys to encrypt sensitive data (API keys, etc.). Add a warning notice on the settings page explaining potential risks. Automatic regeneration is now opt-in only; manual regeneration remains available.
 Fix: Pro Module: Two-Factor Authentication: Fix incorrect user retrieval in AJAX handlers when login input is an email address, causing 2FA method retrieval and code generation to fail for email-based logins.
 
-
-= 2.19.0 =
-Update: Pro Module: Add Essentials Shortcodes: Add `id-from-get` parameter support for User, Post, and Term shortcodes to retrieve IDs from URL query parameters (e.g. `id-from-get="post_id"`). When provided, `id-from-get` takes precedence over `id`. Add this option to the shortcode generator in the dashboard.
-Fix: CRITICAL - Rewrite .htaccess write logic to use atomic temp-file + rename, preventing file truncation on interrupted writes. Add mandatory timestamped backup before every modification (last 5 kept), automatic restore on validation failure, and full logging via WPMastertoolkit_Logs.
-Fix: CRITICAL - Rewrite wp-config.php write logic to use atomic temp-file + rename, preventing file truncation on interrupted writes. Add mandatory timestamped backup before every modification (last 5 kept), automatic restore on validation failure. Fix `change_php_variable()` where `$pattern` was undefined. Fix `add_constant()` ignoring `$var_export_skip` parameter. Replace all `error_log()` calls with WPMastertoolkit_Logs.
 
 
 [See changelog for all versions.](https://wpmastertoolkit.com/en/changelog/)

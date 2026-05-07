@@ -244,7 +244,9 @@ class Settings {
 					<div class="wpmastertoolkit-license-main-section__left__header">
 						<div>
 							<?php
-							if ( 'activate' === $action ) {
+							if ( $this->is_constant_license() ) {
+								esc_html_e( 'Your license key is managed via the', 'wpmastertoolkit' ); ?> <code>WPMASTERTOOLKIT_LICENSE_KEY</code> <?php esc_html_e( 'constant defined in wp-config.php and cannot be changed here.', 'wpmastertoolkit' );
+							} elseif ( 'activate' === $action ) {
 								echo esc_html( sprintf(
 									/* translators: %s: client name */
 									__( 'Enter your license key to activate %s.', 'wpmastertoolkit' ), $this->client->name )
@@ -263,12 +265,12 @@ class Settings {
 						</div>
 					</div>
 
-					<?php if ( 'activate' === $action ) : ?> 
+					<?php if ( 'activate' === $action && ! $this->is_constant_license() ) : ?> 
 						<input class="widefat" type="password" autocomplete="off" name="license_key" id="license_key" value="<?php echo esc_attr( $this->license_key ); ?>" autofocus placeholder="<?php esc_attr_e('Enter the license...', 'wpmastertoolkit'); ?>">
 					<?php else : ?>
 						<div class="wpmastertoolkit-license-main-section__left__header__license">
 							<?php 
-							$obfuscated_license = substr( $this->license_key, 0, 8 ) . str_repeat( '*', strlen( $this->license_key ) - 8 );
+							$obfuscated_license = strlen( $this->license_key ) - 8 > 0 ? substr( $this->license_key, 0, 8 ) . str_repeat( '*', strlen( $this->license_key ) - 8 ) : $this->license_key;
 							echo esc_html( $obfuscated_license ); 
 							?>
 						</div>
@@ -283,16 +285,18 @@ class Settings {
 					<?php endif; ?>
 
 					<div class="wpmastertoolkit-license-main-section__left__actions">
-						<?php if ( 'activate' === $action ) : ?>
-							<button name="submit" type="submit" class="wpmastertoolkit-submit-license-form-button activate">
-								<?php echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/white-key.svg'), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
-								<?php esc_html_e( 'Activate License', 'wpmastertoolkit' ); ?>
-							</button>
-						<?php else : ?>
-							<button name="submit" type="submit" class="wpmastertoolkit-submit-license-form-button deactivate">
-								<?php echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/red-key.svg'), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
-								<?php esc_html_e( 'Deactivate License', 'wpmastertoolkit' ); ?>
-							</button>
+						<?php if ( ! $this->is_constant_license() ) : ?>
+							<?php if ( 'activate' === $action ) : ?>
+								<button name="submit" type="submit" class="wpmastertoolkit-submit-license-form-button activate">
+									<?php echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/white-key.svg'), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
+									<?php esc_html_e( 'Activate License', 'wpmastertoolkit' ); ?>
+								</button>
+							<?php else : ?>
+								<button name="submit" type="submit" class="wpmastertoolkit-submit-license-form-button deactivate">
+									<?php echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/red-key.svg'), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
+									<?php esc_html_e( 'Deactivate License', 'wpmastertoolkit' ); ?>
+								</button>
+							<?php endif; ?>
 						<?php endif; ?>
 						
 						<a href="<?php echo esc_url( __( 'https://wpmastertoolkit.com/en/customer-dashboard/', 'wpmastertoolkit') ); ?>" target="_blank" class="wpmastertoolkit-my-account-button">
@@ -392,9 +396,15 @@ class Settings {
 				<!-- RIGHT -->
 				<div class="wpmastertoolkit-marketing-section__right">
 					<div class="wpmastertoolkit-marketing-section__right__video">
-						<!-- <video src="#" autoplay loop muted controls></video> -->
-						<?php //phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
-						<img class="wpmastertoolkit-marketing-section__right__video__no-video-placeholder" src="<?php echo esc_url( WPMASTERTOOLKIT_PLUGIN_URL . 'admin/images/licensing-video-placeholder.png' ); ?>" alt="">
+						<?php
+							$iframe_src = 'https://www.youtube.com/embed/ynV1BhAegtg?si=w41B0QvX-BdP1nob';
+							if ( get_locale() === 'fr_FR' ) {
+								$iframe_src = 'https://www.youtube.com/embed/A9OAKSoGcck?si=XGvgbW-zQk3yYXk6';
+							} elseif ( get_locale() === 'es_ES' ) {
+								$iframe_src = 'https://www.youtube.com/embed/C6H7ZL_YldI?si=EBevTVE65UX8upP4';
+							}
+						?>
+						<iframe width="560" height="315" src="<?php echo esc_url( $iframe_src ); ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 					</div>
 					<div class="wpmastertoolkit-marketing-section__right__content">
 						<div class="wpmastertoolkit-marketing-section__right__content__title">
@@ -436,6 +446,12 @@ class Settings {
 	public function license_form_submit() {
 		// only if we are submitting.
 		if ( ! isset( $_POST['submit'] ) ) {
+			return;
+		}
+
+		// Block form submissions when the license key is managed via a constant.
+		if ( $this->is_constant_license() ) {
+			$this->add_error( 'constant_license', __( 'The license key is managed via the WPMASTERTOOLKIT_LICENSE_KEY constant defined in wp-config.php and cannot be changed here.', 'wpmastertoolkit' ) );
 			return;
 		}
 
@@ -574,6 +590,15 @@ class Settings {
 	}
 
 	/**
+	 * Check if the license key is managed via a wp-config.php constant.
+	 *
+	 * @return bool
+	 */
+	private function is_constant_license() {
+		return defined( 'WPMASTERTOOLKIT_LICENSE_KEY' );
+	}
+
+	/**
 	 * Set an option.
 	 *
 	 * @param string $name Name of option.
@@ -581,6 +606,9 @@ class Settings {
 	 * @return mixed
 	 */
 	public function __get( $name ) {
+		if ( 'license_key' === $name && $this->is_constant_license() ) {
+			return constant( 'WPMASTERTOOLKIT_LICENSE_KEY' );
+		}
 		return $this->get_option( 'sc_' . $name );
 	}
 

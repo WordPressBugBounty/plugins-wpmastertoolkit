@@ -74,7 +74,7 @@ class WPMastertoolkit_Local_Avatars {
 					<th><label><?php esc_html_e( 'Profile Picture', 'wpmastertoolkit' ); ?></label></th>
 					<td>
 						<div class="site-icon-section">
-							<div id="wpmastertoolkit-local-avatar-icon-preview-container">
+							<div id="wpmastertoolkit-local-avatar-icon-preview-container" class="<?php echo esc_attr( trim( $classes_for_wrapper ) ); ?>">
 								<?php //phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 								<img id="wpmastertoolkit-local-avatar-icon-preview" class="app-icon-preview" src="<?php echo esc_url( $avatar_url ); ?>">
 							</div>

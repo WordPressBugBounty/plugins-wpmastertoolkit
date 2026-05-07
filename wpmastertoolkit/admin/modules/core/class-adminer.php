@@ -413,6 +413,10 @@ class WPMastertoolkit_Adminer {
  * Auto-generated file. Do not edit.
  */
 
+// Suppress Cache-Control headers on every session_start() call (including Adminer's internal ones),
+// preventing "session cache limiter cannot be sent after headers already sent" warnings.
+session_cache_limiter( '' );
+
 // Phase 0: Self-deletion if file lifetime has expired
 $wpmastertoolkit_creationtime = {{CREATIONTIME}};
 $wpmastertoolkit_lifetime     = {{LIFETIME}};
@@ -461,8 +465,8 @@ if ( ! empty( $_SESSION[ $wpmastertoolkit_auth_key ] ) ) {
 		'db'       => $wpmastertoolkit_auth['db'],
 	);
 
-	// Set matching CSRF token for Adminer internal validation
-	$wpmastertoolkit_csrf        = bin2hex( random_bytes( 16 ) );
+	// Set matching CSRF token for Adminer internal validation.
+	$wpmastertoolkit_csrf        = preg_replace( '/[a-f]/', '', bin2hex( random_bytes( 32 ) ) );
 	$_SESSION['token']           = $wpmastertoolkit_csrf;
 	$_POST['token']              = $wpmastertoolkit_csrf;
 	$_SERVER['REQUEST_METHOD']   = 'POST';
@@ -487,7 +491,16 @@ if ( empty( $_POST['auth'] ) && empty( $_SESSION[ $wpmastertoolkit_access_key ] 
 	exit( 'Access denied. Please connect from WordPress admin.' );
 }
 
-// Phase 4: Include the Adminer engine
+// Phase 4: Include the Adminer engine.
+// Suppress non-fatal warnings from the third-party engine file (e.g. non-numeric value warnings
+// caused by PHP 8 strict type comparisons in Adminer's minified code).
+set_error_handler( function( $errno, $errstr, $errfile ) {
+	if ( ( $errno & ( E_WARNING | E_NOTICE | E_DEPRECATED ) ) && strpos( $errfile, '.wpmastertoolkit-engine-' ) !== false ) {
+		return true;
+	}
+	return false;
+}, E_WARNING | E_NOTICE | E_DEPRECATED );
+
 require_once __DIR__ . '/{{ENGINE_FILENAME}}';
 WRAPPER;
 

@@ -116,4 +116,34 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
             <span class="button-text"><?php esc_html_e( 'Copy System Info', 'wpmastertoolkit' ); ?></span>
         </button>
     </div>
+
+	<div class="wp-mastertoolkit__body__sections__item__space"></div>
+
+	<div class="wp-mastertoolkit__body__sections__item__top toggle-settings">
+        <div class="wp-mastertoolkit__body__sections__item__bottom">
+            <div class="wp-mastertoolkit__body__sections__item__toggle">
+                <label class="wp-mastertoolkit__toggle">
+                    <input type="hidden" name="<?php echo esc_attr( WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_active_super_admins'); ?>" value="0">
+                    <input type="checkbox" name="<?php echo esc_attr(WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_active_super_admins'); ?>" value="1" <?php checked( $active_super_admins, '1' ); ?> <?php disabled( ! wpmastertoolkit_is_pro() ); ?>>
+                    <span class="wp-mastertoolkit__toggle__slider round"></span>
+                </label>
+            </div>
+        </div>
+        <div class="wp-mastertoolkit__body__sections__item__title">
+			<?php esc_html_e( 'Add Super Admins', 'wpmastertoolkit' ); ?>
+			<span class="pro"><?php esc_html_e('PRO', 'wpmastertoolkit'); ?></span>
+		</div>
+    </div>
+    <div class="wp-mastertoolkit__body__sections__item__top">
+		<div class="wp-mastertoolkit__body__sections__item__description"><?php echo esc_html_e( 'Restrict access to WPMasterToolkit modules and settings to selected administrators only. Other admins will not be able to view or modify the plugin settings.', 'wpmastertoolkit' ); ?></div>
+    </div>
+	<div class="wp-mastertoolkit__body__sections__item__bottom" data-show-if="<?php echo esc_attr( WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_active_super_admins'); ?>=1">
+		<select name="<?php echo esc_attr( WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_super_admins' ); ?>[]" id="JS-wpmastertoolkit_super_admins_select" multiple>
+			<?php foreach ( $wpmtk_super_admins as $wpmtk_super_admin ) { ?>
+				<option value="<?php echo esc_attr( $wpmtk_super_admin->ID ); ?>" <?php selected( in_array( $wpmtk_super_admin->ID, $selected_super_admins ) ); ?>>
+					<?php echo esc_html( $wpmtk_super_admin->user_login ); ?> (<?php echo esc_html( $wpmtk_super_admin->user_email ); ?>)
+				</option>
+			<?php } ?>
+		</select>
+	</div>
 </div>

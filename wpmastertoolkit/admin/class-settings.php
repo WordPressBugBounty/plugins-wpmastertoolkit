@@ -150,6 +150,26 @@ class WPMastertoolkit_Settings {
 	 * @since	1.0.0
 	 */
 	public function render_settings_page() {
+		global $wpmtk_module_settings_submenu_pages;
+
+		$current_user_id       = get_current_user_id();
+		$active_super_admins   = get_option( WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_active_super_admins', '0' );
+		$selected_super_admins = get_option( WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_super_admins', array() );
+
+		if ( wpmastertoolkit_is_pro() && $active_super_admins === '1' ) {
+			if ( ! empty( $selected_super_admins ) && is_array( $selected_super_admins ) && ! in_array( $current_user_id, $selected_super_admins ) ) {
+				require_once WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/page-settings-no-super-admin.php';
+				return;
+			}
+		}
+
+		if ( empty( $selected_super_admins) ) {
+			$selected_super_admins[] = $current_user_id;
+		}
+		if ( ! wpmastertoolkit_is_pro() ) {
+			$active_super_admins = '0';
+		}
+
 		$db_options              = get_option( WPMASTERTOOLKIT_PLUGIN_SETTINGS, array() );
 		$opt_in_option           = get_option( WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_opt_in', array() );
 		$promot_option           = get_option( WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_promot', array() );
@@ -165,6 +185,16 @@ class WPMastertoolkit_Settings {
 		if ( get_locale() === 'fr_FR' ) {
 			$try_url = 'https://wpmastertoolkit.com/fr/produits/wpmastertoolkit-pro/';
 		}
+		$wpmtk_pro_modules_count = 0;
+		$wpmtk_modules           = wpmastertoolkit_options();
+		$wpmtk_order             = array_column( $wpmtk_modules, 'name' );
+		array_multisort( $wpmtk_order, SORT_ASC, $wpmtk_modules );
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$search_term             = sanitize_text_field( wp_unslash( $_GET['wpmastertoolkit_search'] ?? '' ) );
+		$wpmtk_super_admins      = get_users( array(
+			'role__in' => array( 'administrator' ),
+			'fields'   => array( 'ID', 'user_email', 'user_login' ),
+		) );
 
 		require_once WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/page-settings.php';
 	}
@@ -319,6 +349,7 @@ class WPMastertoolkit_Settings {
 			$this->save_opt_in();
 			$this->save_credentials();
 			$this->save_use_wp_submenu();
+			$this->save_super_admins();
 
 			$class_stats = new WPMastertoolkit_Stats();
 			$class_stats->send_stats();
@@ -473,10 +504,14 @@ class WPMastertoolkit_Settings {
 			 * Compare old and new settings to call activate or deactivate method
 			 */
 			if ( ( !isset($old_settings[$class]) || $old_settings[$class] !== '1' ) && $status === '1' ) {
+				WPMastertoolkit_Logs::add_notice( 'Module Activated: ' . $class );
+
 				if ( class_exists( $class ) && method_exists( $class, 'activate' ) && is_callable( $class . '::activate' ) ) {
 					$class::activate();
 				}
 			} else if ( isset($old_settings[$class]) && $old_settings[$class] === '1' && $status === '0' ) {
+				WPMastertoolkit_Logs::add_notice( 'Module Deactivated: ' . $class );
+
 				if ( class_exists( $class ) && method_exists( $class, 'deactivate' ) && is_callable( $class . '::deactivate' ) ) {
 					$class::deactivate();
 				}
@@ -510,6 +545,25 @@ class WPMastertoolkit_Settings {
 		//phpcs:ignore WordPress.Security.NonceVerification.Missing
 		$use_wp_submenu = sanitize_text_field( wp_unslash( $_POST[WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_use_wp_submenu'] ?? '0' ) );
 		update_option( WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_use_wp_submenu', $use_wp_submenu, false );
+	}
+
+	/**
+	 * Save the selected super admins
+	 */
+	private function save_super_admins() {
+
+		//phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$active_super_admins = sanitize_text_field( wp_unslash( $_POST[WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_active_super_admins'] ?? '0' ) );
+		//phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$selected_super_admins = array_map( 'intval', wp_unslash( $_POST[WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_super_admins'] ?? array() ) );
+
+		if ( ! wpmastertoolkit_is_pro() ) {
+			$active_super_admins   = '0';
+			$selected_super_admins = array();
+		}
+
+		update_option( WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_active_super_admins', $active_super_admins, false );
+		update_option( WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_super_admins', $selected_super_admins, false );
 	}
 
 	/**

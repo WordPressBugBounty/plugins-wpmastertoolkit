@@ -22,6 +22,7 @@ class WPMastertoolkit_Meta_Debugger {
         add_action( 'show_user_profile', array( $this, 'render_user_meta_box' ) );
         add_action( 'edit_user_profile', array( $this, 'render_user_meta_box' ) );
 		add_action( 'woocommerce_after_order_itemmeta', array( $this, 'render_order_meta_box' ), PHP_INT_MAX, 3 );
+		add_action( 'woocommerce_product_after_variable_attributes', array( $this, 'render_variation_meta_box' ), PHP_INT_MAX, 3 );
         add_action( 'wp_ajax_' . $this->action, array( $this, 'get_meta_data' ) );
     }
 
@@ -148,7 +149,25 @@ class WPMastertoolkit_Meta_Debugger {
 	}
 
     /**
-     * Render meta debugger
+	 * Render variation meta box
+	 * 
+	 * @since   2.22.0
+	 */
+	public function render_variation_meta_box( $loop, $variation_data, $variation ) {
+
+		if ( ! $this->user_allowed() ) {
+			return;
+		}
+
+		if ( ! wpmastertoolkit_is_pro() ) {
+			$this->render_fake_meta_debugger();
+			return;
+		}
+
+		$this->render_meta_debugger( $variation->ID, 'post' );
+	}
+
+	/**
      * 
      * @since   1.4.0
      */

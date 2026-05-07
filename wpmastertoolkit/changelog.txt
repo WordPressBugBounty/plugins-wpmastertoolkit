@@ -1,5 +1,18 @@
 == Changelog ==
 
+= 2.21.0 =
+Add: Logs page: Add a dedicated admin interface to browse, monitor, download, and clear plugin log files.
+Add: Module: Meta Debugger: Display metadata for each WooCommerce product variation directly from the variation editor.
+Update: License page: Add the plugin license constant to the generated `wp-config.php` snippet and embed a help video for faster setup.
+Fix: Module: Redirect Manager: Improve CSV import compatibility by auto-detecting delimiters and using semicolon-separated imports more reliably. Update version annotations for redirect retrieval methods.
+Fix: Module: Media Encoder: Validate attachment IDs earlier and improve error messages during processing.
+Fix: Module: Adminer: Suppress conflicting `Cache-Control` headers and improve CSRF token handling.
+Fix: Module: Meta Debugger: Improve handling when multiple WooCommerce order items share the same meta key.
+Fix: Module: Disallow Countries IP: Add clearer notices when the GeoIP database path is invalid and handle corrupted `.mmdb` files more safely.
+Fix: Module: Custom Login Design: Improve compatibility with the WordPress admin email confirmation screen.
+Fix: Module: Local Avatars: Add dynamic classes to the avatar preview container for more reliable styling.
+Fix: General: Improve plugin checks and related admin-side robustness.
+
 = 2.20.1 =
 Tweak: Add a toggle button to switch between fullscreen and normal mode for better focus and usability when editing code snippets in various modules.
 Fix: SMTP Mailer: Fix redirect loop when using Gmail/Outlook integrations with incorrect credentials.

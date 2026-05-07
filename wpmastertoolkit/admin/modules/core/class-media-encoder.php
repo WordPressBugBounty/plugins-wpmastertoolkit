@@ -902,9 +902,9 @@ class WPMastertoolkit_Media_Encoder {
 			wp_send_json_error( __( 'Choose an image format and save the settings.', 'wpmastertoolkit' ) );
 		}
 
-		$attachment_id = isset( $_POST['attachment_id'] ) ? sanitize_text_field( wp_unslash( $_POST['attachment_id'] ) ) : false;
+		$attachment_id = $this->get_valid_attachment_id_from_request();
 		if ( ! $attachment_id ) {
-			wp_send_json_error( __( 'No attachment id.', 'wpmastertoolkit' ) );
+			wp_send_json_error( __( 'Invalid attachment id.', 'wpmastertoolkit' ) );
 		}
 
 		$already_optimized = get_post_meta( $attachment_id, $this->meta_already_optimized, true );
@@ -970,9 +970,9 @@ class WPMastertoolkit_Media_Encoder {
 			wp_send_json_error( __( 'Refresh the page and try again.', 'wpmastertoolkit' ) );
 		}
 
-		$attachment_id = isset( $_POST['attachment_id'] ) ? sanitize_text_field( wp_unslash( $_POST['attachment_id'] ) ) : false;
+		$attachment_id = $this->get_valid_attachment_id_from_request();
 		if ( ! $attachment_id ) {
-			wp_send_json_error( __( 'No attachment id.', 'wpmastertoolkit' ) );
+			wp_send_json_error( __( 'Invalid attachment id.', 'wpmastertoolkit' ) );
 		}
 
 		$data = get_post_meta( $attachment_id, $this->meta_data, true );
@@ -1001,9 +1001,9 @@ class WPMastertoolkit_Media_Encoder {
 			wp_send_json_error( __( 'Refresh the page and try again.', 'wpmastertoolkit' ) );
 		}
 
-		$attachment_id = isset( $_POST['attachment_id'] ) ? sanitize_text_field( wp_unslash( $_POST['attachment_id'] ) ) : false;
+		$attachment_id = $this->get_valid_attachment_id_from_request();
 		if ( ! $attachment_id ) {
-			wp_send_json_error( __( 'No attachment id.', 'wpmastertoolkit' ) );
+			wp_send_json_error( __( 'Invalid attachment id.', 'wpmastertoolkit' ) );
 		}
 
 		$already_optimized_quickwebp = get_post_meta( $attachment_id, $this->meta_already_optimized_quickwebp, true );
@@ -2059,15 +2059,75 @@ class WPMastertoolkit_Media_Encoder {
 	}
 
 	/**
+	 * Get and validate attachment id from request payload.
+	 *
+	 * @since   2.20.0
+	 */
+	private function get_valid_attachment_id_from_request() {
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$attachment_id = isset( $_POST['attachment_id'] ) ? absint( wp_unslash( $_POST['attachment_id'] ) ) : 0;
+
+		if ( $attachment_id <= 0 ) {
+			return 0;
+		}
+
+		$post = get_post( $attachment_id );
+		if ( ! $post || 'attachment' !== $post->post_type ) {
+			return 0;
+		}
+
+		return $attachment_id;
+	}
+
+	/**
+	 * Ensure related file path is a generated image in uploads directory.
+	 *
+	 * @since   2.20.0
+	 */
+	private function is_safe_related_file_path( $path ) {
+		if ( ! is_string( $path ) || '' === $path ) {
+			return false;
+		}
+
+		$uploads = wp_upload_dir();
+		if ( ! empty( $uploads['error'] ) || empty( $uploads['basedir'] ) ) {
+			return false;
+		}
+
+		$uploads_basedir = wp_normalize_path( trailingslashit( $uploads['basedir'] ) );
+		$real_path       = realpath( $path );
+
+		if ( false === $real_path ) {
+			return false;
+		}
+
+		$real_path = wp_normalize_path( $real_path );
+
+		if ( 0 !== strpos( $real_path, $uploads_basedir ) ) {
+			return false;
+		}
+
+		if ( ! preg_match( '/\.(webp|avif)$/i', $real_path ) ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
 	 * Remove the related files of an optimized attachment
 	 * 
 	 * @since   1.13.0
 	 */
 	private function remove_related_files( $data ) {
+		if ( ! is_array( $data ) ) {
+			return;
+		}
+
 		foreach ( $data as $value ) {
 			$path = $value['path'] ?? '';
 
-			if ( ! empty( $path ) && file_exists( $path ) ) {
+			if ( ! empty( $path ) && file_exists( $path ) && $this->is_safe_related_file_path( $path ) ) {
 				wp_delete_file( $path );
 			}
 		}

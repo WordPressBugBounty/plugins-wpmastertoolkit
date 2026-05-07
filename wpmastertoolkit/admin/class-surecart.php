@@ -61,6 +61,8 @@ class WPMastertoolkit_Surecart {
 			'position'    => null,
 		));
 
+		$this->maybe_auto_activate_from_constant();
+
 		if ( $this->license_activated() ) {
 			$site_transient_prefix = 'site_transient_';//phpcs:ignore prefix to ignore the error
 			add_filter( $site_transient_prefix . 'update_plugins', array( $this, 'force_surecart_updates' ) );
@@ -173,6 +175,55 @@ class WPMastertoolkit_Surecart {
 		}
 
 		return $value;
+	}
+
+	/**
+	 * Auto-activate from the WPMASTERTOOLKIT_LICENSE_KEY constant when defined in wp-config.php.
+	 * Handles key rotation by deactivating the old activation and re-activating with the new key.
+	 *
+	 * @since 1.15.0
+	 */
+	private function maybe_auto_activate_from_constant() {
+		/**
+		 * To auto-activate using a constant, define WPMASTERTOOLKIT_LICENSE_KEY in your wp-config.php with your license key as the value. Example:
+		 * define( 'WPMASTERTOOLKIT_LICENSE_KEY', 'your_license_key_here' );
+		 */
+		if ( ! defined( 'WPMASTERTOOLKIT_LICENSE_KEY' ) ) {
+			return;
+		}
+
+		$constant_key  = constant( 'WPMASTERTOOLKIT_LICENSE_KEY' );
+		$stored_key    = $this->settings->get_option( 'sc_license_key' );
+		$activation_id = $this->settings->get_option( 'sc_activation_id' );
+
+		// Key rotation: constant differs from stored key → deactivate old, clear options, re-activate.
+		if ( ! empty( $stored_key ) && $stored_key !== $constant_key ) {
+			if ( ! empty( $activation_id ) ) {
+				$this->client->license()->deactivate( $activation_id ); // best-effort, ignore errors
+			}
+			$this->settings->clear_options();
+			delete_transient( $this->transient_id );
+			$activation_id = null;
+		}
+
+		// Already activated with this key — nothing to do.
+		if ( ! empty( $activation_id ) ) {
+			return;
+		}
+
+		// Throttle: avoid hammering the API on repeated failures.
+		$retry_transient = $this->transient_id . '_constant_retry';
+		if ( get_transient( $retry_transient ) ) {
+			return;
+		}
+
+		$activated = $this->client->license()->activate( $constant_key );
+		if ( is_wp_error( $activated ) ) {
+			set_transient( $retry_transient, true, 5 * MINUTE_IN_SECONDS );
+			return;
+		}
+
+		$this->after_activated();
 	}
 
 	/**

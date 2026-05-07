@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: WPMasterToolKit\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-31 17:04+0100\n"
-"PO-Revision-Date: 2026-04-23 17:23+0000\n"
+"PO-Revision-Date: 2026-05-07 09:17+0000\n"
 "Last-Translator: \n"
 "Language-Team: French (France)\n"
 "Language: fr_FR\n"
@@ -1557,7 +1557,7 @@ msgstr "URI de redirection autorisé"
 
 #: admin/modules/pro/class-auto-clean-actionscheduler-actions.php:43
 msgid "Auto clean actionscheduler_actions"
-msgstr "Nettoyage automatique de actionscheduler_actions"
+msgstr "Nettoyage automatique d'actionscheduler_actions"
 
 #: admin/modules/core/class-auto-regenerate-salt-keys.php:48
 msgid "Auto Regenerate Salt Keys"
@@ -7046,9 +7046,8 @@ msgid "Media Icon"
 msgstr "Icône média"
 
 #: admin/modules/core/class-media-library-post-folders.php:64
-#, fuzzy
 msgid "Media Library & Post Folders"
-msgstr "Bibliothèque multimédia et dossiers postaux"
+msgstr "Dossier sur la médiathèque et les articles"
 
 #: admin/modules/pro/class-media-replacement.php:268
 #, fuzzy
@@ -8476,13 +8475,13 @@ msgstr "Gestionnaire 410"
 #: admin/class-modules-data.php:1230
 msgctxt "Module name"
 msgid "Add Essentials Shortcodes"
-msgstr "Ajouter des shortcodes essentiels"
+msgstr "Shortcodes essentiels"
 
 #: admin/class-modules-data.php:1294
 #, fuzzy
 msgctxt "Module name"
 msgid "Admin Menu Organizer"
-msgstr "Organisateur de menu d'administration"
+msgstr "Organisateur du menu d'administration"
 
 #: admin/class-modules-data.php:1186
 msgctxt "Module name"
@@ -8498,8 +8497,7 @@ msgstr "Mode de débogage avancé"
 #: admin/class-modules-data.php:834
 msgctxt "Module name"
 msgid "Allow Menu Custom Links to Open in New Tab"
-msgstr ""
-"Autoriser l'ouverture des liens personnalisés du menu dans un nouvel onglet"
+msgstr "Ouvrir les liens personnalisés du menu dans un nouvel onglet"
 
 #: admin/class-modules-data.php:1190
 msgctxt "Module name"
@@ -8509,7 +8507,7 @@ msgstr "Icône Apple Touch"
 #: admin/class-modules-data.php:1198
 msgctxt "Module name"
 msgid "Auto clean actionscheduler_actions"
-msgstr "Nettoyage automatique de actionscheduler_actions"
+msgstr "Nettoyage automatique d'actionscheduler_actions"
 
 #: admin/class-modules-data.php:1006
 msgctxt "Module name"
@@ -8563,12 +8561,12 @@ msgstr "Modifier le préfixe de la base de données"
 #: admin/class-modules-data.php:1038
 msgctxt "Module name"
 msgid "Child theme generator"
-msgstr "Générateur de thèmes enfants"
+msgstr "Générateur de thème enfant"
 
 #: admin/class-modules-data.php:1022
 msgctxt "Module name"
 msgid "Clean Profiles"
-msgstr "Nettoyer les profils"
+msgstr "Nettoyage des profils"
 
 #: admin/class-modules-data.php:1074
 msgctxt "Module name"
@@ -8603,13 +8601,13 @@ msgstr "CSS d'administration personnalisé"
 #: admin/class-modules-data.php:982
 msgctxt "Module name"
 msgid "Custom Body Class"
-msgstr "Classe de Body personnalisée"
+msgstr "Classe body personnalisée"
 
 #: admin/class-modules-data.php:870
 #, fuzzy
 msgctxt "Module name"
 msgid "Custom COOKIEHASH"
-msgstr "Personnaliser COOKIEHASH"
+msgstr "COOKIEHASH personnalisé"
 
 #: admin/class-modules-data.php:1090
 msgctxt "Module name"
@@ -8649,7 +8647,7 @@ msgstr "Désactiver les widgets du tableau de bord"
 #: admin/class-modules-data.php:962
 msgctxt "Module name"
 msgid "Disable dashicons CSS and JS files"
-msgstr "Désactiver les fichiers CSS et JS dashicons"
+msgstr "Désactiver les fichiers CSS et JS de Dashicons"
 
 #: admin/class-modules-data.php:958
 msgctxt "Module name"
@@ -8695,7 +8693,7 @@ msgstr "Désactiver la balise <link> du manifeste Windows Live Writer (WLW)"
 #, fuzzy
 msgctxt "Module name"
 msgid "Disable Woocommerce Logout Confirmation"
-msgstr "Désactiver la confirmation de déconnexion de Woocommerce"
+msgstr "Désactiver la confirmation de déconnexion de WooCommerce"
 
 #: admin/class-modules-data.php:966
 msgctxt "Module name"
@@ -8720,7 +8718,7 @@ msgstr "Désactiver XML-RPC"
 #: admin/class-modules-data.php:918
 msgctxt "Module name"
 msgid "Disallow Access WP Sensible Files"
-msgstr "Interdire l'accès aux fichiers sensibles WP"
+msgstr "Interdire l'accès aux fichiers sensibles de WordPress"
 
 #: admin/class-modules-data.php:1002
 msgctxt "Module name"
@@ -8730,7 +8728,7 @@ msgstr "Interdire les mauvaises requêtes"
 #: admin/class-modules-data.php:922
 msgctxt "Module name"
 msgid "Disallow Countries IP"
-msgstr "Interdire les IPs par pays"
+msgstr "Interdire les IP de certains pays"
 
 #: admin/class-modules-data.php:926
 msgctxt "Module name"
@@ -8740,7 +8738,7 @@ msgstr "Interdire la liste des répertoires"
 #: admin/class-modules-data.php:946
 msgctxt "Module name"
 msgid "Disallow Malicious File Access in upload"
-msgstr "Interdire l'accès aux fichiers malveillants dans le dossier upload"
+msgstr "Interdire l'accès aux fichiers malveillants dans uploads"
 
 #: admin/class-modules-data.php:914
 msgctxt "Module name"
@@ -8766,7 +8764,7 @@ msgstr "Interdire l’utilisation de WP File Edit"
 #, fuzzy
 msgctxt "Module name"
 msgid "Download medias as zip"
-msgstr "Télécharger les fichiers multimédias au format zip"
+msgstr "Télécharger les médias en ZIP"
 
 #: admin/class-modules-data.php:1034
 msgctxt "Module name"
@@ -8858,12 +8856,12 @@ msgstr "Masquer la version WordPress"
 #| msgid "Hook and filter debugger"
 msgctxt "Module name"
 msgid "Hook And Filter Debugger"
-msgstr "Débogueur de hook et de filtre"
+msgstr "Débogueur de hooks et de filtres"
 
 #: admin/class-modules-data.php:1122
 msgctxt "Module name"
 msgid "Image Upload Control"
-msgstr "Contrôle d'upload d'images"
+msgstr "Contrôle du téléversement d'images"
 
 #: admin/class-modules-data.php:1094
 msgctxt "Module name"
@@ -8873,7 +8871,7 @@ msgstr "Insérer le code <head>, <body> et <footer>"
 #: admin/class-modules-data.php:822
 msgctxt "Module name"
 msgid "Last Login Column"
-msgstr "Colonne Dernière connexion"
+msgstr "Colonne de dernière connexion"
 
 #: admin/class-modules-data.php:1134
 msgctxt "Module name"
@@ -8889,7 +8887,7 @@ msgstr "Raccourcisseur de liens"
 #: admin/class-modules-data.php:1194
 msgctxt "Module name"
 msgid "Local avatars"
-msgstr "Avatars en locale"
+msgstr "Avatars locaux"
 
 #: admin/class-modules-data.php:886
 msgctxt "Module name"
@@ -8909,7 +8907,7 @@ msgstr "Menu Connexion/Déconnexion"
 #: admin/class-modules-data.php:1302
 msgctxt "Module name"
 msgid "Mail catcher"
-msgstr "Collecteur d'e-mail"
+msgstr "Collecteur d'e-mails"
 
 #: admin/class-modules-data.php:1046
 msgctxt "Module name"
@@ -8919,7 +8917,7 @@ msgstr "Mode maintenance"
 #: admin/class-modules-data.php:930
 msgctxt "Module name"
 msgid "Manage Admin Emails Notifications"
-msgstr "Gérer les notifications par e-mail de l'administrateur"
+msgstr "Notifications e-mail administrateur"
 
 #: admin/class-modules-data.php:1098
 msgctxt "Module name"
@@ -8942,10 +8940,9 @@ msgid "Media Encoder"
 msgstr "Encodeur multimédia"
 
 #: admin/class-modules-data.php:1310
-#, fuzzy
 msgctxt "Module name"
 msgid "Media Library & Post Folders"
-msgstr "Bibliothèque multimédia et dossiers postaux"
+msgstr "Dossier sur la médiathèque et les articles"
 
 #: admin/class-modules-data.php:1282
 msgctxt "Module name"
@@ -8965,13 +8962,13 @@ msgstr "Déplacer l'URL de connexion"
 #: admin/class-modules-data.php:1182
 msgctxt "Module name"
 msgid "Multiple User Roles"
-msgstr "Rôles d'utilisateurs multiples"
+msgstr "Rôles utilisateur multiples"
 
 #: admin/class-modules-data.php:1286
 #, fuzzy
 msgctxt "Module name"
 msgid "My Account Menu Customizer"
-msgstr "Personnalisateur de menu Mon compte"
+msgstr "Personnalisateur du menu Mon compte"
 
 #: admin/class-modules-data.php:1014
 msgctxt "Module name"
@@ -8981,7 +8978,7 @@ msgstr "Visibilité du menu de navigation"
 #: admin/class-modules-data.php:1238
 msgctxt "Module name"
 msgid "No Plugin Activation / Deactivation / Deletion"
-msgstr "Aucune activation / désactivation / suppression de plugin"
+msgstr "Bloquer l'activation / désactivation / suppression des extensions"
 
 #: admin/class-modules-data.php:1114
 msgctxt "Module name"
@@ -9012,7 +9009,7 @@ msgstr "Protection par mot de passe"
 #: admin/class-modules-data.php:1226
 msgctxt "Module name"
 msgid "Paste Image In Media"
-msgstr "Coller l'image dans le média"
+msgstr "Coller une image dans la médiathèque"
 
 #: admin/class-modules-data.php:1170
 msgctxt "Module name"
@@ -9022,12 +9019,12 @@ msgstr "Restauration des plugins et des thèmes"
 #: admin/class-modules-data.php:942
 msgctxt "Module name"
 msgid "Plugin Download"
-msgstr "Téléchargement d'extension"
+msgstr "Téléchargement des extensions"
 
 #: admin/class-modules-data.php:1058
 msgctxt "Module name"
 msgid "Post Per Page"
-msgstr "Publication par page"
+msgstr "Articles par page"
 
 #: admin/class-modules-data.php:1254
 #, fuzzy
@@ -9069,12 +9066,12 @@ msgstr "Redirection après la déconnexion"
 #, fuzzy
 msgctxt "Module name"
 msgid "Redirect Manager"
-msgstr "Gestionnaire de réorientation"
+msgstr "Gestionnaire de redirections"
 
 #: admin/class-modules-data.php:1126
 msgctxt "Module name"
 msgid "Register Custom Content Types"
-msgstr "Enregistrer des types de contenu"
+msgstr "Types de contenu personnalisés"
 
 #: admin/class-modules-data.php:954
 msgctxt "Module name"
@@ -9085,13 +9082,13 @@ msgstr "Contrôle des révisions"
 #, fuzzy
 msgctxt "Module name"
 msgid "Search Replace in database"
-msgstr "Rechercher Remplacer dans la base de données"
+msgstr "Rechercher/remplacer dans la base de données"
 
 #: admin/class-modules-data.php:1146
 #| msgid "SMTP mailer"
 msgctxt "Module name"
 msgid "SMTP Mailer"
-msgstr "Courrier SMTP"
+msgstr "Envoi SMTP"
 
 #: admin/class-modules-data.php:826
 msgctxt "Module name"
@@ -9112,7 +9109,7 @@ msgstr "Authentification à deux facteurs"
 #: admin/class-modules-data.php:814
 msgctxt "Module name"
 msgid "Updates Logs"
-msgstr "Journaux de mises à jour"
+msgstr "Journal des mises à jour"
 
 #: admin/class-modules-data.php:1214
 msgctxt "Module name"
