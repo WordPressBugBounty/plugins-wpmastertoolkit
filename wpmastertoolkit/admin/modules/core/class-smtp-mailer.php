@@ -142,8 +142,19 @@ class WPMastertoolkit_SMTP_Mailer {
 	 * @since   2.14.0
 	 */
 	public function for_smtps_has_auth() {
+		if ( wp_doing_ajax() || wp_doing_cron() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
+			return;
+		}
+
 		if ( is_admin() ) {
 			if ( ! current_user_can( 'manage_options' ) ) {
+				return;
+			}
+
+			// Run provider auth refresh only on SMTP page to avoid unintended settings writes.
+			//phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$current_page = sanitize_key( wp_unslash( $_GET['page'] ?? '' ) );
+			if ( $this->page_id !== $current_page ) {
 				return;
 			}
 
@@ -226,9 +237,11 @@ class WPMastertoolkit_SMTP_Mailer {
 		$this->settings         = $this->get_settings();
 		$this->default_settings = $this->get_default_settings();
 
-		$force_sender = $this->settings['force_sender'] ?? $this->default_settings['force_sender'];
-		$sender_email = $this->settings['sender_email'] ?? $this->default_settings['sender_email'];
-		$def_email    = $this->get_default_email();
+		$def_email         = $this->get_default_email();
+		$selected_provider = $this->settings['active_provider'] ?? $this->default_settings['active_provider'];
+		$provider_params   = $this->settings['providers'][ $selected_provider ]['params'] ?? array();
+		$force_sender      = $provider_params['force_sender']['value'] ?? '0';
+		$sender_email      = $provider_params['sender_email']['value'] ?? '';
 
 		// Save the original from address.
 		$this->filtered_from_email = filter_var( $wp_email, FILTER_VALIDATE_EMAIL );
@@ -260,8 +273,10 @@ class WPMastertoolkit_SMTP_Mailer {
 		$this->settings         = $this->get_settings();
 		$this->default_settings = $this->get_default_settings();
 
-		$force_sender = $this->settings['force_sender'] ?? $this->default_settings['force_sender'];
-		$sender_name  = $this->settings['sender_name'] ?? $this->default_settings['sender_name'];
+		$selected_provider = $this->settings['active_provider'] ?? $this->default_settings['active_provider'];
+		$provider_params   = $this->settings['providers'][ $selected_provider ]['params'] ?? array();
+		$force_sender      = $provider_params['force_sender']['value'] ?? '0';
+		$sender_name       = $provider_params['sender_name']['value'] ?? '';
 
 		// Save the original from name.
 		$this->filtered_from_name = $name;
@@ -505,6 +520,14 @@ class WPMastertoolkit_SMTP_Mailer {
 		$nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ?? '' ) );
 		if ( wp_verify_nonce( $nonce, $this->nonce_action ) ) {
 
+			$reset_all = sanitize_text_field( wp_unslash( $_POST['reset_all_providers'] ?? '' ) );
+			if ( '1' === $reset_all ) {
+				$this->default_settings = $this->get_default_settings();
+				$this->save_settings( $this->default_settings );
+				wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
+				exit;
+			}
+
 			$remove_auth = sanitize_text_field( wp_unslash( $_POST['remove_auth'] ?? '' ) );
 			if ( ! empty( $remove_auth ) ) {
 				$this->maybe_remove_auth( $remove_auth );
@@ -530,43 +553,47 @@ class WPMastertoolkit_SMTP_Mailer {
 	public function sanitize_settings( $new_settings ){
 		$this->settings         = $this->get_settings();
 		$this->default_settings = $this->get_default_settings();
-		$sanitized_settings     = array();
+		$sanitized_settings     = $this->settings;
 
 		foreach ( $this->default_settings as $settings_key => $settings_value ) {
 			if ( 'providers' === $settings_key ) {
 
-				foreach ( $settings_value as $provider_key => $provider ) {
-					if ( ! isset( $provider['params'] ) ) {
-						continue;
-					}
+				$selected_provider       = sanitize_text_field( $new_settings['active_provider'] ?? $this->settings['active_provider'] ?? $this->default_settings['active_provider'] );
+				$default_provider_params = $settings_value[ $selected_provider ]['params'] ?? array();
 
-					$params = $provider['params'];
-					foreach ( $params as $param_key => $param_value ) {
-						$param_type = $param_value['type'];
+				foreach ( $default_provider_params as $param_key => $param_value ) {
+					$param_type = $param_value['type'];
 
-						switch ( $param_type ) {
-							case 'db':
-								$sanitized_settings[ $settings_key ][ $provider_key ]['params'][ $param_key ]['value'] = sanitize_text_field( $this->settings['providers'][ $provider_key ]['params'][ $param_key ]['value'] ?? '' );
-							break;
-							case 'text':
-							case 'password':
-							case 'checkbox':
-								$sanitized_settings[ $settings_key ][ $provider_key ]['params'][ $param_key ]['value'] = sanitize_text_field( $new_settings[ $settings_key ][ $provider_key ]['params'][ $param_key ] ?? $param_value['value'] );
-							break;
-							case 'select':
-								$new_value = $new_settings[ $settings_key ][ $provider_key ]['params'][ $param_key ]['value'] ?? $param_value['value']['value'];
-								if ( array_key_exists( $new_value, $param_value['value']['options'] ) ) {
-									$sanitized_value = $new_value;
-								} else {
-									$sanitized_value = $param_value['value']['value'];
-								}
-								$sanitized_settings[ $settings_key ][ $provider_key ]['params'][ $param_key ]['value']['value'] = $sanitized_value;
-							break;
-						}
+					switch ( $param_type ) {
+						case 'db':
+							$sanitized_settings[ $settings_key ][ $selected_provider ]['params'][ $param_key ]['value'] = sanitize_text_field( $this->settings['providers'][ $selected_provider ]['params'][ $param_key ]['value'] ?? '' );
+						break;
+						case 'text':
+						case 'password':
+						case 'checkbox':
+							$sanitized_settings[ $settings_key ][ $selected_provider ]['params'][ $param_key ]['value'] = sanitize_text_field( $new_settings[ $settings_key ][ $selected_provider ]['params'][ $param_key ] ?? $param_value['value'] );
+						break;
+						case 'select':
+							$new_value = $new_settings[ $settings_key ][ $selected_provider ]['params'][ $param_key ]['value'] ?? $param_value['value']['value'];
+							if ( array_key_exists( $new_value, $param_value['value']['options'] ) ) {
+								$sanitized_value = $new_value;
+							} else {
+								$sanitized_value = $param_value['value']['value'];
+							}
+							$sanitized_settings[ $settings_key ][ $selected_provider ]['params'][ $param_key ]['value']['value'] = $sanitized_value;
+						break;
 					}
 				}
+
 			} else {
 				$sanitized_settings[ $settings_key ] = sanitize_text_field( $new_settings[ $settings_key ] ?? $settings_value );
+			}
+		}
+
+		$old_value_to_remove = array( 'sender_name', 'sender_email', 'force_sender' );
+		foreach ( $old_value_to_remove as $old_key ) {
+			if ( isset( $sanitized_settings[ $old_key ] ) ) {
+				unset( $sanitized_settings[ $old_key ] );
 			}
 		}
 		
@@ -585,12 +612,39 @@ class WPMastertoolkit_SMTP_Mailer {
 		$this->default_settings = $this->get_default_settings();
 		$settings = get_option( $this->option_id, $this->default_settings );
 
+		// Some sites may contain a malformed option value (e.g. plain string) from legacy saves.
+		if ( is_string( $settings ) ) {
+			$decoded_settings = json_decode( $settings, true );
+			if ( is_array( $decoded_settings ) ) {
+				$settings = $decoded_settings;
+			}
+		}
+
+		if ( ! is_array( $settings ) ) {
+			$settings = array();
+		}
+
+		$settings = wp_parse_args( $settings, $this->default_settings );
+
+		if ( ! isset( $settings['providers'] ) || ! is_array( $settings['providers'] ) ) {
+			$settings['providers'] = $this->default_settings['providers'];
+		}
+
 		// Handle the conpatibility for older versions
 		if ( ! empty( $settings['host'] ) && ! empty( $settings['port'] ) ) {
+			$legacy_encryption = 'none';
+			if ( isset( $settings['encryption'] ) ) {
+				if ( is_array( $settings['encryption'] ) ) {
+					$legacy_encryption = $settings['encryption']['value'] ?? 'none';
+				} elseif ( is_string( $settings['encryption'] ) ) {
+					$legacy_encryption = $settings['encryption'];
+				}
+			}
+
 			$settings['active_provider']                                              = 'other';
 			$settings['providers']['other']['params']['host']['value']                = $settings['host'];
 			$settings['providers']['other']['params']['port']['value']                = $settings['port'];
-			$settings['providers']['other']['params']['encryption']['value']['value'] = $settings['encryption']['value'] ?? 'none';
+			$settings['providers']['other']['params']['encryption']['value']['value'] = $legacy_encryption;
 
 			if ( ! empty( $settings['username'] ) && ! empty( $settings['password'] ) ) {
 				$settings['providers']['other']['params']['authentication']['value'] = '1';
@@ -601,7 +655,37 @@ class WPMastertoolkit_SMTP_Mailer {
 			}
 		}
 
-		return $settings;
+		// Handle the older versions that don't have php as a provider.
+		if ( ! isset( $settings['providers']['php'] ) ) {
+			$settings['providers']['php'] = $this->default_settings['providers']['php'];
+		}
+
+		// Handle the compatibility for older versions that don't have the sender_name|sender_email|force_sender in each provider params.
+		$providers = $settings['providers'] ?? array();
+		foreach ( $providers as $provider => $provider_data ) {
+			if ( ! is_array( $provider_data ) ) {
+				continue;
+			}
+
+			$sender_name = $provider_data['params']['sender_name']['value'] ?? '';
+			if ( empty( $sender_name ) && ! empty( $settings['sender_name'] ) ) {
+				$settings['providers'][ $provider ]['params']['sender_name']['value'] = get_bloginfo( 'name' );
+			}
+
+			$sender_email = $provider_data['params']['sender_email']['value'] ?? '';
+			if ( empty( $sender_email ) && ! empty( $settings['sender_email'] ) ) {
+				$settings['providers'][ $provider ]['params']['sender_email']['value'] = get_option( 'admin_email' );
+			}
+
+			$force_sender = $provider_data['params']['force_sender']['value'] ?? '';
+			if ( empty( $force_sender ) && ! empty( $settings['force_sender'] ) ) {
+				$settings['providers'][ $provider ]['params']['force_sender']['value'] = '1';
+			}
+		}
+
+		$this->settings = $settings;
+
+		return $this->settings;
 		
 	}
 
@@ -615,15 +699,24 @@ class WPMastertoolkit_SMTP_Mailer {
 		if( $this->default_settings !== null ) return $this->default_settings;
 
 		return array(
-			// General
-			'sender_name'     => get_bloginfo( 'name' ),
-			'sender_email'    => get_option( 'admin_email' ),
-			'force_sender'    => '0',
-			// Providers
 			'active_provider' => 'php',
 			'providers'       => array(
 				'php' => array(
 					'pro' => false,
+					'params' => array(
+						'sender_name' => array(
+							'type'  => 'text',
+							'value' => get_bloginfo( 'name' ),
+						),
+						'sender_email' => array(
+							'type'  => 'text',
+							'value' => get_option( 'admin_email' ),
+						),
+						'force_sender' => array(
+							'type'  => 'checkbox',
+							'value' => '0',
+						),
+					),
 				),
 				'other' => array(
 					'pro'    => false,
@@ -663,6 +756,18 @@ class WPMastertoolkit_SMTP_Mailer {
 							'type'  => 'checkbox',
 							'value' => '1',
 						),
+						'sender_name' => array(
+							'type'  => 'text',
+							'value' => get_bloginfo( 'name' ),
+						),
+						'sender_email' => array(
+							'type'  => 'text',
+							'value' => get_option( 'admin_email' ),
+						),
+						'force_sender' => array(
+							'type'  => 'checkbox',
+							'value' => '0',
+						),
 					),
 				),
 				'gmail' => array(
@@ -687,6 +792,18 @@ class WPMastertoolkit_SMTP_Mailer {
 						'user_email' => array(
 							'type'  => 'db',
 							'value' => '',
+						),
+						'sender_name' => array(
+							'type'  => 'text',
+							'value' => get_bloginfo( 'name' ),
+						),
+						'sender_email' => array(
+							'type'  => 'text',
+							'value' => get_option( 'admin_email' ),
+						),
+						'force_sender' => array(
+							'type'  => 'checkbox',
+							'value' => '0',
 						),
 					),
 				),
@@ -713,6 +830,18 @@ class WPMastertoolkit_SMTP_Mailer {
 							'type'  => 'db',
 							'value' => '',
 						),
+						'sender_name' => array(
+							'type'  => 'text',
+							'value' => get_bloginfo( 'name' ),
+						),
+						'sender_email' => array(
+							'type'  => 'text',
+							'value' => get_option( 'admin_email' ),
+						),
+						'force_sender' => array(
+							'type'  => 'checkbox',
+							'value' => '0',
+						),
 					),
 				),
 				'sendgrid' => array(
@@ -725,6 +854,18 @@ class WPMastertoolkit_SMTP_Mailer {
 						'sending_domain' => array(
 							'type'  => 'text',
 							'value' => '',
+						),
+						'sender_name' => array(
+							'type'  => 'text',
+							'value' => get_bloginfo( 'name' ),
+						),
+						'sender_email' => array(
+							'type'  => 'text',
+							'value' => get_option( 'admin_email' ),
+						),
+						'force_sender' => array(
+							'type'  => 'checkbox',
+							'value' => '1',
 						),
 					),
 				),
@@ -743,6 +884,18 @@ class WPMastertoolkit_SMTP_Mailer {
 							'type'  => 'text',
 							'value' => 'us-east-1',
 						),
+						'sender_name' => array(
+							'type'  => 'text',
+							'value' => get_bloginfo( 'name' ),
+						),
+						'sender_email' => array(
+							'type'  => 'text',
+							'value' => get_option( 'admin_email' ),
+						),
+						'force_sender' => array(
+							'type'  => 'checkbox',
+							'value' => '0',
+						),
 					),
 				),
 				'brevo' => array(
@@ -755,6 +908,18 @@ class WPMastertoolkit_SMTP_Mailer {
 						'sending_domain' => array(
 							'type'  => 'text',
 							'value' => '',
+						),
+						'sender_name' => array(
+							'type'  => 'text',
+							'value' => get_bloginfo( 'name' ),
+						),
+						'sender_email' => array(
+							'type'  => 'text',
+							'value' => get_option( 'admin_email' ),
+						),
+						'force_sender' => array(
+							'type'  => 'checkbox',
+							'value' => '1',
 						),
 					),
 				),
@@ -773,6 +938,18 @@ class WPMastertoolkit_SMTP_Mailer {
 							'type'  => 'text',
 							'value' => 'us',
 						),
+						'sender_name' => array(
+							'type'  => 'text',
+							'value' => get_bloginfo( 'name' ),
+						),
+						'sender_email' => array(
+							'type'  => 'text',
+							'value' => get_option( 'admin_email' ),
+						),
+						'force_sender' => array(
+							'type'  => 'checkbox',
+							'value' => '1',
+						),
 					),
 				),
 				'mailjet' => array(
@@ -785,6 +962,18 @@ class WPMastertoolkit_SMTP_Mailer {
 						'secret_key' => array(
 							'type'  => 'password',
 							'value' => '',
+						),
+						'sender_name' => array(
+							'type'  => 'text',
+							'value' => get_bloginfo( 'name' ),
+						),
+						'sender_email' => array(
+							'type'  => 'text',
+							'value' => get_option( 'admin_email' ),
+						),
+						'force_sender' => array(
+							'type'  => 'checkbox',
+							'value' => '1',
 						),
 					),
 				),
@@ -799,6 +988,18 @@ class WPMastertoolkit_SMTP_Mailer {
 							'type'  => 'text',
 							'value' => '',
 						),
+						'sender_name' => array(
+							'type'  => 'text',
+							'value' => get_bloginfo( 'name' ),
+						),
+						'sender_email' => array(
+							'type'  => 'text',
+							'value' => get_option( 'admin_email' ),
+						),
+						'force_sender' => array(
+							'type'  => 'checkbox',
+							'value' => '1',
+						),
 					),
 				),
 				'sparkpost' => array(
@@ -811,6 +1012,18 @@ class WPMastertoolkit_SMTP_Mailer {
 						'region' => array(
 							'type'  => 'text',
 							'value' => 'us',
+						),
+						'sender_name' => array(
+							'type'  => 'text',
+							'value' => get_bloginfo( 'name' ),
+						),
+						'sender_email' => array(
+							'type'  => 'text',
+							'value' => get_option( 'admin_email' ),
+						),
+						'force_sender' => array(
+							'type'  => 'checkbox',
+							'value' => '1',
 						),
 					),
 				),
@@ -825,6 +1038,18 @@ class WPMastertoolkit_SMTP_Mailer {
 							'type'  => 'checkbox',
 							'value' => '0',
 						),
+						'sender_name' => array(
+							'type'  => 'text',
+							'value' => get_bloginfo( 'name' ),
+						),
+						'sender_email' => array(
+							'type'  => 'text',
+							'value' => get_option( 'admin_email' ),
+						),
+						'force_sender' => array(
+							'type'  => 'checkbox',
+							'value' => '1',
+						),
 					),
 				),
 				'resend' => array(
@@ -834,6 +1059,18 @@ class WPMastertoolkit_SMTP_Mailer {
 							'type'  => 'password',
 							'value' => '',
 						),
+						'sender_name' => array(
+							'type'  => 'text',
+							'value' => get_bloginfo( 'name' ),
+						),
+						'sender_email' => array(
+							'type'  => 'text',
+							'value' => get_option( 'admin_email' ),
+						),
+						'force_sender' => array(
+							'type'  => 'checkbox',
+							'value' => '1',
+						),
 					),
 				),
 				'sendlayer' => array(
@@ -842,6 +1079,18 @@ class WPMastertoolkit_SMTP_Mailer {
 						'api_key' => array(
 							'type'  => 'password',
 							'value' => '',
+						),
+						'sender_name' => array(
+							'type'  => 'text',
+							'value' => get_bloginfo( 'name' ),
+						),
+						'sender_email' => array(
+							'type'  => 'text',
+							'value' => get_option( 'admin_email' ),
+						),
+						'force_sender' => array(
+							'type'  => 'checkbox',
+							'value' => '1',
 						),
 					),
 				),
@@ -856,6 +1105,14 @@ class WPMastertoolkit_SMTP_Mailer {
 							'type'  => 'text',
 							'value' => '',
 						),
+						'sender_email' => array(
+							'type'  => 'text',
+							'value' => get_option( 'admin_email' ),
+						),
+						'force_sender' => array(
+							'type'  => 'checkbox',
+							'value' => '0',
+						),
 					),
 				),
 				'smtp2go' => array(
@@ -865,6 +1122,18 @@ class WPMastertoolkit_SMTP_Mailer {
 							'type'  => 'password',
 							'value' => '',
 						),
+						'sender_name' => array(
+							'type'  => 'text',
+							'value' => get_bloginfo( 'name' ),
+						),
+						'sender_email' => array(
+							'type'  => 'text',
+							'value' => get_option( 'admin_email' ),
+						),
+						'force_sender' => array(
+							'type'  => 'checkbox',
+							'value' => '1',
+						),
 					),
 				),
 				'elasticemail' => array(
@@ -873,6 +1142,18 @@ class WPMastertoolkit_SMTP_Mailer {
 						'api_key' => array(
 							'type'  => 'password',
 							'value' => '',
+						),
+						'sender_name' => array(
+							'type'  => 'text',
+							'value' => get_bloginfo( 'name' ),
+						),
+						'sender_email' => array(
+							'type'  => 'text',
+							'value' => get_option( 'admin_email' ),
+						),
+						'force_sender' => array(
+							'type'  => 'checkbox',
+							'value' => '1',
 						),
 					),
 				),
@@ -919,6 +1200,10 @@ class WPMastertoolkit_SMTP_Mailer {
 							'type'  => 'db',
 							'value' => '',
 						),
+						'sender_name' => array(
+							'type'  => 'text',
+							'value' => get_bloginfo( 'name' ),
+						),
 					),
 				),
 				'sendpulse' => array(
@@ -944,6 +1229,18 @@ class WPMastertoolkit_SMTP_Mailer {
 							'type'  => 'db',
 							'value' => '',
 						),
+						'sender_name' => array(
+							'type'  => 'text',
+							'value' => get_bloginfo( 'name' ),
+						),
+						'sender_email' => array(
+							'type'  => 'text',
+							'value' => get_option( 'admin_email' ),
+						),
+						'force_sender' => array(
+							'type'  => 'checkbox',
+							'value' => '1',
+						),
 					),
 				),
 				'mandrill' => array(//This provider not tested due to lack of account.
@@ -953,6 +1250,18 @@ class WPMastertoolkit_SMTP_Mailer {
 							'type'  => 'password',
 							'value' => '',
 						),
+						'sender_name' => array(
+							'type'  => 'text',
+							'value' => get_bloginfo( 'name' ),
+						),
+						'sender_email' => array(
+							'type'  => 'text',
+							'value' => get_option( 'admin_email' ),
+						),
+						'force_sender' => array(
+							'type'  => 'checkbox',
+							'value' => '1',
+						),
 					),
 				),
 				'pepipost' => array(//This provider not tested due to lack of account.
@@ -961,6 +1270,18 @@ class WPMastertoolkit_SMTP_Mailer {
 						'api_key' => array(
 							'type'  => 'password',
 							'value' => '',
+						),
+						'sender_name' => array(
+							'type'  => 'text',
+							'value' => get_bloginfo( 'name' ),
+						),
+						'sender_email' => array(
+							'type'  => 'text',
+							'value' => get_option( 'admin_email' ),
+						),
+						'force_sender' => array(
+							'type'  => 'checkbox',
+							'value' => '1',
 						),
 					),
 				),
@@ -977,8 +1298,10 @@ class WPMastertoolkit_SMTP_Mailer {
 		$this->settings         = $this->get_settings();
 		$this->default_settings = $this->get_default_settings();
 
-		$force_sender = $this->settings['force_sender'] ?? $this->default_settings['force_sender'];
-		$sender_email = $this->settings['sender_email'] ?? $this->default_settings['sender_email'];
+		$selected_provider = $this->settings['active_provider'] ?? $this->default_settings['active_provider'];
+		$provider_params   = $this->settings['providers'][ $selected_provider ]['params'] ?? array();
+		$force_sender      = $provider_params['force_sender']['value'] ?? '0';
+		$sender_email      = $provider_params['sender_email']['value'] ?? '';
 
 		if ( ! empty( $reply_to ) || empty( $this->wp_mail_from ) ) {
 			return false;
@@ -1023,7 +1346,34 @@ class WPMastertoolkit_SMTP_Mailer {
 	 * @since   1.7.0
 	 */
 	public function save_settings( $new_settings ) {
-		update_option( $this->option_id, $new_settings );
+		if ( ! is_array( $new_settings ) ) {
+			return;
+		}
+
+		$current_settings = get_option( $this->option_id, array() );
+		if ( is_string( $current_settings ) ) {
+			$decoded_current_settings = json_decode( $current_settings, true );
+			if ( is_array( $decoded_current_settings ) ) {
+				$current_settings = $decoded_current_settings;
+			}
+		}
+
+		if ( ! is_array( $current_settings ) ) {
+			$current_settings = array();
+		}
+
+		if ( isset( $new_settings['providers'] ) && ! is_array( $new_settings['providers'] ) ) {
+			unset( $new_settings['providers'] );
+		}
+
+		$default_settings = $this->get_default_settings();
+		$merged_settings  = array_replace_recursive( $default_settings, $current_settings, $new_settings );
+
+		if ( empty( $merged_settings['active_provider'] ) || ! is_string( $merged_settings['active_provider'] ) ) {
+			$merged_settings['active_provider'] = $current_settings['active_provider'] ?? $default_settings['active_provider'];
+		}
+
+		update_option( $this->option_id, $merged_settings );
 	}
 
 	/**
@@ -1038,9 +1388,6 @@ class WPMastertoolkit_SMTP_Mailer {
 
 		// General
 		$current_user_email = get_option( 'admin_email' );
-		$force_sender       = $this->settings['force_sender'] ?? $this->default_settings['force_sender'];
-		$sender_name        = $this->settings['sender_name'] ?? $this->default_settings['sender_name'];
-		$sender_email       = $this->settings['sender_email'] ?? $this->default_settings['sender_email'];
 
 		// Providers
 		$providers       = $this->default_settings['providers'];
@@ -1061,59 +1408,9 @@ class WPMastertoolkit_SMTP_Mailer {
 			}
 		}
 		?>
-			<div class="wp-mastertoolkit__sections__wrapper">
-				<div class="wp-mastertoolkit__section general">
-					<div class="wp-mastertoolkit__section__desc">
-						<?php esc_html_e( "Set custom sender name and email. Optionally use external SMTP service to ensure notification and transactional emails from your site are being delivered to inboxes.", 'wpmastertoolkit'); ?>
-					</div>
-					<div class="wp-mastertoolkit__section__body">
-						<div class="wp-mastertoolkit__section__body__item">
-							<div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e( 'Sender Config', 'wpmastertoolkit' ); ?></div>
-							<div class="wp-mastertoolkit__section__body__item__content">
-								<div class="description"><?php esc_html_e( 'If set, the following sender name/email overrides WordPress core defaults but can still be overridden by other plugins that enables custom sender name/email, e.g. form plugins.', 'wpmastertoolkit' ); ?></div>
-								<br>
-								<div class="wp-mastertoolkit__input-text flex">
-									<div><input type="text" class="" name="<?php echo esc_attr( $this->option_id . '[sender_name]' ); ?>" value="<?php echo esc_attr( $sender_name ); ?>" placeholder="<?php esc_attr_e( 'Sender name', 'wpmastertoolkit' ); ?>"></div>
-									<div><input type="text" class="" name="<?php echo esc_attr( $this->option_id . '[sender_email]' ); ?>" value="<?php echo esc_attr( $sender_email ); ?>" placeholder="<?php esc_attr_e( 'Sender email', 'wpmastertoolkit' ); ?>"></div>
-								</div>
-							</div>
-						</div>
-
-						<div class="wp-mastertoolkit__section__body__item">
-							<div class="wp-mastertoolkit__section__body__item__content">
-								<label class="wp-mastertoolkit__toggle">
-									<input type="hidden" name="<?php echo esc_attr( $this->option_id . '[force_sender]' ); ?>" value="0">
-									<input type="checkbox" name="<?php echo esc_attr( $this->option_id . '[force_sender]' ); ?>" value="1" <?php checked( $force_sender, '1' ); ?>>
-									<span class="wp-mastertoolkit__toggle__slider round"></span>
-								</label>
-								<span class="wp-mastertoolkit__checkbox__label__text"><?php esc_html_e( 'Force the usage of the sender name/email defined above. It will override those set by other plugins.', 'wpmastertoolkit' ); ?></span>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="wp-mastertoolkit__section test">
-					<div class="wp-mastertoolkit__section__body">
-						<div class="wp-mastertoolkit__section__body__item">
-							<div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e( 'Email test', 'wpmastertoolkit' ); ?></div>
-							<div class="wp-mastertoolkit__section__body__item__content">
-								<div class="description"><?php esc_html_e( 'After saving the settings above, check if everything is configured properly below.', 'wpmastertoolkit' ); ?></div>
-								<br>
-								<div class="wp-mastertoolkit__input-text">
-									<div><input type="email" class="" id="JS-test-input" value="<?php echo esc_attr( $current_user_email ); ?>" placeholder="<?php esc_attr_e( 'Email', 'wpmastertoolkit' ); ?>"></div>
-								</div>
-								<br>
-								<div class="wp-mastertoolkit__button">
-									<button class="flex" id="JS-test-btn">
-										<?php echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/message-arrow.svg'), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
-										<?php esc_html_e( 'Send Now', 'wpmastertoolkit' ); ?>
-										<div class="wp-mastertoolkit__loader" id="JS-test-loader"></div>
-									</button>
-									<div class="wp-mastertoolkit__msg" id="JS-test-msg"></div>
-								</div>
-							</div>
-						</div>
-					</div>
+			<div class="wp-mastertoolkit__section">
+				<div class="wp-mastertoolkit__section__desc">
+					<?php esc_html_e( "Set custom sender name and email. Optionally use external SMTP service to ensure notification and transactional emails from your site are being delivered to inboxes.", 'wpmastertoolkit'); ?>
 				</div>
 			</div>
 
@@ -1124,6 +1421,11 @@ class WPMastertoolkit_SMTP_Mailer {
 						<div class="wp-mastertoolkit__section__body__item">
 							<div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e( 'Providers', 'wpmastertoolkit' ); ?></div>
 							<div class="wp-mastertoolkit__section__body__item__content">
+
+								<div class="wp-mastertoolkit__button reset_all">
+									<button class="danger" type="submit" name="reset_all_providers" value="1" onclick="return confirm('<?php echo esc_js( __( 'Are you sure you want to reset all providers data? This action cannot be undone.', 'wpmastertoolkit' ) ); ?>')"><?php esc_html_e( 'Reset all providers', 'wpmastertoolkit' ); ?></button>
+								</div>
+
 								<div class="wp-mastertoolkit__providers">
 								<?php
 								foreach ( $providers_available as $provider_key => $provider ) {
@@ -1182,6 +1484,30 @@ class WPMastertoolkit_SMTP_Mailer {
 						}
 					}
 					?>
+				</div>
+			</div>
+
+			<div class="wp-mastertoolkit__section">
+				<div class="wp-mastertoolkit__section__body">
+					<div class="wp-mastertoolkit__section__body__item">
+						<div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e( 'Email test', 'wpmastertoolkit' ); ?></div>
+						<div class="wp-mastertoolkit__section__body__item__content">
+							<div class="description"><?php esc_html_e( 'After saving the settings above, check if everything is configured properly below.', 'wpmastertoolkit' ); ?></div>
+							<br>
+							<div class="wp-mastertoolkit__input-text">
+								<div><input type="email" class="" id="JS-test-input" value="<?php echo esc_attr( $current_user_email ); ?>" placeholder="<?php esc_attr_e( 'Email', 'wpmastertoolkit' ); ?>"></div>
+							</div>
+							<br>
+							<div class="wp-mastertoolkit__button">
+								<button type="button" class="flex" id="JS-test-btn">
+									<?php echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/message-arrow.svg'), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
+									<?php esc_html_e( 'Send Now', 'wpmastertoolkit' ); ?>
+									<div class="wp-mastertoolkit__loader" id="JS-test-loader"></div>
+								</button>
+								<div class="wp-mastertoolkit__msg" id="JS-test-msg"></div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		<?php

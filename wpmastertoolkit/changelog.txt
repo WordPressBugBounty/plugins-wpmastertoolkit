@@ -1,8 +1,16 @@
 == Changelog ==
 
+= 2.22.0 =
+Update: Use AI Client API if the WordPress version support it
+Update: Module: Meta Debugger: Add support for WooCommerce product variations and display metadata for each variation directly from the variation editor.
+Fix: Module: SMTP Mailer: Save only the selected provider, move the sender config in each provider, add reset all providers button
+Fix: Pro Module: Two-Factor Authentication: Implement modal enhancements and lock submit button until initialization
+Fix: Pro Module: Cron Manager: Add filters to row actions links.
+Update: Pro Module: Cron Manager: Add a status section.
+
 = 2.21.0 =
-Add: Logs page: Add a dedicated admin interface to browse, monitor, download, and clear plugin log files.
-Add: Module: Meta Debugger: Display metadata for each WooCommerce product variation directly from the variation editor.
+Add: Add a dedicated admin interface to browse, monitor, download, and clear plugin log files.
+Update: Module: Meta Debugger: Display metadata for each WooCommerce product variation directly from the variation editor.
 Update: License page: Add the plugin license constant to the generated `wp-config.php` snippet and embed a help video for faster setup.
 Fix: Module: Redirect Manager: Improve CSV import compatibility by auto-detecting delimiters and using semicolon-separated imports more reliably. Update version annotations for redirect retrieval methods.
 Fix: Module: Media Encoder: Validate attachment IDs earlier and improve error messages during processing.

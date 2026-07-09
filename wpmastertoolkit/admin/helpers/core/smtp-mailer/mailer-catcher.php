@@ -75,6 +75,9 @@ class WPMastertoolkit_SMTP_Mailer_Mailer_Catcher extends PHPMailer\PHPMailer\PHP
 				throw $e;
 			}
 
+			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+			do_action( 'wp_mail_failed', new WP_Error( 'wp_mail_failed', $e->getMessage() ) );
+
 			return false;
 		} finally {
 
@@ -136,6 +139,9 @@ class WPMastertoolkit_SMTP_Mailer_Mailer_Catcher extends PHPMailer\PHPMailer\PHP
 			if ( $this->exceptions ) {
 				throw $e;
 			}
+
+			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+			do_action( 'wp_mail_failed', new WP_Error( 'wp_mail_failed', $e->getMessage() ) );
 
 			return false;
 		}

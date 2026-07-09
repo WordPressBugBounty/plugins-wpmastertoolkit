@@ -1,5 +1,5 @@
 <?php
-namespace SureCart\Licensing;
+namespace SureCartWPMTK\Licensing;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  */
 class Updater {
 	/**
-	 * SureCart\Licensing\Client.
+	 * SureCartWPMTK\Licensing\Client.
 	 *
 	 * @var object
 	 */
@@ -24,7 +24,7 @@ class Updater {
 	/**
 	 * Initialize the class.
 	 *
-	 * @param SureCart\Licensing\Client $client The client.
+	 * @param SureCartWPMTK\Licensing\Client $client The client.
 	 */
 	public function __construct( Client $client ) {
 		$this->client    = $client;
@@ -141,7 +141,7 @@ class Updater {
 	}
 
 	/**
-	 * Get plugin info from SureCart\Licensing
+	 * Get plugin info from SureCartWPMTK\Licensing
 	 */
 	private function get_project_latest_version() {
 		$current_release = $this->client->license()->get_current_release( 3 * HOUR_IN_SECONDS );

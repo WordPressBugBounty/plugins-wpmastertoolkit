@@ -40,11 +40,11 @@ class WPMastertoolkit_Surecart {
 	public function init_surecart() {
 		global $wpmtk_surecart_client;
 
-		if ( ! class_exists( 'SureCart\Licensing\Client' ) ) {
+		if ( ! class_exists( 'SureCartWPMTK\Licensing\Client' ) ) {
 			require_once WPMASTERTOOLKIT_PLUGIN_PATH . 'licensing/src/Client.php';
 		}
 
-		$this->client   = new \SureCart\Licensing\Client( 'WPMasterToolKit', 'pt_peLDYfw2gnkrUcoY5BzTNC89', WPMASTERTOOLKIT_PLUGIN_FILE );
+		$this->client   = new \SureCartWPMTK\Licensing\Client( 'WPMasterToolKit', 'pt_peLDYfw2gnkrUcoY5BzTNC89', WPMASTERTOOLKIT_PLUGIN_FILE );
 		$wpmtk_surecart_client = $this->client;
 
 		$this->settings = $this->client->settings();
@@ -71,6 +71,8 @@ class WPMastertoolkit_Surecart {
 			remove_filter(  $site_transient_prefix . 'update_plugins', array( $this->updater, 'check_plugin_update' ) );
 			remove_filter( 'plugins_api', array( $this->updater, 'plugins_api_filter' ), 10, 3 );
 		}
+
+		$this->maybe_force_pro_upgrade();
 	}
 
 	/**
@@ -131,10 +133,12 @@ class WPMastertoolkit_Surecart {
 			$this->updater->delete_cached_version_info();
 			$version_info = $this->updater->get_version_info();
 			if ( is_object( $version_info ) ) {
+				include_once ABSPATH . 'wp-admin/includes/file.php';
+				include_once ABSPATH . 'wp-admin/includes/misc.php';
 				include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
 				include_once WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/class-surecart-update.php';
 
-				$upgrader = new WPMastertoolkit_Surecart_Update();
+				$upgrader = new WPMastertoolkit_Surecart_Update( new Automatic_Upgrader_Skin() );
 				$upgrader->update_from_surecart( $version_info->package );
 			}
 		}
@@ -175,6 +179,32 @@ class WPMastertoolkit_Surecart {
 		}
 
 		return $value;
+	}
+
+	/**
+	 * Force upgrade to pro version when the license is active but the free version is installed.
+	 * This handles the case where a user renews their license without visiting the license page.
+	 *
+	 * @since 1.15.0
+	 */
+	private function maybe_force_pro_upgrade() {
+
+		// WordPress plugin upgrader requires admin context.
+		if ( ! is_admin() ) {
+			return;
+		}
+
+		// Already on pro — nothing to do.
+		if ( wpmastertoolkit_is_pro() ) {
+			return;
+		}
+
+		// No active license — nothing to upgrade to.
+		if ( ! $this->license_activated() ) {
+			return;
+		}
+
+		$this->after_activated();
 	}
 
 	/**

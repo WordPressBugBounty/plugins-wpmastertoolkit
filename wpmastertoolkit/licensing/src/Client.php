@@ -1,10 +1,10 @@
 <?php
-namespace SureCart\Licensing;
+namespace SureCartWPMTK\Licensing;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
- * SureCart Client
+ * SureCartWPMTK Client
  *
  * This class is necessary to set project data
  */
@@ -136,7 +136,7 @@ class Client {
 	/**
 	 * Initialize plugin/theme updater
 	 *
-	 * @return SureCart\Updater
+	 * @return SureCartWPMTK\Updater
 	 */
 	public function updater() {
 		if ( ! class_exists( __NAMESPACE__ . '\Updater' ) ) {
@@ -152,7 +152,7 @@ class Client {
 	/**
 	 * Initialize license model
 	 *
-	 * @return SureCart\Licensing
+	 * @return SureCartWPMTK\Licensing
 	 */
 	public function license() {
 		if ( ! class_exists( __NAMESPACE__ . '\License' ) ) {
@@ -168,7 +168,7 @@ class Client {
 	/**
 	 * Initialize activation model
 	 *
-	 * @return SureCart\Licensing
+	 * @return SureCartWPMTK\Licensing
 	 */
 	public function activation() {
 		if ( ! class_exists( __NAMESPACE__ . '\Activation' ) ) {
@@ -184,7 +184,7 @@ class Client {
 	/**
 	 * Initialize settings page
 	 *
-	 * @return SureCart\Licensing
+	 * @return SureCartWPMTK\Licensing
 	 */
 	public function settings() {
 		if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
@@ -209,7 +209,10 @@ class Client {
 		}
 
 		// filterable endpoint.
-		return trailingslashit( apply_filters( 'surecart_licensing_endpoint', 'https://api.surecart.com' ) );
+		return trailingslashit(
+			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+			apply_filters( 'surecart_licensing_endpoint', 'https://api.surecart.com' )
+		);
 	}
 
 	/**
@@ -325,6 +328,8 @@ class Client {
 	public function is_local_server() {
 		$remote_addr = sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ?? '' ) );
 		$is_local    = in_array( $remote_addr, array( '127.0.0.1', '::1' ), true );
+
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		return apply_filters( 'surecart_licensing_is_local', $is_local );
 	}
 

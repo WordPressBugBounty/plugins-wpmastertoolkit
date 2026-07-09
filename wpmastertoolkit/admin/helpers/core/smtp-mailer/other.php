@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 class WPMastertoolkit_SMTP_Mailer_Other {
 
 	private static $class_smtp_mailer;
-	private static $settings = array();
+	private static $settings         = array();
 	private static $default_settings = array();
 
 	/**
@@ -34,6 +34,10 @@ class WPMastertoolkit_SMTP_Mailer_Other {
 		$encryption_options      = self::$default_settings['encryption']['value']['options'];
 		$encryption_value        = self::$settings['encryption']['value']['value'] ?? '';
 		$autotls                 = self::$settings['autotls']['value'] ?? self::$default_settings['autotls']['value'];
+		$sender_name             = self::$settings['sender_name']['value'] ?? '';
+		$sender_email            = self::$settings['sender_email']['value'] ?? '';
+		$force_sender            = self::$settings['force_sender']['value'] ?? self::$default_settings['force_sender']['value'];
+		
 		?>
 		<div class="wp-mastertoolkit__section__body other <?php echo 'other' === $active_provider ? 'active' : ''; ?>">
 			<div class="wp-mastertoolkit__section__body__item">
@@ -112,6 +116,29 @@ class WPMastertoolkit_SMTP_Mailer_Other {
 				</div>
 				<div class="wp-mastertoolkit__section__body__item__content">
 					<div class="description"><?php esc_html_e( 'By default, TLS encryption is automatically used if the server supports it (recommended). In some cases, due to server misconfigurations, this can cause issues and may need to be disabled.', 'wpmastertoolkit' ); ?></div>
+				</div>
+			</div>
+
+			<div class="wp-mastertoolkit__section__body__item">
+				<div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e( 'Sender Config', 'wpmastertoolkit' ); ?></div>
+				<div class="wp-mastertoolkit__section__body__item__content">
+					<div class="description"><?php esc_html_e( 'If set, the following sender name/email overrides WordPress core defaults but can still be overridden by other plugins that enables custom sender name/email, e.g. form plugins.', 'wpmastertoolkit' ); ?></div>
+					<br>
+					<div class="wp-mastertoolkit__input-text flex">
+						<div><input type="text" class="" name="<?php echo esc_attr( $option_id . '[sender_name]' ); ?>" value="<?php echo esc_attr( $sender_name ); ?>" placeholder="<?php esc_attr_e( 'Sender name', 'wpmastertoolkit' ); ?>"></div>
+						<div><input type="text" class="" name="<?php echo esc_attr( $option_id . '[sender_email]' ); ?>" value="<?php echo esc_attr( $sender_email ); ?>" placeholder="<?php esc_attr_e( 'Sender email', 'wpmastertoolkit' ); ?>"></div>
+					</div>
+				</div>
+			</div>
+
+			<div class="wp-mastertoolkit__section__body__item">
+				<div class="wp-mastertoolkit__section__body__item__content">
+					<label class="wp-mastertoolkit__toggle">
+						<input type="hidden" name="<?php echo esc_attr( $option_id . '[force_sender]' ); ?>" value="0">
+						<input type="checkbox" name="<?php echo esc_attr( $option_id . '[force_sender]' ); ?>" value="1" <?php checked( $force_sender, '1' ); ?>>
+						<span class="wp-mastertoolkit__toggle__slider round"></span>
+					</label>
+					<span class="wp-mastertoolkit__checkbox__label__text"><?php esc_html_e( 'Force the usage of the sender name/email defined above. It will override those set by other plugins.', 'wpmastertoolkit' ); ?></span>
 				</div>
 			</div>
 		</div>

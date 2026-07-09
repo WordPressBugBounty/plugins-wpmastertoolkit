@@ -1,5 +1,5 @@
 <?php
-namespace SureCart\Licensing;
+namespace SureCartWPMTK\Licensing;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  */
 class Settings {
 	/**
-	 * SureCart\Licensing\Client
+	 * SureCartWPMTK\Licensing\Client
 	 *
 	 * @var object
 	 */
@@ -40,7 +40,7 @@ class Settings {
 	/**
 	 * Create the pages.
 	 *
-	 * @param SureCart\Licensing\Client $client The client.
+	 * @param SureCartWPMTK\Licensing\Client $client The client.
 	 */
 	public function __construct( Client $client ) {
 		$this->client     = $client;
@@ -79,6 +79,7 @@ class Settings {
 	 * Form action URL
 	 */
 	private function form_action_url() {
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 		return apply_filters( 'surecart_client_license_form_action', '' );
 	}
 

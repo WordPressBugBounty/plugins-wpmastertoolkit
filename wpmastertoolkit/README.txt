@@ -2,9 +2,9 @@
 Contributors: ludwigyou
 Tags: all in one plugin, admin, security, disable features, easy to use
 Requires at least: 6.0.0
-Tested up to: 6.9.4
+Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 2.21.0
+Stable tag: 2.22.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
 
@@ -261,9 +261,17 @@ Yes, the Media Encoder module automatically converts uploaded images to WebP for
 
 == Changelog ==
 
+= 2.22.0 =
+Update: Use AI Client API if the WordPress version support it
+Update: Module: Meta Debugger: Add support for WooCommerce product variations and display metadata for each variation directly from the variation editor.
+Fix: Module: SMTP Mailer: Save only the selected provider, move the sender config in each provider, add reset all providers button
+Fix: Pro Module: Two-Factor Authentication: Implement modal enhancements and lock submit button until initialization
+Fix: Pro Module: Cron Manager: Add filters to row actions links.
+Update: Pro Module: Cron Manager: Add a status section.
+
 = 2.21.0 =
-Add: Logs page: Add a dedicated admin interface to browse, monitor, download, and clear plugin log files.
-Add: Module: Meta Debugger: Display metadata for each WooCommerce product variation directly from the variation editor.
+Add: Add a dedicated admin interface to browse, monitor, download, and clear plugin log files.
+Update: Module: Meta Debugger: Display metadata for each WooCommerce product variation directly from the variation editor.
 Update: License page: Add the plugin license constant to the generated `wp-config.php` snippet and embed a help video for faster setup.
 Fix: Module: Redirect Manager: Improve CSV import compatibility by auto-detecting delimiters and using semicolon-separated imports more reliably. Update version annotations for redirect retrieval methods.
 Fix: Module: Media Encoder: Validate attachment IDs earlier and improve error messages during processing.
@@ -277,33 +285,6 @@ Fix: General: Improve plugin checks and related admin-side robustness.
 = 2.20.1 =
 Tweak: Add a toggle button to switch between fullscreen and normal mode for better focus and usability when editing code snippets in various modules.
 Fix: SMTP Mailer: Fix redirect loop when using Gmail/Outlook integrations with incorrect credentials.
-
-= 2.20.0 =
-Add: Module: Block 404 PHP File Scanning: Return `403 Forbidden` for requests to nonexistent `.php` URLs that WordPress resolves as 404, with a bypass filter and `PHP404` log marker.
-Add: Module: Custom COOKIEHASH: Generate and inject a random `COOKIEHASH` constant in `wp-config.php` when activated.
-Add: Module: Redirect Manager: Manage redirects with an integrated interface (create/edit/delete), import/export CSV, and request logs.
-Add: Pro Module: Password Expiration: Enforce password rotation policies by role and force reset flow when passwords expire.
-Security: Global hardening across admin/settings/AJAX flows: explicit capability checks are now systematically enforced (`manage_options`, `edit_post`, `edit_theme_options`, `upload_files`, `install_plugins`, `list_users`) before processing sensitive actions.
-Security: Global CSRF protection hardening: stricter nonce validation has been standardized across settings forms, `save_submenu` handlers, and critical AJAX/admin entry points.
-Security: Global input validation hardening: stricter sanitization/whitelisting for request parameters, dynamic identifiers, filenames, paths, and regex usage.
-Security: Global database safety hardening: search/replace routines now enforce runtime table whitelist checks, strict table matching, and validated/quoted SQL identifiers.
-Security: Global filesystem safety hardening: stronger path-boundary controls, archive/copy/delete validation, and symlink protections to prevent traversal outside allowed roots.
-Security: Global auth/login abuse hardening: improved throttling and anti-enumeration behavior on exposed authentication-related endpoints.
-Security: Module: Password Protection: Replace hardcoded cookie secret with password-derived hash (like WP core post passwords). Each site now has a unique cookie tied to the admin-chosen password. Changing the password invalidates all existing cookies. Fix cookie `secure` flag to respect HTTPS. Validate redirect URL to remain internal to site domain to prevent open redirects.
-Security: Module: Temporary Login: Remove plaintext password from admin URL flow by using short-lived server-side credentials token and one-time password display.
-Security: Module: Temporary Login: Add per-user/IP rate limiting on failed magic-link authentication attempts and clear throttle on successful login.
-Security: Pro Module: Two-Factor Authentication: Harden public (`wp_ajax_nopriv`) endpoints with throttling + uniform responses to reduce enumeration/abuse, and reset rate-limit counters after successful code validation.
-Tweak: Pro Module: Two-Factor Authentication: Improve rate-limit feedback in the login popup with a dedicated user-friendly message and integrated alert styling.
-Security: Module: Force SSL: Build HTTPS redirects from canonical site host (`home_url`) with sanitized request URI instead of user-controlled `HTTP_HOST`.
-Security: Module: Maintenance Mode: Improve bypass token entropy by using cryptographically secure `random_bytes()` instead of weak `md5(time())`.
-Security: Module: Adminer: Complete security overhaul. Credentials are no longer exposed in HTML or URLs. Secure session-based authentication with auto-login, file self-deletion on expiry, and full compatibility with Adminer v5+.
-Security: Pro Module: Add Essentials Shortcodes: Implement whitelist-based access for WordPress options shortcode. Options are blocked by default and must be explicitly whitelisted by an admin. Escape all shortcode outputs to prevent XSS.
-Update: Module: Disallow Access WP Sensible Files: Block access to `readme` and `changelog` files in `.txt`, `.md`, and `.html` formats (alongside `license.txt`). Block direct access to `/wp-admin/install.php`, `/wp-admin/network/menu.php`, `/wp-admin/user/menu.php`, and `/wp-includes/admin-bar.php`.
-Fix: Module: Disallow Bad Requests: Whitelist `/?s=` search queries to prevent 403 errors when using Cyrillic or other non-Latin characters that produce long UTF-encoded URLs.
-Update: Module: Blacklisted Usernames: Add 24 new blacklisted usernames based on recent trends and security reports.
-Update: Module: Auto Regenerate Salt Keys: Change default frequency to "Never" to prevent issues with plugins that use salt keys to encrypt sensitive data (API keys, etc.). Add a warning notice on the settings page explaining potential risks. Automatic regeneration is now opt-in only; manual regeneration remains available.
-Fix: Pro Module: Two-Factor Authentication: Fix incorrect user retrieval in AJAX handlers when login input is an email address, causing 2FA method retrieval and code generation to fail for email-based logins.
-
 
 
 [See changelog for all versions.](https://wpmastertoolkit.com/en/changelog/)

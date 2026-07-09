@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPMasterToolKit\n"
 "Report-Msgid-Bugs-To: Webdeclic <contact@webdeclic.com>\n"
-"POT-Creation-Date: 2026-04-23 18:22+0100\n"
+"POT-Creation-Date: 2026-07-09 10:18+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Webdeclic <contact@webdeclic.com>\n"
 "Language-Team: Webdeclic <contact@webdeclic.com>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Poedit-KeywordsList: "
 "__;_e;esc_html_e;esc_html_x:1,2c;esc_html__;esc_attr_e;esc_attr_x:1,2c;esc_attr__;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;_x:1,2c;_n:1,2;_n_noop:1,2;__ngettext:1,2;__ngettext_noop:1,2;_c,_nc:4c,1,2\n"
 "X-Poedit-Basepath: ..\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: svn\n"
 "X-Poedit-SearchPathExcluded-1: admin/assets/node_modules\n"
@@ -38,6 +38,92 @@ msgstr ""
 #: admin/modules/core/class-apple-touch-icon.php:69
 #, javascript-format, php-format
 msgid "App icon preview: The current image has no alternative text. The file name is: %s"
+msgstr ""
+
+#: admin/class-logs.php:24 admin/class-logs.php:74 admin/class-logs.php:75
+#: admin/helpers/core/redirect-manager/class-redirects-list-table.php:90
+#: admin/modules/core/class-redirect-manager.php:1339 admin/modules/core/class-redirect-manager.php:1350
+#: admin/modules/core/class-redirect-manager.php:1885
+msgid "Logs"
+msgstr ""
+
+#: admin/class-logs.php:45
+msgid "No log files available."
+msgstr ""
+
+#: admin/class-logs.php:46
+msgid "Select a log file"
+msgstr ""
+
+#: admin/class-logs.php:47
+msgid "Error loading log files"
+msgstr ""
+
+#: admin/class-logs.php:48
+msgid "Error loading log content"
+msgstr ""
+
+#: admin/class-logs.php:49
+msgid "Error downloading log file"
+msgstr ""
+
+#: admin/class-logs.php:50
+msgid "Please select a log file first"
+msgstr ""
+
+#: admin/class-logs.php:51
+msgid "Delete logs older than how many days?"
+msgstr ""
+
+#: admin/class-logs.php:52
+msgid "Please enter a valid number of days"
+msgstr ""
+
+#: admin/class-logs.php:53
+msgid "Please enter a number of days"
+msgstr ""
+
+#: admin/class-logs.php:54
+msgid "Are you sure you want to delete logs older than"
+msgstr ""
+
+#: admin/class-logs.php:55
+msgid "days?"
+msgstr ""
+
+#: admin/class-logs.php:56
+msgid "Error clearing logs"
+msgstr ""
+
+#: admin/class-logs.php:57
+msgid "New entries detected"
+msgstr ""
+
+#: admin/class-logs.php:58
+msgid "No new entries"
+msgstr ""
+
+#: admin/class-logs.php:106 admin/class-logs.php:155 admin/class-logs.php:211 admin/class-logs.php:257
+msgid "Invalid nonce. Please refresh the page and try again."
+msgstr ""
+
+#: admin/class-logs.php:111 admin/class-logs.php:160 admin/class-logs.php:216 admin/class-logs.php:262
+#: admin/class-settings.php:711 admin/class-settings.php:914
+#: admin/modules/core/class-blacklisted-usernames.php:151 admin/modules/core/class-content-duplication.php:52
+msgid "You do not have permission to perform this action."
+msgstr ""
+
+#: admin/class-logs.php:166 admin/class-logs.php:269
+msgid "Invalid filename"
+msgstr ""
+
+#: admin/class-logs.php:171
+msgid "Log file not found"
+msgstr ""
+
+#: admin/class-logs.php:240
+#, php-format
+msgid "%d log file(s) deleted successfully."
 msgstr ""
 
 #: admin/class-modules-data.php:810
@@ -1533,7 +1619,7 @@ msgstr ""
 msgid "Parse error: syntax error, unexpected end of snippet"
 msgstr ""
 
-#: admin/class-settings.php:94 admin/modules/core/class-redirect-manager.php:1846
+#: admin/class-settings.php:94 admin/modules/core/class-redirect-manager.php:1852
 msgid "Modules"
 msgstr ""
 
@@ -1542,46 +1628,41 @@ msgid "WPMasterToolkit Settings"
 msgstr ""
 
 #: admin/class-settings.php:108 admin/modules/core/class-media-encoder.php:449
-#: admin/templates/core/page-settings.php:28 admin/templates/core/submenu/header.php:22
+#: admin/templates/core/page-settings.php:20 admin/templates/core/submenu/header.php:22
 msgid "WPMasterToolkit"
 msgstr ""
 
-#: admin/class-settings.php:635
+#: admin/class-settings.php:689
 msgid "Scheduled module assets regeneration failed: "
 msgstr ""
 
-#: admin/class-settings.php:640
+#: admin/class-settings.php:694
 msgid "Scheduled module assets regeneration completed."
 msgstr ""
 
-#: admin/class-settings.php:640 admin/class-settings.php:676
+#: admin/class-settings.php:694 admin/class-settings.php:730
 #, php-format
 msgid "%d modules processed."
 msgstr ""
 
-#: admin/class-settings.php:657 admin/class-settings.php:860
-#: admin/modules/core/class-blacklisted-usernames.php:151 admin/modules/core/class-content-duplication.php:52
-msgid "You do not have permission to perform this action."
-msgstr ""
-
-#: admin/class-settings.php:665
+#: admin/class-settings.php:719
 msgid "Module assets regeneration failed: "
 msgstr ""
 
-#: admin/class-settings.php:669
+#: admin/class-settings.php:723
 msgid "An error occurred while regenerating module assets. Please check the logs."
 msgstr ""
 
-#: admin/class-settings.php:676
+#: admin/class-settings.php:730
 msgid "Module assets regenerated successfully."
 msgstr ""
 
-#: admin/class-settings.php:682
+#: admin/class-settings.php:736
 #, php-format
 msgid "Module assets regenerated successfully. %d modules processed."
 msgstr ""
 
-#: admin/class-settings.php:874
+#: admin/class-settings.php:928
 msgid "An error occurred while gathering system information."
 msgstr ""
 
@@ -1589,19 +1670,19 @@ msgstr ""
 msgid "Manage License"
 msgstr ""
 
-#: admin/class-surecart.php:83 licensing/src/Settings.php:289
+#: admin/class-surecart.php:87 licensing/src/Settings.php:293
 msgid "Activate License"
 msgstr ""
 
-#: admin/class-surecart.php:83
+#: admin/class-surecart.php:87
 msgid "Upgrade Pro"
 msgstr ""
 
-#: admin/class-surecart.php:106
+#: admin/class-surecart.php:110
 msgid "Note:"
 msgstr ""
 
-#: admin/class-surecart.php:111
+#: admin/class-surecart.php:115
 #, php-format
 msgid ""
 "A new version %s is available. If you activate your license, you will get the latest version automatically."
@@ -1642,7 +1723,7 @@ msgid "ID"
 msgstr ""
 
 #: admin/helpers/core/mail-catcher/class-logs-list-table.php:149
-#: admin/helpers/pro/smtp-mailer/pepipost-catcher.php:339 admin/modules/core/class-mail-catcher.php:830
+#: admin/helpers/pro/smtp-mailer/pepipost-catcher.php:341 admin/modules/core/class-mail-catcher.php:830
 msgid "Error"
 msgstr ""
 
@@ -1665,7 +1746,7 @@ msgstr ""
 #: admin/helpers/core/redirect-manager/class-logs-list-table.php:160
 #: admin/helpers/core/redirect-manager/class-redirects-list-table.php:71
 #: admin/helpers/core/redirect-manager/class-redirects-list-table.php:149
-#: admin/helpers/pro/cron-manager/class-event-list-table.php:375 admin/modules/core/class-code-snippets.php:267
+#: admin/helpers/pro/cron-manager/class-event-list-table.php:379 admin/modules/core/class-code-snippets.php:273
 #: admin/modules/core/class-limit-login-attempts.php:562
 #: admin/modules/core/class-media-library-post-folders.php:345 admin/modules/core/class-temporary-login.php:434
 #: admin/modules/pro/class-admin-menu-organizer.php:916
@@ -1720,8 +1801,8 @@ msgid "Url"
 msgstr ""
 
 #: admin/helpers/core/redirect-manager/class-redirects-list-table.php:86
-#: admin/modules/core/class-code-snippets.php:244 admin/modules/core/class-code-snippets.php:687
-#: admin/modules/core/class-redirect-manager.php:1801
+#: admin/modules/core/class-code-snippets.php:250 admin/modules/core/class-code-snippets.php:693
+#: admin/modules/core/class-redirect-manager.php:1807
 #: admin/modules/core/class-register-custom-content-types.php:166 admin/modules/pro/class-link-shortener.php:123
 #: admin/templates/core/register-custom-content-types/edit-post-cpt.php:51
 #: admin/templates/core/register-custom-content-types/edit-taxonomy.php:51
@@ -1738,14 +1819,8 @@ msgid "Model"
 msgstr ""
 
 #: admin/helpers/core/redirect-manager/class-redirects-list-table.php:89
-#: admin/modules/core/class-redirect-manager.php:1863
+#: admin/modules/core/class-redirect-manager.php:1869
 msgid "Query Parameters"
-msgstr ""
-
-#: admin/helpers/core/redirect-manager/class-redirects-list-table.php:90
-#: admin/modules/core/class-redirect-manager.php:1333 admin/modules/core/class-redirect-manager.php:1344
-#: admin/modules/core/class-redirect-manager.php:1879
-msgid "Logs"
 msgstr ""
 
 #: admin/helpers/core/redirect-manager/class-redirects-list-table.php:133
@@ -3080,31 +3155,31 @@ msgstr ""
 msgid "YouTube Icon"
 msgstr ""
 
-#: admin/helpers/core/smtp-mailer/mailer-catcher.php:113
+#: admin/helpers/core/smtp-mailer/mailer-catcher.php:116
 msgid "The selected provider not found."
 msgstr ""
 
-#: admin/helpers/core/smtp-mailer/other.php:40
+#: admin/helpers/core/smtp-mailer/other.php:44
 msgid "SMTP Config"
 msgstr ""
 
-#: admin/helpers/core/smtp-mailer/other.php:42
+#: admin/helpers/core/smtp-mailer/other.php:46
 msgid "If set, the following SMTP service/account wil be used to deliver your emails."
 msgstr ""
 
-#: admin/helpers/core/smtp-mailer/other.php:49
+#: admin/helpers/core/smtp-mailer/other.php:53
 msgid "Host"
 msgstr ""
 
-#: admin/helpers/core/smtp-mailer/other.php:54
+#: admin/helpers/core/smtp-mailer/other.php:58
 msgid "Port"
 msgstr ""
 
-#: admin/helpers/core/smtp-mailer/other.php:68
+#: admin/helpers/core/smtp-mailer/other.php:72
 msgid "Authentication"
 msgstr ""
 
-#: admin/helpers/core/smtp-mailer/other.php:76 admin/modules/core/class-temporary-login.php:393
+#: admin/helpers/core/smtp-mailer/other.php:80 admin/modules/core/class-temporary-login.php:393
 #: admin/modules/pro/class-custom-login-design.php:149 admin/modules/pro/class-custom-login-design.php:151
 #: admin/modules/pro/class-custom-login-design.php:278 admin/modules/pro/class-custom-login-design.php:280
 #: admin/modules/pro/class-custom-login-design.php:407 admin/modules/pro/class-custom-login-design.php:409
@@ -3125,7 +3200,7 @@ msgstr ""
 msgid "Username"
 msgstr ""
 
-#: admin/helpers/core/smtp-mailer/other.php:80 admin/modules/pro/class-custom-login-design.php:150
+#: admin/helpers/core/smtp-mailer/other.php:84 admin/modules/pro/class-custom-login-design.php:150
 #: admin/modules/pro/class-custom-login-design.php:279 admin/modules/pro/class-custom-login-design.php:408
 #: admin/modules/pro/class-custom-login-design.php:537 admin/modules/pro/class-custom-login-design.php:666
 #: admin/modules/pro/class-custom-login-design.php:795 admin/modules/pro/class-custom-login-design.php:924
@@ -3139,25 +3214,94 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: admin/helpers/core/smtp-mailer/other.php:86
+#: admin/helpers/core/smtp-mailer/other.php:90
 msgid "Encryption Type"
 msgstr ""
 
-#: admin/helpers/core/smtp-mailer/other.php:110
+#: admin/helpers/core/smtp-mailer/other.php:114
 msgid "Auto TLS"
 msgstr ""
 
-#: admin/helpers/core/smtp-mailer/other.php:114
+#: admin/helpers/core/smtp-mailer/other.php:118
 msgid ""
 "By default, TLS encryption is automatically used if the server supports it (recommended). In some cases, due "
 "to server misconfigurations, this can cause issues and may need to be disabled."
 msgstr ""
 
-#: admin/helpers/core/smtp-mailer/php.php:21
+#: admin/helpers/core/smtp-mailer/other.php:123 admin/helpers/core/smtp-mailer/php.php:40
+#: admin/helpers/pro/smtp-mailer/aws.php:63 admin/helpers/pro/smtp-mailer/brevo.php:53
+#: admin/helpers/pro/smtp-mailer/elasticemail.php:48 admin/helpers/pro/smtp-mailer/gmail.php:145
+#: admin/helpers/pro/smtp-mailer/mailersend.php:66 admin/helpers/pro/smtp-mailer/mailgun.php:62
+#: admin/helpers/pro/smtp-mailer/mailjet.php:53 admin/helpers/pro/smtp-mailer/mandrill.php:48
+#: admin/helpers/pro/smtp-mailer/outlook.php:144 admin/helpers/pro/smtp-mailer/pepipost.php:48
+#: admin/helpers/pro/smtp-mailer/postmark.php:53 admin/helpers/pro/smtp-mailer/resend.php:48
+#: admin/helpers/pro/smtp-mailer/sendgrid.php:53 admin/helpers/pro/smtp-mailer/sendlayer.php:48
+#: admin/helpers/pro/smtp-mailer/sendpulse.php:54 admin/helpers/pro/smtp-mailer/smtp2go.php:48
+#: admin/helpers/pro/smtp-mailer/smtpcom.php:52 admin/helpers/pro/smtp-mailer/sparkpost.php:57
+#: admin/helpers/pro/smtp-mailer/zohomail.php:152
+msgid "Sender Config"
+msgstr ""
+
+#: admin/helpers/core/smtp-mailer/other.php:125 admin/helpers/core/smtp-mailer/php.php:42
+#: admin/helpers/pro/smtp-mailer/aws.php:65 admin/helpers/pro/smtp-mailer/brevo.php:55
+#: admin/helpers/pro/smtp-mailer/elasticemail.php:50 admin/helpers/pro/smtp-mailer/gmail.php:147
+#: admin/helpers/pro/smtp-mailer/mailersend.php:68 admin/helpers/pro/smtp-mailer/mailgun.php:64
+#: admin/helpers/pro/smtp-mailer/mailjet.php:55 admin/helpers/pro/smtp-mailer/mandrill.php:50
+#: admin/helpers/pro/smtp-mailer/outlook.php:146 admin/helpers/pro/smtp-mailer/pepipost.php:50
+#: admin/helpers/pro/smtp-mailer/postmark.php:55 admin/helpers/pro/smtp-mailer/resend.php:50
+#: admin/helpers/pro/smtp-mailer/sendgrid.php:55 admin/helpers/pro/smtp-mailer/sendlayer.php:50
+#: admin/helpers/pro/smtp-mailer/sendpulse.php:56 admin/helpers/pro/smtp-mailer/smtp2go.php:50
+#: admin/helpers/pro/smtp-mailer/smtpcom.php:54 admin/helpers/pro/smtp-mailer/sparkpost.php:59
+#: admin/helpers/pro/smtp-mailer/zohomail.php:154
+msgid ""
+"If set, the following sender name/email overrides WordPress core defaults but can still be overridden by "
+"other plugins that enables custom sender name/email, e.g. form plugins."
+msgstr ""
+
+#: admin/helpers/core/smtp-mailer/other.php:128 admin/helpers/core/smtp-mailer/php.php:45
+#: admin/helpers/pro/smtp-mailer/aws.php:68 admin/helpers/pro/smtp-mailer/brevo.php:58
+#: admin/helpers/pro/smtp-mailer/elasticemail.php:53 admin/helpers/pro/smtp-mailer/gmail.php:150
+#: admin/helpers/pro/smtp-mailer/mailersend.php:71 admin/helpers/pro/smtp-mailer/mailgun.php:67
+#: admin/helpers/pro/smtp-mailer/mailjet.php:58 admin/helpers/pro/smtp-mailer/mandrill.php:53
+#: admin/helpers/pro/smtp-mailer/outlook.php:149 admin/helpers/pro/smtp-mailer/pepipost.php:53
+#: admin/helpers/pro/smtp-mailer/postmark.php:58 admin/helpers/pro/smtp-mailer/resend.php:53
+#: admin/helpers/pro/smtp-mailer/sendgrid.php:58 admin/helpers/pro/smtp-mailer/sendlayer.php:53
+#: admin/helpers/pro/smtp-mailer/sendpulse.php:59 admin/helpers/pro/smtp-mailer/smtp2go.php:53
+#: admin/helpers/pro/smtp-mailer/sparkpost.php:62 admin/helpers/pro/smtp-mailer/zohomail.php:157
+msgid "Sender name"
+msgstr ""
+
+#: admin/helpers/core/smtp-mailer/other.php:129 admin/helpers/core/smtp-mailer/php.php:46
+#: admin/helpers/pro/smtp-mailer/aws.php:69 admin/helpers/pro/smtp-mailer/brevo.php:59
+#: admin/helpers/pro/smtp-mailer/elasticemail.php:54 admin/helpers/pro/smtp-mailer/gmail.php:151
+#: admin/helpers/pro/smtp-mailer/mailersend.php:72 admin/helpers/pro/smtp-mailer/mailgun.php:68
+#: admin/helpers/pro/smtp-mailer/mailjet.php:59 admin/helpers/pro/smtp-mailer/mandrill.php:54
+#: admin/helpers/pro/smtp-mailer/outlook.php:150 admin/helpers/pro/smtp-mailer/pepipost.php:54
+#: admin/helpers/pro/smtp-mailer/postmark.php:59 admin/helpers/pro/smtp-mailer/resend.php:54
+#: admin/helpers/pro/smtp-mailer/sendgrid.php:59 admin/helpers/pro/smtp-mailer/sendlayer.php:54
+#: admin/helpers/pro/smtp-mailer/sendpulse.php:60 admin/helpers/pro/smtp-mailer/smtp2go.php:54
+#: admin/helpers/pro/smtp-mailer/smtpcom.php:57 admin/helpers/pro/smtp-mailer/sparkpost.php:63
+msgid "Sender email"
+msgstr ""
+
+#: admin/helpers/core/smtp-mailer/other.php:141 admin/helpers/core/smtp-mailer/php.php:58
+#: admin/helpers/pro/smtp-mailer/aws.php:81 admin/helpers/pro/smtp-mailer/brevo.php:71
+#: admin/helpers/pro/smtp-mailer/elasticemail.php:66 admin/helpers/pro/smtp-mailer/gmail.php:163
+#: admin/helpers/pro/smtp-mailer/mailersend.php:84 admin/helpers/pro/smtp-mailer/mailgun.php:80
+#: admin/helpers/pro/smtp-mailer/mailjet.php:71 admin/helpers/pro/smtp-mailer/mandrill.php:66
+#: admin/helpers/pro/smtp-mailer/outlook.php:162 admin/helpers/pro/smtp-mailer/pepipost.php:66
+#: admin/helpers/pro/smtp-mailer/postmark.php:71 admin/helpers/pro/smtp-mailer/resend.php:66
+#: admin/helpers/pro/smtp-mailer/sendgrid.php:71 admin/helpers/pro/smtp-mailer/sendlayer.php:66
+#: admin/helpers/pro/smtp-mailer/sendpulse.php:72 admin/helpers/pro/smtp-mailer/smtp2go.php:66
+#: admin/helpers/pro/smtp-mailer/smtpcom.php:69 admin/helpers/pro/smtp-mailer/sparkpost.php:75
+msgid "Force the usage of the sender name/email defined above. It will override those set by other plugins."
+msgstr ""
+
+#: admin/helpers/core/smtp-mailer/php.php:35
 msgid "PHP Config"
 msgstr ""
 
-#: admin/helpers/core/smtp-mailer/php.php:22
+#: admin/helpers/core/smtp-mailer/php.php:36
 msgid "You currently have the Default (none) mailer selected, which won't improve email deliverability."
 msgstr ""
 
@@ -3211,85 +3355,85 @@ msgstr ""
 msgid "Late events"
 msgstr ""
 
-#: admin/helpers/pro/cron-manager/class-event-list-table.php:337
+#: admin/helpers/pro/cron-manager/class-event-list-table.php:338
 msgid "Run now"
 msgstr ""
 
-#: admin/helpers/pro/cron-manager/class-event-list-table.php:350
+#: admin/helpers/pro/cron-manager/class-event-list-table.php:352
 msgid "Resume this hook"
 msgstr ""
 
-#: admin/helpers/pro/cron-manager/class-event-list-table.php:361
+#: admin/helpers/pro/cron-manager/class-event-list-table.php:364
 msgid "Pause this hook"
 msgstr ""
 
-#: admin/helpers/pro/cron-manager/class-event-list-table.php:395
+#: admin/helpers/pro/cron-manager/class-event-list-table.php:400
 #, php-format
 msgid "Delete all events with this hook (%s)"
 msgstr ""
 
-#: admin/helpers/pro/cron-manager/class-event-list-table.php:428
+#: admin/helpers/pro/cron-manager/class-event-list-table.php:433
 msgid "This is a WordPress core event and cannot be deleted"
 msgstr ""
 
-#: admin/helpers/pro/cron-manager/class-event-list-table.php:445
-#: admin/helpers/pro/cron-manager/class-event-list-table.php:457
+#: admin/helpers/pro/cron-manager/class-event-list-table.php:450
+#: admin/helpers/pro/cron-manager/class-event-list-table.php:462
 #, php-format
 msgid "PHP cron event (%s)"
 msgstr ""
 
-#: admin/helpers/pro/cron-manager/class-event-list-table.php:459
+#: admin/helpers/pro/cron-manager/class-event-list-table.php:464
 msgid "PHP cron event"
 msgstr ""
 
-#: admin/helpers/pro/cron-manager/class-event-list-table.php:465
+#: admin/helpers/pro/cron-manager/class-event-list-table.php:470
 msgid "Needs checking"
 msgstr ""
 
-#: admin/helpers/pro/cron-manager/class-event-list-table.php:473
+#: admin/helpers/pro/cron-manager/class-event-list-table.php:478
 #, php-format
 msgid "Line %1$s: %2$s"
 msgstr ""
 
-#: admin/helpers/pro/cron-manager/class-event-list-table.php:486
-#: admin/helpers/pro/cron-manager/class-event-list-table.php:494
+#: admin/helpers/pro/cron-manager/class-event-list-table.php:491
+#: admin/helpers/pro/cron-manager/class-event-list-table.php:499
 #, php-format
 msgid "URL cron event (%s)"
 msgstr ""
 
-#: admin/helpers/pro/cron-manager/class-event-list-table.php:496
+#: admin/helpers/pro/cron-manager/class-event-list-table.php:501
 msgid "URL cron event"
 msgstr ""
 
-#: admin/helpers/pro/cron-manager/class-event-list-table.php:508
+#: admin/helpers/pro/cron-manager/class-event-list-table.php:513
 msgid "Paused"
 msgstr ""
 
-#: admin/helpers/pro/cron-manager/class-event-list-table.php:544 admin/modules/core/class-smtp-mailer.php:656
+#: admin/helpers/pro/cron-manager/class-event-list-table.php:549 admin/modules/core/class-smtp-mailer.php:749
 msgid "None"
 msgstr ""
 
-#: admin/helpers/pro/cron-manager/class-event-list-table.php:581
+#: admin/helpers/pro/cron-manager/class-event-list-table.php:586
 #, php-format
 msgid "%s ago"
 msgstr ""
 
-#: admin/helpers/pro/cron-manager/class-event-list-table.php:619
+#: admin/helpers/pro/cron-manager/class-event-list-table.php:624
 #, php-format
 msgid ""
 "This interval is less than the %1$s constant which is set to %2$s seconds. Events that use it may not run on "
 "time."
 msgstr ""
 
-#: admin/helpers/pro/cron-manager/class-event-list-table.php:628
+#: admin/helpers/pro/cron-manager/class-event-list-table.php:633
 msgid "Non-repeating"
 msgstr ""
 
-#: admin/helpers/pro/cron-manager/class-event-list-table.php:640
+#: admin/helpers/pro/cron-manager/class-event-list-table.php:645
 msgid "There are currently no scheduled cron events."
 msgstr ""
 
-#: admin/helpers/pro/cron-manager/class-event-list-table.php:642
+#: admin/helpers/pro/cron-manager/class-event-list-table.php:647
 msgid "No matching cron events."
 msgstr ""
 
@@ -3343,565 +3487,565 @@ msgstr ""
 msgid "Amazon SES Error: %s"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/aws.php:34
+#: admin/helpers/pro/smtp-mailer/aws.php:40
 msgid "Amazon SES Config"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/aws.php:36
+#: admin/helpers/pro/smtp-mailer/aws.php:42
 msgid ""
 "Amazon Simple Email Service (Amazon SES) is a highly reliable and scalable transactional email service used "
 "by businesses of all sizes to send billions of emails every month. It’s designed for developers and companies "
 "that need high deliverability, detailed analytics, and seamless integration with other AWS services."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/aws.php:39
+#: admin/helpers/pro/smtp-mailer/aws.php:45
 msgid "Access Key ID"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/aws.php:43
+#: admin/helpers/pro/smtp-mailer/aws.php:49
 msgid "Secret Access Key"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/aws.php:68
+#: admin/helpers/pro/smtp-mailer/aws.php:97
 msgid "Africa (Cape Town)"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/aws.php:69
+#: admin/helpers/pro/smtp-mailer/aws.php:98
 msgid "Asia Pacific (Jakarta)"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/aws.php:70
+#: admin/helpers/pro/smtp-mailer/aws.php:99
 msgid "Asia Pacific (Mumbai)"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/aws.php:71
+#: admin/helpers/pro/smtp-mailer/aws.php:100
 msgid "Asia Pacific (Osaka)"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/aws.php:72
+#: admin/helpers/pro/smtp-mailer/aws.php:101
 msgid "Asia Pacific (Tokyo)"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/aws.php:73
+#: admin/helpers/pro/smtp-mailer/aws.php:102
 msgid "Asia Pacific (Seoul)"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/aws.php:74
+#: admin/helpers/pro/smtp-mailer/aws.php:103
 msgid "Asia Pacific (Singapore)"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/aws.php:75
+#: admin/helpers/pro/smtp-mailer/aws.php:104
 msgid "Asia Pacific (Sydney)"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/aws.php:76
+#: admin/helpers/pro/smtp-mailer/aws.php:105
 msgid "AWS GovCloud (US-East)"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/aws.php:77
+#: admin/helpers/pro/smtp-mailer/aws.php:106
 msgid "AWS GovCloud (US-West)"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/aws.php:78
+#: admin/helpers/pro/smtp-mailer/aws.php:107
 msgid "Canada (Central)"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/aws.php:79
+#: admin/helpers/pro/smtp-mailer/aws.php:108
 msgid "Europe (Ireland)"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/aws.php:80
+#: admin/helpers/pro/smtp-mailer/aws.php:109
 msgid "Europe (London)"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/aws.php:81
+#: admin/helpers/pro/smtp-mailer/aws.php:110
 msgid "Europe (Frankfurt)"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/aws.php:82
+#: admin/helpers/pro/smtp-mailer/aws.php:111
 msgid "Europe (Milan)"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/aws.php:83
+#: admin/helpers/pro/smtp-mailer/aws.php:112
 msgid "Europe (Paris)"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/aws.php:84
+#: admin/helpers/pro/smtp-mailer/aws.php:113
 msgid "Europe (Stockholm)"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/aws.php:85
+#: admin/helpers/pro/smtp-mailer/aws.php:114
 msgid "Middle East (Bahrain)"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/aws.php:86
+#: admin/helpers/pro/smtp-mailer/aws.php:115
 msgid "South America (São Paulo)"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/aws.php:87
+#: admin/helpers/pro/smtp-mailer/aws.php:116
 msgid "US East (N. Virginia)"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/aws.php:88
+#: admin/helpers/pro/smtp-mailer/aws.php:117
 msgid "US East (Ohio)"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/aws.php:89
+#: admin/helpers/pro/smtp-mailer/aws.php:118
 msgid "US West (N. California)"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/aws.php:90
+#: admin/helpers/pro/smtp-mailer/aws.php:119
 msgid "US West (Oregon)"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/aws.php:91
+#: admin/helpers/pro/smtp-mailer/aws.php:120
 msgid "Israel (Tel Aviv)"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/aws.php:130
+#: admin/helpers/pro/smtp-mailer/aws.php:159
 #, php-format
 msgid "Failed to initialize AWS SES Client: %s"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/aws.php:210
+#: admin/helpers/pro/smtp-mailer/aws.php:239
 msgid "AWS credentials validated successfully."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/aws.php:216
+#: admin/helpers/pro/smtp-mailer/aws.php:245
 msgid "Failed to validate AWS credentials."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/aws.php:224
+#: admin/helpers/pro/smtp-mailer/aws.php:253
 #, php-format
 msgid "AWS credential validation failed: %s"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/brevo.php:32
+#: admin/helpers/pro/smtp-mailer/brevo.php:38
 msgid "Brevo Config"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/brevo.php:34
+#: admin/helpers/pro/smtp-mailer/brevo.php:40
 msgid ""
 "Brevo is a transactional email provider with scalable price plans, so it's suitable for any size of business."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/brevo.php:37 admin/helpers/pro/smtp-mailer/elasticemail.php:36
-#: admin/helpers/pro/smtp-mailer/mailersend.php:37 admin/helpers/pro/smtp-mailer/mailgun.php:38
-#: admin/helpers/pro/smtp-mailer/mailjet.php:37 admin/helpers/pro/smtp-mailer/mandrill.php:36
-#: admin/helpers/pro/smtp-mailer/pepipost.php:36 admin/helpers/pro/smtp-mailer/resend.php:36
-#: admin/helpers/pro/smtp-mailer/sendgrid.php:37 admin/helpers/pro/smtp-mailer/sendlayer.php:36
-#: admin/helpers/pro/smtp-mailer/sendpulse.php:38 admin/helpers/pro/smtp-mailer/smtp2go.php:36
-#: admin/helpers/pro/smtp-mailer/smtpcom.php:37 admin/helpers/pro/smtp-mailer/sparkpost.php:37
+#: admin/helpers/pro/smtp-mailer/brevo.php:43 admin/helpers/pro/smtp-mailer/elasticemail.php:42
+#: admin/helpers/pro/smtp-mailer/mailersend.php:43 admin/helpers/pro/smtp-mailer/mailgun.php:44
+#: admin/helpers/pro/smtp-mailer/mailjet.php:43 admin/helpers/pro/smtp-mailer/mandrill.php:42
+#: admin/helpers/pro/smtp-mailer/pepipost.php:42 admin/helpers/pro/smtp-mailer/resend.php:42
+#: admin/helpers/pro/smtp-mailer/sendgrid.php:43 admin/helpers/pro/smtp-mailer/sendlayer.php:42
+#: admin/helpers/pro/smtp-mailer/sendpulse.php:44 admin/helpers/pro/smtp-mailer/smtp2go.php:42
+#: admin/helpers/pro/smtp-mailer/smtpcom.php:42 admin/helpers/pro/smtp-mailer/sparkpost.php:43
 msgid "API Key"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/brevo.php:41 admin/helpers/pro/smtp-mailer/mailgun.php:42
-#: admin/helpers/pro/smtp-mailer/sendgrid.php:41
+#: admin/helpers/pro/smtp-mailer/brevo.php:47 admin/helpers/pro/smtp-mailer/mailgun.php:48
+#: admin/helpers/pro/smtp-mailer/sendgrid.php:47
 msgid "Sending Domain"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/elasticemail.php:31
+#: admin/helpers/pro/smtp-mailer/elasticemail.php:37
 msgid "Elastic Email Config"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/elasticemail.php:33
+#: admin/helpers/pro/smtp-mailer/elasticemail.php:39
 msgid ""
 "Elastic Email is a cloud-based email marketing platform offering tools for email campaigns, automation, "
 "transactional emails, and analytics, designed for businesses of all sizes."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/gmail-catcher.php:120
+#: admin/helpers/pro/smtp-mailer/gmail-catcher.php:122
 msgid "The response object is invalid (missing getId method)."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/gmail-catcher.php:126
+#: admin/helpers/pro/smtp-mailer/gmail-catcher.php:128
 msgid "The email message ID is missing."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/gmail-catcher.php:251
+#: admin/helpers/pro/smtp-mailer/gmail-catcher.php:253
 msgid "Please re-grant Google app permissions!"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/gmail-catcher.php:252
+#: admin/helpers/pro/smtp-mailer/gmail-catcher.php:254
 msgid "Go to WPMastertoolkit plugin settings page. Click the \"Remove OAuth Connection\" button."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/gmail-catcher.php:253
+#: admin/helpers/pro/smtp-mailer/gmail-catcher.php:255
 msgid "Then click the \"Allow plugin to send emails using your Google account\" button and re-enable access."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/gmail-catcher.php:260
+#: admin/helpers/pro/smtp-mailer/gmail-catcher.php:262
 msgid "Authorization failed. Please check your Gmail API credentials."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/gmail-catcher.php:267
+#: admin/helpers/pro/smtp-mailer/gmail-catcher.php:269
 msgid "Gmail API quota exceeded. Please wait and try again later."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/gmail.php:78
+#: admin/helpers/pro/smtp-mailer/gmail.php:83
 msgid "Gmail Config"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/gmail.php:80
+#: admin/helpers/pro/smtp-mailer/gmail.php:85
 msgid ""
 "The Gmail mailer works well for sites that send low numbers of emails. However, Gmail's API has rate "
 "limitations and a number of additional restrictions that can lead to challenges during setup."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/gmail.php:83 admin/helpers/pro/smtp-mailer/zohomail.php:86
+#: admin/helpers/pro/smtp-mailer/gmail.php:88 admin/helpers/pro/smtp-mailer/zohomail.php:88
 msgid "Client ID"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/gmail.php:87 admin/helpers/pro/smtp-mailer/outlook.php:86
-#: admin/helpers/pro/smtp-mailer/zohomail.php:90
+#: admin/helpers/pro/smtp-mailer/gmail.php:92 admin/helpers/pro/smtp-mailer/outlook.php:91
+#: admin/helpers/pro/smtp-mailer/zohomail.php:92
 msgid "Client Secret"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/gmail.php:93 admin/helpers/pro/smtp-mailer/zohomail.php:104
+#: admin/helpers/pro/smtp-mailer/gmail.php:98 admin/helpers/pro/smtp-mailer/zohomail.php:106
 msgid "Authorized Redirect URI"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/gmail.php:104
+#: admin/helpers/pro/smtp-mailer/gmail.php:109
 msgid "Please copy this URL into the \"Authorized redirect URIs\" field of your Google web application."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/gmail.php:109 admin/helpers/pro/smtp-mailer/outlook.php:108
-#: admin/helpers/pro/smtp-mailer/zohomail.php:120
+#: admin/helpers/pro/smtp-mailer/gmail.php:114 admin/helpers/pro/smtp-mailer/outlook.php:113
+#: admin/helpers/pro/smtp-mailer/zohomail.php:122
 msgid "Authorization Connect"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/gmail.php:113 admin/helpers/pro/smtp-mailer/gmail.php:121
-#: admin/helpers/pro/smtp-mailer/outlook.php:112 admin/helpers/pro/smtp-mailer/outlook.php:120
-#: admin/helpers/pro/smtp-mailer/zohomail.php:124 admin/helpers/pro/smtp-mailer/zohomail.php:131
+#: admin/helpers/pro/smtp-mailer/gmail.php:118 admin/helpers/pro/smtp-mailer/gmail.php:126
+#: admin/helpers/pro/smtp-mailer/outlook.php:117 admin/helpers/pro/smtp-mailer/outlook.php:125
+#: admin/helpers/pro/smtp-mailer/zohomail.php:126 admin/helpers/pro/smtp-mailer/zohomail.php:133
 msgid "Confirm Authorization"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/gmail.php:115 admin/helpers/pro/smtp-mailer/outlook.php:114
-#: admin/helpers/pro/smtp-mailer/zohomail.php:126
+#: admin/helpers/pro/smtp-mailer/gmail.php:120 admin/helpers/pro/smtp-mailer/outlook.php:119
+#: admin/helpers/pro/smtp-mailer/zohomail.php:128
 msgid "You need to save settings with Client ID and Client Secret before you can proceed."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/gmail.php:123 admin/helpers/pro/smtp-mailer/outlook.php:122
-#: admin/helpers/pro/smtp-mailer/zohomail.php:133
+#: admin/helpers/pro/smtp-mailer/gmail.php:128 admin/helpers/pro/smtp-mailer/outlook.php:127
+#: admin/helpers/pro/smtp-mailer/zohomail.php:135
 msgid "Click the button above to confirm authorization."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/gmail.php:128 admin/helpers/pro/smtp-mailer/outlook.php:127
-#: admin/helpers/pro/smtp-mailer/zohomail.php:138
+#: admin/helpers/pro/smtp-mailer/gmail.php:133 admin/helpers/pro/smtp-mailer/outlook.php:132
+#: admin/helpers/pro/smtp-mailer/zohomail.php:140
 msgid "Remove Authorization"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/mailersend.php:32
+#: admin/helpers/pro/smtp-mailer/mailersend.php:38
 msgid "Mailersend Config"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/mailersend.php:34
+#: admin/helpers/pro/smtp-mailer/mailersend.php:40
 msgid ""
 "Mailersend is a reliable transactional email provider with powerful features. They offer 500 emails per month "
 "for free and have affordable plans for higher volumes. Their modern API and excellent deliverability make "
 "them a great choice for WordPress sites."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/mailersend.php:51
+#: admin/helpers/pro/smtp-mailer/mailersend.php:57
 msgid "Professional Plan"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/mailersend.php:55
+#: admin/helpers/pro/smtp-mailer/mailersend.php:61
 msgid ""
 "Activate if you have a Professional or higher plan with MailerSend. This allows you to use custom headers."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/mailgun.php:33
+#: admin/helpers/pro/smtp-mailer/mailgun.php:39
 msgid "Mailgun Config"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/mailgun.php:35
+#: admin/helpers/pro/smtp-mailer/mailgun.php:41
 msgid ""
 "Mailgun is a transactional email provider that offers a generous 3-month free trial. After that, it offers a "
 "'Pay As You Grow' plan that allows you to pay for what you use without committing to a fixed monthly rate."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/mailgun.php:67 admin/helpers/pro/smtp-mailer/sparkpost.php:62
+#: admin/helpers/pro/smtp-mailer/mailgun.php:96 admin/helpers/pro/smtp-mailer/sparkpost.php:91
 msgid "US"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/mailgun.php:68 admin/helpers/pro/smtp-mailer/sparkpost.php:63
+#: admin/helpers/pro/smtp-mailer/mailgun.php:97 admin/helpers/pro/smtp-mailer/sparkpost.php:92
 msgid "EU"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/mailjet.php:32
+#: admin/helpers/pro/smtp-mailer/mailjet.php:38
 msgid "Mailjet Config"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/mailjet.php:34
+#: admin/helpers/pro/smtp-mailer/mailjet.php:40
 msgid ""
 "Mailjet is a cloud-based email service platform that enables businesses to send marketing and transactional "
 "emails, offering features like email automation, real-time analytics, and responsive design templates. If "
 "you're just starting out, you can send up to 200 emails per day without a credit card."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/mailjet.php:41 admin/helpers/pro/smtp-mailer/sendpulse.php:42
+#: admin/helpers/pro/smtp-mailer/mailjet.php:47 admin/helpers/pro/smtp-mailer/sendpulse.php:48
 msgid "Secret Key"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/mandrill-catcher.php:422
+#: admin/helpers/pro/smtp-mailer/mandrill-catcher.php:424
 #, php-format
 msgid "The email failed to be sent. Reason: %s"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/mandrill-catcher.php:458 admin/helpers/pro/smtp-mailer/resend-catcher.php:441
-#: admin/helpers/pro/smtp-mailer/sendlayer-catcher.php:426
-#: admin/helpers/pro/smtp-mailer/sparkpost-catcher.php:482
+#: admin/helpers/pro/smtp-mailer/mandrill-catcher.php:460 admin/helpers/pro/smtp-mailer/resend-catcher.php:443
+#: admin/helpers/pro/smtp-mailer/sendlayer-catcher.php:428
+#: admin/helpers/pro/smtp-mailer/sparkpost-catcher.php:484
 msgid "API Key:"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/mandrill.php:31
+#: admin/helpers/pro/smtp-mailer/mandrill.php:37
 msgid "Mandrill Config"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/mandrill.php:33
+#: admin/helpers/pro/smtp-mailer/mandrill.php:39
 msgid ""
 "Mandrill is a transactional email API for MailChimp users. It is a reliable, scalable, and secure delivery "
 "API for transactional emails."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/outlook-catcher.php:77
+#: admin/helpers/pro/smtp-mailer/outlook-catcher.php:79
 msgid "Access token is missing."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/outlook-catcher.php:246
+#: admin/helpers/pro/smtp-mailer/outlook-catcher.php:248
 msgid "Unknown error occurred."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/outlook-catcher.php:251
+#: admin/helpers/pro/smtp-mailer/outlook-catcher.php:253
 #, php-format
 msgid "Unexpected response code: %d"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/outlook-catcher.php:380
+#: admin/helpers/pro/smtp-mailer/outlook-catcher.php:382
 msgid "Please re-authorize your Microsoft account!"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/outlook-catcher.php:381
+#: admin/helpers/pro/smtp-mailer/outlook-catcher.php:383
 msgid "Go to WPMastertoolkit plugin settings page. Click the \"Remove Authorization\" button."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/outlook-catcher.php:382
+#: admin/helpers/pro/smtp-mailer/outlook-catcher.php:384
 msgid "Then click the \"Confirm Authorization\" button and re-enable access."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/outlook-catcher.php:390
+#: admin/helpers/pro/smtp-mailer/outlook-catcher.php:392
 msgid "Authorization failed. Please check your Outlook API credentials."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/outlook-catcher.php:398
+#: admin/helpers/pro/smtp-mailer/outlook-catcher.php:400
 msgid "Outlook API rate limit exceeded. Please wait and try again later."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/outlook-catcher.php:405
+#: admin/helpers/pro/smtp-mailer/outlook-catcher.php:407
 msgid "Access denied. Please ensure your app has the necessary permissions in Azure AD."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/outlook.php:77
+#: admin/helpers/pro/smtp-mailer/outlook.php:82
 msgid "Outlook Config"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/outlook.php:79
+#: admin/helpers/pro/smtp-mailer/outlook.php:84
 msgid "The Outlook mailer works well for sites that send low numbers of emails."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/outlook.php:82
+#: admin/helpers/pro/smtp-mailer/outlook.php:87
 msgid "Application (client) ID"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/outlook.php:92
+#: admin/helpers/pro/smtp-mailer/outlook.php:97
 msgid "Redirect URI"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/outlook.php:103
+#: admin/helpers/pro/smtp-mailer/outlook.php:108
 msgid "Please copy this URL into the \"Redirect URI\" field of your application on Microsoft Azure."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/pepipost-catcher.php:338
+#: admin/helpers/pro/smtp-mailer/pepipost-catcher.php:340
 msgid "General error"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/pepipost.php:31
+#: admin/helpers/pro/smtp-mailer/pepipost.php:37
 msgid "Pepipost Config"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/pepipost.php:33
+#: admin/helpers/pro/smtp-mailer/pepipost.php:39
 msgid ""
 "Pepipost is a cloud-based email delivery service designed for websites sending low to high volumes of "
 "transactional emails. It offers SMTP and API-based sending with strong deliverability and real-time analytics."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/postmark-catcher.php:442
+#: admin/helpers/pro/smtp-mailer/postmark-catcher.php:444
 msgid "Server API Token:"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/postmark-catcher.php:444
+#: admin/helpers/pro/smtp-mailer/postmark-catcher.php:446
 msgid "Message Stream ID:"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/postmark.php:32
+#: admin/helpers/pro/smtp-mailer/postmark.php:38
 msgid "Postmark Config"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/postmark.php:34
+#: admin/helpers/pro/smtp-mailer/postmark.php:40
 msgid ""
 "Postmark is a transactional email provider that offers great deliverability and accessible pricing for any "
 "business. You can start out with the free trial that allows you to send 100 test emails each month via its "
 "secure API."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/postmark.php:37
+#: admin/helpers/pro/smtp-mailer/postmark.php:43
 msgid "Server API Token"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/postmark.php:41
+#: admin/helpers/pro/smtp-mailer/postmark.php:47
 msgid "Message Stream ID"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/resend.php:31
+#: admin/helpers/pro/smtp-mailer/resend.php:37
 msgid "Resend Config"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/resend.php:33
+#: admin/helpers/pro/smtp-mailer/resend.php:39
 msgid ""
 "Resend is a modern email delivery platform that enables developers to send transactional and marketing emails "
 "quickly and reliably. If you're just getting started, you can send up to 3000 emails per month without a "
 "credit card."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/sendgrid.php:32
+#: admin/helpers/pro/smtp-mailer/sendgrid.php:38
 msgid "SendGrid Config"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/sendgrid.php:34
+#: admin/helpers/pro/smtp-mailer/sendgrid.php:40
 msgid ""
 "SendGrid is a popular transactional email provider that sends more than 35 billion emails every month. If "
 "you're just starting out, the free plan allows you to send up to 100 emails each day without entering your "
 "credit card details."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/sendlayer.php:31
+#: admin/helpers/pro/smtp-mailer/sendlayer.php:37
 msgid "Sendlayer Config"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/sendlayer.php:33
+#: admin/helpers/pro/smtp-mailer/sendlayer.php:39
 msgid ""
 "Sendlayer's affordable pricing and simple setup make it the perfect choice for WordPress sites. SendLayer "
 "will authenticate your outgoing emails to make sure they always hit customers’ inboxes"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/sendpulse.php:33
+#: admin/helpers/pro/smtp-mailer/sendpulse.php:39
 msgid "SendPulse Config"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/sendpulse.php:35
+#: admin/helpers/pro/smtp-mailer/sendpulse.php:41
 msgid ""
 "SendPulse is a versatile email delivery service suitable for websites sending low to medium volumes of "
 "emails. It provides SMTP and API-based sending with built-in analytics and automation features."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/smtp2go.php:31
+#: admin/helpers/pro/smtp-mailer/smtp2go.php:37
 msgid "SMTP2Go Config"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/smtp2go.php:33
+#: admin/helpers/pro/smtp-mailer/smtp2go.php:39
 msgid ""
 "SMTP2Go provides a robust and reliable email delivery service with global infrastructure, real-time "
 "analytics, and advanced security features. If you're just starting out, you can use SMTP2GO's free plan to "
 "send up to 1000 emails per month."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/smtpcom-catcher.php:465
+#: admin/helpers/pro/smtp-mailer/smtpcom-catcher.php:467
 msgid "Api Key:"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/smtpcom-catcher.php:467
+#: admin/helpers/pro/smtp-mailer/smtpcom-catcher.php:469
 msgid "Channel:"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/smtpcom.php:32
+#: admin/helpers/pro/smtp-mailer/smtpcom.php:37
 msgid "SMTP.com Config"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/smtpcom.php:34
+#: admin/helpers/pro/smtp-mailer/smtpcom.php:39
 msgid ""
 "SMTP.com is a transactional email provider that's currently used by 100,000+ businesses. SMTP.com is an "
 "established brand that's been offering email services for more than 20 years."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/smtpcom.php:41
+#: admin/helpers/pro/smtp-mailer/smtpcom.php:46
 msgid "Sender Name"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/sparkpost-catcher.php:483
+#: admin/helpers/pro/smtp-mailer/sparkpost-catcher.php:485
 msgid "Region:"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/sparkpost.php:32
+#: admin/helpers/pro/smtp-mailer/sparkpost.php:38
 msgid "Sparkpost Config"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/sparkpost.php:34
+#: admin/helpers/pro/smtp-mailer/sparkpost.php:40
 msgid ""
 "Sparkpost is a transactional email provider that's trusted by big brands and small businesses. It sends more "
 "than 4 trillion emails each year and reports 99.9% uptime. You can get started with the free test account "
 "that lets you send up to 500 emails per month."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/zohomail.php:81
+#: admin/helpers/pro/smtp-mailer/zohomail.php:83
 msgid "Zoho Mail Config"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/zohomail.php:83
+#: admin/helpers/pro/smtp-mailer/zohomail.php:85
 msgid ""
 "Zoho Mail is a reliable email service suitable for websites that send low to moderate volumes of emails. It "
 "offers secure SMTP and API-based sending options with good deliverability."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/zohomail.php:115
+#: admin/helpers/pro/smtp-mailer/zohomail.php:117
 msgid ""
 "Please copy this URL into \"Create New Client > Authorized Redirect URIs\" web field for your application on "
 "Zoho Developer Console."
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/zohomail.php:161
+#: admin/helpers/pro/smtp-mailer/zohomail.php:174
 msgid "United States (zoho.com)"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/zohomail.php:162
+#: admin/helpers/pro/smtp-mailer/zohomail.php:175
 msgid "Europe (zoho.eu)"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/zohomail.php:163
+#: admin/helpers/pro/smtp-mailer/zohomail.php:176
 msgid "Australia (zoho.com.au)"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/zohomail.php:164
+#: admin/helpers/pro/smtp-mailer/zohomail.php:177
 msgid "India (zoho.in)"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/zohomail.php:165
+#: admin/helpers/pro/smtp-mailer/zohomail.php:178
 msgid "Japan (zoho.jp)"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/zohomail.php:166
+#: admin/helpers/pro/smtp-mailer/zohomail.php:179
 msgid "United Kingdom (zoho.uk)"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/zohomail.php:167
+#: admin/helpers/pro/smtp-mailer/zohomail.php:180
 msgid "Canada (zohocloud.ca)"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/zohomail.php:168
+#: admin/helpers/pro/smtp-mailer/zohomail.php:181
 msgid "Saudi Arabia (zoho.sa)"
 msgstr ""
 
-#: admin/helpers/pro/smtp-mailer/zohomail.php:169
+#: admin/helpers/pro/smtp-mailer/zohomail.php:182
 msgid "China (zoho.com.cn)"
 msgstr ""
 
@@ -3929,49 +4073,49 @@ msgstr ""
 msgid "4 Hours"
 msgstr ""
 
-#: admin/modules/core/class-adminer.php:541
+#: admin/modules/core/class-adminer.php:554
 msgid "A full-featured database management tool."
 msgstr ""
 
-#: admin/modules/core/class-adminer.php:545
+#: admin/modules/core/class-adminer.php:558
 msgid "File lifetime"
 msgstr ""
 
-#: admin/modules/core/class-adminer.php:553
+#: admin/modules/core/class-adminer.php:566
 msgid "Choose the lifetime of the database file"
 msgstr ""
 
-#: admin/modules/core/class-adminer.php:560
+#: admin/modules/core/class-adminer.php:573
 msgid "File Creation"
 msgstr ""
 
-#: admin/modules/core/class-adminer.php:567
+#: admin/modules/core/class-adminer.php:580
 msgid "File Deletion"
 msgstr ""
 
-#: admin/modules/core/class-adminer.php:571
+#: admin/modules/core/class-adminer.php:584
 msgid "Delete Now"
 msgstr ""
 
-#: admin/modules/core/class-adminer.php:577
+#: admin/modules/core/class-adminer.php:590
 msgid "Connect to database"
 msgstr ""
 
-#: admin/modules/core/class-adminer.php:580
+#: admin/modules/core/class-adminer.php:593
 msgid "Connect"
 msgstr ""
 
-#: admin/modules/core/class-adminer.php:582
+#: admin/modules/core/class-adminer.php:595
 msgid "Securely connect to your database via Adminer"
 msgstr ""
 
-#: admin/modules/core/class-adminer.php:588
+#: admin/modules/core/class-adminer.php:601
 msgid "Download adminer"
 msgstr ""
 
-#: admin/modules/core/class-adminer.php:591 admin/modules/core/class-redirect-manager.php:1987
+#: admin/modules/core/class-adminer.php:604 admin/modules/core/class-redirect-manager.php:1993
 #: admin/templates/core/file-manager/views/default.php:179 admin/templates/core/file-manager/views/view.php:78
-#: admin/templates/core/page-settings-tabs/settings.php:37
+#: admin/templates/core/page-settings-tabs/settings.php:37 admin/templates/pro/page-logs.php:51
 msgid "Download"
 msgstr ""
 
@@ -4026,14 +4170,14 @@ msgid "Current configuration:"
 msgstr ""
 
 #: admin/modules/core/class-advanced-debug-mode.php:380 admin/modules/core/class-advanced-debug-mode.php:391
-#: admin/modules/core/class-advanced-debug-mode.php:402 admin/modules/core/class-redirect-manager.php:1395
-#: admin/modules/core/class-redirect-manager.php:1462
+#: admin/modules/core/class-advanced-debug-mode.php:402 admin/modules/core/class-redirect-manager.php:1401
+#: admin/modules/core/class-redirect-manager.php:1468
 msgid "Enabled"
 msgstr ""
 
 #: admin/modules/core/class-advanced-debug-mode.php:380 admin/modules/core/class-advanced-debug-mode.php:391
-#: admin/modules/core/class-advanced-debug-mode.php:402 admin/modules/core/class-redirect-manager.php:1396
-#: admin/modules/core/class-redirect-manager.php:1461
+#: admin/modules/core/class-advanced-debug-mode.php:402 admin/modules/core/class-redirect-manager.php:1402
+#: admin/modules/core/class-redirect-manager.php:1467
 msgid "Disabled"
 msgstr ""
 
@@ -4063,14 +4207,14 @@ msgstr ""
 
 #: admin/modules/core/class-advanced-debug-mode.php:442 admin/modules/core/class-advanced-debug-mode.php:460
 #: admin/modules/core/class-advanced-debug-mode.php:488
-#: admin/modules/core/class-media-library-post-folders.php:360 admin/modules/core/class-meta-debugger.php:191
-#: admin/modules/core/class-redirect-manager.php:1848 admin/modules/core/class-redirect-manager.php:1881
+#: admin/modules/core/class-media-library-post-folders.php:360 admin/modules/core/class-meta-debugger.php:210
+#: admin/modules/core/class-redirect-manager.php:1854 admin/modules/core/class-redirect-manager.php:1887
 #: admin/modules/core/class-search-replace-in-database.php:1366
 #: admin/modules/core/class-search-replace-in-database.php:1563
-#: admin/modules/core/class-search-replace-in-database.php:1616 admin/modules/core/class-smtp-mailer.php:1141
+#: admin/modules/core/class-search-replace-in-database.php:1616 admin/modules/core/class-smtp-mailer.php:1443
 #: admin/modules/core/class-temporary-login.php:546 admin/modules/core/class-temporary-login.php:585
 #: admin/modules/core/class-temporary-login.php:597 admin/templates/core/changelog.php:68
-#: admin/templates/core/page-settings.php:164
+#: admin/templates/core/page-settings-tabs/settings.php:134 admin/templates/core/page-settings.php:156
 #: admin/templates/core/register-custom-content-types/cpt-key-change-popup.php:32
 #: admin/templates/core/register-custom-content-types/cpt-key-change-popup.php:41
 #: admin/templates/core/register-custom-content-types/taxonomy-key-change-popup.php:32
@@ -4217,7 +4361,7 @@ msgid "WordPress salt keys or security keys are codes that help protect importan
 msgstr ""
 
 #: admin/modules/core/class-auto-regenerate-salt-keys.php:231
-#: admin/modules/pro/class-generate-alt-text-with-ai.php:707
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:815
 msgid "Warning!"
 msgstr ""
 
@@ -4342,10 +4486,10 @@ msgstr ""
 #: admin/modules/core/class-media-encoder.php:1001 admin/modules/core/class-media-encoder.php:1037
 #: admin/modules/core/class-media-encoder.php:1067 admin/modules/core/class-media-encoder.php:1080
 #: admin/modules/core/class-media-encoder.php:1087 admin/modules/core/class-media-encoder.php:1100
-#: admin/modules/core/class-meta-debugger.php:206
+#: admin/modules/core/class-meta-debugger.php:225
 #: admin/modules/core/class-register-custom-content-types.php:1224
 #: admin/modules/core/class-register-custom-content-types.php:1564
-#: admin/modules/core/class-search-replace-in-database.php:111 admin/modules/core/class-smtp-mailer.php:384
+#: admin/modules/core/class-search-replace-in-database.php:111 admin/modules/core/class-smtp-mailer.php:399
 #: admin/modules/pro/class-download-medias-as-zip.php:177 admin/modules/pro/class-download-medias-as-zip.php:223
 #: admin/modules/pro/class-generate-alt-text-with-ai.php:306
 #: admin/modules/pro/class-generate-alt-text-with-ai.php:350
@@ -4491,10 +4635,10 @@ msgstr ""
 msgid "Only letters, numbers, underscores and hyphens are allowed."
 msgstr ""
 
-#: admin/modules/core/class-child-theme-generator.php:415 admin/modules/core/class-code-snippets.php:685
+#: admin/modules/core/class-child-theme-generator.php:415 admin/modules/core/class-code-snippets.php:691
 #: admin/modules/core/class-register-custom-content-types.php:360
 #: admin/modules/core/class-register-custom-content-types.php:561
-#: admin/modules/pro/class-custom-login-design.php:4302 admin/templates/pro/link-shortener/edit-post.php:90
+#: admin/modules/pro/class-custom-login-design.php:4303 admin/templates/pro/link-shortener/edit-post.php:90
 msgid "Description"
 msgstr ""
 
@@ -4511,7 +4655,7 @@ msgid "Preview & generation"
 msgstr ""
 
 #: admin/modules/core/class-child-theme-generator.php:434 admin/modules/core/class-maintenance-mode.php:739
-#: admin/modules/core/class-maintenance-mode.php:742 admin/modules/core/class-media-encoder.php:2735
+#: admin/modules/core/class-maintenance-mode.php:742 admin/modules/core/class-media-encoder.php:2795
 msgid "Preview"
 msgstr ""
 
@@ -4580,7 +4724,7 @@ msgstr ""
 msgid "Role"
 msgstr ""
 
-#: admin/modules/core/class-clean-profiles.php:224 admin/modules/core/class-smtp-mailer.php:1103
+#: admin/modules/core/class-clean-profiles.php:224 admin/modules/core/class-smtp-mailer.php:1498
 #: admin/modules/core/class-temporary-login.php:394 admin/modules/pro/class-custom-login-design.php:152
 #: admin/modules/pro/class-custom-login-design.php:281 admin/modules/pro/class-custom-login-design.php:410
 #: admin/modules/pro/class-custom-login-design.php:539 admin/modules/pro/class-custom-login-design.php:668
@@ -4594,7 +4738,7 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: admin/modules/core/class-clean-profiles.php:228 admin/modules/pro/class-custom-login-design.php:4767
+#: admin/modules/core/class-clean-profiles.php:228 admin/modules/pro/class-custom-login-design.php:4768
 msgid "New Password"
 msgstr ""
 
@@ -4721,7 +4865,7 @@ msgstr ""
 msgid "Search Snippet"
 msgstr ""
 
-#: admin/modules/core/class-code-snippets.php:100 licensing/src/Client.php:308
+#: admin/modules/core/class-code-snippets.php:100 licensing/src/Client.php:311
 msgid "Not found"
 msgstr ""
 
@@ -4801,40 +4945,50 @@ msgstr ""
 msgid "END Exemple of Shortcode content"
 msgstr ""
 
-#: admin/modules/core/class-code-snippets.php:239
+#: admin/modules/core/class-code-snippets.php:229 admin/modules/core/class-custom-admin-css.php:213
+#: admin/modules/core/class-custom-frontend-css.php:218
+#: admin/modules/core/class-insert-head-body-footer-code.php:298
+#: admin/modules/core/class-insert-head-body-footer-code.php:319
+#: admin/modules/core/class-insert-head-body-footer-code.php:340 admin/modules/core/class-manage-ads-txt.php:248
+#: admin/modules/core/class-manage-ads-txt.php:264 admin/modules/core/class-manage-robots-txt.php:232
+#: admin/modules/core/class-register-custom-content-types.php:1599
+msgid "Toggle fullscreen"
+msgstr ""
+
+#: admin/modules/core/class-code-snippets.php:245
 msgid "Update"
 msgstr ""
 
-#: admin/modules/core/class-code-snippets.php:239 admin/modules/core/class-code-snippets.php:273
+#: admin/modules/core/class-code-snippets.php:245 admin/modules/core/class-code-snippets.php:279
 msgid "Publish"
 msgstr ""
 
-#: admin/modules/core/class-code-snippets.php:252
+#: admin/modules/core/class-code-snippets.php:258
 msgid "Snippet Type"
 msgstr ""
 
-#: admin/modules/core/class-code-snippets.php:291
+#: admin/modules/core/class-code-snippets.php:297
 msgid "⚠️ Warning: Please be careful when adding custom code snippets. Incorrect code can break your website."
 msgstr ""
 
-#: admin/modules/core/class-code-snippets.php:292
+#: admin/modules/core/class-code-snippets.php:298
 msgid "Two types of snippets are available:"
 msgstr ""
 
-#: admin/modules/core/class-code-snippets.php:300
+#: admin/modules/core/class-code-snippets.php:306
 msgid "You can use JS in <script> tag or CSS in <style> tag in your snippet."
 msgstr ""
 
-#: admin/modules/core/class-code-snippets.php:686 admin/modules/pro/class-media-replacement.php:332
+#: admin/modules/core/class-code-snippets.php:692 admin/modules/pro/class-media-replacement.php:332
 #: admin/modules/pro/class-media-replacement.php:358 admin/modules/pro/class-post-type-switcher.php:72
 msgid "Type"
 msgstr ""
 
-#: admin/modules/core/class-code-snippets.php:740
+#: admin/modules/core/class-code-snippets.php:746
 msgid "Regenerate Snippets Files"
 msgstr ""
 
-#: admin/modules/core/class-code-snippets.php:781
+#: admin/modules/core/class-code-snippets.php:787
 msgid "All active snippets have been regenerated."
 msgstr ""
 
@@ -4992,7 +5146,7 @@ msgstr ""
 #: admin/modules/core/class-duplicate-menu.php:39 admin/modules/core/class-mail-catcher.php:158
 #: admin/modules/core/class-maintenance-mode.php:233 admin/modules/core/class-media-encoder.php:725
 #: admin/modules/core/class-register-custom-content-types.php:1219
-#: admin/modules/core/class-search-replace-in-database.php:103 admin/modules/core/class-smtp-mailer.php:378
+#: admin/modules/core/class-search-replace-in-database.php:103 admin/modules/core/class-smtp-mailer.php:393
 #: admin/modules/pro/class-download-medias-as-zip.php:172 admin/modules/pro/class-download-medias-as-zip.php:218
 #: admin/modules/pro/class-generate-alt-text-with-ai.php:292
 msgid "You are not allowed to perform this action."
@@ -5687,7 +5841,7 @@ msgid ""
 "To exclude an image from conversion and resizing, append '%1$s' suffix to the file name, e.g. my-image%1$s.jpg"
 msgstr ""
 
-#: admin/modules/core/class-image-upload-control.php:309 admin/modules/pro/class-custom-login-design.php:3880
+#: admin/modules/core/class-image-upload-control.php:309 admin/modules/pro/class-custom-login-design.php:3881
 msgid "Max Width"
 msgstr ""
 
@@ -5718,8 +5872,8 @@ msgid "Code to insert before </head>"
 msgstr ""
 
 #: admin/modules/core/class-insert-head-body-footer-code.php:289
-#: admin/modules/core/class-insert-head-body-footer-code.php:304
-#: admin/modules/core/class-insert-head-body-footer-code.php:319
+#: admin/modules/core/class-insert-head-body-footer-code.php:310
+#: admin/modules/core/class-insert-head-body-footer-code.php:331
 msgid "Priority"
 msgstr ""
 
@@ -5727,19 +5881,19 @@ msgstr ""
 msgid "Larger number insert code closer to </head>"
 msgstr ""
 
-#: admin/modules/core/class-insert-head-body-footer-code.php:301
+#: admin/modules/core/class-insert-head-body-footer-code.php:307
 msgid "Code to insert after <body>"
 msgstr ""
 
-#: admin/modules/core/class-insert-head-body-footer-code.php:309
+#: admin/modules/core/class-insert-head-body-footer-code.php:315
 msgid "Smaller number insert code closer to <body>"
 msgstr ""
 
-#: admin/modules/core/class-insert-head-body-footer-code.php:316
+#: admin/modules/core/class-insert-head-body-footer-code.php:328
 msgid "Code to insert before </body>"
 msgstr ""
 
-#: admin/modules/core/class-insert-head-body-footer-code.php:324
+#: admin/modules/core/class-insert-head-body-footer-code.php:336
 msgid "Larger number insert code closer to </body>"
 msgstr ""
 
@@ -5760,7 +5914,7 @@ msgstr ""
 msgid "<b>WARNING:</b> You've been locked out. You can login again in %s."
 msgstr ""
 
-#: admin/modules/core/class-limit-login-attempts.php:167 admin/modules/core/class-smtp-mailer.php:420
+#: admin/modules/core/class-limit-login-attempts.php:167 admin/modules/core/class-smtp-mailer.php:435
 msgid "Error:"
 msgstr ""
 
@@ -5887,7 +6041,7 @@ msgstr ""
 #: admin/modules/pro/class-custom-login-design.php:1854 admin/modules/pro/class-custom-login-design.php:1869
 #: admin/modules/pro/class-custom-login-design.php:1983 admin/modules/pro/class-custom-login-design.php:1998
 #: admin/modules/pro/class-custom-login-design.php:2112 admin/modules/pro/class-custom-login-design.php:2127
-#: admin/modules/pro/class-custom-login-design.php:4743
+#: admin/modules/pro/class-custom-login-design.php:4744
 msgid "Log In"
 msgstr ""
 
@@ -5944,7 +6098,7 @@ msgid ""
 msgstr ""
 
 #: admin/modules/core/class-mail-catcher.php:905 admin/modules/core/class-mail-catcher.php:929
-#: admin/templates/core/page-settings.php:32
+#: admin/templates/core/page-settings.php:24
 msgid "Pro"
 msgstr ""
 
@@ -5965,10 +6119,10 @@ msgstr ""
 msgid "Try for 15 days"
 msgstr ""
 
-#: admin/modules/core/class-mail-catcher.php:941 admin/modules/core/class-redirect-manager.php:1741
-#: admin/modules/core/class-redirect-manager.php:1937
-#: admin/modules/core/class-register-custom-content-types.php:138 admin/modules/pro/class-cron-manager.php:1173
-#: admin/templates/core/file-manager/views/edit.php:11 admin/templates/core/page-settings.php:43
+#: admin/modules/core/class-mail-catcher.php:941 admin/modules/core/class-redirect-manager.php:1747
+#: admin/modules/core/class-redirect-manager.php:1943
+#: admin/modules/core/class-register-custom-content-types.php:138 admin/modules/pro/class-cron-manager.php:1246
+#: admin/templates/core/file-manager/views/edit.php:11 admin/templates/core/page-settings.php:35
 msgid "Search"
 msgstr ""
 
@@ -6063,10 +6217,10 @@ msgstr ""
 msgid "Footer Text"
 msgstr ""
 
-#: admin/modules/core/class-maintenance-mode.php:632 admin/modules/pro/class-custom-login-design.php:3649
-#: admin/modules/pro/class-custom-login-design.php:3718 admin/modules/pro/class-custom-login-design.php:3791
-#: admin/modules/pro/class-custom-login-design.php:3907 admin/modules/pro/class-custom-login-design.php:4118
-#: admin/modules/pro/class-custom-login-design.php:4485 admin/modules/pro/class-custom-login-design.php:4821
+#: admin/modules/core/class-maintenance-mode.php:632 admin/modules/pro/class-custom-login-design.php:3650
+#: admin/modules/pro/class-custom-login-design.php:3719 admin/modules/pro/class-custom-login-design.php:3792
+#: admin/modules/pro/class-custom-login-design.php:3908 admin/modules/pro/class-custom-login-design.php:4119
+#: admin/modules/pro/class-custom-login-design.php:4486 admin/modules/pro/class-custom-login-design.php:4822
 msgid "Background Color"
 msgstr ""
 
@@ -6074,19 +6228,19 @@ msgstr ""
 msgid "Text Color"
 msgstr ""
 
-#: admin/modules/core/class-maintenance-mode.php:650 admin/modules/pro/class-custom-login-design.php:2491
+#: admin/modules/core/class-maintenance-mode.php:650 admin/modules/pro/class-custom-login-design.php:2492
 msgid "Logo"
 msgstr ""
 
 #: admin/modules/core/class-maintenance-mode.php:656 admin/modules/core/class-maintenance-mode.php:671
-#: admin/modules/core/class-redirect-manager.php:1974 admin/templates/core/file-manager/views/navbar.php:25
+#: admin/modules/core/class-redirect-manager.php:1980 admin/templates/core/file-manager/views/navbar.php:25
 #: admin/templates/core/page-settings-tabs/settings.php:22
 msgid "Upload"
 msgstr ""
 
-#: admin/modules/core/class-maintenance-mode.php:665 admin/modules/pro/class-custom-login-design.php:3639
-#: admin/modules/pro/class-custom-login-design.php:3708 admin/modules/pro/class-custom-login-design.php:3781
-#: admin/modules/pro/class-custom-login-design.php:3897
+#: admin/modules/core/class-maintenance-mode.php:665 admin/modules/pro/class-custom-login-design.php:3640
+#: admin/modules/pro/class-custom-login-design.php:3709 admin/modules/pro/class-custom-login-design.php:3782
+#: admin/modules/pro/class-custom-login-design.php:3898
 msgid "Background Image"
 msgstr ""
 
@@ -6149,12 +6303,12 @@ msgstr ""
 msgid "ads.txt"
 msgstr ""
 
-#: admin/modules/core/class-manage-ads-txt.php:244 admin/modules/core/class-manage-ads-txt.php:254
+#: admin/modules/core/class-manage-ads-txt.php:244 admin/modules/core/class-manage-ads-txt.php:260
 #: admin/modules/core/class-manage-robots-txt.php:228
 msgid "Validate with"
 msgstr ""
 
-#: admin/modules/core/class-manage-ads-txt.php:251
+#: admin/modules/core/class-manage-ads-txt.php:257
 msgid "app-ads.txt"
 msgstr ""
 
@@ -6245,8 +6399,8 @@ msgid "Bulk optimization stopped."
 msgstr ""
 
 #: admin/modules/core/class-media-encoder.php:907 admin/modules/core/class-media-encoder.php:975
-#: admin/modules/core/class-media-encoder.php:1006 admin/modules/pro/class-generate-alt-text-with-ai.php:414
-msgid "No attachment id."
+#: admin/modules/core/class-media-encoder.php:1006
+msgid "Invalid attachment id."
 msgstr ""
 
 #: admin/modules/core/class-media-encoder.php:913 admin/modules/core/class-media-encoder.php:917
@@ -6293,132 +6447,132 @@ msgstr ""
 msgid "Undo optimization"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2525
+#: admin/modules/core/class-media-encoder.php:2585
 msgid "Off"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2526
+#: admin/modules/core/class-media-encoder.php:2586
 msgid "WebP"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2527
+#: admin/modules/core/class-media-encoder.php:2587
 msgid "AVIF"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2533
+#: admin/modules/core/class-media-encoder.php:2593
 msgid "Low"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2534
+#: admin/modules/core/class-media-encoder.php:2594
 msgid "Medium"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2535
+#: admin/modules/core/class-media-encoder.php:2595
 msgid "High"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2543
+#: admin/modules/core/class-media-encoder.php:2603
 msgid "Deactivate"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2544
+#: admin/modules/core/class-media-encoder.php:2604
 msgid "Use <picture> tags"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2545
+#: admin/modules/core/class-media-encoder.php:2605
 msgid "Use rewrite rules"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2567
+#: admin/modules/core/class-media-encoder.php:2627
 #, php-format
 msgid "Please deactivate %s plugin."
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2614
+#: admin/modules/core/class-media-encoder.php:2674
 msgid ""
 "Automatically converts uploaded images to your selected format (WebP or AVIF) for better performance and "
 "reduced file size."
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2620
+#: admin/modules/core/class-media-encoder.php:2680
 msgid "Image Format Optimization"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2626
+#: admin/modules/core/class-media-encoder.php:2686
 msgid ""
 "Select “Off” to disable image optimization, “WebP” for wide browser support, or “AVIF” for best compression "
 "and smaller file sizes."
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2639
+#: admin/modules/core/class-media-encoder.php:2699
 msgid "(PRO Only)"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2641
+#: admin/modules/core/class-media-encoder.php:2701
 msgid "(imageavif() not supported)"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2644
+#: admin/modules/core/class-media-encoder.php:2704
 msgid "(PHP 8.1 or higher)"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2659
+#: admin/modules/core/class-media-encoder.php:2719
 msgid "Quality"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2665
+#: admin/modules/core/class-media-encoder.php:2725
 msgid ""
 "Choose the image quality level. Lower quality results in smaller file sizes, while higher quality provides "
 "better visuals but larger files."
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2681
+#: admin/modules/core/class-media-encoder.php:2741
 msgid "Do not compress images already in same format"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2694
+#: admin/modules/core/class-media-encoder.php:2754
 msgid "Save original images"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2708
+#: admin/modules/core/class-media-encoder.php:2768
 msgid "Display images with new format on the site"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2714
+#: admin/modules/core/class-media-encoder.php:2774
 msgid ""
 "This option allows to override the original images by the new version (useless for images converted in import)"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2732
+#: admin/modules/core/class-media-encoder.php:2792
 msgid "Before saving, test your configuration with preview mode"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2741
+#: admin/modules/core/class-media-encoder.php:2801
 msgid "Bulk optimization"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2748 admin/modules/core/class-media-encoder.php:2783
-#: admin/modules/pro/class-custom-login-design.php:3857 admin/modules/pro/class-custom-login-design.php:4001
-#: admin/modules/pro/class-generate-alt-text-with-ai.php:812
+#: admin/modules/core/class-media-encoder.php:2808 admin/modules/core/class-media-encoder.php:2843
+#: admin/modules/pro/class-custom-login-design.php:3858 admin/modules/pro/class-custom-login-design.php:4002
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:930
 msgid "Start"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2755 admin/modules/core/class-media-encoder.php:2789
+#: admin/modules/core/class-media-encoder.php:2815 admin/modules/core/class-media-encoder.php:2849
 #: admin/modules/core/class-search-replace-in-database.php:1484
 #: admin/modules/core/class-search-replace-in-database.php:1527
-#: admin/modules/pro/class-generate-alt-text-with-ai.php:819
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:937
 msgid "Stop"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2775
+#: admin/modules/core/class-media-encoder.php:2835
 msgid "Bulk migration from QuickWebP"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2814
+#: admin/modules/core/class-media-encoder.php:2874
 msgid "Add image"
 msgstr ""
 
-#: admin/modules/core/class-media-encoder.php:2838
+#: admin/modules/core/class-media-encoder.php:2898
 msgid "Original Image"
 msgstr ""
 
@@ -6635,20 +6789,20 @@ msgstr ""
 msgid "Post removed from folder successfully."
 msgstr ""
 
-#: admin/modules/core/class-meta-debugger.php:58 admin/modules/core/class-meta-debugger.php:111
-#: admin/modules/core/class-meta-debugger.php:123
+#: admin/modules/core/class-meta-debugger.php:59 admin/modules/core/class-meta-debugger.php:112
+#: admin/modules/core/class-meta-debugger.php:124
 msgid "WPMastertoolkit Meta Debugger"
 msgstr ""
 
-#: admin/modules/core/class-meta-debugger.php:169 admin/modules/core/class-meta-debugger.php:190
+#: admin/modules/core/class-meta-debugger.php:188 admin/modules/core/class-meta-debugger.php:209
 msgid "Show all meta data"
 msgstr ""
 
-#: admin/modules/core/class-meta-debugger.php:210
+#: admin/modules/core/class-meta-debugger.php:229
 msgid "You are not allowed to perform this action"
 msgstr ""
 
-#: admin/modules/core/class-meta-debugger.php:254
+#: admin/modules/core/class-meta-debugger.php:273
 msgid "No meta data found"
 msgstr ""
 
@@ -6726,7 +6880,7 @@ msgid "Copy All"
 msgstr ""
 
 #: admin/modules/core/class-nginx-code-snippets.php:117
-#: admin/modules/core/class-register-custom-content-types.php:1600
+#: admin/modules/core/class-register-custom-content-types.php:1606
 #: admin/modules/core/class-temporary-login.php:303 admin/modules/core/class-temporary-login.php:313
 #: admin/modules/core/class-temporary-login.php:324 admin/modules/core/class-temporary-login.php:337
 #: admin/templates/core/file-manager/views/copy.php:31 admin/templates/core/file-manager/views/copyfinish.php:12
@@ -6774,7 +6928,7 @@ msgid "No Rollback Available: This is a non-WordPress.org theme."
 msgstr ""
 
 #: admin/modules/core/class-plugin-theme-rollback.php:66
-#: admin/modules/pro/class-add-essentials-shortcodes.php:352
+#: admin/modules/pro/class-add-essentials-shortcodes.php:352 admin/templates/pro/page-logs.php:18
 msgid "Loading..."
 msgstr ""
 
@@ -7048,267 +7202,267 @@ msgstr ""
 msgid "Redirect Manager"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1318 admin/modules/core/class-redirect-manager.php:1904
+#: admin/modules/core/class-redirect-manager.php:1324 admin/modules/core/class-redirect-manager.php:1910
 msgid "Add Redirect"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1320
+#: admin/modules/core/class-redirect-manager.php:1326
 msgid "Edit Redirect"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1325
+#: admin/modules/core/class-redirect-manager.php:1331
 msgid "Redirects"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1337 admin/modules/core/class-redirect-manager.php:1348
+#: admin/modules/core/class-redirect-manager.php:1343 admin/modules/core/class-redirect-manager.php:1354
 msgid "Import/Export"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1407
+#: admin/modules/core/class-redirect-manager.php:1413
 msgid "301 Moved Permanently"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1408
+#: admin/modules/core/class-redirect-manager.php:1414
 msgid "302 Found"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1409
+#: admin/modules/core/class-redirect-manager.php:1415
 msgid "303 See Other"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1410
+#: admin/modules/core/class-redirect-manager.php:1416
 msgid "304 Not Modified"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1411
+#: admin/modules/core/class-redirect-manager.php:1417
 msgid "307 Temporary Redirect"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1412
+#: admin/modules/core/class-redirect-manager.php:1418
 msgid "308 Permanent Redirect"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1413
+#: admin/modules/core/class-redirect-manager.php:1419
 msgid "400 Bad Request"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1414
+#: admin/modules/core/class-redirect-manager.php:1420
 msgid "401 Unauthorized"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1415
+#: admin/modules/core/class-redirect-manager.php:1421
 msgid "403 Forbidden"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1416
+#: admin/modules/core/class-redirect-manager.php:1422
 msgid "404 Not Found"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1417
+#: admin/modules/core/class-redirect-manager.php:1423
 msgid "410 Gone"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1418
+#: admin/modules/core/class-redirect-manager.php:1424
 msgid "418 I'm a teapot"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1419
+#: admin/modules/core/class-redirect-manager.php:1425
 msgid "451 Unavailable For Legal Reasons"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1420
+#: admin/modules/core/class-redirect-manager.php:1426
 msgid "500 Internal Server Error"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1421
+#: admin/modules/core/class-redirect-manager.php:1427
 msgid "501 Not Implemented"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1422
+#: admin/modules/core/class-redirect-manager.php:1428
 msgid "502 Bad Gateway"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1423
+#: admin/modules/core/class-redirect-manager.php:1429
 msgid "503 Service Unavailable"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1424
+#: admin/modules/core/class-redirect-manager.php:1430
 msgid "504 Gateway Timeout"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1435
+#: admin/modules/core/class-redirect-manager.php:1441
 msgid "WordPress (PHP)"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1436
+#: admin/modules/core/class-redirect-manager.php:1442
 msgid "Apache"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1437
+#: admin/modules/core/class-redirect-manager.php:1443
 msgid "Nginx"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1448
+#: admin/modules/core/class-redirect-manager.php:1454
 msgid "Exact match in any order"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1449
+#: admin/modules/core/class-redirect-manager.php:1455
 msgid "Ignore all parameters"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1450
+#: admin/modules/core/class-redirect-manager.php:1456
 msgid "Ignore & pass parameters to the target"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1573
+#: admin/modules/core/class-redirect-manager.php:1579
 #, php-format
 msgid "Redirect with ID %s has warnings:"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1618
+#: admin/modules/core/class-redirect-manager.php:1624
 msgid "Redirect added successfully."
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1622
+#: admin/modules/core/class-redirect-manager.php:1628
 msgid "Redirect updated successfully."
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1626
+#: admin/modules/core/class-redirect-manager.php:1632
 msgid "Failed to add redirect. Please try again."
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1630
+#: admin/modules/core/class-redirect-manager.php:1636
 msgid "Redirect deleted successfully."
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1634
+#: admin/modules/core/class-redirect-manager.php:1640
 msgid "Failed to delete redirect. Please try again."
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1638
+#: admin/modules/core/class-redirect-manager.php:1644
 msgid "Selected redirects deleted successfully."
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1642
+#: admin/modules/core/class-redirect-manager.php:1648
 msgid "Selected redirects enabled successfully."
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1646
+#: admin/modules/core/class-redirect-manager.php:1652
 msgid "Selected redirects disabled successfully."
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1650
+#: admin/modules/core/class-redirect-manager.php:1656
 msgid "Selected logs deleted successfully."
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1654
+#: admin/modules/core/class-redirect-manager.php:1660
 msgid "Bulk action failed. Please try again."
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1658
+#: admin/modules/core/class-redirect-manager.php:1664
 msgid "Log deleted successfully."
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1662
+#: admin/modules/core/class-redirect-manager.php:1668
 msgid "Failed to delete log. Please try again."
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1666
+#: admin/modules/core/class-redirect-manager.php:1672
 msgid "All logs emptied successfully."
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1670
+#: admin/modules/core/class-redirect-manager.php:1676
 msgid "Failed to empty logs. Please try again."
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1674
+#: admin/modules/core/class-redirect-manager.php:1680
 msgid "Import completed successfully."
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1678
+#: admin/modules/core/class-redirect-manager.php:1684
 msgid "Import failed. Please check the file and try again."
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1693
+#: admin/modules/core/class-redirect-manager.php:1699
 #, php-format
 msgid "Model changed to %s."
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1698
+#: admin/modules/core/class-redirect-manager.php:1704
 #, php-format
 msgid "Query parameters changed to %s."
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1703
+#: admin/modules/core/class-redirect-manager.php:1709
 #, php-format
 msgid "Code changed to %s."
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1708
+#: admin/modules/core/class-redirect-manager.php:1714
 #, php-format
 msgid "Status changed to %s."
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1713
+#: admin/modules/core/class-redirect-manager.php:1719
 #, php-format
 msgid "Logs changed to %s."
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1718
+#: admin/modules/core/class-redirect-manager.php:1724
 #, php-format
 msgid "Regex changed to %s."
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1806
+#: admin/modules/core/class-redirect-manager.php:1812
 msgid "Source URL"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1809
+#: admin/modules/core/class-redirect-manager.php:1815
 msgid "The relative URL you want to redirect from"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1812
+#: admin/modules/core/class-redirect-manager.php:1818
 #: admin/modules/core/class-search-replace-in-database.php:1609
 msgid "Use regular expressions"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1823
+#: admin/modules/core/class-redirect-manager.php:1829
 msgid "Target URL"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1826
+#: admin/modules/core/class-redirect-manager.php:1832
 msgid "The target URL you want to redirect to"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1832
+#: admin/modules/core/class-redirect-manager.php:1838
 msgid "Codes"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1902
+#: admin/modules/core/class-redirect-manager.php:1908
 msgid "Update Redirect"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1921
+#: admin/modules/core/class-redirect-manager.php:1927
 msgid "Logs are available in the Pro version."
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1953
+#: admin/modules/core/class-redirect-manager.php:1959
 msgid "Import/Export is available in the Pro version."
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1968
+#: admin/modules/core/class-redirect-manager.php:1974
 msgid "Import Redirects"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1982
+#: admin/modules/core/class-redirect-manager.php:1988
 msgid "Export Redirects"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:1995
+#: admin/modules/core/class-redirect-manager.php:2001
 msgid "Export Template"
 msgstr ""
 
-#: admin/modules/core/class-redirect-manager.php:2000
+#: admin/modules/core/class-redirect-manager.php:2006
 msgid "Download Template"
 msgstr ""
 
@@ -8245,103 +8399,89 @@ msgstr ""
 msgid "SMTP mailer"
 msgstr ""
 
-#: admin/modules/core/class-smtp-mailer.php:389
+#: admin/modules/core/class-smtp-mailer.php:404
 msgid "Please enter a valid email address."
 msgstr ""
 
-#: admin/modules/core/class-smtp-mailer.php:400
+#: admin/modules/core/class-smtp-mailer.php:415
 msgid "WPMasterToolkit - SMTP Test Email"
 msgstr ""
 
-#: admin/modules/core/class-smtp-mailer.php:401
+#: admin/modules/core/class-smtp-mailer.php:416
 msgid "Congratulations! Your SMTP settings are working correctly."
 msgstr ""
 
-#: admin/modules/core/class-smtp-mailer.php:402
+#: admin/modules/core/class-smtp-mailer.php:417
 msgid "This is a test email sent from your WordPress site to verify your SMTP configuration."
 msgstr ""
 
-#: admin/modules/core/class-smtp-mailer.php:404
+#: admin/modules/core/class-smtp-mailer.php:419
 #, php-format
 msgid "Site: %s"
 msgstr ""
 
-#: admin/modules/core/class-smtp-mailer.php:406
+#: admin/modules/core/class-smtp-mailer.php:421
 #, php-format
 msgid "Sent at: %s"
 msgstr ""
 
-#: admin/modules/core/class-smtp-mailer.php:413
+#: admin/modules/core/class-smtp-mailer.php:428
 msgid "Test email sent successfully! Please check your inbox."
 msgstr ""
 
-#: admin/modules/core/class-smtp-mailer.php:417
+#: admin/modules/core/class-smtp-mailer.php:432
 msgid "Failed to send test email. Please check your SMTP settings."
 msgstr ""
 
-#: admin/modules/core/class-smtp-mailer.php:485
+#: admin/modules/core/class-smtp-mailer.php:500
 msgid "Please save your settings before testing the email."
 msgstr ""
 
-#: admin/modules/core/class-smtp-mailer.php:486
+#: admin/modules/core/class-smtp-mailer.php:501
 msgid "Please save your settings before confirming the authorization."
 msgstr ""
 
-#: admin/modules/core/class-smtp-mailer.php:657
+#: admin/modules/core/class-smtp-mailer.php:750
 msgid "SSL"
 msgstr ""
 
-#: admin/modules/core/class-smtp-mailer.php:658
+#: admin/modules/core/class-smtp-mailer.php:751
 msgid "TLS"
 msgstr ""
 
-#: admin/modules/core/class-smtp-mailer.php:1067
+#: admin/modules/core/class-smtp-mailer.php:1413
 msgid ""
 "Set custom sender name and email. Optionally use external SMTP service to ensure notification and "
 "transactional emails from your site are being delivered to inboxes."
 msgstr ""
 
-#: admin/modules/core/class-smtp-mailer.php:1071
-msgid "Sender Config"
-msgstr ""
-
-#: admin/modules/core/class-smtp-mailer.php:1073
-msgid ""
-"If set, the following sender name/email overrides WordPress core defaults but can still be overridden by "
-"other plugins that enables custom sender name/email, e.g. form plugins."
-msgstr ""
-
-#: admin/modules/core/class-smtp-mailer.php:1076
-msgid "Sender name"
-msgstr ""
-
-#: admin/modules/core/class-smtp-mailer.php:1077
-msgid "Sender email"
-msgstr ""
-
-#: admin/modules/core/class-smtp-mailer.php:1089
-msgid "Force the usage of the sender name/email defined above. It will override those set by other plugins."
-msgstr ""
-
-#: admin/modules/core/class-smtp-mailer.php:1098
-msgid "Email test"
-msgstr ""
-
-#: admin/modules/core/class-smtp-mailer.php:1100
-msgid "After saving the settings above, check if everything is configured properly below."
-msgstr ""
-
-#: admin/modules/core/class-smtp-mailer.php:1109
-msgid "Send Now"
-msgstr ""
-
-#: admin/modules/core/class-smtp-mailer.php:1125 admin/modules/core/class-smtp-mailer.php:1140
-#: admin/modules/core/class-smtp-mailer.php:1158
+#: admin/modules/core/class-smtp-mailer.php:1422 admin/modules/core/class-smtp-mailer.php:1442
+#: admin/modules/core/class-smtp-mailer.php:1460
 msgid "Providers"
 msgstr ""
 
-#: admin/modules/core/class-smtp-mailer.php:1159
+#: admin/modules/core/class-smtp-mailer.php:1426
+msgid "Are you sure you want to reset all providers data? This action cannot be undone."
+msgstr ""
+
+#: admin/modules/core/class-smtp-mailer.php:1426
+msgid "Reset all providers"
+msgstr ""
+
+#: admin/modules/core/class-smtp-mailer.php:1461
 msgid "Coomming Soon"
+msgstr ""
+
+#: admin/modules/core/class-smtp-mailer.php:1493
+msgid "Email test"
+msgstr ""
+
+#: admin/modules/core/class-smtp-mailer.php:1495
+msgid "After saving the settings above, check if everything is configured properly below."
+msgstr ""
+
+#: admin/modules/core/class-smtp-mailer.php:1504
+msgid "Send Now"
 msgstr ""
 
 #: admin/modules/core/class-svg-upload.php:67
@@ -9141,221 +9281,247 @@ msgstr ""
 msgid "CRON Manager"
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:74 admin/modules/pro/class-cron-manager.php:111
+#: admin/modules/pro/class-cron-manager.php:74 admin/modules/pro/class-cron-manager.php:112
 msgid "You are not allowed to delete cron events."
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:82 admin/modules/pro/class-cron-manager.php:119
+#: admin/modules/pro/class-cron-manager.php:82 admin/modules/pro/class-cron-manager.php:120
 msgid "You are not allowed to delete PHP cron events."
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:151
+#: admin/modules/pro/class-cron-manager.php:143
 msgid "You are not allowed to run cron events."
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:174 admin/modules/pro/class-cron-manager.php:180
-#: admin/modules/pro/class-cron-manager.php:201 admin/modules/pro/class-cron-manager.php:207
+#: admin/modules/pro/class-cron-manager.php:167 admin/modules/pro/class-cron-manager.php:173
+#: admin/modules/pro/class-cron-manager.php:195 admin/modules/pro/class-cron-manager.php:201
 msgid "You are not allowed to pause or resume cron events."
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:253 admin/modules/pro/class-cron-manager.php:691
+#: admin/modules/pro/class-cron-manager.php:248 admin/modules/pro/class-cron-manager.php:686
 #, php-format
 msgid "The cron event %s could not be found."
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:565
+#: admin/modules/pro/class-cron-manager.php:560
 #, php-format
 msgid "Function %s does not exist"
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:610
+#: admin/modules/pro/class-cron-manager.php:605
 #, php-format
 msgid "Failed to pause the cron event %s."
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:640
+#: admin/modules/pro/class-cron-manager.php:635
 #, php-format
 msgid "Failed to resume the cron event %s."
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:728
+#: admin/modules/pro/class-cron-manager.php:723
 #, php-format
 msgid "Failed to schedule the cron event %s."
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:821
+#: admin/modules/pro/class-cron-manager.php:816
 #, php-format
 msgid "Unknown (%s)"
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:881
+#: admin/modules/pro/class-cron-manager.php:876
 #, php-format
 msgid "%s year"
 msgid_plural "%s years"
 msgstr[0] ""
 msgstr[1] ""
 
-#: admin/modules/pro/class-cron-manager.php:883
+#: admin/modules/pro/class-cron-manager.php:878
 #, php-format
 msgid "%s month"
 msgid_plural "%s months"
 msgstr[0] ""
 msgstr[1] ""
 
-#: admin/modules/pro/class-cron-manager.php:885
+#: admin/modules/pro/class-cron-manager.php:880
 #, php-format
 msgid "%s week"
 msgid_plural "%s weeks"
 msgstr[0] ""
 msgstr[1] ""
 
-#: admin/modules/pro/class-cron-manager.php:887
+#: admin/modules/pro/class-cron-manager.php:882
 #, php-format
 msgid "%s day"
 msgid_plural "%s days"
 msgstr[0] ""
 msgstr[1] ""
 
-#: admin/modules/pro/class-cron-manager.php:889
+#: admin/modules/pro/class-cron-manager.php:884
 #, php-format
 msgid "%s hour"
 msgid_plural "%s hours"
 msgstr[0] ""
 msgstr[1] ""
 
-#: admin/modules/pro/class-cron-manager.php:891
+#: admin/modules/pro/class-cron-manager.php:886
 #, php-format
 msgid "%s minute"
 msgid_plural "%s minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: admin/modules/pro/class-cron-manager.php:893
+#: admin/modules/pro/class-cron-manager.php:888
 #, php-format
 msgid "%s second"
 msgid_plural "%s seconds"
 msgstr[0] ""
 msgstr[1] ""
 
-#: admin/modules/pro/class-cron-manager.php:897
+#: admin/modules/pro/class-cron-manager.php:892
 msgid "now"
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:1027
+#: admin/modules/pro/class-cron-manager.php:1048
 msgid "Now"
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:1028
+#: admin/modules/pro/class-cron-manager.php:1049
 msgid "week"
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:1029
+#: admin/modules/pro/class-cron-manager.php:1050
 msgid "weeks"
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:1030
+#: admin/modules/pro/class-cron-manager.php:1051
 msgid "day"
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:1031
+#: admin/modules/pro/class-cron-manager.php:1052
 msgid "days"
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:1032
+#: admin/modules/pro/class-cron-manager.php:1053
 msgid "hour"
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:1033
+#: admin/modules/pro/class-cron-manager.php:1054
 msgid "hours"
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:1034
+#: admin/modules/pro/class-cron-manager.php:1055
 msgid "minute"
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:1035
+#: admin/modules/pro/class-cron-manager.php:1056
 msgid "minutes"
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:1036
+#: admin/modules/pro/class-cron-manager.php:1057
 msgid "second"
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:1037
+#: admin/modules/pro/class-cron-manager.php:1058
 msgid "seconds"
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:1055
+#: admin/modules/pro/class-cron-manager.php:1076
 #, php-format
 msgid "Scheduled the cron event %s to run now. The original event will not be affected."
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:1060
+#: admin/modules/pro/class-cron-manager.php:1081
 #, php-format
 msgid "Deleted all %s cron events."
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:1065
+#: admin/modules/pro/class-cron-manager.php:1086
 #, php-format
 msgid "There are no %s cron events to delete."
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:1070
+#: admin/modules/pro/class-cron-manager.php:1091
 #, php-format
 msgid "Saved the cron event %s."
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:1075
+#: admin/modules/pro/class-cron-manager.php:1096
 #, php-format
 msgid "Deleted the cron event %s."
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:1080
+#: admin/modules/pro/class-cron-manager.php:1101
 #, php-format
 msgid "Failed to the delete the cron event %s."
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:1085
+#: admin/modules/pro/class-cron-manager.php:1106
 #, php-format
 msgid "Failed to the execute the cron event %s."
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:1089
+#: admin/modules/pro/class-cron-manager.php:1110
 msgid "Deleted the selected cron events."
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:1094
+#: admin/modules/pro/class-cron-manager.php:1115
 #, php-format
 msgid "Failed to save the cron event %s."
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:1099
+#: admin/modules/pro/class-cron-manager.php:1120
 #, php-format
 msgid "Paused the %s hook."
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:1104
+#: admin/modules/pro/class-cron-manager.php:1125
 #, php-format
 msgid "Resumed the %s hook."
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:1108
+#: admin/modules/pro/class-cron-manager.php:1129
 msgid "URL cron event saved."
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:1112
+#: admin/modules/pro/class-cron-manager.php:1133
 msgid "PHP cron event saved."
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:1116
+#: admin/modules/pro/class-cron-manager.php:1137
 msgid "An unknown error occurred."
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:1174
+#: admin/modules/pro/class-cron-manager.php:1195
+#, php-format
+msgid "The %1$s constant is correctly set to %2$s. No delays have been observed in the cron jobs."
+msgstr ""
+
+#: admin/modules/pro/class-cron-manager.php:1203
+#, php-format
+msgid ""
+"The %1$s constant is not set to %2$s. Cron execution depends on visits to your website, which may impact "
+"front-end page loading performance."
+msgstr ""
+
+#: admin/modules/pro/class-cron-manager.php:1211
+#, php-format
+msgid ""
+"The %1$s constant is not set to %2$s. Some cron jobs are delayed by more than 5 minutes. Cron execution "
+"depends on visits to your website, which may impact front-end page loading performance."
+msgstr ""
+
+#: admin/modules/pro/class-cron-manager.php:1219
+#, php-format
+msgid ""
+"The %1$s constant is correctly set to %2$s, but your cron jobs are delayed. It seems that your cron system is "
+"not working properly."
+msgstr ""
+
+#: admin/modules/pro/class-cron-manager.php:1247
 msgid "Per Page"
 msgstr ""
 
-#: admin/modules/pro/class-cron-manager.php:1175
+#: admin/modules/pro/class-cron-manager.php:1248
 msgid "Submit"
 msgstr ""
 
@@ -9410,7 +9576,7 @@ msgstr ""
 #: admin/modules/pro/class-custom-login-design.php:1455 admin/modules/pro/class-custom-login-design.php:1584
 #: admin/modules/pro/class-custom-login-design.php:1713 admin/modules/pro/class-custom-login-design.php:1842
 #: admin/modules/pro/class-custom-login-design.php:1971 admin/modules/pro/class-custom-login-design.php:2100
-#: admin/modules/pro/class-custom-login-design.php:2518
+#: admin/modules/pro/class-custom-login-design.php:2519
 msgid "Remember Me"
 msgstr ""
 
@@ -9430,7 +9596,7 @@ msgstr ""
 #: admin/modules/pro/class-custom-login-design.php:1855 admin/modules/pro/class-custom-login-design.php:1870
 #: admin/modules/pro/class-custom-login-design.php:1984 admin/modules/pro/class-custom-login-design.php:1999
 #: admin/modules/pro/class-custom-login-design.php:2113 admin/modules/pro/class-custom-login-design.php:2128
-#: admin/modules/pro/class-custom-login-design.php:4751 admin/modules/pro/class-custom-login-design.php:4928
+#: admin/modules/pro/class-custom-login-design.php:4752 admin/modules/pro/class-custom-login-design.php:4929
 msgid "Register"
 msgstr ""
 
@@ -9542,321 +9708,321 @@ msgstr ""
 msgid "Sign in"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:2437
+#: admin/modules/pro/class-custom-login-design.php:2438
 msgid "Templates"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:2446
+#: admin/modules/pro/class-custom-login-design.php:2447
 msgid "Background"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:2455 admin/modules/pro/class-custom-login-design.php:5061
+#: admin/modules/pro/class-custom-login-design.php:2456 admin/modules/pro/class-custom-login-design.php:5062
 msgid "Aside"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:2464 admin/modules/pro/class-custom-login-design.php:3871
+#: admin/modules/pro/class-custom-login-design.php:2465 admin/modules/pro/class-custom-login-design.php:3872
 #: admin/modules/pro/class-my-account-menu-customizer.php:949
 msgid "Content"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:2473
+#: admin/modules/pro/class-custom-login-design.php:2474
 msgid "Form"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:2482 admin/modules/pro/class-custom-login-design.php:5073
+#: admin/modules/pro/class-custom-login-design.php:2483 admin/modules/pro/class-custom-login-design.php:5074
 msgid "Form Top"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:2500 admin/modules/pro/class-custom-login-design.php:4206
-#: admin/modules/pro/class-custom-login-design.php:4310 admin/modules/pro/class-custom-login-design.php:4584
+#: admin/modules/pro/class-custom-login-design.php:2501 admin/modules/pro/class-custom-login-design.php:4207
+#: admin/modules/pro/class-custom-login-design.php:4311 admin/modules/pro/class-custom-login-design.php:4585
 msgid "Text"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:2509
+#: admin/modules/pro/class-custom-login-design.php:2510
 msgid "Field"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:2527
+#: admin/modules/pro/class-custom-login-design.php:2528
 msgid "Submit Button"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:2536
+#: admin/modules/pro/class-custom-login-design.php:2537
 msgid "Links"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:2545
+#: admin/modules/pro/class-custom-login-design.php:2546
 msgid "Language Switcher"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:2554
+#: admin/modules/pro/class-custom-login-design.php:2555
 msgid "HTML Content"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:2563
+#: admin/modules/pro/class-custom-login-design.php:2564
 msgid "Custom CSS"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:3625
+#: admin/modules/pro/class-custom-login-design.php:3626
 msgid "Select Template"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:3659 admin/modules/pro/class-custom-login-design.php:3728
-#: admin/modules/pro/class-custom-login-design.php:3801 admin/modules/pro/class-custom-login-design.php:3917
-#: admin/modules/pro/class-custom-login-design.php:4128 admin/modules/pro/class-custom-login-design.php:4495
-#: admin/modules/pro/class-custom-login-design.php:4665
+#: admin/modules/pro/class-custom-login-design.php:3660 admin/modules/pro/class-custom-login-design.php:3729
+#: admin/modules/pro/class-custom-login-design.php:3802 admin/modules/pro/class-custom-login-design.php:3918
+#: admin/modules/pro/class-custom-login-design.php:4129 admin/modules/pro/class-custom-login-design.php:4496
+#: admin/modules/pro/class-custom-login-design.php:4666
 msgid "Background Opacity"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:3676 admin/modules/pro/class-custom-login-design.php:4046
-#: admin/modules/pro/class-custom-login-design.php:4908
+#: admin/modules/pro/class-custom-login-design.php:3677 admin/modules/pro/class-custom-login-design.php:4047
+#: admin/modules/pro/class-custom-login-design.php:4909
 msgid "Position"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:3680 admin/modules/pro/class-custom-login-design.php:4050
-#: admin/modules/pro/class-custom-login-design.php:4219 admin/modules/pro/class-custom-login-design.php:4323
-#: admin/modules/pro/class-custom-login-design.php:4515 admin/modules/pro/class-custom-login-design.php:4901
-#: admin/modules/pro/class-custom-login-design.php:5020
+#: admin/modules/pro/class-custom-login-design.php:3681 admin/modules/pro/class-custom-login-design.php:4051
+#: admin/modules/pro/class-custom-login-design.php:4220 admin/modules/pro/class-custom-login-design.php:4324
+#: admin/modules/pro/class-custom-login-design.php:4516 admin/modules/pro/class-custom-login-design.php:4902
+#: admin/modules/pro/class-custom-login-design.php:5021
 msgid "Hide"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:3681 admin/modules/pro/class-custom-login-design.php:4063
-#: admin/modules/pro/class-custom-login-design.php:4274 admin/modules/pro/class-custom-login-design.php:4378
-#: admin/modules/pro/class-custom-login-design.php:4834 admin/modules/pro/class-custom-login-design.php:5031
+#: admin/modules/pro/class-custom-login-design.php:3682 admin/modules/pro/class-custom-login-design.php:4064
+#: admin/modules/pro/class-custom-login-design.php:4275 admin/modules/pro/class-custom-login-design.php:4379
+#: admin/modules/pro/class-custom-login-design.php:4835 admin/modules/pro/class-custom-login-design.php:5032
 #: admin/modules/pro/class-my-account-menu-customizer.php:931
 msgid "Left"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:3682 admin/modules/pro/class-custom-login-design.php:4065
-#: admin/modules/pro/class-custom-login-design.php:4276 admin/modules/pro/class-custom-login-design.php:4380
-#: admin/modules/pro/class-custom-login-design.php:4836 admin/modules/pro/class-custom-login-design.php:5033
+#: admin/modules/pro/class-custom-login-design.php:3683 admin/modules/pro/class-custom-login-design.php:4066
+#: admin/modules/pro/class-custom-login-design.php:4277 admin/modules/pro/class-custom-login-design.php:4381
+#: admin/modules/pro/class-custom-login-design.php:4837 admin/modules/pro/class-custom-login-design.php:5034
 #: admin/modules/pro/class-my-account-menu-customizer.php:932
 msgid "Right"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:3691 admin/modules/pro/class-custom-login-design.php:4074
+#: admin/modules/pro/class-custom-login-design.php:3692 admin/modules/pro/class-custom-login-design.php:4075
 #: admin/modules/pro/class-media-replacement.php:341 admin/modules/pro/class-media-replacement.php:367
 msgid "Width"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:3745 admin/modules/pro/class-custom-login-design.php:3818
+#: admin/modules/pro/class-custom-login-design.php:3746 admin/modules/pro/class-custom-login-design.php:3819
 msgid "Margin"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:3762 admin/modules/pro/class-custom-login-design.php:3968
-#: admin/modules/pro/class-custom-login-design.php:4179
+#: admin/modules/pro/class-custom-login-design.php:3763 admin/modules/pro/class-custom-login-design.php:3969
+#: admin/modules/pro/class-custom-login-design.php:4180
 msgid "Border Raduis"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:3835 admin/modules/pro/class-custom-login-design.php:3951
-#: admin/modules/pro/class-custom-login-design.php:4029 admin/modules/pro/class-custom-login-design.php:4145
-#: admin/modules/pro/class-custom-login-design.php:4524 admin/modules/pro/class-custom-login-design.php:4862
+#: admin/modules/pro/class-custom-login-design.php:3836 admin/modules/pro/class-custom-login-design.php:3952
+#: admin/modules/pro/class-custom-login-design.php:4030 admin/modules/pro/class-custom-login-design.php:4146
+#: admin/modules/pro/class-custom-login-design.php:4525 admin/modules/pro/class-custom-login-design.php:4863
 msgid "Padding"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:3852 admin/modules/pro/class-custom-login-design.php:4059
-#: admin/modules/pro/class-custom-login-design.php:4270 admin/modules/pro/class-custom-login-design.php:4374
-#: admin/modules/pro/class-custom-login-design.php:4829 admin/modules/pro/class-custom-login-design.php:5027
+#: admin/modules/pro/class-custom-login-design.php:3853 admin/modules/pro/class-custom-login-design.php:4060
+#: admin/modules/pro/class-custom-login-design.php:4271 admin/modules/pro/class-custom-login-design.php:4375
+#: admin/modules/pro/class-custom-login-design.php:4830 admin/modules/pro/class-custom-login-design.php:5028
 msgid "Align"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:3856 admin/modules/pro/class-custom-login-design.php:4833
+#: admin/modules/pro/class-custom-login-design.php:3857 admin/modules/pro/class-custom-login-design.php:4834
 msgid "Full Width"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:3858 admin/modules/pro/class-custom-login-design.php:4002
-#: admin/modules/pro/class-custom-login-design.php:4064 admin/modules/pro/class-custom-login-design.php:4275
-#: admin/modules/pro/class-custom-login-design.php:4379 admin/modules/pro/class-custom-login-design.php:4835
-#: admin/modules/pro/class-custom-login-design.php:5032
+#: admin/modules/pro/class-custom-login-design.php:3859 admin/modules/pro/class-custom-login-design.php:4003
+#: admin/modules/pro/class-custom-login-design.php:4065 admin/modules/pro/class-custom-login-design.php:4276
+#: admin/modules/pro/class-custom-login-design.php:4380 admin/modules/pro/class-custom-login-design.php:4836
+#: admin/modules/pro/class-custom-login-design.php:5033
 msgid "Center"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:3859 admin/modules/pro/class-custom-login-design.php:4003
+#: admin/modules/pro/class-custom-login-design.php:3860 admin/modules/pro/class-custom-login-design.php:4004
 msgid "End"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:3866 admin/modules/pro/class-custom-login-design.php:4091
+#: admin/modules/pro/class-custom-login-design.php:3867 admin/modules/pro/class-custom-login-design.php:4092
 #: admin/modules/pro/class-media-replacement.php:345 admin/modules/pro/class-media-replacement.php:371
 msgid "Height"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:3870
+#: admin/modules/pro/class-custom-login-design.php:3871
 msgid "Full Height"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:3934
+#: admin/modules/pro/class-custom-login-design.php:3935
 msgid "Background Blur"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:3985
+#: admin/modules/pro/class-custom-login-design.php:3986
 msgid "Direction"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:3989
+#: admin/modules/pro/class-custom-login-design.php:3990
 msgid "Row"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:3990
+#: admin/modules/pro/class-custom-login-design.php:3991
 msgid "Column"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:3997
+#: admin/modules/pro/class-custom-login-design.php:3998
 msgid "Align Items"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:4012 admin/modules/pro/class-custom-login-design.php:4568
-#: admin/modules/pro/class-custom-login-design.php:4726
+#: admin/modules/pro/class-custom-login-design.php:4013 admin/modules/pro/class-custom-login-design.php:4569
+#: admin/modules/pro/class-custom-login-design.php:4727
 msgid "Gap"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:4051
+#: admin/modules/pro/class-custom-login-design.php:4052
 msgid "Inside"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:4052
+#: admin/modules/pro/class-custom-login-design.php:4053
 msgid "Outside"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:4108
+#: admin/modules/pro/class-custom-login-design.php:4109
 msgid "Logo Image"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:4162 admin/modules/pro/class-custom-login-design.php:4285
-#: admin/modules/pro/class-custom-login-design.php:4389
+#: admin/modules/pro/class-custom-login-design.php:4163 admin/modules/pro/class-custom-login-design.php:4286
+#: admin/modules/pro/class-custom-login-design.php:4390
 msgid "Margin Bottom"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:4198
+#: admin/modules/pro/class-custom-login-design.php:4199
 #: admin/templates/core/register-custom-content-types/edit-post-cpt.php:114
 msgid "Title"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:4214 admin/modules/pro/class-custom-login-design.php:4318
+#: admin/modules/pro/class-custom-login-design.php:4215 admin/modules/pro/class-custom-login-design.php:4319
 msgid "Show/Hide"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:4218 admin/modules/pro/class-custom-login-design.php:4322
-#: admin/modules/pro/class-custom-login-design.php:4514 admin/modules/pro/class-custom-login-design.php:4900
-#: admin/modules/pro/class-custom-login-design.php:5019
+#: admin/modules/pro/class-custom-login-design.php:4219 admin/modules/pro/class-custom-login-design.php:4323
+#: admin/modules/pro/class-custom-login-design.php:4515 admin/modules/pro/class-custom-login-design.php:4901
+#: admin/modules/pro/class-custom-login-design.php:5020
 msgid "Show"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:4228 admin/modules/pro/class-custom-login-design.php:4332
-#: admin/modules/pro/class-custom-login-design.php:4465 admin/modules/pro/class-custom-login-design.php:4628
-#: admin/modules/pro/class-custom-login-design.php:4811 admin/modules/pro/class-custom-login-design.php:4988
+#: admin/modules/pro/class-custom-login-design.php:4229 admin/modules/pro/class-custom-login-design.php:4333
+#: admin/modules/pro/class-custom-login-design.php:4466 admin/modules/pro/class-custom-login-design.php:4629
+#: admin/modules/pro/class-custom-login-design.php:4812 admin/modules/pro/class-custom-login-design.php:4989
 msgid "Color"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:4238 admin/modules/pro/class-custom-login-design.php:4342
-#: admin/modules/pro/class-custom-login-design.php:4448 admin/modules/pro/class-custom-login-design.php:4594
-#: admin/modules/pro/class-custom-login-design.php:4777 admin/modules/pro/class-custom-login-design.php:4954
+#: admin/modules/pro/class-custom-login-design.php:4239 admin/modules/pro/class-custom-login-design.php:4343
+#: admin/modules/pro/class-custom-login-design.php:4449 admin/modules/pro/class-custom-login-design.php:4595
+#: admin/modules/pro/class-custom-login-design.php:4778 admin/modules/pro/class-custom-login-design.php:4955
 msgid "Font Size"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:4255 admin/modules/pro/class-custom-login-design.php:4359
-#: admin/modules/pro/class-custom-login-design.php:4611 admin/modules/pro/class-custom-login-design.php:4794
-#: admin/modules/pro/class-custom-login-design.php:4971
+#: admin/modules/pro/class-custom-login-design.php:4256 admin/modules/pro/class-custom-login-design.php:4360
+#: admin/modules/pro/class-custom-login-design.php:4612 admin/modules/pro/class-custom-login-design.php:4795
+#: admin/modules/pro/class-custom-login-design.php:4972
 msgid "Font Weight"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:4406
+#: admin/modules/pro/class-custom-login-design.php:4407
 msgid "Login Placeholder"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:4414
+#: admin/modules/pro/class-custom-login-design.php:4415
 msgid "Password Placeholder"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:4422
+#: admin/modules/pro/class-custom-login-design.php:4423
 msgid "Register Login Placeholder"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:4430
+#: admin/modules/pro/class-custom-login-design.php:4431
 msgid "Register Email Placeholder"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:4438
+#: admin/modules/pro/class-custom-login-design.php:4439
 msgid "Lost password Login Placeholder"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:4475
+#: admin/modules/pro/class-custom-login-design.php:4476
 msgid "Placeholde Color"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:4510
+#: admin/modules/pro/class-custom-login-design.php:4511
 msgid "Icons"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:4541
+#: admin/modules/pro/class-custom-login-design.php:4542
 msgid "Border Color"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:4551 admin/modules/pro/class-custom-login-design.php:4845
+#: admin/modules/pro/class-custom-login-design.php:4552 admin/modules/pro/class-custom-login-design.php:4846
 msgid "Border Radius"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:4638
+#: admin/modules/pro/class-custom-login-design.php:4639
 msgid "Checkbox Size"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:4655
+#: admin/modules/pro/class-custom-login-design.php:4656
 msgid "Checkbox Background Color"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:4682
+#: admin/modules/pro/class-custom-login-design.php:4683
 msgid "Checkbox Border Color"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:4692
+#: admin/modules/pro/class-custom-login-design.php:4693
 msgid "Checkbox Border Radius"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:4709 admin/modules/pro/class-custom-login-design.php:4879
-#: admin/modules/pro/class-custom-login-design.php:4998 admin/modules/pro/class-custom-login-design.php:5042
+#: admin/modules/pro/class-custom-login-design.php:4710 admin/modules/pro/class-custom-login-design.php:4880
+#: admin/modules/pro/class-custom-login-design.php:4999 admin/modules/pro/class-custom-login-design.php:5043
 msgid "Margin Top"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:4759
+#: admin/modules/pro/class-custom-login-design.php:4760
 msgid "Register confirmation"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:4896 admin/modules/pro/class-custom-login-design.php:5015
+#: admin/modules/pro/class-custom-login-design.php:4897 admin/modules/pro/class-custom-login-design.php:5016
 msgid "Display"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:4912
+#: admin/modules/pro/class-custom-login-design.php:4913
 msgid "Top"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:4913
+#: admin/modules/pro/class-custom-login-design.php:4914
 msgid "Bottom"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:4920
+#: admin/modules/pro/class-custom-login-design.php:4921
 msgid "Login"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:4936
+#: admin/modules/pro/class-custom-login-design.php:4937
 msgid "Lost Password"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:4944
+#: admin/modules/pro/class-custom-login-design.php:4945
 msgid "Go To"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:5062 admin/modules/pro/class-custom-login-design.php:5074
-#: admin/modules/pro/class-custom-login-design.php:5086 admin/modules/pro/class-custom-login-design.php:5098
+#: admin/modules/pro/class-custom-login-design.php:5063 admin/modules/pro/class-custom-login-design.php:5075
+#: admin/modules/pro/class-custom-login-design.php:5087 admin/modules/pro/class-custom-login-design.php:5099
 msgid "You can enter raw HTML or use shortcodes in this field."
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:5085
+#: admin/modules/pro/class-custom-login-design.php:5086
 msgid "Form Middle"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:5097
+#: admin/modules/pro/class-custom-login-design.php:5098
 msgid "Footer"
 msgstr ""
 
-#: admin/modules/pro/class-custom-login-design.php:5111
+#: admin/modules/pro/class-custom-login-design.php:5112
 msgid "Custom css"
 msgstr ""
 
@@ -9941,39 +10107,44 @@ msgstr ""
 msgid "Include in Debug Session"
 msgstr ""
 
-#: admin/modules/pro/class-disallow-countries-ip.php:134
+#: admin/modules/pro/class-disallow-countries-ip.php:136
 msgid "Disallow countries IP"
 msgstr ""
 
-#: admin/modules/pro/class-disallow-countries-ip.php:393
+#: admin/modules/pro/class-disallow-countries-ip.php:395
 msgid "Select countries"
 msgstr ""
 
-#: admin/modules/pro/class-disallow-countries-ip.php:394
+#: admin/modules/pro/class-disallow-countries-ip.php:396
 msgid "No result found"
 msgstr ""
 
-#: admin/modules/pro/class-disallow-countries-ip.php:605
+#: admin/modules/pro/class-disallow-countries-ip.php:625
 msgid "Forbidden Access"
 msgstr ""
 
-#: admin/modules/pro/class-disallow-countries-ip.php:606
+#: admin/modules/pro/class-disallow-countries-ip.php:626
 msgid "You do not have permission to access this page."
 msgstr ""
 
-#: admin/modules/pro/class-disallow-countries-ip.php:655
+#: admin/modules/pro/class-disallow-countries-ip.php:677
 msgid "Include/Exclude countries."
 msgstr ""
 
-#: admin/modules/pro/class-disallow-countries-ip.php:660
+#: admin/modules/pro/class-disallow-countries-ip.php:684
+#, php-format
+msgid "We are having trouble using the current GeoIP database file. We will try to download it again in %s."
+msgstr ""
+
+#: admin/modules/pro/class-disallow-countries-ip.php:695
 msgid "Countries"
 msgstr ""
 
-#: admin/modules/pro/class-disallow-countries-ip.php:676
+#: admin/modules/pro/class-disallow-countries-ip.php:711
 msgid "IP Access Control"
 msgstr ""
 
-#: admin/modules/pro/class-disallow-countries-ip.php:688
+#: admin/modules/pro/class-disallow-countries-ip.php:723
 msgid ""
 "If the toggle is disabled, the IPs listed above will not be able to access your site. Conversely, if the "
 "toggle is enabled, only the IPs listed above will have access to your site."
@@ -10051,56 +10222,60 @@ msgstr ""
 msgid "Bulk alt text generation stopped."
 msgstr ""
 
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:414
+msgid "No attachment id."
+msgstr ""
+
 #: admin/modules/pro/class-generate-alt-text-with-ai.php:468
 msgid "Generate Alt Text"
 msgstr ""
 
-#: admin/modules/pro/class-generate-alt-text-with-ai.php:698
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:806
 msgid "Automatically generate alternative text using AI."
 msgstr ""
 
-#: admin/modules/pro/class-generate-alt-text-with-ai.php:708
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:816
 msgid "You have not yet entered a key in the credentials section of the settings. To do so,"
 msgstr ""
 
-#: admin/modules/pro/class-generate-alt-text-with-ai.php:712
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:820
 msgid "go here"
 msgstr ""
 
-#: admin/modules/pro/class-generate-alt-text-with-ai.php:722
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:830
 msgid "AI Model"
 msgstr ""
 
-#: admin/modules/pro/class-generate-alt-text-with-ai.php:727
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:835
 msgid "Select AI Model"
 msgstr ""
 
-#: admin/modules/pro/class-generate-alt-text-with-ai.php:756
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:874
 #: admin/templates/pro/custom-login-design/login-page-template.php:151
 msgid "Language"
 msgstr ""
 
-#: admin/modules/pro/class-generate-alt-text-with-ai.php:760
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:878
 msgid "Website Language"
 msgstr ""
 
-#: admin/modules/pro/class-generate-alt-text-with-ai.php:773
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:891
 msgid "Prompt"
 msgstr ""
 
-#: admin/modules/pro/class-generate-alt-text-with-ai.php:775
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:893
 msgid "Placeholder will be replaced by language."
 msgstr ""
 
-#: admin/modules/pro/class-generate-alt-text-with-ai.php:783
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:901
 msgid "Generate when a new image is uploaded"
 msgstr ""
 
-#: admin/modules/pro/class-generate-alt-text-with-ai.php:794
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:912
 msgid "Only generate alt text if it is empty"
 msgstr ""
 
-#: admin/modules/pro/class-generate-alt-text-with-ai.php:805
+#: admin/modules/pro/class-generate-alt-text-with-ai.php:923
 msgid "Bulk generation"
 msgstr ""
 
@@ -10412,158 +10587,158 @@ msgstr ""
 msgid "&mdash; No Change &mdash;"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:54
-#: admin/modules/pro/class-two-factor-authentication.php:485
+#: admin/modules/pro/class-two-factor-authentication.php:55
+#: admin/modules/pro/class-two-factor-authentication.php:559
 msgid "Two factor authentication"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:212
+#: admin/modules/pro/class-two-factor-authentication.php:213
 msgid "This module will add two factor authentication methods to the login page."
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:218
+#: admin/modules/pro/class-two-factor-authentication.php:219
 msgid "Active for user roles"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:241
+#: admin/modules/pro/class-two-factor-authentication.php:242
 msgid "Default method: force Email"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:245
+#: admin/modules/pro/class-two-factor-authentication.php:246
 msgid "If a user has not selected any method, Email will be applied automatically."
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:257
+#: admin/modules/pro/class-two-factor-authentication.php:258
 msgid "Method 1 : Send code via Email"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:273
+#: admin/modules/pro/class-two-factor-authentication.php:274
 msgid "Method 2 : Google Authenticator (TOTP)"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:323
-#: admin/modules/pro/class-two-factor-authentication.php:633
+#: admin/modules/pro/class-two-factor-authentication.php:324
+#: admin/modules/pro/class-two-factor-authentication.php:707
 msgid "Too many attempts. Please wait a few minutes and try again."
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:337
+#: admin/modules/pro/class-two-factor-authentication.php:411
 msgid "Close button"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:342
+#: admin/modules/pro/class-two-factor-authentication.php:416
 msgid "Wait please..."
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:349
+#: admin/modules/pro/class-two-factor-authentication.php:423
 msgid "One more step"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:352
+#: admin/modules/pro/class-two-factor-authentication.php:426
 msgid "Please select your preferred method for two-factor authentication."
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:361
+#: admin/modules/pro/class-two-factor-authentication.php:435
 msgid "Receive an email"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:374
-#: admin/modules/pro/class-two-factor-authentication.php:502
+#: admin/modules/pro/class-two-factor-authentication.php:448
+#: admin/modules/pro/class-two-factor-authentication.php:576
 msgid "Google Authenticator"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:391
+#: admin/modules/pro/class-two-factor-authentication.php:465
 msgid "Enter the code"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:394
+#: admin/modules/pro/class-two-factor-authentication.php:468
 msgid "Please enter your two factor authentication code here."
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:407
+#: admin/modules/pro/class-two-factor-authentication.php:481
 msgid "Se connecter"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:491
+#: admin/modules/pro/class-two-factor-authentication.php:565
 msgid "Via email"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:517
+#: admin/modules/pro/class-two-factor-authentication.php:591
 msgid "Scan this QR code with your Google Authenticator app:"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:518
+#: admin/modules/pro/class-two-factor-authentication.php:592
 #: admin/templates/pro/link-shortener/edit-post.php:116
 msgid "QR Code"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:519
+#: admin/modules/pro/class-two-factor-authentication.php:593
 msgid "Secret key:"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:623
-#: admin/modules/pro/class-two-factor-authentication.php:661
+#: admin/modules/pro/class-two-factor-authentication.php:697
+#: admin/modules/pro/class-two-factor-authentication.php:735
 msgid "Invalid nonce"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:665
+#: admin/modules/pro/class-two-factor-authentication.php:739
 msgid ""
 "Too many attempts for now. Please wait a few minutes and try again. If you have already received a code, "
 "please use that code."
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:680
-#: admin/modules/pro/class-two-factor-authentication.php:690
 #: admin/modules/pro/class-two-factor-authentication.php:754
+#: admin/modules/pro/class-two-factor-authentication.php:764
+#: admin/modules/pro/class-two-factor-authentication.php:828
 msgid "If the account and method are valid, a code will be sent."
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:701
+#: admin/modules/pro/class-two-factor-authentication.php:775
 msgid "Your login code"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:704
+#: admin/modules/pro/class-two-factor-authentication.php:778
 #, php-format
 msgid "Hello %s,"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:707
+#: admin/modules/pro/class-two-factor-authentication.php:781
 msgid "Here is your login code :"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:712
+#: admin/modules/pro/class-two-factor-authentication.php:786
 #, php-format
 msgid "IP : %s"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:717
+#: admin/modules/pro/class-two-factor-authentication.php:791
 #, php-format
 msgid "Date : %s"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:722
+#: admin/modules/pro/class-two-factor-authentication.php:796
 #, php-format
 msgid "User agent : %s"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:727
+#: admin/modules/pro/class-two-factor-authentication.php:801
 #, php-format
 msgid "Website : %s"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:784
+#: admin/modules/pro/class-two-factor-authentication.php:858
 msgid "Method not found"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:793
+#: admin/modules/pro/class-two-factor-authentication.php:867
 msgid "Code not found"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:802
+#: admin/modules/pro/class-two-factor-authentication.php:876
 msgid "Google Authenticator not configured"
 msgstr ""
 
-#: admin/modules/pro/class-two-factor-authentication.php:808
-#: admin/modules/pro/class-two-factor-authentication.php:817
+#: admin/modules/pro/class-two-factor-authentication.php:882
+#: admin/modules/pro/class-two-factor-authentication.php:891
 msgid "Code not valid"
 msgstr ""
 
@@ -10855,7 +11030,7 @@ msgstr ""
 msgid "BackUp"
 msgstr ""
 
-#: admin/templates/core/file-manager/views/edit.php:25 admin/templates/core/page-settings.php:52
+#: admin/templates/core/file-manager/views/edit.php:25 admin/templates/core/page-settings.php:44
 #: admin/templates/core/register-custom-content-types/edit-post-cpt.php:26
 #: admin/templates/core/register-custom-content-types/edit-taxonomy.php:26
 #: admin/templates/core/submenu/header.php:36 admin/templates/pro/link-shortener/edit-post.php:33
@@ -10958,11 +11133,28 @@ msgstr ""
 msgid "Seconds"
 msgstr ""
 
-#: admin/templates/core/page-settings-tabs/credentials.php:36
+#: admin/templates/core/page-settings-no-super-admin.php:10
+msgid "Access denied"
+msgstr ""
+
+#: admin/templates/core/page-settings-no-super-admin.php:11
+msgid "You do not have access to the settings page. Please contact the site administrator to request access."
+msgstr ""
+
+#: admin/templates/core/page-settings-tabs/credentials.php:18
+msgid "AI Connectors"
+msgstr ""
+
+#: admin/templates/core/page-settings-tabs/credentials.php:27
+#, php-format
+msgid "To set the API keys for AI connectors, please go to the <a href=\"%s\">AI Connectors settings page</a>."
+msgstr ""
+
+#: admin/templates/core/page-settings-tabs/credentials.php:57
 msgid "Enter your API Key"
 msgstr ""
 
-#: admin/templates/core/page-settings-tabs/credentials.php:38
+#: admin/templates/core/page-settings-tabs/credentials.php:59
 msgid "Modifier la clé API"
 msgstr ""
 
@@ -11080,134 +11272,144 @@ msgstr ""
 msgid "Copy System Info"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:32 licensing/src/Settings.php:364
+#: admin/templates/core/page-settings-tabs/settings.php:133
+msgid "Add Super Admins"
+msgstr ""
+
+#: admin/templates/core/page-settings-tabs/settings.php:138
+msgid ""
+"Restrict access to WPMasterToolkit modules and settings to selected administrators only. Other admins will "
+"not be able to view or modify the plugin settings."
+msgstr ""
+
+#: admin/templates/core/page-settings.php:24 licensing/src/Settings.php:369
 msgid "WPMasterToolKit"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:34
+#: admin/templates/core/page-settings.php:26
 msgid "Version"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:34
+#: admin/templates/core/page-settings.php:26
 msgid "What's new?"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:168
+#: admin/templates/core/page-settings.php:160
 msgid "Try 15 days for free"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:174
+#: admin/templates/core/page-settings.php:166
 msgid "coming soon"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:177
+#: admin/templates/core/page-settings.php:169
 msgid "DOC"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:180
+#: admin/templates/core/page-settings.php:172
 msgid "SETTINGS"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:219
+#: admin/templates/core/page-settings.php:211
 msgid "Share my configuration"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:220
+#: admin/templates/core/page-settings.php:212
 msgid ""
 "In order to improve our modules, we would like to know which modules are most used, with the aim of improving "
 "the most used modules as a priority. All data is sent anonymously."
 msgstr ""
 
-#: admin/templates/core/page-settings.php:232
+#: admin/templates/core/page-settings.php:224
 msgid "Data anonymization"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:233
+#: admin/templates/core/page-settings.php:225
 msgid "We only send your WPMasterToolKit configuration."
 msgstr ""
 
-#: admin/templates/core/page-settings.php:243
+#: admin/templates/core/page-settings.php:235
 msgid "Personal Data"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:244
+#: admin/templates/core/page-settings.php:236
 msgid "We never share or get your personal information."
 msgstr ""
 
-#: admin/templates/core/page-settings.php:254
+#: admin/templates/core/page-settings.php:246
 msgid "Plugin improvement"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:255
+#: admin/templates/core/page-settings.php:247
 msgid "This sharing allows us to make the most relevant improvements to the plugin."
 msgstr ""
 
-#: admin/templates/core/page-settings.php:271
+#: admin/templates/core/page-settings.php:263
 msgid "I agree to share my configuration with wpmastertoolkit.com."
 msgstr ""
 
-#: admin/templates/core/page-settings.php:276
+#: admin/templates/core/page-settings.php:268
 msgid "Save & continue"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:285
+#: admin/templates/core/page-settings.php:277
 msgid "Unlock the full potential of WPMasterToolKit"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:291
+#: admin/templates/core/page-settings.php:283
 #, php-format
 msgid ""
 "Like the free version of WPMasterToolKit? The PRO version lets you go further with %s additional modules and "
 "additional features in the free modules."
 msgstr ""
 
-#: admin/templates/core/page-settings.php:312
+#: admin/templates/core/page-settings.php:304
 #, php-format
 msgid "+%s modules"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:318
+#: admin/templates/core/page-settings.php:310
 msgid "Benefit from modules designed 100% for professionals."
 msgstr ""
 
-#: admin/templates/core/page-settings.php:327
+#: admin/templates/core/page-settings.php:319
 msgid "Additional Features"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:328
+#: admin/templates/core/page-settings.php:320
 msgid "Take advantage of PRO features within the free modules, to go further."
 msgstr ""
 
-#: admin/templates/core/page-settings.php:337
+#: admin/templates/core/page-settings.php:329
 msgid "Improve your performance"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:338
+#: admin/templates/core/page-settings.php:330
 msgid "Further reduce the number of active plugins and benefit from our resource-conscious approach."
 msgstr ""
 
-#: admin/templates/core/page-settings.php:350
+#: admin/templates/core/page-settings.php:342
 msgid "I no longer wish to see this message"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:353
+#: admin/templates/core/page-settings.php:345
 msgid "I already have a license"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:356 admin/templates/core/page-settings.php:357
+#: admin/templates/core/page-settings.php:348 admin/templates/core/page-settings.php:349
 msgid "Start 15 free trial"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:375
+#: admin/templates/core/page-settings.php:367
 #, php-format
 msgid "What's new in v%s"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:383
+#: admin/templates/core/page-settings.php:375
 msgid "https://wpmastertoolkit.com/en/changelog/"
 msgstr ""
 
-#: admin/templates/core/page-settings.php:383
+#: admin/templates/core/page-settings.php:375
 msgid "View all changelogs"
 msgstr ""
 
@@ -11919,6 +12121,50 @@ msgstr[1] ""
 msgid "QR code"
 msgstr ""
 
+#: admin/templates/pro/page-logs.php:14
+msgid "Log Files"
+msgstr ""
+
+#: admin/templates/pro/page-logs.php:27
+msgid "Refresh"
+msgstr ""
+
+#: admin/templates/pro/page-logs.php:35
+msgid "Start Stream"
+msgstr ""
+
+#: admin/templates/pro/page-logs.php:43
+msgid "Stop Stream"
+msgstr ""
+
+#: admin/templates/pro/page-logs.php:59
+msgid "Clear Old Logs"
+msgstr ""
+
+#: admin/templates/pro/page-logs.php:86
+msgid "Stream Mode Active"
+msgstr ""
+
+#: admin/templates/pro/page-logs.php:87
+msgid "New log entries will be displayed in real-time."
+msgstr ""
+
+#: admin/templates/pro/page-logs.php:99
+msgid "File Name:"
+msgstr ""
+
+#: admin/templates/pro/page-logs.php:103
+msgid "File Size:"
+msgstr ""
+
+#: admin/templates/pro/page-logs.php:107
+msgid "Lines:"
+msgstr ""
+
+#: admin/templates/pro/page-logs.php:117
+msgid "Select a log file to view its content"
+msgstr ""
+
 #: admin/templates/pro/vulnerabilities-scan/admin-submenu.php:7
 msgid "WordPress Core"
 msgstr ""
@@ -12045,7 +12291,7 @@ msgstr ""
 msgid "Could not activate the license."
 msgstr ""
 
-#: licensing/src/Client.php:314
+#: licensing/src/Client.php:317
 msgid "Unknown error occurred, Please try again."
 msgstr ""
 
@@ -12073,134 +12319,148 @@ msgstr ""
 msgid "This license key is not valid. Please double check it and try again."
 msgstr ""
 
-#: licensing/src/Settings.php:226
+#: licensing/src/Settings.php:227
 msgid "https://wpmastertoolkit.com/en/how-to-upgrade-to-wpmastertoolkit-pro-complete-guide/"
 msgstr ""
 
-#: licensing/src/Settings.php:230
+#: licensing/src/Settings.php:231
 msgid "Help"
 msgstr ""
 
-#: licensing/src/Settings.php:250
+#: licensing/src/Settings.php:249
+msgid "Your license key is managed via the"
+msgstr ""
+
+#: licensing/src/Settings.php:249
+msgid "constant defined in wp-config.php and cannot be changed here."
+msgstr ""
+
+#: licensing/src/Settings.php:253
 #, php-format
 msgid "Enter your license key to activate %s."
 msgstr ""
 
-#: licensing/src/Settings.php:255
+#: licensing/src/Settings.php:258
 msgid "Your license is succesfully activated for this site."
 msgstr ""
 
-#: licensing/src/Settings.php:261
+#: licensing/src/Settings.php:264
 msgid "State:"
 msgstr ""
 
-#: licensing/src/Settings.php:267
+#: licensing/src/Settings.php:270
 msgid "Enter the license..."
 msgstr ""
 
-#: licensing/src/Settings.php:278
+#: licensing/src/Settings.php:281
 msgid "License ID"
 msgstr ""
 
-#: licensing/src/Settings.php:281
+#: licensing/src/Settings.php:284
 msgid "Activation ID"
 msgstr ""
 
-#: licensing/src/Settings.php:294
+#: licensing/src/Settings.php:298
 msgid "Deactivate License"
 msgstr ""
 
-#: licensing/src/Settings.php:298
+#: licensing/src/Settings.php:303
 msgid "https://wpmastertoolkit.com/en/customer-dashboard/"
 msgstr ""
 
-#: licensing/src/Settings.php:300
+#: licensing/src/Settings.php:305
 msgid "My account"
 msgstr ""
 
-#: licensing/src/Settings.php:318
+#: licensing/src/Settings.php:323
 msgid "With the PRO version you unlock:"
 msgstr ""
 
-#: licensing/src/Settings.php:326
+#: licensing/src/Settings.php:331
 msgid "Pro features"
 msgstr ""
 
-#: licensing/src/Settings.php:330
+#: licensing/src/Settings.php:335
 msgid ""
 "Unlock Pro features on free modules. These features will save you even more time without overloading your "
 "site. ✨"
 msgstr ""
 
-#: licensing/src/Settings.php:341
+#: licensing/src/Settings.php:346
 #, php-format
 msgid "+ %s Pro modules"
 msgstr ""
 
-#: licensing/src/Settings.php:348
+#: licensing/src/Settings.php:353
 msgid ""
 "Take advantage of all the pro modules. These modules were created mainly to facilitate web professionals and "
 "will save you a lot of time. ✨"
 msgstr ""
 
-#: licensing/src/Settings.php:361
+#: licensing/src/Settings.php:366
 msgid "Our offers"
 msgstr ""
 
-#: licensing/src/Settings.php:367
+#: licensing/src/Settings.php:372
 msgid ""
 "Choose from our 4 plans, the plan that best suits your needs and enjoy advanced features to optimize your "
 "WordPress site. ✨"
 msgstr ""
 
-#: licensing/src/Settings.php:369
+#: licensing/src/Settings.php:374
 msgid "https://wpmastertoolkit.com/en/products-2/wpmastertoolkit-pro/"
 msgstr ""
 
-#: licensing/src/Settings.php:371
+#: licensing/src/Settings.php:376
 msgid "Buy"
 msgstr ""
 
-#: licensing/src/Settings.php:379
+#: licensing/src/Settings.php:384
 msgid "Modules documentation"
 msgstr ""
 
-#: licensing/src/Settings.php:382
+#: licensing/src/Settings.php:387
 msgid "Find all the essential information to configure and use WPMasterToolKit modules effectively. 🎓"
 msgstr ""
 
-#: licensing/src/Settings.php:384
+#: licensing/src/Settings.php:389
 msgid "https://wpmastertoolkit.com/en/modules/"
 msgstr ""
 
-#: licensing/src/Settings.php:386
+#: licensing/src/Settings.php:391
 msgid "Discover WPMTK"
 msgstr ""
 
-#: licensing/src/Settings.php:401
+#: licensing/src/Settings.php:412
 msgid "Unlock the full potential of WPMTK"
 msgstr ""
 
-#: licensing/src/Settings.php:404
+#: licensing/src/Settings.php:415
 msgid "Discover the power of WPMasterToolKit and unlock the full potential of your WordPress site. 🔥"
 msgstr ""
 
-#: licensing/src/Settings.php:425
+#: licensing/src/Settings.php:436
 msgid "Your license has been deactivated for this site."
 msgstr ""
 
-#: licensing/src/Settings.php:444 licensing/src/Settings.php:456
+#: licensing/src/Settings.php:455
+msgid ""
+"The license key is managed via the WPMASTERTOOLKIT_LICENSE_KEY constant defined in wp-config.php and cannot "
+"be changed here."
+msgstr ""
+
+#: licensing/src/Settings.php:461 licensing/src/Settings.php:473
 msgid "You don't have permission to manage licenses."
 msgstr ""
 
-#: licensing/src/Settings.php:450
+#: licensing/src/Settings.php:467
 msgid "Please add all information"
 msgstr ""
 
-#: licensing/src/Settings.php:475
+#: licensing/src/Settings.php:492
 msgid "This site was successfully activated."
 msgstr ""
 
-#: licensing/src/Settings.php:492
+#: licensing/src/Settings.php:509
 msgid "This site was successfully deactivated."
 msgstr ""

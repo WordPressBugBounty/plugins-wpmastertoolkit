@@ -1,6 +1,6 @@
 <?php
 
-namespace SureCart\Licensing;
+namespace SureCartWPMTK\Licensing;
 
 /**
  * Activation model
@@ -14,7 +14,7 @@ class Activation {
 	protected $endpoint = 'v1/public/activations';
 
 	/**
-	 * SureCart\Licensing\Client
+	 * SureCartWPMTK\Licensing\Client
 	 *
 	 * @var object
 	 */
@@ -30,7 +30,7 @@ class Activation {
 	/**
 	 * Initialize the class.
 	 *
-	 * @param SureCart\Licensing\Client $client The client.
+	 * @param SureCartWPMTK\Licensing\Client $client The client.
 	 */
 	public function __construct( Client $client ) {
 		$this->client     = $client;
