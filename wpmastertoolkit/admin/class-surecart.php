@@ -28,6 +28,11 @@ class WPMastertoolkit_Surecart {
 	private $updater;
 
 	/**
+	 * The license instance.
+	 */
+	private $license;
+
+	/**
 	 * The transient id.
 	 */
 	private $transient_id = 'wpmastertoolkit_surecart_license';
@@ -38,19 +43,21 @@ class WPMastertoolkit_Surecart {
 	 * @since 1.15.0
 	 */
 	public function init_surecart() {
-		global $wpmtk_surecart_client;
+		global $wpmtk_surecart_client, $wpmtk_surecart_license, $wpmtk_surecart_license_status;
 
 		if ( ! class_exists( 'SureCartWPMTK\Licensing\Client' ) ) {
 			require_once WPMASTERTOOLKIT_PLUGIN_PATH . 'licensing/src/Client.php';
 		}
 
-		$this->client   = new \SureCartWPMTK\Licensing\Client( 'WPMasterToolKit', 'pt_peLDYfw2gnkrUcoY5BzTNC89', WPMASTERTOOLKIT_PLUGIN_FILE );
+		$this->client = new \SureCartWPMTK\Licensing\Client( 'WPMasterToolKit', 'pt_peLDYfw2gnkrUcoY5BzTNC89', WPMASTERTOOLKIT_PLUGIN_FILE );
 		$wpmtk_surecart_client = $this->client;
 
 		$this->settings = $this->client->settings();
 		$this->updater  = $this->client->updater();
+		$this->license  = $this->client->license();
+		$wpmtk_surecart_license = $this->license;
 
-		$this->client->settings()->add_page( array(
+		$this->settings->add_page( array(
 			'type'        => 'submenu',
 			'parent_slug' => 'wp-mastertoolkit-settings',
 			'page_title'  => esc_html__( 'Manage License', 'wpmastertoolkit' ),
@@ -63,16 +70,52 @@ class WPMastertoolkit_Surecart {
 
 		$this->maybe_auto_activate_from_constant();
 
-		if ( $this->license_activated() ) {
-			$site_transient_prefix = 'site_transient_';//phpcs:ignore prefix to ignore the error
-			add_filter( $site_transient_prefix . 'update_plugins', array( $this, 'force_surecart_updates' ) );
-		} else {
-			$site_transient_prefix = 'pre_set_site_transient_';//phpcs:ignore prefix to ignore the error
-			remove_filter(  $site_transient_prefix . 'update_plugins', array( $this->updater, 'check_plugin_update' ) );
-			remove_filter( 'plugins_api', array( $this->updater, 'plugins_api_filter' ), 10, 3 );
-		}
+		$site_transient_prefix = 'site_transient_';//phpcs:ignore prefix to ignore the error
+		add_filter( $site_transient_prefix . 'update_plugins', array( $this, 'force_surecart_updates' ) );
+
+		$plugin_file_name = plugin_basename( WPMASTERTOOLKIT_PLUGIN_FILE );
+		add_action( 'in_plugin_update_message-' . $plugin_file_name, array( $this, 'add_plugin_update_message' ) );
 
 		$this->maybe_force_pro_upgrade();
+	}
+
+	/**
+	 * Check the license status.
+	 */
+	public function check_license() {
+		global $wpmtk_surecart_license, $wpmtk_surecart_license_status;
+
+		if ( $this->license_activated() ) {
+			$transient_id   = $this->transient_id . '_status';
+			$license_status = get_transient( $transient_id );
+	
+			if ( false === $license_status ) {
+				$retrieve = $wpmtk_surecart_license->retrieve( $this->settings->get_option( 'sc_license_key' ) );
+				if ( ! is_wp_error( $retrieve ) ) {
+					$license_status = isset( $retrieve->status ) ? $retrieve->status : '';
+					set_transient( $transient_id, $license_status, HOUR_IN_SECONDS );
+				}
+			}
+
+			$wpmtk_surecart_license_status = $license_status;
+		}
+	}
+
+	/**
+	 * Show license notice in the admin area if the license is not activated.
+	 */
+	public function show_license_notice() {
+		global $wpmtk_surecart_license_status;
+
+		if ( 'revoked' === $wpmtk_surecart_license_status ) {
+			?>
+			<div class="notice notice-error">
+				<p>
+					<?php esc_html_e( 'Your WPMasterToolKit license has been revoked. Please renew your license to continue receiving updates and support.', 'wpmastertoolkit' ); ?>
+				</p>
+			</div>
+			<?php
+		}
 	}
 
 	/**
@@ -154,6 +197,7 @@ class WPMastertoolkit_Surecart {
 	 */
 	public function after_deactivated() {
 		delete_transient( $this->transient_id );
+		delete_transient( $this->transient_id . '_status' );
 		$site_transient_prefix = '_site_transient_';//phpcs:ignore prefix to ignore the error
 		delete_option( $site_transient_prefix . 'update_plugins' );
 	}
@@ -166,7 +210,8 @@ class WPMastertoolkit_Surecart {
 	public function force_surecart_updates( $value ) {
 		if ( is_object( $value ) ) {
 			if ( isset( $value->response[ WPMASTERTOOLKIT_BASENAME ] ) ) {
-				$version_info = $this->updater->get_version_info();
+				$version_info  = $this->updater->get_version_info();
+				$activation_id = $this->settings->get_option( 'sc_activation_id' );
 
 				if ( is_object( $version_info ) ) {
 					$value->response[ WPMASTERTOOLKIT_BASENAME ]->new_version  = $version_info->new_version;
@@ -174,11 +219,67 @@ class WPMastertoolkit_Surecart {
 					$value->response[ WPMASTERTOOLKIT_BASENAME ]->requires     = $version_info->requires;
 					$value->response[ WPMASTERTOOLKIT_BASENAME ]->tested       = $version_info->tested;
 					$value->response[ WPMASTERTOOLKIT_BASENAME ]->requires_php = $version_info->requires_php;
+				} elseif ( wpmastertoolkit_is_pro() && ! empty( $activation_id ) ) {
+					$value->response[ WPMASTERTOOLKIT_BASENAME ]->package = '';
 				}
 			}
 		}
 
 		return $value;
+	}
+
+	/**
+	 * Add a message to the plugin update row in the plugins list table.
+	 */
+	public function add_plugin_update_message() {
+
+		if ( wpmastertoolkit_is_pro() ) {
+
+			$activation_id = $this->settings->get_option( 'sc_activation_id' );
+			if ( ! empty( $activation_id ) ) {
+
+				$license_page_url = add_query_arg(
+					array(
+						'page' => 'wpmastertoolkit-manage-license',
+					),
+					admin_url( 'admin.php' )
+				);
+
+				printf(
+					wp_kses(
+					/* translators: 1: WPMasterToolkit plugin license URL */
+						__( ' Please <a href="%1$s">verify your license status</a> to receive updates.', 'wpmastertoolkit' ),
+						array(
+							'a' => array(
+								'href'  => array(),
+								'class' => array(),
+							),
+						)
+					),
+					esc_url( $license_page_url ),
+				);
+			} else {
+				echo '<span style="color: red;"> ' . esc_html__( 'Please note: Updating this plugin without an active license will switch it to the Free version.', 'wpmastertoolkit' ) . '</span>';
+			}
+
+		} else {
+
+			$license_website_url = 'https://wpmastertoolkit.com/en/products-4/wpmastertoolkit-pro/';
+
+			printf(
+				wp_kses(
+				/* translators: 1: WPMasterToolkit plugin license website URL */
+					__( ' Upgrade to <a href="%1$s">WPMasterToolkit Pro</a> to unlock more features.', 'wpmastertoolkit' ),
+					array(
+						'a' => array(
+							'href'  => array(),
+							'class' => array(),
+						),
+					)
+				),
+				esc_url( $license_website_url ),
+			);
+		}
 	}
 
 	/**

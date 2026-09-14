@@ -21,7 +21,9 @@ class WPMastertoolkit_Meta_Debugger {
         add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
         add_action( 'show_user_profile', array( $this, 'render_user_meta_box' ) );
         add_action( 'edit_user_profile', array( $this, 'render_user_meta_box' ) );
-		add_action( 'woocommerce_after_order_itemmeta', array( $this, 'render_order_meta_box' ), PHP_INT_MAX, 3 );
+		add_action( 'woocommerce_after_order_itemmeta', array( $this, 'render_order_meta_box' ), PHP_INT_MAX, 2 );
+		add_action( 'woocommerce_after_order_fee_item_name', array( $this, 'render_order_meta_box' ), PHP_INT_MAX, 2 );
+		add_action( 'woocommerce_after_order_refund_item_name', array( $this, 'render_order_meta_box_refund' ), PHP_INT_MAX );
 		add_action( 'woocommerce_product_after_variable_attributes', array( $this, 'render_variation_meta_box' ), PHP_INT_MAX, 3 );
         add_action( 'wp_ajax_' . $this->action, array( $this, 'get_meta_data' ) );
     }
@@ -95,6 +97,11 @@ class WPMastertoolkit_Meta_Debugger {
 			$id   = $post->get_id();
 		}
 
+		if ( is_a( $post, 'WC_Subscription' ) ) {
+			$type = 'subscription';
+			$id   = $post->get_id();
+		}
+
         $this->render_meta_debugger( $id, $type );
     }
 
@@ -132,11 +139,7 @@ class WPMastertoolkit_Meta_Debugger {
 	 * 
 	 * @since   2.12.0
 	 */
-	public function render_order_meta_box( $item_id, $item, $product ) {
-
-		if ( ! $item->is_type( 'line_item' ) ) {
-			return;
-		}
+	public function render_order_meta_box( $item_id, $item ) {
 
 		if ( ! wpmastertoolkit_is_pro() ) {
 			$this->render_fake_meta_debugger();
@@ -145,7 +148,24 @@ class WPMastertoolkit_Meta_Debugger {
 
 		$order_id = $item->get_order_id();
 
-		$this->render_meta_debugger( $order_id . '_' . $item_id, 'order_item' );
+		$this->render_meta_debugger( $order_id . '_' . $item_id, 'order_item_' . $item->get_type() );
+	}
+
+	/**
+	 * Render order meta box for refund
+	 * 
+	 * @since   2.12.0
+	 */
+	public function render_order_meta_box_refund( $refund ) {
+
+		if ( ! wpmastertoolkit_is_pro() ) {
+			$this->render_fake_meta_debugger();
+			return;
+		}
+
+		$refund_id = $refund->get_id();
+
+		$this->render_meta_debugger( $refund_id, 'order_item_refund' );
 	}
 
     /**
@@ -252,7 +272,14 @@ class WPMastertoolkit_Meta_Debugger {
 					$data        = $this->format_wc_metas( $order_metas );
 				}
                 break;
-            case 'order_item':
+            case 'subscription':
+				$subscription = wcs_get_subscription( $id );
+				if ( $subscription ) {
+					$subscription_metas = $subscription->get_meta_data();
+					$data               = $this->format_wc_metas( $subscription_metas );
+				}
+				break;
+            case 'order_item_line_item':
 				$desired_ids      = explode( '_', $id );
 				$desired_order_id = $desired_ids[0] ?? '';
 				$desired_item_id  = $desired_ids[1] ?? '';
@@ -260,10 +287,194 @@ class WPMastertoolkit_Meta_Debugger {
 				$order = wc_get_order( $desired_order_id );
 				if ( $order ) {
 					$order_item = $order->get_item( $desired_item_id );
-					$item_metas = $order_item->get_meta_data();
-					$data       = $this->format_wc_metas( $item_metas );
+
+					$custom_meta          = $order_item->get_meta_data();
+					$custom_meta_formated = $this->format_wc_metas( $custom_meta );
+
+					$original_meta        = array();
+					$original_meta_values = $order_item->get_data();
+					$not_original_meta    = array( 'id', 'order_id', 'name', 'meta_data' );
+
+					foreach ( $original_meta_values as $meta_key => $meta_value ) {
+
+						if ( in_array( $meta_key, $not_original_meta ) ) {
+							continue;
+						}
+
+						$original_key = $meta_key;
+						switch ( $meta_key ) {
+							case 'product_id':
+								$original_key = '_product_id';
+							break;
+							case 'variation_id':
+								$original_key = '_variation_id';
+							break;
+							case 'quantity':
+								$original_key = '_qty';
+							break;
+							case 'tax_class':
+								$original_key = '_tax_class';
+							break;
+							case 'subtotal':
+								$original_key = '_line_subtotal';
+							break;
+							case 'subtotal_tax':
+								$original_key = '_line_subtotal_tax';
+							break;
+							case 'total':
+								$original_key = '_line_total';
+							break;
+							case 'total_tax':
+								$original_key = '_line_tax';
+							break;
+							case 'taxes':
+								$original_key = '_line_tax_data';
+							break;
+						}
+
+						$original_meta[ $original_key ] = array( $meta_value );
+					}
+
+					$data = array_merge( $original_meta, $custom_meta_formated );
 				}
                 break;
+			case 'order_item_shipping':
+				$desired_ids      = explode( '_', $id );
+				$desired_order_id = $desired_ids[0] ?? '';
+				$desired_item_id  = $desired_ids[1] ?? '';
+
+				$order = wc_get_order( $desired_order_id );
+				if ( $order ) {
+					$order_item = $order->get_item( $desired_item_id );
+
+					$custom_meta          = $order_item->get_meta_data();
+					$custom_meta_formated = $this->format_wc_metas( $custom_meta );
+
+					$original_meta        = array();
+					$original_meta_values = $order_item->get_data();
+					$not_original_meta    = array( 'id', 'order_id', 'name', 'meta_data' );
+
+					foreach ( $original_meta_values as $meta_key => $meta_value ) {
+
+						if ( in_array( $meta_key, $not_original_meta ) ) {
+							continue;
+						}
+
+						$original_key = $meta_key;
+						switch ( $meta_key ) {
+							case 'method_id':
+								$original_key = 'method_id';
+							break;
+							case 'instance_id':
+								$original_key = 'instance_id';
+							break;
+							case 'total':
+								$original_key = 'cost';
+							break;
+							case 'total_tax':
+								$original_key = 'total_tax';
+							break;
+							case 'taxes':
+								$original_key = 'taxes';
+							break;
+						}
+
+						$original_meta[ $original_key ] = array( $meta_value );
+					}
+
+					$data = array_merge( $original_meta, $custom_meta_formated );
+				}
+				break;
+			case 'order_item_fee':
+				$desired_ids      = explode( '_', $id );
+				$desired_order_id = $desired_ids[0] ?? '';
+				$desired_item_id  = $desired_ids[1] ?? '';
+
+				$order = wc_get_order( $desired_order_id );
+				if ( $order ) {
+					$order_item = $order->get_item( $desired_item_id );
+
+					$custom_meta          = $order_item->get_meta_data();
+					$custom_meta_formated = $this->format_wc_metas( $custom_meta );
+
+					$original_meta        = array();
+					$original_meta_values = $order_item->get_data();
+					$not_original_meta    = array( 'id', 'order_id', 'name', 'meta_data' );
+
+					foreach ( $original_meta_values as $meta_key => $meta_value ) {
+
+						if ( in_array( $meta_key, $not_original_meta ) ) {
+							continue;
+						}
+
+						$original_key = $meta_key;
+						switch ( $meta_key ) {
+							case 'amount':
+								$original_key = '_fee_amount';
+							break;
+							case 'tax_class':
+								$original_key = '_tax_class';
+							break;
+							case 'tax_status':
+								$original_key = '_tax_status';
+							break;
+							case 'total':
+								$original_key = '_line_total';
+							break;
+							case 'total_tax':
+								$original_key = '_line_tax';
+							break;
+							case 'taxes':
+								$original_key = '_line_tax_data';
+							break;
+						}
+
+						$original_meta[ $original_key ] = array( $meta_value );
+					}
+
+					$data = array_merge( $original_meta, $custom_meta_formated );
+				}
+
+				break;
+			case 'order_item_refund':
+				$order = wc_get_order( $id );
+				if ( $order ) {
+
+					$custom_meta          = $order->get_meta_data();
+					$custom_meta_formated = $this->format_wc_metas( $custom_meta );
+
+					$original_meta        = array();
+					$original_meta_values = $order->get_data();
+					$original_meta_keys   = array( 'amount', 'reason', 'refunded_by', 'refunded_payment' );
+
+					foreach ( $original_meta_values as $meta_key => $meta_value ) {
+
+						if ( ! in_array( $meta_key, $original_meta_keys ) ) {
+							continue;
+						}
+
+						$original_key = $meta_key;
+						switch ( $meta_key ) {
+							case 'amount':
+								$original_key = '_refund_amount';
+							break;
+							case 'reason':
+								$original_key = '_refund_reason';
+							break;
+							case 'refunded_by':
+								$original_key = '_refunded_by';
+							break;
+							case 'refunded_payment':
+								$original_key = '_refunded_payment';
+							break;
+						}
+
+						$original_meta[ $original_key ] = array( $meta_value );
+					}
+
+					$data = array_merge( $original_meta, $custom_meta_formated );
+				}
+				break;
             default:
                 $data = array();
                 break;

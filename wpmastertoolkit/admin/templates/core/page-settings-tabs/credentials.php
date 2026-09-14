@@ -20,14 +20,13 @@ $wpmtk_settings = get_option( 'wpmastertoolkit_credentials_tab', array() );
 		</div>
 		<div class="wp-mastertoolkit__body__sections__item__bottom">
 			<p>
-				<?php
-				printf(
-					/* translators: %s: link to the AI connectors settings page */
-					wp_kses(
+				<?php echo wp_kses(
+					sprintf(
+						/* translators: %s: link to the AI connectors settings page */
 						__( 'To set the API keys for AI connectors, please go to the <a href="%s">AI Connectors settings page</a>.', 'wpmastertoolkit' ),
-						array( 'a' => array( 'href' => array() ) )
+						esc_url( admin_url( 'options-connectors.php' ) )
 					),
-					esc_url( admin_url( 'options-connectors.php' ) )
+					array( 'a' => array( 'href' => array() ) )
 				);
 				?>
 			</p>

@@ -193,6 +193,21 @@ class WPMastertoolkit_Mail_Catcher {
 			$search       = sanitize_text_field( wp_unslash( $_REQUEST['search']['term'] ?? '' ) );
 			// phpcs:enable
 
+			$allowed_order_by = array(
+				'id'        => 'id',
+				'timestamp' => 'unixtime',
+				'host'      => 'host',
+				'receiver'  => 'receiver',
+				'subject'   => 'subject',
+			);
+			$allowed_search_place = array(
+				'receiver' => 'receiver',
+				'subject'  => 'subject',
+				'message'  => 'message',
+			);
+			$order_by     = $allowed_order_by[ $order_by ] ?? 'id';
+			$search_place = $allowed_search_place[ $search_place ] ?? 'receiver';
+
 			// Build `SELECT` clause.
 			if ( $count_only ) {
 				$select = 'SELECT COUNT(*) ';
@@ -219,7 +234,7 @@ class WPMastertoolkit_Mail_Catcher {
 					$search_where .= ' AND (';
 				}
 
-				$search_where .=  '`' . esc_sql( $search_place ) . '` LIKE "%' . esc_sql( $search ) . '%" OR ';
+				$search_where .=  '`' . $search_place . '` LIKE "%' . esc_sql( $search ) . '%" OR ';
 
 				// Remove the last ' OR ' and add the closing ')';
 				$search_where = substr( $search_where, 0, -4 ) . ')';
@@ -234,7 +249,7 @@ class WPMastertoolkit_Mail_Catcher {
 			} else {
 				// SORT BY, LIMIT, and ORDER are only applicable if we're not counting the results.
 				if ( ! empty( $order_by ) ) {
-					$query .= ' ORDER BY `' . esc_sql( $order_by ) . '`';
+					$query .= ' ORDER BY `' . $order_by . '`';
 	
 					if ( ! empty( $order ) && in_array( $order, array( 'asc', 'desc' ), true ) ) {
 						$query .= ' ' . esc_sql( $order );

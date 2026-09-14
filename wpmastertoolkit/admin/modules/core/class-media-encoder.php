@@ -88,6 +88,7 @@ class WPMastertoolkit_Media_Encoder {
 		add_action( $this->cron_hook_migrate, array( $this, 'excute_migrate_cron' ) );
 		
 		add_action( 'wp_ajax_wpmtk_media_encoder_preview_mode', array( $this, 'preview_mode_cb' ) );
+		add_action( 'wp_ajax_wpmtk_media_encoder_image_data_for_preview', array( $this, 'image_data_for_preview' ) );
 		add_action( 'wp_ajax_wpmtk_media_encoder_start_bulk', array( $this, 'start_bulk_cb' ) );
 		add_action( 'wp_ajax_wpmtk_media_encoder_stop_bulk', array( $this, 'stop_bulk_cb' ) );
 		add_action( 'wp_ajax_wpmtk_media_encoder_progress_bulk', array( $this, 'progress_bulk_cb' ) );
@@ -785,6 +786,74 @@ class WPMastertoolkit_Media_Encoder {
 	}
 
 	/**
+	 * Get image data for preview callback
+	 */
+	public function image_data_for_preview() {
+		$this->ensure_ajax_permissions();
+
+		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ?? '' ) );
+		if ( ! wp_verify_nonce( $nonce, $this->nonce_action ) ) {
+			wp_send_json_error( __( 'Refresh the page and try again.', 'wpmastertoolkit' ) );
+		}
+
+		$file = count( $_FILES ) > 0 ? array_shift( $_FILES ) : array();
+		if ( empty( $file ) ) {
+			wp_send_json_error( __( 'No image uploaded, try again.', 'wpmastertoolkit' ) );
+		}
+
+		$image_file = $this->file_is_image( $file );
+		if ( ! $image_file ) {
+			wp_send_json_error( __( 'No image uploaded, try again.', 'wpmastertoolkit' ) );
+		}
+
+		$preview_image_data = array(
+			'name'       => $image_file['name'],
+			'size'       => size_format( $image_file['size'], 2 ),
+			'dimensions' => $image_file['width'] . ' x ' . $image_file['height'],
+		);
+
+		$conversions = array( 'webp', 'avif' );
+		$qualities	 = array( 'low', 'medium', 'high', 'extra_high' );
+
+		foreach ( $conversions as $conversion ) {
+			foreach ( $qualities as $quality ) {
+
+				$size_after = 0;
+
+				if ( 'avif' == $conversion ) {
+					$new_path      = $image_file['tmp_name'] . '-' . $quality . '.avif';
+					$quality_value = $this->get_the_quality_values( $quality, $conversion );
+					$avif_image    = $this->create_avif_image( $image_file['tmp_name'], $new_path, $quality_value );
+
+					if ( $avif_image ) {
+						$size_after = filesize( $new_path );
+					}
+				} elseif ( 'webp' == $conversion ) {
+					$new_path      = $image_file['tmp_name'] . '-' . $quality . '.webp';
+					$quality_value = $this->get_the_quality_values( $quality, $conversion );
+					$webp_image    = $this->create_webp_image( $image_file['tmp_name'], $new_path, $quality_value );
+
+					if ( $webp_image ) {
+						$size_after = filesize( $new_path );
+					}
+				}
+
+				$deference = $image_file['size'] - $size_after;
+				$percent   = $deference / $image_file['size'] * 100;
+
+				$preview_image_data[$conversion . '_' . $quality] = array(
+					'size'         => size_format( $size_after, 2 ),
+					'save'         => size_format( $deference, 2 ),
+					'save_percent' => round( $percent ) . '%',
+					'percent'      => round( 100 - $percent ) . '%',
+				);
+			}
+		}
+
+		wp_send_json_success( $preview_image_data );
+	}
+
+	/**
 	 * Start bulk optimization callback
 	 * 
 	 * @since   1.13.0
@@ -1144,8 +1213,10 @@ class WPMastertoolkit_Media_Encoder {
         wp_enqueue_style( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/media-encoder.css', array(), $submenu_assets['version'], 'all' );
         wp_enqueue_script( 'WPMastertoolkit_submenu', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/media-encoder.js', $submenu_assets['dependencies'], $submenu_assets['version'], true );
 		wp_localize_script( 'WPMastertoolkit_submenu', 'WPMastertoolkit_media_encoder', array(
-			'ajaxUrl' => admin_url( 'admin-ajax.php' ),
-            'nonce'   => wp_create_nonce( $this->nonce_action ),
+			'ajaxUrl'            => admin_url( 'admin-ajax.php' ),
+            'nonce'              => wp_create_nonce( $this->nonce_action ),
+			'preview_image_data' => $this->get_preview_image_data(),
+			'default_image_url'  => WPMASTERTOOLKIT_PLUGIN_URL . 'admin/images/media-encoder/preview.jpg',
 		));
 
         include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/templates/core/submenu/header.php';
@@ -2152,7 +2223,23 @@ class WPMastertoolkit_Media_Encoder {
 			return false;
 		}
 
-		return $file;
+		$file_name		= isset($file['name']) 		? $file['name'] 	: '';
+		$file_type		= isset($file['type']) 		? $file['type'] 	: '';
+		$file_tmp_name	= isset($file['tmp_name'])	? $file['tmp_name']	: '';
+		$file_error		= isset($file['error']) 	? $file['error'] 	: '';
+		$file_size		= isset($file['size']) 		? $file['size'] 	: '';
+		$name           = $file_name;
+
+		return array(
+			'original_name'	=> $file_name,
+			'name'			=> $name,
+			'type'			=> $file_type,
+			'tmp_name'		=> $file_tmp_name,
+			'error'			=> $file_error,
+			'size'			=> $file_size,
+			'width'			=> $is_image[0],
+			'height'		=> $is_image[1],
+		);
 	}
 
 	/**
@@ -2258,11 +2345,19 @@ class WPMastertoolkit_Media_Encoder {
 		$this->settings         = $this->get_settings();
 		$this->default_settings = $this->get_default_settings();
 
-		$result       = 50;
 		$mode_enabled = $this->settings['mode_enabled']['value'] ?? $this->default_settings['mode_enabled']['value'];
 		$quality      = $this->settings['quality']['value'] ?? $this->default_settings['quality']['value'];
 
-		switch ($quality) {
+		return $this->get_the_quality_values( $quality, $mode_enabled );
+	}
+
+	/**
+	 * Get the quality values for avif and webp
+	 */
+	private function get_the_quality_values( $quality, $mode_enabled ) {
+		$result = 50;
+
+		switch ( $quality ) {
 			case 'low':
 				$result = 50;
 				if ( 'avif' === $mode_enabled ) {
@@ -2270,12 +2365,18 @@ class WPMastertoolkit_Media_Encoder {
 				}
 			break;
 			case 'medium':
+				$result = 60;
+				if ( 'avif' === $mode_enabled ) {
+					$result = 40;
+				}
+			break;
+			case 'high':
 				$result = 75;
 				if ( 'avif' === $mode_enabled ) {
 					$result = 50;
 				}
 			break;
-			case 'high':
+			case 'extra_high':
 				$result = 90;
 				if ( 'avif' === $mode_enabled ) {
 					$result = 70;
@@ -2585,15 +2686,73 @@ class WPMastertoolkit_Media_Encoder {
 					'off'  => __( 'Off', 'wpmastertoolkit' ),
 					'webp' => __( 'WebP', 'wpmastertoolkit' ),
 					'avif' => __( 'AVIF', 'wpmastertoolkit' ),
-				)
+				),
+				'data' => array(
+					'off' => array(
+						'desc' => __( '0% saved', 'wpmastertoolkit' ),
+						'color' => '#000000',
+					),
+					'webp' => array(
+						'desc' => __( '≈ −30% on average across a site', 'wpmastertoolkit' ),
+						'color' => '#316BFF',
+					),
+					'avif' => array(
+						'disabled' => ! wpmastertoolkit_is_pro() || ! is_php_version_compatible( '8.1.0' ),
+						'desc'     => __( '≈ −50% on average across a site', 'wpmastertoolkit' ),
+						'color'    => '#16A34A',
+						'taglines' => array(
+							array(
+								'label' => 'Pro',
+								'value' => 'pro',
+								'show'  => ! wpmastertoolkit_is_pro(),
+							),
+							array(
+								'label' => 'Requires PHP 8.1+',
+								'value' => 'pro',
+								'show'  => ! is_php_version_compatible( '8.1.0' ),
+							),
+							array(
+								'label' => __( 'Recommended', 'wpmastertoolkit' ),
+								'value' => 'recommended',
+								'show'  => true,
+							),
+						),
+					),
+				),
 			),
 			'quality'            => array(
-				'value'   => 'medium',
+				'value'   => 'high',
 				'options' => array(
-					'low'    => __( 'Low', 'wpmastertoolkit' ),
-					'medium' => __( 'Medium', 'wpmastertoolkit' ),
-					'high'   => __( 'High', 'wpmastertoolkit' ),
-				)
+					'low'        => __( 'Low', 'wpmastertoolkit' ),
+					'medium'     => __( 'Medium', 'wpmastertoolkit' ),
+					'high'       => __( 'High', 'wpmastertoolkit' ),
+					'extra_high' => __( 'Extra High', 'wpmastertoolkit' ),
+				),
+				'data' => array(
+					'low' => array(
+						'desc' => __( 'Smallest size', 'wpmastertoolkit' ),
+						'color' => '#E74C3C',
+					),
+					'medium' => array(
+						'desc' => __( 'Good balance', 'wpmastertoolkit' ),
+						'color' => '#E67E22',
+					),
+					'high' => array(
+						'desc'     => __( 'High quality & good size', 'wpmastertoolkit' ),
+						'color'    => '#16A34A',
+						'taglines' => array(
+							array(
+								'label' => __( 'Recommended', 'wpmastertoolkit' ),
+								'value' => 'recommended',
+								'show'  => true,
+							),
+						),
+					),
+					'extra_high' => array(
+						'desc'  => __( 'Maximum quality', 'wpmastertoolkit' ),
+						'color' => '#2563EB',
+					),
+				),
 			),
 			'ignore_same_format' => '1',
 			'save_original'      => '0',
@@ -2607,6 +2766,65 @@ class WPMastertoolkit_Media_Encoder {
 			),
         );
     }
+
+	/**
+	 * Get the preview image data
+	 */
+	private function get_preview_image_data() {
+		return array(
+			'name'       => 'preview.jpg',
+			'size'       => '423.17 KB',
+			'dimensions' => '1264 x 848',
+			'webp_low' => array(
+				'size'         => '175.32 KB',
+				'save'         => '247.85 KB',
+				'save_percent' => '59%',
+				'percent'      => '41%',
+			),
+			'webp_medium' => array(
+				'size'         => '196.08 KB',
+				'save'         => '227.09 KB',
+				'save_percent' => '54%',
+				'percent'      => '46%',
+			),
+			'webp_high' => array(
+				'size'         => '229.29 KB',
+				'save'         => '193.88 KB',
+				'save_percent' => '46%',
+				'percent'      => '54%',
+			),
+			'webp_extra_high' => array(
+				'size'         => '387.46 KB',
+				'save'         => '35.71 KB',
+				'save_percent' => '8%',
+				'percent'      => '92%',
+			),
+			'avif_low' => array(
+				'size'         => '73.44 KB',
+				'save'         => '349.73 KB',
+				'save_percent' => '83%',
+				'percent'      => '17%',
+			),
+			'avif_medium' => array(
+				'size'         => '120.06 KB',
+				'save'         => '303.11 KB',
+				'save_percent' => '72%',
+				'percent'      => '28%',
+			),
+			'avif_high' => array(
+				'size'         => '183.21 KB',
+				'save'         => '239.96 KB',
+				'save_percent' => '57%',
+				'percent'      => '43%',
+			),
+			'avif_extra_high' => array(
+				'size'         => '290.54 KB',
+				'save'         => '132.63 KB',
+				'save_percent' => '31%',
+				'percent'      => '69%',
+			),
+		);
+	}
 
 	/**
      * Add the submenu content
@@ -2637,9 +2855,6 @@ class WPMastertoolkit_Media_Encoder {
 
         $this->settings         = $this->get_settings();
 		$this->default_settings = $this->get_default_settings();
-		$is_pro                 = wpmastertoolkit_is_pro();
-		$php_compatible         = is_php_version_compatible( '8.1.0' );
-		$imageavif_supported 	= function_exists('imageavif');
 
 		$mode_enabled_options = $this->default_settings['mode_enabled']['options'];
 		$quality_options      = $this->default_settings['quality']['options'];
@@ -2650,6 +2865,10 @@ class WPMastertoolkit_Media_Encoder {
 		$ignore_same_format = $this->settings['ignore_same_format'] ?? $this->default_settings['ignore_same_format'];
 		$save_original      = $this->settings['save_original'] ?? $this->default_settings['save_original'];
 		$display_mode       = $this->settings['display_mode']['value'] ?? $this->default_settings['display_mode']['value'];
+
+		$preview_image_data      = $this->get_preview_image_data();
+		$preview_image_data_webp = $preview_image_data['webp_' . $quality] ?? $preview_image_data['webp_high'];
+		$preview_image_data_avif = $preview_image_data['avif_' . $quality] ?? $preview_image_data['avif_high'];
 
 		$status     = get_option( $this->option_bulk_status, '' );
 		$is_running = $status == 'running' ? true : false;
@@ -2688,33 +2907,34 @@ class WPMastertoolkit_Media_Encoder {
 							</div>
 						</div>
                         <div class="wp-mastertoolkit__section__body__item__content">
-							<div class="wp-mastertoolkit__select">
-                                <select name="<?php echo esc_attr( $this->option_id . '[mode_enabled][value]' ); ?>">
-                                    <?php
-										foreach ( $mode_enabled_options as $key => $name ) {
-											$option_disabled = false;
-											$disable_message = '';
-											if ( $key == 'avif' && ( ! $is_pro || ! $php_compatible || ! $imageavif_supported ) ) {
-												$option_disabled = true;
-												$disable_message = __( '(PRO Only)', 'wpmastertoolkit' );
-												if( ! $imageavif_supported ) {
-													$disable_message = __( '(imageavif() not supported)', 'wpmastertoolkit' );
-												}
-												if ( ! $php_compatible ) {
-													$disable_message = __( '(PHP 8.1 or higher)', 'wpmastertoolkit' );
-												}
-											}
-											?>
-												<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $mode_enabled, $key ); ?> <?php disabled( $option_disabled, true ); ?>><?php echo esc_html( $name ); ?> <?php echo esc_html( $disable_message ); ?></option>
-											<?php
-										}
+							<div class="wp-mastertoolkit__button-group" style="max-width: 900px;">
+							<?php foreach ( $mode_enabled_options as $key => $name ):
+								$disabled = $this->default_settings['mode_enabled']['data'][$key]['disabled'] ?? false;
+								$desc     = $this->default_settings['mode_enabled']['data'][$key]['desc'] ?? '';
+								$color    = $this->default_settings['mode_enabled']['data'][$key]['color'] ?? '#000000';
+								$taglines = $this->default_settings['mode_enabled']['data'][$key]['taglines'] ?? array();
+							?>
+								<label class="wp-mastertoolkit__button-group__item">
+									<input type="radio" name="<?php echo esc_attr( $this->option_id . '[mode_enabled][value]' ); ?>" value="<?php echo esc_attr( $key ); ?>" <?php checked( $mode_enabled, $key ); disabled( $disabled ); ?>>
+									<span class="wp-mastertoolkit__button-group__item__content">
+										<span class="wp-mastertoolkit__button-group__item__content__text" style="color: <?php echo esc_attr( $color ); ?>;"><?php echo esc_html( $name ); ?></span>
+										<span class="wp-mastertoolkit__button-group__item__content__desc"><?php echo esc_html( $desc ); ?></span>
+									</span>
+									<span class="wp-mastertoolkit__button-group__item__check">
+										<?php echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/check-round.svg'), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
+									</span>
+									<?php foreach ( $taglines as $tagline ):
+										if ( isset( $tagline['show'] ) && ! $tagline['show'] ) { continue; }
 									?>
-                                </select>
-                            </div>
+										<span class="wp-mastertoolkit__button-group__item__tagline <?php echo esc_attr( strtolower( $tagline['value'] ?? '' ) ); ?>"><?php echo esc_html( $tagline['label'] ); ?></span>
+									<?php endforeach; ?>
+								</label>
+							<?php endforeach; ?>
+							</div>
                         </div>
                     </div>
 
-					<div class="wp-mastertoolkit__section__body__item">
+					<div class="wp-mastertoolkit__section__body__item" data-show-if="<?php echo esc_attr( $this->option_id . '[mode_enabled][value]' ); ?>!=off">
 						<div class="wp-mastertoolkit__section__body__item__title">
 							<?php esc_html_e( 'Quality', 'wpmastertoolkit' ); ?>
 							<div class="wp-mastertoolkit__section__body__item__title__info">
@@ -2727,17 +2947,116 @@ class WPMastertoolkit_Media_Encoder {
 							</div>
 						</div>
                         <div class="wp-mastertoolkit__section__body__item__content">
-							<div class="wp-mastertoolkit__select">
-                                <select name="<?php echo esc_attr( $this->option_id . '[quality][value]' ); ?>">
-                                    <?php foreach ( $quality_options as $key => $name ) : ?>
-										<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $quality, $key ); ?>><?php echo esc_html( $name ); ?></option>
+							<div class="wp-mastertoolkit__button-group" style="max-width: 900px;">
+							<?php foreach ( $quality_options as $key => $name ):
+								$desc     = $this->default_settings['quality']['data'][$key]['desc'] ?? '';
+								$color    = $this->default_settings['quality']['data'][$key]['color'] ?? '#000000';
+								$taglines = $this->default_settings['quality']['data'][$key]['taglines'] ?? array();
+							?>
+								<label class="wp-mastertoolkit__button-group__item">
+									<input type="radio" name="<?php echo esc_attr( $this->option_id . '[quality][value]' ); ?>" value="<?php echo esc_attr( $key ); ?>" <?php checked( $quality, $key ); ?>>
+									<span class="wp-mastertoolkit__button-group__item__content">
+										<span class="wp-mastertoolkit__button-group__item__content__text" style="color: <?php echo esc_attr( $color ); ?>;"><?php echo esc_html( $name ); ?></span>
+										<span class="wp-mastertoolkit__button-group__item__content__desc"><?php echo esc_html( $desc ); ?></span>
+									</span>
+									<span class="wp-mastertoolkit__button-group__item__check">
+										<?php echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/check-round.svg'), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
+									</span>
+									<?php foreach ( $taglines as $tagline ):
+										if ( isset( $tagline['show'] ) && ! $tagline['show'] ) { continue; }
+									?>
+										<span class="wp-mastertoolkit__button-group__item__tagline <?php echo esc_attr( strtolower( $tagline['value'] ?? '' ) ); ?>"><?php echo esc_html( $tagline['label'] ); ?></span>
 									<?php endforeach; ?>
-                                </select>
-                            </div>
+								</label>
+							<?php endforeach; ?>
+							</div>
                         </div>
                     </div>
 
-					<div class="wp-mastertoolkit__section__body__item">
+					<div class="wp-mastertoolkit__section__body__item" data-show-if="<?php echo esc_attr( $this->option_id . '[mode_enabled][value]' ); ?>!=off">
+                        <div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e( 'Preview', 'wpmastertoolkit' ); ?></div>
+                        <div class="wp-mastertoolkit__section__body__item__content">
+							<div class="wp-mastertoolkit__section__preview__demo">
+								<div class="wp-mastertoolkit__section__preview__demo__top">
+									<div class="wp-mastertoolkit__section__preview__demo__top__left">
+										<div class="wp-mastertoolkit__section__preview__demo__top__left__image">
+											<img src="<?php echo esc_url( WPMASTERTOOLKIT_PLUGIN_URL . 'admin/images/media-encoder/preview.jpg' ); ?>" alt="Preview" />
+											<div class="wp-mastertoolkit__section__preview__demo__top__left__image__edit">
+												<?php echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/edit-square-outline.svg'), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
+											</div>
+										</div>
+									</div>
+									<div class="wp-mastertoolkit__section__preview__demo__top__right">
+										<div class="wp-mastertoolkit__section__preview__demo__top__right__title"><?php esc_html_e( 'Preview on your typical photo', 'wpmastertoolkit' ); ?></div>
+										<div class="wp-mastertoolkit__section__preview__demo__top__right__info"><?php echo esc_html( $preview_image_data['name'] ); ?> · <?php echo esc_html( $preview_image_data['size'] ); ?> · <?php echo esc_html( $preview_image_data['dimensions'] ); ?></div>
+										<div class="wp-mastertoolkit__section__preview__demo__top__right__details webp <?php echo ( 'webp' == $mode_enabled ) ? 'selected' : ''; ?>">
+											<?php echo wp_kses_post( sprintf(
+												// translators: %s is the amount of space saved by converting to WebP format.
+												__( 'WebP saves %s on this photo', 'wpmastertoolkit' ), '<span class="value">' . esc_html( $preview_image_data_webp['save'] ) . '</span>'
+											) ); ?>
+										</div>
+										<div class="wp-mastertoolkit__section__preview__demo__top__right__details avif <?php echo ( 'avif' == $mode_enabled ) ? 'selected' : ''; ?>">
+											<?php echo wp_kses_post( sprintf(
+												// translators: %s is the amount of space saved by converting to AVIF format.
+												__( 'AVIF saves %s on this photo', 'wpmastertoolkit' ), '<span class="value">' . esc_html( $preview_image_data_avif['save'] ) . '</span>'
+											) ); ?>
+										</div>
+									</div>
+								</div>
+								<div class="wp-mastertoolkit__section__preview__demo__bottom">
+									<div class="wp-mastertoolkit__section__preview__demo__bottom__item">
+										<div class="wp-mastertoolkit__section__preview__demo__bottom__item__title"><?php esc_html_e( 'Original', 'wpmastertoolkit' ); ?></div>
+										<div class="wp-mastertoolkit__section__preview__demo__bottom__item__progress">
+											<div class="wp-mastertoolkit__section__preview__demo__bottom__item__progress__bar original"><?php echo esc_html( $preview_image_data['size'] ); ?></div>
+										</div>
+										<div class="wp-mastertoolkit__section__preview__demo__bottom__item__info">
+											<div class="wp-mastertoolkit__section__preview__demo__bottom__item__info__save"><?php esc_html_e( '0% saved', 'wpmastertoolkit' ); ?></div>
+											<div class="wp-mastertoolkit__section__preview__demo__bottom__item__info__desc"><?php esc_html_e( 'No compression applied', 'wpmastertoolkit' ); ?></div>
+										</div>
+									</div>
+
+									<div class="wp-mastertoolkit__section__preview__demo__bottom__item webp <?php echo ( 'webp' == $mode_enabled ) ? 'selected' : ''; ?>">
+										<div class="wp-mastertoolkit__section__preview__demo__bottom__item__title"><?php esc_html_e( 'WebP', 'wpmastertoolkit' ); ?></div>
+										<div class="wp-mastertoolkit__section__preview__demo__bottom__item__progress">
+											<div class="wp-mastertoolkit__section__preview__demo__bottom__item__progress__bar webp" style="width: <?php echo esc_attr( $preview_image_data_webp['percent'] ); ?>;"><?php echo esc_html( $preview_image_data_webp['size'] ); ?></div>
+										</div>
+										<div class="wp-mastertoolkit__section__preview__demo__bottom__item__info">
+											<div class="wp-mastertoolkit__section__preview__demo__bottom__item__info__save webp tag">
+												<span class="value"><?php echo esc_html( $preview_image_data_webp['save_percent'] ); ?></span>
+												<span class="small"><?php esc_html_e( 'on this photo', 'wpmastertoolkit' ); ?></span>
+											</div>
+											<div class="wp-mastertoolkit__section__preview__demo__bottom__item__info__desc"><?php esc_html_e( '≈ −30% on average across a site', 'wpmastertoolkit' ); ?></div>
+										</div>
+										<div class="wp-mastertoolkit__section__preview__demo__bottom__item__check">
+											<?php echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/check-round.svg'), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
+										</div>
+									</div>
+
+									<div class="wp-mastertoolkit__section__preview__demo__bottom__item avif <?php echo ( 'avif' == $mode_enabled ) ? 'selected' : ''; ?>">
+										<div class="wp-mastertoolkit__section__preview__demo__bottom__item__title"><?php esc_html_e( 'AVIF', 'wpmastertoolkit' ); ?></div>
+										<div class="wp-mastertoolkit__section__preview__demo__bottom__item__progress">
+											<div class="wp-mastertoolkit__section__preview__demo__bottom__item__progress__bar avif" style="width: <?php echo esc_attr( $preview_image_data_avif['percent'] ); ?>;"><?php echo esc_html( $preview_image_data_avif['size'] ); ?></div>
+										</div>
+										<div class="wp-mastertoolkit__section__preview__demo__bottom__item__info">
+											<div class="wp-mastertoolkit__section__preview__demo__bottom__item__info__save avif tag">
+												<span class="value"><?php echo esc_html( $preview_image_data_avif['save_percent'] ); ?></span>
+												<span class="small"><?php esc_html_e( 'on this photo', 'wpmastertoolkit' ); ?></span>
+											</div>
+											<div class="wp-mastertoolkit__section__preview__demo__bottom__item__info__desc"><?php esc_html_e( '≈ −50% on average across a site', 'wpmastertoolkit' ); ?></div>
+										</div>
+										<?php if ( ! wpmastertoolkit_is_pro() ): ?>
+											<div class="wp-mastertoolkit__section__preview__demo__bottom__item__pro"><?php esc_html_e( 'Pro', 'wpmastertoolkit' ); ?></div>
+										<?php endif; ?>
+										<div class="wp-mastertoolkit__section__preview__demo__bottom__item__check">
+											<?php echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/check-round.svg'), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
+										</div>
+									</div>
+								</div>
+							</div>
+                        </div>
+                    </div>
+
+					<div class="wp-mastertoolkit__section__body__item" data-show-if="<?php echo esc_attr( $this->option_id . '[mode_enabled][value]' ); ?>!=off">
                         <div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e( 'Do not compress images already in same format', 'wpmastertoolkit' ); ?></div>
                         <div class="wp-mastertoolkit__section__body__item__content">
 							<div class="wp-mastertoolkit__checkbox">
@@ -2750,7 +3069,7 @@ class WPMastertoolkit_Media_Encoder {
                         </div>
                     </div>
 
-					<div class="wp-mastertoolkit__section__body__item">
+					<div class="wp-mastertoolkit__section__body__item" data-show-if="<?php echo esc_attr( $this->option_id . '[mode_enabled][value]' ); ?>!=off">
                         <div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e( 'Save original images', 'wpmastertoolkit' ); ?></div>
                         <div class="wp-mastertoolkit__section__body__item__content">
 							<div class="wp-mastertoolkit__checkbox">
@@ -2763,7 +3082,7 @@ class WPMastertoolkit_Media_Encoder {
                         </div>
                     </div>
 
-					<div class="wp-mastertoolkit__section__body__item">
+					<div class="wp-mastertoolkit__section__body__item" data-show-if="<?php echo esc_attr( $this->option_id . '[mode_enabled][value]' ); ?>!=off&<?php echo esc_attr( $this->option_id . '[save_original]' ); ?>=1">
                         <div class="wp-mastertoolkit__section__body__item__title">
 							<?php esc_html_e( 'Display images with new format on the site', 'wpmastertoolkit' ); ?>
 							<div class="wp-mastertoolkit__section__body__item__title__info">
@@ -2788,23 +3107,32 @@ class WPMastertoolkit_Media_Encoder {
                         </div>
                     </div>
 
-					<div class="wp-mastertoolkit__section__body__item">
-                        <div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e( 'Before saving, test your configuration with preview mode', 'wpmastertoolkit' ); ?></div>
-                        <div class="wp-mastertoolkit__section__body__item__content">
-							<div class="wp-mastertoolkit__button">
-								<button type="button" class="wp-mastertoolkit__button__open-preview secondary"><?php esc_html_e( 'Preview', 'wpmastertoolkit' ); ?></button>
+					<div class="wp-mastertoolkit__section__body__item" data-show-if="<?php echo esc_attr( $this->option_id . '[mode_enabled][value]' ); ?>!=off&<?php echo esc_attr( $this->option_id . '[save_original]' ); ?>=1&<?php echo esc_attr( $this->option_id . '[display_mode][value]' ); ?>=disabled">
+						<div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e( 'Display mode required', 'wpmastertoolkit' ); ?></div>
+						<div class="wp-mastertoolkit__section__body__item__content">
+							<div class="wp-mastertoolkit__section__notice warning show">
+								<p class="wp-mastertoolkit__section__notice__message">
+									<?php esc_html_e( 'If you keep the original images, you also need to enable a display mode so the optimized files are actually served on the front end.', 'wpmastertoolkit' ); ?>
+								</p>
 							</div>
-                        </div>
-                    </div>
+						</div>
+					</div>
 
-					<div class="wp-mastertoolkit__section__body__item">
+					<div class="wp-mastertoolkit__section__body__item" data-show-if="<?php echo esc_attr( $this->option_id . '[mode_enabled][value]' ); ?>!=off">
                         <div class="wp-mastertoolkit__section__body__item__title"><?php esc_html_e( 'Bulk optimization', 'wpmastertoolkit' ); ?></div>
                         <div class="wp-mastertoolkit__section__body__item__content">
 
 							<div class="wp-mastertoolkit__section__bulk">
+								<div data-show-if="<?php echo esc_attr( $this->option_id . '[save_original]' ); ?>=0">
+									<div class="wp-mastertoolkit__section__notice warning show">
+										<p class="wp-mastertoolkit__section__notice__message">
+											<?php esc_html_e( 'When original images are not saved, newly uploaded images can be converted directly during upload. Bulk optimization of existing media does not replace the original attachment URL or extension shown in the media library.', 'wpmastertoolkit' ); ?>
+										</p>
+									</div>
+								</div>
 								<div class="wp-mastertoolkit__section__bulk__top">
 									<div class="wp-mastertoolkit__button">
-										<button type="button" class="secondary start <?php echo $is_running ? '' : 'show'; ?>">
+										<button type="button" class="secondary start <?php echo $is_running ? '' : 'show'; ?>" data-show-if="<?php echo esc_attr( $this->option_id . '[save_original]' ); ?>=1">
 											<?php esc_html_e( 'Start', 'wpmastertoolkit' ); ?>
 											<span class="spinner"></span>
 										</button>
@@ -2864,57 +3192,81 @@ class WPMastertoolkit_Media_Encoder {
 						</div>
 					</div>
 					<?php endif; ?>
-
                 </div>
 
-				<div class="wp-mastertoolkit__section__preview">
-					<div class="wp-mastertoolkit__section__preview__file show">
-						<div class="wp-mastertoolkit__section__preview__file__btn">
+				<div class="wp-mastertoolkit__section__preview__popup">
+
+					<div class="wp-mastertoolkit__section__preview__popup__file">
+						<div class="wp-mastertoolkit__section__preview__popup__file__btn">
 							<?php echo file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/add-img.svg' );//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 							<span><?php esc_html_e( 'Add image', 'wpmastertoolkit' ); ?></span>
 						</div>
-						<input type="file" class="wp-mastertoolkit__section__preview__file__input" accept='image/*'>
+
+						<input type="file" class="wp-mastertoolkit__section__preview__popup__file__input" accept='image/*'>
 					</div>
 
-					<div class="wp-mastertoolkit__section__preview__compare">
-						<div class="wp-mastertoolkit__section__preview__compare__images">
-							<div class="wp-mastertoolkit__section__preview__compare__images__original">
+					<div class="wp-mastertoolkit__section__preview__popup__compare show">
+
+						<div class="wp-mastertoolkit__section__preview__popup__compare__images">
+							<div class="wp-mastertoolkit__section__preview__popup__compare__images__original">
 								<div class="image"></div>
 							</div>
-							<div class="wp-mastertoolkit__section__preview__compare__images__new">
+							<div class="wp-mastertoolkit__section__preview__popup__compare__images__new">
 								<div class="image"></div>
 							</div>
 						</div>
 
-						<div class="wp-mastertoolkit__section__preview__compare__handle">
-							<div class="wp-mastertoolkit__section__preview__compare__handle__svg">
-								<?php echo file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/resize.svg' );//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+						<div class="wp-mastertoolkit__section__preview__popup__compare__handle">
+							<div class="wp-mastertoolkit__section__preview__popup__compare__handle__svg">
+								<?php echo wp_kses( file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/resize.svg' ), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
 							</div>
 						</div>
 
-						<div class="wp-mastertoolkit__section__preview__compare__data">
+						<div class="wp-mastertoolkit__section__preview__popup__compare__data">
 
-							<div class="wp-mastertoolkit__section__preview__compare__data__original">
-								<div class="wp-mastertoolkit__section__preview__compare__data__original__type"><?php esc_html_e( 'Original Image', 'wpmastertoolkit' ); ?></div>
-								<div class="wp-mastertoolkit__section__preview__compare__data__original__size"></div>
+							<div class="wp-mastertoolkit__section__preview__popup__compare__data__original">
+								<div class="wp-mastertoolkit__section__preview__popup__compare__data__original__type"><?php esc_html_e( 'Original Image', 'wpmastertoolkit' ); ?></div>
+								<div class="wp-mastertoolkit__section__preview__popup__compare__data__original__size"></div>
 							</div>
 
-							<div class="wp-mastertoolkit__section__preview__compare__data__new">
-								<div class="wp-mastertoolkit__section__preview__compare__data__new__type"></div>
-								<div class="wp-mastertoolkit__section__preview__compare__data__new__size"></div>
-								<div class="wp-mastertoolkit__section__preview__compare__data__new__gain"></div>
+							<div class="wp-mastertoolkit__section__preview__popup__compare__data__new">
+								<div class="wp-mastertoolkit__section__preview__popup__compare__data__new__type"></div>
+								<div class="wp-mastertoolkit__section__preview__popup__compare__data__new__size"></div>
+								<div class="wp-mastertoolkit__section__preview__popup__compare__data__new__gain"></div>
 							</div>
 
 						</div>
+
+						<div class="wp-mastertoolkit__section__preview__popup__compare__zoom">
+							<div class="wp-mastertoolkit__section__preview__popup__compare__zoom__btn minus">
+								<?php echo wp_kses( file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/minus.svg' ), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
+							</div>
+							<div class="wp-mastertoolkit__section__preview__popup__compare__zoom__value">
+								<div class="wp-mastertoolkit__section__preview__popup__compare__zoom__value__text">100</div>
+								<div class="wp-mastertoolkit__section__preview__popup__compare__zoom__value__unit">%</div>
+							</div>
+							<div class="wp-mastertoolkit__section__preview__popup__compare__zoom__btn plus">
+								<?php echo wp_kses( file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/plus.svg' ), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
+							</div>
+						</div>
 					</div>
 
-					<div class="wp-mastertoolkit__section__preview__spiner">
-						<div class="wp-mastertoolkit__section__preview__spiner__circle"></div>
+					<div class="wp-mastertoolkit__section__preview__popup__spiner">
+						<div class="wp-mastertoolkit__section__preview__popup__spiner__circle"></div>
 					</div>
 
-					<div class="wp-mastertoolkit__section__preview__close">
-            			<button type="button" class="wp-mastertoolkit__section__preview__close__btn"><?php echo file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/times.svg' );//phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></button>
+					<div class="wp-mastertoolkit__section__preview__popup__close">
+            			<button type="button" class="wp-mastertoolkit__section__preview__popup__close__btn">
+							<?php echo wp_kses( file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/times.svg' ), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
+						</button>
         			</div>
+
+					<div class="wp-mastertoolkit__section__preview__popup__replace show">
+						<div class="wp-mastertoolkit__section__preview__popup__replace__btn">
+							<?php echo wp_kses( file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/add-img.svg' ), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
+							<span><?php esc_html_e( 'Replace image', 'wpmastertoolkit' ); ?></span>
+						</div>
+					</div>
 				</div>
             </div>
         <?php

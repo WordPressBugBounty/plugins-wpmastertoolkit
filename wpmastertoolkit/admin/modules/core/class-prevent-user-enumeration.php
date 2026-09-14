@@ -17,7 +17,7 @@ class WPMasterToolKit_Prevent_User_Enumeration {
         add_action( 'template_redirect', array( $this, 'set_404_for_author_pages' ) );
         add_filter( 'author_link', array( $this, 'replace_author_link' ) );
         add_action( 'init', array( $this, 'block_author_page_front' ) );
-        add_filter( 'rest_request_before_callbacks', array( $this, 'block_author_page_rest' ) );
+        add_filter( 'rest_request_before_callbacks', array( $this, 'block_author_page_rest' ), 10, 3 );
     }
 
     /**
@@ -62,32 +62,22 @@ class WPMasterToolKit_Prevent_User_Enumeration {
     /**
      * Block user enumeration via the REST API.
      *
-     * @param WP_Error|null $response Current response object.
+     * @param WP_REST_Response|WP_HTTP_Response|WP_Error|null $response Current response object.
+     * @param array                                           $handler  Route handler used for the request.
+     * @param WP_REST_Request                                 $request  Current REST request.
      * @since 1.15.0
-     * @return WP_Error|null Modified response object or original response.
+     * @return WP_REST_Response|WP_HTTP_Response|WP_Error|null Modified response object or original response.
      */
-    public function block_author_page_rest( $response ) {
-        if ( ! current_user_can( 'list_users' ) && strpos( strtolower( $this->get_current_rest_url() ), '/wp/v2/users' ) !== false ) {
-            wp_send_json( 
-                array(
-                    'code'    => 'rest_cannot_access',
-                    'message' => __( 'Access to user enumeration is forbidden.', 'wpmastertoolkit' ),
-                    'data'    => array( 'status' => 401 ),
-                ), 
-                401 
+    public function block_author_page_rest( $response, $handler, $request ) {
+		
+        if ( ! current_user_can( 'list_users' ) && preg_match( '#^/wp/v2/users(?:/|$)#i', $request->get_route() ) ) {
+            return new WP_Error(
+                'rest_cannot_access',
+                __( 'Access to user enumeration is forbidden.', 'wpmastertoolkit' ),
+                array( 'status' => 401 )
             );
         }
-        return $response;
-    }
 
-    /**
-     * Get the current REST API URL.
-     *
-     * @since 1.15.0
-     * @return string Current REST API URL.
-     */
-    private function get_current_rest_url() {
-        $request_uri = isset( $_SERVER['REQUEST_URI'] ) ? esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
-        return home_url( $request_uri );
+        return $response;
     }
 }

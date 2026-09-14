@@ -9,6 +9,10 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 class WPMastertoolkit_Redirect_Manager {
 
 	const MODULE_ID = 'Redirect Manager';
+	const REGEX_MAX_PATTERN_LENGTH = 250;
+	const REGEX_MAX_REQUEST_LENGTH = 4096;
+	const REGEX_MATCH_LIMIT = 100000;
+	const REGEX_DEPTH_LIMIT = 256;
 
 	public $menu_slug = 'wp-mastertoolkit-settings-redirect-manager';
 	
@@ -141,74 +145,22 @@ class WPMastertoolkit_Redirect_Manager {
             return;
         }
 
-		$id       = sanitize_text_field( wp_unslash( $_POST[ $this->option_id ]['id'] ?? '' ) );
-		$url_from = sanitize_text_field( wp_unslash( $_POST[ $this->option_id ]['url_from'] ?? '' ) );
-		$url_to   = sanitize_text_field( wp_unslash( $_POST[ $this->option_id ]['url_to'] ?? '' ) );
-		$params   = sanitize_text_field( wp_unslash( $_POST[ $this->option_id ]['params'] ?? '' ) );
-		$model    = sanitize_text_field( wp_unslash( $_POST[ $this->option_id ]['model'] ?? '' ) );
-		$code     = sanitize_text_field( wp_unslash( $_POST[ $this->option_id ]['code'] ?? '' ) );
-		$regex    = sanitize_text_field( wp_unslash( $_POST[ $this->option_id ]['regex'] ?? '' ) );
-		$status   = sanitize_text_field( wp_unslash( $_POST[ $this->option_id ]['status'] ?? '' ) );
-		$logs     = sanitize_text_field( wp_unslash( $_POST[ $this->option_id ]['logs'] ?? '' ) );
+		$id         = absint( wp_unslash( $_POST[ $this->option_id ]['id'] ?? 0 ) );
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$normalized = $this->normalize_redirect_data( (array) wp_unslash( $_POST[ $this->option_id ] ?? array() ) );
 
-		$home_url_parsed = wp_parse_url( home_url() );
-		$url_from_parsed = wp_parse_url( trim( $url_from ) );
-		$url_to_parsed   = wp_parse_url( trim( $url_to ) );
-
-		$url_from = '/' . ltrim( $url_from_parsed['path'] ?? '', '/' );
-		if ( ! empty( $url_from_parsed['query'] ) ) {
-			$url_from .= '?' . $url_from_parsed['query'];
-		}
-		$internal = '0';
-
-		if ( $home_url_parsed['host'] === $url_to_parsed['host'] ) {
-			$url_to   = '/' . ltrim( $url_to_parsed['path'] ?? '', '/' );
-			if ( ! empty( $url_to_parsed['query'] ) ) {
-				$url_to .= '?' . $url_to_parsed['query'];
-			}
-			$internal = '1';
+		if ( ! $normalized['valid'] ) {
+			wp_safe_redirect( add_query_arg( array(
+				'page'                    => $this->menu_slug,
+				'wpmastertoolkit_view'    => 'add_redirect',
+				'wpmastertoolkit_message' => 'redirect_failed',
+			), admin_url( 'admin.php' ) ) );
+			exit;
 		}
 
-		$allowed_models = $this->get_models();
-		if ( $model === '' || ! array_key_exists( $model, $allowed_models ) || ! wpmastertoolkit_is_pro() ) {
-			$model = '0';
-		}
-
-		$allowed_params = $this->get_params();
-		if ( $params === '' || ! array_key_exists( $params, $allowed_params ) || '0' !== $model ) {
-			$params = '0';
-		}
-
-		$allowed_codes = $this->get_codes();
-		if ( $code === '' || ! array_key_exists( $code, $allowed_codes ) ) {
-			$code = '301';
-		}
-
-		$allowed_statuses = $this->get_statuses();
-		if ( $status === '' || ! array_key_exists( $status, $allowed_statuses ) ) {
-			$status = '1';
-		}
-
-		$allowed_logs = $this->get_logs();
-		if ( $logs === '' || ! array_key_exists( $logs, $allowed_logs ) || ! wpmastertoolkit_is_pro() || '0' !== $model ) {
-			$logs = '0';
-		}
-
-		if ( $regex === '' || ( '0' !== $regex && '1' !== $regex ) ) {
-			$regex = '0';
-		}
-
-		$redirect_data = array(
-			'url_from' => $url_from,
-			'url_to'   => $url_to,
-			'params'   => $params,
-			'model'    => $model,
-			'code'     => $code,
-			'regex'    => $regex,
-			'internal' => $internal,
-			'status'   => $status,
-			'logs'     => $logs,
-		);
+		$redirect_data = $normalized['data'];
+		$model         = $redirect_data['model'];
+		$status        = $redirect_data['status'];
 
 		$this->maybe_create_tables();
 
@@ -243,6 +195,11 @@ class WPMastertoolkit_Redirect_Manager {
 
 		if ( '1' === $model ) {
 			$this->add_to_htaccess( $redirect_data );
+
+			if (  '0' === $status ) {
+				$this->remove_from_htaccess( $id );
+			}
+
 		} else {
 			if ( ! empty( $id ) ) {
 				$this->remove_from_htaccess( $id );
@@ -251,6 +208,351 @@ class WPMastertoolkit_Redirect_Manager {
 
 		wp_safe_redirect( add_query_arg( $redirect, admin_url( 'admin.php' ) ) );
 		exit;
+	}
+
+	/**
+	 * Validate and normalize redirect data from forms and CSV imports.
+	 *
+	 * @since 2.20.0
+	 *
+	 * @param array $redirect_data Raw redirect data.
+	 * @return array Normalized data, warnings, and validity state.
+	 */
+	private function normalize_redirect_data( array $redirect_data ) {
+		$errors = array();
+		$valid  = true;
+
+		$model  = sanitize_text_field( $this->get_scalar_value( $redirect_data['model'] ?? '' ) );
+		$params = sanitize_text_field( $this->get_scalar_value( $redirect_data['params'] ?? '' ) );
+		$code   = sanitize_text_field( $this->get_scalar_value( $redirect_data['code'] ?? '' ) );
+		$regex  = sanitize_text_field( $this->get_scalar_value( $redirect_data['regex'] ?? '' ) );
+		$status = sanitize_text_field( $this->get_scalar_value( $redirect_data['status'] ?? '' ) );
+		$logs   = sanitize_text_field( $this->get_scalar_value( $redirect_data['logs'] ?? '' ) );
+
+		if ( ! array_key_exists( $model, $this->get_models() ) || ( '0' !== $model && ! wpmastertoolkit_is_pro() ) ) {
+			$model    = '0';
+			$errors[] = 'model_invalid';
+		}
+
+		if ( ! array_key_exists( $params, $this->get_params() ) || ( '0' !== $model && '0' !== $params ) ) {
+			$params   = '0';
+			$errors[] = 'params_invalid';
+		}
+
+		if ( ! array_key_exists( $code, $this->get_codes() ) ) {
+			$code     = '301';
+			$errors[] = 'code_invalid';
+		}
+
+		if ( ! array_key_exists( $status, $this->get_statuses() ) ) {
+			$status   = '1';
+			$errors[] = 'status_invalid';
+		}
+
+		if ( ! array_key_exists( $logs, $this->get_logs() ) || ( '1' === $logs && ( ! wpmastertoolkit_is_pro() || '0' !== $model ) ) ) {
+			$logs     = '0';
+			$errors[] = 'logs_invalid';
+		}
+
+		if ( '0' !== $regex && '1' !== $regex ) {
+			$regex    = '0';
+			$errors[] = 'regex_invalid';
+		}
+
+		$url_from = $this->normalize_source_url( $this->get_scalar_value( $redirect_data['url_from'] ?? '' ), $regex );
+		if ( false === $url_from ) {
+			$url_from = '';
+			$errors[] = 'url_from_invalid';
+			$valid    = false;
+		}
+
+		$target = $this->normalize_target_url( $this->get_scalar_value( $redirect_data['url_to'] ?? '' ) );
+		if ( false === $target ) {
+			$url_to   = '';
+			$internal = '0';
+			$errors[] = 'url_to_invalid';
+			$valid    = false;
+		} else {
+			$url_to   = $target['url'];
+			$internal = $target['internal'];
+		}
+
+		if ( $valid && '1' === $regex ) {
+			$pattern = $this->build_regex_pattern( $url_from );
+			if ( false === $pattern || false === @preg_match( $pattern, '' ) || PREG_NO_ERROR !== preg_last_error() ) {
+				$errors[] = 'regex_pattern_invalid';
+				$valid    = false;
+			}
+		}
+
+		if ( $valid && '0' !== $model && $this->contains_server_config_metacharacters( $url_from . $url_to ) ) {
+			$errors[] = 'server_config_invalid';
+			$valid    = false;
+		}
+
+		return array(
+			'data' => array(
+				'url_from' => $url_from,
+				'url_to'   => $url_to,
+				'params'   => $params,
+				'model'    => $model,
+				'code'     => $code,
+				'regex'    => $regex,
+				'internal' => $internal,
+				'status'   => $status,
+				'logs'     => $logs,
+			),
+			'errors' => array_values( array_unique( $errors ) ),
+			'valid'  => $valid,
+		);
+	}
+
+	/**
+	 * Normalize a redirect source to a local request path.
+	 *
+	 * @param string $url   Source URL or path.
+	 * @param string $regex Whether the source is a regular expression.
+	 * @return string|false Normalized path, or false when invalid.
+	 */
+	private function normalize_source_url( $url, $regex ) {
+		$url = trim( $url );
+		if ( ! $this->is_valid_url_input( $url ) || 0 === strpos( $url, '//' ) ) {
+			return false;
+		}
+
+		if ( '1' === $regex ) {
+			if ( preg_match( '/^[a-z][a-z0-9+.-]*:/i', $url ) ) {
+				return false;
+			}
+
+			return '/' . ltrim( $url, '/' );
+		}
+
+		$parsed = wp_parse_url( $url );
+		if ( false === $parsed || isset( $parsed['fragment'] ) || isset( $parsed['user'] ) || isset( $parsed['pass'] ) ) {
+			return false;
+		}
+
+		if ( isset( $parsed['scheme'] ) || isset( $parsed['host'] ) ) {
+			$home = wp_parse_url( home_url() );
+			if (
+				empty( $parsed['scheme'] ) ||
+				! in_array( strtolower( $parsed['scheme'] ), array( 'http', 'https' ), true ) ||
+				empty( $parsed['host'] ) ||
+				empty( $home['host'] ) ||
+				0 !== strcasecmp( $parsed['host'], $home['host'] )
+			) {
+				return false;
+			}
+		}
+
+		$normalized = '/' . ltrim( $parsed['path'] ?? '', '/' );
+		if ( ! empty( $parsed['query'] ) ) {
+			$normalized .= '?' . $parsed['query'];
+		}
+
+		return $normalized;
+	}
+
+	/**
+	 * Build a bounded PCRE pattern from an administrator-provided expression.
+	 *
+	 * @param string $expression Regular expression without delimiters.
+	 * @return string|false Compiled pattern string, or false when oversized.
+	 */
+	private function build_regex_pattern( $expression ) {
+		if ( '' === $expression || self::REGEX_MAX_PATTERN_LENGTH < strlen( $expression ) ) {
+			return false;
+		}
+
+		$delimiter  = '#';
+		$expression = $this->escape_regex_delimiter( $expression, $delimiter );
+
+		return $delimiter
+			. '(*LIMIT_MATCH=' . self::REGEX_MATCH_LIMIT . ')'
+			. '(*LIMIT_DEPTH=' . self::REGEX_DEPTH_LIMIT . ')'
+			. $expression
+			. $delimiter
+			. 'i';
+	}
+
+	/**
+	 * Escape unescaped occurrences of the selected PCRE delimiter.
+	 *
+	 * @param string $expression Regular expression body.
+	 * @param string $delimiter  Single-character PCRE delimiter.
+	 * @return string Expression with safe delimiters.
+	 */
+	private function escape_regex_delimiter( $expression, $delimiter ) {
+		$escaped           = '';
+		$backslash_count   = 0;
+		$expression_length = strlen( $expression );
+
+		for ( $index = 0; $index < $expression_length; $index++ ) {
+			$character = $expression[ $index ];
+
+			if ( $delimiter === $character && 0 === $backslash_count % 2 ) {
+				$escaped .= '\\';
+			}
+
+			$escaped .= $character;
+			$backslash_count = '\\' === $character ? $backslash_count + 1 : 0;
+		}
+
+		return $escaped;
+	}
+
+	/**
+	 * Normalize a redirect target and derive whether it is internal.
+	 *
+	 * @param string $url Target URL or path.
+	 * @return array|false Normalized target data, or false when invalid.
+	 */
+	private function normalize_target_url( $url ) {
+		$url = trim( $url );
+		if ( ! $this->is_valid_url_input( $url ) || 0 === strpos( $url, '//' ) ) {
+			return false;
+		}
+
+		$parsed = wp_parse_url( $url );
+		if ( false === $parsed || isset( $parsed['user'] ) || isset( $parsed['pass'] ) ) {
+			return false;
+		}
+
+		if ( isset( $parsed['scheme'] ) || isset( $parsed['host'] ) ) {
+			if (
+				empty( $parsed['scheme'] ) ||
+				! in_array( strtolower( $parsed['scheme'] ), array( 'http', 'https' ), true ) ||
+				empty( $parsed['host'] )
+			) {
+				return false;
+			}
+
+			$home = wp_parse_url( home_url() );
+			if ( ! empty( $home['host'] ) && 0 === strcasecmp( $parsed['host'], $home['host'] ) ) {
+				return array(
+					'url'      => $this->build_relative_url( $parsed ),
+					'internal' => '1',
+				);
+			}
+
+			$url = esc_url_raw( $url, array( 'http', 'https' ) );
+			if ( empty( $url ) ) {
+				return false;
+			}
+
+			return array(
+				'url'      => $url,
+				'internal' => '0',
+			);
+		}
+
+		return array(
+			'url'      => $this->build_relative_url( $parsed ),
+			'internal' => '1',
+		);
+	}
+
+	/**
+	 * Validate a runtime redirect target without allowing regex captures to change its origin.
+	 *
+	 * @param string $target            Redirect target after regex substitution.
+	 * @param string $configured_target Stored redirect target before substitution.
+	 * @param bool   $internal           Whether the configured target is internal.
+	 * @return string|false Sanitized redirect target, or false when unsafe.
+	 */
+	private function validate_runtime_redirect_target( $target, $configured_target, $internal ) {
+		$target = esc_url_raw( $target, array( 'http', 'https' ) );
+		if ( empty( $target ) ) {
+			return false;
+		}
+
+		$target_parsed   = wp_parse_url( $target );
+		$expected_parsed = wp_parse_url( $internal ? home_url( '/' ) : $configured_target );
+
+		if (
+			false === $target_parsed ||
+			false === $expected_parsed ||
+			empty( $target_parsed['scheme'] ) ||
+			empty( $target_parsed['host'] ) ||
+			empty( $expected_parsed['scheme'] ) ||
+			empty( $expected_parsed['host'] ) ||
+			isset( $target_parsed['user'] ) ||
+			isset( $target_parsed['pass'] ) ||
+			0 !== strcasecmp( $target_parsed['scheme'], $expected_parsed['scheme'] ) ||
+			0 !== strcasecmp( $target_parsed['host'], $expected_parsed['host'] ) ||
+			$this->get_url_port( $target_parsed ) !== $this->get_url_port( $expected_parsed )
+		) {
+			return false;
+		}
+
+		return $target;
+	}
+
+	/**
+	 * Return an explicit or scheme-default URL port.
+	 *
+	 * @param array $parsed Parsed URL components.
+	 * @return int URL port.
+	 */
+	private function get_url_port( array $parsed ) {
+		if ( isset( $parsed['port'] ) ) {
+			return (int) $parsed['port'];
+		}
+
+		return 'https' === strtolower( $parsed['scheme'] ?? '' ) ? 443 : 80;
+	}
+
+	/**
+	 * Build a relative URL from parsed URL components.
+	 *
+	 * @param array $parsed Parsed URL components.
+	 * @return string Relative URL.
+	 */
+	private function build_relative_url( array $parsed ) {
+		$url = '/' . ltrim( $parsed['path'] ?? '', '/' );
+
+		if ( ! empty( $parsed['query'] ) ) {
+			$url .= '?' . $parsed['query'];
+		}
+		if ( ! empty( $parsed['fragment'] ) ) {
+			$url .= '#' . $parsed['fragment'];
+		}
+
+		return $url;
+	}
+
+	/**
+	 * Check basic URL constraints shared by source and target fields.
+	 *
+	 * @param string $url URL value.
+	 * @return bool Whether the value is safe to normalize.
+	 */
+	private function is_valid_url_input( $url ) {
+		return '' !== $url
+			&& 250 >= strlen( $url )
+			&& ! preg_match( '/[\x00-\x20\x7F]/', $url )
+			&& false === strpbrk( $url, "<>\"'" );
+	}
+
+	/**
+	 * Check for characters that can alter Apache or Nginx configuration.
+	 *
+	 * @param string $value Configuration value.
+	 * @return bool Whether server configuration metacharacters are present.
+	 */
+	private function contains_server_config_metacharacters( $value ) {
+		return (bool) preg_match( '/[;{}#`]/', $value );
+	}
+
+	/**
+	 * Return a scalar input value as a string.
+	 *
+	 * @param mixed $value Input value.
+	 * @return string Scalar string or an empty string.
+	 */
+	private function get_scalar_value( $value ) {
+		return is_scalar( $value ) ? (string) $value : '';
 	}
 
 	/**
@@ -341,16 +643,17 @@ class WPMastertoolkit_Redirect_Manager {
 		}
 
 		$redirects_with_errors = array();
+		$row_number            = 1;
 		while ( ( $row = fgetcsv( $handle, null, $separator ) ) !== false ) {
+			$row_number++;
 
-			$errors        = array();
 			$redirect_data = array_combine( $this->import_csv_header, $row );
 			if ( $redirect_data === false ) {
+				$redirects_with_errors[ 'CSV row ' . $row_number ] = array( 'row_invalid' );
 				continue;
 			}
 
-			$redirect_data = array_map( 'trim', $redirect_data );
-			$redirect_data = array(
+			$normalized = $this->normalize_redirect_data( array(
 				'url_from' => $redirect_data['URL From'] ?? '',
 				'url_to'   => $redirect_data['URL To'] ?? '',
 				'params'   => $redirect_data['Params'] ?? '0',
@@ -360,41 +663,14 @@ class WPMastertoolkit_Redirect_Manager {
 				'internal' => $redirect_data['Internal'] ?? '0',
 				'status'   => $redirect_data['Status'] ?? '1',
 				'logs'     => $redirect_data['Logs'] ?? '0',
-			);
+			) );
 
-			$allowed_models = $this->get_models();
-			if ( $redirect_data['model'] === '' || ! array_key_exists( $redirect_data['model'], $allowed_models ) || ! wpmastertoolkit_is_pro() ) {
-				$redirect_data['model'] = '0';
-				$errors[] = 'model_invalid';
-			}
+			$redirect_data = $normalized['data'];
+			$errors        = $normalized['errors'];
 
-			$allowed_params = $this->get_params();
-			if ( $redirect_data['params'] === '' || ! array_key_exists( $redirect_data['params'], $allowed_params ) || ( '0' !== $redirect_data['model'] && '0' !== $redirect_data['params'] ) ) {
-				$redirect_data['params'] = '0';
-				$errors[] = 'params_invalid';
-			}
-
-			$allowed_codes = $this->get_codes();
-			if ( $redirect_data['code'] === '' || ! array_key_exists( $redirect_data['code'], $allowed_codes ) ) {
-				$redirect_data['code'] = '301';
-				$errors[] = 'code_invalid';
-			}
-
-			$allowed_statuses = $this->get_statuses();
-			if ( $redirect_data['status'] === '' || ! array_key_exists( $redirect_data['status'], $allowed_statuses ) ) {
-				$redirect_data['status'] = '1';
-				$errors[] = 'status_invalid';
-			}
-
-			$allowed_logs = $this->get_logs();
-			if ( $redirect_data['logs'] === '' || ! array_key_exists( $redirect_data['logs'], $allowed_logs ) || ! wpmastertoolkit_is_pro() || ( '0' !== $redirect_data['model'] && '0' !== $redirect_data['logs'] ) ) {
-				$redirect_data['logs'] = '0';
-				$errors[] = 'logs_invalid';
-			}
-
-			if ( $redirect_data['regex'] === '' || ( '0' !== $redirect_data['regex'] && '1' !== $redirect_data['regex'] ) ) {
-				$redirect_data['regex'] = '0';
-				$errors[] = 'regex_invalid';
+			if ( ! $normalized['valid'] ) {
+				$redirects_with_errors[ 'CSV row ' . $row_number ] = $errors;
+				continue;
 			}
 
 			$this->maybe_create_tables();
@@ -408,7 +684,7 @@ class WPMastertoolkit_Redirect_Manager {
 				}
 			}
 
-			if ( '1' === $redirect_data['model'] ) {
+			if ( $result && '1' === $redirect_data['model'] && '1' === $redirect_data['status'] ) {
 				$this->add_to_htaccess( $redirect_data );
 			}
 		}
@@ -448,7 +724,7 @@ class WPMastertoolkit_Redirect_Manager {
 		fputcsv( $output, $this->import_csv_header, ';' );
 
 		foreach ( $redirects as $redirect ) {
-			fputcsv( $output, array(
+			$row = array(
 				$redirect['url_from'],
 				$redirect['url_to'],
 				$redirect['params'],
@@ -458,9 +734,29 @@ class WPMastertoolkit_Redirect_Manager {
 				$redirect['internal'],
 				$redirect['status'],
 				$redirect['logs'],
-			), ';' );
+			);
+
+			fputcsv( $output, array_map( array( $this, 'neutralize_csv_formula' ), $row ), ';' );
 		}
 		exit;
+	}
+
+	/**
+	 * Prevent a CSV cell from being interpreted as a spreadsheet formula.
+	 *
+	 * @since 2.20.0
+	 *
+	 * @param mixed $value CSV cell value.
+	 * @return string Safe CSV cell value.
+	 */
+	private function neutralize_csv_formula( $value ) {
+		$value = (string) $value;
+
+		if ( preg_match( '/^[=+\-@\t\r\n]/', $value ) ) {
+			return "'" . $value;
+		}
+
+		return $value;
 	}
 
 	/**
@@ -578,6 +874,15 @@ class WPMastertoolkit_Redirect_Manager {
 			break;
 			case 'bulk_redirects_enable':
 
+				foreach ( $ids as $id ) {
+					$redirect_data = $this->get_redirect( $id );
+					$model         = $redirect_data['model'] ?? '0';
+
+					if ( '1' === $model ) {
+						$this->add_to_htaccess( $redirect_data );
+					}
+				}
+
 				$result = $this->update_redirects_status( $ids, '1' );
 				if ( $result ) {
 					$message = 'bulk_redirects_enabled';
@@ -590,6 +895,10 @@ class WPMastertoolkit_Redirect_Manager {
 
 			break;
 			case 'bulk_redirects_disable':
+
+				foreach ( $ids as $id ) {
+					$this->remove_from_htaccess( $id );
+				}
 
 				$result = $this->update_redirects_status( $ids, '0' );
 				if ( $result ) {
@@ -1217,6 +1526,10 @@ class WPMastertoolkit_Redirect_Manager {
 		}
 
 		// 2. Fall back to regex redirects (must loop, but typically a small set).
+		if ( self::REGEX_MAX_REQUEST_LENGTH < strlen( $full_request ) ) {
+			return;
+		}
+
 		$regex_redirects = $this->get_regex_redirects();
 
 		foreach ( $regex_redirects as $redirect ) {
@@ -1224,9 +1537,24 @@ class WPMastertoolkit_Redirect_Manager {
 			$url_to   = $redirect['url_to'];
 			$code     = (int) $redirect['code'];
 			$internal = '1' === (string) $redirect['internal'];
+			$pattern  = $this->build_regex_pattern( $url_from );
 
-			if ( preg_match( '#' . $url_from . '#i', $full_request, $matches ) ) {
-				$target = preg_replace( '#' . $url_from . '#i', $internal ? home_url( $url_to ) : $url_to, $full_request );
+			if ( false === $pattern ) {
+				continue;
+			}
+
+			$matched = @preg_match( $pattern, $full_request );
+			if ( 1 === $matched && PREG_NO_ERROR === preg_last_error() ) {
+				$target = @preg_replace( $pattern, $internal ? home_url( $url_to ) : $url_to, $full_request );
+				if ( ! is_string( $target ) || PREG_NO_ERROR !== preg_last_error() ) {
+					continue;
+				}
+
+				$target = is_string( $target ) ? $this->validate_runtime_redirect_target( $target, $url_to, $internal ) : false;
+
+				if ( false === $target ) {
+					continue;
+				}
 
 				$this->maybe_create_tables();
 				$this->insert_log_redirect( $redirect );
@@ -1575,9 +1903,9 @@ class WPMastertoolkit_Redirect_Manager {
 				<div class="wp-mastertoolkit__section__notice show warning">
 					<p class="wp-mastertoolkit__section__notice__message">
 						<?php echo wp_kses_post( sprintf(
-							// translators: %s is the redirect ID.
-							__( 'Redirect with ID %s has warnings:', 'wpmastertoolkit' ),
-							'<strong>'.$redirect_id.'</strong>'
+							// translators: %s is the redirect ID or CSV row number.
+							__( 'Redirect entry %s has warnings:', 'wpmastertoolkit' ),
+							'<strong>' . esc_html( $redirect_id ) . '</strong>'
 							) );
 						?>
 					</p>
@@ -1694,6 +2022,11 @@ class WPMastertoolkit_Redirect_Manager {
 	 */
 	private function warnings_messages() {
 		return array(
+			'row_invalid' => __( 'The CSV row has an invalid number of columns.', 'wpmastertoolkit' ),
+			'url_from_invalid' => __( 'The source URL is invalid.', 'wpmastertoolkit' ),
+			'url_to_invalid' => __( 'The target URL is invalid or uses an unsupported protocol.', 'wpmastertoolkit' ),
+			'regex_pattern_invalid' => __( 'The source regular expression is invalid.', 'wpmastertoolkit' ),
+			'server_config_invalid' => __( 'The redirect contains characters that are not allowed in server configuration.', 'wpmastertoolkit' ),
 			'model_invalid'  => sprintf(
 				// translators: %s is the model name (e.g. "Apache").
 				__( 'Model changed to %s.', 'wpmastertoolkit' ),

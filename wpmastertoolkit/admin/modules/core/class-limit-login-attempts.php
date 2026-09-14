@@ -29,7 +29,7 @@ class WPMastertoolkit_Limit_Login_Attempts {
 		add_filter( 'authenticate', array( $this, 'maybe_allow_login' ), 999 );
 		add_action( 'wp_login_errors', array( $this, 'login_error_handler' ), 999 );
 		add_action( 'login_enqueue_scripts', array( $this, 'maybe_hide_login_form' ) );
-		add_action( 'wp_login_failed', array( $this, 'log_failed_login' ), 5 );
+		add_action( 'wp_login_failed', array( $this, 'log_failed_login' ), 5, 2 );
 		add_action( 'wp_login', array( $this, 'clear_failed_login_log' ) );
     }
 
@@ -244,9 +244,16 @@ class WPMastertoolkit_Limit_Login_Attempts {
 	 * Log failed login
 	 * 
 	 * @since   1.5.0
+	 *
+	 * @param string   $username Username or email address.
+	 * @param WP_Error $error    Authentication error.
 	 */
-	public function log_failed_login( $username ) {
+	public function log_failed_login( $username, $error ) {
 		global $wpdb, $wpmastertoolkit_limit_login;
+
+		if ( is_wp_error( $error ) && $error->get_error_message( 'password_expired' ) ) {
+			return;
+		}
 
 		$ip_address_check = $wpmastertoolkit_limit_login['ip_address'] ?? wpmastertoolkit_get_current_ip();
 		if ( $this->is_ip_whitelisted( $ip_address_check ) ) {

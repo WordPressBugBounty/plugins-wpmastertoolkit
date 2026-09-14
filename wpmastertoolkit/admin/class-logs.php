@@ -143,6 +143,51 @@ class WPMastertoolkit_Logs {
 	}
 
 	/**
+	 * Resolve a readable log file inside the logs directory.
+	 *
+	 * @since 2.21.0
+	 *
+	 * @param mixed $file_name Log file name.
+	 * @return string|false Canonical log file path, or false when invalid.
+	 */
+	private function get_log_file_path( $file_name ) {
+		if ( ! is_string( $file_name ) || '' === $file_name ) {
+			return false;
+		}
+
+		$sanitized_file_name = sanitize_file_name( $file_name );
+		if (
+			$sanitized_file_name !== $file_name
+			|| false !== strpos( $file_name, '/' )
+			|| false !== strpos( $file_name, '\\' )
+			|| $file_name !== wp_basename( $file_name )
+		) {
+			return false;
+		}
+
+		if ( 'log' !== strtolower( pathinfo( $file_name, PATHINFO_EXTENSION ) ) ) {
+			return false;
+		}
+
+		$log_dir   = wpmastertoolkit_folders() . '/logs';
+		$file_path = realpath( $log_dir . '/' . $file_name );
+		$log_dir   = realpath( $log_dir );
+
+		if ( false === $log_dir || false === $file_path || ! is_file( $file_path ) || ! is_readable( $file_path ) ) {
+			return false;
+		}
+
+		$log_dir   = trailingslashit( wp_normalize_path( $log_dir ) );
+		$file_path = wp_normalize_path( $file_path );
+
+		if ( 0 !== strpos( $file_path, $log_dir ) ) {
+			return false;
+		}
+
+		return $file_path;
+	}
+
+	/**
 	 * AJAX handler to get log content
 	 * 
 	 * @since	2.21.0
@@ -161,40 +206,49 @@ class WPMastertoolkit_Logs {
 		}
 
 		$lines     = (int) sanitize_text_field( wp_unslash( $_POST['lines'] ?? '0' ) );
-		$file_name = sanitize_text_field( wp_unslash( $_POST['file_name'] ?? '' ) );
-		if ( empty( $file_name ) ) {
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$file_name = wp_unslash( $_POST['file_name'] ?? '' );
+		$file_path = $this->get_log_file_path( $file_name );
+		if ( false === $file_path ) {
 			wp_send_json_error( array( 'message' => __( 'Invalid filename', 'wpmastertoolkit' ) ) );
-		}
-
-		$file_path = wpmastertoolkit_folders() . '/logs/' . $file_name;
-		if ( ! file_exists( $file_path ) ) {
-			wp_send_json_error( array( 'message' => __( 'Log file not found', 'wpmastertoolkit' ) ) );
 		}
 
 		$content = '';
 		
 		if ( $lines > 0 ) {
-			$file       = new SplFileObject( $file_path, 'r' );
-			$file->seek( PHP_INT_MAX );
-			$last_line  = $file->key();
-			$start_line = max( 0, $last_line - $lines );
-			
-			$lines_array = array();
-			$file->seek( $start_line );
+			try {
+				$file       = new SplFileObject( $file_path, 'r' );
+				$file->seek( PHP_INT_MAX );
+				$last_line  = $file->key();
+				$start_line = max( 0, $last_line - $lines );
 
-			while ( ! $file->eof() ) {
-				$lines_array[] = $file->current();
-				$file->next();
+				$lines_array = array();
+				$file->seek( $start_line );
+
+				while ( ! $file->eof() ) {
+					$lines_array[] = $file->current();
+					$file->next();
+				}
+				$content = implode( '', $lines_array );
+			} catch ( RuntimeException $exception ) {
+				wp_send_json_error( array( 'message' => __( 'Unable to read log file', 'wpmastertoolkit' ) ) );
 			}
-			$content = implode( '', $lines_array );
 		} else {
 			$content = file_get_contents( $file_path );
+			if ( false === $content ) {
+				wp_send_json_error( array( 'message' => __( 'Unable to read log file', 'wpmastertoolkit' ) ) );
+			}
+		}
+
+		$file_size = filesize( $file_path );
+		if ( false === $file_size ) {
+			wp_send_json_error( array( 'message' => __( 'Unable to read log file', 'wpmastertoolkit' ) ) );
 		}
 
 		wp_send_json_success( array(
 			'content'   => $content,
 			'file_name' => $file_name,
-			'size'      => size_format( filesize( $file_path ) ),
+			'size'      => size_format( $file_size ),
 		) );
 	}
 
@@ -262,16 +316,16 @@ class WPMastertoolkit_Logs {
 			wp_send_json_error( array( 'message' => esc_html__( 'You do not have permission to perform this action.', 'wpmastertoolkit' ) ) );
 		}
 
-		$file_name = sanitize_file_name( wp_unslash( $_POST['file_name'] ?? '' ) );
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$file_name = wp_unslash( $_POST['file_name'] ?? '' );
 		$last_size = (int) sanitize_text_field( wp_unslash( $_POST['last_size'] ?? '0' ) );
 
 		if ( empty( $file_name ) ) {
 			wp_send_json_error( array( 'message' => __( 'Invalid filename', 'wpmastertoolkit' ) ) );
 		}
 
-		$log_path = wpmastertoolkit_folders() . '/logs/' . $file_name;
-		if ( ! file_exists( $log_path ) ) {
-
+		$log_path = $this->get_log_file_path( $file_name );
+		if ( false === $log_path ) {
 			wp_send_json_success( array( 
 				'content'         => '',
 				'current_size'    => 0,
@@ -279,23 +333,50 @@ class WPMastertoolkit_Logs {
 			) );
 		}
 
-		$current_size = filesize( $log_path );
-		$new_content  = '';
+		$current_size   = filesize( $log_path );
+		$new_content    = '';
+		$has_new_content = false;
+		if ( false === $current_size ) {
+			wp_send_json_success( array(
+				'content'         => '',
+				'current_size'    => 0,
+				'has_new_content' => false,
+			) );
+		}
 
 		if ( $current_size > $last_size ) {
+			$has_new_content = true;
+
 			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen
 			$file = fopen( $log_path, 'r' );
-			fseek( $file, $last_size );
+			if ( false === $file || 0 !== fseek( $file, $last_size ) ) {
+				if ( is_resource( $file ) ) {
+					// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
+					fclose( $file );
+				}
+
+				wp_send_json_success( array(
+					'content'         => '',
+					'current_size'    => $current_size,
+					'has_new_content' => false,
+				) );
+			}
+
 			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fread
 			$new_content = fread( $file, $current_size - $last_size );
 			// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
 			fclose( $file );
+
+			if ( false === $new_content ) {
+				$new_content     = '';
+				$has_new_content = false;
+			}
 		}
 
 		wp_send_json_success( array(
 			'content'         => $new_content,
 			'current_size'    => $current_size,
-			'has_new_content' => $current_size > $last_size,
+			'has_new_content' => $has_new_content,
 		) );
 	}
 

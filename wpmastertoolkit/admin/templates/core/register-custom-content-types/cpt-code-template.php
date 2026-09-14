@@ -1,6 +1,8 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
+/** @var array $settings */
+
 $wpmtk_labels = $this->get_cpt_labels();
 unset( $wpmtk_labels['post_type'] );
 unset( $wpmtk_labels['description'] );
@@ -9,7 +11,7 @@ $wpmtk_text_domain = !empty($settings['text_domain']) ? $settings['text_domain']
 
 $wpmtk_permalink_rewrite = $settings['permalink_rewrite'] ?? 'post_type_key';
 $wpmtk_rewrite_enabled   = $wpmtk_permalink_rewrite === 'no_permalink' ? false : true;
-$wpmtk_rewrite           = $this->text_to_boolean( $wpmtk_rewrite_enabled );
+$wpmtk_rewrite           = $wpmtk_rewrite_enabled;
 $wpmtk_rewrite_args      = array();
 
 if ( ! empty( $settings['slug'] ) && $settings['slug'] !== $settings['post_type'] && 'custom_permalink' === $settings['permalink_rewrite'] ) {
@@ -29,12 +31,10 @@ if ( empty($settings['pages']) && $wpmtk_rewrite_enabled ) {
 }
 
 if( !empty($wpmtk_rewrite_args) ) {
-    $wpmtk_rewrite = 'array( ' . implode( ', ', array_map( function ( $key, $value ) {
-        return "'" . $key . "' => " . ( is_bool( $value ) ? ( $value ? 'true' : 'false' ) : "'" . $value . "'" );
-    }, array_keys( $wpmtk_rewrite_args ), $wpmtk_rewrite_args ) ) . ' )';
+        $wpmtk_rewrite = $wpmtk_rewrite_args;
 }
 
-$wpmtk_query_var = 'custom_query_var' === $settings['query_var'] && !empty( $settings['query_var_name'] ) && $settings['query_var_name'] !== $settings['post_type'] ? "'" . $settings['query_var_name'] . "'" : 'false';
+$wpmtk_query_var = 'custom_query_var' === $settings['query_var'] && !empty( $settings['query_var_name'] ) && $settings['query_var_name'] !== $settings['post_type'] ? $settings['query_var_name'] : false;
 
 if ( !empty( $settings['rename_capabilities'] ) ) {
     $wpmtk_singular_capability_name = (string) $settings['singular_capability_name'];
@@ -49,12 +49,12 @@ if ( !empty( $settings['rename_capabilities'] ) ) {
 }
 //phpcs:disable
 ?>
-add_action( 'init', function(){
+$wpmtk_register_content_type = function(){
     $labels = array(
 <?php foreach( $wpmtk_labels  as $name => $label_data ) : ?>
 <?php if( !empty($label_data['required']) || !empty($settings['manage_optional_labels']) ) : ?>
 <?php if( !empty($settings[$name]) ) : ?>
-        '<?php echo esc_html( $name ); ?>'<?php echo str_repeat( ' ', 19 - strlen( $name ) ); ?>=> __( "<?php echo esc_html( $settings[$name] ); ?>", '<?php echo esc_html( $wpmtk_text_domain ); ?>' ),
+        <?php echo var_export( $name, true ); ?><?php echo str_repeat( ' ', max( 1, 20 - strlen( $name ) ) ); ?>=> __( <?php echo var_export( $settings[$name], true ); ?>, <?php echo var_export( $wpmtk_text_domain, true ); ?> ),
 <?php endif; ?>
 <?php endif; ?>
 <?php endforeach; ?>
@@ -63,14 +63,14 @@ add_action( 'init', function(){
     $args = array(
         'labels'                => $labels,
 <?php if( !empty($settings['description']) && !empty($settings['manage_optional_labels']) ) : ?>
-        'description'           => __( "<?php echo esc_html( $settings['description'] ); ?>", '<?php echo esc_html( $wpmtk_text_domain ); ?>' ),
+        'description'           => __( <?php echo var_export( $settings['description'], true ); ?>, <?php echo var_export( $wpmtk_text_domain, true ); ?> ),
 <?php endif; ?>
         'public'                => <?php echo esc_html( $this->text_to_boolean( $settings['public'] ) ); ?>,
         'exclude_from_search'   => <?php echo esc_html( $this->text_to_boolean( $settings['exclude_from_search'] ) ); ?>,
         'publicly_queryable'    => <?php echo esc_html( $this->text_to_boolean( $settings['publicly_queryable'] ) ); ?>,
         'show_ui'               => <?php echo esc_html( $this->text_to_boolean( $settings['show_ui'] ) ); ?>,
 <?php if( $settings['show_in_menu'] !== $settings['show_ui'] || !empty($settings['admin_menu_parent']) ) : ?>
-        'show_in_menu'          => <?php echo !empty($settings['admin_menu_parent']) ? "'" . esc_url($settings['admin_menu_parent']) . "'" : $this->text_to_boolean( $settings['show_in_menu'] ); ?>,
+        'show_in_menu'          => <?php echo !empty($settings['admin_menu_parent']) ? var_export( $settings['admin_menu_parent'], true ) : $this->text_to_boolean( $settings['show_in_menu'] ); ?>,
 <?php endif; ?>
 <?php if( $settings['show_in_nav_menus'] !== $settings['public'] ) : ?>
         'show_in_nav_menus'     => <?php echo esc_html( $this->text_to_boolean( $settings['show_in_nav_menus'] ) ); ?>,
@@ -80,39 +80,35 @@ add_action( 'init', function(){
 <?php endif; ?>
         'show_in_rest'          => <?php echo esc_html( $this->text_to_boolean( $settings['show_in_rest'] ) ); ?>,
 <?php if( !empty( $settings['show_in_rest'] ) && !empty( $settings['rest_base'] ) && $settings['rest_base'] !== $settings['post_type'] ) : ?>
-        'rest_base'             => "<?php echo esc_html( $settings['rest_base'] ); ?>",
+        'rest_base'             => <?php echo var_export( $settings['rest_base'], true ); ?>,
 <?php endif; ?>
 <?php if( !empty( $settings['show_in_rest'] ) && !empty( $settings['rest_namespace'] ) && $settings['rest_namespace'] !== 'wp/v2' ) : ?>
-        'rest_namespace'        => "<?php echo esc_html( $settings['rest_namespace'] ); ?>",
+        'rest_namespace'        => <?php echo var_export( $settings['rest_namespace'], true ); ?>,
 <?php endif; ?>
 <?php if( !empty( $settings['menu_position'] ) ) : ?>
         'menu_position'         => <?php echo esc_html( (int) $settings['menu_position'] ); ?>,
 <?php endif; ?>
-        'menu_icon'             => "<?php echo esc_html( !empty($settings['use_dashicon']) && !empty($settings['menu_icon']) ? $settings['menu_icon'] : $settings['custom_menu_icon'] ); ?>",
+        'menu_icon'             => <?php echo var_export( !empty($settings['use_dashicon']) && !empty($settings['menu_icon']) ? $settings['menu_icon'] : $settings['custom_menu_icon'], true ); ?>,
 <?php if( !empty( $settings['rename_capabilities'] ) && $wpmtk_capability_type !== 'post' && $wpmtk_capability_type !== array( 'post', 'posts' ) ) : ?>
-        'capability_type'       => <?php echo is_array( $wpmtk_capability_type ) ? 'array( "' . implode( '", "', $wpmtk_capability_type ) . '" )' : "'" . $wpmtk_capability_type . "'" ?>,
+        'capability_type'       => <?php echo var_export( $wpmtk_capability_type, true ); ?>,
         'map_meta_cap'          => true,
 <?php endif; ?>
 <?php if( !empty( $settings['hierarchical'] ) ) : ?>
         'hierarchical'          => <?php echo esc_html( $this->text_to_boolean( $settings['hierarchical'] ) ); ?>,
 <?php endif; ?>
-        'supports'              => array( <?php echo implode( ', ', array_map( function ( $item ) {
-            return '"' . $item . '"';
-        }, $settings['supports'] ) ); ?> ),
+        'supports'              => <?php echo var_export( $settings['supports'], true ); ?>,
 <?php if( !empty( $settings['taxonomies'] ) ) : ?>
-        'taxonomies'            => array( <?php echo implode( ', ', array_map( function ( $item ) {
-            return '"' . $item . '"';
-        }, $settings['taxonomies'] ) ); ?> ),
+        'taxonomies'            => <?php echo var_export( $settings['taxonomies'], true ); ?>,
 <?php endif; ?>
 <?php if( !empty( $settings['has_archive'] ) ) : ?>
-        'has_archive'           => <?php echo !empty($settings['archive_slug']) && $settings['archive_slug'] !== $settings['post_type'] ? "'" . $settings['archive_slug'] . "'" : 'true'; ?>,
+        'has_archive'           => <?php echo !empty($settings['archive_slug']) && $settings['archive_slug'] !== $settings['post_type'] ? var_export( $settings['archive_slug'], true ) : 'true'; ?>,
 <?php endif; ?>
 <?php if( !empty( $settings['show_in_rest'] ) && !empty( $settings['rest_controller_class'] ) && $settings['rest_controller_class'] !== 'WP_REST_Posts_Controller' ) : ?>
-        'rest_controller_class' => "<?php echo esc_html( $settings['rest_controller_class'] ); ?>",
+        'rest_controller_class' => <?php echo var_export( $settings['rest_controller_class'], true ); ?>,
 <?php endif; ?>
-        'rewrite'               => <?php echo $wpmtk_rewrite; ?>,
+        'rewrite'               => <?php echo var_export( $wpmtk_rewrite, true ); ?>,
 <?php if( $settings['query_var'] !== 'post_type_key' && !empty( $settings['publicly_queryable'] ) ) : ?>
-        'query_var'             => <?php echo $wpmtk_query_var; ?>,
+        'query_var'             => <?php echo var_export( $wpmtk_query_var, true ); ?>,
 <?php endif; ?>
 <?php if( empty($settings['can_export']) ) : ?>
         'can_export'            => false,
@@ -125,7 +121,13 @@ add_action( 'init', function(){
     *
     * @param array    $args The arguments for the custom post type.
     */
-    $args = apply_filters( 'wpmastertoolkit/register_custom_content_types/cpt/<?php echo esc_html( $settings['post_type'] ); ?>', $args );
+        $args = apply_filters( <?php echo var_export( 'wpmastertoolkit/register_custom_content_types/cpt/' . $settings['post_type'], true ); ?>, $args );
 
-    register_post_type( '<?php echo esc_html( $settings['post_type'] ); ?>', $args );
-});
+        register_post_type( <?php echo var_export( $settings['post_type'], true ); ?>, $args );
+};
+
+if ( did_action( 'init' ) ) {
+        $wpmtk_register_content_type();
+} else {
+        add_action( 'init', $wpmtk_register_content_type );
+}

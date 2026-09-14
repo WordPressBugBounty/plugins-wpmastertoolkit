@@ -2,9 +2,9 @@
 Contributors: ludwigyou
 Tags: all in one plugin, admin, security, disable features, easy to use
 Requires at least: 6.0.0
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.22.0
+Stable tag: 2.23.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
 
@@ -261,6 +261,24 @@ Yes, the Media Encoder module automatically converts uploaded images to WebP for
 
 == Changelog ==
 
+= 2.23.1 =
+Security: Improve SVG file type validation in the SVG Upload module
+Security: Improve label alignment in custom content type templates
+Update: Pro Module: Password Expiration: Enhance login attempt logging and password expiration handling
+
+= 2.23.0 =
+Add: Module: Social Login: Add social authentication with Google, configurable login button layouts, and WooCommerce login and registration compatibility. Add Apple, Facebook, GitHub, LinkedIn, Microsoft, X/Twitter, and WordPress.com providers on Pro version.
+Update: Module: Media Encoder: Redesign image format and quality settings with an improved preview and clearer bulk optimization controls.
+Update: Module: Meta Debugger: Add WooCommerce Subscriptions HPOS support and metadata display for shipping items and order refunds.
+Update: Module: Redirect Manager: Improve redirect data validation, normalization, and error handling.
+Update: Module: Mail Catcher: Improve search and sorting with validated query parameters.
+Update: Module: Register Custom Content Types: Improve generated post type and taxonomy registration code and refine supported-feature controls.
+Update: License page: Improve license status checks and related interface states.
+Fix: General: Improve plugin log file path resolution and error handling.
+Security: Module: Prevent User Enumeration: Improve REST API parameter handling and route matching.
+Security: Module: Media Library Post Folders: Add a capability check before saving settings.
+Security: Module: SVG Upload: Strengthen SVG sanitization to close a sanitization bypass.
+
 = 2.22.0 =
 Update: Use AI Client API if the WordPress version support it
 Update: Module: Meta Debugger: Add support for WooCommerce product variations and display metadata for each variation directly from the variation editor.
@@ -268,23 +286,6 @@ Fix: Module: SMTP Mailer: Save only the selected provider, move the sender confi
 Fix: Pro Module: Two-Factor Authentication: Implement modal enhancements and lock submit button until initialization
 Fix: Pro Module: Cron Manager: Add filters to row actions links.
 Update: Pro Module: Cron Manager: Add a status section.
-
-= 2.21.0 =
-Add: Add a dedicated admin interface to browse, monitor, download, and clear plugin log files.
-Update: Module: Meta Debugger: Display metadata for each WooCommerce product variation directly from the variation editor.
-Update: License page: Add the plugin license constant to the generated `wp-config.php` snippet and embed a help video for faster setup.
-Fix: Module: Redirect Manager: Improve CSV import compatibility by auto-detecting delimiters and using semicolon-separated imports more reliably. Update version annotations for redirect retrieval methods.
-Fix: Module: Media Encoder: Validate attachment IDs earlier and improve error messages during processing.
-Fix: Module: Adminer: Suppress conflicting `Cache-Control` headers and improve CSRF token handling.
-Fix: Module: Meta Debugger: Improve handling when multiple WooCommerce order items share the same meta key.
-Fix: Module: Disallow Countries IP: Add clearer notices when the GeoIP database path is invalid and handle corrupted `.mmdb` files more safely.
-Fix: Module: Custom Login Design: Improve compatibility with the WordPress admin email confirmation screen.
-Fix: Module: Local Avatars: Add dynamic classes to the avatar preview container for more reliable styling.
-Fix: General: Improve plugin checks and related admin-side robustness.
-
-= 2.20.1 =
-Tweak: Add a toggle button to switch between fullscreen and normal mode for better focus and usability when editing code snippets in various modules.
-Fix: SMTP Mailer: Fix redirect loop when using Gmail/Outlook integrations with incorrect credentials.
 
 
 [See changelog for all versions.](https://wpmastertoolkit.com/en/changelog/)

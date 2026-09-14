@@ -303,7 +303,7 @@ function wpmastertoolkit_kses_svg_by_path( $relative_path ) {
 /**
  * wpmastertoolkit_folders
  *
- * @return void
+ * @return string The path to the wpmastertoolkit folder.
  */
 function wpmastertoolkit_folders(){
     $path    = WP_CONTENT_DIR;

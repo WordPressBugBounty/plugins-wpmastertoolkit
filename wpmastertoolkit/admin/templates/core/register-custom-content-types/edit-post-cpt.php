@@ -108,27 +108,9 @@ $wpmtk_post_status  = $wpmtk_post_status == 'draft' && empty( $wpmtk_settings['n
         <div class="wp-mastertoolkit__section__body__item">
             <div class="wp-mastertoolkit__select2">
                 <div class="description"><strong><?php esc_html_e( 'Supports', 'wpmastertoolkit' ); ?></strong></div>
-                <select class="js-multiselect-tags" name="<?php echo esc_attr( $this->content_type_settings . '[supports]' ); ?>[]" multiple>
+                <select class="js-multiselect" name="<?php echo esc_attr( $this->content_type_settings . '[supports]' ); ?>[]" multiple>
                     <?php
-                    $wpmtk_supports = array(
-                        'title'           => esc_html__( 'Title', 'wpmastertoolkit' ),
-                        'editor'          => esc_html__( 'Editor', 'wpmastertoolkit' ),
-                        'author'          => esc_html__( 'Author', 'wpmastertoolkit' ),
-                        'thumbnail'       => esc_html__( 'Thumbnail', 'wpmastertoolkit' ),
-                        'excerpt'         => esc_html__( 'Excerpt', 'wpmastertoolkit' ),
-                        'comments'        => esc_html__( 'Comments', 'wpmastertoolkit' ),
-                        'revisions'       => esc_html__( 'Revisions', 'wpmastertoolkit' ),
-                        'page-attributes' => esc_html__( 'Page Attributes', 'wpmastertoolkit' ),
-                        'custom-fields'   => esc_html__( 'Custom Fields', 'wpmastertoolkit' ),
-                    );
-                    $wpmtk_new_tag = $wpmtk_settings['supports'] ?? array();
-                    if ( !empty( $wpmtk_new_tag ) && is_array( $wpmtk_new_tag ) ) {
-                        foreach ( $wpmtk_new_tag as $tag ) {
-                            if ( !array_key_exists( $tag, $wpmtk_supports ) ) {
-                                $wpmtk_supports[$tag] = $tag;
-                            }
-                        }
-                    }
+                    $wpmtk_supports = $this->get_allowed_cpt_supports();
                     foreach ( $wpmtk_supports as $wpmtk_key => $wpmtk_value ) {
                         ?>
                         <option value="<?php echo esc_attr( $wpmtk_key ); ?>" <?php selected( in_array( $wpmtk_key, $wpmtk_settings['supports'] ?? array() ) ); ?>>
@@ -140,7 +122,7 @@ $wpmtk_post_status  = $wpmtk_post_status == 'draft' && empty( $wpmtk_settings['n
                 </select>
             </div>
             <div class="description">
-                <?php esc_html_e( 'Select the features you want to enable for this content type. You can also create new features.', 'wpmastertoolkit' ); ?>
+                <?php esc_html_e( 'Select the features you want to enable for this content type.', 'wpmastertoolkit' ); ?>
             </div>
         </div>
     </div>

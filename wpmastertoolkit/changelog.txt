@@ -1,5 +1,23 @@
 == Changelog ==
 
+= 2.23.1 =
+Security: Improve SVG file type validation in the SVG Upload module
+Security: Improve label alignment in custom content type templates
+Update: Pro Module: Password Expiration: Enhance login attempt logging and password expiration handling
+
+= 2.23.0 =
+Add: Module: Social Login: Add social authentication with Google, configurable login button layouts, and WooCommerce login and registration compatibility. Add Apple, Facebook, GitHub, LinkedIn, Microsoft, X/Twitter, and WordPress.com providers on Pro version.
+Update: Module: Media Encoder: Redesign image format and quality settings with an improved preview and clearer bulk optimization controls.
+Update: Module: Meta Debugger: Add WooCommerce Subscriptions HPOS support and metadata display for shipping items and order refunds.
+Update: Module: Redirect Manager: Improve redirect data validation, normalization, and error handling.
+Update: Module: Mail Catcher: Improve search and sorting with validated query parameters.
+Update: Module: Register Custom Content Types: Improve generated post type and taxonomy registration code and refine supported-feature controls.
+Update: License page: Improve license status checks and related interface states.
+Fix: General: Improve plugin log file path resolution and error handling.
+Security: Module: Prevent User Enumeration: Improve REST API parameter handling and route matching.
+Security: Module: Media Library Post Folders: Add a capability check before saving settings.
+Security: Module: SVG Upload: Strengthen SVG sanitization to close a sanitization bypass.
+
 = 2.22.0 =
 Update: Use AI Client API if the WordPress version support it
 Update: Module: Meta Debugger: Add support for WooCommerce product variations and display metadata for each variation directly from the variation editor.

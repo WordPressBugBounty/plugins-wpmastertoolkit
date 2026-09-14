@@ -786,6 +786,12 @@ class WPMastertoolkit_Modules_Data {
 				'pro'           => true,
 				'path'          => 'pro/class-password-expiration.php',
 			),
+			'WPMastertoolkit_Social_Login' => array(
+				'original_name' => 'Social Login',
+				'group'         => 'administration',
+				'pro'           => false,
+				'path'          => 'core/class-social-login.php',
+			),
 		);
 		
 		/**
@@ -1317,6 +1323,10 @@ class WPMastertoolkit_Modules_Data {
 			'WPMastertoolkit_Password_Expiration' => array(
 				'name' => esc_html_x( "Password Expiration", "Module name", 'wpmastertoolkit' ),
 				'desc' => esc_html_x( "Manage password expiration policies to enhance security by enforcing regular password updates.", "Module description", 'wpmastertoolkit' ),
+			),
+			'WPMastertoolkit_Social_Login' => array(
+				'name' => esc_html_x( "Social Login", "Module name", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( 'Let users log in or register with Google, Facebook, and more.', "Module description", 'wpmastertoolkit' ),
 			),
 		);
 

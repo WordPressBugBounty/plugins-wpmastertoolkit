@@ -211,14 +211,18 @@ class Settings {
 	 * @return void
 	 */
 	public function settings_output() {
+		global $wpmtk_surecart_license_status;
+
 		$this->license_form_submit();
 
 		$assets = include WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/assets/build/core/licensing.asset.php';
 		// wp_enqueue_script( 'wpmastertoolkit-licensing', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/licensing.js', $assets['dependencies'], $assets['version'], true );
 		wp_enqueue_style( 'wpmastertoolkit-licensing', WPMASTERTOOLKIT_PLUGIN_URL . 'admin/assets/build/core/licensing.css', array(), $assets['version'] );
 
-		$activation 	= $this->get_activation();
-		$action     	= ! empty( $activation->id ) ? 'deactivate' : 'activate';
+		$activation = $this->get_activation();
+		$action     = ! empty( $activation->id ) ? 'deactivate' : 'activate';
+		$revoked    = 'revoked' === $wpmtk_surecart_license_status ? true : false;
+		$status     = $revoked ? 'activate' : $action;
 		?>
 
 		<div class="wrap wpmastertoolkit-license-wrap">
@@ -253,23 +257,24 @@ class Settings {
 									__( 'Enter your license key to activate %s.', 'wpmastertoolkit' ), $this->client->name )
 								);
 							} else {
-								echo esc_html( sprintf(
-									/* translators: %s: client name */
-									__( 'Your license is succesfully activated for this site.', 'wpmastertoolkit' ), $this->client->name )
-								);
+								if ( $revoked ) {
+									echo esc_html( __( 'Your license has been revoked.', 'wpmastertoolkit' ) );
+								} else {
+									echo esc_html( __( 'Your license is succesfully activated for this site.', 'wpmastertoolkit' ) );
+								}
 							}
 							?>
 						</div>
 						<div class="wpmastertoolkit-license-main-section__left__header__state">
 							<div><?php echo wp_kses_post( __( 'State:', 'wpmastertoolkit' ) ); ?></div>
-							<div class="wpmastertoolkit-license-main-section__left__header__state__icon <?php echo esc_attr( $action ); ?>">●</div>
+							<div class="wpmastertoolkit-license-main-section__left__header__state__icon <?php echo esc_attr( $status ); ?>">● <?php echo esc_html( $wpmtk_surecart_license_status ); ?></div>
 						</div>
 					</div>
 
 					<?php if ( 'activate' === $action && ! $this->is_constant_license() ) : ?> 
 						<input class="widefat" type="password" autocomplete="off" name="license_key" id="license_key" value="<?php echo esc_attr( $this->license_key ); ?>" autofocus placeholder="<?php esc_attr_e('Enter the license...', 'wpmastertoolkit'); ?>">
 					<?php else : ?>
-						<div class="wpmastertoolkit-license-main-section__left__header__license">
+						<div class="wpmastertoolkit-license-main-section__left__header__license <?php echo esc_attr( $wpmtk_surecart_license_status ); ?>">
 							<?php 
 							$obfuscated_license = strlen( $this->license_key ) - 8 > 0 ? substr( $this->license_key, 0, 8 ) . str_repeat( '*', strlen( $this->license_key ) - 8 ) : $this->license_key;
 							echo esc_html( $obfuscated_license ); 

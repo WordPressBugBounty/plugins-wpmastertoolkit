@@ -201,6 +201,8 @@ class WPMastertoolkit {
 
 		$wpmastertoolkit_surecart = new WPMastertoolkit_Surecart();
 		$this->loader->add_action( 'init', $wpmastertoolkit_surecart, 'init_surecart', 1 );
+		$this->loader->add_action( 'admin_init', $wpmastertoolkit_surecart, 'check_license' );
+		$this->loader->add_action( 'admin_notices', $wpmastertoolkit_surecart, 'show_license_notice' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $wpmastertoolkit_surecart, 'enqueue_scripts_styles' );
 		$this->loader->add_action( 'wpmastertoolkit_licensing/after_submit_section', $wpmastertoolkit_surecart, 'show_warning_if_new_version' );
 		$this->loader->add_action( 'wpmastertoolkit_licensing/license_activated', $wpmastertoolkit_surecart, 'after_activated' );

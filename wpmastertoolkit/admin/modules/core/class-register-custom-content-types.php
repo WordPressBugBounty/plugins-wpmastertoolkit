@@ -69,7 +69,8 @@ class WPMastertoolkit_Register_Custom_Content_Types {
 		$this->option_taxonomy_delete_status    = $this->option_id . '_option_taxonomy_delete_status';
 		$this->option_taxonomy_delete_terms     = $this->option_id . '_option_taxonomy_delete_terms';
         
-        add_action( 'init', array( $this, 'register_content_type_cpt' ) );
+        add_action( 'init', array( $this, 'register_content_type_cpt' ), 0 );
+        add_action( 'init', array( $this, 'custom_content_types_loader' ), PHP_INT_MAX );
         add_filter( 'manage_' . $this->post_type . '_posts_columns', array( $this, 'add_custom_columns' ) );
         add_action( 'manage_' . $this->post_type . '_posts_custom_column', array( $this, 'custom_column_content' ), 10, 2 );
         add_action( 'add_meta_boxes', array( $this, 'meta_boxes' ) );
@@ -97,9 +98,6 @@ class WPMastertoolkit_Register_Custom_Content_Types {
 		add_filter( 'handle_bulk_actions-edit-' . $this->post_type, array( $this, 'handle_bulk_actions' ), 10, 3 );
 		add_action( 'admin_menu', array( $this, 'add_submenu' ) );
 		add_action( 'submenu_file', array( $this, 'hide_sub_menu' ) );
-
-        $this->custom_content_types_loader();
-
     }
 
     /**
@@ -142,15 +140,34 @@ class WPMastertoolkit_Register_Custom_Content_Types {
 
         $args = array(
             'labels'              => $labels,
-            'public'              => true,
+            'public'              => false,
+            'show_ui'             => true,
+            'show_in_menu'        => true,
             'has_archive'         => false,
             'publicly_queryable'  => false,
             'exclude_from_search' => true,
-            'query_var'           => true,
+            'query_var'           => false,
             'rewrite'             => false,
             'supports'            => array( 'none' ),
             'menu_icon'           => 'dashicons-welcome-widgets-menus',
             'menu_position'       => 101,
+            'capability_type'     => 'page',
+            'capabilities'        => array(
+                'create_posts'       => 'manage_options',
+                'edit_post'          => 'manage_options',
+                'read_post'          => 'manage_options',
+                'delete_post'        => 'manage_options',
+                'edit_posts'         => 'manage_options',
+                'edit_others_posts'  => 'manage_options',
+                'edit_private_posts' => 'manage_options',
+                'edit_published_posts'=> 'manage_options',
+                'delete_posts'       => 'manage_options',
+                'delete_others_posts' => 'manage_options',
+                'delete_private_posts'=> 'manage_options',
+                'delete_published_posts'=> 'manage_options',
+                'publish_posts'      => 'manage_options',
+                'read_private_posts' => 'manage_options',
+            ),
         );
 
         register_post_type( $this->post_type, $args );
@@ -721,6 +738,7 @@ class WPMastertoolkit_Register_Custom_Content_Types {
         if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
 		$nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ?? '' ) );
 		if ( ! wp_verify_nonce( $nonce, 'update-post_' . $post_id ) ) return;
+        if ( ! current_user_can( 'manage_options' ) ) return;
         if ( ! current_user_can( 'edit_post', $post_id ) ) return;
 		//phpcs:ignore WordPress.Security.NonceVerification.Missing
         if ( ! isset( $_POST['post_type'] ) || $_POST['post_type'] !== $this->post_type ) return;
@@ -729,35 +747,36 @@ class WPMastertoolkit_Register_Custom_Content_Types {
         if ( isset( $_POST['content_type'] ) ) {
 			//phpcs:ignore WordPress.Security.NonceVerification.Missing
             $content_type = sanitize_text_field( wp_unslash( $_POST['content_type'] ) );
+            if ( ! in_array( $content_type, array( 'cpt', 'taxonomy' ), true ) ) return;
             update_post_meta( $post_id, 'content_type', $content_type );
         }
         //phpcs:ignore WordPress.Security.NonceVerification.Missing
         if ( isset( $_POST[ $this->content_type_settings ] ) && is_array( $_POST[ $this->content_type_settings ] ) ) {
             $content_type = get_post_meta( $post_id, 'content_type', true );
+            //phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+            $submitted_settings = wp_unslash( $_POST[ $this->content_type_settings ] );
             switch( $content_type ) {
                 case 'cpt':
-                    //phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-                    $settings = $this->clean_settings_cpt( wp_unslash( $_POST[ $this->content_type_settings ] ) );
+                    $submitted_settings['supports']   = isset( $submitted_settings['supports'] ) && is_array( $submitted_settings['supports'] ) ? $submitted_settings['supports'] : array();
+                    $submitted_settings['taxonomies'] = isset( $submitted_settings['taxonomies'] ) && is_array( $submitted_settings['taxonomies'] ) ? $submitted_settings['taxonomies'] : array();
+                    $settings = $this->clean_settings_cpt( $submitted_settings );
                     break;
-                    case 'taxonomy':
-                    //phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-                    $settings = $this->clean_settings_taxonomy( wp_unslash( $_POST[ $this->content_type_settings ] ) );
+                case 'taxonomy':
+                    $submitted_settings['object_type'] = isset( $submitted_settings['object_type'] ) && is_array( $submitted_settings['object_type'] ) ? $submitted_settings['object_type'] : array();
+                    $settings = $this->clean_settings_taxonomy( $submitted_settings );
                     break;
                 case 'option_page':
-                    // TODO: Add option page settings
-                    break;
+                    return;
                 default:
-                    return false;
-                    break;
+                    return;
             }
             update_post_meta( $post_id, $this->content_type_settings, $settings );
+        }
 
-			//phpcs:ignore WordPress.Security.NonceVerification.Missing
-            if( isset( $_POST['post_status'] ) && $_POST['post_status'] === 'publish' ) {
-                $this->generate_registration_file( $post_id );
-            } else {
-                $this->delete_registration_file( $post_id );
-            }
+        if ( 'publish' === get_post_status( $post_id ) ) {
+            $this->generate_registration_file( $post_id );
+        } else {
+            $this->delete_registration_file( $post_id );
         }
     }
     
@@ -779,13 +798,13 @@ class WPMastertoolkit_Register_Custom_Content_Types {
     /**
      * generate_cpt_registration_code
      *
-     * @param  mixed $post_id
-     * @return void
+      * @param int $post_id Definition post ID.
+      * @return string|false
      */
     public function generate_cpt_registration_code( $post_id ) {
         $content_type = get_post_meta( $post_id, 'content_type', true );
 
-        if( $content_type !== 'cpt' ) return;
+          if( $content_type !== 'cpt' ) return false;
 
         $settings = $this->get_settings_cpt( $post_id );
 
@@ -797,13 +816,13 @@ class WPMastertoolkit_Register_Custom_Content_Types {
     /**
      * generate_taxonomy_registration_code
      *
-     * @param  mixed $post_id
-     * @return void
+      * @param int $post_id Definition post ID.
+      * @return string|false
      */
     public function generate_taxonomy_registration_code( $post_id ) {
         $content_type = get_post_meta( $post_id, 'content_type', true );
 
-        if( $content_type !== 'taxonomy' ) return;
+          if( $content_type !== 'taxonomy' ) return false;
 
         $settings = $this->get_settings_taxonomy( $post_id );
 
@@ -815,26 +834,60 @@ class WPMastertoolkit_Register_Custom_Content_Types {
     /**
      * generate_registration_file
      *
-     * @return void
+     * @param int $post_id Definition post ID.
+     * @return bool
      */
-    public function generate_registration_file($post_id){
-        $title = get_the_title( $post_id );
+    public function generate_registration_file( $post_id ) {
+        $content = $this->generate_registration_content( $post_id );
+        if ( false === $content ) {
+            return false;
+        }
 
-        $content  = '<?php'. PHP_EOL;
-        $content .='if ( ! defined( \'ABSPATH\' ) ) exit; // Exit if accessed directly'. PHP_EOL . PHP_EOL;
-        $content .= '/**' . PHP_EOL;
-        $content .= !empty($title) ? ' * Title: ' . $title . PHP_EOL : '';
-        $content .= ' * ID: ' . $post_id . PHP_EOL;
-        $content .= ' * Generated at: ' . wp_date('Y-m-d H:i:s') . PHP_EOL;
-        $content .= ' *' . PHP_EOL;
-        $content .= ' * @author This code is generated by WPMasterToolkit' . PHP_EOL;
-        $content .= ' * @link ' . get_edit_post_link( $post_id, '' ) . PHP_EOL;
-        $content .= ' * @since ' . WPMASTERTOOLKIT_VERSION . PHP_EOL;
-        $content .= ' *' . PHP_EOL;
-        $content .= '**/' . PHP_EOL;
-        
+        $file_path = $this->get_code_file_path( $post_id );
+        if ( false === $file_path ) {
+            return false;
+        }
+
         $content_type = get_post_meta( $post_id, 'content_type', true );
-        
+        foreach ( array( 'cpt', 'taxonomy' ) as $type ) {
+            $stale_paths = array(
+                $this->get_legacy_code_folder_path() . '/register-' . $type . '-' . absint( $post_id ) . '.php',
+            );
+            if ( $type !== $content_type ) {
+                $stale_paths[] = $this->get_code_file_path( $post_id, $type );
+            }
+
+            foreach ( $stale_paths as $stale_path ) {
+                if ( is_string( $stale_path ) && ( is_file( $stale_path ) || is_link( $stale_path ) ) ) {
+                    wp_delete_file( $stale_path );
+                }
+            }
+        }
+
+        return $this->write_registration_file( $file_path, $content );
+    }
+
+    /**
+     * Generate deterministic registration file contents.
+     *
+     * @param int $post_id Definition post ID.
+     * @return string|false
+     */
+    private function generate_registration_content( $post_id ) {
+        $post_id = absint( $post_id );
+        if ( empty( $post_id ) ) {
+            return false;
+        }
+
+        $content  = '<?php' . PHP_EOL;
+        $content .= 'if ( ! defined( \'ABSPATH\' ) ) exit; // Exit if accessed directly' . PHP_EOL . PHP_EOL;
+        $content .= '/**' . PHP_EOL;
+        $content .= ' * Generated by WPMasterToolkit.' . PHP_EOL;
+        $content .= ' * Definition ID: ' . $post_id . PHP_EOL;
+        $content .= ' */' . PHP_EOL;
+
+        $content_type = get_post_meta( $post_id, 'content_type', true );
+
         switch( $content_type ) {
             case 'cpt':
                 $content .= $this->generate_cpt_registration_code( $post_id );
@@ -843,17 +896,52 @@ class WPMastertoolkit_Register_Custom_Content_Types {
                 $content .= $this->generate_taxonomy_registration_code( $post_id );
                 break;
             case 'option_page':
-                break;
+                return false;
             default:
                 return false;
-                break;
         }
 
-        $file_path = $this->get_code_file_path( $post_id );
-        
-        file_put_contents( $file_path, $content );
+        return $content;
+    }
+
+    /**
+     * Atomically write a registration file.
+     *
+     * @param string $file_path Destination path.
+     * @param string $content File contents.
+     * @return bool
+     */
+    private function write_registration_file( $file_path, $content ) {
+        $directory = dirname( $file_path );
+        if ( is_link( $directory ) || ( ! is_dir( $directory ) && ! wp_mkdir_p( $directory ) ) ) {
+            return false;
+        }
+
+        if ( is_link( $file_path ) ) {
+            return false;
+        }
+
+        $temporary_file = tempnam( $directory, 'wpmtk-' );
+        if ( false === $temporary_file ) {
+            return false;
+        }
+
+        $bytes_written = file_put_contents( $temporary_file, $content, LOCK_EX );
+        if ( strlen( $content ) !== $bytes_written ) {
+            wp_delete_file( $temporary_file );
+            return false;
+        }
+
 		//phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_chmod
-        chmod( $file_path, 0644 );
+        chmod( $temporary_file, 0644 );
+		//phpcs:ignore WordPress.WP.AlternativeFunctions.rename_rename
+        if ( ! rename( $temporary_file, $file_path ) ) {
+            wp_delete_file( $temporary_file );
+            return false;
+        }
+
+        clearstatcache( true, $file_path );
+        return true;
     }
     
     /**
@@ -877,22 +965,129 @@ class WPMastertoolkit_Register_Custom_Content_Types {
     /**
      * clean_settings_cpt
      *
-     * @param  mixed $settings
-     * @return void
+    * @param mixed $settings Settings to normalize.
+    * @return array
      */
     public function clean_settings_cpt( $settings ){
-		//phpcs:ignore WordPress.Security.NonceVerification.Missing
-        if( isset($_POST[$this->content_type_settings]) && is_array( $_POST[$this->content_type_settings] ) ) {
-            $settings['supports'] = isset($settings['supports']) ? $settings['supports'] : array();
-        }
-        $settings         = !empty( $settings ) && is_array( $settings ) ? $settings : array();
         $default_settings = $this->default_settings_cpt();
-        $settings         = array_merge( $default_settings, $settings );
-        $settings         = array_map( function( $item ) {
-            return is_array( $item ) ? array_map( 'sanitize_text_field', $item ) : sanitize_text_field( $item );
-        }, $settings );
+        $settings         = $this->clean_scalar_settings( $settings, $default_settings );
 
-        $settings['post_type'] = sanitize_title( $settings['post_type'] );
+        $settings['supports'] = $this->clean_allowed_list(
+            $settings['supports'],
+            array_keys( $this->get_allowed_cpt_supports() )
+        );
+        $settings['taxonomies'] = $this->clean_allowed_list(
+            $settings['taxonomies'],
+            get_taxonomies( array( 'public' => true ), 'names' )
+        );
+
+        $settings['post_type']   = substr( sanitize_key( $settings['post_type'] ), 0, 20 );
+        $settings['text_domain'] = sanitize_key( $settings['text_domain'] );
+        $settings['slug']        = sanitize_title( $settings['slug'] );
+        $settings['archive_slug']= sanitize_title( $settings['archive_slug'] );
+        $settings['query_var_name'] = sanitize_key( $settings['query_var_name'] );
+        $settings['singular_capability_name'] = sanitize_key( $settings['singular_capability_name'] );
+        $settings['plural_capability_name']   = sanitize_key( $settings['plural_capability_name'] );
+        $settings['menu_position'] = absint( $settings['menu_position'] );
+        $settings['permalink_rewrite'] = $this->clean_enum( $settings['permalink_rewrite'] ?? '', array( 'post_type_key', 'custom_permalink', 'no_permalink' ), $default_settings['permalink_rewrite'] );
+        $settings['query_var'] = $this->clean_enum( $settings['query_var'] ?? '', array( 'post_type_key', 'custom_query_var', 'none' ), $default_settings['query_var'] );
+        $settings = $this->clean_boolean_settings(
+            $settings,
+            array( 'public', 'hierarchical', 'manage_optional_labels', 'show_ui', 'show_in_menu', 'use_dashicon', 'show_in_admin_bar', 'show_in_nav_menus', 'exclude_from_search', 'with_front', 'feeds', 'pages', 'has_archive', 'publicly_queryable', 'rename_capabilities', 'can_export', 'delete_with_user', 'show_in_rest' )
+        );
+
+        return $settings;
+    }
+
+    /**
+     * Get supported post type features.
+     *
+     * @return array
+     */
+    public function get_allowed_cpt_supports() {
+        return array(
+            'title'           => __( 'Title', 'wpmastertoolkit' ),
+            'editor'          => __( 'Editor', 'wpmastertoolkit' ),
+            'author'          => __( 'Author', 'wpmastertoolkit' ),
+            'thumbnail'       => __( 'Thumbnail', 'wpmastertoolkit' ),
+            'excerpt'         => __( 'Excerpt', 'wpmastertoolkit' ),
+            'comments'        => __( 'Comments', 'wpmastertoolkit' ),
+            'revisions'       => __( 'Revisions', 'wpmastertoolkit' ),
+            'page-attributes' => __( 'Page Attributes', 'wpmastertoolkit' ),
+            'custom-fields'   => __( 'Custom Fields', 'wpmastertoolkit' ),
+        );
+    }
+
+    /**
+     * Normalize settings whose default values define their expected shape.
+     *
+     * @param mixed $settings Submitted or stored settings.
+     * @param array $defaults Default settings.
+     * @return array
+     */
+    private function clean_scalar_settings( $settings, $defaults ) {
+        $settings = is_array( $settings ) ? array_intersect_key( $settings, $defaults ) : array();
+        $cleaned  = $defaults;
+
+        foreach ( $defaults as $key => $default_value ) {
+            if ( ! array_key_exists( $key, $settings ) ) {
+                continue;
+            }
+
+            if ( is_array( $default_value ) ) {
+                $cleaned[ $key ] = is_array( $settings[ $key ] ) ? $settings[ $key ] : $default_value;
+                continue;
+            }
+
+            if ( is_scalar( $settings[ $key ] ) ) {
+                $cleaned[ $key ] = sanitize_text_field( (string) $settings[ $key ] );
+            }
+        }
+
+        return $cleaned;
+    }
+
+    /**
+     * Keep scalar list values present in an allow-list.
+     *
+     * @param mixed $values Submitted values.
+     * @param array $allowed_values Allowed values.
+     * @return array
+     */
+    private function clean_allowed_list( $values, $allowed_values ) {
+        if ( ! is_array( $values ) ) {
+            return array();
+        }
+
+        $values = array_filter( $values, 'is_scalar' );
+        $values = array_map( 'sanitize_key', array_map( 'strval', $values ) );
+
+        return array_values( array_unique( array_intersect( $values, $allowed_values ) ) );
+    }
+
+    /**
+     * Normalize an enum value.
+     *
+     * @param mixed  $value Submitted value.
+     * @param array  $allowed_values Allowed values.
+     * @param string $default_value Default value.
+     * @return string
+     */
+    private function clean_enum( $value, $allowed_values, $default_value ) {
+        return in_array( $value, $allowed_values, true ) ? $value : $default_value;
+    }
+
+    /**
+     * Normalize checkbox and toggle values.
+     *
+     * @param array $settings Settings to normalize.
+     * @param array $boolean_keys Boolean setting keys.
+     * @return array
+     */
+    private function clean_boolean_settings( $settings, $boolean_keys ) {
+        foreach ( $boolean_keys as $key ) {
+            $settings[ $key ] = isset( $settings[ $key ] ) && '1' === (string) $settings[ $key ] ? '1' : '0';
+        }
 
         return $settings;
     }
@@ -900,7 +1095,7 @@ class WPMastertoolkit_Register_Custom_Content_Types {
     /**
      * get_all_wp_capabilities
      *
-     * @return void
+    * @return array
      */
     public function get_all_wp_capabilities() {
         if( $this->all_wp_capabilities ) {
@@ -923,7 +1118,7 @@ class WPMastertoolkit_Register_Custom_Content_Types {
     /**
      * default_settings_cpt
      *
-     * @return void
+    * @return array
      */
     public function default_settings_cpt(){
         return array ( 
@@ -1021,18 +1216,35 @@ class WPMastertoolkit_Register_Custom_Content_Types {
     /**
      * clean_settings_taxonomy
      *
-     * @param  mixed $settings
-     * @return void
+    * @param mixed $settings Settings to normalize.
+    * @return array
      */
     public function clean_settings_taxonomy( $settings ){
-        $settings         = !empty( $settings ) && is_array( $settings ) ? $settings : array();
         $default_settings = $this->default_settings_taxonomy();
-        $settings         = array_merge( $default_settings, $settings );
-        $settings         = array_map( function( $item ) {
-            return is_array( $item ) ? array_map( 'sanitize_text_field', $item ) : sanitize_text_field( $item );
-        }, $settings );
+        $settings         = $this->clean_scalar_settings( $settings, $default_settings );
 
-        $settings['taxonomy'] = sanitize_title( $settings['taxonomy'] );
+        $settings['object_type'] = $this->clean_allowed_list(
+            $settings['object_type'],
+            get_post_types( array( 'public' => true ), 'names' )
+        );
+
+        $settings['taxonomy']      = substr( sanitize_key( $settings['taxonomy'] ), 0, 32 );
+        $settings['text_domain']   = sanitize_key( $settings['text_domain'] );
+        $settings['slug']          = sanitize_title( $settings['slug'] );
+        $settings['query_var_name']= sanitize_key( $settings['query_var_name'] );
+        $settings['default_term_slug'] = sanitize_title( $settings['default_term_slug'] );
+        $settings['permalink_rewrite'] = $this->clean_enum( $settings['permalink_rewrite'] ?? '', array( 'taxonomy_key', 'custom_permalink', 'no_permalink' ), $default_settings['permalink_rewrite'] );
+        $settings['query_var'] = $this->clean_enum( $settings['query_var'] ?? '', array( 'taxonomy_key', 'custom_query_var', 'none' ), $default_settings['query_var'] );
+        $settings = $this->clean_boolean_settings(
+            $settings,
+            array( 'public', 'hierarchical', 'sort', 'manage_optional_labels', 'show_ui', 'show_in_menu', 'show_in_nav_menus', 'show_tagcloud', 'show_in_quick_edit', 'show_admin_column', 'default_term_enabled', 'with_front', 'rewrite_hierarchical', 'pages', 'publicly_queryable', 'show_in_rest' )
+        );
+
+        $available_capabilities = array_keys( $this->get_all_wp_capabilities() );
+        foreach ( array( 'manage_terms', 'edit_terms', 'delete_terms', 'assign_terms' ) as $capability_key ) {
+            $settings[ $capability_key ] = $this->clean_enum( $settings[ $capability_key ] ?? '', $available_capabilities, $default_settings[ $capability_key ] );
+        }
+
 
         return $settings;
     }
@@ -1040,7 +1252,7 @@ class WPMastertoolkit_Register_Custom_Content_Types {
     /**
      * default_settings_taxonomy
      *
-     * @return void
+    * @return array
      */
     public function default_settings_taxonomy(){
         return array(
@@ -1113,13 +1325,19 @@ class WPMastertoolkit_Register_Custom_Content_Types {
     /**
      * get_code_folder_path
      *
-     * @return void
+    * @return string
      */
     public function get_code_folder_path(){
-        if( !empty($this->code_folder_path) ){
-            return $this->code_folder_path;
-        }
-        return wpmastertoolkit_folders() . '/register-custom-content-types';
+        return $this->get_legacy_code_folder_path() . '/v2/site-' . get_current_blog_id();
+    }
+
+    /**
+     * Get the legacy generated code directory.
+     *
+     * @return string
+     */
+    private function get_legacy_code_folder_path() {
+        return (string) wpmastertoolkit_folders() . '/register-custom-content-types';
     }
     
     /**
@@ -1127,13 +1345,16 @@ class WPMastertoolkit_Register_Custom_Content_Types {
      *
      * @param  mixed $post_id
      * @param  mixed $type
-     * @return void
+    * @return string|false
      */
     public function get_code_file_path( $post_id, $type = null ) {
         $code_folder_path = $this->get_code_folder_path();
         $type             = !empty($type) ? $type : get_post_meta( $post_id, 'content_type', true );
-        $type             = sanitize_title( $type );
-        return $code_folder_path . '/register-' . esc_attr( $type ) . '-' . $post_id . '.php';
+        if ( ! in_array( $type, array( 'cpt', 'taxonomy' ), true ) ) {
+            return false;
+        }
+
+        return $code_folder_path . '/register-' . $type . '-' . absint( $post_id ) . '.php';
     }
     
     /**
@@ -1143,9 +1364,18 @@ class WPMastertoolkit_Register_Custom_Content_Types {
      * @return void
      */
     public function delete_registration_file( $post_id ){
-        $file_path = $this->get_code_file_path( $post_id );
-        if( file_exists($file_path) ){
-            return wp_delete_file( $file_path );
+        $post_id = absint( $post_id );
+        foreach ( array( 'cpt', 'taxonomy' ) as $type ) {
+            $file_paths = array(
+                $this->get_code_file_path( $post_id, $type ),
+                $this->get_legacy_code_folder_path() . '/register-' . $type . '-' . $post_id . '.php',
+            );
+
+            foreach ( $file_paths as $file_path ) {
+                if ( is_string( $file_path ) && ( is_file( $file_path ) || is_link( $file_path ) ) ) {
+                    wp_delete_file( $file_path );
+                }
+            }
         }
     }
     
@@ -1170,12 +1400,77 @@ class WPMastertoolkit_Register_Custom_Content_Types {
         if( defined('WPMASTERTOOLKIT_REGISTER_CUSTOM_CONTENT_TYPES_SAFE_MODE') && WPMASTERTOOLKIT_REGISTER_CUSTOM_CONTENT_TYPES_SAFE_MODE === true ) return;
 
         $code_folder_path = $this->get_code_folder_path();
-        $files = glob( $code_folder_path . '/register-*.php' );
-        foreach( $files as $file ){
-            $file_name = str_replace('.php', '', basename( $file ));
-            if( preg_match('/^register-([a-zA-Z0-9-_]+)-([0-9]+)$/', $file_name, $matches) ){
-                require_once $file;
+        if ( is_link( $code_folder_path ) || ( ! is_dir( $code_folder_path ) && ! wp_mkdir_p( $code_folder_path ) ) ) {
+            return;
+        }
+
+        $post_ids = get_posts(
+            array(
+                'post_type'              => $this->post_type,
+                'post_status'            => 'publish',
+                'posts_per_page'         => -1,
+                'fields'                 => 'ids',
+                'orderby'                => 'ID',
+                'order'                  => 'ASC',
+                'no_found_rows'          => true,
+                'update_post_meta_cache' => false,
+                'update_post_term_cache' => false,
+                'suppress_filters'       => false,
+            )
+        );
+
+        $expected_files = array();
+        foreach ( $post_ids as $post_id ) {
+            $content_type = get_post_meta( $post_id, 'content_type', true );
+            if ( ! in_array( $content_type, array( 'cpt', 'taxonomy' ), true ) ) {
+                continue;
             }
+
+            $content   = $this->generate_registration_content( $post_id );
+            $file_path = $this->get_code_file_path( $post_id, $content_type );
+            if ( false === $content || false === $file_path ) {
+                continue;
+            }
+
+            $expected_files[ $file_path ] = $content;
+        }
+
+        $this->delete_untrusted_registration_files( array_keys( $expected_files ) );
+
+        foreach ( $expected_files as $file_path => $content ) {
+            $expected_hash = hash( 'sha256', $content );
+            $current_hash  = is_file( $file_path ) && ! is_link( $file_path ) ? hash_file( 'sha256', $file_path ) : false;
+
+            if ( ! is_string( $current_hash ) || ! hash_equals( $expected_hash, $current_hash ) ) {
+                if ( ! $this->write_registration_file( $file_path, $content ) ) {
+                    continue;
+                }
+                $current_hash = hash_file( 'sha256', $file_path );
+            }
+
+            if ( is_string( $current_hash ) && ! is_link( $file_path ) && hash_equals( $expected_hash, $current_hash ) ) {
+                require_once $file_path;
+            }
+        }
+    }
+
+    /**
+     * Delete files that patched code will never trust or load.
+     *
+     * @param array $expected_files Expected v2 paths.
+     * @return void
+     */
+    private function delete_untrusted_registration_files( $expected_files ) {
+        $v2_files = glob( $this->get_code_folder_path() . '/register-*.php' );
+        foreach ( is_array( $v2_files ) ? $v2_files : array() as $file_path ) {
+            if ( ! in_array( $file_path, $expected_files, true ) ) {
+                wp_delete_file( $file_path );
+            }
+        }
+
+        $legacy_files = glob( $this->get_legacy_code_folder_path() . '/register-*.php' );
+        foreach ( is_array( $legacy_files ) ? $legacy_files : array() as $file_path ) {
+            wp_delete_file( $file_path );
         }
     }
 
