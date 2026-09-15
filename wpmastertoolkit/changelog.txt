@@ -1,5 +1,13 @@
 == Changelog ==
 
+= 2.23.2 =
+Update: Module: Meta Debugger: Improve metadata display and error handling, and remove the json-view dependency.
+Fix: Module: Code Snippets: Improve generated PHP docblock formatting for multiline values and comment delimiters, use raw titles and saved descriptions, and leave descriptions empty when no excerpt is set.
+Fix: Module: Social Login: Correct the user meta key used to retrieve stored avatar hashes.
+Fix: Module: Limit Login Attempts: Prevent errors when failed-login hooks are triggered without an authentication error argument.
+Security: Module: Meta Debugger: Strengthen object-level permission checks and WooCommerce object validation, and safely handle serialized metadata without instantiating objects.
+Security: Module: SVG Upload: Validate file contents to block SVG uploads through unsupported upload methods, regardless of the filename extension.
+
 = 2.23.1 =
 Security: Improve SVG file type validation in the SVG Upload module
 Security: Improve label alignment in custom content type templates

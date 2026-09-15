@@ -245,10 +245,10 @@ class WPMastertoolkit_Limit_Login_Attempts {
 	 * 
 	 * @since   1.5.0
 	 *
-	 * @param string   $username Username or email address.
-	 * @param WP_Error $error    Authentication error.
+	 * @param string        $username Username or email address.
+	 * @param WP_Error|null $error    Authentication error.
 	 */
-	public function log_failed_login( $username, $error ) {
+	public function log_failed_login( $username, $error = null ) {
 		global $wpdb, $wpmastertoolkit_limit_login;
 
 		if ( is_wp_error( $error ) && $error->get_error_message( 'password_expired' ) ) {

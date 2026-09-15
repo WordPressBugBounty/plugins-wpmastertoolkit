@@ -4,7 +4,7 @@ Tags: all in one plugin, admin, security, disable features, easy to use
 Requires at least: 6.0.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.23.1
+Stable tag: 2.23.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
 
@@ -261,6 +261,14 @@ Yes, the Media Encoder module automatically converts uploaded images to WebP for
 
 == Changelog ==
 
+= 2.23.2 =
+Update: Module: Meta Debugger: Improve metadata display and error handling, and remove the json-view dependency.
+Fix: Module: Code Snippets: Improve generated PHP docblock formatting for multiline values and comment delimiters, use raw titles and saved descriptions, and leave descriptions empty when no excerpt is set.
+Fix: Module: Social Login: Correct the user meta key used to retrieve stored avatar hashes.
+Fix: Module: Limit Login Attempts: Prevent errors when failed-login hooks are triggered without an authentication error argument.
+Security: Module: Meta Debugger: Strengthen object-level permission checks and WooCommerce object validation, and safely handle serialized metadata without instantiating objects.
+Security: Module: SVG Upload: Validate file contents to block SVG uploads through unsupported upload methods, regardless of the filename extension.
+
 = 2.23.1 =
 Security: Improve SVG file type validation in the SVG Upload module
 Security: Improve label alignment in custom content type templates
@@ -278,14 +286,6 @@ Fix: General: Improve plugin log file path resolution and error handling.
 Security: Module: Prevent User Enumeration: Improve REST API parameter handling and route matching.
 Security: Module: Media Library Post Folders: Add a capability check before saving settings.
 Security: Module: SVG Upload: Strengthen SVG sanitization to close a sanitization bypass.
-
-= 2.22.0 =
-Update: Use AI Client API if the WordPress version support it
-Update: Module: Meta Debugger: Add support for WooCommerce product variations and display metadata for each variation directly from the variation editor.
-Fix: Module: SMTP Mailer: Save only the selected provider, move the sender config in each provider, add reset all providers button
-Fix: Pro Module: Two-Factor Authentication: Implement modal enhancements and lock submit button until initialization
-Fix: Pro Module: Cron Manager: Add filters to row actions links.
-Update: Pro Module: Cron Manager: Add a status section.
 
 
 [See changelog for all versions.](https://wpmastertoolkit.com/en/changelog/)

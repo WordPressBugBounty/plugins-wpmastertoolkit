@@ -102,6 +102,7 @@ class WPMastertoolkit_Svg_Upload {
         if ( ! is_array( $upload_bits ) ) return $upload_bits;
 
         $filename = isset( $upload_bits['name'] ) ? $upload_bits['name'] : '';
+        $bits     = isset( $upload_bits['bits'] ) ? $upload_bits['bits'] : '';
         $filetype = wp_check_filetype(
             $filename,
             array(
@@ -111,11 +112,32 @@ class WPMastertoolkit_Svg_Upload {
         );
         $extension = strtolower( (string) $filetype['ext'] );
 
-        if ( in_array( $extension, array( 'svg', 'svgz' ), true ) ) {
+        if ( in_array( $extension, array( 'svg', 'svgz' ), true ) || $this->is_svg_content( $bits ) ) {
             return __( 'Sorry, SVG files cannot be uploaded through this method.', 'wpmastertoolkit' );
         }
 
         return $upload_bits;
+    }
+
+    /**
+     * Determine whether a string contains an SVG XML document.
+     *
+     * @param mixed $content File contents.
+     * @return bool
+     */
+    private function is_svg_content( $content ) {
+        if ( ! is_string( $content ) || '' === trim( $content ) ) return false;
+
+        $previous_errors = libxml_use_internal_errors( true );
+        $document        = new DOMDocument();
+        $loaded          = $document->loadXML( $content, LIBXML_NONET );
+
+        libxml_clear_errors();
+        libxml_use_internal_errors( $previous_errors );
+
+        if ( ! $loaded || ! $document->documentElement ) return false;
+
+        return 'svg' === strtolower( $document->documentElement->localName );
     }
     
     /**

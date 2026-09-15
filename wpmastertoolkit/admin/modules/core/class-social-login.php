@@ -574,7 +574,7 @@ class WPMastertoolkit_Social_Login {
 
 		$avatar_meta_keys      = $this->get_avatar_meta_keys( $blog_id, $wpdb );
 		$avatar_attachment_id  = $this->get_user_avatar_attachment_id( $user_id, $avatar_meta_keys );
-		$avatar_attachment_md5 = get_user_meta( $user_id, 'nsl_user_avatar_md5', true );
+		$avatar_attachment_md5 = get_user_meta( $user_id, 'wpmtk_user_avatar_md5', true );
 
 		if ( $avatar_attachment_id && $avatar_attachment_md5 ) {
 
