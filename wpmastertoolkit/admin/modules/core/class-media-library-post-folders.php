@@ -313,13 +313,14 @@ class WPMastertoolkit_Media_Library_Post_Folders {
 	 */
 	public function enqueue_scripts_styles( $suffix ) {
 
-		$suffixes = array( 'upload.php', 'edit.php' );
+		$suffixes = array( 'upload.php', 'edit.php', 'post.php', 'post-new.php' );
 		
-		if ( in_array( $suffix, $suffixes ) ) {
+		if ( in_array( $suffix, $suffixes, true ) ) {
 
 			$this->settings         = $this->get_settings();
 			$this->default_settings = $this->get_default_settings();
 			$post_types             = $this->settings['post_types'] ?? $this->default_settings['post_types'] ?? array();
+			$is_media_modal         = in_array( $suffix, array( 'post.php', 'post-new.php' ), true );
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$current_post_type      = 'edit.php' === $suffix ? ( isset( $_GET['post_type'] ) ? sanitize_key( $_GET['post_type'] ) : 'post' ) : 'attachment';
 
@@ -337,7 +338,7 @@ class WPMastertoolkit_Media_Library_Post_Folders {
 				'ajaxUrl'         => admin_url( 'admin-ajax.php' ),
 				'nonce'           => wp_create_nonce( $this->nonce_action ),
 				'isPro'           => wpmastertoolkit_is_pro(),
-				'currentPage'     => 'edit.php' === $suffix ? 'edit' : 'upload',
+				'currentPage'     => $is_media_modal ? 'media-modal' : ( 'edit.php' === $suffix ? 'edit' : 'upload' ),
 				'currentPostType' => $current_post_type,
 				'mediaMode'       => get_user_option( 'media_library_mode', get_current_user_id() ),
 				'i18n'            => array(

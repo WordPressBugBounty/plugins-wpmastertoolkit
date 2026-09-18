@@ -2,9 +2,9 @@
 Contributors: ludwigyou
 Tags: all in one plugin, admin, security, disable features, easy to use
 Requires at least: 6.0.0
-Tested up to: 7.1
+Tested up to: 7.1.1
 Requires PHP: 7.4
-Stable tag: 2.23.2
+Stable tag: 2.24.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
 
@@ -163,7 +163,7 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 
 [youtube https://youtu.be/ynV1BhAegtg]
 
-⭐️ UPGRADE TO PRO VERSION: [WPMasterToolKit Pro](https://wpmastertoolkit.com) ⭐️
+⭐️ UPGRADE TO PRO VERSION: [WPMasterToolKit Pro](https://wpmastertoolkit.com/?utm_source=readme-wordpress-org&utm_medium=readme&utm_campaign=upgrade-pro&utm_content=description-upgrade-pro) ⭐️
 
 == Other plugin by Webdeclic ==
 [Webdeclic](https://webdeclic.com) is a French web agency based in Paris. We are specialized in the creation of websites and e-commerce sites. We are also the creator of the following plugins:
@@ -261,6 +261,12 @@ Yes, the Media Encoder module automatically converts uploaded images to WebP for
 
 == Changelog ==
 
+= 2.24.0 =
+Add: Pro Module: White Label: Customize the plugin name and control which users can access the plugin.
+Add: Pro Module: Disable Blog: Disable blog features and related WordPress functionality while preserving selected content and access rules.
+Update: Module: Media Library Post Folders: Add folder sidebar support to media modals opened from individual post editing screens.
+Update: Pro Module: Two-Factor Authentication: Improve form submission handling, modal state management, validation, and error feedback.
+
 = 2.23.2 =
 Update: Module: Meta Debugger: Improve metadata display and error handling, and remove the json-view dependency.
 Fix: Module: Code Snippets: Improve generated PHP docblock formatting for multiline values and comment delimiters, use raw titles and saved descriptions, and leave descriptions empty when no excerpt is set.
@@ -274,18 +280,5 @@ Security: Improve SVG file type validation in the SVG Upload module
 Security: Improve label alignment in custom content type templates
 Update: Pro Module: Password Expiration: Enhance login attempt logging and password expiration handling
 
-= 2.23.0 =
-Add: Module: Social Login: Add social authentication with Google, configurable login button layouts, and WooCommerce login and registration compatibility. Add Apple, Facebook, GitHub, LinkedIn, Microsoft, X/Twitter, and WordPress.com providers on Pro version.
-Update: Module: Media Encoder: Redesign image format and quality settings with an improved preview and clearer bulk optimization controls.
-Update: Module: Meta Debugger: Add WooCommerce Subscriptions HPOS support and metadata display for shipping items and order refunds.
-Update: Module: Redirect Manager: Improve redirect data validation, normalization, and error handling.
-Update: Module: Mail Catcher: Improve search and sorting with validated query parameters.
-Update: Module: Register Custom Content Types: Improve generated post type and taxonomy registration code and refine supported-feature controls.
-Update: License page: Improve license status checks and related interface states.
-Fix: General: Improve plugin log file path resolution and error handling.
-Security: Module: Prevent User Enumeration: Improve REST API parameter handling and route matching.
-Security: Module: Media Library Post Folders: Add a capability check before saving settings.
-Security: Module: SVG Upload: Strengthen SVG sanitization to close a sanitization bypass.
 
-
-[See changelog for all versions.](https://wpmastertoolkit.com/en/changelog/)
+[See changelog for all versions.](https://wpmastertoolkit.com/en/changelog/?utm_source=readme-wordpress-org&utm_medium=readme&utm_campaign=changelog&utm_content=full-changelog)

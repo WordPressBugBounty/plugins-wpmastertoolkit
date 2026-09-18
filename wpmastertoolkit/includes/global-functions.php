@@ -2,6 +2,32 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
+ * Add tracking parameters to a WPMasterToolKit website URL.
+ *
+ * @since 2.23.3
+ *
+ * @param string $url             Destination URL.
+ * @param string $campaign        UTM campaign name.
+ * @param string $context         Link context used as UTM content.
+ * @param array  $additional_args Additional query arguments.
+ * @return string
+ */
+function wpmastertoolkit_get_tracked_url( $url, $campaign, $context, $additional_args = array() ) {
+    return add_query_arg(
+        array_merge(
+        $additional_args,
+        array(
+            'utm_source'   => 'wpmastertoolkit-plugin',
+            'utm_medium'   => 'plugin',
+            'utm_campaign' => sanitize_key( $campaign ),
+            'utm_content'  => sanitize_key( $context ),
+        )
+        ),
+        $url
+    );
+}
+
+/**
  * Get the options
  * 
  * @since   1.0.0

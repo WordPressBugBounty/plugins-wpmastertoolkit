@@ -939,7 +939,7 @@ class WPMastertoolkit_Mail_Catcher {
 							?>
 						</div>
 						<div class="wpmtk-banner__content__cta__btn wp-mastertoolkit__button">
-							<a href="https://wpmastertoolkit.com/" target="_blank" class="wpmtk-button">
+							<a href="<?php echo esc_url( wpmastertoolkit_get_tracked_url( 'https://wpmastertoolkit.com/', 'upgrade-pro', 'mail-catcher-limit' ) ); ?>" target="_blank" class="wpmtk-button">
 								<?php esc_html_e( 'Try for 15 days', 'wpmastertoolkit' ); ?>
 								<span class="wpmtk-button__pro"><?php esc_html_e( 'Pro', 'wpmastertoolkit' ); ?></span>
 							</a>

@@ -228,7 +228,7 @@ class Settings {
 		<div class="wrap wpmastertoolkit-license-wrap">
 			<div class="wpmastertoolkit-header-section">
 				<h1><?php echo esc_html( $this->menu_args['page_title'] ); ?></h1>
-				<a class="wpmastertoolkit-header-section__help" target="_blank" href="<?php echo esc_url( __( 'https://wpmastertoolkit.com/en/how-to-upgrade-to-wpmastertoolkit-pro-complete-guide/', 'wpmastertoolkit' ) ); ?>">
+				<a class="wpmastertoolkit-header-section__help" target="_blank" href="<?php echo esc_url( wpmastertoolkit_get_tracked_url( __( 'https://wpmastertoolkit.com/en/how-to-upgrade-to-wpmastertoolkit-pro-complete-guide/', 'wpmastertoolkit' ), 'documentation', 'licensing-upgrade-guide' ) ); ?>">
 					<?php //phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage ?>
 					<img src="<?php echo esc_url(WPMASTERTOOLKIT_PLUGIN_URL . 'admin/svg/interrogation.svg'); ?>" alt="">
 					<span>
@@ -305,7 +305,7 @@ class Settings {
 							<?php endif; ?>
 						<?php endif; ?>
 						
-						<a href="<?php echo esc_url( __( 'https://wpmastertoolkit.com/en/customer-dashboard/', 'wpmastertoolkit') ); ?>" target="_blank" class="wpmastertoolkit-my-account-button">
+						<a href="<?php echo esc_url( wpmastertoolkit_get_tracked_url( __( 'https://wpmastertoolkit.com/en/customer-dashboard/', 'wpmastertoolkit'), 'customer-account', 'licensing-my-account' ) ); ?>" target="_blank" class="wpmastertoolkit-my-account-button">
 							<?php echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/grey-my-account.svg'), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
 							<?php esc_html_e( 'My account', 'wpmastertoolkit' ); ?>
 						</a>
@@ -376,7 +376,7 @@ class Settings {
 							 <div class="wpmastertoolkit-marketing-section__left__block__content__description">
 								 <?php esc_html_e( 'Choose from our 4 plans, the plan that best suits your needs and enjoy advanced features to optimize your WordPress site. ✨', 'wpmastertoolkit' ); ?>
 							 </div>
-							 <a href="<?php echo esc_url( __( 'https://wpmastertoolkit.com/en/products-2/wpmastertoolkit-pro/', 'wpmastertoolkit' ) ); ?>" target="_blank" class="wpmastertoolkit-marketing-section__left__block__content__button">
+							 <a href="<?php echo esc_url( wpmastertoolkit_get_tracked_url( __( 'https://wpmastertoolkit.com/en/products-2/wpmastertoolkit-pro/', 'wpmastertoolkit' ), 'upgrade-pro', 'licensing-buy-button' ) ); ?>" target="_blank" class="wpmastertoolkit-marketing-section__left__block__content__button">
 								 <?php echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/white-add-to-cart.svg'), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
 								 <?php esc_html_e( 'Buy', 'wpmastertoolkit' ); ?>
 							 </a>
@@ -391,7 +391,7 @@ class Settings {
 							 <div class="wpmastertoolkit-marketing-section__left__block__content__description">
 								 <?php esc_html_e( 'Find all the essential information to configure and use WPMasterToolKit modules effectively. 🎓', 'wpmastertoolkit' ); ?>
 							 </div>
-							 <a href="<?php echo esc_url( __( 'https://wpmastertoolkit.com/en/modules/', 'wpmastertoolkit' ) ); ?>" target="_blank" class="wpmastertoolkit-marketing-section__left__block__content__button">
+							 <a href="<?php echo esc_url( wpmastertoolkit_get_tracked_url( __( 'https://wpmastertoolkit.com/en/modules/', 'wpmastertoolkit' ), 'documentation', 'licensing-modules' ) ); ?>" target="_blank" class="wpmastertoolkit-marketing-section__left__block__content__button">
 								 <?php echo wp_kses( file_get_contents(WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/white-documentation.svg'), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
 								 <?php esc_html_e( 'Discover WPMTK', 'wpmastertoolkit' ); ?>
 							 </a>

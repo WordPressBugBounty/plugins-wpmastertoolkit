@@ -157,7 +157,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 										<?php if( ! wpmastertoolkit_is_pro() ): ?>
                                         <span class="try">
-											<a href="<?php echo esc_url( $try_url ); ?>" target="_blank"><?php esc_html_e('Try 15 days for free', 'wpmastertoolkit'); ?></a>
+											<a href="<?php echo esc_url( wpmastertoolkit_get_tracked_url( $try_url, 'upgrade-pro', 'settings-module-card' ) ); ?>" target="_blank"><?php esc_html_e('Try 15 days for free', 'wpmastertoolkit'); ?></a>
 										</span>
 										<?php endif; ?>
 
@@ -166,7 +166,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
                                         <span class="comming-soon"><?php esc_html_e('coming soon', 'wpmastertoolkit'); ?></span>
                                     <?php endif; ?>
 									<?php if ( !$wpmtk_is_addon_module && !$wpmtk_coming_soon ): ?>
-										<a class="documentation" href="https://wpmastertoolkit.com/?module_documentation=<?php echo esc_attr( $wpmtk_option_key ); ?>" target="_blank"><?php echo wp_kses( file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/images/documentation-icon.svg' ), wpmastertoolkit_allowed_tags_for_svg_files() ); ?><?php esc_html_e('DOC', 'wpmastertoolkit'); ?></a>
+										<a class="documentation" href="<?php echo esc_url( wpmastertoolkit_get_tracked_url( 'https://wpmastertoolkit.com/', 'documentation', $wpmtk_option_key, array( 'module_documentation' => $wpmtk_option_key ) ) ); ?>" target="_blank"><?php echo wp_kses( file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/images/documentation-icon.svg' ), wpmastertoolkit_allowed_tags_for_svg_files() ); ?><?php esc_html_e('DOC', 'wpmastertoolkit'); ?></a>
 									<?php endif; ?>
 									<?php if ( is_array($wpmtk_module_settings_submenu_pages) && isset($wpmtk_module_settings_submenu_pages[$wpmtk_option_key]) ): ?>
 										<a class="module-settings" href="<?php echo esc_url( admin_url( 'admin.php?page=' . $wpmtk_module_settings_submenu_pages[$wpmtk_option_key] ) ); ?>"><?php echo wp_kses( file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/gear.svg' ), wpmastertoolkit_allowed_tags_for_svg_files() ); ?><?php esc_html_e('SETTINGS', 'wpmastertoolkit'); ?></a>
@@ -346,7 +346,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 						</div>
 						<div class="wp-mastertoolkit__promot-modal__content__footer__try-now">
 							<button id="JS-wpmastertoolkit_modal_promot_try_now_hidden" type="submit" name="wpmastertoolkit_promot_modal" value="try-now"><?php esc_html_e( 'Start 15 free trial', 'wpmastertoolkit' ); ?></button>
-							<a id="JS-wpmastertoolkit_modal_promot_try_now" href="<?php echo esc_url( $try_url ); ?>" target="_blank"><?php esc_html_e( 'Start 15 free trial', 'wpmastertoolkit' ); ?></a>
+							<a id="JS-wpmastertoolkit_modal_promot_try_now" href="<?php echo esc_url( wpmastertoolkit_get_tracked_url( $try_url, 'upgrade-pro', 'promotion-modal' ) ); ?>" target="_blank"><?php esc_html_e( 'Start 15 free trial', 'wpmastertoolkit' ); ?></a>
 						</div>
 					</div>
 				</div>
@@ -372,7 +372,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 				<?php echo do_shortcode( '[wpmtk_changelog limit="3"]' ); ?>
 
 				<div class="wp-mastertoolkit__changelog-modal__content__body__link">
-					<a href="<?php echo esc_url( __( 'https://wpmastertoolkit.com/en/changelog/', 'wpmastertoolkit' ) ); ?>" target="_blank"><?php esc_html_e( 'View all changelogs', 'wpmastertoolkit' ); ?></a>
+					<a href="<?php echo esc_url( wpmastertoolkit_get_tracked_url( __( 'https://wpmastertoolkit.com/en/changelog/', 'wpmastertoolkit' ), 'changelog', 'changelog-modal' ) ); ?>" target="_blank"><?php esc_html_e( 'View all changelogs', 'wpmastertoolkit' ); ?></a>
 				</div>
 			</div>
         </div>

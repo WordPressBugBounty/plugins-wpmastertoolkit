@@ -792,6 +792,18 @@ class WPMastertoolkit_Modules_Data {
 				'pro'           => false,
 				'path'          => 'core/class-social-login.php',
 			),
+			'WPMastertoolkit_White_Label' => array(
+				'original_name' => 'White Label',
+				'group'         => 'administration',
+				'pro'           => true,
+				'path'          => 'pro/class-white-label.php',
+			),
+			'WPMastertoolkit_Disable_Blog' => array(
+				'original_name' => 'Disable Blog',
+				'group'         => 'administration',
+				'pro'           => true,
+				'path'          => 'pro/class-disable-blog.php',
+			),
 		);
 		
 		/**
@@ -1327,6 +1339,14 @@ class WPMastertoolkit_Modules_Data {
 			'WPMastertoolkit_Social_Login' => array(
 				'name' => esc_html_x( "Social Login", "Module name", 'wpmastertoolkit' ),
 				'desc' => esc_html_x( 'Let users log in or register with Google, Facebook, and more.', "Module description", 'wpmastertoolkit' ),
+			),
+			'WPMastertoolkit_White_Label' => array(
+				'name' => esc_html_x( "White Label", "Module name", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( "Customize the plugin name and control which managers can access WPMasterToolKit.", "Module description", 'wpmastertoolkit' ),
+			),
+			'WPMastertoolkit_Disable_Blog' => array(
+				'name' => esc_html_x( "Disable Blog", "Module name", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( "Disable the blog functionality on your WordPress site.", "Module description", 'wpmastertoolkit' ),
 			),
 		);
 

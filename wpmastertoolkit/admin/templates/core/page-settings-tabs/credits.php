@@ -47,7 +47,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
                     ?>
                 </li>
                 <li>
-                    <a href="<?php echo esc_url( 'https://wpmastertoolkit.com/en/products-2/wpmastertoolkit-pro/' ); ?>" target="_blank">
+                    <a href="<?php echo esc_url( wpmastertoolkit_get_tracked_url( 'https://wpmastertoolkit.com/en/products-2/wpmastertoolkit-pro/', 'upgrade-pro', 'credits-buy-pro' ) ); ?>" target="_blank">
                         <?php esc_html_e( 'Buy PRO version.', 'wpmastertoolkit' ); ?>
                     </a>
                 </li>

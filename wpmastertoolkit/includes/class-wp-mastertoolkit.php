@@ -207,6 +207,36 @@ class WPMastertoolkit {
 		$this->loader->add_action( 'wpmastertoolkit_licensing/after_submit_section', $wpmastertoolkit_surecart, 'show_warning_if_new_version' );
 		$this->loader->add_action( 'wpmastertoolkit_licensing/license_activated', $wpmastertoolkit_surecart, 'after_activated' );
 		$this->loader->add_action( 'wpmastertoolkit_licensing/license_deactivated', $wpmastertoolkit_surecart, 'after_deactivated' );
+		$this->loader->add_filter( 'plugin_action_links_' . WPMASTERTOOLKIT_BASENAME, $this, 'add_upgrade_plugin_action_link' );
+		$this->loader->add_filter( 'network_admin_plugin_action_links_' . WPMASTERTOOLKIT_BASENAME, $this, 'add_upgrade_plugin_action_link' );
+	}
+
+	/**
+	 * Add an upgrade link to the plugin actions list.
+	 *
+	 * @since 2.23.3
+	 *
+	 * @param array $links Plugin action links.
+	 * @return array
+	 */
+	public function add_upgrade_plugin_action_link( $links ) {
+		if ( wpmastertoolkit_is_pro() ) {
+			return $links;
+		}
+
+		$upgrade_url = wpmastertoolkit_get_tracked_url(
+			__( 'https://wpmastertoolkit.com/en/products-2/wpmastertoolkit-pro/', 'wpmastertoolkit' ),
+			'upgrade-pro',
+			'plugins-list-upgrade'
+		);
+
+		$links['wpmastertoolkit-upgrade-pro'] = sprintf(
+			'<a href="%1$s" target="_blank" rel="noopener noreferrer">%2$s</a>',
+			esc_url( $upgrade_url ),
+			esc_html__( 'Upgrade Pro', 'wpmastertoolkit' )
+		);
+
+		return $links;
 	}
 
 	/**

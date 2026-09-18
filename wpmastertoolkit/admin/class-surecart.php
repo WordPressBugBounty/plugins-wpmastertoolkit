@@ -264,7 +264,11 @@ class WPMastertoolkit_Surecart {
 
 		} else {
 
-			$license_website_url = 'https://wpmastertoolkit.com/en/products-4/wpmastertoolkit-pro/';
+			$license_website_url = wpmastertoolkit_get_tracked_url(
+				'https://wpmastertoolkit.com/en/products-4/wpmastertoolkit-pro/',
+				'upgrade-pro',
+				'plugin-update-notice'
+			);
 
 			printf(
 				wp_kses(

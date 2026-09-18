@@ -1,5 +1,11 @@
 == Changelog ==
 
+= 2.24.0 =
+Add: Pro Module: White Label: Customize the plugin name and control which users can access the plugin.
+Add: Pro Module: Disable Blog: Disable blog features and related WordPress functionality while preserving selected content and access rules.
+Update: Module: Media Library Post Folders: Add folder sidebar support to media modals opened from individual post editing screens.
+Update: Pro Module: Two-Factor Authentication: Improve form submission handling, modal state management, validation, and error feedback.
+
 = 2.23.2 =
 Update: Module: Meta Debugger: Improve metadata display and error handling, and remove the json-view dependency.
 Fix: Module: Code Snippets: Improve generated PHP docblock formatting for multiline values and comment delimiters, use raw titles and saved descriptions, and leave descriptions empty when no excerpt is set.
