@@ -1,5 +1,12 @@
 == Changelog ==
 
+= 2.25.0 =
+Add: Pro Module: Local Google Font: Host Google Fonts locally to improve performance and comply with privacy regulations.
+Add: Pro Module: Media Trash: Manage and restore deleted media items from the WordPress media trash.
+Add: Pro Module: No Theme Switch: Lock the active theme by preventing users from switching themes.
+Add: Pro Module: Pixel Tag Manager: Manage Google Analytics, Google Tag Manager, Google Ads, Meta, TikTok, LinkedIn, Microsoft UET and Pinterest tracking tags, with consent controls and event configuration.
+Update: Module: Child Theme Generator: Respect theme-switching capabilities, safely handle generation actions and provide clearer generation status feedback when activation is unavailable.
+
 = 2.24.0 =
 Add: Pro Module: White Label: Customize the plugin name and control which users can access the plugin.
 Add: Pro Module: Disable Blog: Disable blog features and related WordPress functionality while preserving selected content and access rules.

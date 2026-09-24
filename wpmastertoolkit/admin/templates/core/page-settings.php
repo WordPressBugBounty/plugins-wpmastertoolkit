@@ -157,7 +157,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 										<?php if( ! wpmastertoolkit_is_pro() ): ?>
                                         <span class="try">
-											<a href="<?php echo esc_url( wpmastertoolkit_get_tracked_url( $try_url, 'upgrade-pro', 'settings-module-card' ) ); ?>" target="_blank"><?php esc_html_e('Try 15 days for free', 'wpmastertoolkit'); ?></a>
+											<a href="<?php echo esc_url( wpmastertoolkit_get_tracked_url( $try_url, 'upgrade-pro', 'settings-module-card' ) ); ?>" target="_blank"><?php esc_html_e('Upgrade Pro', 'wpmastertoolkit'); ?></a>
 										</span>
 										<?php endif; ?>
 
@@ -345,8 +345,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 							<button type="submit" name="wpmastertoolkit_promot_modal" value="have-license"><?php esc_html_e( 'I already have a license', 'wpmastertoolkit' ); ?></button>
 						</div>
 						<div class="wp-mastertoolkit__promot-modal__content__footer__try-now">
-							<button id="JS-wpmastertoolkit_modal_promot_try_now_hidden" type="submit" name="wpmastertoolkit_promot_modal" value="try-now"><?php esc_html_e( 'Start 15 free trial', 'wpmastertoolkit' ); ?></button>
-							<a id="JS-wpmastertoolkit_modal_promot_try_now" href="<?php echo esc_url( wpmastertoolkit_get_tracked_url( $try_url, 'upgrade-pro', 'promotion-modal' ) ); ?>" target="_blank"><?php esc_html_e( 'Start 15 free trial', 'wpmastertoolkit' ); ?></a>
+							<button id="JS-wpmastertoolkit_modal_promot_try_now_hidden" type="submit" name="wpmastertoolkit_promot_modal" value="try-now"><?php esc_html_e( 'Upgrade Pro', 'wpmastertoolkit' ); ?></button>
+							<a id="JS-wpmastertoolkit_modal_promot_try_now" href="<?php echo esc_url( wpmastertoolkit_get_tracked_url( $try_url, 'upgrade-pro', 'promotion-modal' ) ); ?>" target="_blank"><?php esc_html_e( 'Upgrade Pro', 'wpmastertoolkit' ); ?></a>
 						</div>
 					</div>
 				</div>

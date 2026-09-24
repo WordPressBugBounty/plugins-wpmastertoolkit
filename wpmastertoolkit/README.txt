@@ -2,156 +2,207 @@
 Contributors: ludwigyou
 Tags: all in one plugin, admin, security, disable features, easy to use
 Requires at least: 6.0.0
-Tested up to: 7.1.1
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.24.0
+Stable tag: 2.25.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
 
-Duplicate post, post order, email via SMTP, code snippets, disable gutenberg, child theme generator, svg support, disable XMLRPC, and more...
+Modular WordPress toolkit for security, performance, SMTP, WebP images, code snippets, redirects, administration and more.
 
 == Description ==
-WP Master ToolKit is your all-in-one solution for optimizing WordPress. It streamlines your dashboard, enhances workflows, and simplifies content and settings management. Customize your WordPress installation effortlessly with all the tools you need at your fingertips.
+WPMasterToolKit is an all-in-one WordPress plugin that replaces dozens of separate plugins with 100+ modular tools for security, performance, administration, media and development.
 
-**Test by Alexis Fichou (WP-Origami) :**
+Activate only what you need and manage everything from one place. Built for site owners, freelancers, developers and agencies.
+
+98 free modules, plus 37 advanced modules and additional features with WPMasterToolKit Pro.
+
+**Review by Alexis Fichou (WP-Origami):**
 [youtube https://www.youtube.com/watch?v=Lw0EeaBy4W4]
 
-**Test by Enzo (Easy WordPress) :**
+**Review by Enzo (Easy WordPress):**
 [youtube https://www.youtube.com/watch?v=I1GdHeeJp6E&t]
 
-= 97 FREE modules =
+= 98 free modules =
 
-* Adminer: A full-featured database management tool.
-* Advanced Debug Mode
-* Allow Menu Custom Links to Open in New Tab.
-* Apple Touch Icon: Manage app icon (Apple Touch Icon) individually.
-* Auto Regenerate Salt Keys.
-* Auto-Publish Posts with Missed Schedule: Automatically publish scheduled posts marked as &quot;missed schedule&quot; across all post types.
-* Ban Emails: Ban the chosen emails.
-* Blacklisted Usernames: Prevent creation of user accounts with predefined blacklisted or common usernames.
-* Block User Registration from Disposable Email: Block user registration from temporary disposable email addresses.
-* Block 404 PHP File Scanning
-* Browser Theme Color: Select a tag color to allow seamless theme customization in all major browsers.
-* Child theme generator: Generate a child theme directly from WordPress dashboard.
-* Clean Profiles: Tidy up user profiles by removing sections you do not utilise.
-* Clean Up Admin Bar.
-* Code Snippets: Add custom code snippets without editing the theme's **functions.php**.
-* Content Duplication: One-click duplication of pages, posts and custom post types with taxonomy terms and post meta.
-* Content Order: Custom ordering for hierarchical content types and those supporting page attributes.
-* Custom Admin CSS: Add custom CSS on all admin pages for all user roles.
-* Custom Body Class: Add custom &lt;body&gt; class(es) on the singular view of some or all public post types.
-* Custom COOKIEHASH
-* Custom Frontend CSS: Add custom CSS on all frontend pages for all user roles.
-* Disable All Updates: Completely disable core, theme and plugin updates and auto-updates. Will also disable update checks, notices and emails.
-* Disable Block-Based Widgets Settings Screen: Restore classic widgets settings screen for non-block themes.
-* Disable Dashboard Widgets: Clean up and speed up dashboard by disabling widgets that won't load assets.
-* Disable Feeds: Disable RSS, Atom, and RDF feeds and remove feed URL references from `<head>` section.
-* Disable Gutenberg: Selectively disable Gutenberg block editor for specific or all post types.
-* Disable REST API: Disable REST API for non-authenticated users and remove URL traces.
-* Disable Really Simple Discovery (RSD) &lt;link&gt; tag: Remove RSD tag used by XML-RPC clients.
-* Disable WP Sitemap: Disable the default WordPress sitemap.
-* Disable Windows Live Writer (WLW) manifest &lt;link&gt; tag: Remove discontinued WLW manifest tag.
-* Disable WordPress shortlink &lt;link&gt; tag: Remove WordPress shortlink tag from `<head>`.
-* Disable XML-RPC.
-* Disable cart fragments scripts: Disable WooCommerce cart fragments scripts for public visitors.
-* Disable dashicons CSS and JS files.
-* Disable emoji support: Remove emoji scripts as modern browsers natively support emojis.
-* Disable jQuery Migrate: Removes the jQuery Migrate script from the frontend of your site.
-* Disable wp_mail: Disable WordPress email function to save resources on sites that don't send emails.
-* Disallow Bad Requests: Block malicious requests containing eval(, base64_, and excessively long strings.
-* Disallow Dir Listing: Disable the listing of the directories.
-* Disallow Malicious File Access in upload: Prevent malicious file access in upload directory.
-* Disallow Plugin Upload: Disable plugin zip file uploads.
-* Disallow Theme Upload: Disable theme zip file uploads.
-* Disallow WP File Edit: Prevent core file modifications through admin panel.
-* Disallow register user: Prevent new user account creation via WordPress registration form.
-* Duplicate Menu: Easily duplicate your WordPress Menus
-* Enhance List Tables: Add or remove columns in listing pages for post types, taxonomies, media, comments and users.
-* Export Posts &amp; Pages: Export posts and pages to CSV format.
-* Export Users: Export user data to CSV format.
-* External Permalinks: Set permalinks to external URLs with rel=&quot;noopener noreferrer nofollow&quot; attributes.
-* File Manager: Browse and manage files efficiently.
-* Force SSL: Force HTTPS for encrypted secure traffic.
-* Force Strong Password: Enforce strong passwords for all users to prevent weak credentials.
-* Heartbeat Control: Modify or disable WordPress heartbeat API to reduce server CPU load.
-* Hide Admin Bar: Hide admin bar on frontend for specific roles or all users.
-* Hide Admin Notices: Gather all notifications in a popup accessible from top-right bell icon.
-* Hide Login Errors: Hide default WordPress login error messages.
-* Hide PHP Versions: Remove X-Powered-By header that reveals PHP version to potential attackers.
-* Hide WordPress Version
-* Image Upload Control: Resize large images, convert BMPs and PNGs to JPGs, delete originals.
-* Insert &lt;head&gt;, &lt;body&gt; and &lt;footer&gt; Code: Insert tracking pixels, analytics, meta tags, and custom scripts.
-* Last Login Column: Display last login date and time in users list table.
-* Limit Login Attempts: Prevent brute force attacks by limiting failed login attempts per IP.
-* Local avatars: Replaces GRAVATAR management with media management.
-* Lock Admin Email: Prevent admin email address modifications.
-* Lock Site URL: Prevent site URL modifications.
-* Log In/Out Menu: Add dynamic login/logout menu items.
-* Mail Catcher: Capture all outgoing emails.
-* Maintenance Mode: Display customizable maintenance page. Administrators can still access the site.
-* Manage ads.txt and app-ads.txt: Edit and validate ads.txt files.
-* Manage robots.txt: Edit and validate robots.txt file.
-* Media Cleaner: Sanitize file names and auto-generate metadata (title, caption, alt text, description).
-* Media Encoder: Automatically convert images to WebP (AVIF in PRO).
-* Meta Debugger: Display all metadata for a post, user, term, or comment.
-* Move Login URL: Change the default login URL to a custom URL of your choice.
-* Multiple User Roles: Assign multiple roles per user, useful for e-commerce or LMS plugins.
-* Nav Menu Visibility: Apply visibility controls to menu items.
-* Obfuscate Author Slugs: Hide user slugs in author URLs and REST API endpoints.
-* Obfuscate Email Addresses: Protect emails from spam bots via [wpm_obfuscate] shortcode.
-* Open All External Links in New Tab: Open external links in new tab with security attributes.
-* Password Protection: Password-protect entire site from public and search engines. Admins retain access.
-* Plugin &amp; Theme Rollback: Revert plugins/themes to previous WordPress.org versions.
-* Post Per Page: Set posts per page for each post type.
-* Prevent User Enumeration: Block user enumeration via ?author= and REST API.
-* Protect Website Headers: Add security headers to protect against phishing and data theft.
-* Quick Add Post: Quick button to add new posts faster.
-* Redirect 404 to Homepage: Redirect non-existent pages to homepage.
+**Administration**
+* Clean Up Admin Bar
+* Disable Dashboard Widgets: Clean up the dashboard by disabling widgets that load unnecessary assets.
+* Enhance List Tables: Add or remove columns in post type, taxonomy, media, comment and user list tables.
+* Heartbeat Control: Modify or disable the WordPress Heartbeat API to reduce server CPU usage.
+* Hide Admin Bar
+* Hide Admin Notices
+* Log In/Out Menu
+* Maintenance Mode
+* Password Protection
+* Plugin &amp; Theme Rollback
 * Redirect After Login
 * Redirect After Logout
-* Redirect Manager
-* Revisions Control: Limit number of revisions saved per post type.
-* Register Custom Content Types: Register custom post types and taxonomies.
-* Search Replace in database
-* SMTP Mailer: Configure sender name/email and external SMTP for reliable email delivery.
-* SVG Upload: Enable SVG file uploads.
-* Temporary Login
+* Social Login
 * Wider Admin Menu
 
-= 31 Pro Modules =
-* 410 Manager
-* Add Essentials Shortcodes
-* Admin Menu Organizer
-* Auto clean actionscheduler_actions: Clean actionscheduler_actions database table from actions that have been completed | failed | cancelled.
-* Better Password Hash
-* Password Expiration
-* CRON Manager: Manage cron events on your website.
-* Change Database Prefix: Quickly change your WordPress database prefix to save time and enhance security.
-* Custom Login Design: Personalize your login page to match your brand.
-* Disable Comments: Manage the visibility of comments on your public posts by selectively disabling them for specific post types or across all posts.
-* Disable Plugin For Debug: Temporarily disable specific plugins to troubleshoot and debug issues on your WordPress site without uninstalling.
-* Disable Woocommerce Logout Confirmation
-* Disallow Access WP Sensible Files: Delete the wp-config-sample.php, block access to readme.html, license.txt
-* Disallow Countries IP
-* Download medias as zip
-* Force Send All Email To: Force all emails sent from your website to be sent to a specific email address.
-* Generate Alt Text With AI: Automatically generate alternative text using AI.
-* Head Sorter: Automatically sorts and optimizes the &lt;head&gt; of your website, making sure important tags load first for better speed and SEO.
-* Hook And Filter Debugger: Displaying the sequence of action and filter hooks by their origin on a single page.
-* Link Shortener: Shorten your links with a custom prefix. You can also track the number of clicks on each link.
-* Manage Admin Emails Notifications: Check the types of emails you no longer want to receive as an administrator.
-* Media Replacement
-* My Account Menu Customizer: for WooCommerce My Account page.
-* No Plugin Activation / Deactivation / Deletion: Prevents plugin activation, deactivation, and deletion for enhanced security.
-* Paste Image In Media: With this feature you can paste directly your picture in WordPress media.
-* Plugin Download: Download plugins from the plugins page in the WordPress admin panel.
-* Post Type Switcher
-* Two Factor Authentication
-* Updates Logs: Track and record the most recent login activity of site users, then showcase the date and time in the users list table
-* User Switching
-* Vulnerabilities Scan
+**Users**
+* Clean Profiles
+* Export Users
+* Last Login Column
+* Local Avatars
+* Multiple User Roles
+* Temporary Login
 
-= PRO Additionnals Features =
+**Debug**
+* Adminer
+* Advanced Debug Mode
+* Disable All Updates
+* Disable wp_mail
+* File Manager
+* Mail Catcher
+* Meta Debugger
+
+**Contents &amp; Media**
+* Allow Menu Custom Links to Open in New Tab
+* Auto-Publish Posts with Missed Schedule
+* Browser Theme Color
+* Content Duplication
+* Content Order
+* Duplicate Menu
+* Export Posts &amp; Pages
+* External Permalinks
+* Image Upload Control
+* Media Cleaner
+* Media Encoder: Convert images to WebP locally. AVIF conversion is available in Pro.
+* Media Library &amp; Post Folders
+* Nav Menu Visibility
+* Obfuscate Email Addresses
+* Open All External Links in New Tab
+* Post Per Page
+* Quick Add Post
+* Redirect 404 to Homepage
+* Register Custom Content Types
+* Revisions Control
+* Search Replace in Database
+* SVG Upload
+
+**Custom Code**
+* Code Snippets
+* Custom Admin CSS
+* Custom Body Class
+* Custom Frontend CSS
+* Insert &lt;head&gt;, &lt;body&gt; and &lt;footer&gt; Code
+* Manage ads.txt and app-ads.txt
+* Manage robots.txt
+
+**Disable Features**
+* Disable Block-Based Widgets Settings Screen
+* Disable Dashicons CSS and JS Files
+* Disable Emoji Support
+* Disable Feeds
+* Disable Gutenberg
+* Disable jQuery Migrate
+* Disable Really Simple Discovery (RSD) &lt;link&gt; Tag
+* Disable REST API
+* Disable Windows Live Writer (WLW) Manifest &lt;link&gt; Tag
+* Disable WordPress Shortlink &lt;link&gt; Tag
+
+**SEO &amp; Speed Optimizations**
+* Disable WP Sitemap
+* Redirect Manager
+
+**WooCommerce**
+* Disable Cart Fragments Scripts
+
+**Security**
+* Auto Regenerate Salt Keys
+* Ban Emails
+* Blacklisted Usernames
+* Block 404 PHP File Scanning
+* Block User Registration from Disposable Email
+* Custom COOKIEHASH
+* Disable XML-RPC
+* Disallow Bad Requests
+* Disallow Directory Listing
+* Disallow Malicious File Access in Uploads
+* Disallow Plugin Upload
+* Disallow Theme Upload
+* Disallow User Registration
+* Disallow WP File Edit
+* Force SSL
+* Force Strong Password
+* Hide Login Errors
+* Hide PHP Version
+* Hide WordPress Version
+* Limit Login Attempts
+* Lock Admin Email
+* Lock Site URL
+* Move Login URL
+* Obfuscate Author Slugs
+* Prevent User Enumeration
+* Protect Website Headers
+
+**Other**
+* Apple Touch Icon
+* Child Theme Generator
+* SMTP Mailer
+
+= 37 Pro modules =
+
+**Administration**
+* Admin Menu Organizer
+* Custom Login Design
+* Disable Blog
+* Local Google Fonts
+* White Label
+
+**Users**
+* User Switching
+
+**Debug**
+* CRON Manager
+* Disable Plugin for Debug
+* Force Send All Email To
+* Hook and Filter Debugger
+* Update Logs
+
+**Contents &amp; Media**
+* Add Essential Shortcodes
+* Download Media as ZIP
+* Generate Alt Text with AI
+* Media Replacement
+* Media Trash
+* No Theme Switch
+* Paste Image in Media
+* Post Type Switcher
+
+**Custom Code**
+* Pixel Tag Manager
+
+**Disable Features**
+* Disable Comments
+
+**SEO &amp; Speed Optimizations**
+* 410 Manager
+* Head Sorter
+* Link Shortener
+
+**WooCommerce**
+* Auto Clean Action Scheduler Actions
+* Disable WooCommerce Logout Confirmation
+* My Account Menu Customizer
+
+**Security**
+* Better Password Hash
+* Disallow Access to Sensitive WordPress Files
+* Disallow Countries by IP
+* Manage Admin Email Notifications
+* No Plugin Activation, Deactivation or Deletion
+* Password Expiration
+* Two-Factor Authentication
+* Vulnerability Scan
+
+**Other**
+* Change Database Prefix
+* Plugin Download
+
+= Additional Pro features =
 * Move Login URL: Block access to /wp-admin with server side 403 error for non-logged users.
 * Maintenance Mode: Real countdown timer with automatic site activation. Bypass link generation for access during maintenance. Exclude specific URLs from maintenance mode.
 * Media Encoder: Convert images to AVIF format (PHP ≥ 8.1). Free version limited to WebP only.
@@ -163,91 +214,118 @@ WP Master ToolKit is your all-in-one solution for optimizing WordPress. It strea
 
 [youtube https://youtu.be/ynV1BhAegtg]
 
-⭐️ UPGRADE TO PRO VERSION: [WPMasterToolKit Pro](https://wpmastertoolkit.com/?utm_source=readme-wordpress-org&utm_medium=readme&utm_campaign=upgrade-pro&utm_content=description-upgrade-pro) ⭐️
+[Upgrade to WPMasterToolKit Pro](https://wpmastertoolkit.com/?utm_source=readme-wordpress-org&utm_medium=readme&utm_campaign=upgrade-pro&utm_content=description-upgrade-pro)
 
-== Other plugin by Webdeclic ==
-[Webdeclic](https://webdeclic.com) is a French web agency based in Paris. We are specialized in the creation of websites and e-commerce sites. We are also the creator of the following plugins:
-* [QuickWebP](https://wordpress.org/plugins/quickwebp/)
-* [Cookie Dough](https://wordpress.org/plugins/cookie-dough-compliance-and-consent-for-gdpr/)
-* [Univeral Honey Pot](https://wordpress.org/plugins/universal-honey-pot/)
-* [Clean My WP](https://wordpress.org/plugins/clean-my-wp/)
-* [Mentions Legales Par Webdeclic](https://wordpress.org/plugins/mentions-legales-par-webdeclic/)
-* [Lexilink](https://wordpress.org/plugins/lexilink/)
-* [Show all plugins on WordPress.org](https://wordpress.org/plugins/search/webdeclic/)
+= External services =
+
+WPMasterToolKit does not connect every website to external services by default. Some optional modules can communicate with third-party providers only when you enable and configure them, for example SMTP and email providers, social login services, geolocation databases, vulnerability data sources, analytics platforms or AI services. The data transmitted depends on the selected module and provider. Review the module settings and the provider's terms and privacy policy before enabling an integration.
+
+= Support =
+
+For help with the free plugin, bug reports and feature requests, use the [WPMasterToolKit support forum on WordPress.org](https://wordpress.org/support/plugin/wpmastertoolkit/). Please include your WordPress version, PHP version, enabled WPMasterToolKit modules and clear steps to reproduce the issue. Security vulnerabilities must be reported privately using the process described in the FAQ below.
+
+= More plugins by Webdeclic =
+
+[Discover all WordPress plugins by Webdeclic](https://wordpress.org/plugins/search/webdeclic/).
 
 == Installation ==
 
-1. Upload the plugin files to the `/wp-content/plugins/wp-mastertoolkit` directory, or install the plugin through the WordPress plugins screen directly.
-2. Activate the plugin through the 'Plugins' screen in WordPress
-3. Use the WPMasterToolKit screen to configure the plugin
+= Install from the WordPress dashboard =
+
+1. In your WordPress dashboard, go to **Plugins > Add New Plugin**.
+2. Search for **WPMasterToolKit**.
+3. Click **Install Now**, then click **Activate**.
+4. Open **WPMasterToolKit** from the WordPress admin menu.
+5. Browse the available modules and enable only the features your website needs.
+6. Open each enabled module to review and save its settings.
+
+= Manual installation =
+
+1. Download the WPMasterToolKit ZIP file.
+2. In WordPress, go to **Plugins > Add New Plugin > Upload Plugin**.
+3. Select the ZIP file, click **Install Now**, then activate the plugin.
+
+Alternatively, extract the ZIP file and upload the `wpmastertoolkit` folder to `/wp-content/plugins/` using SFTP or your hosting file manager. Then activate WPMasterToolKit from the **Plugins** screen.
+
+= Recommended setup =
+
+WPMasterToolKit is modular: no module is enabled automatically. Start with the tools you need and avoid enabling features already provided by another active plugin, such as SMTP, redirects, login protection, image optimization or code snippets.
+
+Create a full backup before using modules that modify files or database content. For production websites, test security, performance, database and login-related changes on a staging site first. After configuration, clear any page, object or CDN cache and verify the frontend, WordPress login, forms, email delivery and critical WooCommerce pages.
 
 == Frequently asked questions ==
 
 = What is WPMasterToolKit? =
-WPMasterToolKit is a comprehensive plugin that provides a wide range of features designed to improve your WordPress. It includes tools to improve media management, user interface, site security and much more.
+WPMasterToolKit is a modular all-in-one WordPress plugin for site administration, security, performance, media, email delivery and development. It brings together 100+ tools in one dashboard, including code snippets, content duplication, SMTP, WebP conversion, login protection, redirects and database utilities.
+
+= Is WPMasterToolKit free? =
+Yes. The free version includes 98 modules for WordPress administration, security, performance, media management and development. WPMasterToolKit Pro adds 37 advanced modules and premium features such as two-factor authentication, vulnerability scanning, AVIF conversion, advanced SMTP providers, White Label and Pixel Tag Manager.
+
+= Do I have to enable every module? =
+No. WPMasterToolKit is modular, so you can enable only the features you need. Disabled modules do not load their feature logic on your website. This also helps prevent conflicts caused by activating overlapping tools.
 
 = Will WPMasterToolKit slow down my website? =
-No, WPMasterToolKit is designed to be lightweight and efficient. This should not negatively impact your website performance.
+WPMasterToolKit is designed to load modules only when they are enabled. Actual performance depends on your hosting, theme, other plugins and the modules you select. Several tools can also help reduce frontend work, including Heartbeat Control, WebP image conversion and options to disable emojis, cart fragments, Dashicons or jQuery Migrate when they are not needed.
 
-=Can WPMasterToolKit help with SEO? =
-Although WPMasterToolKit is not primarily an SEO plugin, it does include features that can help your site's SEO, such as the ability to open external links in a new tab with the appropriate "rel" attributes.
+= Can WPMasterToolKit improve WordPress SEO? =
+WPMasterToolKit is not a replacement for a dedicated WordPress SEO plugin, but it includes technical tools that can support SEO and website performance. These include WebP and AVIF image optimization, robots.txt management, redirect management, media metadata tools, local Google Fonts, external link attributes and control over the default WordPress sitemap.
 
-= How often is WPMasterToolKit updated? =
-We regularly update WPMasterToolKit to introduce new features, fix bugs and ensure compatibility with the latest versions of WordPress.
+= Can WPMasterToolKit replace other WordPress plugins? =
+It can replace multiple single-purpose plugins when its modules cover the features you use. Common examples include plugins for duplicate posts, SMTP email, code snippets, WebP conversion, login URL changes, login attempt limits, redirects, maintenance mode, SVG uploads and child theme generation. Test changes on a staging site and avoid running two plugins that provide the same feature.
 
-= How can I contribute to WPMasterToolKit? =
-Contributions are welcome! You can contribute by reporting bugs, suggesting features, translating the plugin, or submitting code fixes.
+= Can WPMasterToolKit replace a WordPress security plugin? =
+WPMasterToolKit includes security hardening tools such as Limit Login Attempts, Move Login URL, strong password enforcement, user enumeration protection, XML-RPC control, security headers and file access restrictions. These features can replace several security tweaks, but they are not a guarantee against every threat and may not replace a dedicated firewall, malware scanner, backup service or security monitoring platform for high-risk websites.
 
-= Is WPMasterToolKit similar to ASE ? =
-Yes, WPMasterToolKit is similar to Admin and Site Enhancements (ASE), WP Extended and other all in one plugin.
-
-= Can I replace my security plugin with WPMTK? =
-Yes, WPMTK includes many security features that can replace your existing security plugin. WPMTK includes up to 90% of the features known from security plugins like Wordfence, Sucuri, iThemes Security, SecuPress, etc.
-
-= Can I replace plugins like Imagify or ShortPixel? =
-Yes, WPMTK includes a media encoder that can convert images to WebP and AVIF if you have the PRO version. This very similar to the features of Imagify and ShortPixel, the big difference is that WPMTK convert your images locally and not on the cloud. So you don't need to worry about your images being uploaded to a third party server.
-
-= How can I report security bugs? =
-You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/wordpress/plugin/wpmastertoolkit/vdp)
-
-= Does WPMasterToolKit work with WooCommerce? =
-Yes, WPMasterToolKit is fully compatible with WooCommerce. It includes specific features like disabling WooCommerce logout confirmation, customizing the My Account menu, and disabling cart fragments scripts to improve performance. Many WooCommerce store owners use WPMTK to enhance their site security and optimize their admin dashboard.
-
-= Can I disable Gutenberg editor with this plugin? =
-Yes, WPMasterToolKit allows you to selectively disable the Gutenberg block editor. You can choose to disable it for specific post types or all relevant post types, giving you full control over when to use the classic editor or the block editor.
-
-= How do I set up SMTP email on WordPress with WPMasterToolKit? =
-WPMasterToolKit includes a comprehensive SMTP Mailer module that supports 19+ popular email providers including Gmail (with OAuth 2.0), Outlook, SendGrid, AWS SES, Brevo (formerly Sendinblue), Mailgun, Mailjet, and more. Simply enable the SMTP Mailer module, select your provider, enter your credentials, and send a test email to verify the configuration.
-
-= Is WPMasterToolKit compatible with page builders like Elementor and Divi? =
-Yes, WPMasterToolKit is fully compatible with popular page builders including Elementor, Divi, Beaver Builder, and others. The plugin doesn't interfere with page builder functionality and can actually enhance your workflow with features like content duplication and custom body classes.
-
-= Can I duplicate posts and pages with WPMasterToolKit? =
-Yes, the Content Duplication module enables one-click duplication of pages, posts, and custom post types. When you duplicate content, the corresponding taxonomy terms and post meta are also duplicated, making it perfect for creating similar content quickly.
-
-= Does this plugin help prevent brute force attacks? =
-Yes, WPMasterToolKit includes multiple security features to prevent brute force attacks: Limit Login Attempts to restrict failed login attempts per IP address, Move Login URL to hide your login page from automated bots, and Blacklisted Usernames to prevent common usernames like "admin" from being created.
-
-= Can I manage my WordPress database with this plugin? =
-Yes, WPMasterToolKit includes Adminer, a full-featured database management tool that allows you to browse, edit, and manage your WordPress database directly from your admin panel without needing phpMyAdmin.
+= How do I change or hide the WordPress login URL? =
+Enable the Move Login URL module and choose a custom login path. The module changes access to the default WordPress login URL to reduce automated login traffic. WPMasterToolKit Pro can additionally block unauthenticated access to `/wp-admin` with a server-side 403 response.
 
 = How do I disable XML-RPC in WordPress? =
-WPMasterToolKit provides a simple one-click solution to disable XML-RPC. Just enable the "Disable XML-RPC" module in the plugin settings. This helps protect your site from XML-RPC attacks and DDoS attempts that target this feature.
+Enable the Disable XML-RPC module from the WPMasterToolKit dashboard. Disabling XML-RPC can reduce exposure to attacks that target this legacy interface, but first confirm that your mobile app, remote publishing service or integration does not depend on it.
 
-= Can I create a child theme with WPMasterToolKit? =
-Yes, the Child Theme Generator module allows you to create a child theme directly from your WordPress dashboard in just a few clicks. You can even disable the module after generating your child theme to save resources.
+= Can I disable the WordPress REST API for logged-out visitors? =
+Yes. The Disable REST API module restricts REST API access for unauthenticated visitors and removes related discovery links. Because themes, plugins and external applications may rely on the REST API, test this setting before using it on a production website.
+
+= Can I convert WordPress images to WebP or AVIF? =
+Yes. The Media Encoder module converts images locally on your WordPress server instead of sending them to an external optimization service. The free version supports automatic WebP conversion, while WPMasterToolKit Pro adds AVIF conversion on compatible servers running PHP 8.1 or later.
+
+= How do I configure WordPress SMTP email? =
+Enable SMTP Mailer, enter the sender details and SMTP credentials, then send a test email from the module settings. The free version supports PHP mail and generic SMTP. WPMasterToolKit Pro adds integrations for 19+ providers, including Gmail, Outlook, SendGrid, AWS SES, Brevo, Mailgun, Mailjet, Postmark and Resend.
+
+= Does WPMasterToolKit work with WooCommerce? =
+WPMasterToolKit includes WooCommerce-specific tools such as disabling cart fragments for logged-out visitors, removing the logout confirmation and customizing the My Account menu. It also uses standard WordPress and WooCommerce APIs where applicable. As with any plugin stack, test checkout, account and caching behavior on a staging site after enabling performance or WooCommerce modules.
+
+= Can I disable the Gutenberg block editor? =
+Yes. The Disable Gutenberg module can restore the classic editor for selected post types or disable the block editor more broadly. This gives you control over where Gutenberg is used without modifying your theme.
+
+= Can I duplicate WordPress posts, pages and custom post types? =
+Yes. Content Duplication adds one-click duplication for posts, pages and custom post types. It also copies associated taxonomy terms and post metadata, which is useful for reusing page structures, product content and custom content templates.
+
+= Can I add WordPress code snippets without editing functions.php? =
+Yes. Code Snippets lets you manage reusable PHP code from the WordPress dashboard without editing your theme's `functions.php` file. Snippets can also contain CSS inside `<style>` tags or JavaScript inside `<script>` tags. Incorrect custom code can break a website, so validate snippets and test them on staging first.
+
+= Can I manage the WordPress database without phpMyAdmin? =
+Yes. The Adminer module provides a database management interface inside WordPress for browsing tables and running database operations. Database changes can be destructive, so restrict access to trusted administrators and create a complete backup before editing data or running SQL queries.
+
+= Can I create a WordPress child theme? =
+Yes. Child Theme Generator creates a child theme from the active theme directly in the WordPress dashboard. After generation, you can disable the module because the child theme continues to work independently.
+
+= Can I upload SVG files to WordPress? =
+Yes. The SVG Upload module enables SVG media uploads and validates SVG file content. Because SVG is an XML-based format that can contain active content, only trusted users should be allowed to upload files.
+
+= Does WPMasterToolKit include a WordPress redirect manager? =
+Yes. The free Redirect Manager supports WordPress/PHP redirects. WPMasterToolKit Pro adds Apache and Nginx redirect engines, redirect logs and CSV import/export. Redirects should be tested carefully to avoid loops and inaccessible pages.
 
 = Does WPMasterToolKit work with multisite installations? =
-Yes, WPMasterToolKit is compatible with WordPress multisite installations. You can network activate it or activate it on individual sites within your multisite network.
+WPMasterToolKit includes multisite-aware behavior in several modules, but support can vary by feature. Test each required module on a staging network before network activation, especially modules that modify files, login URLs, media settings or database content.
 
-= How do I disable WordPress REST API for non-authenticated users? =
-Enable the "Disable REST API" module in WPMasterToolKit. This will disable REST API access for non-authenticated users and remove URL traces from the `<head>` section, HTTP headers, and WP RSD endpoint, improving your site's security.
+= Is WPMasterToolKit compatible with Elementor, Divi and other page builders? =
+WPMasterToolKit uses standard WordPress hooks and is designed to work alongside popular themes and page builders. Tools such as content duplication, custom body classes and custom frontend CSS can complement page-builder workflows. Compatibility can still depend on the specific modules and third-party extensions enabled, so test important pages after configuration changes.
 
-= Can I add custom code snippets without editing functions.php? =
-Yes, the Code Snippets module allows you to add custom PHP, CSS, and JavaScript code snippets directly from your WordPress dashboard without editing your theme's functions.php file. This keeps your customizations safe even when you update your theme.
+= How often is WPMasterToolKit updated? =
+WPMasterToolKit is regularly updated with new modules, improvements, security hardening, bug fixes and compatibility changes. Review the changelog before updating production websites and use a staging environment for business-critical sites.
 
-= Can I convert images to WebP format automatically? =
-Yes, the Media Encoder module automatically converts uploaded images to WebP format (or AVIF in the PRO version with PHP 8.1+). This significantly reduces image file sizes and improves your site's loading speed without sacrificing quality.
+= How can I report a security vulnerability? =
+Please report security issues privately through the Patchstack Vulnerability Disclosure Program. The Patchstack team helps validate, triage and coordinate security reports. Do not publish vulnerability details before a fix is available. [Report a security vulnerability.](https://patchstack.com/database/wordpress/plugin/wpmastertoolkit/vdp)
 
 == Screenshots ==
 1. Activate the modules you need to customize your WordPress according to your needs. A disabled module will have no impact on your site.
@@ -260,6 +338,13 @@ Yes, the Media Encoder module automatically converts uploaded images to WebP for
 8. Media Encoder module automatically converts your images to WebP (and AVIF in PRO) for faster loading times and better performance.
 
 == Changelog ==
+
+= 2.25.0 =
+Add: Pro Module: Local Google Font: Host Google Fonts locally to improve performance and comply with privacy regulations.
+Add: Pro Module: Media Trash: Manage and restore deleted media items from the WordPress media trash.
+Add: Pro Module: No Theme Switch: Lock the active theme by preventing users from switching themes.
+Add: Pro Module: Pixel Tag Manager: Manage Google Analytics, Google Tag Manager, Google Ads, Meta, TikTok, LinkedIn, Microsoft UET and Pinterest tracking tags, with consent controls and event configuration.
+Update: Module: Child Theme Generator: Respect theme-switching capabilities, safely handle generation actions and provide clearer generation status feedback when activation is unavailable.
 
 = 2.24.0 =
 Add: Pro Module: White Label: Customize the plugin name and control which users can access the plugin.
@@ -274,11 +359,6 @@ Fix: Module: Social Login: Correct the user meta key used to retrieve stored ava
 Fix: Module: Limit Login Attempts: Prevent errors when failed-login hooks are triggered without an authentication error argument.
 Security: Module: Meta Debugger: Strengthen object-level permission checks and WooCommerce object validation, and safely handle serialized metadata without instantiating objects.
 Security: Module: SVG Upload: Validate file contents to block SVG uploads through unsupported upload methods, regardless of the filename extension.
-
-= 2.23.1 =
-Security: Improve SVG file type validation in the SVG Upload module
-Security: Improve label alignment in custom content type templates
-Update: Pro Module: Password Expiration: Enhance login attempt logging and password expiration handling
 
 
 [See changelog for all versions.](https://wpmastertoolkit.com/en/changelog/?utm_source=readme-wordpress-org&utm_medium=readme&utm_campaign=changelog&utm_content=full-changelog)

@@ -804,6 +804,30 @@ class WPMastertoolkit_Modules_Data {
 				'pro'           => true,
 				'path'          => 'pro/class-disable-blog.php',
 			),
+			'WPMastertoolkit_Local_Google_Font' => array(
+				'original_name' => 'Local Google Font',
+				'group'         => 'administration',
+				'pro'           => true,
+				'path'          => 'pro/class-local-google-font.php',
+			),
+			'WPMastertoolkit_Media_Trash' => array(
+				'original_name' => 'Media Trash',
+				'group'         => 'content-media',
+				'pro'           => true,
+				'path'          => 'pro/class-media-trash.php',
+			),
+			'WPMastertoolkit_No_Theme_Switch' => array(
+				'original_name' => 'No Theme Switch',
+				'group'         => 'content-media',
+				'pro'           => true,
+				'path'          => 'pro/class-no-theme-switch.php',
+			),
+			'WPMastertoolkit_Pixel_Tag_Manager' => array(
+				'original_name' => 'Pixel Tag Manager',
+				'group'         => 'custom-code',
+				'pro'           => true,
+				'path'          => 'pro/class-pixel-tag-manager.php',
+			),
 		);
 		
 		/**
@@ -1347,6 +1371,22 @@ class WPMastertoolkit_Modules_Data {
 			'WPMastertoolkit_Disable_Blog' => array(
 				'name' => esc_html_x( "Disable Blog", "Module name", 'wpmastertoolkit' ),
 				'desc' => esc_html_x( "Disable the blog functionality on your WordPress site.", "Module description", 'wpmastertoolkit' ),
+			),
+			'WPMastertoolkit_Local_Google_Font' => array(
+				'name' => esc_html_x( "Local Google Font", "Module name", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( "Host Google Fonts locally to improve performance and comply with privacy regulations.", "Module description", 'wpmastertoolkit' ),
+			),
+			'WPMastertoolkit_Media_Trash' => array(
+				'name' => esc_html_x( "Media Trash", "Module name", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( "Manage and restore deleted media items from the trash.", "Module description", 'wpmastertoolkit' ),
+			),
+			'WPMastertoolkit_No_Theme_Switch' => array(
+				'name' => esc_html_x( "No Theme Switch", "Module name", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( "Lock the active theme by preventing all users from switching to a different theme.", "Module description", 'wpmastertoolkit' ),
+			),
+			'WPMastertoolkit_Pixel_Tag_Manager' => array(
+				'name' => esc_html_x( "Pixel Tag Manager", "Module name", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( "Manage and deploy pixel tags on your WordPress site.", "Module description", 'wpmastertoolkit' ),
 			),
 		);
 

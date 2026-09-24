@@ -86,10 +86,26 @@ class WPMastertoolkit_Child_Theme_Generator {
 		$nonce = sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ?? '' ) );
 
 		if ( wp_verify_nonce( $nonce, $this->nonce_action ) && isset( $_POST[ $this->option_id ] ) ) {
+			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+            $settings = wp_unslash( $_POST[ $this->option_id ] );
 
-            $settings = array_map('sanitize_text_field', wp_unslash( $_POST[ $this->option_id ] ) );
+            if ( ! is_array( $settings ) ) {
+                return;
+            }
 
-            if( !empty( $settings['action'] ) ){
+            $settings        = array_map( 'sanitize_text_field', $settings );
+            $allowed_actions = array( 'download', 'generate', 'generate-and-activate' );
+            $action          = sanitize_key( $settings['action'] ?? '' );
+
+            if ( in_array( $action, $allowed_actions, true ) ) {
+                $can_switch_themes  = current_user_can( 'switch_themes' );
+                $activation_blocked = false;
+
+                if ( 'generate-and-activate' === $action && ! $can_switch_themes ) {
+                    $action             = 'generate';
+                    $activation_blocked = true;
+                }
+
                 global $wp_filesystem;
 
 				if ( ! function_exists( 'WP_Filesystem' ) ) {
@@ -109,7 +125,7 @@ class WPMastertoolkit_Child_Theme_Generator {
                 $child_theme_text_domain = trim( strtolower( str_replace( array( ' ', '_' ), '-', $child_theme_name ) ) );
                 $active_theme = wp_get_theme();
 
-                if ( $settings['action'] == 'generate' || $settings['action'] == 'generate-and-activate' ){
+                if ( 'generate' === $action || 'generate-and-activate' === $action ) {
 					$themes_dir = get_theme_root();
 				} else {
 					$themes_dir = get_temp_dir();
@@ -218,7 +234,7 @@ class WPMastertoolkit_Child_Theme_Generator {
                 $wp_filesystem->put_contents( $functions_file, $functions_content, FS_CHMOD_FILE );
 
                 
-                if( $settings['action'] == 'download' ){
+				if ( 'download' === $action ) {
 
 					if ( empty( $child_theme_folder_name ) ) {
 						exit();
@@ -263,12 +279,23 @@ class WPMastertoolkit_Child_Theme_Generator {
                     exit;
                 }
 
-                if ( $settings['action'] == 'generate' || $settings['action'] == 'generate-and-activate' ){
-                    if ( $settings['action'] == 'generate-and-activate' ){
+                if ( 'generate' === $action || 'generate-and-activate' === $action ) {
+                    if ( 'generate-and-activate' === $action && current_user_can( 'switch_themes' ) ) {
                         switch_theme( $child_theme_folder_name );
                     }
 
-                    // redirect to the themes page
+					if ( ! $can_switch_themes ) {
+						$status = $activation_blocked ? 'activation-blocked' : 'generated';
+						$url    = add_query_arg(
+							'child_theme_status',
+							$status,
+							admin_url( 'admin.php?page=wp-mastertoolkit-settings-child-theme-generator' )
+						);
+
+						wp_safe_redirect( $url );
+						exit;
+					}
+
                     wp_safe_redirect( admin_url( 'themes.php' ) );
                     exit;
                 }
@@ -285,6 +312,20 @@ class WPMastertoolkit_Child_Theme_Generator {
      * @return void
      */
     private function submenu_content() {
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        $status = sanitize_key( wp_unslash( $_GET['child_theme_status'] ?? '' ) );
+
+        if ( 'generated' === $status || 'activation-blocked' === $status ) {
+            $message = 'activation-blocked' === $status
+                ? __( 'Child theme generated. Theme activation is disabled.', 'wpmastertoolkit' )
+                : __( 'Child theme generated successfully.', 'wpmastertoolkit' );
+            ?>
+            <div class="notice notice-success is-dismissible">
+                <p><?php echo esc_html( $message ); ?></p>
+            </div>
+            <?php
+        }
+
         $active_theme = wp_get_theme();
 
         $themes = wp_get_themes();
@@ -489,7 +530,9 @@ class WPMastertoolkit_Child_Theme_Generator {
                             <div>
                                 <button id="child-theme-download-zip" class="button"><?php esc_html_e( 'Download as ZIP', 'wpmastertoolkit' ); ?></button>
                                 <button id="child-theme-generate" class="button"><?php esc_html_e( 'Generate', 'wpmastertoolkit' ); ?></button>
-                                <button id="child-theme-generate-and-activate" class="button button-primary"><?php esc_html_e( 'Generate & Activate', 'wpmastertoolkit' ); ?></button>
+								<?php if ( current_user_can( 'switch_themes' ) ) : ?>
+									<button id="child-theme-generate-and-activate" class="button button-primary"><?php esc_html_e( 'Generate & Activate', 'wpmastertoolkit' ); ?></button>
+								<?php endif; ?>
                             </div>
                         </div>
                     </div>
