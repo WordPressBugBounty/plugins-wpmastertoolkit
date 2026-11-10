@@ -4,7 +4,7 @@
  * Plugin Name:       WPMasterToolKit
  * Plugin URI:        https://wpmastertoolkit.com/?utm_source=wpmastertoolkit-plugin&utm_medium=plugin&utm_campaign=plugin-information&utm_content=plugin-uri
  * Description:       Modular WordPress toolkit for security, performance, administration, media, email delivery, custom code, and development.
- * Version:           2.26.0
+ * Version:           2.26.1
  * Requires at least: 6.2.0
  * Requires PHP:      7.4
  * Author:            Webdeclic

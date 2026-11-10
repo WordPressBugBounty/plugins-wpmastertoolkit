@@ -1,5 +1,8 @@
 == Changelog ==
 
+= 2.26.1 =
+Fix: Module: Media Encoder: Preserve the original image processing pipeline when applying compression quality settings.
+
 = 2.26.0 =
 Add: Guided onboarding with setup presets and module activation to help configure the plugin.
 Update: Module: Activity Log: Make activity tracking available in the free version and improve filtering and retention controls.

@@ -4,7 +4,7 @@ Tags: all in one plugin, admin, security, disable features, easy to use
 Requires at least: 6.2.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.26.0
+Stable tag: 2.26.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
 
@@ -388,6 +388,9 @@ Please report security issues privately through the Patchstack Vulnerability Dis
 
 == Changelog ==
 
+= 2.26.1 =
+Fix: Module: Media Encoder: Preserve the original image processing pipeline when applying compression quality settings.
+
 = 2.26.0 =
 Add: Guided onboarding with setup presets and module activation to help configure the plugin.
 Update: Module: Activity Log: Make activity tracking available in the free version and improve filtering and retention controls.
@@ -406,12 +409,6 @@ Add: Pro Module: Media Trash: Manage and restore deleted media items from the Wo
 Add: Pro Module: No Theme Switch: Lock the active theme by preventing users from switching themes.
 Add: Pro Module: Pixel Tag Manager: Manage Google Analytics, Google Tag Manager, Google Ads, Meta, TikTok, LinkedIn, Microsoft UET and Pinterest tracking tags, with consent controls and event configuration.
 Update: Module: Child Theme Generator: Respect theme-switching capabilities, safely handle generation actions and provide clearer generation status feedback when activation is unavailable.
-
-= 2.24.0 =
-Add: Pro Module: White Label: Customize the plugin name and control which users can access the plugin.
-Add: Pro Module: Disable Blog: Disable blog features and related WordPress functionality while preserving selected content and access rules.
-Update: Module: Media Library Post Folders: Add folder sidebar support to media modals opened from individual post editing screens.
-Update: Pro Module: Two-Factor Authentication: Improve form submission handling, modal state management, validation, and error feedback.
 
 
 [See changelog for all versions.](https://wpmastertoolkit.com/en/changelog/?utm_source=readme-wordpress-org&utm_medium=readme&utm_campaign=changelog&utm_content=full-changelog)

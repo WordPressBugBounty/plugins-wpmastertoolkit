@@ -74,7 +74,7 @@ class WPMastertoolkit_Media_Encoder {
 		add_filter( 'wp_handle_upload_prefilter', array( $this, 'image_optimization' ) );
 		add_filter( 'wp_generate_attachment_metadata', array( $this, 'add_already_optimized_meta' ), 10, 3 );
 		add_filter( 'wp_generate_attachment_metadata', array( $this, 'image_optimization_saving_original' ), 10, 3 );
-		add_filter( 'wp_editor_set_quality', array( $this, 'change_image_compression_quality' ), PHP_INT_MAX );
+		add_filter( 'wp_editor_set_quality', array( $this, 'change_image_compression_quality' ), PHP_INT_MAX, 2 );
 		add_action( 'delete_attachment', array( $this, 'before_delete_attachment' ) );
 		
 		add_filter( 'attachment_fields_to_edit', array( $this, 'add_attachment_fields_to_edit' ), PHP_INT_MAX, 2 );
@@ -334,11 +334,15 @@ class WPMastertoolkit_Media_Encoder {
 	}
 
 	/**
-	 * Change the image compression quality to be 100 if this module is active.
+	 * Apply the selected quality while preserving the original-image pipeline.
 	 * 
 	 * @since   1.13.0
+	 *
+	 * @param int    $quality   Incoming image compression quality.
+	 * @param string $mime_type Output image MIME type.
+	 * @return int Image compression quality.
 	 */
-	public function change_image_compression_quality( $quality ) {
+	public function change_image_compression_quality( $quality, $mime_type = '' ) {
 		$this->settings         = $this->get_settings();
 		$this->default_settings = $this->get_default_settings();
 
@@ -347,11 +351,20 @@ class WPMastertoolkit_Media_Encoder {
 		}
 
 		$mode_enabled = $this->settings['mode_enabled']['value'] ?? $this->default_settings['mode_enabled']['value'];
-		if ( 'off' == $mode_enabled ) {
+		if ( 'off' === $mode_enabled ) {
 			return $quality;
 		}
 
-		return 100;
+		$save_original = $this->settings['save_original'] ?? $this->default_settings['save_original'];
+		if ( '1' === $save_original ) {
+			return 100;
+		}
+
+		if ( 'image/' . $mode_enabled === $mime_type ) {
+			return $this->get_the_quality();
+		}
+
+		return $quality;
 	}
 
 	/**
