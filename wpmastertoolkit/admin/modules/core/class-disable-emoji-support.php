@@ -65,6 +65,7 @@ class WPMastertoolkit_Disable_Emoji_Support {
 
         if ( 'dns-prefetch' == $relation_type ) {
 
+			//phpcs:ignore PluginCheck.CodeAnalysis.Offloading.OffloadedContent
             $emoji_svg_url_base = 'https://s.w.org/images/core/emoji/';
             foreach ( $urls as $key => $url ) {
                 if ( is_string( $url ) && false !== strpos( $url, $emoji_svg_url_base ) ) {

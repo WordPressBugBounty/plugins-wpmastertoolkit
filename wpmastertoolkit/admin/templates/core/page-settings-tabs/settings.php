@@ -10,10 +10,25 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 <div class="wp-mastertoolkit__body__sections__item hide-in-all" data-key="settings">
     <div class="wp-mastertoolkit__body__sections__item__top">
+        <div class="wp-mastertoolkit__body__sections__item__title"><?php esc_html_e( 'Guided setup', 'wpmastertoolkit' ); ?></div>
+    </div>
+    <div class="wp-mastertoolkit__body__sections__item__top">
+        <div class="wp-mastertoolkit__body__sections__item__description"><?php esc_html_e( 'Choose a goal-based configuration and review the recommended modules before activating them.', 'wpmastertoolkit' ); ?></div>
+    </div>
+    <div class="wp-mastertoolkit__body__sections__item__bottom">
+        <a class="wp-mastertoolkit__body__sections__item__btn wp-mastertoolkit__body__sections__item__btn--guided" href="<?php echo esc_url( admin_url( 'admin.php?page=' . WPMastertoolkit_Onboarding::PAGE_SLUG ) ); ?>">
+            <?php echo wp_kses( file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/gear.svg' ), wpmastertoolkit_allowed_tags_for_svg_files() ); ?>
+            <?php esc_html_e( 'Run guided setup', 'wpmastertoolkit' ); ?>
+        </a>
+    </div>
+
+    <div class="wp-mastertoolkit__body__sections__item__space"></div>
+
+    <div class="wp-mastertoolkit__body__sections__item__top">
         <div class="wp-mastertoolkit__body__sections__item__title"><?php esc_html_e( 'Import settings from JSON', 'wpmastertoolkit' ); ?></div>
     </div>
     <div class="wp-mastertoolkit__body__sections__item__top">
-        <div class="wp-mastertoolkit__body__sections__item__description"><?php echo esc_html_e( "You can import settings from a JSON file. This will overwrite all current settings. Please make sure to backup your current settings before importing a new file.", 'wpmastertoolkit' ); ?></div>
+        <div class="wp-mastertoolkit__body__sections__item__description"><?php esc_html_e( "You can import settings from a JSON file. This will overwrite all current settings. Please make sure to backup your current settings before importing a new file.", 'wpmastertoolkit' ); ?></div>
     </div>
     <div class="wp-mastertoolkit__body__sections__item__bottom">
         <input type="file" name="wpmastertoolkit_settings_tab_input" accept="application/JSON">
@@ -29,7 +44,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
         <div class="wp-mastertoolkit__body__sections__item__title"><?php esc_html_e( 'Export settings to JSON', 'wpmastertoolkit' ); ?></div>
     </div>
     <div class="wp-mastertoolkit__body__sections__item__top">
-        <div class="wp-mastertoolkit__body__sections__item__description"><?php echo esc_html_e( 'You can export settings to a JSON file. This will create a JSON file with all current settings.', 'wpmastertoolkit' ); ?></div>
+        <div class="wp-mastertoolkit__body__sections__item__description"><?php esc_html_e( 'You can export settings to a JSON file. This will create a JSON file with all current settings.', 'wpmastertoolkit' ); ?></div>
     </div>
     <div class="wp-mastertoolkit__body__sections__item__bottom">
         <button class="wp-mastertoolkit__body__sections__item__btn" type="submit" name="wpmastertoolkit_settings_tab_download_json_submit" >
@@ -53,7 +68,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
         <div class="wp-mastertoolkit__body__sections__item__title"><?php esc_html_e( 'Help WPMasterToolkit improve with usage tracking', 'wpmastertoolkit' ); ?></div>
     </div>
 	<div class="wp-mastertoolkit__body__sections__item__top">
-        <div class="wp-mastertoolkit__body__sections__item__description"><?php echo esc_html_e( 'Gathering usage data allows us to improve WPMasterToolkit. Your site will be considered as we evaluate new features, judge the quality of an update, or determine if an improvement makes sense.', 'wpmastertoolkit' ); ?></div>
+        <div class="wp-mastertoolkit__body__sections__item__description"><?php esc_html_e( 'Gathering usage data allows us to improve WPMasterToolkit. Your site will be considered as we evaluate new features, judge the quality of an update, or determine if an improvement makes sense.', 'wpmastertoolkit' ); ?></div>
     </div>
 	
     <div class="wp-mastertoolkit__body__sections__item__space"></div>
@@ -71,7 +86,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
         <div class="wp-mastertoolkit__body__sections__item__title"><?php esc_html_e( 'Use WordPress Submenu for WPMasterToolkit modules settings', 'wpmastertoolkit' ); ?></div>
     </div>
 	<div class="wp-mastertoolkit__body__sections__item__top">
-        <div class="wp-mastertoolkit__body__sections__item__description"><?php echo esc_html_e( 'When enabled, each WPMasterToolkit module will have its own submenu under the main WPMasterToolkit menu in the WordPress admin dashboard.', 'wpmastertoolkit' ); ?></div>
+        <div class="wp-mastertoolkit__body__sections__item__description"><?php esc_html_e( 'When enabled, each WPMasterToolkit module will have its own submenu under the main WPMasterToolkit menu in the WordPress admin dashboard.', 'wpmastertoolkit' ); ?></div>
     </div>
 	
 	<div class="wp-mastertoolkit__body__sections__item__space"></div>
@@ -80,7 +95,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
         <div class="wp-mastertoolkit__body__sections__item__title"><?php esc_html_e( 'Regenerate module assets', 'wpmastertoolkit' ); ?></div>
     </div>
 	<div class="wp-mastertoolkit__body__sections__item__top">
-        <div class="wp-mastertoolkit__body__sections__item__description"><?php echo esc_html_e( 'Force the regeneration of module assets by triggering the activation and deactivation hooks. This can help resolve issues with missing or outdated module files.', 'wpmastertoolkit' ); ?></div>
+        <div class="wp-mastertoolkit__body__sections__item__description"><?php esc_html_e( 'Force the regeneration of module assets by triggering the activation and deactivation hooks. This can help resolve issues with missing or outdated module files.', 'wpmastertoolkit' ); ?></div>
     </div>
     <div class="wp-mastertoolkit__body__sections__item__bottom">
         <button class="wp-mastertoolkit__body__sections__item__btn" type="button" id="JS-wpmastertoolkit_regenerate_assets_btn" >
@@ -100,7 +115,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
         <div class="wp-mastertoolkit__body__sections__item__title"><?php esc_html_e( 'Copy system information', 'wpmastertoolkit' ); ?></div>
     </div>
     <div class="wp-mastertoolkit__body__sections__item__top">
-        <div class="wp-mastertoolkit__body__sections__item__description"><?php echo esc_html_e( 'Copy detailed system information to your clipboard for support purposes. This includes PHP version, WordPress configuration, active plugins, themes, and WPMasterToolkit module settings.', 'wpmastertoolkit' ); ?></div>
+        <div class="wp-mastertoolkit__body__sections__item__description"><?php esc_html_e( 'Copy detailed system information to your clipboard for support purposes. This includes PHP version, WordPress configuration, active plugins, themes, and WPMasterToolkit module settings.', 'wpmastertoolkit' ); ?></div>
     </div>
     <div class="wp-mastertoolkit__body__sections__item__bottom">
         <button class="wp-mastertoolkit__body__sections__item__btn" type="button" id="JS-wpmastertoolkit_copy_system_info_btn" >
@@ -135,7 +150,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 		</div>
     </div>
     <div class="wp-mastertoolkit__body__sections__item__top">
-		<div class="wp-mastertoolkit__body__sections__item__description"><?php echo esc_html_e( 'Restrict access to WPMasterToolkit modules and settings to selected administrators only. Other admins will not be able to view or modify the plugin settings.', 'wpmastertoolkit' ); ?></div>
+		<div class="wp-mastertoolkit__body__sections__item__description"><?php esc_html_e( 'Restrict access to WPMasterToolkit modules and settings to selected administrators only. Other admins will not be able to view or modify the plugin settings.', 'wpmastertoolkit' ); ?></div>
     </div>
 	<div class="wp-mastertoolkit__body__sections__item__bottom" data-show-if="<?php echo esc_attr( WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_active_super_admins'); ?>=1">
 		<select name="<?php echo esc_attr( WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_super_admins' ); ?>[]" id="JS-wpmastertoolkit_super_admins_select" multiple>

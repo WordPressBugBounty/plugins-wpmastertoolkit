@@ -128,8 +128,7 @@ class WPMastertoolkit_Heartbeat_Control {
             $this->header_title,
             'manage_options',
             'wp-mastertoolkit-settings-heartbeat-control',
-            array( $this, 'render_submenu' ),
-            null
+            array( $this, 'render_submenu' )
         );
     }
 
@@ -200,6 +199,111 @@ class WPMastertoolkit_Heartbeat_Control {
         $this->default_settings = $this->get_default_settings();
         return get_option( $this->option_id, $this->default_settings );
     }
+
+	/**
+	 * Map onboarding fields to the module's nested settings.
+	 *
+	 * @return array
+	 */
+	private static function preset_field_paths() {
+		return array(
+			'admin_pages_controle'   => array( 'admin_pages', 'controle' ),
+			'admin_pages_interval'   => array( 'admin_pages', 'interval' ),
+			'post_creation_controle' => array( 'post_creation', 'controle' ),
+			'post_creation_interval' => array( 'post_creation', 'interval' ),
+			'frontend_controle'      => array( 'frontend', 'controle' ),
+			'frontend_interval'      => array( 'frontend', 'interval' ),
+		);
+	}
+
+	/**
+	 * Return saved values for onboarding fields.
+	 *
+	 * @return array
+	 */
+	public static function get_preset_settings() {
+		$instance = new self();
+		$settings = $instance->get_settings();
+		$result   = array();
+
+		if ( ! is_array( $settings ) ) {
+			return $result;
+		}
+
+		foreach ( self::preset_field_paths() as $field => $path ) {
+			$value = $settings[ $path[0] ][ $path[1] ]['value'] ?? null;
+			if ( is_scalar( $value ) ) {
+				$result[ $field ] = (string) $value;
+			}
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Validate values against the choices offered by the module settings page.
+	 *
+	 * @param array $new_settings Onboarding settings.
+	 * @return true|WP_Error
+	 */
+	public static function validate_preset_settings( $new_settings ) {
+		if ( ! is_array( $new_settings ) ) {
+			return new WP_Error( 'wpmastertoolkit_invalid_heartbeat_setting', esc_html__( 'Select a valid Heartbeat setting.', 'wpmastertoolkit' ) );
+		}
+
+		$instance = new self();
+		$defaults = $instance->get_default_settings();
+		foreach ( self::preset_field_paths() as $field => $path ) {
+			if ( ! array_key_exists( $field, $new_settings ) ) {
+				continue;
+			}
+
+			$value = $new_settings[ $field ];
+			if ( ! is_string( $value ) || ! array_key_exists( $value, $defaults[ $path[0] ][ $path[1] ]['options'] ) ) {
+				return new WP_Error( 'wpmastertoolkit_invalid_heartbeat_setting', esc_html__( 'Select a valid Heartbeat setting.', 'wpmastertoolkit' ), $field );
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * Apply selected fields without resetting other Heartbeat settings.
+	 *
+	 * @param array $new_settings Onboarding settings.
+	 * @return true|WP_Error
+	 */
+	public static function apply_preset_settings( $new_settings ) {
+		$validation = self::validate_preset_settings( $new_settings );
+		if ( is_wp_error( $validation ) ) {
+			return $validation;
+		}
+
+		$instance = new self();
+		$defaults = $instance->get_default_settings();
+		$settings = $instance->get_settings();
+		if ( ! is_array( $settings ) ) {
+			$settings = $defaults;
+		}
+
+		foreach ( self::preset_field_paths() as $field => $path ) {
+			if ( ! array_key_exists( $field, $new_settings ) ) {
+				continue;
+			}
+
+			if ( ! is_array( $settings[ $path[0] ] ?? null ) ) {
+				$settings[ $path[0] ] = $defaults[ $path[0] ];
+			}
+			if ( ! is_array( $settings[ $path[0] ][ $path[1] ] ?? null ) ) {
+				$settings[ $path[0] ][ $path[1] ] = $defaults[ $path[0] ][ $path[1] ];
+			}
+			$settings[ $path[0] ][ $path[1] ]['value'] = $new_settings[ $field ];
+		}
+
+		$instance->save_settings( $settings );
+
+		return true;
+	}
 
 	/**
      * Save settings

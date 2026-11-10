@@ -537,7 +537,19 @@ class WPMastertoolkit_SMTP_Mailer {
 			}
 
 			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-			$new_settings = $this->sanitize_settings(wp_unslash(  $_POST[ $this->option_id ] ?? array() ) );
+			$new_settings = wp_unslash( $_POST[ $this->option_id ] ?? array() );
+			if ( ! is_array( $new_settings ) ) {
+				$new_settings = array();
+			}
+
+			if ( isset( $new_settings['providers'] ) && is_array( $new_settings['providers'] ) ) {
+				if ( isset( $new_settings['providers']['phpmail']['params'] ) && is_array( $new_settings['providers']['phpmail']['params'] ) ) {
+					$new_settings['providers']['php'] = $new_settings['providers']['phpmail'];
+				}
+				unset( $new_settings['providers']['phpmail'] );
+			}
+
+			$new_settings = $this->sanitize_settings( $new_settings );
 			$this->save_settings( $new_settings );
 			wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
 			exit;
@@ -624,7 +636,8 @@ class WPMastertoolkit_SMTP_Mailer {
 			$settings = array();
 		}
 
-		$settings = wp_parse_args( $settings, $this->default_settings );
+		$saved_providers = isset( $settings['providers'] ) && is_array( $settings['providers'] ) ? $settings['providers'] : array();
+		$settings        = wp_parse_args( $settings, $this->default_settings );
 
 		if ( ! isset( $settings['providers'] ) || ! is_array( $settings['providers'] ) ) {
 			$settings['providers'] = $this->default_settings['providers'];
@@ -667,19 +680,10 @@ class WPMastertoolkit_SMTP_Mailer {
 				continue;
 			}
 
-			$sender_name = $provider_data['params']['sender_name']['value'] ?? '';
-			if ( empty( $sender_name ) && ! empty( $settings['sender_name'] ) ) {
-				$settings['providers'][ $provider ]['params']['sender_name']['value'] = get_bloginfo( 'name' );
-			}
-
-			$sender_email = $provider_data['params']['sender_email']['value'] ?? '';
-			if ( empty( $sender_email ) && ! empty( $settings['sender_email'] ) ) {
-				$settings['providers'][ $provider ]['params']['sender_email']['value'] = get_option( 'admin_email' );
-			}
-
-			$force_sender = $provider_data['params']['force_sender']['value'] ?? '';
-			if ( empty( $force_sender ) && ! empty( $settings['force_sender'] ) ) {
-				$settings['providers'][ $provider ]['params']['force_sender']['value'] = '1';
+			foreach ( array( 'sender_name', 'sender_email', 'force_sender' ) as $sender_key ) {
+				if ( ! isset( $saved_providers[ $provider ]['params'][ $sender_key ]['value'] ) && isset( $settings[ $sender_key ] ) ) {
+					$settings['providers'][ $provider ]['params'][ $sender_key ]['value'] = $settings[ $sender_key ];
+				}
 			}
 		}
 

@@ -197,6 +197,72 @@ class WPMastertoolkit_Clean_Up_Admin_Bar {
     }
 
     /**
+     * Return saved admin bar switches for onboarding fields.
+     *
+     * @return array
+     */
+    public static function get_preset_settings() {
+        $instance = new self();
+        $settings = $instance->get_settings();
+        $elements = is_array( $settings ) ? ( $settings['elements'] ?? array() ) : array();
+
+        return is_array( $elements ) ? array_intersect_key( $elements, $instance->get_elements_settings() ) : array();
+    }
+
+    /**
+     * Validate onboarding switch values before enabling the module.
+     *
+     * @param array $new_settings Onboarding settings.
+     * @return true|WP_Error
+     */
+    public static function validate_preset_settings( $new_settings ) {
+        if ( ! is_array( $new_settings ) ) {
+            return new WP_Error( 'wpmastertoolkit_invalid_admin_bar_setting', esc_html__( 'Choose a valid admin bar setting.', 'wpmastertoolkit' ) );
+        }
+
+        $instance = new self();
+        foreach ( array_keys( $instance->get_elements_settings() ) as $key ) {
+            if ( array_key_exists( $key, $new_settings ) && ! in_array( $new_settings[ $key ], array( '0', '1' ), true ) ) {
+                return new WP_Error( 'wpmastertoolkit_invalid_admin_bar_setting', esc_html__( 'Choose a valid admin bar setting.', 'wpmastertoolkit' ), $key );
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Save selected switches without changing other admin bar settings.
+     *
+     * @param array $new_settings Onboarding settings.
+     * @return true|WP_Error
+     */
+    public static function apply_preset_settings( $new_settings ) {
+        $validation = self::validate_preset_settings( $new_settings );
+        if ( is_wp_error( $validation ) ) {
+            return $validation;
+        }
+
+        $instance = new self();
+        $settings = $instance->get_settings();
+        if ( ! is_array( $settings ) ) {
+            $settings = $instance->get_default_settings();
+        }
+        if ( ! is_array( $settings['elements'] ?? null ) ) {
+            $settings['elements'] = $instance->get_elements_settings();
+        }
+
+        foreach ( array_keys( $instance->get_elements_settings() ) as $key ) {
+            if ( array_key_exists( $key, $new_settings ) ) {
+                $settings['elements'][ $key ] = $new_settings[ $key ];
+            }
+        }
+
+        $instance->save_settings( $settings );
+
+        return true;
+    }
+
+    /**
      * Save settings
      * 
      * @since   1.4.0

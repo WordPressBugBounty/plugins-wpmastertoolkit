@@ -1,10 +1,10 @@
 === WPMasterToolKit (WPMTK) - All in one plugin ===
 Contributors: ludwigyou
 Tags: all in one plugin, admin, security, disable features, easy to use
-Requires at least: 6.0.0
+Requires at least: 6.2.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.25.0
+Stable tag: 2.26.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
 
@@ -26,6 +26,7 @@ Activate only what you need and manage everything from one place. Built for site
 = 98 free modules =
 
 **Administration**
+
 * Clean Up Admin Bar
 * Disable Dashboard Widgets: Clean up the dashboard by disabling widgets that load unnecessary assets.
 * Enhance List Tables: Add or remove columns in post type, taxonomy, media, comment and user list tables.
@@ -42,6 +43,7 @@ Activate only what you need and manage everything from one place. Built for site
 * Wider Admin Menu
 
 **Users**
+
 * Clean Profiles
 * Export Users
 * Last Login Column
@@ -50,6 +52,7 @@ Activate only what you need and manage everything from one place. Built for site
 * Temporary Login
 
 **Debug**
+
 * Adminer
 * Advanced Debug Mode
 * Disable All Updates
@@ -59,6 +62,7 @@ Activate only what you need and manage everything from one place. Built for site
 * Meta Debugger
 
 **Contents &amp; Media**
+
 * Allow Menu Custom Links to Open in New Tab
 * Auto-Publish Posts with Missed Schedule
 * Browser Theme Color
@@ -83,6 +87,7 @@ Activate only what you need and manage everything from one place. Built for site
 * SVG Upload
 
 **Custom Code**
+
 * Code Snippets
 * Custom Admin CSS
 * Custom Body Class
@@ -92,6 +97,7 @@ Activate only what you need and manage everything from one place. Built for site
 * Manage robots.txt
 
 **Disable Features**
+
 * Disable Block-Based Widgets Settings Screen
 * Disable Dashicons CSS and JS Files
 * Disable Emoji Support
@@ -104,13 +110,16 @@ Activate only what you need and manage everything from one place. Built for site
 * Disable WordPress Shortlink &lt;link&gt; Tag
 
 **SEO &amp; Speed Optimizations**
+
 * Disable WP Sitemap
 * Redirect Manager
 
 **WooCommerce**
+
 * Disable Cart Fragments Scripts
 
 **Security**
+
 * Auto Regenerate Salt Keys
 * Ban Emails
 * Blacklisted Usernames
@@ -139,6 +148,7 @@ Activate only what you need and manage everything from one place. Built for site
 * Protect Website Headers
 
 **Other**
+
 * Apple Touch Icon
 * Child Theme Generator
 * SMTP Mailer
@@ -146,6 +156,7 @@ Activate only what you need and manage everything from one place. Built for site
 = 37 Pro modules =
 
 **Administration**
+
 * Admin Menu Organizer
 * Custom Login Design
 * Disable Blog
@@ -153,9 +164,11 @@ Activate only what you need and manage everything from one place. Built for site
 * White Label
 
 **Users**
+
 * User Switching
 
 **Debug**
+
 * CRON Manager
 * Disable Plugin for Debug
 * Force Send All Email To
@@ -163,6 +176,7 @@ Activate only what you need and manage everything from one place. Built for site
 * Update Logs
 
 **Contents &amp; Media**
+
 * Add Essential Shortcodes
 * Download Media as ZIP
 * Generate Alt Text with AI
@@ -173,22 +187,27 @@ Activate only what you need and manage everything from one place. Built for site
 * Post Type Switcher
 
 **Custom Code**
+
 * Pixel Tag Manager
 
 **Disable Features**
+
 * Disable Comments
 
 **SEO &amp; Speed Optimizations**
+
 * 410 Manager
 * Head Sorter
 * Link Shortener
 
 **WooCommerce**
+
 * Auto Clean Action Scheduler Actions
 * Disable WooCommerce Logout Confirmation
 * My Account Menu Customizer
 
 **Security**
+
 * Better Password Hash
 * Disallow Access to Sensitive WordPress Files
 * Disallow Countries by IP
@@ -199,6 +218,7 @@ Activate only what you need and manage everything from one place. Built for site
 * Vulnerability Scan
 
 **Other**
+
 * Change Database Prefix
 * Plugin Download
 
@@ -279,6 +299,25 @@ WPMasterToolKit includes security hardening tools such as Limit Login Attempts, 
 = How do I change or hide the WordPress login URL? =
 Enable the Move Login URL module and choose a custom login path. The module changes access to the default WordPress login URL to reduce automated login traffic. WPMasterToolKit Pro can additionally block unauthenticated access to `/wp-admin` with a server-side 403 response.
 
+= How does the local CAPTCHA work? =
+Enable Captcha on login form and select the native WordPress login, lost-password and registration forms to protect. It generates addition questions locally, without contacting an external provider or requiring an image library. Arithmetic adds friction for basic bots; it is not reliable human detection and should supplement Limit Login Attempts and two-factor authentication. CAPTCHA errors have separate throttling and do not count as incorrect credentials.
+
+Choose the protection mode using the radio options in the module settings. Always require is available in the free edition and shows a question on every protected form. Adaptive is available only with WPMasterToolKit Pro and is the default in Pro when no mode has been saved. Its time windows, failed-login thresholds, request limits and form-timing options appear only when Adaptive is selected. Switching to Always require hides those controls but preserves their saved values. Free installations always use Always require, including when a previously saved mode was Adaptive.
+
+In Adaptive mode, low-risk visitors see no arithmetic question but submit a browser-bound, single-use form token. The server rechecks activity on submission and before two-factor code sending or final login. If risk increases, the visitor must solve a question. Successful solves authorize only their bounded flow, not a persistent trusted-browser exemption.
+
+Editable defaults require a challenge after three authentication failures per browser or five per IP, ten login submissions, three recovery requests, three registration requests, or three two-factor code requests within a five-minute observation window. Request thresholds apply to the attempt reaching the limit; failure thresholds apply to subsequent attempts. A challenge-required period lasts fifteen minutes and is not extended by each retry. Browser and IP activity are tracked separately, without account-wide penalties. These adaptive thresholds do not replace hard rate limits or credential lockouts, and a solved CAPTCHA cannot bypass those limits.
+
+Optional form timing supplements existing server suspicion: submissions under 1.5 seconds can require a question once at least half a relevant server threshold is reached, with a minimum of two events. Fast submission alone, absent timing, autofill, pasted passwords and missing JavaScript are not independent reasons to require CAPTCHA. Only a bounded elapsed-time hint is sent; typing, pointer movement, fingerprints, passwords and timing history are not collected or retained. Timing can be disabled in settings.
+
+The module requires first-party cookies and database write access. Open its settings page after activation or upgrade to initialize storage and invalidate older policy state before signing out. Form tokens and challenges expire after ten minutes and allow one attempt. Two-factor continuations allow up to three code-send attempts and one final login within fifteen minutes; low-risk continuations are reassessed and revoked if a question becomes necessary. Refreshing or cancelling the two-factor flow invalidates its continuation. Native submissions work without JavaScript and return a visible challenge if risk escalates; this does not add no-JavaScript support to the existing two-factor modal.
+
+The binding cookie is HttpOnly, uses SameSite=Lax and Secure on HTTPS, and lasts for the browser session. Expiring state contains keyed browser, IP and entered-identifier hashes, not raw identifiers or passwords. Hard defaults allow 60 state issuances and 20 rejected CAPTCHA validations per IP per five-minute fixed window, with additional validation/browser/site ceilings. Shared networks and reverse proxies can increase challenges or throttling; limits use REMOTE_ADDR, not forwarded headers. Expired records are removed in bounded batches during activity/issuance and hourly cleanup while the module is active. Plugin deactivation removes ephemeral storage; merely toggling the module off stops enforcement but does not immediately erase its state or settings.
+
+Exclude native login routes, including renamed routes, and CAPTCHA AJAX responses from page/CDN caches. Response headers cannot prevent a cache from serving a stale page before WordPress runs. Native-form protection preserves OAuth callbacks, temporary magic links, user switching and application-password/API authentication; it does not cover WooCommerce or membership/custom forms, multisite signup, shared-password gates or password-reset completion. Individual multisite sites have separate storage.
+
+If storage fails, protected submissions are rejected rather than silently bypassing CAPTCHA. Keep an authenticated administrator session during configuration. For recovery, disable the module from that session or temporarily define WPMASTERTOOLKIT_SAFE_MODE as true in the site's server-side configuration; safe mode disables all WPMasterToolKit modules. Restore normal operation after resolving the storage issue. Do not enable overlapping CAPTCHA plugins without testing the combined forms.
+
 = How do I disable XML-RPC in WordPress? =
 Enable the Disable XML-RPC module from the WPMasterToolKit dashboard. Disabling XML-RPC can reduce exposure to attacks that target this legacy interface, but first confirm that your mobile app, remote publishing service or integration does not depend on it.
 
@@ -318,6 +357,16 @@ Yes. The free Redirect Manager supports WordPress/PHP redirects. WPMasterToolKit
 = Does WPMasterToolKit work with multisite installations? =
 WPMasterToolKit includes multisite-aware behavior in several modules, but support can vary by feature. Test each required module on a staging network before network activation, especially modules that modify files, login URLs, media settings or database content.
 
+= How long does Activity Log keep its history? =
+Activity Log automatically deletes history older than one calendar month in Free, including existing installations when the module is enabled. This retention period cannot be changed in Free. Pro keeps its configurable retention policy and defaults to three calendar months; Pro users can select Keep all data to retain their entire history. Saved Pro retention preferences are preserved while Pro is unavailable, but the fixed one-month Free policy applies until Pro is active again. The first cleanup is scheduled 24 hours after initialization; subsequent runs are daily and depend on WordPress cron. Back up existing archives before upgrading or switching to Free if older history must be preserved.
+
+Pro retention supports days, months and years. Cleanup deletes whole daily log files dated before the UTC cutoff day, preserving that day's files and any files with uncertain or newer records. Purge Old Data uses the fixed one-month policy in Free or the saved policy in Pro and permanently deletes eligible files; unsaved form changes do not affect it. Disabling the module, deactivating the plugin or uninstalling it stops scheduled cleanup without erasing saved history.
+
+= Can I exclude activity from the Activity Log? =
+Pro supports exclusions by users, actor roles, IP addresses and post types. Roles and supported post types are searched dynamically; IP addresses are entered locally without AJAX. Any matching exclusion skips new events without changing existing history. Free preserves saved exclusions but does not enforce them.
+
+IP exclusions accept individual IPv4/IPv6 addresses and CIDR ranges. Matching uses only the server connection address (REMOTE_ADDR), not proxy forwarding headers; behind a proxy this may be the proxy's address. IP exclusions do not apply to CLI or cron execution. Post-type exclusions cover direct core content and attachment events only; comments, menus, taxonomy and WooCommerce events remain logged according to their event settings.
+
 = Is WPMasterToolKit compatible with Elementor, Divi and other page builders? =
 WPMasterToolKit uses standard WordPress hooks and is designed to work alongside popular themes and page builders. Tools such as content duplication, custom body classes and custom frontend CSS can complement page-builder workflows. Compatibility can still depend on the specific modules and third-party extensions enabled, so test important pages after configuration changes.
 
@@ -339,6 +388,18 @@ Please report security issues privately through the Patchstack Vulnerability Dis
 
 == Changelog ==
 
+= 2.26.0 =
+Add: Guided onboarding with setup presets and module activation to help configure the plugin.
+Update: Module: Activity Log: Make activity tracking available in the free version and improve filtering and retention controls.
+Add: Module: White Label CMS: Customize WordPress admin branding and client-facing screens, with additional Pro options. This is separate from the existing Pro White Label module for plugin branding and access.
+Add: Module: Captcha on Login Form: Protect login, registration and password recovery forms with a local arithmetic captcha.
+Add: Module: Comment on Everything: Collaborate privately with contextual comments on supported WordPress pages.
+Add: Module: Admin Boost: Temporarily block external HTTP requests during an admin session to improve responsiveness; Pro adds targeted rules, exclusions and a history of blocked requests.
+Add: Module: Image Plugins: Show plugin icons beside names in the Installed Plugins list.
+Update: Module: Media Library Post Folders: Move media between folders using drag and drop, with feedback for successful and failed moves.
+Fix: Module: Media Encoder: Only read EXIF orientation data from JPEG images to avoid errors with other formats.
+Fix: Module: SMTP Mailer: Correct PHP mailer settings storage and preserve saved sender settings when sanitizing provider options.
+
 = 2.25.0 =
 Add: Pro Module: Local Google Font: Host Google Fonts locally to improve performance and comply with privacy regulations.
 Add: Pro Module: Media Trash: Manage and restore deleted media items from the WordPress media trash.
@@ -351,14 +412,6 @@ Add: Pro Module: White Label: Customize the plugin name and control which users 
 Add: Pro Module: Disable Blog: Disable blog features and related WordPress functionality while preserving selected content and access rules.
 Update: Module: Media Library Post Folders: Add folder sidebar support to media modals opened from individual post editing screens.
 Update: Pro Module: Two-Factor Authentication: Improve form submission handling, modal state management, validation, and error feedback.
-
-= 2.23.2 =
-Update: Module: Meta Debugger: Improve metadata display and error handling, and remove the json-view dependency.
-Fix: Module: Code Snippets: Improve generated PHP docblock formatting for multiline values and comment delimiters, use raw titles and saved descriptions, and leave descriptions empty when no excerpt is set.
-Fix: Module: Social Login: Correct the user meta key used to retrieve stored avatar hashes.
-Fix: Module: Limit Login Attempts: Prevent errors when failed-login hooks are triggered without an authentication error argument.
-Security: Module: Meta Debugger: Strengthen object-level permission checks and WooCommerce object validation, and safely handle serialized metadata without instantiating objects.
-Security: Module: SVG Upload: Validate file contents to block SVG uploads through unsupported upload methods, regardless of the filename extension.
 
 
 [See changelog for all versions.](https://wpmastertoolkit.com/en/changelog/?utm_source=readme-wordpress-org&utm_medium=readme&utm_campaign=changelog&utm_content=full-changelog)

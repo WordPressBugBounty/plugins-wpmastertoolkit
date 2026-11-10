@@ -2411,7 +2411,10 @@ class WPMastertoolkit_Media_Encoder {
 		}
 
 		// Handle EXIF orientation for proper image rotation
-		$exif_data = @exif_read_data( $file_path );
+		$exif_data = array();
+		if ( 'image/jpeg' === $mime_type && is_callable( 'exif_read_data' ) ) {
+			$exif_data = @exif_read_data( $file_path );
+		}
 		if ( ! empty( $exif_data['Orientation'] ) ) {
 			$orientation = (int) $exif_data['Orientation'];
 			//phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
@@ -2499,7 +2502,10 @@ class WPMastertoolkit_Media_Encoder {
 		}
 
 		// Handle EXIF orientation for proper image rotation
-		$exif_data = @exif_read_data( $file_path );
+		$exif_data = array();
+		if ( 'image/jpeg' === $mime_type && is_callable( 'exif_read_data' ) ) {
+			$exif_data = @exif_read_data( $file_path );
+		}
 		if ( ! empty( $exif_data['Orientation'] ) ) {
 			$orientation = (int) $exif_data['Orientation'];
 			//phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound

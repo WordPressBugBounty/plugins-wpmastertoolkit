@@ -127,6 +127,25 @@ class WPMastertoolkit_Media_Library_Post_Folders {
     }
 
 	/**
+	 * Apply onboarding preset settings when no configuration exists.
+	 *
+	 * @since 2.25.0
+	 * @param array $new_settings Preset settings.
+	 * @return bool
+	 */
+	public static function apply_preset_settings( $new_settings ) {
+		$instance = new self();
+
+		if ( false !== get_option( $instance->option_id, false ) ) {
+			return false;
+		}
+
+		$instance->save_settings( $instance->sanitize_settings( $new_settings ) );
+
+		return true;
+	}
+
+	/**
      * Render the submenu
      * 
      * @since   2.17.0
@@ -364,6 +383,11 @@ class WPMastertoolkit_Media_Library_Post_Folders {
 					'searchPlaceholder'  => esc_html__( 'Search folders...', 'wpmastertoolkit' ),
 					'upgradeNotice'      => esc_html__( 'To go further, upgrade to the version', 'wpmastertoolkit' ),
 					'pro'                => esc_html__( 'PRO', 'wpmastertoolkit' ),
+					'moveSuccess'        => esc_html__( 'The selected items were moved successfully.', 'wpmastertoolkit' ),
+					'movePartial'        => esc_html__( 'Some items could not be moved. Reload the page to see the current folder contents before trying again.', 'wpmastertoolkit' ),
+					'moveFailed'         => esc_html__( 'The selected items could not be moved. Reload the page and try again.', 'wpmastertoolkit' ),
+					'moveInvalid'        => esc_html__( 'The dragged selection contains invalid item IDs. Please select the items again.', 'wpmastertoolkit' ),
+					'moveRefreshFailed'  => esc_html__( 'The folder view could not be refreshed. Reload the page to see the current folder contents.', 'wpmastertoolkit' ),
 				),
 				'svg'             => array(
 					'chevronRight'       => file_get_contents( WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/svg/chevron-right.svg' ),
@@ -850,7 +874,7 @@ class WPMastertoolkit_Media_Library_Post_Folders {
 			$wpdb->prepare(
 				//phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				"DELETE FROM %i WHERE folder_id IN ($folder_ids_placeholder)",
-				$attachment_table,
+				array_merge( array( $attachment_table ), $folder_ids_to_delete )
 			)
 		);
 
@@ -860,7 +884,7 @@ class WPMastertoolkit_Media_Library_Post_Folders {
 			$wpdb->prepare(
 				//phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				"DELETE FROM %i WHERE folder_id IN ($folder_ids_placeholder)",
-				$table_name,
+				array_merge( array( $post_table ), $folder_ids_to_delete )
 			)
 		);
 
@@ -870,7 +894,7 @@ class WPMastertoolkit_Media_Library_Post_Folders {
 			$wpdb->prepare(
 				//phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				"DELETE FROM %i WHERE id IN ($folder_ids_placeholder)",
-				$table_name,
+				array_merge( array( $table_name ), $folder_ids_to_delete )
 			)
 		);
 

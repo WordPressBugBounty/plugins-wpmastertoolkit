@@ -25,7 +25,7 @@ class WPMastertoolkit_SMTP_Mailer_Php {
 		self::$settings          = $global_settings['providers']['php']['params'] ?? '';
 		self::$default_settings  = $global_default_settings['providers']['php']['params'] ?? '';
 
-		$option_id               = self::$class_smtp_mailer->option_id . '[providers][php][params]';
+		$option_id               = self::$class_smtp_mailer->option_id . '[providers][phpmail][params]';
 		$sender_name             = self::$settings['sender_name']['value'] ?? '';
 		$sender_email            = self::$settings['sender_email']['value'] ?? '';
 		$force_sender            = self::$settings['force_sender']['value'] ?? self::$default_settings['force_sender']['value'];

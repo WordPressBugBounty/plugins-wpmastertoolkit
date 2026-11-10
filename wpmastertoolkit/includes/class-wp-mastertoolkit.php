@@ -130,6 +130,21 @@ class WPMastertoolkit {
 		require_once WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/class-modules-data.php';
 
 		/**
+		 * The class responsible for module state transitions.
+		 */
+		require_once WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/class-module-manager.php';
+
+		/**
+		 * The class responsible for guided onboarding presets.
+		 */
+		require_once WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/class-onboarding-presets.php';
+
+		/**
+		 * The class responsible for guided onboarding.
+		 */
+		require_once WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/class-onboarding.php';
+
+		/**
 		 * The class responsible for handling the options of the plugin.
 		 */
 		require_once WPMASTERTOOLKIT_PLUGIN_PATH . 'admin/class-handle-options.php';
@@ -197,7 +212,18 @@ class WPMastertoolkit {
 		$this->loader->add_action( 'wpmastertoolkit_daily_regenerate_assets', $wpmastertoolkit_settings, 'cron_regenerate_assets' );
 		$this->loader->add_action( 'wp_ajax_wpmastertoolkit_regenerate_assets', $wpmastertoolkit_settings, 'ajax_regenerate_assets' );
 		$this->loader->add_action( 'wp_ajax_wpmastertoolkit_get_system_info', $wpmastertoolkit_settings, 'ajax_get_system_info' );
+		$this->loader->add_action( 'admin_notices', $wpmastertoolkit_settings, 'module_update_notice' );
 		$this->loader->add_filter( 'removable_query_args', $wpmastertoolkit_settings, 'filter_removable_query_args' );
+
+		$wpmastertoolkit_onboarding = new WPMastertoolkit_Onboarding();
+		$this->loader->add_action( 'admin_init', $wpmastertoolkit_onboarding, 'ensure_state', 1 );
+		$this->loader->add_action( 'admin_init', $wpmastertoolkit_onboarding, 'maybe_redirect', 20 );
+		$this->loader->add_action( 'admin_menu', $wpmastertoolkit_onboarding, 'register_page' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $wpmastertoolkit_onboarding, 'enqueue_assets' );
+		$this->loader->add_action( 'admin_notices', $wpmastertoolkit_onboarding, 'admin_notice' );
+		$this->loader->add_filter( 'admin_body_class', $wpmastertoolkit_onboarding, 'body_class' );
+		$this->loader->add_action( 'admin_post_wpmastertoolkit_apply_onboarding', $wpmastertoolkit_onboarding, 'handle_apply' );
+		$this->loader->add_action( 'admin_post_wpmastertoolkit_skip_onboarding', $wpmastertoolkit_onboarding, 'handle_skip' );
 
 		$wpmastertoolkit_surecart = new WPMastertoolkit_Surecart();
 		$this->loader->add_action( 'init', $wpmastertoolkit_surecart, 'init_surecart', 1 );

@@ -828,6 +828,42 @@ class WPMastertoolkit_Modules_Data {
 				'pro'           => true,
 				'path'          => 'pro/class-pixel-tag-manager.php',
 			),
+			'WPMastertoolkit_Activity_Log' => array(
+				'original_name' => 'Activity Log',
+				'group'         => 'administration',
+				'pro'           => false,
+				'path'          => 'core/class-activity-log.php',
+			),
+			'WPMastertoolkit_White_Label_CMS' => array(
+				'original_name' => 'White Label CMS',
+				'group'         => 'administration',
+				'pro'           => false,
+				'path'          => 'core/class-white-label-cms.php',
+			),
+			'WPMastertoolkit_Captcha_Login_Form' => array(
+				'original_name' => 'Captcha on login form',
+				'group'         => 'security',
+				'pro'           => false,
+				'path'          => 'core/class-captcha-login-form.php',
+			),
+			'WPMastertoolkit_Comment_on_Everything' => array(
+				'original_name' => 'Comment on everything',
+				'group'         => 'administration',
+				'pro'           => false,
+				'path'          => 'core/class-comment-on-everything.php',
+			),
+			'WPMastertoolkit_Admin_Boost' => array(
+				'original_name' => 'Admin Boost',
+				'group'         => 'administration',
+				'pro'           => false,
+				'path'          => 'core/class-admin-boost.php',
+			),
+			'WPMastertoolkit_Image_Plugins' => array(
+				'original_name' => 'Image plugins',
+				'group'         => 'administration',
+				'pro'           => false,
+				'path'          => 'core/class-image-plugins.php',
+			),
 		);
 		
 		/**
@@ -1387,6 +1423,30 @@ class WPMastertoolkit_Modules_Data {
 			'WPMastertoolkit_Pixel_Tag_Manager' => array(
 				'name' => esc_html_x( "Pixel Tag Manager", "Module name", 'wpmastertoolkit' ),
 				'desc' => esc_html_x( "Manage and deploy pixel tags on your WordPress site.", "Module description", 'wpmastertoolkit' ),
+			),
+			'WPMastertoolkit_Activity_Log' => array(
+				'name' => esc_html_x( "Activity Log", "Module name", 'wpmastertoolkit' ),
+				'desc' => esc_html_x( "Track and manage user activity on your WordPress site.", "Module description", 'wpmastertoolkit' ),
+			),
+			'WPMastertoolkit_White_Label_CMS' => array(
+				'name' => esc_html_x( 'White Label CMS', 'Module name', 'wpmastertoolkit' ),
+				'desc' => esc_html_x( 'Manage WordPress branding and client administration in one module.', 'Module description', 'wpmastertoolkit' ),
+			),
+			'WPMastertoolkit_Captcha_Login_Form' => array(
+				'name' => esc_html_x( 'Captcha on login form', 'Module name', 'wpmastertoolkit' ),
+				'desc' => esc_html_x( 'Add a local arithmetic captcha to native WordPress login, lost password and registration forms.', 'Module description', 'wpmastertoolkit' ),
+			),
+			'WPMastertoolkit_Comment_on_Everything' => array(
+				'name' => esc_html_x( 'Comment on everything', 'Module name', 'wpmastertoolkit' ),
+				'desc' => esc_html_x( 'Private contextual collaboration on supported WordPress pages.', 'Module description', 'wpmastertoolkit' ),
+			),
+			'WPMastertoolkit_Admin_Boost' => array(
+				'name' => esc_html_x( 'Admin Boost', 'Module name', 'wpmastertoolkit' ),
+				'desc' => esc_html_x( 'Temporarily speed up administration by blocking external HTTP requests in your login session. Pro adds targeted rules, page exclusions and private diagnostics.', 'Module description', 'wpmastertoolkit' ),
+			),
+			'WPMastertoolkit_Image_Plugins' => array(
+				'name' => esc_html_x( 'Image plugins', 'Module name', 'wpmastertoolkit' ),
+				'desc' => esc_html_x( 'Show plugin icons beside names in the Installed Plugins list.', 'Module description', 'wpmastertoolkit' ),
 			),
 		);
 

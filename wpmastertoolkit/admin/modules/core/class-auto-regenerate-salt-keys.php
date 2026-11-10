@@ -140,6 +140,64 @@ class WPMastertoolkit_Auto_Regenerate_Salt_Keys {
     }
 
     /**
+     * Return the saved schedule for the onboarding select field.
+     *
+     * @return array
+     */
+    public static function get_preset_settings() {
+        $settings = get_option( WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_auto_regenerate_salt_keys', array() );
+
+        return array(
+            'frequently' => is_array( $settings ) && is_array( $settings['frequently'] ?? null ) ? ( $settings['frequently']['value'] ?? 'never' ) : 'never',
+        );
+    }
+
+    /**
+     * Reject unsupported schedules before onboarding activates modules.
+     *
+     * @param array $new_settings Onboarding settings.
+     * @return true|WP_Error
+     */
+    public static function validate_preset_settings( $new_settings ) {
+        $instance = new self();
+        $choices  = $instance->get_default_settings()['frequently']['options'];
+        $value    = is_array( $new_settings ) ? ( $new_settings['frequently'] ?? null ) : null;
+
+        if ( ! is_string( $value ) || ! array_key_exists( $value, $choices ) ) {
+            return new WP_Error( 'wpmastertoolkit_invalid_salt_schedule', esc_html__( 'Select a valid salt key regeneration schedule.', 'wpmastertoolkit' ), 'frequently' );
+        }
+
+        return true;
+    }
+
+    /**
+     * Save the selected schedule in the module's nested settings format.
+     *
+     * @param array $new_settings Onboarding settings.
+     * @return true|WP_Error
+     */
+    public static function apply_preset_settings( $new_settings ) {
+        $validation = self::validate_preset_settings( $new_settings );
+        if ( is_wp_error( $validation ) ) {
+            return $validation;
+        }
+
+        $instance = new self();
+        $settings = $instance->get_settings();
+        if ( ! is_array( $settings ) ) {
+            $settings = $instance->get_default_settings();
+        }
+        if ( ! is_array( $settings['frequently'] ?? null ) ) {
+            $settings['frequently'] = array();
+        }
+
+        $settings['frequently']['value'] = $new_settings['frequently'];
+        $instance->save_settings( $settings );
+
+        return true;
+    }
+
+    /**
      * Save settings
      */
     public function save_settings( $new_settings ) {

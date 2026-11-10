@@ -298,14 +298,17 @@ class WPMastertoolkit_Settings {
 						}
 					}
 
-					foreach ( $sanitized_items_data as $item_key => $item_value ) {
-						if ( class_exists( $item_key ) && method_exists( $item_key, 'save_settings' ) && is_callable( $item_key . '::save_settings' ) ) {
-							$item_class = new $item_key();
-							$item_class->save_settings( $item_value );
+					$prepare_import = function() use ( $sanitized_items_data ) {
+						foreach ( $sanitized_items_data as $item_key => $item_value ) {
+							if ( class_exists( $item_key ) && method_exists( $item_key, 'save_settings' ) && is_callable( array( $item_key, 'save_settings' ) ) ) {
+								$item_class = new $item_key();
+								$item_class->save_settings( $item_value );
+							}
 						}
-					}
+					};
 
-					$this->save_main_settings( $sanitized_main_data );
+					$module_result = WPMastertoolkit_Module_Manager::save_all( $sanitized_main_data, $prepare_import );
+					$this->store_module_update_notice( $module_result );
 
 					wp_safe_redirect( sanitize_url( wp_unslash( $_SERVER['REQUEST_URI'] ?? '' ) ) );
 					exit;
@@ -345,7 +348,8 @@ class WPMastertoolkit_Settings {
 
 			//phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			$new_settings = $this->sanitize_main_settings( wp_unslash( $_POST[WPMASTERTOOLKIT_PLUGIN_SETTINGS] ?? array() ) );
-			$this->save_main_settings( $new_settings );
+			$module_result = $this->save_main_settings( $new_settings );
+			$this->store_module_update_notice( $module_result );
 			$this->save_opt_in();
 			$this->save_credentials();
 			$this->save_use_wp_submenu();
@@ -495,30 +499,65 @@ class WPMastertoolkit_Settings {
 	 * Save the main settings
 	 */
 	private function save_main_settings( $new_settings ) {
+		return WPMastertoolkit_Module_Manager::save_all( $new_settings );
+	}
 
-		$old_settings	= get_option( WPMASTERTOOLKIT_PLUGIN_SETTINGS, array() );
+	/**
+	 * Store a one-time notice when module transitions fail.
+	 *
+	 * @param array|WP_Error $result Module update result.
+	 * @return void
+	 */
+	private function store_module_update_notice( $result ) {
+		$messages = array();
 
-		foreach ( $new_settings as $class => $status ) {
-
-			/**
-			 * Compare old and new settings to call activate or deactivate method
-			 */
-			if ( ( !isset($old_settings[$class]) || $old_settings[$class] !== '1' ) && $status === '1' ) {
-				WPMastertoolkit_Logs::add_notice( 'Module Activated: ' . $class );
-
-				if ( class_exists( $class ) && method_exists( $class, 'activate' ) && is_callable( $class . '::activate' ) ) {
-					$class::activate();
-				}
-			} else if ( isset($old_settings[$class]) && $old_settings[$class] === '1' && $status === '0' ) {
-				WPMastertoolkit_Logs::add_notice( 'Module Deactivated: ' . $class );
-
-				if ( class_exists( $class ) && method_exists( $class, 'deactivate' ) && is_callable( $class . '::deactivate' ) ) {
-					$class::deactivate();
+		if ( is_wp_error( $result ) ) {
+			$messages[] = $result->get_error_message();
+		} elseif ( is_array( $result ) ) {
+			foreach ( $result as $module_result ) {
+				if ( 'failed' === ( $module_result['status'] ?? '' ) && ! empty( $module_result['message'] ) ) {
+					$messages[] = $module_result['message'];
 				}
 			}
 		}
 
-		update_option( WPMASTERTOOLKIT_PLUGIN_SETTINGS, $new_settings );
+		if ( ! empty( $messages ) ) {
+			set_transient(
+				'wpmastertoolkit_module_update_notice_' . get_current_user_id(),
+				array_values( array_unique( $messages ) ),
+				MINUTE_IN_SECONDS
+			);
+		}
+	}
+
+	/**
+	 * Display module update failures after redirecting back to settings.
+	 *
+	 * @return void
+	 */
+	public function module_update_notice() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		$transient = 'wpmastertoolkit_module_update_notice_' . get_current_user_id();
+		$messages  = get_transient( $transient );
+
+		if ( empty( $messages ) || ! is_array( $messages ) ) {
+			return;
+		}
+
+		delete_transient( $transient );
+		?>
+		<div class="notice notice-error is-dismissible">
+			<p><strong><?php esc_html_e( 'Some module changes could not be applied.', 'wpmastertoolkit' ); ?></strong></p>
+			<ul>
+				<?php foreach ( $messages as $message ) : ?>
+					<li><?php echo esc_html( $message ); ?></li>
+				<?php endforeach; ?>
+			</ul>
+		</div>
+		<?php
 	}
 
 	/**

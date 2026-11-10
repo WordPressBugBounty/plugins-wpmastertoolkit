@@ -29,8 +29,13 @@ class WPMastertoolkit_Deactivator {
 	 * Long Description.
 	 *
 	 * @since    1.0.0
+	 * @param bool $network_wide Whether the plugin is being network-deactivated.
 	 */
-	public static function deactivate() {
+	public static function deactivate( $network_wide = false ) {
+		require_once dirname( __DIR__ ) . '/admin/modules/core/class-activity-log.php';
+		WPMastertoolkit_Activity_Log::deactivate( $network_wide );
+		require_once dirname( __DIR__ ) . '/admin/modules/core/class-captcha-login-form.php';
+		WPMastertoolkit_Captcha_Login_Form::cleanup_sites( $network_wide );
 
 		self::delete_limit_login_attempts_table();
 	}

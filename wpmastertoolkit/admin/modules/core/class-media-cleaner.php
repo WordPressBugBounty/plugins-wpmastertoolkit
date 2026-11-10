@@ -199,6 +199,63 @@ class WPMastertoolkit_Media_Cleaner {
     }
 
 	/**
+	 * Return saved switches for onboarding fields.
+	 *
+	 * @return array
+	 */
+	public static function get_preset_settings() {
+		$instance = new self();
+		$settings = $instance->get_settings();
+
+		return is_array( $settings ) ? array_intersect_key( $settings, $instance->get_default_settings() ) : array();
+	}
+
+	/**
+	 * Validate onboarding switches before activating the module.
+	 *
+	 * @param array $new_settings Onboarding settings.
+	 * @return true|WP_Error
+	 */
+	public static function validate_preset_settings( $new_settings ) {
+		if ( ! is_array( $new_settings ) ) {
+			return new WP_Error( 'wpmastertoolkit_invalid_media_cleaner_setting', esc_html__( 'Choose a valid media setting.', 'wpmastertoolkit' ) );
+		}
+
+		$instance = new self();
+		foreach ( array_keys( $instance->get_default_settings() ) as $key ) {
+			if ( array_key_exists( $key, $new_settings ) && ! in_array( $new_settings[ $key ], array( '0', '1' ), true ) ) {
+				return new WP_Error( 'wpmastertoolkit_invalid_media_cleaner_setting', esc_html__( 'Choose a valid media setting.', 'wpmastertoolkit' ), $key );
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * Apply selected switches without resetting other Media Cleaner settings.
+	 *
+	 * @param array $new_settings Onboarding settings.
+	 * @return true|WP_Error
+	 */
+	public static function apply_preset_settings( $new_settings ) {
+		$validation = self::validate_preset_settings( $new_settings );
+		if ( is_wp_error( $validation ) ) {
+			return $validation;
+		}
+
+		$instance = new self();
+		$settings = $instance->get_settings();
+		if ( ! is_array( $settings ) ) {
+			$settings = $instance->get_default_settings();
+		}
+
+		$settings = array_merge( $settings, array_intersect_key( $new_settings, $instance->get_default_settings() ) );
+		$instance->save_settings( $settings );
+
+		return true;
+	}
+
+	/**
      * get_default_settings
      *
 	 * @since   1.14.0

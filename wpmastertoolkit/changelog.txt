@@ -1,5 +1,17 @@
 == Changelog ==
 
+= 2.26.0 =
+Add: Guided onboarding with setup presets and module activation to help configure the plugin.
+Update: Module: Activity Log: Make activity tracking available in the free version and improve filtering and retention controls.
+Add: Module: White Label CMS: Customize WordPress admin branding and client-facing screens, with additional Pro options. This is separate from the existing Pro White Label module for plugin branding and access.
+Add: Module: Captcha on Login Form: Protect login, registration and password recovery forms with a local arithmetic captcha.
+Add: Module: Comment on Everything: Collaborate privately with contextual comments on supported WordPress pages.
+Add: Module: Admin Boost: Temporarily block external HTTP requests during an admin session to improve responsiveness; Pro adds targeted rules, exclusions and a history of blocked requests.
+Add: Module: Image Plugins: Show plugin icons beside names in the Installed Plugins list.
+Update: Module: Media Library Post Folders: Move media between folders using drag and drop, with feedback for successful and failed moves.
+Fix: Module: Media Encoder: Only read EXIF orientation data from JPEG images to avoid errors with other formats.
+Fix: Module: SMTP Mailer: Correct PHP mailer settings storage and preserve saved sender settings when sanitizing provider options.
+
 = 2.25.0 =
 Add: Pro Module: Local Google Font: Host Google Fonts locally to improve performance and comply with privacy regulations.
 Add: Pro Module: Media Trash: Manage and restore deleted media items from the WordPress media trash.

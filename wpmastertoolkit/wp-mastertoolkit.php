@@ -4,8 +4,8 @@
  * Plugin Name:       WPMasterToolKit
  * Plugin URI:        https://wpmastertoolkit.com/?utm_source=wpmastertoolkit-plugin&utm_medium=plugin&utm_campaign=plugin-information&utm_content=plugin-uri
  * Description:       Modular WordPress toolkit for security, performance, administration, media, email delivery, custom code, and development.
- * Version:           2.25.0
- * Requires at least: 6.0
+ * Version:           2.26.0
+ * Requires at least: 6.2.0
  * Requires PHP:      7.4
  * Author:            Webdeclic
  * Author URI:        https://webdeclic.com
@@ -65,22 +65,30 @@ define( 'WPMASTERTOOLKIT_BASENAME', plugin_basename( __FILE__ ) );
 define ( 'WPMASTERTOOLKIT_PLUGIN_SETTINGS', 'wpmastertoolkit_settings' );
 
 /**
+ * Plugin onboarding state option.
+ */
+define( 'WPMASTERTOOLKIT_ONBOARDING_OPTION', 'wpmastertoolkit_onboarding' );
+
+/**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-wp-mastertoolkit-activator.php
  */
-register_activation_hook( __FILE__, function(){
+register_activation_hook( __FILE__, function( $network_wide ){
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wp-mastertoolkit-activator.php';
-	WPMastertoolkit_Activator::activate();
+	WPMastertoolkit_Activator::activate( $network_wide );
 } );
 
 /**
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-wp-mastertoolkit-deactivator.php
  */
-register_deactivation_hook( __FILE__, function(){
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-wp-mastertoolkit-deactivator.php';
-	WPMastertoolkit_Deactivator::deactivate();
-} );
+register_deactivation_hook(
+	__FILE__,
+	function ( $network_wide = false ) {
+		require_once plugin_dir_path( __FILE__ ) . 'includes/class-wp-mastertoolkit-deactivator.php';
+		WPMastertoolkit_Deactivator::deactivate( $network_wide );
+	}
+);
 
 /**
  * The core plugin class that is used to define internationalization,

@@ -211,7 +211,7 @@ class WPMastertoolkit_Limit_Login_Attempts {
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
             $page_was_reloaded = 1 == sanitize_text_field( wp_unslash( $_GET['rl'] ?? '' ) ) ? true : false;
 			$fail_count        = $wpmastertoolkit_limit_login['fail_count'] ?? false;
-			$fails_allowed     = $wpmastertoolkit_limit_login['login_fails_allowed'] ?? '3';
+			$fails_allowed     = $wpmastertoolkit_limit_login['login_fails_allowed'] ?? '15';
 
 			if ( false !== $fail_count ) {
 				if (
@@ -254,6 +254,9 @@ class WPMastertoolkit_Limit_Login_Attempts {
 		if ( is_wp_error( $error ) && $error->get_error_message( 'password_expired' ) ) {
 			return;
 		}
+		if ( ! apply_filters( 'wpmastertoolkit_count_failed_login', true, $error ) ) {
+			return;
+		}
 
 		$ip_address_check = $wpmastertoolkit_limit_login['ip_address'] ?? wpmastertoolkit_get_current_ip();
 		if ( $this->is_ip_whitelisted( $ip_address_check ) ) {
@@ -263,7 +266,7 @@ class WPMastertoolkit_Limit_Login_Attempts {
 		$table_name              = $this->get_table_name();
 		$ip_address              = $wpmastertoolkit_limit_login['ip_address'] ?? '';
 		$ip_address_log          = $wpmastertoolkit_limit_login['ip_address_log'] ?? array();
-		$fails_allowed           = $wpmastertoolkit_limit_login['login_fails_allowed'] ?? '3';
+		$fails_allowed           = $wpmastertoolkit_limit_login['login_fails_allowed'] ?? '15';
 		$lockout_maxcount        = $wpmastertoolkit_limit_login['login_lockout_maxcount'] ?? '3';
 		$request_uri             = $wpmastertoolkit_limit_login['request_uri'] ?? '';
 		$default_lockout_period  = $wpmastertoolkit_limit_login['default_lockout_period'] ?? '';
@@ -388,8 +391,7 @@ class WPMastertoolkit_Limit_Login_Attempts {
             $this->header_title,
             'manage_options',
             'wp-mastertoolkit-settings-limit-login-attempts',
-            array( $this, 'render_submenu' ),
-            null
+            array( $this, 'render_submenu' )
         );
     }
 
@@ -457,6 +459,71 @@ class WPMastertoolkit_Limit_Login_Attempts {
     }
 
 	/**
+	 * Return saved counts for onboarding fields.
+	 *
+	 * @return array
+	 */
+	public static function get_preset_settings() {
+		$settings = get_option( WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_limit_login_attempts', array() );
+
+		return is_array( $settings ) ? array_intersect_key( $settings, array( 'fails_allowed' => true, 'lockout_maxcount' => true ) ) : array();
+	}
+
+	/**
+	 * Require positive whole-number limits before enabling the module.
+	 *
+	 * @param array $new_settings Onboarding settings.
+	 * @return true|WP_Error
+	 */
+	public static function validate_preset_settings( $new_settings ) {
+		if ( ! is_array( $new_settings ) ) {
+			return new WP_Error( 'wpmastertoolkit_invalid_login_limit', esc_html__( 'Enter a positive whole number.', 'wpmastertoolkit' ) );
+		}
+
+		foreach ( array( 'fails_allowed', 'lockout_maxcount' ) as $key ) {
+			if ( ! array_key_exists( $key, $new_settings ) ) {
+				continue;
+			}
+
+			$value = $new_settings[ $key ];
+			if ( ! ( is_string( $value ) || is_int( $value ) ) || ! preg_match( '/^[1-9][0-9]*$/', (string) $value ) || false === filter_var( $value, FILTER_VALIDATE_INT, array( 'options' => array( 'min_range' => 1 ) ) ) ) {
+				return new WP_Error( 'wpmastertoolkit_invalid_login_limit', esc_html__( 'Enter a positive whole number.', 'wpmastertoolkit' ), $key );
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * Save selected counts without resetting the IP whitelist or other settings.
+	 *
+	 * @param array $new_settings Onboarding settings.
+	 * @return true|WP_Error
+	 */
+	public static function apply_preset_settings( $new_settings ) {
+		$validation = self::validate_preset_settings( $new_settings );
+		if ( is_wp_error( $validation ) ) {
+			return $validation;
+		}
+
+		$instance = new self();
+		$settings = $instance->get_settings();
+		if ( ! is_array( $settings ) ) {
+			$settings = $instance->get_default_settings();
+		}
+
+		foreach ( array( 'fails_allowed', 'lockout_maxcount' ) as $key ) {
+			if ( array_key_exists( $key, $new_settings ) ) {
+				$settings[ $key ] = (string) $new_settings[ $key ];
+			}
+		}
+
+		$instance->save_settings( $settings );
+
+		return true;
+	}
+
+	/**
      * get_settings
      *
      * @since   1.5.0
@@ -486,7 +553,7 @@ class WPMastertoolkit_Limit_Login_Attempts {
         if( $this->default_settings !== null ) return $this->default_settings;
 
         return array(
-			'fails_allowed'    => '3',
+			'fails_allowed'    => '15',
 			'lockout_maxcount' => '3',
 			'ip_whitelist'     => '',
         );
@@ -502,7 +569,7 @@ class WPMastertoolkit_Limit_Login_Attempts {
 		global $wpdb;
 
         $this->settings   = $this->get_settings();
-		$fails_allowed    = $this->settings['fails_allowed'] ?? '3';
+		$fails_allowed    = $this->settings['fails_allowed'] ?? '15';
 		$lockout_maxcount = $this->settings['lockout_maxcount'] ?? '3';
 		$ip_whitelist     = $this->settings['ip_whitelist'] ?? '';
 		$date_format      = get_option( 'date_format', 'Y-m-d' );

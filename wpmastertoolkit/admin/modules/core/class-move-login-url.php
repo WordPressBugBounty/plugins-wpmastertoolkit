@@ -172,6 +172,52 @@ location ^~ /wp-admin {
 	}
 
 	/**
+	 * Return saved settings for pre-filling onboarding fields.
+	 *
+	 * @return array
+	 */
+	public static function get_preset_settings() {
+		$settings = get_option( WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_move_login_url', array() );
+		return is_array( $settings ) ? $settings : array();
+	}
+
+	/**
+	 * Validate the login slug before onboarding changes any module state.
+	 *
+	 * @param array $settings Proposed settings.
+	 * @return true|WP_Error
+	 */
+	public static function validate_preset_settings( $settings ) {
+		$slug = $settings['login_slug'] ?? null;
+		$wp   = new WP();
+
+		if ( ! is_string( $slug ) || '' === $slug || sanitize_title_with_dashes( $slug ) !== $slug || in_array( $slug, array_merge( $wp->public_query_vars, $wp->private_query_vars ), true ) || in_array( $slug, array( 'wp-admin', 'wp-login.php' ), true ) ) {
+			return new WP_Error( 'wpmastertoolkit_invalid_login_slug', esc_html__( 'Choose a valid login URL slug that is not reserved by WordPress.', 'wpmastertoolkit' ), 'login_slug' );
+		}
+
+		return true;
+	}
+
+	/**
+	 * Apply selected onboarding settings without resetting other module settings.
+	 *
+	 * @param array $new_settings Validated onboarding settings.
+	 * @return true|WP_Error
+	 */
+	public static function apply_preset_settings( $new_settings ) {
+		$validation = self::validate_preset_settings( $new_settings );
+		if ( is_wp_error( $validation ) ) {
+			return $validation;
+		}
+
+		$instance = new self();
+		$current  = self::get_preset_settings();
+		$settings = array_merge( $instance->get_default_settings(), $current, array( 'login_slug' => $new_settings['login_slug'] ) );
+		$instance->save_settings( $settings );
+		return true;
+	}
+
+	/**
      * get_default_settings
      *
      * @return array
@@ -287,7 +333,7 @@ location ^~ /wp-admin {
 	 * user_trailingslashit
 	 *
 	 * @param  mixed $string
-	 * @return void
+	 * @return string
 	 */
 	private function user_trailingslashit( $string ) {
 		return $this->use_trailing_slashes() ? trailingslashit( $string ) : untrailingslashit( $string );
@@ -355,7 +401,7 @@ location ^~ /wp-admin {
 	 * new_login_url
 	 *
 	 * @param  mixed $scheme
-	 * @return void
+	 * @return string
 	 */
 	public function new_login_url( $scheme = null ) {
 
@@ -380,7 +426,7 @@ location ^~ /wp-admin {
 	 * new_redirect_url
 	 *
 	 * @param  mixed $scheme
-	 * @return void
+	 * @return string
 	 */
 	public function new_redirect_url( $scheme = null ) {
 		$base_url = home_url('/', $scheme);

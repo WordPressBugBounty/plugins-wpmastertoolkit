@@ -107,6 +107,63 @@ class WPMastertoolkit_Wider_Admin_Menu {
     }
 
     /**
+     * Return the saved width for onboarding.
+     *
+     * @return array
+     */
+    public static function get_preset_settings() {
+        $settings = get_option( WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_wider_admin_menu', array() );
+        $value    = is_array( $settings ) ? ( $settings['width']['value'] ?? null ) : null;
+
+        return is_scalar( $value ) ? array( 'width' => (string) $value ) : array();
+    }
+
+    /**
+     * Validate the selected width against the module's supported sizes.
+     *
+     * @param array $new_settings Onboarding settings.
+     * @return true|WP_Error
+     */
+    public static function validate_preset_settings( $new_settings ) {
+        $instance = new self();
+        $choices  = $instance->get_default_settings()['width']['options'];
+        $value    = is_array( $new_settings ) ? ( $new_settings['width'] ?? null ) : null;
+
+        if ( ! is_string( $value ) || ! array_key_exists( $value, $choices ) ) {
+            return new WP_Error( 'wpmastertoolkit_invalid_admin_menu_width', esc_html__( 'Select a valid admin menu width.', 'wpmastertoolkit' ), 'width' );
+        }
+
+        return true;
+    }
+
+    /**
+     * Apply the selected width while preserving other settings.
+     *
+     * @param array $new_settings Onboarding settings.
+     * @return true|WP_Error
+     */
+    public static function apply_preset_settings( $new_settings ) {
+        $validation = self::validate_preset_settings( $new_settings );
+        if ( is_wp_error( $validation ) ) {
+            return $validation;
+        }
+
+        $instance = new self();
+        $settings = $instance->get_settings();
+        if ( ! is_array( $settings ) ) {
+            $settings = $instance->get_default_settings();
+        }
+        if ( ! is_array( $settings['width'] ?? null ) ) {
+            $settings['width'] = $instance->get_default_settings()['width'];
+        }
+
+        $settings['width']['value'] = $new_settings['width'];
+        $instance->save_settings( $settings );
+
+        return true;
+    }
+
+    /**
      * Save settings
      */
     public function save_settings( $new_settings ) {

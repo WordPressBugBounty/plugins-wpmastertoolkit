@@ -257,6 +257,71 @@ class WPMastertoolkit_Image_Upload_Control {
         return get_option( $this->option_id, $this->default_settings );
     }
 
+    /**
+     * Return saved dimensions for onboarding fields.
+     *
+     * @return array
+     */
+    public static function get_preset_settings() {
+        $settings = get_option( WPMASTERTOOLKIT_PLUGIN_SETTINGS . '_image_upload_control', array() );
+
+        return is_array( $settings ) ? array_intersect_key( $settings, array( 'max_width' => true, 'max_height' => true ) ) : array();
+    }
+
+    /**
+     * Validate onboarding dimensions before enabling the module.
+     *
+     * @param array $new_settings Onboarding settings.
+     * @return true|WP_Error
+     */
+    public static function validate_preset_settings( $new_settings ) {
+        if ( ! is_array( $new_settings ) ) {
+            return new WP_Error( 'wpmastertoolkit_invalid_image_dimension', esc_html__( 'Enter a positive whole number of pixels.', 'wpmastertoolkit' ) );
+        }
+
+        foreach ( array( 'max_width', 'max_height' ) as $key ) {
+            if ( ! array_key_exists( $key, $new_settings ) ) {
+                continue;
+            }
+
+            $value = $new_settings[ $key ];
+            if ( ! ( is_string( $value ) || is_int( $value ) ) || ! preg_match( '/^[1-9][0-9]*$/', (string) $value ) || false === filter_var( $value, FILTER_VALIDATE_INT, array( 'options' => array( 'min_range' => 1 ) ) ) ) {
+                return new WP_Error( 'wpmastertoolkit_invalid_image_dimension', esc_html__( 'Enter a positive whole number of pixels.', 'wpmastertoolkit' ), $key );
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Apply selected dimensions without resetting other module settings.
+     *
+     * @param array $new_settings Onboarding settings.
+     * @return true|WP_Error
+     */
+    public static function apply_preset_settings( $new_settings ) {
+        $validation = self::validate_preset_settings( $new_settings );
+        if ( is_wp_error( $validation ) ) {
+            return $validation;
+        }
+
+        $instance = new self();
+        $settings = $instance->get_settings();
+        if ( ! is_array( $settings ) ) {
+            $settings = $instance->get_default_settings();
+        }
+
+        foreach ( array( 'max_width', 'max_height' ) as $key ) {
+            if ( array_key_exists( $key, $new_settings ) ) {
+                $settings[ $key ] = (string) $new_settings[ $key ];
+            }
+        }
+
+        $instance->save_settings( $settings );
+
+        return true;
+    }
+
 	/**
      * Save settings
      * 
